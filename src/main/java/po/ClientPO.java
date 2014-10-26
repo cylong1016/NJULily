@@ -34,7 +34,7 @@ public class ClientPO extends PersistentObject {
 	/** 客户应收额度 */
 	private double receivableLimit;
 	/** 默认业务员 */
-	private UserPO operator;
+	private UserPO salesman;
 
 	/**
 	 * @param id 客户id
@@ -50,7 +50,7 @@ public class ClientPO extends PersistentObject {
 	 * @author cylong
 	 * @version Oct 26, 2014 12:55:54 PM
 	 */
-	public ClientPO(String id, ClientCategory category, ClientLevel level, String name, String phone, String address, String post, String email, double receivableLimit, UserPO operator) {
+	public ClientPO(String id, ClientCategory category, ClientLevel level, String name, String phone, String address, String post, String email, double receivableLimit, UserPO salesman) {
 		super(id);
 		this.category = category;
 		this.level = level;
@@ -60,7 +60,7 @@ public class ClientPO extends PersistentObject {
 		this.post = post;
 		this.email = email;
 		this.receivableLimit = receivableLimit;
-		this.operator = operator;
+		this.salesman = salesman;
 	}
 
 	public ClientCategory getCategory() {
@@ -148,12 +148,12 @@ public class ClientPO extends PersistentObject {
 		return this.payable;
 	}
 
-	public UserPO getOperator() {
-		return this.operator;
+	public UserPO getSalesman() {
+		return this.salesman;
 	}
 
-	public void setOperator(UserPO operator) {
-		this.operator = operator;
+	public void setSalesman(UserPO salesman) {
+		this.salesman = salesman;
 	}
 
 }

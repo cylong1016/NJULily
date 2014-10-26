@@ -3,7 +3,6 @@ package dataservice;
 import java.util.ArrayList;
 
 import po.PersistentObject;
-import message.ResultMessage;
 
 /**
  * 提供销售明细表、经营历程表、经营情况表的查看

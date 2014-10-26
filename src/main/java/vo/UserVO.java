@@ -7,7 +7,7 @@ import dataenum.UserIdentity;
  * @author cylong
  * @version Oct 26, 2014 1:59:25 PM
  */
-public class UserVO {
+public class UserVO extends ValueObject {
 
 	/** 用户姓名 */
 	public String name;

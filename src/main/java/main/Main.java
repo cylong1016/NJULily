@@ -11,6 +11,7 @@ import businesslogicservice.UserBLService;
 public class Main {
 
 	public static void main(String[] args) {
+		System.out.println("测试：");
 		UserBLService userBL = new UserBLService_Stub();
 		UserBLService_Driver driver = new UserBLService_Driver();
 		driver.drive(userBL);
