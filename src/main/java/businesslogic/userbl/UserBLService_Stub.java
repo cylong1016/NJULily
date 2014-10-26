@@ -1,6 +1,5 @@
 package businesslogic.userbl;
 
-import dataservice.UserDataService;
 import message.ResultMessage;
 import vo.UserVO;
 import businesslogicservice.UserBLService;
@@ -10,12 +9,12 @@ import businesslogicservice.UserBLService;
  * @version Oct 26, 2014 4:58:58 PM
  */
 public class UserBLService_Stub implements UserBLService {
-	
-	private UserDataService userDataService;
+
 	/**
 	 * @see businesslogicservice.UserBLService#login(vo.UserVO)
 	 */
 	public ResultMessage login(UserVO userVO) {
+		System.out.println("登陆成功");
 		return ResultMessage.LOGIN_SUCCESS;
 	}
 
@@ -23,21 +22,24 @@ public class UserBLService_Stub implements UserBLService {
 	 * @see businesslogicservice.UserBLService#addUser(vo.UserVO)
 	 */
 	public ResultMessage addUser(UserVO userVO) {
-		return null;
+		System.out.println("添加成功");
+		return ResultMessage.SUCCESS;
 	}
 
 	/**
 	 * @see businesslogicservice.UserBLService#deleteUser(java.lang.String)
 	 */
 	public ResultMessage deleteUser(String username) {
-		return null;
+		System.out.println("删除成功");
+		return ResultMessage.SUCCESS;
 	}
 
 	/**
 	 * @see businesslogicservice.UserBLService#updateUser(vo.UserVO)
 	 */
 	public ResultMessage updateUser(UserVO userVO) {
-		return null;
+		System.out.println("更新成功");
+		return ResultMessage.SUCCESS;
 	}
 
 }

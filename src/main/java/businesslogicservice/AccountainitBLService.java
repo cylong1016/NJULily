@@ -6,5 +6,5 @@ package businesslogicservice;
  * @version Oct 26, 2014 3:16:58 PM
  */
 public interface AccountainitBLService {
-
+	
 }

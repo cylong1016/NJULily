@@ -8,5 +8,5 @@ package message;
  */
 public enum ResultMessage {
 	LOGIN_SUCCESS,
-	
+	SUCCESS;
 }

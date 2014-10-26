@@ -6,5 +6,5 @@ package dataservice;
  * @version Oct 26, 2014 3:54:50 PM
  */
 public interface PromotionDataService {
-
+	// TODO PromotionDataService接口定义
 }

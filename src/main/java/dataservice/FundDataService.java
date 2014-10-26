@@ -6,5 +6,5 @@ package dataservice;
  * @version Oct 26, 2014 3:51:07 PM
  */
 public interface FundDataService {
-
+	// TODO FundDataService接口定义
 }
