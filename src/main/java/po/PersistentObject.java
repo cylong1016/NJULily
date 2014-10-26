@@ -1,0 +1,61 @@
+package po;
+
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+/**
+ * 所有po类的父类，包括创建时间，编号,即使大作业说明中有些单子没有编号和时间，但是我还是建议加上去
+ * @author cylong
+ * @version Oct 25, 2014 11:02:36 PM
+ */
+public abstract class PersistentObject implements Serializable {
+
+	/** serialVersionUID */
+	private static final long serialVersionUID = 1L;
+	/** 单据编号，格式根据不同单据而不同 */
+	protected String id;
+	/** 时间 ，由系统自动生成 */
+	protected String date;
+
+	/**
+	 * 用来自动生成日期和单据编号
+	 * @author cylong
+	 * @version Oct 25, 2014 11:31:44 PM
+	 */
+	public PersistentObject() {
+		/* 自动生成日期 */
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		date = sdf.format(new Date());
+		/* 自动生成单据编号，详见createID()方法 */
+		this.id = createId();
+	}
+
+	/**
+	 * <p>自动生成编号</p>
+	 * 由不同的单子决定如何生成编号和编号的格式,子类实现这个方法返回生成的单据编号
+	 * @return 单据的编号，默认为空
+	 * @author cylong
+	 * @version Oct 25, 2014 11:38:18 PM
+	 */
+	protected abstract String createId();
+
+	/**
+	 * 供外部创建或者修改单子的编号
+	 * @param id
+	 * @author cylong
+	 * @version Oct 25, 2014 11:43:37 PM
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getId() {
+		return this.id;
+	}
+
+	public String getDate() {
+		return this.date;
+	}
+
+}
