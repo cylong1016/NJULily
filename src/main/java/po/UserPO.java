@@ -1,8 +1,9 @@
 package po;
 
-import po.po_enum.UserIdentity;
+import dataenum.UserIdentity;
 
 /**
+ * 用户持久化对象
  * @author cylong
  * @version Oct 26, 2014 1:22:02 AM
  */
@@ -11,18 +12,25 @@ public class UserPO extends PersistentObject {
 	/** serialVersionUID */
 	private static final long serialVersionUID = 1L;
 	/** 用户名 */
-	private String name;
+	private String username;
 	/** 密码 */
 	private String password;
 	/** 用户身份 */
 	private UserIdentity iden;
 
-	public String getName() {
-		return this.name;
+	public UserPO(String id, String username, String password, UserIdentity iden) {
+		super(id);
+		this.username = username;
+		this.password = password;
+		this.iden = iden;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public String getUsername() {
+		return this.username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -39,12 +47,6 @@ public class UserPO extends PersistentObject {
 
 	public void setIden(UserIdentity iden) {
 		this.iden = iden;
-	}
-
-	@Override
-	protected String createId() {
-		// TODO 生成用户的编号
-		return null;
 	}
 
 }

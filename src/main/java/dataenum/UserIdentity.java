@@ -1,4 +1,4 @@
-package po.po_enum;
+package dataenum;
 
 /**
  * 用户的身份：库存管理人员、进货销售人员、财务人员、总经理

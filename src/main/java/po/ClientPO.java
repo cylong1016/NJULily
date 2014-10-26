@@ -1,10 +1,11 @@
 package po;
 
-import po.po_enum.ClientCategory;
-import po.po_enum.ClientLevel;
-import po.po_enum.UserIdentity;
+import dataenum.ClientCategory;
+import dataenum.ClientLevel;
+import dataenum.UserIdentity;
 
 /**
+ * 客户持久化对象
  * @author cylong
  * @version Oct 25, 2014 10:21:07 PM
  */
@@ -32,6 +33,35 @@ public class ClientPO extends PersistentObject {
 	private double payable;
 	/** 客户应收额度 */
 	private double receivableLimit;
+	/** 默认业务员 */
+	private UserPO operator;
+
+	/**
+	 * @param id 客户id
+	 * @param category 客户类别：进货商、销售商
+	 * @param level 客户级别：1-5（vip）
+	 * @param name 客户姓名
+	 * @param phone 客户电话
+	 * @param address 客户地址
+	 * @param post 客户邮编
+	 * @param email 客户电子邮箱
+	 * @param receivableLimit 客户应收额度
+	 * @param operator 默认业务员
+	 * @author cylong
+	 * @version Oct 26, 2014 12:55:54 PM
+	 */
+	public ClientPO(String id, ClientCategory category, ClientLevel level, String name, String phone, String address, String post, String email, double receivableLimit, UserPO operator) {
+		super(id);
+		this.category = category;
+		this.level = level;
+		this.name = name;
+		this.phone = phone;
+		this.address = address;
+		this.post = post;
+		this.email = email;
+		this.receivableLimit = receivableLimit;
+		this.operator = operator;
+	}
 
 	public ClientCategory getCategory() {
 		return this.category;
@@ -94,15 +124,16 @@ public class ClientPO extends PersistentObject {
 	}
 
 	/**
+	 * 修改客户应收额度，仅最高权限可以修改
 	 * @param receivableLimit 客户应收额度
 	 * @param iden 修改者的身份
 	 * @return boolean 是否修改成功
 	 * @author cylong
-	 * @version Oct 26, 2014  1:50:53 AM
+	 * @version Oct 26, 2014 1:50:53 AM
 	 */
 	public boolean setReceivableLimit(double receivableLimit, UserIdentity iden) {
-		// 仅最高权限可以修改
-		if(iden.equals(UserIdentity.GENERAL_MANAGER)) {
+		// 仅总经理可以修改
+		if (iden.equals(UserIdentity.GENERAL_MANAGER)) {
 			this.receivableLimit = receivableLimit;
 			return true;
 		}
@@ -117,10 +148,12 @@ public class ClientPO extends PersistentObject {
 		return this.payable;
 	}
 
-	@Override
-	protected String createId() {
-		return null;
-		// TODO 生成客户的编号
+	public UserPO getOperator() {
+		return this.operator;
+	}
+
+	public void setOperator(UserPO operator) {
+		this.operator = operator;
 	}
 
 }

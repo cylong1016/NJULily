@@ -9,7 +9,7 @@ import java.util.Date;
  * @author cylong
  * @version Oct 25, 2014 11:02:36 PM
  */
-public abstract class PersistentObject implements Serializable {
+public class PersistentObject implements Serializable {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = 1L;
@@ -23,22 +23,12 @@ public abstract class PersistentObject implements Serializable {
 	 * @author cylong
 	 * @version Oct 25, 2014 11:31:44 PM
 	 */
-	public PersistentObject() {
+	public PersistentObject(String id) {
+		this.id = id;
 		/* 自动生成日期 */
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		date = sdf.format(new Date());
-		/* 自动生成单据编号，详见createID()方法 */
-		this.id = createId();
 	}
-
-	/**
-	 * <p>自动生成编号</p>
-	 * 由不同的单子决定如何生成编号和编号的格式,子类实现这个方法返回生成的单据编号
-	 * @return 单据的编号，默认为空
-	 * @author cylong
-	 * @version Oct 25, 2014 11:38:18 PM
-	 */
-	protected abstract String createId();
 
 	/**
 	 * 供外部创建或者修改单子的编号
