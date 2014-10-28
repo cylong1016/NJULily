@@ -1,5 +1,8 @@
 package businesslogicservice;
 
+import java.util.ArrayList;
+
+import vo.CommodityVO;
 import message.ResultMessage;
 
 /**
@@ -13,10 +16,30 @@ import message.ResultMessage;
  * @version 2014年10月28日下午5:31:15
  */
 public interface SaleBLService {
-	public ResultMessage addSale(Commodity commodity,  int num, int price,  String remark);
 	
-	public ResultMessage addSaleBack(Commodity commodity,  int num, int price,  String remark;
+	/**
+	 * 制定出新的销售单
+	 * @param commodities
+	 * @param num
+	 * @param price
+	 * @param remark
+	 * @return
+	 */
+	public ResultMessage addSale(ArrayList<CommodityVO> commodities,  int num, int price,  String remark);
 	
+	/**
+	 * 制定出新的销售退货单
+	 * @param commodity
+	 * @param num
+	 * @param price
+	 * @return
+	 */
+	public ResultMessage addSaleBack(ArrayList<CommodityVO> commodities,  int num, int price,  String remark);
+	
+	/**
+	 * 单据提交发送
+	 * @return
+	 */
 	public ResultMessage submit();
 
 

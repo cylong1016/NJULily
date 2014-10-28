@@ -1,5 +1,7 @@
 package businesslogicservice;
 
+import vo.AccountVO;
+import vo.ClientVO;
 import message.ResultMessage;
 
 /**
@@ -22,7 +24,7 @@ public interface FuntBLService {
 	 * @param remark
 	 * @return
 	 */
-	public ResultMessage addExpenses(Client client, Account account, int money, String remark);
+	public ResultMessage addExpenses(ClientVO client, AccountVO account, int money, String remark);
 	
 	/**
 	 * 建立付款单
@@ -32,7 +34,7 @@ public interface FuntBLService {
 	 * @param remark
 	 * @return
 	 */
-	public ResultMessage addPay(Client client, Account account, int money, String remark);
+	public ResultMessage addPay(ClientVO client, AccountVO account, int money, String remark);
 	
 	/**
 	 * 建立现金费用单
@@ -42,7 +44,7 @@ public interface FuntBLService {
 	 * @param remark
 	 * @return
 	 */
-	public ResultMessage addCash(Account account, String name, int money, String remark)
+	public ResultMessage addCash(AccountVO account, String name, int money, String remark);
 
 	/**
 	 * 提交单据

@@ -1,5 +1,8 @@
 package businesslogicservice;
 
+import java.util.ArrayList;
+
+import vo.CommodityVO;
 import message.ResultMessage;
 
 /**
@@ -13,10 +16,31 @@ import message.ResultMessage;
  * @version 2014年10月28日下午5:28:55
  */
 public interface PurchaseBLService {
-	public ResultMessage addPur(Commodity commodity,  int num, int price,  String remark);
 	
-	public ResultMessage addPurBack(Commodity commodity,  int num, int price,  String remark);
+	/**
+	 * 制定进货单
+	 * @param commodity
+	 * @param num
+	 * @param price
+	 * @param remark
+	 * @return
+	 */
+	public ResultMessage addPur(ArrayList<CommodityVO> commodities,  int num, int price,  String remark);
 	
+	/**
+	 * 制定进货退货单
+	 * @param commodity
+	 * @param num
+	 * @param price
+	 * @param remark
+	 * @return
+	 */
+	public ResultMessage addPurBack(ArrayList<CommodityVO> commodities,int num, int price,  String remark);
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public ResultMessage submit();
 
 

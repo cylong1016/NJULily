@@ -1,6 +1,11 @@
 package businesslogicservice;
 
+import po.DocumentPO;
+import vo.ClientVO;
+import vo.CommodityVO;
+import vo.UserVO;
 import dataenum.Date;
+import dataenum.Storage;
 import message.ResultMessage;
 
 /**
@@ -25,7 +30,7 @@ public interface RecordBLService {
 	 * @param Storage
 	 * @return
 	 */
-	public ResultMessage saleDetail(Date begin, Date end, Commodity commodity, Client client, User user, Storage Storage);
+	public ResultMessage saleDetail(Date begin, Date end, CommodityVO commodity, ClientVO client, UserVO user, Storage Storage);
 	
 	/**
 	 * 制定经营历程表
@@ -37,14 +42,15 @@ public interface RecordBLService {
 	 * @param storage
 	 * @return
 	 */
-	public ResultMessage bussinessPro(Date begin, Date end, String kind, Client client, User user, Storage storage);
+	public ResultMessage bussinessPro(Date begin, Date end, String kind, ClientVO client, UserVO user, Storage storage);
 	
 	/**
 	 * 添加红冲
 	 * @param record
 	 * @return
 	 */
-	public ResultMessage red(Record record);
+	
+	public ResultMessage red(DocumentPO document);
 	
 	/**
 	 * 修改红冲
@@ -52,7 +58,7 @@ public interface RecordBLService {
 	 * @return
 	 */
 	
-	public ResultMessage copyRed(Record record);
+	public ResultMessage copyRed(DocumentPO document);
 	/**
 	 * 制定经营情况表
 	 * @param begin
