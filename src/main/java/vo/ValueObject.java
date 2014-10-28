@@ -8,5 +8,5 @@ package vo;
  */
 public class ValueObject {
 	public String id;
-	public String data;
+	public String date;
 }

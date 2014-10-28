@@ -1,5 +1,6 @@
 package businesslogic.userbl;
 
+import dataenum.UserIdentity;
 import message.ResultMessage;
 import vo.UserVO;
 import businesslogicservice.UserBLService;
@@ -13,7 +14,7 @@ public class UserBLService_Stub implements UserBLService {
 	/**
 	 * @see businesslogicservice.UserBLService#login(vo.UserVO)
 	 */
-	public ResultMessage login(UserVO userVO) {
+	public ResultMessage login(String username, String password) {
 		System.out.println("用户登陆成功");
 		return ResultMessage.LOGIN_SUCCESS;
 	}
@@ -21,7 +22,7 @@ public class UserBLService_Stub implements UserBLService {
 	/**
 	 * @see businesslogicservice.UserBLService#addUser(vo.UserVO)
 	 */
-	public ResultMessage addUser(UserVO userVO) {
+	public ResultMessage addUser(String username,  String password, UserIdentity position) {
 		System.out.println("添加用户成功");
 		return ResultMessage.SUCCESS;
 	}
@@ -37,7 +38,7 @@ public class UserBLService_Stub implements UserBLService {
 	/**
 	 * @see businesslogicservice.UserBLService#updateUser(vo.UserVO)
 	 */
-	public ResultMessage updateUser(UserVO userVO) {
+	public ResultMessage updateUser(String username, UserIdentity newPosition) {
 		System.out.println("更新用户成功");
 		return ResultMessage.SUCCESS;
 	}

@@ -2,6 +2,7 @@ package businesslogicservice;
 
 import message.ResultMessage;
 import vo.UserVO;
+import dataenum.UserIdentity;
 
 /**
  * 负责实现用户管理界面所需要的服务
@@ -15,14 +16,13 @@ public interface UserBLService {
 	 * @param userVO
 	 * @return 处理结果
 	 */
-	public ResultMessage login(UserVO userVO);
-
+	public ResultMessage login(String username, String password);
 	/**
 	 * 添加用户
 	 * @param userVO
 	 * @return 处理结果
 	 */
-	public ResultMessage addUser(UserVO userVO);
+	public ResultMessage addUser(String username,  String password, UserIdentity position);
 
 	/**
 	 * 根据用户名删除用户
@@ -36,5 +36,5 @@ public interface UserBLService {
 	 * @param userVO
 	 * @return 处理结果
 	 */
-	public ResultMessage updateUser(UserVO userVO);
+	public ResultMessage updateUser(String username, UserIdentity newPosition);
 }

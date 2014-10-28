@@ -13,9 +13,9 @@ import dataenum.UserIdentity;
 public class UserBLService_Driver {
 	public void drive (UserBLService userBLService) {
 		UserVO vo = new UserVO("njulily", "njulily", UserIdentity.GENERAL_MANAGER);
-		userBLService.login(vo);
-		userBLService.addUser(vo);
+		userBLService.login("njulily", "njulily");
+		userBLService.addUser("njulily", "njulily", UserIdentity.GENERAL_MANAGER);
 		userBLService.deleteUser("njulily");
-		userBLService.updateUser(vo);
+		userBLService.updateUser("njulily", UserIdentity.FINANCE_MANAGER);
 	}
 }
