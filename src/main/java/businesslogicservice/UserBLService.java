@@ -1,7 +1,6 @@
 package businesslogicservice;
 
 import message.ResultMessage;
-import vo.UserVO;
 import dataenum.UserIdentity;
 
 /**
@@ -9,6 +8,11 @@ import dataenum.UserIdentity;
  * @author cylong
  * @version Oct 26, 2014 3:19:03 PM
  */
+ /**
+  * 
+  * @author Zing
+  * @version 2014年10月28日下午7:44:23
+  */
 public interface UserBLService {
 
 	/**

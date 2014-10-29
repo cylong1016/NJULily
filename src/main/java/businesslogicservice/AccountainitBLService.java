@@ -1,5 +1,8 @@
 package businesslogicservice;
 
+import vo.AccountVO;
+import vo.ClientVO;
+import vo.CommodityVO;
 import message.ResultMessage;
 
 /**
@@ -15,16 +18,16 @@ import message.ResultMessage;
 public interface AccountainitBLService {
 	
 	/**
-	 * 
+	 *  建立初期账目
 	 * @param commodity
 	 * @param client
 	 * @param account
 	 * @return
 	 */
-	public ResultMessage addInit(Commodity commodity, Client client, Account account);
+	public ResultMessage addInit(CommodityVO commodity, ClientVO client, AccountVO account);
 	
 	/**
-	 * 
+	 * 返回上年的平均进价和售价
 	 * @param time
 	 * @param purPrice
 	 * @param salePrice
