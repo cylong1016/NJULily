@@ -10,10 +10,11 @@ import message.ResultMessage;
  */
 /**
  * 添加内容
- * @author soujing
+ * @author Zing
  * @version 2014年10月27日下午4:48:31
  */
 public interface CommodityBLService {
+	
 	/**
 	 * 添加商品分类
 	 * @param sortName 分类名称
