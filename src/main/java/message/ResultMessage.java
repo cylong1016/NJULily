@@ -7,6 +7,6 @@ package message;
  * @version Oct 26, 2014  4:29:45 PM
  */
 public enum ResultMessage {
-	LOGIN_SUCCESS,
-	SUCCESS;
+	SUCCESS,
+	FAILURE,
 }
