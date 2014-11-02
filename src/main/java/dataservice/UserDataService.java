@@ -1,5 +1,7 @@
 package dataservice;
 
+import java.rmi.RemoteException;
+
 import message.ResultMessage;
 import po.UserPO;
 
@@ -15,26 +17,26 @@ public interface UserDataService extends DataService {
 	 * @param po
 	 * @return 处理结果
 	 */
-	public ResultMessage insert(UserPO po);
+	public ResultMessage insert(UserPO po) throws RemoteException;
 
 	/**
 	 * 根据用户名查找用户
 	 * @param username
 	 * @return 用户持久化数据
 	 */
-	public UserPO find(String username);
+	public UserPO find(String username) throws RemoteException;
 
 	/**
 	 * 根据用户名删除
 	 * @param po
 	 * @return 处理结果
 	 */
-	public ResultMessage delete(String username);
+	public ResultMessage delete(String username) throws RemoteException;
 
 	/**
 	 * 更新用户
 	 * @param po
 	 * @return 处理结果
 	 */
-	public ResultMessage update(UserPO po);
+	public ResultMessage update(UserPO po) throws RemoteException;
 }
