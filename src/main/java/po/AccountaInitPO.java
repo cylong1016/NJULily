@@ -7,5 +7,5 @@ package po;
  * @version Oct 26, 2014  2:21:52 PM
  */
 public class AccountaInitPO {
-
+	
 }

@@ -8,7 +8,7 @@ import message.ResultMessage;
  * @author cylong
  * @version Oct 26, 2014 3:51:07 PM
  */
-public interface FundDataService extends DataService {
+public interface AccountBillDataService extends DataService {
 
 	/**
 	 * 插入收款单（付款单）

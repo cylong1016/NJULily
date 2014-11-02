@@ -6,6 +6,6 @@ package po;
  * @author cylong
  * @version Oct 26, 2014  2:19:50 PM
  */
-public class InventoryBillPO {
+public class InventoryBillPO extends DocumentPO{
 
 }

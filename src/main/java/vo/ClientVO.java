@@ -1,6 +1,5 @@
 package vo;
 
-import po.UserPO;
 import dataenum.ClientCategory;
 import dataenum.ClientLevel;
 
@@ -32,9 +31,10 @@ public class ClientVO extends ValueObject {
 	/** 客户应收额度 */
 	public double receivableLimit;
 	/** 默认业务员 */
-	public UserPO salesman;
+	public UserVO salesman;
 
-	public ClientVO(ClientCategory category, ClientLevel level, String name, String phone, String address, String post, String email, double receivable, double payable, double receivableLimit, UserPO salesman) {
+	public ClientVO(ClientCategory category, ClientLevel level, String name, String phone, String address, 
+			String post, String email, double receivable, double payable, double receivableLimit, UserVO salesman) {
 		super();
 		this.category = category;
 		this.level = level;

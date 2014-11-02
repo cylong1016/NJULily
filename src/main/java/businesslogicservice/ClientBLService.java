@@ -1,5 +1,6 @@
 package businesslogicservice;
 
+import vo.UserVO;
 import message.ResultMessage;
 
 /**
@@ -30,10 +31,12 @@ public interface ClientBLService {
 	 * @param phoneNum
 	 * @param address
 	 * @param post
+	 * @param email
+	 * @param salesman
 	 * @return
 	 */
 	public ResultMessage addClient(String kind, String name, String level, 
-			String phoneNum, String address, String post);
+			String phoneNum, String address, String post, String email, UserVO salesman);
 	
 	/**
 	 * 修改客户
@@ -42,11 +45,13 @@ public interface ClientBLService {
 	 * @param level
 	 * @param phoneNum
 	 * @param address
+	 * @param email
 	 * @param post
+	 * @param salesman
 	 * @return
 	 */
 	public ResultMessage updClient(String kind, String name, String level, 
-			String phoneNum, String address, String post);
+			String phoneNum, String address, String email, String post, UserVO salesman);
 	
 	/**
 	 * 删除客户

@@ -2,7 +2,10 @@ package businesslogicservice;
 
 import java.util.ArrayList;
 
-import vo.CommodityVO;
+import dataenum.Storage;
+import vo.ClientVO;
+import vo.CommodityItemVO;
+import vo.UserVO;
 import message.ResultMessage;
 
 /**
@@ -13,32 +16,63 @@ import message.ResultMessage;
 /**
  * 
  * @author Zing
- * @version 2014年10月28日下午5:28:55
+ * @version 2014年10月31日下午4:36:47
  */
 public interface PurchaseBLService {
 	
 	/**
-	 * 制定进货单
-	 * @param commodity
+	 * 得到进货单的编号
+	 * @return
+	 */
+	public ResultMessage getID ();
+	
+	/**
+	 * 添加商品到进货单
+	 * @param name
 	 * @param num
 	 * @param price
 	 * @param remark
 	 * @return
 	 */
-	public ResultMessage addPur(ArrayList<CommodityVO> commodities,  int num, int price,  String remark);
+	public ResultMessage addCommodities(String name,  int num, int price,  String remark);
 	
 	/**
-	 * 制定进货退货单
-	 * @param commodity
-	 * @param num
-	 * @param price
+	 * 得到商品总价
+	 * @param commodities
+	 * @return
+	 */
+	public ResultMessage getBeforePrice(ArrayList<CommodityItemVO> commodities);
+
+	/**
+	 * 添加进货单
+	 * @param ID
+	 * @param client
+	 * @param user
+	 * @param storage
+	 * @param commodities
+	 * @param sumPrice
 	 * @param remark
 	 * @return
 	 */
-	public ResultMessage addPurBack(ArrayList<CommodityVO> commodities,int num, int price,  String remark);
+	public ResultMessage addSale(String ID, ClientVO client, UserVO user,  Storage storage, 
+			ArrayList<CommodityItemVO> commodities, int sumPrice, String remark);
 	
 	/**
-	 * 
+	 * 添加进货退货单
+	 * @param ID
+	 * @param client
+	 * @param saleman
+	 * @param user
+	 * @param storage
+	 * @param commodities
+	 * @param sumPrice
+	 * @return
+	 */
+	public ResultMessage addSaleBack(String ID, ClientVO client, UserVO user,  Storage storage, 
+			ArrayList<CommodityItemVO> commodities, int sumPrice);
+	
+	/**
+	 * 提交单据进行审核
 	 * @return
 	 */
 	public ResultMessage submit();

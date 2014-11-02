@@ -2,6 +2,7 @@ package vo;
 
 import java.util.ArrayList;
 
+
 import dataenum.Storage;
 
 
@@ -18,35 +19,27 @@ import dataenum.Storage;
 public class SalesVO {
 	
 	/** 单据编号 */
-	public String id;
-	
+	public String id;	
 	/** 客户 */
 	public ClientVO client;
-	
 	/** 仓库 */
 	public Storage storage;
-	
-	/** 业务员（当前用户） */
+	/** 业务员 */
+	public UserVO salesman;
+	/** 操作员 */
 	public UserVO user;	
-	
 	/** 商品列表清单 */
-	public ArrayList<CommodityVO> commodities;
-	
-	/** 备注 */
-	public String remark;
-	
+	public ArrayList<CommodityItemVO> commodities;
 	/** 折让前总额*/
 	public int beforePrice;
-	
 	/** 折让金额*/
 	public int allowance;
-	
 	/** 代金券总额*/
 	public int voucher;
-	
 	/** 折让后总额*/
 	public int afterPrice;
-	
+	/** 备注 */
+	public String remark;
 	/**
 	 * 
 	 * @param client
@@ -59,9 +52,11 @@ public class SalesVO {
 	 * @param voucher
 	 * @param afterPrice
 	 */
-	public SalesVO(ClientVO client, Storage storage, UserVO user, 
-			ArrayList<CommodityVO> commodities,String remark, 
+	public SalesVO(String id, ClientVO client, Storage storage, UserVO user, UserVO salesman,
+			ArrayList<CommodityItemVO> commodities,String remark, 
 			int beforePrice, int allowance, int voucher, int afterPrice){
+		this.id = id;
+		this.salesman =salesman;
 		this.client = client;
 		this.storage = storage;
 		this.user = user;
