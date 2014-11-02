@@ -13,6 +13,8 @@ public class CommodityPO extends PersistentObject {
 	private String name;
 	/** 商品型号 */
 	private String type;
+	/** 商品分类 */
+	private CommodityManagePO sort;
 	/** 商品库存数量 */
 	private int inventoryNum;
 	/** 商品进价 */
@@ -33,10 +35,11 @@ public class CommodityPO extends PersistentObject {
 	 * @author cylong
 	 * @version Oct 26, 2014 1:21:03 PM
 	 */
-	public CommodityPO(String id, String name, String type, double purPrice, double salePrice) {
+	public CommodityPO(String id, String name, CommodityManagePO sort, String type, double purPrice, double salePrice) {
 		super(id);
 		this.name = name;
 		this.type = type;
+		this.sort = sort;
 		this.purPrice = purPrice;
 		this.salePrice = salePrice;
 	}
@@ -95,6 +98,14 @@ public class CommodityPO extends PersistentObject {
 
 	public void setRecentSalePrice(double recentSalePrice) {
 		this.recentSalePrice = recentSalePrice;
+	}
+
+	public CommodityManagePO getSort() {
+		return sort;
+	}
+
+	public void setSort(CommodityManagePO sort) {
+		this.sort = sort;
 	}
 
 }

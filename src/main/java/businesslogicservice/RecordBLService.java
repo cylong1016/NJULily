@@ -1,9 +1,10 @@
 package businesslogicservice;
 
-import po.DocumentPO;
 import vo.ClientVO;
 import vo.CommodityVO;
 import vo.UserVO;
+import vo.ValueObject;
+import dataenum.BillType;
 import dataenum.Date;
 import dataenum.Storage;
 import message.ResultMessage;
@@ -26,23 +27,23 @@ public interface RecordBLService {
 	 * @param end
 	 * @param commodity
 	 * @param client
-	 * @param user
+	 * @param salesman
 	 * @param Storage
 	 * @return
 	 */
-	public ResultMessage saleDetail(Date begin, Date end, CommodityVO commodity, ClientVO client, UserVO user, Storage Storage);
+	public ResultMessage saleDetail(Date begin, Date end, CommodityVO commodity, ClientVO client, UserVO salesman, Storage Storage);
 	
 	/**
 	 * 制定经营历程表
 	 * @param begin
 	 * @param end
-	 * @param kind
+	 * @param billType
 	 * @param client
-	 * @param user
+	 * @param salesman
 	 * @param storage
 	 * @return
 	 */
-	public ResultMessage bussinessPro(Date begin, Date end, String kind, ClientVO client, UserVO user, Storage storage);
+	public ResultMessage bussinessPro(Date begin, Date end, BillType billType, ClientVO client, UserVO salesman, Storage storage);
 	
 	/**
 	 * 添加红冲
@@ -50,7 +51,7 @@ public interface RecordBLService {
 	 * @return
 	 */
 	
-	public ResultMessage red(DocumentPO document);
+	public ResultMessage red(ValueObject valueRecord);
 	
 	/**
 	 * 修改红冲
@@ -58,7 +59,7 @@ public interface RecordBLService {
 	 * @return
 	 */
 	
-	public ResultMessage copyRed(DocumentPO document);
+	public ResultMessage copyRed(ValueObject valueRecord);
 	/**
 	 * 制定经营情况表
 	 * @param begin
@@ -66,7 +67,7 @@ public interface RecordBLService {
 	 * @param kind
 	 * @return
 	 */
-	public ResultMessage businessState(Date begin, Date end, String kind);
+	public ResultMessage businessState(Date begin, Date end);
 	
 	/**
 	 * 计算得到的收入

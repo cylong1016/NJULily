@@ -1,6 +1,7 @@
 package businesslogicservice;
 
 import po.DocumentPO;
+import po.PersistentObject;
 import message.ResultMessage;
 
 
@@ -21,7 +22,7 @@ public interface ApprovalBLService {
 	 * @param record
 	 * @return
 	 */
-	public ResultMessage checkRecord(DocumentPO record);
+	public ResultMessage checkRecord(PersistentObject record);
 	
 	/**
 	 * 修改单据内容

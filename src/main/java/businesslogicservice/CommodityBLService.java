@@ -1,5 +1,6 @@
 package businesslogicservice;
 
+import vo.CommodityManageVO;
 import dataenum.CommoditySort;
 import message.ResultMessage;
 
@@ -21,21 +22,21 @@ public interface CommodityBLService {
 	 * @param parentSort 父类
 	 * @return
 	 */
-	public ResultMessage addCommoSort(String sortName, CommoditySort parentSort);
+	public ResultMessage addCommoSort(String sortName, CommodityManageVO parentSort);
 
 	/**
 	 * 删除商品分类
 	 * @param sortName 商品分类的名称
 	 * @return
 	 */
-	public ResultMessage deleteCommoSort(String sortName);
+	public ResultMessage deleteCommoSort(CommodityManageVO sortName);
 	
 	/**
 	 * 更改商品分类名称
 	 * @param sortName 分类名称
 	 * @return
 	 */
-	public ResultMessage updCommoSort(String sortName);
+	public ResultMessage updCommoSort(CommodityManageVO sortName);
 	
 	/**
 	 * 添加商品
@@ -46,7 +47,7 @@ public interface CommodityBLService {
 	 * @param salePrice 商品售价
 	 * @return
 	 */
-	public ResultMessage addCommo(CommoditySort sortName, String name, 
+	public ResultMessage addCommo(CommodityManageVO sortName, String name, 
 			String type, int purPrice, int salePrice);
 
 	/**
@@ -65,7 +66,7 @@ public interface CommodityBLService {
 	 * @param salePrice 商品售价
 	 * @return
 	 */
-	public ResultMessage updCommo(String name, CommoditySort sortName, 
+	public ResultMessage updCommo(String name, CommodityManageVO sortName, 
 			String type, int purPrice, int salePrice);
 
 	/**
