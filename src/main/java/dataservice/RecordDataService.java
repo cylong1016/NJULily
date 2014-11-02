@@ -1,6 +1,5 @@
 package dataservice;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.PersistentObject;
@@ -17,20 +16,20 @@ public interface RecordDataService extends DataService {
 	 * @param item
 	 * @return 满足需求的账单
 	 */
-	public ArrayList<PersistentObject> getSaleDetail(String item) throws RemoteException;
+	public ArrayList<PersistentObject> getSaleDetail(String item);
 
 	/**
 	 * 查看经营历程表
 	 * @param item
 	 * @return 满足需求的账单
 	 */
-	public ArrayList<PersistentObject> getBusinessProcess(String item) throws RemoteException;
+	public ArrayList<PersistentObject> getBusinessProcess(String item);
 
 	/**
 	 * 查看经营情况表
 	 * @param item
 	 * @return 满足需求的账单
 	 */
-	public ArrayList<PersistentObject> getBusinessCondition(String item) throws RemoteException;
+	public ArrayList<PersistentObject> getBusinessCondition(String item);
 
 }

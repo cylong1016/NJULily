@@ -16,7 +16,7 @@ public class UserBLService_Stub implements UserBLService {
 	 */
 	public ResultMessage login(String username, String password) {
 		System.out.println("用户登陆成功");
-		return ResultMessage.SUCCESS;
+		return ResultMessage.LOGIN_SUCCESS;
 	}
 
 	/**

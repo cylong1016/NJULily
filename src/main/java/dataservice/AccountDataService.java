@@ -1,7 +1,5 @@
 package dataservice;
 
-import java.rmi.RemoteException;
-
 import message.ResultMessage;
 import po.AccountPO;
 
@@ -17,27 +15,27 @@ public interface AccountDataService extends DataService {
 	 * @param po
 	 * @return 处理结果
 	 */
-	public ResultMessage insert(AccountPO po) throws RemoteException;
+	public ResultMessage insert(AccountPO po);
 
 	/**
 	 * 以账户名称查看账户信息
 	 * @param name
 	 * @return 账户持久化对象
 	 */
-	public AccountPO find(String name) throws RemoteException;
+	public AccountPO find(String name);
 
 	/**
 	 * 以账户名称删除账户
 	 * @param name
 	 * @return 处理结果
 	 */
-	public ResultMessage delete(String name) throws RemoteException;
+	public ResultMessage delete(String name);
 
 	/**
 	 * 更新账户
 	 * @param po
 	 * @return 处理结果
 	 */
-	public ResultMessage update(AccountPO po) throws RemoteException;
+	public ResultMessage update(AccountPO po);
 
 }
