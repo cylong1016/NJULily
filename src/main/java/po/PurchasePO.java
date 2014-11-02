@@ -2,7 +2,6 @@ package po;
 
 import java.util.ArrayList;
 
-import vo.ClientVO;
 import dataenum.Storage;
 
 
@@ -20,7 +19,7 @@ public class PurchasePO extends DocumentPO{
 	/** 单据编号 */
 	private String id;	
 	/** 客户 */
-	private ClientVO client;
+	private ClientPO client;
 	/** 仓库 */
 	private Storage storage;
 	/** 操作员 */
@@ -32,7 +31,7 @@ public class PurchasePO extends DocumentPO{
 	/** 备注 */
 	private String remark;
 	
-	public PurchasePO(String ID, ClientVO client, UserPO user,  Storage storage, 
+	public PurchasePO(String ID, ClientPO client, UserPO user,  Storage storage, 
 			ArrayList<CommodityItemPO> commodities, int sumPrice){
 		this.id = ID;
 		this.client = client;
@@ -48,10 +47,10 @@ public class PurchasePO extends DocumentPO{
 	public void setId(String id) {
 		this.id = id;
 	}
-	public ClientVO getClient() {
+	public ClientPO getClient() {
 		return client;
 	}
-	public void setClient(ClientVO client) {
+	public void setClient(ClientPO client) {
 		this.client = client;
 	}
 	public Storage getStorage() {
