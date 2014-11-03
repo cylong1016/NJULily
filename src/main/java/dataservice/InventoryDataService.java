@@ -1,7 +1,5 @@
 package dataservice;
 
-import java.rmi.RemoteException;
-
 import message.ResultMessage;
 import po.InventoryBillPO;
 
@@ -13,30 +11,23 @@ import po.InventoryBillPO;
 public interface InventoryDataService extends DataService {
 
 	/**
-	 * 出入一个库存账单（赠送单、报溢单、报损单、报警单）
+	 * 插入一个库存账单（赠送单、报溢单、报损单、报警单）
 	 * @param po
 	 * @return 处理结果
 	 */
-	public ResultMessage insert(InventoryBillPO po) throws RemoteException;
+	public ResultMessage insert(InventoryBillPO po);
 
 	/**
-	 * 查找库存账单（赠送单、报溢单、报损单、报警单）
-	 * @param id
+	 * 以ID查找库存账单（赠送单、报溢单、报损单、报警单）
+	 * @param ID
 	 * @return 库存账单（赠送单、报溢单、报损单、报警单）
 	 */
-	public InventoryBillPO find(String id) throws RemoteException;
-
-	/**
-	 * 删除库存账单（赠送单、报溢单、报损单、报警单）
-	 * @param po
-	 * @return 处理结果
-	 */
-	public ResultMessage delete(InventoryBillPO po) throws RemoteException;
+	public InventoryBillPO find(String ID);
 
 	/**
 	 * 更新库存账单（赠送单、报溢单、报损单、报警单）
 	 * @param po
 	 * @return 处理结果
 	 */
-	public ResultMessage update(InventoryBillPO po) throws RemoteException;
+	public ResultMessage update(InventoryBillPO po);
 }

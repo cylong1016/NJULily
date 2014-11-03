@@ -1,7 +1,5 @@
 package dataservice;
 
-import java.rmi.RemoteException;
-
 import message.ResultMessage;
 import po.SalesPO;
 
@@ -17,26 +15,26 @@ public interface SaleDataService extends DataService {
 	 * @param po
 	 * @return 处理结果
 	 */
-	public ResultMessage insert(SalesPO po) throws RemoteException;
+	public ResultMessage insert(SalesPO po);
 
 	/**
-	 * 以id查找账单
-	 * @param id
+	 * 以ID查找账单
+	 * @param ID
 	 * @return 销售（销售退货）单
 	 */
-	public SalesPO find(String id) throws RemoteException;
+	public SalesPO find(String ID);
 
 	/**
-	 * 以id删除账单
-	 * @param id
+	 * 以ID删除账单
+	 * @param ID
 	 * @return 处理结果
 	 */
-	public ResultMessage delete(String id) throws RemoteException;
+	public ResultMessage delete(String ID);
 
 	/**
 	 * 更新账单
 	 * @param po
 	 * @return 处理结果
 	 */
-	public ResultMessage update(SalesPO po) throws RemoteException;
+	public ResultMessage update(SalesPO po);
 }

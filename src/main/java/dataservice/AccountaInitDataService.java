@@ -1,6 +1,6 @@
 package dataservice;
 
-import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import message.ResultMessage;
 import po.AccountaInitPO;
@@ -16,13 +16,15 @@ public interface AccountaInitDataService extends DataService {
 	 * 向序列化数据中插入一个期初建账信息
 	 * @param po
 	 * @return 处理结果
+	 * @author cylong
 	 */
-	public ResultMessage insert(AccountaInitPO po) throws RemoteException;
+	public ResultMessage insert(AccountaInitPO po);
 
 	/**
-	 * 期初建账po
-	 * @param id
-	 * @return
+	 * 查看所有期初建账信息，装入ArrayList中
+	 * @return 所有期初建账信息
+	 * @author cylong
+	 * @version Nov 3, 2014  8:42:08 PM
 	 */
-	public AccountaInitPO find(String id) throws RemoteException;
+	public ArrayList<AccountaInitPO> getAllMsg ();
 }
