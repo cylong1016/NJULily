@@ -1,5 +1,7 @@
 package dataservice;
 
+import java.rmi.RemoteException;
+
 import message.ResultMessage;
 import po.PersistentObject;
 
@@ -15,6 +17,6 @@ public interface ApprovalDataService extends DataService {
 	 * @param po
 	 * @return 处理结果
 	 */
-	public ResultMessage update(PersistentObject po);
+	public ResultMessage update(PersistentObject po) throws RemoteException;
 
 }

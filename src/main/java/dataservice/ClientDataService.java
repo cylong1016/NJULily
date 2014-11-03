@@ -1,5 +1,7 @@
 package dataservice;
 
+import java.rmi.RemoteException;
+
 import message.ResultMessage;
 import po.ClientPO;
 
@@ -15,27 +17,27 @@ public interface ClientDataService extends DataService {
 	 * @param po
 	 * @return 处理结果
 	 */
-	public ResultMessage insert(ClientPO po);
+	public ResultMessage insert(ClientPO po) throws RemoteException;
 
 	/**
 	 * 根据客户id查看客户
 	 * @param id
 	 * @return 客户持久化数据
 	 */
-	public ClientPO find(String id);
+	public ClientPO find(String id) throws RemoteException;
 
 	/**
 	 * 删除客户信息
 	 * @param id
 	 * @return 处理结果
 	 */
-	public ResultMessage delete(String id);
+	public ResultMessage delete(String id) throws RemoteException;
 
 	/**
 	 * 删除客户信息
 	 * @param po
 	 * @return 处理结果
 	 */
-	public ResultMessage update(ClientPO po);
+	public ResultMessage update(ClientPO po) throws RemoteException;
 
 }
