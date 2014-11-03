@@ -29,14 +29,14 @@ public interface CommodityBLService {
 	 * @param sortName 商品分类的名称
 	 * @return
 	 */
-	public ResultMessage deleteCommoSort(CommodityManageVO sortName);
+	public ResultMessage deleteCommoSort(CommodityManageVO sort);
 	
 	/**
 	 * 更改商品分类名称
 	 * @param sortName 分类名称
 	 * @return
 	 */
-	public ResultMessage updCommoSort(CommodityManageVO sortName);
+	public ResultMessage updCommoSort(CommodityManageVO sort);
 	
 	/**
 	 * 添加商品
@@ -47,8 +47,8 @@ public interface CommodityBLService {
 	 * @param salePrice 商品售价
 	 * @return
 	 */
-	public ResultMessage addCommo(CommodityManageVO sortName, String name, 
-			String type, int purPrice, int salePrice);
+	public ResultMessage addCommo(CommodityManageVO sort, String name, 
+			String type, double purPrice, double salePrice);
 
 	/**
 	 * 删除商品
@@ -66,8 +66,8 @@ public interface CommodityBLService {
 	 * @param salePrice 商品售价
 	 * @return
 	 */
-	public ResultMessage updCommo(String name, CommodityManageVO sortName, 
-			String type, int purPrice, int salePrice);
+	public ResultMessage updCommo(String id, String name, CommodityManageVO sort, 
+			String type, double purPrice, double salePrice);
 
 	/**
 	 * 查找商品
@@ -76,7 +76,7 @@ public interface CommodityBLService {
 	 * @param type 商品型号
 	 * @return
 	 */
-	public ResultMessage findCommo(String name, int id, String type);
+	public ResultMessage findCommo(String name, String id, String type);
 
 
 }
