@@ -5,6 +5,6 @@ package dataservice;
  * @author cylong
  * @version Oct 26, 2014 3:54:50 PM
  */
-public interface PromotionDataService {
+public interface PromotionDataService extends DataService {
 	// TODO PromotionDataService接口定义
 }
