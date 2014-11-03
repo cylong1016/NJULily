@@ -1,7 +1,5 @@
 package dataservice;
 
-import java.rmi.RemoteException;
-
 import message.ResultMessage;
 import po.CommodityPO;
 
@@ -17,26 +15,26 @@ public interface CommodityDataServer extends DataService {
 	 * @param po
 	 * @return 处理结果
 	 */
-	public ResultMessage insert(CommodityPO po) throws RemoteException;
+	public ResultMessage insert(CommodityPO po);
 
 	/**
 	 * 根据商品id查看商品
 	 * @param id
 	 * @return 商品持久化数据
 	 */
-	public CommodityPO find(String id) throws RemoteException;
+	public CommodityPO find(String id);
 
 	/**
 	 * 删除商品数据
 	 * @param id
 	 * @return 处理结果
 	 */
-	public ResultMessage delete(String id) throws RemoteException;
+	public ResultMessage delete(String id);
 
 	/**
 	 * 更新商品数据
 	 * @param po
 	 * @return 处理结果
 	 */
-	public ResultMessage update(CommodityPO po) throws RemoteException;
+	public ResultMessage update(CommodityPO po);
 }
