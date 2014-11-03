@@ -1,7 +1,5 @@
 package dataservice;
 
-import java.rmi.RemoteException;
-
 import message.ResultMessage;
 import po.AccountaInitPO;
 
@@ -17,12 +15,11 @@ public interface AccountaInitDataService extends DataService {
 	 * @param po
 	 * @return 处理结果
 	 */
-	public ResultMessage insert(AccountaInitPO po) throws RemoteException;
-
+	public ResultMessage insert(AccountaInitPO po);
 	/**
 	 * 期初建账po
 	 * @param id
-	 * @return
+	 * @return 
 	 */
-	public AccountaInitPO find(String id) throws RemoteException;
+	public AccountaInitPO find(String id);
 }

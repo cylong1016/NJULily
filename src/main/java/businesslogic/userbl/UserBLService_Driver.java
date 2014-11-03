@@ -1,5 +1,6 @@
 package businesslogic.userbl;
 
+import vo.UserVO;
 import businesslogicservice.UserBLService;
 import dataenum.UserIdentity;
 
@@ -11,6 +12,7 @@ import dataenum.UserIdentity;
  */
 public class UserBLService_Driver {
 	public void drive (UserBLService userBLService) {
+		UserVO vo = new UserVO("njulily", "njulily", UserIdentity.GENERAL_MANAGER);
 		userBLService.login("njulily", "njulily");
 		userBLService.addUser("njulily", "njulily", UserIdentity.GENERAL_MANAGER);
 		userBLService.deleteUser("njulily");
