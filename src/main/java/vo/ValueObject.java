@@ -9,4 +9,8 @@ package vo;
 public class ValueObject {
 	public String id;
 	public String date;
+	
+	public ValueObject(String id, String date) {
+		
+	}
 }
