@@ -7,6 +7,11 @@ import dataenum.UserIdentity;
  * @author cylong
  * @version Oct 26, 2014 1:22:02 AM
  */
+/**
+ * 
+ * @author Zing
+ * @version 2014年11月2日下午5:53:29
+ */
 public class UserPO extends PersistentObject {
 
 	/** serialVersionUID */
