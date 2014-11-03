@@ -1,9 +1,8 @@
 package businesslogic.userbl;
 
-import dataenum.UserIdentity;
 import message.ResultMessage;
-import vo.UserVO;
 import businesslogicservice.UserBLService;
+import dataenum.UserIdentity;
 
 /**
  * @author cylong
@@ -16,7 +15,7 @@ public class UserBLService_Stub implements UserBLService {
 	 */
 	public ResultMessage login(String username, String password) {
 		System.out.println("用户登陆成功");
-		return ResultMessage.LOGIN_SUCCESS;
+		return ResultMessage.SUCCESS;
 	}
 
 	/**

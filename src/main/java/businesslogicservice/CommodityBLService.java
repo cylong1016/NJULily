@@ -1,8 +1,7 @@
 package businesslogicservice;
 
-import vo.CommodityManageVO;
-import dataenum.CommoditySort;
 import message.ResultMessage;
+import vo.CommodityManageVO;
 
 /**
  * 负责实现商品与商品管理界面所需要的服务

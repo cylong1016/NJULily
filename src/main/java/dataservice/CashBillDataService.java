@@ -1,5 +1,5 @@
 package dataservice;
 
-public class CashBillDataService {
-
+public interface CashBillDataService extends DataService {
+	// TODO CashBillDataService
 }
