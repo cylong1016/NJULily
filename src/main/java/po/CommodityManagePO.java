@@ -6,14 +6,22 @@ package po;
  * @author cylong
  * @version Oct 26, 2014  2:22:18 PM
  */
-public class CommodityManagePO {
+public class CommodityManagePO extends PersistentObject{
+	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private String name;
 	
 	private CommodityManagePO father;
 	
 	private CommodityManagePO children;
 	
-	public CommodityManagePO(String name, CommodityManagePO father, CommodityManagePO children){
+	public CommodityManagePO(String ID, String name, CommodityManagePO father, CommodityManagePO children){
+		super(ID);
 		this.name = name;
 		this.father = father;
 		this.children = children;

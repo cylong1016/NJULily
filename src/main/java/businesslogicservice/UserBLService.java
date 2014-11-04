@@ -1,9 +1,9 @@
 package businesslogicservice;
 
-import po.UserPO;
 import vo.UserVO;
-import message.ResultMessage;
 import dataenum.UserIdentity;
+import message.ResultMessage;
+
 
 /**
  * 负责实现用户管理界面所需要的服务
@@ -25,7 +25,7 @@ public interface UserBLService {
 	 * @param userVO
 	 * @return 处理结果
 	 */
-	public ResultMessage login(String username, String password);
+	public ResultMessage login(String username, String password) ;
 	/**
 	 * 添加用户
 	 * @param userVO

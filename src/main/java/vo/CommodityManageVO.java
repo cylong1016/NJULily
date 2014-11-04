@@ -10,14 +10,15 @@ package vo;
  * @author Zing
  * @version 2014年11月2日下午4:15:31
  */
-public class CommodityManageVO {
+public class CommodityManageVO extends ValueObject{
 	public String name;
 	
 	public CommodityManageVO father;
 	
 	public CommodityManageVO children;
 	
-	public CommodityManageVO(String name, CommodityManageVO father, CommodityManageVO children){
+	public CommodityManageVO(String ID, String name, CommodityManageVO father, CommodityManageVO children){
+		super(ID, name);
 		this.name = name;
 		this.father = father;
 		this.children = children;

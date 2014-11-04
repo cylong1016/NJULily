@@ -1,11 +1,17 @@
 package businesslogic.userbl;
 
+
 import po.UserPO;
 import vo.UserVO;
 import message.ResultMessage;
 import dataenum.UserIdentity;
 import dataservice.UserDataService;
 
+/**
+ * 用户逻辑层
+ * @author Zing
+ * @version 2014年11月3日下午7:59:35
+ */
 public class UserBL implements businesslogicservice.UserBLService{
 	private UserDataService userData;
 	
@@ -18,7 +24,7 @@ public class UserBL implements businesslogicservice.UserBLService{
 			return ResultMessage.SUCCESS;
 		}
 		else {
-			return null;
+			return ResultMessage.FAILURE;
 		}
 	}
 
@@ -28,11 +34,13 @@ public class UserBL implements businesslogicservice.UserBLService{
 	public ResultMessage addUser(String username, String password,
 			UserIdentity position) {
 		// 获得随机ID
-		String id = getRadom(5);
+//		String id = getRadom(5);
+		String ID = userData.getID();
+		// TODO 需要一个得到查看该ID是否存在的方法
 		// 如果该ID未被创立过，则可以使用该ID，创建PO对象
-		UserPO po = new UserPO(id.toString(), username, password, position);
+		UserPO po = new UserPO(ID, username, password, position);
 		userData.insert(po);
-		return null;
+		return ResultMessage.SUCCESS;
 	}
 
 	public ResultMessage deleteUser(String username) {
@@ -59,5 +67,6 @@ public class UserBL implements businesslogicservice.UserBLService{
 		}
 		return id.toString();
 	}
+
 
 }
