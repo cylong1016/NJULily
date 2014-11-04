@@ -29,7 +29,6 @@ public class UserBL implements businesslogicservice.UserBLService{
 			UserIdentity position) {
 		// 获得随机ID
 		String id = getRadom(5);
-		// TODO 需要一个得到查看该ID是否存在的方法
 		// 如果该ID未被创立过，则可以使用该ID，创建PO对象
 		UserPO po = new UserPO(id.toString(), username, password, position);
 		userData.insert(po);
