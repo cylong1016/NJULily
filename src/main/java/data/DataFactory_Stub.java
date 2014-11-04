@@ -54,9 +54,9 @@ public class DataFactory_Stub implements DataFactoryService {
 	}
 
 	/**
-	 * @see dataservice.DataFactoryService#getCommodityManageData()
+	 * @see dataservice.DataFactoryService#getCommoditySortData()
 	 */
-	public DataService getCommodityManageData() {
+	public DataService getCommoditySortData() {
 		return null;
 	}
 

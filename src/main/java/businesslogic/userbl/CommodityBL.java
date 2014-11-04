@@ -3,7 +3,7 @@ package businesslogic.userbl;
 import po.CommodityManagePO;
 import po.CommodityPO;
 import dataservice.CommodityDataService;
-import dataservice.CommodityManageDataService;
+import dataservice.CommoditySortDataService;
 import message.ResultMessage;
 import vo.CommodityManageVO;
 import businesslogicservice.CommodityBLService;
@@ -11,13 +11,13 @@ import businesslogicservice.CommodityBLService;
 public class CommodityBL implements CommodityBLService{
 	
 	private CommodityDataService commodityData;
-	private CommodityManageDataService commodityManageData;
+	private CommoditySortDataService commodityManageData;
 	
 	public CommodityBL(CommodityDataService commodityData) {
 		this.commodityData = commodityData;
 	}
 	
-	public CommodityBL(CommodityManageDataService commodityManageData){
+	public CommodityBL(CommoditySortDataService commodityManageData){
 		this.commodityManageData = commodityManageData;
 	}
 
