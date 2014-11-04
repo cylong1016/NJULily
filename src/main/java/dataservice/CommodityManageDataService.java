@@ -8,7 +8,7 @@ import po.CommodityManagePO;
  * @author cylong
  * @version Oct 26, 2014 3:55:35 PM
  */
-public interface CommodityManageDataServer extends DataService {
+public interface CommodityManageDataService extends DataService {
 
 	/**
 	 * 插入一个商品分类节点

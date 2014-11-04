@@ -8,7 +8,7 @@ import po.CommodityPO;
  * @author cylong
  * @version Oct 26, 2014 3:52:31 PM
  */
-public interface CommodityDataServer extends DataService {
+public interface CommodityDataService extends DataService {
 
 	/**
 	 * 插入一条商品信息

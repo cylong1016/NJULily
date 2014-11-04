@@ -2,22 +2,22 @@ package businesslogic.userbl;
 
 import po.CommodityManagePO;
 import po.CommodityPO;
-import dataservice.CommodityDataServer;
-import dataservice.CommodityManageDataServer;
+import dataservice.CommodityDataService;
+import dataservice.CommodityManageDataService;
 import message.ResultMessage;
 import vo.CommodityManageVO;
 import businesslogicservice.CommodityBLService;
 
 public class CommodityBL implements CommodityBLService{
 	
-	private CommodityDataServer commodityData;
-	private CommodityManageDataServer commodityManageData;
+	private CommodityDataService commodityData;
+	private CommodityManageDataService commodityManageData;
 	
-	public CommodityBL(CommodityDataServer commodityData) {
+	public CommodityBL(CommodityDataService commodityData) {
 		this.commodityData = commodityData;
 	}
 	
-	public CommodityBL(CommodityManageDataServer commodityManageData){
+	public CommodityBL(CommodityManageDataService commodityManageData){
 		this.commodityManageData = commodityManageData;
 	}
 
