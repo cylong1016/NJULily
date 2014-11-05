@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import vo.ClientVO;
 import vo.CommodityVO;
+import dataenum.BillType;
 import dataenum.Date;
 import message.ResultMessage;
 
@@ -34,6 +35,14 @@ public interface InventoryBLService {
 	public ResultMessage checkRecord();
 	
 	/**
+	 * TODO 是直接添加商品的VO还是添加字符串之类的？
+	 * 添加商品到商品赠送单中
+	 * @param commodity
+	 * @return
+	 */
+	public ResultMessage addCommodity(CommodityVO commodity);
+	
+	/**
 	 * 生成相应的库存赠送单
 	 * @param commodities
 	 * @param commoNum
@@ -48,7 +57,7 @@ public interface InventoryBLService {
 	 * @param num
 	 * @return
 	 */
-	public ResultMessage overflowRecord(CommodityVO commodity, int num);
+	public ResultMessage overflowRecord(BillType billType, CommodityVO commodity, int num);
 	
 	/**
 	 * 生成相应的库存报损单
@@ -56,7 +65,7 @@ public interface InventoryBLService {
 	 * @param num
 	 * @return
 	 */
-	public ResultMessage lossRecor(CommodityVO commodity, int num);
+	public ResultMessage lossRecor(BillType billType, CommodityVO commodity, int num);
 	
 	/**
 	 * 生成相应的库存报警单
@@ -64,7 +73,7 @@ public interface InventoryBLService {
 	 * @param num
 	 * @return
 	 */
-	public ResultMessage alarmRecord(CommodityVO commodity, int num);
+	public ResultMessage alarmRecord(BillType billType, CommodityVO commodity, int num);
 
 
 

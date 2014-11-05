@@ -2,9 +2,9 @@ package businesslogicservice;
 
 import java.util.ArrayList;
 
-import po.CommodityManagePO;
 import vo.AccountVO;
 import vo.ClientVO;
+import vo.CommoditySortVO;
 import vo.CommodityVO;
 import message.ResultMessage;
 
@@ -25,8 +25,8 @@ import message.ResultMessage;
  * @version 2014年10月28日下午5:36:24
  */
 public interface AccountainitBLService {
-	
-	public ResultMessage addCommodity(CommodityManagePO sort, String name, String kind, String type);
+	// TODO 需要建立Accountainit里面的商品条目、客户条目、账户条目吗？？？？
+	public ResultMessage addCommodity(CommoditySortVO sort, String name, String kind, String type);
 	
 	public ResultMessage addClient(String kind, String name, String phone);
 	

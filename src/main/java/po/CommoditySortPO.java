@@ -6,7 +6,7 @@ package po;
  * @author cylong
  * @version Oct 26, 2014  2:22:18 PM
  */
-public class CommodityManagePO extends PersistentObject{
+public class CommoditySortPO extends PersistentObject{
 	
 	
 	/**
@@ -16,11 +16,11 @@ public class CommodityManagePO extends PersistentObject{
 
 	private String name;
 	
-	private CommodityManagePO father;
+	private CommoditySortPO father;
 	
-	private CommodityManagePO children;
+	private CommoditySortPO children;
 	
-	public CommodityManagePO(String ID, String name, CommodityManagePO father, CommodityManagePO children){
+	public CommoditySortPO(String ID, String name, CommoditySortPO father, CommoditySortPO children){
 		super(ID);
 		this.name = name;
 		this.father = father;
@@ -35,19 +35,19 @@ public class CommodityManagePO extends PersistentObject{
 		this.name = name;
 	}
 
-	public CommodityManagePO getFather() {
+	public CommoditySortPO getFather() {
 		return father;
 	}
 
-	public void setFather(CommodityManagePO father) {
+	public void setFather(CommoditySortPO father) {
 		this.father = father;
 	}
 
-	public CommodityManagePO getChildren() {
+	public CommoditySortPO getChildren() {
 		return children;
 	}
 
-	public void setChildren(CommodityManagePO children) {
+	public void setChildren(CommoditySortPO children) {
 		this.children = children;
 	}
 	

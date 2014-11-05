@@ -51,7 +51,7 @@ public interface CashBillBLService {
 	 * @param sumMoney
 	 * @return
 	 */
-	public ResultMessage addExpenses(String id, UserVO user, AccountVO account, ArrayList<CashItemVO> bills, int sumMoney);
+	public ResultMessage addCashBill(String id, UserVO user, AccountVO account, ArrayList<CashItemVO> bills, int sumMoney);
 
 	
 	/**

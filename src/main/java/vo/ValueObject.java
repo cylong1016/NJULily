@@ -9,8 +9,5 @@ package vo;
 public class ValueObject {
 	public String ID;
 	public String date;
-	
-	public ValueObject(String ID, String date) {
-		
-	}
+
 }

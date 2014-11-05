@@ -35,7 +35,6 @@ public class ClientVO extends ValueObject {
 
 	public ClientVO(ClientCategory category, ClientLevel level, String name, String phone, String address, 
 			String post, String email, double receivable, double payable, double receivableLimit, UserVO salesman) {
-		super();
 		this.category = category;
 		this.level = level;
 		this.name = name;

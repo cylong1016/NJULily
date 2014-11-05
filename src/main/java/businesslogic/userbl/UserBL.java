@@ -52,7 +52,7 @@ public class UserBL implements businesslogicservice.UserBLService{
 	 * 如果该用户没有权限更改的，ui上禁止更改
 	 */
 	public ResultMessage updateUser(String username, String password, UserIdentity newPosition, UserVO user){
-		UserPO po = new UserPO(user.id, username, password, newPosition);	
+		UserPO po = new UserPO(user.ID, username, password, newPosition);	
 		return userData.update(po);
 	}
 	
