@@ -1,7 +1,7 @@
 package dataservice;
 
 import message.ResultMessage;
-import po.CommodityManagePO;
+import po.CommoditySortPO;
 
 /**
  * 提供商品分类数据集体载入、保存、增删改查服务
@@ -15,14 +15,14 @@ public interface CommoditySortDataService extends DataService {
 	 * @param po
 	 * @return 处理结果
 	 */
-	public ResultMessage insert(CommodityManagePO po);
+	public ResultMessage insert(CommoditySortPO po);
 
 	/**
 	 * 用分类名称查找分类
 	 * @param name
 	 * @return 商品分类节点
 	 */
-	public CommodityManagePO find(String name);
+	public CommoditySortPO find(String name);
 
 	/**
 	 * 以分类ID删除分类
@@ -36,6 +36,6 @@ public interface CommoditySortDataService extends DataService {
 	 * @param po
 	 * @return 处理结果
 	 */
-	public ResultMessage update(CommodityManagePO po);
+	public ResultMessage update(CommoditySortPO po);
 
 }

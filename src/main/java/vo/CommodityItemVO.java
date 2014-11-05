@@ -21,7 +21,7 @@ public class CommodityItemVO extends ValueObject {
 	public String comment;
 
 	public CommodityItemVO(String id, String name, String type, int number, double price, double total, String comment) {
-		this.id = id;
+		super();
 		this.name = name;
 		this.type = type;
 		this.number = number;

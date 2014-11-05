@@ -1,6 +1,6 @@
 package businesslogic.commoditysortbl;
 
-import dataservice.CommodityManageDataServer;
+import dataservice.CommoditySortDataService;
 import message.ResultMessage;
 import po.CommoditySortPO;
 import vo.CommoditySortVO;
@@ -8,23 +8,23 @@ import businesslogicservice.CommoditySortBLService;
 
 public class CommoditySortController implements CommoditySortBLService{
 	
-	private CommodityManageDataServer commodityManageData;
+	private CommoditySortDataService commoditySortData;
 	
 	public ResultMessage addCommoSort(String sortName,
 			CommoditySortVO parentSort) {
 		
 		CommoditySortPO po = 
 				new CommoditySortPO(
-						commodityManageData.getID(), 
+						commoditySortData.getID(), 
 						sortName, 
-						commodityManageData.find(parentSort.name), null);
-		commodityManageData.insert(po);
+						commoditySortData.find(parentSort.name), null);
+		commoditySortData.insert(po);
 		return ResultMessage.SUCCESS;
 	}
 
 	
 	public ResultMessage deleteCommoSort(CommoditySortVO sort) {
-		commodityManageData.delete(sort.name);
+		commoditySortData.delete(sort.name);
 		return ResultMessage.SUCCESS;
 	}
 
@@ -33,9 +33,9 @@ public class CommoditySortController implements CommoditySortBLService{
 				new CommoditySortPO(
 						sort.ID, 
 						sort.name, 
-				commodityManageData.find(sort.name).getFather(),
-				commodityManageData.find(sort.name).getChildren());
-		commodityManageData.update(po);
+						commoditySortData.find(sort.name).getFather(),
+						commoditySortData.find(sort.name).getChildren());
+						commoditySortData.update(po);
 		return ResultMessage.SUCCESS;
 	}
 

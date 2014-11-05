@@ -16,7 +16,7 @@ public class UserBLService_Stub implements UserBLService {
 	 */
 	public ResultMessage login(String username, String password) {
 		System.out.println("用户登陆成功");
-		return ResultMessage.LOGIN_SUCCESS;
+		return ResultMessage.SUCCESS;
 	}
 
 	/**
@@ -41,6 +41,17 @@ public class UserBLService_Stub implements UserBLService {
 	public ResultMessage updateUser(String username, UserIdentity newPosition) {
 		System.out.println("更新用户成功");
 		return ResultMessage.SUCCESS;
+	}
+
+	public String getRadom(int n) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ResultMessage updateUser(String username, String password,
+			UserIdentity newPosition, UserVO user) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

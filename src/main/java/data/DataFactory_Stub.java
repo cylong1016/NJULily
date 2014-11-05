@@ -1,5 +1,7 @@
 package data;
 
+import java.rmi.RemoteException;
+
 import dataservice.DataFactoryService;
 import dataservice.DataService;
 import dataservice.UserDataService;
@@ -99,6 +101,16 @@ public class DataFactory_Stub implements DataFactoryService {
 	 * @see dataservice.DataFactoryService#getSaleData()
 	 */
 	public DataService getSaleData() {
+		return null;
+	}
+
+	public DataService getAccountBillData() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public DataService getCashBillData() throws RemoteException {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

@@ -1,23 +1,23 @@
 package businesslogic.commoditybl;
 
+import dataservice.CommodityDataService;
+import dataservice.CommoditySortDataService;
 import po.CommodityPO;
-import dataservice.CommodityDataServer;
-import dataservice.CommodityManageDataServer;
 import message.ResultMessage;
 import vo.CommoditySortVO;
 import businesslogicservice.CommodityBLService;
 
 public class CommodityController implements CommodityBLService{
 	
-	private CommodityDataServer commodityData;
-	private CommodityManageDataServer commodityManageData;
+	private CommodityDataService commodityData;
+	private CommoditySortDataService commoditySortData;
 	
-	public CommodityController(CommodityDataServer commodityData) {
+	public CommodityController(CommodityDataService commodityData) {
 		this.commodityData = commodityData;
 	}
 	
-	public CommodityController(CommodityManageDataServer commodityManageData){
-		this.commodityManageData = commodityManageData;
+	public CommodityController(CommoditySortDataService commoditySortData){
+		this.commoditySortData = commoditySortData;
 	}
 
 
@@ -28,7 +28,7 @@ public class CommodityController implements CommodityBLService{
 				new CommodityPO(
 						commodityData.getID(), 
 						name, 
-						commodityManageData.find(sort.name), 
+						commoditySortData.find(sort.name), 
 						type, purPrice, salePrice);
 		commodityData.insert(po);
 		return ResultMessage.SUCCESS;
@@ -47,7 +47,7 @@ public class CommodityController implements CommodityBLService{
 		String type, double purPrice, double salePrice) {
 		CommodityPO po = new CommodityPO(
 				id, name, 
-				commodityManageData.find(sort.name), 
+				commoditySortData.find(sort.name), 
 				type, purPrice, salePrice);
 		
 		return commodityData.update(po);

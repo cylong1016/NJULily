@@ -18,7 +18,7 @@ public class CommoditySortVO extends ValueObject{
 	public CommoditySortVO children;
 	
 	public CommoditySortVO(String ID, String name, CommoditySortVO father, CommoditySortVO children){
-		super(ID, name);
+		super();
 		this.name = name;
 		this.father = father;
 		this.children = children;

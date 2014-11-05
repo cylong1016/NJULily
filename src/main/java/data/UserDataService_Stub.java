@@ -53,4 +53,9 @@ public class UserDataService_Stub implements UserDataService {
 		return null;
 	}
 
+	public String getID() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
