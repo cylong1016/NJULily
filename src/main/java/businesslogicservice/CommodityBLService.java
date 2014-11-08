@@ -3,9 +3,13 @@ package businesslogicservice;
 import java.util.ArrayList;
 
 import po.CommodityPO;
+<<<<<<< HEAD
 import dataenum.FindType;
+=======
+>>>>>>> FETCH_HEAD
 import vo.CommoditySortVO;
 import message.ResultMessage;
+import dataenum.FindType;
 
 /**
  * 负责实现商品与商品管理界面所需要的服务
