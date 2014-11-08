@@ -1,5 +1,7 @@
 package dataservice;
 
+import java.util.ArrayList;
+
 import message.ResultMessage;
 import po.UserPO;
 
@@ -37,5 +39,13 @@ public interface UserDataService extends DataService {
 	 * @return 处理结果
 	 */
 	public ResultMessage update(UserPO po);
+	
+	/**
+	 * 显示全部客户
+	 * @return 返回所有客户的集合
+ 	 * @author cylong
+	 * @version Nov 8, 2014  9:35:06 PM
+	 */
+	public ArrayList<UserPO> show();
 
 }
