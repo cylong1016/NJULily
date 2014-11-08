@@ -26,7 +26,7 @@ public class SalesPO extends DocumentPO{
 	/** 操作员 */
 	private UserPO user;	
 	/** 商品列表清单 */
-	private ArrayList<CommodityItemPO> commodities;
+	private ArrayList<SaleCommodityItemPO> commodities;
 	/** 折让前总额*/
 	private int beforePrice;
 	/** 折让金额*/
@@ -40,7 +40,7 @@ public class SalesPO extends DocumentPO{
 	
 	
 	public SalesPO(String ID, ClientPO client, UserPO salesman, UserPO user,  Storage storage, 
-			ArrayList<CommodityItemPO> commodities, int beforePrice, int allowance, 
+			ArrayList<SaleCommodityItemPO> commodities, int beforePrice, int allowance, 
 			int voucher, String remark , int afterPrice){
 		this.id = ID;
 		this.client = client;
@@ -106,12 +106,12 @@ public class SalesPO extends DocumentPO{
 	}
 
 
-	public ArrayList<CommodityItemPO> getCommodities() {
+	public ArrayList<SaleCommodityItemPO> getCommodities() {
 		return commodities;
 	}
 
 
-	public void setCommodities(ArrayList<CommodityItemPO> commodities) {
+	public void setCommodities(ArrayList<SaleCommodityItemPO> commodities) {
 		this.commodities = commodities;
 	}
 

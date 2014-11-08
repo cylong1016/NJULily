@@ -1,5 +1,8 @@
 package businesslogic.commoditybl;
 
+import java.util.ArrayList;
+
+import dataenum.FindType;
 import dataservice.CommodityDataService;
 import dataservice.CommoditySortDataService;
 import po.CommodityPO;
@@ -53,9 +56,15 @@ public class CommodityController implements CommodityBLService{
 		return commodityData.update(po);
 	}
 
-	public ResultMessage findCommo(String name, String id, String type) {
-		// TODO Auto-generated method stub
+	public ArrayList<CommodityPO> findCommo(String info, FindType type) {
+		
+		// TODO 返回符合模糊查询的商品单子
 		return null;
+	}
+
+	public void showCommo() {
+		// TODO Auto-generated method stub
+		
 	}
 
 

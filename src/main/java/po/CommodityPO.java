@@ -108,4 +108,5 @@ public class CommodityPO extends PersistentObject {
 		this.sort = sort;
 	}
 
+
 }

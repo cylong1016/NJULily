@@ -14,7 +14,7 @@ public class UserBLService_Stub implements UserBLService {
 	/**
 	 * @see businesslogicservice.UserBLService#login(vo.UserVO)
 	 */
-	public ResultMessage login(String username, String password) {
+	public ResultMessage login(String username, String password, boolean isRemembered) {
 		System.out.println("用户登陆成功");
 		return ResultMessage.SUCCESS;
 	}
@@ -43,13 +43,13 @@ public class UserBLService_Stub implements UserBLService {
 		return ResultMessage.SUCCESS;
 	}
 
-	public String getRadom(int n) {
+	public ResultMessage updateUser(String username, String password,
+			UserIdentity newPosition, UserVO user) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public ResultMessage updateUser(String username, String password,
-			UserIdentity newPosition, UserVO user) {
+	public String returnUserName(boolean isRemembered) {
 		// TODO Auto-generated method stub
 		return null;
 	}

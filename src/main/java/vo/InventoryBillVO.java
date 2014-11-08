@@ -3,7 +3,6 @@ package vo;
 import java.util.ArrayList;
 
 import dataenum.BillType;
-import dataenum.Date;
 
 
 /**
@@ -17,10 +16,6 @@ import dataenum.Date;
  * @version 2014年11月4日下午4:17:12
  */
 public class InventoryBillVO {
-	/** 时间区间 开始*/
-	public Date begin;
-	/** 时间区间 结束*/
-	public Date end;
 	/** 商品集合（赠送单） */
 	public ArrayList<CommodityVO> commodities;
 	/** 客户 */

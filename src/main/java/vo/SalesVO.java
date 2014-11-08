@@ -29,7 +29,7 @@ public class SalesVO {
 	/** 操作员 */
 	public UserVO user;	
 	/** 商品列表清单 */
-	public ArrayList<CommodityItemVO> commodities;
+	public ArrayList<SaleCommodityItemVO> commodities;
 	/** 折让前总额*/
 	public int beforePrice;
 	/** 折让金额*/
@@ -53,7 +53,7 @@ public class SalesVO {
 	 * @param afterPrice
 	 */
 	public SalesVO(String id, ClientVO client, Storage storage, UserVO user, UserVO salesman,
-			ArrayList<CommodityItemVO> commodities,String remark, 
+			ArrayList<SaleCommodityItemVO> commodities,String remark, 
 			int beforePrice, int allowance, int voucher, int afterPrice){
 		this.id = id;
 		this.salesman =salesman;

@@ -25,7 +25,14 @@ public interface UserBLService {
 	 * @param userVO
 	 * @return 处理结果
 	 */
-	public ResultMessage login(String username, String password) ;
+	public ResultMessage login(String username, String password, boolean isRemembered) ;
+	
+	/**
+	 * 判断是不是保存用户
+	 * @param isRemembered
+	 * @return
+	 */
+	public String returnUserName(boolean isRemembered);
 	/**
 	 * 添加用户
 	 * @param userVO
@@ -33,12 +40,6 @@ public interface UserBLService {
 	 */
 	public ResultMessage addUser(String username,  String password, UserIdentity position);
 	
-	/**
-	 * 获得随机
-	 * @return
-	 */
-	public String getRadom(int n);
-
 	/**
 	 * 根据用户名删除用户
 	 * @param username

@@ -25,14 +25,14 @@ public class PurchasePO extends DocumentPO{
 	/** 操作员 */
 	private UserPO user;	
 	/** 商品列表清单 */
-	private ArrayList<CommodityItemPO> commodities;
+	private ArrayList<SaleCommodityItemPO> commodities;
 	/** 总额*/
 	private int sumPrice;
 	/** 备注 */
 	private String remark;
 	
 	public PurchasePO(String ID, ClientPO client, UserPO user,  Storage storage, 
-			ArrayList<CommodityItemPO> commodities, int sumPrice){
+			ArrayList<SaleCommodityItemPO> commodities, int sumPrice){
 		this.id = ID;
 		this.client = client;
 		this.user = user;
@@ -65,10 +65,10 @@ public class PurchasePO extends DocumentPO{
 	public void setUser(UserPO user) {
 		this.user = user;
 	}
-	public ArrayList<CommodityItemPO> getCommodities() {
+	public ArrayList<SaleCommodityItemPO> getCommodities() {
 		return commodities;
 	}
-	public void setCommodities(ArrayList<CommodityItemPO> commodities) {
+	public void setCommodities(ArrayList<SaleCommodityItemPO> commodities) {
 		this.commodities = commodities;
 	}
 	public int getSumPrice() {

@@ -5,7 +5,7 @@ package po;
  * @author cylong
  * @version Oct 31, 2014 3:26:07 PM
  */
-public class CommodityItemPO extends PersistentObject {
+public class SaleCommodityItemPO extends PersistentObject {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = 1L;
@@ -22,7 +22,7 @@ public class CommodityItemPO extends PersistentObject {
 	/** 商品备注 */
 	private String comment;
 
-	public CommodityItemPO(String id, String name, String type, int number, double price, String comment) {
+	public SaleCommodityItemPO(String id, String name, String type, int number, double price, String comment) {
 		super(id);
 		this.name = name;
 		this.type = type;

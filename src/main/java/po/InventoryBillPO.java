@@ -29,9 +29,8 @@ public class InventoryBillPO extends DocumentPO{
 	/** 单子类型，报损／报溢／报警*/
 	private BillType billType;
 	
-	public InventoryBillPO(BillType billType, CommodityPO commodity, int num) {
+	public InventoryBillPO(BillType billType, ArrayList<CommodityPO> commodities, int num) {
 		this.billType = billType;
-		this.commodity = commodity;
 		this.num = num;
 	}
 	

@@ -19,13 +19,27 @@ public class UserBL implements businesslogicservice.UserBLService{
 		this.userData = userData;
 	}
 	
-	public ResultMessage login(String username, String password) {
+	public ResultMessage login(String username, String password, boolean isRemembered) {
+		if (!isRemembered) {
+			//TODO 删除本地文件
+		}
+		else {
+			returnUserName(isRemembered);
+		}
 		if (userData.find(username).getPassword().equals(password)) {
 			return ResultMessage.SUCCESS;
 		}
 		else {
 			return ResultMessage.FAILURE;
 		}
+	}
+	
+	public String returnUserName(boolean isRemembered){
+		// TODO 从本地文件返回用户名
+		if (isRemembered) {
+			
+		}
+		return  null;
 	}
 
 	/**
@@ -34,7 +48,6 @@ public class UserBL implements businesslogicservice.UserBLService{
 	public ResultMessage addUser(String username, String password,
 			UserIdentity position) {
 		// 获得随机ID
-//		String id = getRadom(5);
 		String ID = userData.getID();
 		// TODO 需要一个得到查看该ID是否存在的方法
 		// 如果该ID未被创立过，则可以使用该ID，创建PO对象
@@ -56,17 +69,4 @@ public class UserBL implements businesslogicservice.UserBLService{
 		return userData.update(po);
 	}
 	
-	/**
-	 * 获得随机数->id
-	 */
-	public String getRadom(int n) {
-		StringBuffer id = new StringBuffer();
-		for (int i = 0; i < n; i++) {
-			int j = (int) (Math.random()*10);
-			id.append(j);
-		}
-		return id.toString();
-	}
-
-
 }

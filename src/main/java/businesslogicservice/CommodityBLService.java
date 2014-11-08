@@ -1,5 +1,9 @@
 package businesslogicservice;
 
+import java.util.ArrayList;
+
+import po.CommodityPO;
+import dataenum.FindType;
 import vo.CommoditySortVO;
 import message.ResultMessage;
 
@@ -15,6 +19,10 @@ import message.ResultMessage;
  */
 public interface CommodityBLService {
 	
+	/**
+	 * 显示所有的商品
+	 */
+	public void showCommo();
 	
 	/**
 	 * 添加商品
@@ -50,11 +58,9 @@ public interface CommodityBLService {
 	/**
 	 * 查找商品
 	 * @param name 商品名称
-	 * @param id 商品编号
-	 * @param type 商品型号
 	 * @return
 	 */
-	public ResultMessage findCommo(String name, String id, String type);
+	public ArrayList<CommodityPO> findCommo(String info, FindType type);
 
 
 }

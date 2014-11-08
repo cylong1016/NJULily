@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import dataenum.Storage;
 import vo.ClientVO;
-import vo.CommodityItemVO;
+import vo.SaleCommodityItemVO;
 import vo.UserVO;
 import message.ResultMessage;
 
@@ -41,7 +41,7 @@ public interface SaleBLService {
 	 * @param commodities
 	 * @return
 	 */
-	public ResultMessage getBeforePrice(ArrayList<CommodityItemVO> commodities);
+	public ResultMessage getBeforePrice(ArrayList<SaleCommodityItemVO> commodities);
 	
 	/**
 	 * 得到商品折让后的价格
@@ -69,7 +69,7 @@ public interface SaleBLService {
 	 * @return
 	 */
 	public ResultMessage addSale(String ID, ClientVO client, UserVO salesman, UserVO user,  Storage storage, 
-			ArrayList<CommodityItemVO> commodities, int beforePrice, int allowance, 
+			ArrayList<SaleCommodityItemVO> commodities, int beforePrice, int allowance, 
 			int voucher, String remark , int afterPrice);
 	
 	/**
@@ -88,7 +88,7 @@ public interface SaleBLService {
 	 * @return
 	 */
 	public ResultMessage addSaleBack(String ID, ClientVO client, UserVO salesman, UserVO user,  Storage storage,
-			ArrayList<CommodityItemVO> commodities, int beforePrice, int allowance, 
+			ArrayList<SaleCommodityItemVO> commodities, int beforePrice, int allowance, 
 			int voucher, int afterPrice, String remark);
 	/**
 	 * 单据提交发送

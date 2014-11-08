@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import dataenum.Storage;
 import vo.ClientVO;
-import vo.CommodityItemVO;
+import vo.SaleCommodityItemVO;
 import vo.UserVO;
 import message.ResultMessage;
 
@@ -41,7 +41,7 @@ public interface PurchaseBLService {
 	 * @param commodities
 	 * @return
 	 */
-	public ResultMessage getBeforePrice(ArrayList<CommodityItemVO> commodities);
+	public ResultMessage getBeforePrice(ArrayList<SaleCommodityItemVO> commodities);
 
 	/**
 	 * 添加进货单
@@ -55,7 +55,7 @@ public interface PurchaseBLService {
 	 * @return
 	 */
 	public ResultMessage addSale(String ID, ClientVO client, UserVO user,  Storage storage, 
-			ArrayList<CommodityItemVO> commodities, int sumPrice, String remark);
+			ArrayList<SaleCommodityItemVO> commodities, int sumPrice, String remark);
 	
 	/**
 	 * 添加进货退货单
@@ -69,7 +69,7 @@ public interface PurchaseBLService {
 	 * @return
 	 */
 	public ResultMessage addSaleBack(String ID, ClientVO client, UserVO user,  Storage storage, 
-			ArrayList<CommodityItemVO> commodities, int sumPrice);
+			ArrayList<SaleCommodityItemVO> commodities, int sumPrice);
 	
 	/**
 	 * 提交单据进行审核
