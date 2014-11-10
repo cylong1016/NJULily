@@ -1,4 +1,4 @@
-package businesslogic.Inventorybl;
+package businesslogic.inventorybl;
 
 import java.util.ArrayList;
 

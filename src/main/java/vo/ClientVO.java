@@ -9,6 +9,7 @@ import dataenum.ClientLevel;
  * @version Oct 26, 2014 2:25:31 PM
  */
 public class ClientVO extends ValueObject {
+	
 
 	/** 客户类别：进货商、销售商 */
 	public ClientCategory category;
