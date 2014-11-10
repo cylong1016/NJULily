@@ -1,6 +1,7 @@
 package main;
 
 
+import ui.saleUI.Frame_Salesman;
 import businesslogic.userbl.UserBLService_Driver;
 import businesslogic.userbl.UserBLService_Stub;
 import businesslogicservice.UserBLService;
@@ -16,5 +17,10 @@ public class Main {
 		UserBLService userBL = new UserBLService_Stub();
 		UserBLService_Driver driver = new UserBLService_Driver();
 		driver.drive(userBL);
+		
+		
+		//UI test
+		Frame_Salesman fs = new Frame_Salesman();
+		fs.setVisible(true);
 	}
 }

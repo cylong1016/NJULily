@@ -1,4 +1,4 @@
-package myUI;
+package ui.myUI;
 
 import javax.swing.JCheckBox;
 
