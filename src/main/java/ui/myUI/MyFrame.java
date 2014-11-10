@@ -24,7 +24,11 @@ public class MyFrame extends JFrame {
 		this.setBounds(getLocation(scrSize.width,1280), getLocation(scrSize.height,720), 1280, 720);
 		this.setLayout(null);	
 		
+<<<<<<< HEAD:src/main/java/ui/myUI/MyFrame.java
 		//the button for action exit
+=======
+		//���ӹرհ�ť
+>>>>>>> origin/master:src/main/java/ui/myUI/MyFrame.java
 		button_exit = new MyButton(1220, 0, 50, 35);
 		button_exit.setIcon(new ImageIcon("image/login/exit.png"));
 		button_exit.addMouseListener(new MouseAdapter(){
@@ -40,7 +44,11 @@ public class MyFrame extends JFrame {
 			}); 
 		this.add(button_exit);
 		
+<<<<<<< HEAD:src/main/java/ui/myUI/MyFrame.java
 		//the codes that make the frame mouse-drag-able
+=======
+		//ʹ�ô����ܱ�����϶�
+>>>>>>> origin/master:src/main/java/ui/myUI/MyFrame.java
 		this.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 requestFocus();
@@ -65,7 +73,11 @@ public class MyFrame extends JFrame {
         }); 
 	}
 	
+<<<<<<< HEAD:src/main/java/ui/myUI/MyFrame.java
 	//return a location to make sure the frame initialize in the middle of users computer
+=======
+	//����λ����꣬ʹ��Frame������Ļ������
+>>>>>>> origin/master:src/main/java/ui/myUI/MyFrame.java
 	private int getLocation(int a,int b){
 		return (a-b)/2;
 	}
