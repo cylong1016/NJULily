@@ -1,4 +1,4 @@
-package myUI;
+package ui.myUI;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPasswordField;
@@ -10,9 +10,9 @@ public class MyPasswordField extends JPasswordField {
 	public MyPasswordField(int x, int y, int width, int height){
 		this.setBounds(x, y, width, height);
 		this.setVisible(true);
-		//Ïû³ýÊäÈë¿ò±³¾°
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò±³¾ï¿½
 		this.setOpaque(false);
-		//Ïû³ýÊäÈë¿ò±ß¿ò
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¿ï¿½
 		this.setBorder(BorderFactory.createEmptyBorder());
 	}
 }

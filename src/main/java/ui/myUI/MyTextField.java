@@ -1,6 +1,6 @@
-package myUI;
+package ui.myUI;
 
-import javax.swing.BorderFactory;
+//import javax.swing.BorderFactory;
 import javax.swing.JTextField;
 
 public class MyTextField extends JTextField{
@@ -10,9 +10,7 @@ public class MyTextField extends JTextField{
 	public MyTextField(int x, int y, int width, int height){
 		this.setBounds(x, y, width, height);
 		this.setVisible(true);
-		//Ïû³ıÊäÈë¿ò±³¾°
-		this.setOpaque(false);
-		//Ïû³ıÊäÈë¿ò±ß¿ò
-		this.setBorder(BorderFactory.createEmptyBorder());
+		//this.setOpaque(false);	
+		//this.setBorder(BorderFactory.createEmptyBorder());
 	}
 }

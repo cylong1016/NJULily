@@ -1,4 +1,4 @@
-package myUI;
+package ui.myUI;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -24,7 +24,7 @@ public class MyFrame extends JFrame {
 		this.setBounds(getLocation(scrSize.width,1280), getLocation(scrSize.height,720), 1280, 720);
 		this.setLayout(null);	
 		
-		//增加关闭按钮
+		//the button for action exit
 		button_exit = new MyButton(1220, 0, 50, 35);
 		button_exit.setIcon(new ImageIcon("image/login/exit.png"));
 		button_exit.addMouseListener(new MouseAdapter(){
@@ -40,7 +40,7 @@ public class MyFrame extends JFrame {
 			}); 
 		this.add(button_exit);
 		
-		//使得窗口能被鼠标拖动
+		//the codes that make the frame mouse-drag-able
 		this.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 requestFocus();
@@ -62,11 +62,10 @@ public class MyFrame extends JFrame {
                     setLocation(left + e.getX() - xx, top + e.getY() - yy);
                 }
             }
-        });
-            
+        }); 
 	}
 	
-	//返回位置坐标，使得Frame处于屏幕正中央
+	//return a location to make sure the frame initialize in the middle of users computer
 	private int getLocation(int a,int b){
 		return (a-b)/2;
 	}
