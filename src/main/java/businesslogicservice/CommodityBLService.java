@@ -2,13 +2,9 @@ package businesslogicservice;
 
 import java.util.ArrayList;
 
-import po.CommodityPO;
-<<<<<<< HEAD
-import dataenum.FindType;
-=======
->>>>>>> FETCH_HEAD
-import vo.CommoditySortVO;
 import message.ResultMessage;
+import po.CommodityPO;
+import vo.CommoditySortVO;
 import dataenum.FindType;
 
 /**
