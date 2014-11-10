@@ -4,7 +4,7 @@ package dataenum;
  * @author Zing
  * @version 2014年11月8日下午4:50:39
  */
-public enum FindType {
+public enum FindTypeCommo {
 	NAME,
 	ID,
 	TYPE,
@@ -12,7 +12,9 @@ public enum FindType {
 	PURCHASE,
 	SALE,
 	RECENTPUR,
-	RECENTSALE
+	RECENTSALE,
+	
+	
 	
 
 }

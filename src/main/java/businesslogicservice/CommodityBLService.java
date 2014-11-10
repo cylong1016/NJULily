@@ -3,13 +3,9 @@ package businesslogicservice;
 import java.util.ArrayList;
 
 import po.CommodityPO;
-<<<<<<< HEAD
-import dataenum.FindType;
-=======
->>>>>>> FETCH_HEAD
+import dataenum.FindTypeCommo;
 import vo.CommoditySortVO;
 import message.ResultMessage;
-import dataenum.FindType;
 
 /**
  * 负责实现商品与商品管理界面所需要的服务
@@ -64,7 +60,7 @@ public interface CommodityBLService {
 	 * @param name 商品名称
 	 * @return
 	 */
-	public ArrayList<CommodityPO> findCommo(String info, FindType type);
+	public ArrayList<CommodityPO> findCommo(String info, FindTypeCommo type);
 
 
 }
