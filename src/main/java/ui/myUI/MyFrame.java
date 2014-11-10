@@ -1,4 +1,4 @@
-package myUI;
+package ui.myUI;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -24,7 +24,7 @@ public class MyFrame extends JFrame {
 		this.setBounds(getLocation(scrSize.width,1280), getLocation(scrSize.height,720), 1280, 720);
 		this.setLayout(null);	
 		
-		//Ôö¼Ó¹Ø±Õ°´Å¥
+		//ï¿½ï¿½ï¿½Ó¹Ø±Õ°ï¿½Å¥
 		button_exit = new MyButton(1220, 0, 50, 35);
 		button_exit.setIcon(new ImageIcon("image/login/exit.png"));
 		button_exit.addMouseListener(new MouseAdapter(){
@@ -40,7 +40,7 @@ public class MyFrame extends JFrame {
 			}); 
 		this.add(button_exit);
 		
-		//Ê¹µÃ´°¿ÚÄÜ±»Êó±êÍÏ¶¯
+		//Ê¹ï¿½Ã´ï¿½ï¿½ï¿½ï¿½Ü±ï¿½ï¿½ï¿½ï¿½ï¿½Ï¶ï¿½
 		this.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 requestFocus();
@@ -66,7 +66,7 @@ public class MyFrame extends JFrame {
             
 	}
 	
-	//·µ»ØÎ»ÖÃ×ø±ê£¬Ê¹µÃFrame´¦ÓÚÆÁÄ»ÕýÖÐÑë
+	//ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ê£¬Ê¹ï¿½ï¿½Frameï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private int getLocation(int a,int b){
 		return (a-b)/2;
 	}
