@@ -16,7 +16,11 @@ public class Frame_Salesman extends MyFrame{
 		
 		
 		//initialize the background for this frame
+<<<<<<< HEAD
 		MyBackground loginBackground = new MyBackground("image/back/backForNow.jpg");
+=======
+		MyBackground loginBackground = new MyBackground("image/back/backForNow.png");
+>>>>>>> origin/master
 		this.add(loginBackground);
 	}
 }
