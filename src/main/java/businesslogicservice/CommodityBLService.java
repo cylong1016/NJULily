@@ -2,10 +2,10 @@ package businesslogicservice;
 
 import java.util.ArrayList;
 
-import message.ResultMessage;
 import po.CommodityPO;
 import dataenum.FindTypeCommo;
 import vo.CommoditySortVO;
+import message.ResultMessage;
 
 /**
  * 负责实现商品与商品管理界面所需要的服务
