@@ -6,6 +6,7 @@ import businesslogicservice.CommoditySortBLService;
 
 /**
  * 实现CommoditySortBLService的类
+ * 调用CommoditySort对象
  * @author Zing
  * @version 2014年11月9日下午3:01:57
  */

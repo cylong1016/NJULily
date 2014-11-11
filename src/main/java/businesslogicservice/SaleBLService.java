@@ -19,13 +19,8 @@ import message.ResultMessage;
  * @version 2014年10月28日下午5:31:15
  */
 public interface SaleBLService {
-	
-	/**
-	 * 得到销售单的编号
-	 * @return
-	 */
-	public ResultMessage getID ();
-	
+
+
 	/**
 	 * 添加商品到商品清单
 	 * @param name
@@ -35,6 +30,7 @@ public interface SaleBLService {
 	 * @return
 	 */
 	public ResultMessage addCommodities(String name,  int num, int price,  String remark);
+	
 	
 	/**
 	 * 添加得到所有商品的总价（折让前）

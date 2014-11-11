@@ -9,6 +9,17 @@ public class CommoditySort {
 	
 	private CommoditySortDataService commoditySortData;
 	
+	
+	public CommoditySort(CommoditySortDataService commoditySortData) {
+		this.commoditySortData = commoditySortData;
+	}
+	
+	/**
+	 * 添加商品分类
+	 * @param sortName
+	 * @param parentSort
+	 * @return
+	 */
 	public ResultMessage addCommoSort(String sortName,
 			CommoditySortVO parentSort) {
 		
@@ -21,12 +32,21 @@ public class CommoditySort {
 		return ResultMessage.SUCCESS;
 	}
 
-	
+	/**
+	 * 删除商品分类
+	 * @param sort
+	 * @return
+	 */
 	public ResultMessage deleteCommoSort(CommoditySortVO sort) {
 		commoditySortData.delete(sort.name);
 		return ResultMessage.SUCCESS;
 	}
 
+	/**
+	 * 修改商品分类
+	 * @param sort
+	 * @return
+	 */
 	public ResultMessage updCommoSort(CommoditySortVO sort) {		
 		CommoditySortPO po = 
 				new CommoditySortPO(
@@ -34,7 +54,7 @@ public class CommoditySort {
 						sort.name, 
 						commoditySortData.find(sort.name).getFather(),
 						commoditySortData.find(sort.name).getChildren());
-						commoditySortData.update(po);
+		commoditySortData.update(po);
 		return ResultMessage.SUCCESS;
 	}
 
