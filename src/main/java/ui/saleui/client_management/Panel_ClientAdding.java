@@ -1,6 +1,6 @@
-package ui.saleUI.clientManagement;
+package ui.saleui.client_management;
 
-import ui.myUI.MyPanel_top;
+import ui.myui.MyPanel_top;
 
 public class Panel_ClientAdding extends MyPanel_top{
 

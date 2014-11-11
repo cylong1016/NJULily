@@ -1,7 +1,7 @@
 package main;
 
 
-import ui.saleUI.Frame_Salesman;
+import ui.saleui.Frame_Salesman;
 import businesslogic.userbl.UserBLService_Driver;
 import businesslogic.userbl.UserBLService_Stub;
 import businesslogicservice.UserBLService;

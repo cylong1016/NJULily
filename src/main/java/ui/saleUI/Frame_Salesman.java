@@ -1,8 +1,8 @@
-package ui.saleUI;
+package ui.saleui;
 
-import ui.myUI.MyBackground;
-import ui.myUI.MyFrame;
-import ui.saleUI.clientManagement.Panel_ClientManagement;
+import ui.myui.MyBackground;
+import ui.myui.MyFrame;
+import ui.saleui.client_management.Panel_ClientManagement;
 
 public class Frame_Salesman extends MyFrame{
 
@@ -14,21 +14,7 @@ public class Frame_Salesman extends MyFrame{
 		Panel_ClientManagement panel_CM = new Panel_ClientManagement();
 		this.add(panel_CM);
 		
-<<<<<<< HEAD
-		//
-		
-		
-		//initialize the background for this frame
 		MyBackground loginBackground = new MyBackground("image/back/backForNow.jpg");
-=======
-		
-		//initialize the background for this frame
-<<<<<<< HEAD
-		MyBackground loginBackground = new MyBackground("image/back/backForNow.jpg");
-=======
-		MyBackground loginBackground = new MyBackground("image/back/backForNow.png");
->>>>>>> origin/master
->>>>>>> origin/master
 		this.add(loginBackground);
 	}
 }

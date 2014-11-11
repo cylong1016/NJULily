@@ -1,5 +1,7 @@
 package data;
 
+import java.util.ArrayList;
+
 import message.ResultMessage;
 import po.UserPO;
 import dataenum.UserIdentity;
@@ -55,6 +57,13 @@ public class UserDataService_Stub implements UserDataService {
 
 	public String getID() {
 		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * @see dataservice.UserDataService#show()
+	 */
+	public ArrayList<UserPO> show() {
 		return null;
 	}
 

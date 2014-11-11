@@ -1,4 +1,4 @@
-﻿package ui.loginUI;
+﻿package ui.loginui;
 
 
 
@@ -10,12 +10,12 @@ import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 
-import ui.myUI.MyBackground;
-import ui.myUI.MyButton;
-import ui.myUI.MyFrame;
-import ui.myUI.MyLabel;
-import ui.myUI.MyPasswordField;
-import ui.myUI.MyTextField;
+import ui.myui.MyBackground;
+import ui.myui.MyButton;
+import ui.myui.MyFrame;
+import ui.myui.MyLabel;
+import ui.myui.MyPasswordField;
+import ui.myui.MyTextField;
 
 public class Frame_Login extends MyFrame {
 
