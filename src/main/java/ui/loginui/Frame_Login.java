@@ -3,21 +3,27 @@
 
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 
+import ui.myui.IOforUI;
 import ui.myui.MyBackground;
 import ui.myui.MyButton;
 import ui.myui.MyFrame;
 import ui.myui.MyLabel;
 import ui.myui.MyPasswordField;
 import ui.myui.MyTextField;
+import ui.saleui.salesmanFrame.Frame_Salesman;
 
-public class Frame_Login extends MyFrame {
+public class Frame_Login extends MyFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	int i = 0;
@@ -28,6 +34,13 @@ public class Frame_Login extends MyFrame {
 	MyButton button_Enter, button_checkbox;
 	
 	public Frame_Login(){
+		Dimension scrSize=Toolkit.getDefaultToolkit().getScreenSize();
+		IOforUI io = new IOforUI();
+		
+		int X = getLocation(scrSize.width,1280);
+		int Y = getLocation(scrSize.height,720);
+		io.writeTo(getCurrentLocation(X, Y),"image/uiData/location.txt" );
+		this.setLocation(X, Y);
 		
 		//a text field for user name input 
 		userNameField = new MyTextField(850, 200, 240, 48);
@@ -60,7 +73,7 @@ public class Frame_Login extends MyFrame {
 		this.add(passwordField);
 		
 		//the button for action login
-		final MyButton button_Enter = new MyButton(782,450,320,60);
+		button_Enter = new MyButton(782,450,320,60);
 		button_Enter.setIcon(new ImageIcon("image/login/loginButton.png"));
 		button_Enter.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent arg0) {
@@ -70,6 +83,7 @@ public class Frame_Login extends MyFrame {
 				button_Enter.setIcon(new ImageIcon("image/login/loginButton.png"));
 			}
 			}); 
+		button_Enter.addActionListener(this);
 		this.add(button_Enter);
 		
 		//a button act as a checkbox
@@ -105,6 +119,20 @@ public class Frame_Login extends MyFrame {
 		//initialize the background for this frame
 		MyBackground loginBackground = new MyBackground("image/login/loginBackground.png");
 		this.add(loginBackground);
-		
+			
+	}
+	
+	public void actionPerformed(ActionEvent events) {
+		if(events.getSource() == button_Enter){
+			Frame_Salesman fs = new Frame_Salesman();
+			fs.setVisible(true);
+			this.setVisible(false);
 		}
+	}
+	
+	private int getLocation(int a,int b){
+		return (a-b)/2;
+	}
+	
+	
 }
