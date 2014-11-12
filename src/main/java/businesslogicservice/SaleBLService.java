@@ -29,7 +29,7 @@ public interface SaleBLService {
 	 * @param remark
 	 * @return
 	 */
-	public ResultMessage addCommodities(String name,  int num, int price,  String remark);
+	public void addCommodities(String name,  int num, int price,  String remark);
 	
 	
 	/**
@@ -51,41 +51,31 @@ public interface SaleBLService {
 
 	/**
 	 * 制定出新的销售单
-	 * @param ID
 	 * @param client
 	 * @param saleman
 	 * @param user
 	 * @param storage
-	 * @param commodities
-	 * @param beforePrice
 	 * @param allowance
 	 * @param voucher
 	 * @param remark
-	 * @param afterPrice
 	 * @return
 	 */
-	public ResultMessage addSale(String ID, ClientVO client, UserVO salesman, UserVO user,  Storage storage, 
-			ArrayList<SaleCommodityItemVO> commodities, int beforePrice, int allowance, 
-			int voucher, String remark , int afterPrice);
+	public ResultMessage addSale(ClientVO client, UserVO salesman,
+			UserVO user, Storage storage, int allowance, int voucher, String remark);
 	
 	/**
 	 * 制定出新的销售退货单
-	 * @param ID
 	 * @param client
 	 * @param saleman
 	 * @param user
 	 * @param storage
-	 * @param commodities
-	 * @param beforePrice
 	 * @param allowance
 	 * @param voucher
-	 * @param afterPrice
 	 * @param remark
 	 * @return
 	 */
-	public ResultMessage addSaleBack(String ID, ClientVO client, UserVO salesman, UserVO user,  Storage storage,
-			ArrayList<SaleCommodityItemVO> commodities, int beforePrice, int allowance, 
-			int voucher, int afterPrice, String remark);
+	public ResultMessage addSaleBack(ClientVO client,UserVO salesman, UserVO user, 
+			Storage storage, int allowance, int voucher, String remark);
 	/**
 	 * 单据提交发送
 	 * @return

@@ -2,12 +2,13 @@ package businesslogic.clientbl;
 
 import java.util.ArrayList;
 
+import po.ClientPO;
 import message.ResultMessage;
 import vo.ClientVO;
-import vo.UserVO;
 import dataenum.ClientCategory;
 import dataenum.ClientLevel;
 import dataenum.FindTypeClient;
+import dataservice.ClientDataService;
 
 public class Client {
 	/** 客户类别：进货商、销售商 */
@@ -31,35 +32,50 @@ public class Client {
 	/** 客户应收额度 */
 	public double receivableLimit;
 	/** 默认业务员 */
-	public UserVO salesman;
+	public String salesman;
+	
+	public ArrayList<ClientVO> clients;
+	
+	private ClientDataService clientData;
+	
+	private ClientPO po;
 	
 	public ArrayList<ClientVO> show() {
-		// TODO Auto-generated method stub
+		// TODO 就for转换就可以了
+		// clientData.show();
 		return null;
 	}
 
+	/**
+	 * 模糊查找
+	 * @param keywords
+	 * @param type
+	 * @return
+	 */
 	public ArrayList<ClientVO> findClient(String keywords, FindTypeClient type) {
-		// TODO Auto-generated method stub
+		// TODO 
+		clientData.find(keywords, type);
 		return null;
 	}
 
-	public ResultMessage addClient(String kind, String name, String level,
-			String phone, String address, String post, String email,
-			UserVO salesman) {
-		// TODO Auto-generated method stub
+	public ResultMessage addClient(ClientCategory category, String name, ClientLevel level,
+			String phone, String address, String post, String email, double receivableLimit,
+			String salesman) {
+		po =  new ClientPO(clientData.getID(), category, level, name, phone, address, post, email, receivableLimit, salesman);
+		clientData.insert(po);
 		return null;
 	}
 
-	public ResultMessage updClient(String ID, String kind, String name,
-			String level, String phoneNum, String address, String email,
-			String post, UserVO salesman) {
-		// TODO Auto-generated method stub
+	public ResultMessage updClient(String ID, ClientCategory kind, String name,
+			ClientLevel level, String phoneNum, String address, String email,
+			String post, String salesman) {
+		po = new ClientPO(ID, kind, level, name, phoneNum, address, post, email, receivableLimit, salesman);
+		clientData.update(po);
 		return null;
 	}
 
 	public ResultMessage deletClient(String ID) {
-		// TODO Auto-generated method stub
-		return null;
+		return clientData.delete(ID);
 	}
 
 }

@@ -32,10 +32,10 @@ public class ClientVO extends ValueObject {
 	/** 客户应收额度 */
 	public double receivableLimit;
 	/** 默认业务员 */
-	public UserVO salesman;
+	public String salesman;
 
 	public ClientVO(ClientCategory category, ClientLevel level, String name, String phone, String address, 
-			String post, String email, double receivable, double payable, double receivableLimit, UserVO salesman) {
+			String post, String email, double receivable, double payable, double receivableLimit, String salesman) {
 		this.category = category;
 		this.level = level;
 		this.name = name;

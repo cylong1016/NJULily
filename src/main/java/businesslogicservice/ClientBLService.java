@@ -2,9 +2,10 @@ package businesslogicservice;
 
 import java.util.ArrayList;
 
+import dataenum.ClientCategory;
+import dataenum.ClientLevel;
 import dataenum.FindTypeClient;
 import vo.ClientVO;
-import vo.UserVO;
 import message.ResultMessage;
 
 /**
@@ -51,8 +52,8 @@ public interface ClientBLService {
 	 * @param salesman
 	 * @return
 	 */
-	public ResultMessage addClient(String kind, String name, String level, 
-			String phone, String address, String post, String email, UserVO salesman);
+	public ResultMessage addClient(ClientCategory category, String name, ClientLevel level, 
+			String phone, String address, String post, String email, double receivableLimit, String salesman);
 	
 	/**
 	 * 修改客户
@@ -66,8 +67,8 @@ public interface ClientBLService {
 	 * @param salesman
 	 * @return
 	 */
-	public ResultMessage updClient(String ID, String kind, String name, String level, 
-			String phoneNum, String address, String email, String post, UserVO salesman);
+	public ResultMessage updClient(String ID, ClientCategory kind, String name, ClientLevel level, 
+			String phoneNum, String address, String email, String post, String salesman);
 	
 	/**
 	 * 删除客户

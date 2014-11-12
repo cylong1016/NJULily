@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import message.ResultMessage;
 import vo.ClientVO;
 import vo.UserVO;
+import dataenum.ClientCategory;
+import dataenum.ClientLevel;
 import dataenum.FindTypeClient;
 import businesslogicservice.ClientBLService;
 
@@ -32,21 +34,21 @@ public class ClientController implements ClientBLService{
 		return client.findClient(keywords, type);
 	}
 
-	public ResultMessage addClient(String kind, String name, String level,
-			String phone, String address, String post, String email,
-			UserVO salesman) {
-		return client.addClient(kind, name, level, phone, address, post, email, salesman);
-	}
-
-	public ResultMessage updClient(String ID, String kind, String name,
-			String level, String phoneNum, String address, String email,
-			String post, UserVO salesman) {
-		
-		return client.updClient(ID, kind, name, level, phoneNum, address, email, post, salesman);
+	public ResultMessage addClient(ClientCategory category, String name, ClientLevel level,
+			String phone, String address, String post, String email,double receivableLimit,
+			String salesman) {
+		return client.addClient(category, name, level, phone, address, post, email, receivableLimit, salesman);
 	}
 
 	public ResultMessage deletClient(String ID) {
 		return client.deletClient(ID);
+	}
+
+	public ResultMessage updClient(String ID, ClientCategory kind, String name,
+			ClientLevel level, String phoneNum, String address, String email,
+			String post, String salesman) {
+		// TODO Auto-generated method stub
+		return client.updClient(ID, kind, name, level, phoneNum, address, email, post, salesman);
 	}
 
 }

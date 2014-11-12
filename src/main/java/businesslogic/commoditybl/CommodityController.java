@@ -6,6 +6,7 @@ import dataenum.FindTypeCommo;
 import po.CommodityPO;
 import message.ResultMessage;
 import vo.CommoditySortVO;
+import vo.CommodityVO;
 import businesslogicservice.CommodityBLService;
 
 public class CommodityController implements CommodityBLService{
@@ -34,8 +35,8 @@ public class CommodityController implements CommodityBLService{
 		return commodity.findCommo(info, type);
 	}
 
-	public void showCommo() {
-		commodity.showCommo();
+	public ArrayList<CommodityVO> showCommo() {
+		return commodity.showCommo();
 		
 	}
 
