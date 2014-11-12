@@ -104,16 +104,19 @@ public class Frame_Login extends MyFrame implements ActionListener{
 		label_field1 = new MyLabel(289, -135, 1280, 700);
 		label_field1.setIcon(new ImageIcon("image/login/field.png"));
 		label_field1.setVisible(false);
+		label_field1.setOpaque(false);
 		this.add(label_field1);
 		
 		label_field2 = new MyLabel(289, -32, 1280, 700);
 		label_field2.setIcon(new ImageIcon("image/login/field.png"));
 		label_field2.setVisible(false);
+		label_field2.setOpaque(false);
 		this.add(label_field2);
 		
 		label_checkbox = new MyLabel(160, 53, 1280, 700);
 		label_checkbox.setIcon(new ImageIcon("image/login/checkbox.png"));
 		label_checkbox.setVisible(false);
+		label_checkbox.setOpaque(false);
 		this.add(label_checkbox);
 		
 		//initialize the background for this frame

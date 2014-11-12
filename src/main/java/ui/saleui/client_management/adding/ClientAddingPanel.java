@@ -14,14 +14,13 @@ public class ClientAddingPanel extends MyPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	MyTextField textField_name, textField_phone, textField_address, textField_post, textField_email;
+	MyTextField textField_name, textField_phone, textField_address, textField_post, textField_email, textField_limit;
 	MyComboBox comboBox_category, comboBox_level;
 	MyJButton button_add;
 	
 	public ClientAddingPanel(){
-		
-		
-		int x1 = 100, y1 = 25, x2 = 100, y2 = 65;
+			
+		int x1 = 120, y1 = 10, x2 = 120, y2 = 75;
 		
 		//information bar
 		JLabel infoBar = new JLabel("新增一位客户",JLabel.CENTER);
@@ -35,16 +34,14 @@ public class ClientAddingPanel extends MyPanel {
 		JLabel word_tip1 = new JLabel("* 必填:",JLabel.CENTER);
 		word_tip1.setForeground(Color.RED);
 		word_tip1.setBackground(new Color(0, 0, 0, 0));
-		word_tip1.setBounds(40, 55, 65, 25);
+		word_tip1.setBounds(40, 45, 65, 25);
 		this.add(word_tip1);
 		
 		JLabel word_tip2 = new JLabel("选填:",JLabel.CENTER);
 		word_tip2.setForeground(Color.RED);
 		word_tip2.setBackground(new Color(0, 0, 0, 0));
-		word_tip2.setBounds(46, 205, 65, 25);
+		word_tip2.setBounds(46, 233, 65, 25);
 		this.add(word_tip2);
-		
-		
 		
 		//ui for name
 		JLabel word_name = new JLabel("* 客户名称:",JLabel.CENTER);
@@ -77,6 +74,22 @@ public class ClientAddingPanel extends MyPanel {
 		String[] comboBoxStr2 = {"----------请选择起始星级----------", "一星", "二星", "三星", "四星", "五星(VIP)"};
 		comboBox_category = new MyComboBox(110 + x1, 130 + y1, 200, 25,comboBoxStr2);
 		this.add(comboBox_category);
+		
+		//ui for receivableLimit
+		JLabel word_limit = new JLabel("* 应收额度:",JLabel.CENTER);
+		word_limit.setForeground(Color.WHITE);
+		word_limit.setBackground(new Color(0, 0, 0, 0));
+		word_limit.setBounds(30 + x1, 170 + y1, 65, 25);
+		this.add(word_limit);
+		
+		textField_limit = new MyTextField(110 + x1, 170 + y1, 180, 25);
+		this.add(textField_limit);
+		
+		JLabel word_limit_yuan = new JLabel("元",JLabel.CENTER);
+		word_limit_yuan.setForeground(Color.WHITE);
+		word_limit_yuan.setBackground(new Color(0, 0, 0, 0));
+		word_limit_yuan.setBounds(290 + x1, 170 + y1, 20, 25);
+		this.add(word_limit_yuan);
 		
 		//ui for phone
 		JLabel word_phone = new JLabel("客户电话:",JLabel.CENTER);
@@ -121,13 +134,13 @@ public class ClientAddingPanel extends MyPanel {
 		//the label for button_return
 		MyLabel label_return = new MyLabel(490 , 420 , 100, 20);
 		label_return.setForeground(Color.BLACK);
-		label_return.setBackground(Color.WHITE);
+		label_return.setBackground(new Color(0, 1, 1, 0.65f));
 		label_return.setText("返回");
 		this.add(label_return);
 		
 		MyLabel label_add = new MyLabel(490 , 390 , 100, 20);
 		label_add.setForeground(Color.BLACK);
-		label_add.setBackground(Color.WHITE);
+		label_add.setBackground(new Color(0, 1, 1, 0.65f));
 		label_add.setText("确认添加");
 		this.add(label_add);
 		
