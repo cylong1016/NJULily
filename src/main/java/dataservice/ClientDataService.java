@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import message.ResultMessage;
 import po.ClientPO;
+import dataenum.FindTypeClient;
 
 /**
  * 提供客户数据集体载入、保存、增删改查服务
@@ -20,11 +21,11 @@ public interface ClientDataService extends DataService {
 	public ResultMessage insert(ClientPO po);
 
 	/**
-	 * 根据客户name查看客户
-	 * @param name
+	 * 根据查找类型和关键字查找客户，不区分关键字的大小写
+	 * @param keywords
 	 * @return 客户持久化数据
 	 */
-	public ClientPO find(String name);
+	public ArrayList<ClientPO> find(String keywords, FindTypeClient type);
 
 	/**
 	 * 以ID删除客户信息

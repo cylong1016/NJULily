@@ -2,6 +2,7 @@ package dataservice;
 
 import message.ResultMessage;
 import po.CommodityPO;
+import dataenum.FindTypeCommo;
 
 /**
  * 提供商品集体载入、保存、增删改查服务
@@ -18,11 +19,11 @@ public interface CommodityDataService extends DataService {
 	public ResultMessage insert(CommodityPO po);
 
 	/**
-	 * 根据商品name查看商品
-	 * @param name
+	 * 根据keywords查看商品，type是以什么方式查找，null是模糊查找
+	 * @param keywords
 	 * @return 商品持久化数据
 	 */
-	public CommodityPO find(String name);
+	public CommodityPO find(String keywords, FindTypeCommo type);
 
 	/**
 	 * 以ID删除商品数据

@@ -18,11 +18,11 @@ public interface AccountDataService extends DataService {
 	public ResultMessage insert(AccountPO po);
 
 	/**
-	 * 以账户名称查看账户信息
-	 * @param name
+	 * 以keywords查看账户信息，type是以什么方式查找，null代表模糊查找
+	 * @param keywords
 	 * @return 账户持久化对象
 	 */
-	public AccountPO find(String name);
+	public AccountPO find(String keywords, FindTypeAccount type);
 
 	/**
 	 * 以账户名称删除账户
