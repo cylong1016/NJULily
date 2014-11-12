@@ -11,20 +11,14 @@ public class ClientDetailUI extends MyWindow implements ActionListener{
 	
 	private static final long serialVersionUID = 1L;
 
-	MyButton button_return, button_modify, button_check;
+	MyButton button_return;
 	
 	public ClientDetailUI(){
 		button_return = new MyButton(630 + 240, 610 + 45, 100, 20);
 		button_return.addActionListener(this);
 		this.add(button_return);
 		
-		button_modify = new MyButton(650 + 240, 275 + 45, 100, 20);
-		button_modify.addActionListener(this);
-		this.add(button_modify);
 		
-		button_check = new MyButton(650 + 240, 580 + 45, 100, 20);
-		button_check.addActionListener(this);
-		this.add(button_check);
 		
 		ClientDetailPanel cdp = new ClientDetailPanel();
 		cdp.setOpaque(true);
@@ -38,12 +32,5 @@ public class ClientDetailUI extends MyWindow implements ActionListener{
 			this.setVisible(false);
 		}
 		
-		if(events.getSource() == button_modify){
-			System.out.println("modifying the infornation of the client ...");
-		}
-		
-		if(events.getSource() == button_check){
-			System.out.println("now checking ...");
-		}
 	}
 }

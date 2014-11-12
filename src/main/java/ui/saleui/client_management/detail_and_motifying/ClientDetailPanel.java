@@ -1,11 +1,14 @@
 package ui.saleui.client_management.detail_and_motifying;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
+import ui.myui.MyButton;
 import ui.myui.MyComboBox;
 import ui.myui.MyJButton;
 import ui.myui.MyLabel;
@@ -13,13 +16,13 @@ import ui.myui.MyPanel;
 import ui.myui.MyTable;
 import ui.myui.MyTextField;
 
-public class ClientDetailPanel extends MyPanel{
+public class ClientDetailPanel extends MyPanel implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 
 	MyTextField textField_name, textField_phone, textField_address, textField_post, textField_email, textField_limit;
 	MyComboBox comboBox_category, comboBox_level;
-	MyJButton button_add;
+	MyButton button_modify, button_check;
 	
 	public ClientDetailPanel(){
 			
@@ -65,7 +68,7 @@ public class ClientDetailPanel extends MyPanel{
 		
 		
 		//ui for salesman
-		JLabel word_salesman = new JLabel("客户编号:",JLabel.CENTER);
+		JLabel word_salesman = new JLabel("业务员:",JLabel.CENTER);
 		word_salesman.setForeground(Color.WHITE);
 		word_salesman.setBackground(new Color(0, 0, 0, 0));
 		word_salesman.setBounds(36 + x2, 130 + y2, 60, 25);
@@ -189,7 +192,7 @@ public class ClientDetailPanel extends MyPanel{
 		jsp2.setOpaque(false);
 		jsp2.setVisible(true);
 		this.add(jsp2);
-			
+		
 		//the label for button_return
 		MyLabel label_return = new MyLabel(600 + 30, 575 + 35, 100, 20);
 		label_return.setForeground(Color.BLACK);
@@ -197,6 +200,8 @@ public class ClientDetailPanel extends MyPanel{
 		label_return.setText("返回");
 		this.add(label_return);
 		
+		
+		//ui for button motify and check
 		MyLabel label_motify = new MyLabel(490 + 140, 390 - 180 + 65, 100, 20);
 		label_motify.setForeground(Color.BLACK);
 		label_motify.setBackground(new Color(0, 1, 1, 0.65f));
@@ -208,5 +213,24 @@ public class ClientDetailPanel extends MyPanel{
 		label_check.setBackground(new Color(0, 1, 1, 0.65f));
 		label_check.setText("查看所选货单");
 		this.add(label_check);
+		
+		button_modify = new MyButton(630, 275, 100, 20);
+		button_modify.addActionListener(this);
+		this.add(button_modify);
+		
+		button_check = new MyButton(630, 580, 100, 20);
+		button_check.addActionListener(this);
+		this.add(button_check);
+	}
+	
+	public void actionPerformed(ActionEvent events) {
+		
+		if(events.getSource() == button_modify){
+			System.out.println("modifying the infornation of the client ...");
+		}
+		
+		if(events.getSource() == button_check){
+			System.out.println("now checking ...");
+		}
 	}
 }

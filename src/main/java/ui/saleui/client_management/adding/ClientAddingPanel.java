@@ -1,22 +1,25 @@
 package ui.saleui.client_management.adding;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 
+import ui.myui.MyButton;
 import ui.myui.MyComboBox;
 import ui.myui.MyJButton;
 import ui.myui.MyLabel;
 import ui.myui.MyPanel;
 import ui.myui.MyTextField;
 
-public class ClientAddingPanel extends MyPanel {
+public class ClientAddingPanel extends MyPanel implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 
 	MyTextField textField_name, textField_phone, textField_address, textField_post, textField_email, textField_limit;
 	MyComboBox comboBox_category, comboBox_level;
-	MyJButton button_add;
+	MyButton button_add;
 	
 	public ClientAddingPanel(){
 			
@@ -138,12 +141,24 @@ public class ClientAddingPanel extends MyPanel {
 		label_return.setText("返回");
 		this.add(label_return);
 		
-		MyLabel label_add = new MyLabel(490 , 390 , 100, 20);
+		//ui for button add
+		MyLabel label_add = new MyLabel(490 , 390, 100, 20);
 		label_add.setForeground(Color.BLACK);
 		label_add.setBackground(new Color(0, 1, 1, 0.65f));
 		label_add.setText("确认添加");
 		this.add(label_add);
 		
+		button_add = new MyButton(490 , 390, 100, 25);
+		button_add.addActionListener(this);
+		this.add(button_add);
+		
+	}
+	
+	public void actionPerformed(ActionEvent events) {
+		
+		if(events.getSource() == button_add){
+			System.out.println("adding client process...");
+		}
 	}
 		
 }
