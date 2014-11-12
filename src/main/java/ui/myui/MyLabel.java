@@ -9,5 +9,7 @@ public class MyLabel extends JLabel {
 	public MyLabel(int x, int y, int width, int height){
 		this.setBounds(x, y, width, height);
 		this.setVisible(true);
+		this.setOpaque(true);
+		this.setHorizontalAlignment(MyLabel.CENTER);
 	}
 }
