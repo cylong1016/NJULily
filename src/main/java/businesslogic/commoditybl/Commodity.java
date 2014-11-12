@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import message.ResultMessage;
 import po.CommodityPO;
 import vo.CommoditySortVO;
+import vo.CommodityVO;
 import dataenum.FindTypeCommo;
 import dataservice.CommodityDataService;
 import dataservice.CommoditySortDataService;
@@ -29,7 +30,9 @@ public class Commodity {
 	public double recentPurPrice;
 	/** 商品最近售价 */
 	public double recentSalePrice;
+	
 	private CommodityDataService commodityData;
+	
 	private CommoditySortDataService commoditySortData;
 	
 	public Commodity(CommodityDataService commodityData) {
@@ -78,7 +81,7 @@ public class Commodity {
 		return null;
 	}
 
-	public void showCommo() {
+	public ArrayList<CommodityVO> showCommo() {
 		// TODO Auto-generated method stub
 		
 	}

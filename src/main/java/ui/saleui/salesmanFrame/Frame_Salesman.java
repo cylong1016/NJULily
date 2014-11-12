@@ -1,8 +1,8 @@
-package ui.saleui;
+package ui.saleui.salesmanFrame;
 
 import ui.myui.MyBackground;
 import ui.myui.MyFrame;
-import ui.saleui.client_management.Panel_ClientManagement;
+import ui.saleui.client_management.index.ClientManagementUI;
 
 public class Frame_Salesman extends MyFrame{
 
@@ -11,7 +11,7 @@ public class Frame_Salesman extends MyFrame{
 	public Frame_Salesman(){
 		
 		//the panel for client management
-		Panel_ClientManagement panel_CM = new Panel_ClientManagement();
+		ClientManagementUI panel_CM = new ClientManagementUI();
 		this.add(panel_CM);
 		
 		MyBackground loginBackground = new MyBackground("image/back/backForNow.jpg");

@@ -1,4 +1,4 @@
-package ui.saleui.client_management;
+package ui.saleui.client_management.index;
 
 
 import java.awt.Color;
@@ -12,14 +12,16 @@ import ui.myui.MyJButton;
 import ui.myui.MyPanel;
 import ui.myui.MyTable;
 import ui.myui.MyTextField;
+import ui.saleui.client_management.adding.ClientAddingUI;
+import ui.saleui.client_management.detail_and_motifying.ClientDetailUI;
 
-public class Panel_ClientManagement extends MyPanel implements ActionListener{
+public class ClientManagementUI extends MyPanel implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 
-	MyJButton button_return, button_add;
+	MyJButton button_return, button_add, button_cam;
 	
-	public Panel_ClientManagement(){
+	public ClientManagementUI(){
 		
 		//add a combo box (for choosing the selected way)
 		String[] comboBoxStr = {"-------请选择一种搜索方式-------", "模糊查找"
@@ -69,7 +71,7 @@ public class Panel_ClientManagement extends MyPanel implements ActionListener{
 		this.add(button_del);	
 		
 		//add a button for checking and modifying the information of a selected client
-		MyJButton button_cam = new MyJButton("修改或查看所选客户详细信息");
+		button_cam = new MyJButton("修改或查看所选客户详细信息");
 		button_cam.setBounds(305 + 420, 610, 210, 25);
 		button_cam.addActionListener(this);
 		this.add(button_cam);	
@@ -88,9 +90,13 @@ public class Panel_ClientManagement extends MyPanel implements ActionListener{
 		}
 		
 		if(events.getSource() == button_add){
-			Panel_ClientAdding panelAdd = new Panel_ClientAdding();
-			this.add(panelAdd);
-			System.out.println("aaa");
+			ClientAddingUI window_add = new ClientAddingUI();
+			window_add.setVisible(true);
+		}
+		
+		if(events.getSource() == button_cam){
+			ClientDetailUI window_detail = new ClientDetailUI();
+			window_detail.setVisible(true);
 		}
 	}
 }

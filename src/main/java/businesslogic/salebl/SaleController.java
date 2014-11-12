@@ -13,9 +13,9 @@ public class SaleController implements SaleBLService{
 
 	private Sale sale;
 	
-	public ResultMessage addCommodities(String name, int num, int price,
+	public void addCommodities(String name, int num, int price,
 			String remark) {
-		return sale.addCommodities(name, num, price, remark);
+		sale.addCommodities(name, num, price, remark);
 	}
 
 	public ResultMessage getBeforePrice(
@@ -30,18 +30,14 @@ public class SaleController implements SaleBLService{
 		return null;
 	}
 
-	public ResultMessage addSale(String ID, ClientVO client, UserVO salesman,
-			UserVO user, Storage storage,
-			ArrayList<SaleCommodityItemVO> commodities, int beforePrice,
-			int allowance, int voucher, String remark, int afterPrice) {
+	public ResultMessage addSale(ClientVO client, UserVO salesman,
+			UserVO user, Storage storage, int allowance, int voucher, String remark) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public ResultMessage addSaleBack(String ID, ClientVO client,
-			UserVO salesman, UserVO user, Storage storage,
-			ArrayList<SaleCommodityItemVO> commodities, int beforePrice,
-			int allowance, int voucher, int afterPrice, String remark) {
+	public ResultMessage addSaleBack(ClientVO client,UserVO salesman, UserVO user, 
+			Storage storage, int allowance, int voucher, String remark)  {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import po.CommodityPO;
 import dataenum.FindTypeCommo;
 import vo.CommoditySortVO;
+import vo.CommodityVO;
 import message.ResultMessage;
 
 /**
@@ -22,7 +23,7 @@ public interface CommodityBLService {
 	/**
 	 * 显示所有的商品
 	 */
-	public void showCommo();
+	public ArrayList<CommodityVO> showCommo();
 	
 	/**
 	 * 添加商品

@@ -16,12 +16,20 @@ public class MyFrame extends JFrame {
 	MyButton button_exit;
 	
 	boolean isDraging;
-	int xx,yy,X0,Y0;	 
+	int xx, yy, X0, Y0, X, Y;	 
     
 	public MyFrame(){	
 		Dimension scrSize=Toolkit.getDefaultToolkit().getScreenSize();
+			
 		this.setUndecorated(true);
-		this.setBounds(getLocation(scrSize.width,1280), getLocation(scrSize.height,720), 1280, 720);
+		IOforUI io = new IOforUI();
+		
+		if(io.getX() == getLocation(scrSize.width,1280) && io.getY() == getLocation(scrSize.height,720)){
+			this.setBounds(getLocation(scrSize.width,1280), getLocation(scrSize.height,720), 1280, 720);
+		}else{
+			this.setBounds(io.getX() ,io.getY(), 1280, 720);
+		}
+		
 		this.setLayout(null);	
 		
 		//the button for action exit
@@ -35,6 +43,7 @@ public class MyFrame extends JFrame {
 				button_exit.setIcon(new ImageIcon("image/login/exit.png"));
 			}
 			public void mouseClicked(MouseEvent arg0){
+			
 				System.exit(0);
 			}
 			}); 
@@ -60,6 +69,10 @@ public class MyFrame extends JFrame {
                     int left = getLocation().x;
                     int top = getLocation().y;
                     setLocation(left + e.getX() - xx, top + e.getY() - yy);
+                    X = left + e.getX() - xx;
+                    Y = top + e.getY() - yy;
+                    IOforUI io = new IOforUI();
+                    io.writeTo(getCurrentLocation(X, Y),"image/uiData/location.txt" );
                 }
             }
         }); 
@@ -69,4 +82,11 @@ public class MyFrame extends JFrame {
 	private int getLocation(int a,int b){
 		return (a-b)/2;
 	}
+	
+	public String getCurrentLocation(int X, int Y){
+		return String.valueOf(X) + ";" + String.valueOf(Y);
+	}
+	
+	
+	
 }
