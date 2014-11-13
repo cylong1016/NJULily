@@ -12,15 +12,15 @@ public class SaleList {
 		beforePrice = 0;
 	}
 
-	public void add(String name, int number, int price, String remark){
-		SaleListItem item = new SaleListItem(name, number, price, remark);
+	public void add(SaleListItem item){
 		commodities.add(item);
 	}
 	
-	public void getBeforePrice(){
+	public double getBeforePrice(){
 		for (int i = 0; i < commodities.size(); i++) {
 			beforePrice+=commodities.get(i).getTotal();
 		}
+		return beforePrice;
 	}
 	
 	public ArrayList<SaleListItem> getCommodities() {

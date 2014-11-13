@@ -11,7 +11,14 @@ import dataenum.Date;
  * @author cylong
  * @version Oct 26, 2014  2:19:50 PM
  */
-public class InventoryBillPO extends DocumentPO{
+public class InventoryBillPO extends PersistentObject{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/** 单据ID */
+	
+	private static String id;
 	/** 时间区间 开始*/
 	private Date begin;
 	/** 时间区间 结束*/
@@ -30,11 +37,13 @@ public class InventoryBillPO extends DocumentPO{
 	private BillType billType;
 	
 	public InventoryBillPO(BillType billType, ArrayList<CommodityPO> commodities, int num) {
+		super(id);
 		this.billType = billType;
 		this.num = num;
 	}
 	
 	public InventoryBillPO(ArrayList<CommodityPO> commodities, int giftNum, ClientPO client) {
+		super(id);
 		this.commodities = commodities;
 		this.giftNum = giftNum;
 		this.client = client;

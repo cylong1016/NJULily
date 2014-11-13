@@ -14,7 +14,11 @@ import dataenum.Storage;
  * @author Zing
  * @version 2014年10月29日上午9:48:18
  */
-public class SalesPO extends DocumentPO{
+public class SalesPO extends PersistentObject{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/** 单据编号 */
 	private String id;	
 	/** 客户 */
@@ -42,6 +46,7 @@ public class SalesPO extends DocumentPO{
 	public SalesPO(String ID, ClientPO client, UserPO salesman, UserPO user,  Storage storage, 
 			ArrayList<SaleCommodityItemPO> commodities, int beforePrice, int allowance, 
 			int voucher, String remark , int afterPrice){
+		super(ID);
 		this.id = ID;
 		this.client = client;
 		this.salesman = salesman;
