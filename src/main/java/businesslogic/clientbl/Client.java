@@ -54,7 +54,7 @@ public class Client {
 	 */
 	public ArrayList<ClientVO> findClient(String keywords, FindTypeClient type) {
 		// TODO 
-		clientData.find(keywords);
+		clientData.find(keywords, type);
 		return null;
 	}
 

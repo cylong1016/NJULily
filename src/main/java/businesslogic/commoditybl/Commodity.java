@@ -1,9 +1,6 @@
 package businesslogic.commoditybl;
 
-import java.net.MalformedURLException;
 import java.rmi.Naming;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import businesslogic.salebl.CommodityInfo;
@@ -66,7 +63,7 @@ public class Commodity implements CommodityInfo{
 	}
 
 	public ResultMessage deletCommo(String name) {
-		CommodityPO po = commodityData.find(name);
+		CommodityPO po = commodityData.find(name, FindTypeCommo.NAME);
 		if (po!=null) {
 			return commodityData.delete(po.getId());
 		}
@@ -85,7 +82,7 @@ public class Commodity implements CommodityInfo{
 	}
 
 	public ArrayList<CommodityPO> findCommo(String info, FindTypeCommo type) {
-		commodityData.find(info);
+		commodityData.find(info, type);
 		// TODO
 		return null;
 	}
