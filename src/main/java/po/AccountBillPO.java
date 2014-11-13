@@ -7,8 +7,12 @@ import java.util.ArrayList;
  * @author cylong
  * @version Oct 26, 2014  2:18:04 PM
  */
-public class AccountBillPO extends DocumentPO{
+public class AccountBillPO extends PersistentObject{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/** 编号 */
 	private String id;
 	/** 客户 */
@@ -21,6 +25,7 @@ public class AccountBillPO extends DocumentPO{
 	private int sumMoney;
 	
 	public AccountBillPO(String id, ClientPO client, UserPO user, ArrayList<BillItemPO> bills, int sumMoney){
+		super(id);
 		this.id = id;
 		this.client = client;
 		this.user = user;

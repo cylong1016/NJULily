@@ -1,5 +1,6 @@
 package businesslogic.salebl;
 
+import java.rmi.Naming;
 import java.util.ArrayList;
 
 import message.ResultMessage;
@@ -7,13 +8,21 @@ import vo.ClientVO;
 import vo.SaleCommodityItemVO;
 import vo.UserVO;
 import dataenum.Storage;
+import dataservice.SaleDataService;
 
 public class Sale {
 	
 	private SaleList saleList;
 	
+	private SaleDataService saleData;
+	
 	public Sale() {
 		this.saleList = new SaleList();
+		try {
+			saleData = (SaleDataService)Naming.lookup("rmi://127.0.0.1:8888/factory");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 	}
 	
 	/**
@@ -25,7 +34,8 @@ public class Sale {
 	 */
 	public void addCommodities(String name, int num, int price,
 			String remark) {
-		saleList.add(name, num, price, remark);
+		SaleListItem item = new SaleListItem(name, num, price, remark);
+		saleList.add(item);
 	}
 	
 	

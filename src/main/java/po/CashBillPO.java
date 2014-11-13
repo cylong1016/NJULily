@@ -10,7 +10,11 @@ import java.util.ArrayList;
  * @author Zing
  * @version 2014年10月31日下午5:55:13
  */
-public class CashBillPO extends DocumentPO{
+public class CashBillPO extends PersistentObject{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/** 编号 */
 	private String id;
 	/** 操作员 */
@@ -23,6 +27,7 @@ public class CashBillPO extends DocumentPO{
 	private int sumMoney;
 	
 	public CashBillPO(String id, UserPO user, AccountPO account, ArrayList<CashItemPO> bills, int sumMoney) {
+		super(id);
 		this.id = id;
 		this.user = user;
 		this.account = account;

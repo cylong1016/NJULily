@@ -1,5 +1,6 @@
 package businesslogic.salebl;
 
+import businesslogic.commoditybl.Commodity;
 import dataservice.CommodityDataService;
 
 /**
@@ -27,67 +28,42 @@ public class SaleListItem {
 	/** 商品备注 */
 	private String remark;
 	
-	CommodityDataService commodityData;
+	CommodityInfo info;
 	
 	public SaleListItem(String name, int number, double price, String remark) {
 		this.name = name;
 		this.number = number;
-		this.type = commodityData.find(name).getType();
+		info = new Commodity();
+		this.type = info.getType(name);
 		this.price = price;
-		this.setRemark(remark);
-	}
-	
-	public void getItemPrice(int number, double price){
 		this.total = number * price;
+		this.remark = remark;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public String getType() {
 		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
 	}
 
 	public int getNumber() {
 		return number;
 	}
 
-	public void setNumber(int number) {
-		this.number = number;
-	}
-
 	public double getPrice() {
 		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
 	}
 
 	public double getTotal() {
 		return total;
 	}
 
-	public void setTotal(double total) {
-		this.total = total;
-	}
-
 	public String getRemark() {
 		return remark;
 	}
 
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
-	
+
 	
 }
