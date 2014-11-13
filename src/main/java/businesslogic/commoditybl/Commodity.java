@@ -1,7 +1,12 @@
 package businesslogic.commoditybl;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import businesslogic.salebl.CommodityInfo;
 import message.ResultMessage;
 import po.CommodityPO;
 import vo.CommoditySortVO;
@@ -14,7 +19,7 @@ import dataservice.CommoditySortDataService;
  * @author Zing
  * @version 2014年11月9日下午2:53:19
  */
-public class Commodity {
+public class Commodity implements CommodityInfo{
 	
 	/** 商品名称 */
 	public String name;
@@ -35,8 +40,12 @@ public class Commodity {
 	
 	private CommoditySortDataService commoditySortData;
 	
-	public Commodity(CommodityDataService commodityData) {
-		this.commodityData = commodityData;
+	public Commodity() {
+		try {
+			commodityData = (CommodityDataService)Naming.lookup("rmi://127.0.0.1:1994/factory");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public Commodity(CommoditySortDataService commoditySortData){
@@ -82,8 +91,13 @@ public class Commodity {
 	}
 
 	public ArrayList<CommodityVO> showCommo() {
+		return null;
 		// TODO Auto-generated method stub
 		
+	}
+
+	public String getType(String name) {
+		return 	commodityData.find(name, FindTypeCommo.NAME).getType();
 	}
 
 

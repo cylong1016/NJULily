@@ -25,7 +25,8 @@ public class Sale {
 	 */
 	public void addCommodities(String name, int num, int price,
 			String remark) {
-		saleList.add(name, num, price, remark);
+		SaleListItem item = new SaleListItem(name, num, price, remark);
+		saleList.add(item);
 	}
 	
 	
