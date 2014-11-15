@@ -1,8 +1,10 @@
 package dataservice;
 
-import dataenum.FindTypeAccount;
+import java.util.ArrayList;
+
 import message.ResultMessage;
 import po.AccountPO;
+import dataenum.FindTypeAccount;
 
 /**
  * 提供账户数据集体载入、保存、增删改查服务
@@ -23,7 +25,7 @@ public interface AccountDataService extends DataService {
 	 * @param keywords
 	 * @return 账户持久化对象
 	 */
-	public AccountPO find(String keywords, FindTypeAccount type);
+	public ArrayList<AccountPO> find(String keywords, FindTypeAccount type);
 
 	/**
 	 * 以账户名称删除账户

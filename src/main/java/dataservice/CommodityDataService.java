@@ -1,5 +1,7 @@
 package dataservice;
 
+import java.util.ArrayList;
+
 import message.ResultMessage;
 import po.CommodityPO;
 import dataenum.FindTypeCommo;
@@ -23,7 +25,16 @@ public interface CommodityDataService extends DataService {
 	 * @param keywords
 	 * @return 商品持久化数据
 	 */
-	public CommodityPO find(String keywords, FindTypeCommo type);
+	public ArrayList<CommodityPO> find(String keywords, FindTypeCommo type);
+	
+	/**
+	 * 已商品的名字查找其所有的型号
+	 * @param name
+	 * @return 商品型号的ArrayList
+	 * @author cylong
+	 * @version Nov 15, 2014  11:10:25 AM
+	 */
+	public ArrayList<String> find(String name);
 
 	/**
 	 * 以ID删除商品数据
