@@ -5,10 +5,10 @@ package po;
  * @author cylong
  * @version Oct 31, 2014 3:26:07 PM
  */
-public class SaleCommodityItemPO extends PersistentObject {
-
-	/** serialVersionUID */
-	private static final long serialVersionUID = 1L;
+public class SaleCommodityItemPO {
+	
+	/** 商品编号*/
+	private String ID;
 	/** 商品名称 */
 	private String name;
 	/** 商品型号 */
@@ -23,7 +23,7 @@ public class SaleCommodityItemPO extends PersistentObject {
 	private String comment;
 
 	public SaleCommodityItemPO(String id, String name, String type, int number, double price, String comment) {
-		super(id);
+		this.setID(id);
 		this.name = name;
 		this.type = type;
 		this.number = number;
@@ -74,6 +74,14 @@ public class SaleCommodityItemPO extends PersistentObject {
 
 	public double getTotal() {
 		return this.total;
+	}
+
+	public String getID() {
+		return ID;
+	}
+
+	public void setID(String iD) {
+		ID = iD;
 	}
 
 }

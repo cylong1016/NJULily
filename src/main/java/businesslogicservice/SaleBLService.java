@@ -1,11 +1,7 @@
 package businesslogicservice;
 
-import java.util.ArrayList;
 
 import dataenum.Storage;
-import vo.ClientVO;
-import vo.SaleCommodityItemVO;
-import vo.UserVO;
 import message.ResultMessage;
 
 /**
@@ -31,14 +27,6 @@ public interface SaleBLService {
 	 */
 	public void addCommodities(String name,  int num, int price,  String remark);
 	
-	
-	/**
-	 * 添加得到所有商品的总价（折让前）
-	 * @param commodities
-	 * @return
-	 */
-	public ResultMessage getBeforePrice(ArrayList<SaleCommodityItemVO> commodities);
-	
 	/**
 	 * 得到商品折让后的价格
 	 * @param beforePrice
@@ -46,7 +34,7 @@ public interface SaleBLService {
 	 * @param voucher
 	 * @return
 	 */
-	public ResultMessage getAfterPrice(int beforePrice, int allowance, int voucher);
+	public double getAfterPrice(double beforePrice, double allowance, double voucher);
 
 
 	/**
@@ -60,8 +48,8 @@ public interface SaleBLService {
 	 * @param remark
 	 * @return
 	 */
-	public ResultMessage addSale(ClientVO client, UserVO salesman,
-			UserVO user, Storage storage, int allowance, int voucher, String remark);
+	public ResultMessage addSale(String client, String salesman,
+			String user, Storage storage, double allowance, double voucher, String remark);
 	
 	/**
 	 * 制定出新的销售退货单
@@ -74,8 +62,8 @@ public interface SaleBLService {
 	 * @param remark
 	 * @return
 	 */
-	public ResultMessage addSaleBack(ClientVO client,UserVO salesman, UserVO user, 
-			Storage storage, int allowance, int voucher, String remark);
+	public ResultMessage addSaleBack(String client,String salesman, String user, 
+			Storage storage, double allowance, double voucher, String remark);
 	/**
 	 * 单据提交发送
 	 * @return
