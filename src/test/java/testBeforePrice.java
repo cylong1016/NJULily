@@ -1,4 +1,5 @@
 
+
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
@@ -19,7 +20,7 @@ public class testBeforePrice {
 	
 		double before = list.getBeforePrice();
 		
-		assertEquals(before, 200, 0.01);
+		assertEquals(before, 200.0, 0.01);
 		
 	}
 

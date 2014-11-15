@@ -37,6 +37,8 @@ public class Commodity implements CommodityInfo{
 	
 	private CommoditySortDataService commoditySortData;
 	
+	private CommodityPO po;
+	
 	public Commodity() {
 		try {
 			commodityData = (CommodityDataService)Naming.lookup("rmi://127.0.0.1:1994/factory");
@@ -52,18 +54,14 @@ public class Commodity implements CommodityInfo{
 	public ResultMessage addCommo(CommoditySortVO sort, String name,
 			String type, double purPrice, double salePrice) {
 		// TODO Auto-generated method stub
-		CommodityPO po = 
-				new CommodityPO(
-						commodityData.getID(), 
-						name, 
-						commoditySortData.find(sort.name), 
+		po = new CommodityPO(commodityData.getID(), name, commoditySortData.find(sort.name), 
 						type, purPrice, salePrice);
 		commodityData.insert(po);
 		return ResultMessage.SUCCESS;
 	}
 
 	public ResultMessage deletCommo(String name) {
-		CommodityPO po = commodityData.find(name, FindTypeCommo.NAME);
+		po = commodityData.find(name, FindTypeCommo.NAME);
 		if (po!=null) {
 			return commodityData.delete(po.getId());
 		}
@@ -73,7 +71,7 @@ public class Commodity implements CommodityInfo{
 
 	public ResultMessage updCommo(String id, String name, CommoditySortVO sort,
 		String type, double purPrice, double salePrice) {
-		CommodityPO po = new CommodityPO(
+		po = new CommodityPO(
 				id, name, 
 				commoditySortData.find(sort.name), 
 				type, purPrice, salePrice);
@@ -94,7 +92,13 @@ public class Commodity implements CommodityInfo{
 	}
 
 	public String getType(String name) {
-		return 	commodityData.find(name, FindTypeCommo.NAME).getType();
+		po = commodityData.find(name, FindTypeCommo.NAME);
+		return 	po.getType();
+	}
+
+	public String getID(String ID) {
+		po = commodityData.find(ID, FindTypeCommo.ID);
+		return po.getId();
 	}
 
 

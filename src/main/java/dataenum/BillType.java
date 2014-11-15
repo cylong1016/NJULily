@@ -2,5 +2,9 @@ package dataenum;
 
 public enum BillType {
 	EXPENSE,
-	PAY
+	PAY,
+	SALE,
+	SALEBACK,
+	PURCHASE,
+	PURCHASEBACK
 }

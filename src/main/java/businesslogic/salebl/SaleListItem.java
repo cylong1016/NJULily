@@ -1,10 +1,10 @@
 package businesslogic.salebl;
 
 import businesslogic.commoditybl.Commodity;
-import dataservice.CommodityDataService;
 
 /**
- * 出货商品清单中要显示商品的编号，
+ * 出货商品清单中要显示
+ * 商品的编号，
  * 名称（从商品选择界面选择），
  * 型号，数量（手工输入），
  * 单价（默认为商品信息里的销售价，可修改），
@@ -15,6 +15,8 @@ import dataservice.CommodityDataService;
  * @version 2014年11月11日下午9:02:13
  */
 public class SaleListItem {
+	/** 商品编号 */
+	private String ID;
 	/** 商品名称 */
 	private String name;
 	/** 商品型号 */
@@ -34,10 +36,15 @@ public class SaleListItem {
 		this.name = name;
 		this.number = number;
 		info = new Commodity();
+		this.ID = info.getID(name);
 		this.type = info.getType(name);
 		this.price = price;
 		this.total = number * price;
 		this.remark = remark;
+	}
+	
+	public String getID(){
+		return ID;
 	}
 
 	public String getName() {
