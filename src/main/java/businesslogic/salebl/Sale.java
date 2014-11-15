@@ -1,7 +1,9 @@
 package businesslogic.salebl;
 
 import java.rmi.Naming;
+import java.util.ArrayList;
 
+import po.SaleCommodityItemPO;
 import po.SalesPO;
 import message.ResultMessage;
 import dataenum.Storage;
@@ -53,6 +55,8 @@ public class Sale {
 			double beforePrice = saleList.getBeforePrice();
 			double afterPrice = getAfterPrice(beforePrice, allowance, voucher);
 			String ID = saleData.getID();
+			
+			ArrayList<SaleCommodityItemPO> commoditisePO= new ArrayList<SaleCommodityItemPO>();
 			// TODO
 		
 			
