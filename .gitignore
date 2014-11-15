@@ -15,6 +15,7 @@ hs_err_pid*
 
 /.settings/*
 .classpath
+.project
 
 #maven.gitignore
 target/
