@@ -16,7 +16,7 @@ public class PurchaseController implements PurchaseBLService{
 		return null;
 	}
 
-	public ResultMessage addCommodities(String name, int num, int price,
+	public ResultMessage addCommodities(String name, int num, double price,
 			String remark) {
 		// TODO Auto-generated method stub
 		return null;

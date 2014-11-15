@@ -1,6 +1,8 @@
 package businesslogic.userbl;
 
 
+import java.util.ArrayList;
+
 import po.UserPO;
 import vo.UserVO;
 import message.ResultMessage;
@@ -67,6 +69,11 @@ public class UserBL implements businesslogicservice.UserBLService{
 	public ResultMessage updateUser(String username, String password, UserIdentity newPosition, UserVO user){
 		UserPO po = new UserPO(user.ID, username, password, newPosition);	
 		return userData.update(po);
+	}
+
+	public ArrayList<UserVO> show() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

@@ -1,6 +1,9 @@
 package businesslogicservice;
 
 
+import java.util.ArrayList;
+
+import vo.SalesVO;
 import dataenum.Storage;
 import message.ResultMessage;
 
@@ -16,6 +19,7 @@ import message.ResultMessage;
  */
 public interface SaleBLService {
 
+	public ArrayList<SalesVO> show();
 
 	/**
 	 * 添加商品到商品清单
@@ -25,7 +29,7 @@ public interface SaleBLService {
 	 * @param remark
 	 * @return
 	 */
-	public void addCommodities(String name,  int num, int price,  String remark);
+	public void addCommodities(String name,  int num, double price,  String remark);
 	
 	/**
 	 * 得到商品折让后的价格

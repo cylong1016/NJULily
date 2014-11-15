@@ -1,5 +1,7 @@
 package businesslogic.userbl;
 
+import java.util.ArrayList;
+
 import dataenum.UserIdentity;
 import message.ResultMessage;
 import vo.UserVO;
@@ -50,6 +52,11 @@ public class UserBLService_Stub implements UserBLService {
 	}
 
 	public String returnUserName(boolean isRemembered) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<UserVO> show() {
 		// TODO Auto-generated method stub
 		return null;
 	}

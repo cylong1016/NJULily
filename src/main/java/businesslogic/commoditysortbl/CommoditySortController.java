@@ -1,5 +1,7 @@
 package businesslogic.commoditysortbl;
 
+import java.util.ArrayList;
+
 import message.ResultMessage;
 import vo.CommoditySortVO;
 import businesslogicservice.CommoditySortBLService;
@@ -27,6 +29,24 @@ public class CommoditySortController implements CommoditySortBLService{
 
 	public ResultMessage updCommoSort(CommoditySortVO sort) {		
 		return commoditySort.updCommoSort(sort);
+	}
+
+
+	public ArrayList<CommoditySortVO> show() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public ResultMessage deleteCommoSort(String ID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public ResultMessage updCommoSort(String ID, String name) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

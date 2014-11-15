@@ -1,5 +1,7 @@
 package businesslogicservice;
 
+import java.util.ArrayList;
+
 import vo.UserVO;
 import dataenum.UserIdentity;
 import message.ResultMessage;
@@ -19,6 +21,8 @@ import message.ResultMessage;
   * @version 2014年10月28日下午7:44:23
   */
 public interface UserBLService {
+	
+	public ArrayList<UserVO> show();
 
 	/**
 	 * 验证用户登陆

@@ -34,7 +34,7 @@ public interface PurchaseBLService {
 	 * @param remark
 	 * @return
 	 */
-	public ResultMessage addCommodities(String name,  int num, int price,  String remark);
+	public ResultMessage addCommodities(String name,  int num, double price,  String remark);
 	
 	/**
 	 * 得到商品总价

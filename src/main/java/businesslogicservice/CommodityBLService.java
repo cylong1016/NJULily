@@ -39,10 +39,10 @@ public interface CommodityBLService {
 
 	/**
 	 * 删除商品
-	 * @param name 商品名称
+	 * @param id 商品名称
 	 * @return
 	 */
-	public ResultMessage deletCommo(String name);
+	public ResultMessage deletCommo(String ID);
 
 	/**
 	 * 更改商品信息
