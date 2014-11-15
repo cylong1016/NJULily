@@ -3,15 +3,13 @@ package businesslogic.inventorybl;
 import java.util.ArrayList;
 
 import message.ResultMessage;
-import vo.CommodityVO;
 import vo.GiftCommodityItemVO;
 import dataenum.BillType;
-import dataenum.Date;
 import businesslogicservice.InventoryBLService;
 
 public class InventoryController implements InventoryBLService{
 
-	public ResultMessage viewInventory(Date beginDate, Date endDate) {
+	public ResultMessage viewInventory(String beginDate, String endDate) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -21,25 +19,7 @@ public class InventoryController implements InventoryBLService{
 		return null;
 	}
 
-	public ResultMessage addCommodity(CommodityVO commodity, int number) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public ResultMessage overflowRecord(BillType billType,
-			CommodityVO commodity, int num) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public ResultMessage lossRecor(BillType billType, CommodityVO commodity,
-			int num) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public ResultMessage alarmRecord(BillType billType, CommodityVO commodity,
-			int num) {
+	public ResultMessage addCommodity(String ID, int number) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -49,4 +29,21 @@ public class InventoryController implements InventoryBLService{
 		return null;
 	}
 
+	public ResultMessage overflowRecord(BillType billType, String commodityID,
+			int num, String remark) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ResultMessage lossRecord(BillType billType, String commodityID,
+			int num, String remark) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ResultMessage alarmRecord(BillType billType, String commodityID,
+			int nowNum, int alarmNum, String remark) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

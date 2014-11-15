@@ -60,8 +60,7 @@ public class Sale {
 			double afterPrice = getAfterPrice(beforePrice, allowance, voucher);
 			String ID = saleData.getID();
 			// TODO
-			po = new SalesPO(ID, client, salesman, user, storage, commodities, 
-					beforePrice, allowance, voucher, remark, afterPrice, type);
+		
 			
 		} catch (Exception e) {
 			e.printStackTrace();

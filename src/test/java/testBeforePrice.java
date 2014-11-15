@@ -11,9 +11,11 @@ public class testBeforePrice {
 
 	@Test
 	public void test() {
-		MockSaleItem item1 = new MockSaleItem("aa", 5, 20, null);
-		MockSaleItem item2 = new MockSaleItem("bb", 10, 10, null);
-		
+		MockCommodity commodity1 = new MockCommodity("a1", "SQQ");
+		MockCommodity commodity2 = new MockCommodity("a2", "RRE");
+		MockSaleItem item1 = new MockSaleItem("aa", 5, 20, null, commodity1);
+		MockSaleItem item2 = new MockSaleItem("bb", 10, 10, null, commodity2);
+				
 		SaleList list = new SaleList();
 		list.add(item1);
 		list.add(item2);

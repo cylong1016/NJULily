@@ -32,6 +32,10 @@ public class SaleListItem {
 	
 	CommodityInfo info;
 	
+	public SaleListItem(){
+		
+	}
+	
 	public SaleListItem(String name, int number, double price, String remark) {
 		this.name = name;
 		this.number = number;

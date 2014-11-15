@@ -2,10 +2,8 @@ package businesslogicservice;
 
 import java.util.ArrayList;
 
-import vo.CommodityVO;
 import vo.GiftCommodityItemVO;
 import dataenum.BillType;
-import dataenum.Date;
 import message.ResultMessage;
 
 /**
@@ -26,7 +24,7 @@ public interface InventoryBLService {
 	 * @param endDate
 	 * @return
 	 */
-	public ResultMessage viewInventory (Date beginDate, Date endDate);
+	public ResultMessage viewInventory (String beginDate, String endDate);
 	
 	/**
 	 * 显示截至盘点时间的库存快照
@@ -34,20 +32,17 @@ public interface InventoryBLService {
 	 */
 	public ResultMessage checkRecord();
 	
-	
-	
 	/**
 	 * TODO 是直接添加商品的VO还是添加字符串之类的？
 	 * 添加商品到商品赠送单中
 	 * @param commodity
 	 * @return
 	 */
-	public ResultMessage addCommodity(CommodityVO commodity, int number);
+	public ResultMessage addCommodity(String ID, int number);
 	
 	/**
 	 * 生成相应的库存赠送单
 	 * @param commodities
-	 * @param commoNum
 	 * @return
 	 */
 	public ResultMessage giftRecord(ArrayList<GiftCommodityItemVO> commodities);
@@ -58,7 +53,7 @@ public interface InventoryBLService {
 	 * @param num
 	 * @return
 	 */
-	public ResultMessage overflowRecord(BillType billType, CommodityVO commodity, int num);
+	public ResultMessage overflowRecord(BillType billType, String commodityID, int num, String remark);
 	
 	/**
 	 * 生成相应的库存报损单
@@ -66,7 +61,7 @@ public interface InventoryBLService {
 	 * @param num
 	 * @return
 	 */
-	public ResultMessage lossRecor(BillType billType, CommodityVO commodity, int num);
+	public ResultMessage lossRecord(BillType billType, String commodityID, int num, String remark);
 	
 	/**
 	 * 生成相应的库存报警单
@@ -74,7 +69,7 @@ public interface InventoryBLService {
 	 * @param num
 	 * @return
 	 */
-	public ResultMessage alarmRecord(BillType billType, CommodityVO commodity, int num);
+	public ResultMessage alarmRecord(BillType billType, String commodityID, int nowNum, int alarmNum, String remark);
 
 
 

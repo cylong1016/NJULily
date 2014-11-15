@@ -3,11 +3,11 @@ package businesslogic.commoditybl;
 import java.rmi.Naming;
 import java.util.ArrayList;
 
-import businesslogic.salebl.CommodityInfo;
 import message.ResultMessage;
 import po.CommodityPO;
 import vo.CommoditySortVO;
 import vo.CommodityVO;
+import businesslogic.salebl.CommodityInfo;
 import dataenum.FindTypeCommo;
 import dataservice.CommodityDataService;
 import dataservice.CommoditySortDataService;
@@ -16,7 +16,7 @@ import dataservice.CommoditySortDataService;
  * @author Zing
  * @version 2014年11月9日下午2:53:19
  */
-public class Commodity implements CommodityInfo{
+public class Commodity implements CommodityInfo, businesslogic.purchasebl.CommodityInfo{
 	
 	/** 商品名称 */
 	public String name;
@@ -60,8 +60,8 @@ public class Commodity implements CommodityInfo{
 		return ResultMessage.SUCCESS;
 	}
 
-	public ResultMessage deletCommo(String name) {
-		po = commodityData.find(name, FindTypeCommo.NAME);
+	public ResultMessage deletCommo(String id) {
+		po = commodityData.find(id, FindTypeCommo.ID).get(0);
 		if (po!=null) {
 			return commodityData.delete(po.getId());
 		}
@@ -92,12 +92,12 @@ public class Commodity implements CommodityInfo{
 	}
 
 	public String getType(String name) {
-		po = commodityData.find(name, FindTypeCommo.NAME);
+		po = commodityData.find(name, FindTypeCommo.NAME).get(0);
 		return 	po.getType();
 	}
 
 	public String getID(String ID) {
-		po = commodityData.find(ID, FindTypeCommo.ID);
+		po = commodityData.find(ID, FindTypeCommo.ID).get(0);
 		return po.getId();
 	}
 
