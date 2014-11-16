@@ -8,7 +8,15 @@ public class testBussinessState {
 
 	@Test
 	public void test() {
-		fail("Not yet implemented");
+		MockSale sale1 = new MockSale(100);
+		MockSale sale2 = new MockSale(200);
+		
+		
+		MockBusinessState businessState = new MockBusinessState();
+		businessState.add(sale1);
+		businessState.add(sale2);
+		
+		assertEquals(300, businessState.getTotal(), 0.01);
 	}
 
 }
