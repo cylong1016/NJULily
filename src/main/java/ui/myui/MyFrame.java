@@ -9,6 +9,8 @@ import java.awt.event.MouseMotionAdapter;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
+import ui.commonui.exitprogram.ExitProgramFrame;
+
 public class MyFrame extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
@@ -42,9 +44,9 @@ public class MyFrame extends JFrame {
 			public void mouseExited(MouseEvent arg0) {
 				button_exit.setIcon(new ImageIcon("image/login/exit.png"));
 			}
-			public void mouseClicked(MouseEvent arg0){
-			
-				System.exit(0);
+			public void mouseClicked(MouseEvent arg0){	
+				ExitProgramFrame epf = new ExitProgramFrame();
+				epf.setVisible(true);
 			}
 			}); 
 		this.add(button_exit);

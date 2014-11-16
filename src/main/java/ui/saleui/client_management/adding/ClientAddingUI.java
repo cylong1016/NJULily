@@ -5,6 +5,9 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+
+import ui.commonui.exitfunction.ExitFunctionFrame;
 import ui.myui.MyButton;
 import ui.myui.MyWindow;
 
@@ -15,6 +18,7 @@ public class ClientAddingUI extends MyWindow implements ActionListener{
 	MyButton button_return;
 	ClientAddingPanel cap;
 	MyButton button_add;
+	public static JButton button_close;
 	
 	public ClientAddingUI(){
 		
@@ -26,26 +30,33 @@ public class ClientAddingUI extends MyWindow implements ActionListener{
 		button_add.addActionListener(this);
 		this.add(button_add);
 		
+		button_close = new JButton();
+		button_close.addActionListener(this);
+		this.add(button_close);
+		
 		cap = new ClientAddingPanel();
 		cap.setOpaque(true);
 		cap.setBackground(new Color(0, 0, 0, 0.4f));
 		cap.setBounds(340, 135, 600, 450);
 		this.add(cap);
 		
-	
-		
 	}
 	
 	public void actionPerformed(ActionEvent events) {
 		
 		if(events.getSource() == button_return){
-			this.setVisible(false);	
+			ExitFunctionFrame epf = new ExitFunctionFrame("ClientAddingUI");
+			epf.setVisible(true);
 		}
 		
 		if(events.getSource() == button_add){
 			this.setVisible(false);
 			System.out.println("adding client process...");
 			System.out.println(cap.getinfo());
+		}
+		
+		if(events.getSource() == button_close){
+			this.setVisible(false);
 		}
 		
 	}
