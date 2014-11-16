@@ -81,5 +81,9 @@ public class Sale {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public SaleList getSaleList(){
+		return saleList;
+	}
 
 }
