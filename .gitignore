@@ -16,6 +16,8 @@ hs_err_pid*
 /.settings/*
 .classpath
 .project
+image/uiData/*
+data/uiData/*
 
 #maven.gitignore
 target/
