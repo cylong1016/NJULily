@@ -1,16 +1,18 @@
 package businesslogic.clientbl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
-import po.ClientPO;
 import message.ResultMessage;
+import po.ClientPO;
 import vo.ClientVO;
 import dataenum.ClientCategory;
 import dataenum.ClientLevel;
 import dataenum.FindTypeClient;
 import dataservice.ClientDataService;
 
-public class Client {
+public class Client implements businesslogic.accountbillbl.ClientInfo {
+
 	/** 客户类别：进货商、销售商 */
 	public ClientCategory category;
 	/** 客户级别：1-5（vip） */
@@ -33,13 +35,13 @@ public class Client {
 	public double receivableLimit;
 	/** 默认业务员 */
 	public String salesman;
-	
+
 	public ArrayList<ClientVO> clients;
-	
+
 	private ClientDataService clientData;
-	
+
 	private ClientPO po;
-	
+
 	public ArrayList<ClientVO> show() {
 		// TODO 就for转换就可以了
 		// clientData.show();
@@ -58,17 +60,14 @@ public class Client {
 		return null;
 	}
 
-	public ResultMessage addClient(ClientCategory category, String name, ClientLevel level,
-			String phone, String address, String post, String email, double receivableLimit,
-			String salesman) {
-		po =  new ClientPO(clientData.getID(), category, level, name, phone, address, post, email, receivableLimit, salesman);
+	public ResultMessage addClient(ClientCategory category, String name, ClientLevel level, String phone, String address, String post, String email, double receivableLimit, String salesman) {
+		po =
+				new ClientPO(clientData.getID(), category, level, name, phone, address, post, email, receivableLimit, salesman);
 		clientData.insert(po);
 		return null;
 	}
 
-	public ResultMessage updClient(String ID, ClientCategory kind, String name,
-			ClientLevel level, String phoneNum, String address, String email,
-			String post, String salesman) {
+	public ResultMessage updClient(String ID, ClientCategory kind, String name, ClientLevel level, String phoneNum, String address, String email, String post, String salesman) {
 		po = new ClientPO(ID, kind, level, name, phoneNum, address, post, email, receivableLimit, salesman);
 		clientData.update(po);
 		return null;
@@ -76,6 +75,13 @@ public class Client {
 
 	public ResultMessage deletClient(String ID) {
 		return clientData.delete(ID);
+	}
+
+	/**
+	 * @see businesslogic.accountbillbl.ClientInfo#getAllClients()
+	 */
+	public ArrayList<ClientPO> getAllClients() {
+		return null;
 	}
 
 }

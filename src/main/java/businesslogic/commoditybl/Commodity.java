@@ -11,6 +11,7 @@ import businesslogic.salebl.CommodityInfo;
 import dataenum.FindTypeCommo;
 import dataservice.CommodityDataService;
 import dataservice.CommoditySortDataService;
+import dataservice.DataFactoryService;
 /**
  * 商品管理
  * @author Zing
@@ -41,7 +42,8 @@ public class Commodity implements CommodityInfo, businesslogic.purchasebl.Commod
 	
 	public Commodity() {
 		try {
-			commodityData = (CommodityDataService)Naming.lookup("rmi://127.0.0.1:1994/factory");
+			DataFactoryService factory = (DataFactoryService)Naming.lookup("rmi://127.0.0.1:1994/factory");
+			commodityData = (CommodityDataService)factory.getCommodityData();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
