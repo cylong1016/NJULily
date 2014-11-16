@@ -1,3 +1,4 @@
+package Sale;
 import businesslogic.salebl.SaleListItem;
 
 public class MockSaleItem extends SaleListItem{

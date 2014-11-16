@@ -1,5 +1,7 @@
 package Record;
 
-public class MockAccountBill {
+import businesslogic.accountbillbl.AccountBill;
+
+public class MockAccountBill extends AccountBill{
 
 }

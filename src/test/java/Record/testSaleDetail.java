@@ -1,14 +1,14 @@
 package Record;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
+
+import businesslogic.recordbl.Record;
 
 public class testSaleDetail {
 
 	@Test
 	public void test() {
-		fail("Not yet implemented");
+		Record r1 = new Record();
 	}
 
 }

@@ -1,5 +1,7 @@
 package Record;
 
-public class MockSale {
+import businesslogic.salebl.Sale;
+
+public class MockSale extends Sale{
 
 }

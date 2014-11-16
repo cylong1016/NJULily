@@ -1,3 +1,4 @@
+package Sale;
 import businesslogic.commoditybl.Commodity;
 
 
