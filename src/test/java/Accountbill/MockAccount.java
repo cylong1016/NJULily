@@ -26,7 +26,6 @@ public class MockAccount extends Account {
 	 * @see businesslogic.accountbillbl.AccountInfo#getAllAccountName()
 	 */
 	public HashMap<String, String> getAllAccountName() {
-		HashMap<String, String> allAccount = new HashMap<String, String>();
 		return null;
 	}
 
