@@ -47,13 +47,13 @@ public class IOforUI {
 	
 	public int getX(){
 		
-		String[] str = readFrom("image/uiData/location.txt").split(";");
+		String[] str = readFrom("ui/data/location.txt").split(";");
 		return Integer.parseInt(str[0]);
 	}
 	
 	public int getY(){
 		
-		String[] str = readFrom("image/uiData/location.txt").split(";");
+		String[] str = readFrom("ui/data/location.txt").split(";");
 		return Integer.parseInt(str[1]);
 	}
 }

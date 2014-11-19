@@ -39,7 +39,7 @@ public class Frame_Login extends MyFrame implements ActionListener{
 		
 		int X = getLocation(scrSize.width,1280);
 		int Y = getLocation(scrSize.height,720);
-		io.writeTo(getCurrentLocation(X, Y),"image/uiData/location.txt" );
+		io.writeTo(getCurrentLocation(X, Y),"ui/data/location.txt" );
 		this.setLocation(X, Y);
 		
 		//a text field for user name input 
@@ -74,13 +74,13 @@ public class Frame_Login extends MyFrame implements ActionListener{
 		
 		//the button for action login
 		button_Enter = new MyButton(782,450,320,60);
-		button_Enter.setIcon(new ImageIcon("image/login/loginButton.png"));
+		button_Enter.setIcon(new ImageIcon("ui/image/login/loginButton.png"));
 		button_Enter.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent arg0) {
-				button_Enter.setIcon(new ImageIcon("image/login/loginButton2.png"));
+				button_Enter.setIcon(new ImageIcon("ui/image/login/loginButton2.png"));
 			}
 			public void mouseExited(MouseEvent arg0) {
-				button_Enter.setIcon(new ImageIcon("image/login/loginButton.png"));
+				button_Enter.setIcon(new ImageIcon("ui/image/login/loginButton.png"));
 			}
 			}); 
 		button_Enter.addActionListener(this);
@@ -102,25 +102,25 @@ public class Frame_Login extends MyFrame implements ActionListener{
 		
 		//these are the effect for better UI
 		label_field1 = new MyLabel(289, -135, 1280, 700);
-		label_field1.setIcon(new ImageIcon("image/login/field.png"));
+		label_field1.setIcon(new ImageIcon("ui/image/login/field.png"));
 		label_field1.setVisible(false);
 		label_field1.setOpaque(false);
 		this.add(label_field1);
 		
 		label_field2 = new MyLabel(289, -32, 1280, 700);
-		label_field2.setIcon(new ImageIcon("image/login/field.png"));
+		label_field2.setIcon(new ImageIcon("ui/image/login/field.png"));
 		label_field2.setVisible(false);
 		label_field2.setOpaque(false);
 		this.add(label_field2);
 		
 		label_checkbox = new MyLabel(160, 53, 1280, 700);
-		label_checkbox.setIcon(new ImageIcon("image/login/checkbox.png"));
+		label_checkbox.setIcon(new ImageIcon("ui/image/login/checkbox.png"));
 		label_checkbox.setVisible(false);
 		label_checkbox.setOpaque(false);
 		this.add(label_checkbox);
 		
 		//initialize the background for this frame
-		MyBackground loginBackground = new MyBackground("image/login/loginBackground.png");
+		MyBackground loginBackground = new MyBackground("ui/image/login/loginBackground.png");
 		this.add(loginBackground);
 			
 	}

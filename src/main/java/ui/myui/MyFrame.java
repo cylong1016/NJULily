@@ -36,13 +36,13 @@ public class MyFrame extends JFrame {
 		
 		//the button for action exit
 		button_exit = new MyButton(1220, 0, 50, 35);
-		button_exit.setIcon(new ImageIcon("image/login/exit.png"));
+		button_exit.setIcon(new ImageIcon("ui/image/login/exit.png"));
 		button_exit.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent arg0) {			
-				button_exit.setIcon(new ImageIcon("image/login/exit2.png"));
+				button_exit.setIcon(new ImageIcon("ui/image/login/exit2.png"));
 			}
 			public void mouseExited(MouseEvent arg0) {
-				button_exit.setIcon(new ImageIcon("image/login/exit.png"));
+				button_exit.setIcon(new ImageIcon("ui/image/login/exit.png"));
 			}
 			public void mouseClicked(MouseEvent arg0){	
 				ExitProgramFrame epf = new ExitProgramFrame();
@@ -74,7 +74,7 @@ public class MyFrame extends JFrame {
                     X = left + e.getX() - xx;
                     Y = top + e.getY() - yy;
                     IOforUI io = new IOforUI();
-                    io.writeTo(getCurrentLocation(X, Y),"image/uiData/location.txt" );
+                    io.writeTo(getCurrentLocation(X, Y),"ui/data/location.txt" );
                 }
             }
         }); 

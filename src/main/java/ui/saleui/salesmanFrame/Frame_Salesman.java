@@ -14,7 +14,7 @@ public class Frame_Salesman extends MyFrame{
 		ClientManagementUI panel_CM = new ClientManagementUI();
 		this.add(panel_CM);
 		
-		MyBackground loginBackground = new MyBackground("image/back/backForNow.jpg");
+		MyBackground loginBackground = new MyBackground("ui/image/back/backForNow.jpg");
 		this.add(loginBackground);
 	}
 }
