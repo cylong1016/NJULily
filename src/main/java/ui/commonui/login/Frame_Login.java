@@ -1,4 +1,4 @@
-﻿package ui.loginui;
+﻿package ui.commonui.login;
 
 
 
@@ -14,14 +14,14 @@ import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 
-import ui.myui.IOforUI;
-import ui.myui.MyBackground;
-import ui.myui.MyButton;
-import ui.myui.MyFrame;
-import ui.myui.MyLabel;
-import ui.myui.MyPasswordField;
-import ui.myui.MyTextField;
-import ui.saleui.salesmanFrame.Frame_Salesman;
+import ui.commonui.myui.IOforUI;
+import ui.commonui.myui.MyBackground;
+import ui.commonui.myui.MyButton;
+import ui.commonui.myui.MyFrame;
+import ui.commonui.myui.MyLabel;
+import ui.commonui.myui.MyPasswordField;
+import ui.commonui.myui.MyTextField;
+import ui.differui.salesman.frame.Frame_Salesman;
 
 public class Frame_Login extends MyFrame implements ActionListener{
 

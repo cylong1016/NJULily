@@ -1,8 +1,8 @@
-package ui.saleui.salesmanFrame;
+package ui.differui.salesman.frame;
 
-import ui.myui.MyBackground;
-import ui.myui.MyFrame;
-import ui.saleui.client_management.index.ClientManagementUI;
+import ui.commonui.myui.MyBackground;
+import ui.commonui.myui.MyFrame;
+import ui.differui.salesman.client_management.index.ClientManagementUI;
 
 public class Frame_Salesman extends MyFrame{
 
@@ -10,7 +10,7 @@ public class Frame_Salesman extends MyFrame{
 	
 	public Frame_Salesman(){
 		
-		//the panel for client management
+		//the panel for client management(for now)
 		ClientManagementUI panel_CM = new ClientManagementUI();
 		this.add(panel_CM);
 		

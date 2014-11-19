@@ -6,9 +6,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-import ui.myui.MyButton;
-import ui.myui.MyWindow;
-import ui.saleui.client_management.adding.ClientAddingUI;
+
+import ui.commonui.myui.MyWindow;
+
 
 public class ExitProgramFrame extends MyWindow implements ActionListener{
 

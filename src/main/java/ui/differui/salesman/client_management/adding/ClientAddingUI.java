@@ -1,4 +1,4 @@
-package ui.saleui.client_management.adding;
+package ui.differui.salesman.client_management.adding;
 
 
 import java.awt.Color;
@@ -8,8 +8,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import ui.commonui.exitfunction.ExitFunctionFrame;
-import ui.myui.MyButton;
-import ui.myui.MyWindow;
+import ui.commonui.myui.MyButton;
+import ui.commonui.myui.MyWindow;
 
 public class ClientAddingUI extends MyWindow implements ActionListener{
 

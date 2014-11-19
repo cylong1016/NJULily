@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-import ui.myui.MyWindow;
+import ui.commonui.myui.MyWindow;
 
 public class ExitFunctionFrame extends MyWindow implements ActionListener{
 	

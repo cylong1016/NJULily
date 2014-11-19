@@ -1,4 +1,4 @@
-package ui.saleui.client_management.detail_and_motifying;
+package ui.differui.salesman.client_management.detail;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -7,8 +7,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import ui.commonui.exitfunction.ExitFunctionFrame;
-import ui.myui.MyButton;
-import ui.myui.MyWindow;
+import ui.commonui.myui.MyButton;
+import ui.commonui.myui.MyWindow;
 
 public class ClientDetailUI extends MyWindow implements ActionListener{
 	

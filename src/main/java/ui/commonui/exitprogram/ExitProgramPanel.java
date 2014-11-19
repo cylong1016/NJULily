@@ -6,8 +6,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 
-import ui.myui.MyJButton;
-import ui.myui.MyPanel;
+import ui.commonui.myui.MyJButton;
+import ui.commonui.myui.MyPanel;
 
 public class ExitProgramPanel extends MyPanel implements ActionListener{
 

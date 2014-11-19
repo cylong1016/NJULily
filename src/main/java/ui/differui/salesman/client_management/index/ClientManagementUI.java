@@ -1,4 +1,4 @@
-package ui.saleui.client_management.index;
+package ui.differui.salesman.client_management.index;
 
 
 import java.awt.Color;
@@ -10,13 +10,13 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 
 import ui.commonui.exitfunction.ExitFunctionFrame;
-import ui.myui.MyComboBox;
-import ui.myui.MyJButton;
-import ui.myui.MyPanel;
-import ui.myui.MyTable;
-import ui.myui.MyTextField;
-import ui.saleui.client_management.adding.ClientAddingUI;
-import ui.saleui.client_management.detail_and_motifying.ClientDetailUI;
+import ui.commonui.myui.MyComboBox;
+import ui.commonui.myui.MyJButton;
+import ui.commonui.myui.MyPanel;
+import ui.commonui.myui.MyTable;
+import ui.commonui.myui.MyTextField;
+import ui.differui.salesman.client_management.adding.ClientAddingUI;
+import ui.differui.salesman.client_management.detail.ClientDetailUI;
 
 public class ClientManagementUI extends MyPanel implements ActionListener{
 

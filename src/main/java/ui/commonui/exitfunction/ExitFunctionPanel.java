@@ -6,11 +6,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 
-import ui.myui.MyJButton;
-import ui.myui.MyPanel;
-import ui.saleui.client_management.adding.ClientAddingUI;
-import ui.saleui.client_management.detail_and_motifying.ClientDetailUI;
-import ui.saleui.client_management.index.ClientManagementUI;
+import ui.commonui.myui.MyJButton;
+import ui.commonui.myui.MyPanel;
+import ui.differui.salesman.client_management.adding.ClientAddingUI;
+import ui.differui.salesman.client_management.detail.ClientDetailUI;
+import ui.differui.salesman.client_management.index.ClientManagementUI;
 
 public class ExitFunctionPanel extends MyPanel implements ActionListener{
 

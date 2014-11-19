@@ -1,7 +1,7 @@
 package main;
 
 
-import ui.loginui.Frame_Login;
+import ui.differui.inventory.frame.Frame_Inventory;
 import businesslogic.userbl.UserBLService_Driver;
 import businesslogic.userbl.UserBLService_Stub;
 import businesslogicservice.UserBLService;
@@ -20,7 +20,9 @@ public class Main {
 		
 		
 		//UI test
-		Frame_Login fl = new Frame_Login();
-		fl.setVisible(true);
+	
+		Frame_Inventory fi = new Frame_Inventory();
+		fi.setVisible(true);
+		
 	}
 }
