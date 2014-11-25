@@ -27,9 +27,9 @@ public class AccountBillPO extends PersistentObject {
 	/** 汇款总额 */
 	private double sumMoney;
 
-	public AccountBillPO(String id, String clientID, String clientName, UserPO user, ArrayList<BillItemPO> bills, double sumMoney) {
-		super(id);
-		this.id = id;
+	public AccountBillPO(String ID, String clientID, String clientName, UserPO user, ArrayList<BillItemPO> bills, double sumMoney) {
+		super(ID);
+		this.ID = ID;
 		this.clientID = clientID;
 		this.clientName = clientName;
 		this.user = user;

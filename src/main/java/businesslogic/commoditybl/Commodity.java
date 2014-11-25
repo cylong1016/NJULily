@@ -65,7 +65,7 @@ public class Commodity implements CommodityInfo, businesslogic.purchasebl.Commod
 	public ResultMessage deletCommo(String id) {
 		po = commodityData.find(id, FindTypeCommo.ID).get(0);
 		if (po!=null) {
-			return commodityData.delete(po.getId());
+			return commodityData.delete(po.getID());
 		}
 		else 
 			return ResultMessage.FAILURE;
@@ -100,7 +100,7 @@ public class Commodity implements CommodityInfo, businesslogic.purchasebl.Commod
 
 	public String getID(String ID) {
 		po = commodityData.find(ID, FindTypeCommo.ID).get(0);
-		return po.getId();
+		return po.getID();
 	}
 
 
