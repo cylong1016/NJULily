@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataService>
+	<ClientData>
+		<path>data/ClientList.ser</path>
+		<initID>10000</initID>
+	</ClientData>
+	<UserData>
+		<path>data/UserList.ser</path>
+		<initID>10000</initID>
+	</UserData>
+	<CommoditySortData>
+		<path>data/CommoditySortList.ser</path>
+		<initID>10000</initID>
+	</CommoditySortData>
+</DataService>

@@ -5,38 +5,44 @@ import java.util.ArrayList;
 import message.ResultMessage;
 import po.ClientPO;
 import server.common.Common;
+import server.common.ParseXML;
 import server.io.DefineList;
 import dataenum.FindTypeClient;
 import dataservice.ClientDataService;
 
 /**
+ * @see dataservice.ClientDataService
  * @author cylong
  * @version Nov 11, 2014 7:47:51 PM
  */
 public class ClientData implements ClientDataService {
 
 	private DefineList<ClientPO> clientList;
-	private String filePath = "data/ClientList";
-	private String currentID;
-	private static final String INIT_CLIENT_ID = "10000";
+	private String filePath;
+	private String initID;
+
 	public ClientData() {
 		init();
+		clientList = new DefineList<ClientPO>(filePath);
 	}
+
 	/**
 	 * @see dataservice.DataService#init()
 	 */
 	public void init() {
-		clientList = new DefineList<ClientPO>(filePath);
+		ParseXML parsexml = new ParseXML("ClientData");
+		filePath = parsexml.getPath();
+		initID = parsexml.getInitID();
 	}
 
 	/**
 	 * @see dataservice.DataService#getID()
 	 */
 	public String getID() {
-		if(clientList.size() == 0) {
-			return INIT_CLIENT_ID; // 客户初始id
+		if (clientList.isEmpty()) {
+			return initID; // 客户初始id
 		}
-		currentID = clientList.get(clientList.size() - 1).getID();
+		String currentID = clientList.get(clientList.size() - 1).getID();
 		long id = Long.parseLong(currentID);
 		currentID = String.valueOf(id + 1);
 		return currentID;
@@ -46,10 +52,8 @@ public class ClientData implements ClientDataService {
 	 * @see dataservice.ClientDataService#insert(po.ClientPO)
 	 */
 	public ResultMessage insert(ClientPO po) {
-		for(int i = 0; i < clientList.size(); i++) {
-			if(po.equals(clientList.get(i))) {
-				return ResultMessage.FAILURE;
-			}
+		if(clientList.contains(po)) {
+			return ResultMessage.FAILURE;
 		}
 		clientList.add(po);
 		return ResultMessage.SUCCESS;
@@ -60,7 +64,7 @@ public class ClientData implements ClientDataService {
 	 */
 	public ResultMessage delete(String ID) {
 		for(int i = 0; i < clientList.size(); i++) {
-			if(clientList.get(i).getID().equals(ID)) {
+			if (clientList.get(i).getID().equals(ID)) {
 				clientList.remove(i);
 				return ResultMessage.SUCCESS;
 			}
@@ -72,20 +76,19 @@ public class ClientData implements ClientDataService {
 	 * @see dataservice.ClientDataService#update(po.ClientPO)
 	 */
 	public ResultMessage update(ClientPO po) {
-		for(int i = 0; i < clientList.size(); i++) {
-			if(clientList.get(i).equals(po)) {
-				clientList.set(i, po);
-				return ResultMessage.SUCCESS;
-			}
+		int index = clientList.indexOf(po);
+		if(index == -1) {
+			return ResultMessage.FAILURE;
 		}
-		return ResultMessage.FAILURE;
+		clientList.set(index, po);
+		return ResultMessage.SUCCESS;
 	}
 
 	/**
 	 * @see dataservice.ClientDataService#show()
 	 */
 	public ArrayList<ClientPO> show() {
-		return clientList.getInnerList();
+		return clientList.getInList();
 	}
 
 	/**
@@ -96,85 +99,85 @@ public class ClientData implements ClientDataService {
 		ArrayList<ClientPO> clients = new ArrayList<ClientPO>();
 		switch(type) {
 		case ID:
-			for(ClientPO client : clientList.getInnerList()) {
-				if(client.getID().toLowerCase().contains(keywords)) {
+			for(ClientPO client : clientList.getInList()) {
+				if (client.getID().toLowerCase().contains(keywords)) {
 					clients.add(client);
 				}
 			}
 			break;
 		case ADDRESS:
-			for(ClientPO client : clientList.getInnerList()) {
-				if(client.getAddress().toLowerCase().contains(keywords)) {
+			for(ClientPO client : clientList.getInList()) {
+				if (client.getAddress().toLowerCase().contains(keywords)) {
 					clients.add(client);
 				}
 			}
 			break;
 		case EMAIL:
-			for(ClientPO client : clientList.getInnerList()) {
-				if(client.getEmail().toLowerCase().contains(keywords)) {
+			for(ClientPO client : clientList.getInList()) {
+				if (client.getEmail().toLowerCase().contains(keywords)) {
 					clients.add(client);
 				}
 			}
 			break;
 		case KIND:
-			for(ClientPO client : clientList.getInnerList()) {
-				if(client.getCategory().toString().toLowerCase().contains(keywords)) {
+			for(ClientPO client : clientList.getInList()) {
+				if (client.getCategory().toString().toLowerCase().contains(keywords)) {
 					clients.add(client);
 				}
 			}
 			break;
 		case LEVEL:
-			for(ClientPO client : clientList.getInnerList()) {
-				if(client.getLevel().toString().toLowerCase().contains(keywords)) {
+			for(ClientPO client : clientList.getInList()) {
+				if (client.getLevel().toString().toLowerCase().contains(keywords)) {
 					clients.add(client);
 				}
 			}
 			break;
 		case NAME:
-			for(ClientPO client : clientList.getInnerList()) {
-				if(client.getName().toLowerCase().contains(keywords)) {
+			for(ClientPO client : clientList.getInList()) {
+				if (client.getName().toLowerCase().contains(keywords)) {
 					clients.add(client);
 				}
 			}
 			break;
 		case PAYABLE:
-			for(ClientPO client : clientList.getInnerList()) {
-				if(Double.toString(client.getPayable()).toLowerCase().contains(keywords)) {
+			for(ClientPO client : clientList.getInList()) {
+				if (Double.toString(client.getPayable()).toLowerCase().contains(keywords)) {
 					clients.add(client);
 				}
 			}
 			break;
 		case PHONE:
-			for(ClientPO client : clientList.getInnerList()) {
-				if(client.getPhone().toLowerCase().contains(keywords)) {
+			for(ClientPO client : clientList.getInList()) {
+				if (client.getPhone().toLowerCase().contains(keywords)) {
 					clients.add(client);
 				}
 			}
 			break;
 		case POST:
-			for(ClientPO client : clientList.getInnerList()) {
-				if(client.getPost().toLowerCase().contains(keywords)) {
+			for(ClientPO client : clientList.getInList()) {
+				if (client.getPost().toLowerCase().contains(keywords)) {
 					clients.add(client);
 				}
 			}
 			break;
 		case RECEIVABLE:
-			for(ClientPO client : clientList.getInnerList()) {
-				if(Double.toString(client.getReceivable()).toLowerCase().contains(keywords)) {
+			for(ClientPO client : clientList.getInList()) {
+				if (Double.toString(client.getReceivable()).toLowerCase().contains(keywords)) {
 					clients.add(client);
 				}
 			}
 			break;
 		case RECEIVABLELIMIT:
-			for(ClientPO client : clientList.getInnerList()) {
-				if(Double.toString(client.getReceivable()).toLowerCase().contains(keywords)) {
+			for(ClientPO client : clientList.getInList()) {
+				if (Double.toString(client.getReceivable()).toLowerCase().contains(keywords)) {
 					clients.add(client);
 				}
 			}
 			break;
 		case SALESMAN:
-			for(ClientPO client : clientList.getInnerList()) {
-				if(client.getSalesman().toLowerCase().contains(keywords)) {
+			for(ClientPO client : clientList.getInList()) {
+				if (client.getSalesman().toLowerCase().contains(keywords)) {
 					clients.add(client);
 				}
 			}
@@ -198,5 +201,5 @@ public class ClientData implements ClientDataService {
 		Common.deleteRep(clients);
 		return clients;
 	}
-
+	
 }

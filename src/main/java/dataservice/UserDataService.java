@@ -20,11 +20,11 @@ public interface UserDataService extends DataService {
 	public ResultMessage insert(UserPO po);
 
 	/**
-	 * 根据用户名查找用户
+	 * 根据用户ID查找用户
 	 * @param username
-	 * @return 用户持久化用户数据
+	 * @return 用户持久化用户数据，如果返回 null则不存在
 	 */
-	public UserPO find(String username);
+	public UserPO find(String ID);
 
 	/**
 	 * 根据用户ID删除

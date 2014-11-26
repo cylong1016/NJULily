@@ -22,40 +22,40 @@ public class DefineList<E> implements Serializable {
 	/** 保存的路径和文件名【统一用相对路径保存在data文件夹下】 */
 	private String filePath = null;
 	/** 用来保存数据的ArrayList */
-	private ArrayList<E> innerList = new ArrayList<E>();
+	private ArrayList<E> inList = new ArrayList<E>();
 
-	public ArrayList<E> getInnerList() {
-		return this.innerList;
+	public ArrayList<E> getInList() {
+		return this.inList;
 	}
 
 	public boolean add(E e) {
-		boolean b = innerList.add(e);
+		boolean b = inList.add(e);
 		save();
 		return b;
 	}
 	
 	public void add(int index, E element) {
-		innerList.add(index, element);
+		inList.add(index, element);
 		save();
 	}
 	
 	public E get(int index) {
-		return innerList.get(index);
+		return inList.get(index);
 	}
 	
 	public void clear() {
-		innerList.clear();
+		inList.clear();
 		save();
 	}
 	
 	public E remove(int index) {
-		E e = innerList.remove(index);
+		E e = inList.remove(index);
 		save();
 		return e;
 	}
 	
 	public boolean remove(Object o) {
-		boolean b = innerList.remove(o);
+		boolean b = inList.remove(o);
 		save();
 		return b;
 	}
@@ -67,9 +67,21 @@ public class DefineList<E> implements Serializable {
 	}
 	
 	public int size() {
-		return innerList.size();
+		return inList.size();
 	}
 
+	public boolean contains(E element) {
+		return inList.contains(element);
+	}
+	
+	public int indexOf(E element) {
+		return inList.indexOf(element);
+	}
+	
+	public boolean isEmpty() {
+		return inList.isEmpty();
+	}
+	
 	/**
 	 * @param filePath 保存的文件的路径，统一用相对路径保存在data文件夹下
 	 * @author cylong
@@ -111,7 +123,7 @@ public class DefineList<E> implements Serializable {
 		ObjectInputStream ois = null;
 		try {
 			ois = new ObjectInputStream(new FileInputStream(filePath));
-			innerList = (ArrayList<E>)ois.readObject();
+			inList = (ArrayList<E>)ois.readObject();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -133,7 +145,7 @@ public class DefineList<E> implements Serializable {
 		ObjectOutputStream oos = null;
 		try {
 			oos = new ObjectOutputStream(new FileOutputStream(filePath));
-			oos.writeObject(innerList);
+			oos.writeObject(inList);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
