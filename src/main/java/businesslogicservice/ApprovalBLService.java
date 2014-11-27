@@ -21,7 +21,7 @@ public interface ApprovalBLService {
 	 * @param record
 	 * @return
 	 */
-	public ResultMessage checkRecord(PersistentObject record);
+	public ResultMessage checkRecord(PersistentObject po);
 	
 	/**
 	 * 修改单据内容

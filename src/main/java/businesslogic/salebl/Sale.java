@@ -3,6 +3,8 @@ package businesslogic.salebl;
 import java.rmi.Naming;
 import java.util.ArrayList;
 
+import org.junit.runner.notification.Failure;
+
 import po.SalesPO;
 import vo.SalesVO;
 import message.ResultMessage;
@@ -20,6 +22,8 @@ public class Sale {
 	private SaleList saleList;
 	
 	private SalesPO po;
+	
+	private BillType type;
 		
 	public Sale() {
 		this.saleList = new SaleList();
@@ -60,7 +64,7 @@ public class Sale {
 	 * @param remark
 	 * @return
 	 */
-	public ResultMessage addSale(String client, String salesman,String user, Storage storage, 
+	public ResultMessage addSale(String client,  Storage storage, 
 			double allowance, double voucher, String remark) {
 		try {
 			DataFactoryService factory = (DataFactoryService)Naming.lookup("rmi://127.0.0.1:8888/factory");
@@ -70,7 +74,7 @@ public class Sale {
 			String ID = saleData.getID();
 			po = new SalesPO(ID, client, salesman, user, storage, saleList.getCommodities(), 
 					beforePrice, allowance, voucher, remark, afterPrice, BillType.SALE);
-			saleData.insert(po);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
@@ -89,8 +93,7 @@ public class Sale {
 	 * @param remark
 	 * @return
 	 */
-	public ResultMessage addSaleBack(String client,String salesman, String user, 
-			Storage storage, double allowance, double voucher, String remark){
+	public ResultMessage addSaleBack(String client, Storage storage, double allowance, double voucher, String remark){
 		try {
 			DataFactoryService factory = (DataFactoryService)Naming.lookup("rmi://127.0.0.1:8888/factory");
 			SaleDataService saleData = (SaleDataService)factory.getSaleData();
@@ -124,6 +127,41 @@ public class Sale {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
+		return null;
+	}
+	
+	public String getID(BillType type) {
+		this.type = type;
+		try {
+			DataFactoryService factory = (DataFactoryService)Naming.lookup("rmi://127.0.0.1:8888/factory");
+			SaleDataService saleData = (SaleDataService)factory.getSaleData();
+			return saleData.getID(type);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return "failure";
+	}
+
+	public ResultMessage submit(String client, Storage storage,
+			double allowance, double voucher, String remark) {
+		switch (type) {
+		case SALE:
+			addSale(client, salesman, user, storage, allowance, voucher, remark);
+			break;
+			
+		case SALEBACK:
+			
+			break;
+
+		default:
+			break;
+		}
+		return null;
+	}
+
+	public ResultMessage save(String client, Storage storage, double allowance,
+			double voucher, String remark) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

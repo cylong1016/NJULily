@@ -4,6 +4,7 @@ package businesslogicservice;
 import java.util.ArrayList;
 
 import vo.SalesVO;
+import dataenum.BillType;
 import dataenum.Storage;
 import message.ResultMessage;
 
@@ -20,6 +21,8 @@ import message.ResultMessage;
 public interface SaleBLService {
 
 	public ArrayList<SalesVO> show();
+	
+	public String getID(BillType type);
 
 	/**
 	 * 添加商品到商品清单
@@ -29,40 +32,23 @@ public interface SaleBLService {
 	 * @param remark
 	 * @return
 	 */
-	public void addCommodities(String name,  int num, double price,  String remark);
+	public void addCommodities(String name,  int number, double price,  String remark);
 
-	/**
-	 * 制定出新的销售单
-	 * @param client
-	 * @param saleman
-	 * @param user
-	 * @param storage
-	 * @param allowance
-	 * @param voucher
-	 * @param remark
-	 * @return
-	 */
-	public ResultMessage addSale(String client, String salesman,
-			String user, Storage storage, double allowance, double voucher, String remark);
-	
-	/**
-	 * 制定出新的销售退货单
-	 * @param client
-	 * @param saleman
-	 * @param user
-	 * @param storage
-	 * @param allowance
-	 * @param voucher
-	 * @param remark
-	 * @return
-	 */
-	public ResultMessage addSaleBack(String client,String salesman, String user, 
-			Storage storage, double allowance, double voucher, String remark);
 	/**
 	 * 单据提交发送
 	 * @return
 	 */
-	public ResultMessage submit();
-
+	public ResultMessage submit(String client, Storage storage, double allowance, double voucher, String remark);
+	
+	/**
+	 * 保存
+	 * @param client
+	 * @param storage
+	 * @param allowance
+	 * @param voucher
+	 * @param remark
+	 * @return
+	 */
+	public ResultMessage save(String client, Storage storage, double allowance, double voucher, String remark);
 
 }
