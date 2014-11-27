@@ -3,6 +3,7 @@ package businesslogic.clientbl;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import businesslogic.salebl.ClientInfo;
 import message.ResultMessage;
 import po.ClientPO;
 import vo.ClientVO;
@@ -11,7 +12,7 @@ import dataenum.ClientLevel;
 import dataenum.FindTypeClient;
 import dataservice.ClientDataService;
 
-public class Client implements businesslogic.accountbillbl.ClientInfo {
+public class Client implements businesslogic.accountbillbl.ClientInfo, ClientInfo{
 
 	/** 客户类别：进货商、销售商 */
 	public ClientCategory category;
@@ -61,8 +62,7 @@ public class Client implements businesslogic.accountbillbl.ClientInfo {
 	}
 
 	public ResultMessage addClient(ClientCategory category, String name, ClientLevel level, String phone, String address, String post, String email, double receivableLimit, String salesman) {
-		po =
-				new ClientPO(clientData.getID(), category, level, name, phone, address, post, email, receivableLimit, salesman);
+		po = new ClientPO(clientData.getID(), category, level, name, phone, address, post, email, receivableLimit, salesman);
 		clientData.insert(po);
 		return null;
 	}
@@ -82,6 +82,19 @@ public class Client implements businesslogic.accountbillbl.ClientInfo {
 	 */
 	public ArrayList<ClientPO> getAllClients() {
 		return null;
+	}
+
+	/**
+	 * @see bussinesslogic.salebl.ClientInfo#getClients
+	 */
+	public String getSalesman(String ID) {
+		po = clientData.find(ID, FindTypeClient.ID).get(0);
+		return po.getSalesman();
+	}
+
+	public String getNamee(String ID) {
+		po = clientData.find(ID, FindTypeClient.ID).get(0);
+		return po.getName();
 	}
 
 }

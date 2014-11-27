@@ -5,11 +5,13 @@ import java.util.ArrayList;
 
 import org.junit.runner.notification.Failure;
 
+import businesslogic.clientbl.Client;
 import po.SalesPO;
 import vo.SalesVO;
 import message.ResultMessage;
 import dataenum.BillType;
 import dataenum.Storage;
+import dataservice.ApprovalDataService;
 import dataservice.DataFactoryService;
 import dataservice.SaleDataService;
 /**
@@ -65,6 +67,18 @@ public class Sale {
 			return null;
 		} 
 	}
+	
+	public ApprovalDataService getApprovalData(){
+		try {
+			DataFactoryService factory = (DataFactoryService)Naming.lookup("rmi://127.0.0.1:8888/factory");
+			ApprovalDataService approvalData = (ApprovalDataService)factory.getApprovalData();
+			return approvalData;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} 
+	}
 
 	/**
 	 * 建立销售单
@@ -77,105 +91,64 @@ public class Sale {
 	 * @param remark
 	 * @return
 	 */
-	public ResultMessage addSale(String client,  Storage storage, double allowance, double voucher, String remark) {
-		SaleDataService saleData = getSaleData();
+	public SalesPO add(String clientID,  Storage storage, double allowance, double voucher, String remark, BillType type) {
 		double beforePrice = saleList.getBeforePrice();
 		double afterPrice = getAfterPrice(beforePrice, allowance, voucher);
-		String ID = saleData.getID();
-		po = new SalesPO(ID, client, salesman, user, storage, saleList.getCommodities(), beforePrice, allowance, voucher, remark, afterPrice, BillType.SALE);
-			
-<<<<<<< HEAD
-=======
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResultMessage.FAILURE;
-		} 
+		ClientInfo info = new Client();		
+		po = new SalesPO(ID, info.getNamee(clientID), info.getSalesman(clientID), user, storage, saleList.getCommodities(), beforePrice, allowance, voucher, remark, afterPrice, type);
 		
->>>>>>> FETCH_HEAD
-		return ResultMessage.SUCCESS;
+		return po;
 	}
 
+
+	public ArrayList<SalesVO> show(){
+		SaleDataService saleData = getSaleData();
+		// TODO
+		return null;
+	}
+	
 	/**
-	 * 建立销售退货单
-	 * @param client
-	 * @param salesman
-	 * @param user
-	 * @param storage
-	 * @param allowance
-	 * @param voucher
-	 * @param remark
+	 * 每次要创建单据前，都要根据单据的类型得到ID
+	 * @param type
 	 * @return
 	 */
-	public ResultMessage addSaleBack(String client, Storage storage, double allowance, double voucher, String remark){
-		try {
-			DataFactoryService factory = (DataFactoryService)Naming.lookup("rmi://127.0.0.1:8888/factory");
-			SaleDataService saleData = (SaleDataService)factory.getSaleData();
-			double beforePrice = saleList.getBeforePrice();
-			double afterPrice = getAfterPrice(beforePrice, allowance, voucher);
-			String ID = saleData.getID();
-			po = new SalesPO(ID, client, salesman, user, storage, saleList.getCommodities(), 
-					beforePrice, allowance, voucher, remark, afterPrice, BillType.SALEBACK);
-			saleData.insert(po);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResultMessage.FAILURE;
-		} 
-		return ResultMessage.SUCCESS;
-	}
-
-	public ResultMessage submit() {
-		
-		return null;
-	}
-	
-	public SaleList getSaleList(){
-		return saleList;
-	}
-	
-	public ArrayList<SalesVO> show(){
-		DataFactoryService factory;
-		try {
-			factory = (DataFactoryService)Naming.lookup("rmi://127.0.0.1:8888/factory");
-			SaleDataService saleData = (SaleDataService)factory.getSaleData();
-			// TODO 需要一个返回所有的PO的方法
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
-		return null;
-	}
-	
 	public String getID(BillType type) {
 		this.type = type;
-		try {
-			DataFactoryService factory = (DataFactoryService)Naming.lookup("rmi://127.0.0.1:8888/factory");
-			SaleDataService saleData = (SaleDataService)factory.getSaleData();
-			return saleData.getID(type);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
-		return "failure";
+		SaleDataService saleData = getSaleData();
+		this.ID = saleData.getID(type);
+		return ID;
 	}
 
-	public ResultMessage submit(String client, Storage storage, double allowance, double voucher, String remark) {
+	public ResultMessage submit(String clientID, Storage storage, double allowance, double voucher, String remark) {
+		SalesPO po = null;
 		switch (type) {
 		case SALE:
-			addSale(client, salesman, user, storage, allowance, voucher, remark);
+			po = add(clientID, storage, allowance, voucher, remark, BillType.SALE);
 			break;
-			
 		case SALEBACK:
-			
+			po = add(clientID, storage, allowance, voucher, remark, BillType.SALEBACK);
 			break;
-
 		default:
 			break;
 		}
-		return null;
+		getApprovalData().insert(po);		
+		return ResultMessage.SUCCESS;
 	}
 
-	public ResultMessage save(String client, Storage storage, double allowance,
-			double voucher, String remark) {
-		// TODO Auto-generated method stub
-		return null;
+	public ResultMessage save(String clientID, Storage storage, double allowance, double voucher, String remark) {
+		SalesPO po = null;
+		switch (type) {
+		case SALE:
+			po = add(clientID, storage, allowance, voucher, remark, BillType.SALE);
+			break;
+		case SALEBACK:
+			po = add(clientID, storage, allowance, voucher, remark, BillType.SALEBACK);
+			break;
+		default:
+			break;
+		}
+		// TODO 保存在本地
+		return ResultMessage.SUCCESS;
 	}
 
 }

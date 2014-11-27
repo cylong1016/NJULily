@@ -30,13 +30,13 @@ public class SaleController implements SaleBLService{
 		return sale.getID(type);
 	}
 
-	public ResultMessage submit(String client, Storage storage, double allowance, double voucher, String remark) {
-		return sale.submit(client, storage, allowance, voucher, remark);
+	public ResultMessage submit(String clientID, Storage storage, double allowance, double voucher, String remark) {
+		return sale.submit(clientID, storage, allowance, voucher, remark);
 	}
 
-	public ResultMessage save(String client, Storage storage, double allowance,
+	public ResultMessage save(String clientID, Storage storage, double allowance,
 			double voucher, String remark) {
-		return sale.save(client, storage, allowance, voucher, remark);
+		return sale.save(clientID, storage, allowance, voucher, remark);
 	}
 
 }

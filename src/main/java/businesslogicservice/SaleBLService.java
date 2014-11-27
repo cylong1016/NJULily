@@ -38,7 +38,7 @@ public interface SaleBLService {
 	 * 单据提交发送
 	 * @return
 	 */
-	public ResultMessage submit(String client, Storage storage, double allowance, double voucher, String remark);
+	public ResultMessage submit(String clientID, Storage storage, double allowance, double voucher, String remark);
 	
 	/**
 	 * 保存
@@ -49,6 +49,6 @@ public interface SaleBLService {
 	 * @param remark
 	 * @return
 	 */
-	public ResultMessage save(String client, Storage storage, double allowance, double voucher, String remark);
+	public ResultMessage save(String clientID, Storage storage, double allowance, double voucher, String remark);
 
 }
