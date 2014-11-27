@@ -17,23 +17,9 @@ public class SaleController implements SaleBLService{
 		sale = new Sale();
 	}
 	
-	public void addCommodities(String name, int num, double price,
+	public void addCommodities(String ID, int number, double price,
 			String remark) {
-		sale.addCommodities(name, num, price, remark);
-	}
-
-	public ResultMessage addSale(String client, String salesman,
-			String user, Storage storage, double allowance, double voucher, String remark) {
-		return sale.addSale(client, salesman, user, storage, allowance, voucher, remark);
-	}
-
-	public ResultMessage addSaleBack(String client,String salesman, String user, 
-			Storage storage, double allowance, double voucher, String remark)  {
-		return sale.addSaleBack(client, salesman, user, storage, allowance, voucher, remark);
-	}
-
-	public ResultMessage submit() {
-		return sale.submit();
+		sale.addCommodities(ID, number, price, remark);
 	}
 
 	public ArrayList<SalesVO> show() {

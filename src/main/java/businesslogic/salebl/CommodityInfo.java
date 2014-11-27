@@ -2,7 +2,7 @@ package businesslogic.salebl;
 
 public interface CommodityInfo {
 	
-	public String getType(String name);
+	public String getType(String ID);
 	
-	public String getID(String name, String type);
+	public String getName(String ID);
 }

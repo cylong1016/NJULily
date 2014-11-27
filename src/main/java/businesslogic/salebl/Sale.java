@@ -24,6 +24,8 @@ public class Sale {
 	private SalesPO po;
 	
 	private BillType type;
+	
+	private String ID;
 		
 	public Sale() {
 		this.saleList = new SaleList();
@@ -31,13 +33,13 @@ public class Sale {
 	
 	/**
 	 * 添加商品
-	 * @param name
+	 * @param ID
 	 * @param num
 	 * @param price
 	 * @param remark
 	 */
-	public void addCommodities(String name, int num, double price, String remark) {
-		SaleListItem item = new SaleListItem(name, num, price, remark);
+	public void addCommodities(String ID, int num, double price, String remark) {
+		SaleListItem item = new SaleListItem(ID, num, price, remark);
 		saleList.add(item);
 	}
 
@@ -48,9 +50,20 @@ public class Sale {
 	 * @param voucher
 	 * @return
 	 */
-	public double getAfterPrice(double beforePrice, double allowance,
-			double voucher) {
+	public double getAfterPrice(double beforePrice, double allowance, double voucher) {
 		return beforePrice - allowance - voucher;
+	}
+	
+	public SaleDataService getSaleData(){
+		try {
+			DataFactoryService factory = (DataFactoryService)Naming.lookup("rmi://127.0.0.1:8888/factory");
+			SaleDataService saleData = (SaleDataService)factory.getSaleData();
+			return saleData;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} 
 	}
 
 	/**
@@ -64,21 +77,13 @@ public class Sale {
 	 * @param remark
 	 * @return
 	 */
-	public ResultMessage addSale(String client,  Storage storage, 
-			double allowance, double voucher, String remark) {
-		try {
-			DataFactoryService factory = (DataFactoryService)Naming.lookup("rmi://127.0.0.1:8888/factory");
-			SaleDataService saleData = (SaleDataService)factory.getSaleData();
-			double beforePrice = saleList.getBeforePrice();
-			double afterPrice = getAfterPrice(beforePrice, allowance, voucher);
-			String ID = saleData.getID();
-			po = new SalesPO(ID, client, salesman, user, storage, saleList.getCommodities(), 
-					beforePrice, allowance, voucher, remark, afterPrice, BillType.SALE);
+	public ResultMessage addSale(String client,  Storage storage, double allowance, double voucher, String remark) {
+		SaleDataService saleData = getSaleData();
+		double beforePrice = saleList.getBeforePrice();
+		double afterPrice = getAfterPrice(beforePrice, allowance, voucher);
+		String ID = saleData.getID();
+		po = new SalesPO(ID, client, salesman, user, storage, saleList.getCommodities(), beforePrice, allowance, voucher, remark, afterPrice, BillType.SALE);
 			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
-		
 		return ResultMessage.SUCCESS;
 	}
 
@@ -142,8 +147,7 @@ public class Sale {
 		return "failure";
 	}
 
-	public ResultMessage submit(String client, Storage storage,
-			double allowance, double voucher, String remark) {
+	public ResultMessage submit(String client, Storage storage, double allowance, double voucher, String remark) {
 		switch (type) {
 		case SALE:
 			addSale(client, salesman, user, storage, allowance, voucher, remark);

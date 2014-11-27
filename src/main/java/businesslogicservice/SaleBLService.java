@@ -26,13 +26,13 @@ public interface SaleBLService {
 
 	/**
 	 * 添加商品到商品清单
-	 * @param name
+	 * @param ID
 	 * @param num
 	 * @param price
 	 * @param remark
 	 * @return
 	 */
-	public void addCommodities(String name,  int number, double price,  String remark);
+	public void addCommodities(String ID,  int number, double price,  String remark);
 
 	/**
 	 * 单据提交发送
