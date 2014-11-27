@@ -84,6 +84,14 @@ public class Sale {
 		String ID = saleData.getID();
 		po = new SalesPO(ID, client, salesman, user, storage, saleList.getCommodities(), beforePrice, allowance, voucher, remark, afterPrice, BillType.SALE);
 			
+<<<<<<< HEAD
+=======
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResultMessage.FAILURE;
+		} 
+		
+>>>>>>> FETCH_HEAD
 		return ResultMessage.SUCCESS;
 	}
 
@@ -110,6 +118,7 @@ public class Sale {
 			saleData.insert(po);
 		} catch (Exception e) {
 			e.printStackTrace();
+			return ResultMessage.FAILURE;
 		} 
 		return ResultMessage.SUCCESS;
 	}

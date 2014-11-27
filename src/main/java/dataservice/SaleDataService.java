@@ -2,6 +2,7 @@ package dataservice;
 
 import message.ResultMessage;
 import po.SalesPO;
+import dataenum.BillType;
 
 /**
  * 提供销售（销售退货）数据集体载入、保存、增加、删除、查找
@@ -10,6 +11,7 @@ import po.SalesPO;
  */
 public interface SaleDataService extends DataService {
 
+	public String getID(BillType type);
 	/**
 	 * 插入账单
 	 * @param po
@@ -17,6 +19,7 @@ public interface SaleDataService extends DataService {
 	 */
 	public ResultMessage insert(SalesPO po);
 
+	public ResultMessage save(SalesPO po);
 	/**
 	 * 以ID查找账单
 	 * @param ID
