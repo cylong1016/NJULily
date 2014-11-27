@@ -24,7 +24,7 @@ public class ClientDetailUI extends MyWindow implements ActionListener{
 		
 		ClientDetailPanel cdp = new ClientDetailPanel();
 		cdp.setOpaque(true);
-		cdp.setBackground(new Color(0, 0, 0, 0.5f));
+		cdp.setBackground(new Color(0, 0, 0));
 		cdp.setBounds(240, 45, 800, 650);
 		this.add(cdp);
 		

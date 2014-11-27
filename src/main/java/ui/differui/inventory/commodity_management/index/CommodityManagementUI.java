@@ -1,4 +1,4 @@
-package ui.differui.inventory.commodity_management;
+package ui.differui.inventory.commodity_management.index;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -14,6 +14,9 @@ import ui.commonui.myui.MyPanel;
 import ui.commonui.myui.MyTable;
 import ui.commonui.myui.MyTextField;
 import ui.commonui.myui.MyTree;
+import ui.differui.inventory.commodity_management.addgood.CommodityAddingUI;
+import ui.differui.inventory.commodity_management.addsort.SortAddingUI;
+import ui.differui.inventory.commodity_management.detailgood.CommodityDetailUI;
 
 public class CommodityManagementUI extends MyPanel implements ActionListener{
 	
@@ -64,8 +67,7 @@ public class CommodityManagementUI extends MyPanel implements ActionListener{
 		this.add(button_showAll);	
 		
 		//add a table for showing the information of the goods(the table is contained in a scroll pane)
-		String[] headers = {"商品编号","商品分类","商品名称","商品型号"
-				,"库存数量","库区"};
+		String[] headers = {"商品编号","商品分类","商品名称","商品型号","库存数量"};
 		MyTable table = new MyTable(headers);
 		
 		JScrollPane jsp2=new JScrollPane(table);
@@ -126,7 +128,19 @@ public class CommodityManagementUI extends MyPanel implements ActionListener{
 	
 	public void actionPerformed(ActionEvent events) {
 		
+		if(events.getSource() == button_add){
+			CommodityAddingUI cau = new CommodityAddingUI();
+			cau.setVisible(true);
+		}
 		
+		if(events.getSource() == button_add2){
+			SortAddingUI sau = new SortAddingUI();
+			sau.setVisible(true);
+		}
 		
+		if(events.getSource() == button_cam){
+			CommodityDetailUI cdu = new CommodityDetailUI();
+			cdu.setVisible(true);
+		}
 	}
 }

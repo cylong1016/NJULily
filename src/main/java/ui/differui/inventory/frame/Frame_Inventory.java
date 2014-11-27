@@ -2,7 +2,7 @@ package ui.differui.inventory.frame;
 
 import ui.commonui.myui.MyBackground;
 import ui.commonui.myui.MyFrame;
-import ui.differui.inventory.commodity_management.CommodityManagementUI;
+import ui.differui.inventory.commodity_management.index.CommodityManagementUI;
 
 
 public class Frame_Inventory extends MyFrame{

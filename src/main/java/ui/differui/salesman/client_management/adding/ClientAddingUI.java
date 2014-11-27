@@ -36,7 +36,7 @@ public class ClientAddingUI extends MyWindow implements ActionListener{
 		
 		cap = new ClientAddingPanel();
 		cap.setOpaque(true);
-		cap.setBackground(new Color(0, 0, 0, 0.4f));
+		cap.setBackground(new Color(0, 0, 0));
 		cap.setBounds(340, 135, 600, 450);
 		this.add(cap);
 		
