@@ -28,6 +28,14 @@ public interface ClientDataService extends DataService {
 	public ArrayList<ClientPO> find(String keywords, FindTypeClient type);
 
 	/**
+	 * 以ID精确查找客户
+	 * @param ID
+	 * @return ClientPO
+	 * @author cylong
+	 * @version 2014年11月27日  下午10:55:27
+	 */
+	public ClientPO find(String ID);
+	/**
 	 * 以ID删除客户信息
 	 * @param ID
 	 * @return 处理结果

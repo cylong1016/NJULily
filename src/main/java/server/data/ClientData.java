@@ -201,5 +201,13 @@ public class ClientData implements ClientDataService {
 		Common.deleteRep(clients);
 		return clients;
 	}
+
+	/**
+	 * @see dataservice.ClientDataService#find(java.lang.String)
+	 */
+	@Override
+	public ClientPO find(String ID) {
+		return find(ID, FindTypeClient.ID).get(0);
+	}
 	
 }
