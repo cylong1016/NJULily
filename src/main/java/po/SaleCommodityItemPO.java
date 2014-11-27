@@ -22,8 +22,8 @@ public class SaleCommodityItemPO {
 	/** 商品备注 */
 	private String comment;
 
-	public SaleCommodityItemPO(String id, String name, String type, int number, double price, String comment) {
-		this.setID(id);
+	public SaleCommodityItemPO(String id, String name, String type, int number, double price, double total, String comment) {
+		this.ID = id;
 		this.name = name;
 		this.type = type;
 		this.number = number;
@@ -32,8 +32,16 @@ public class SaleCommodityItemPO {
 		this.total = price * number;
 	}
 
+	public String getID() {
+		return ID;
+	}
+
+	public void setID(String iD) {
+		ID = iD;
+	}
+
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
 	public void setName(String name) {
@@ -41,7 +49,7 @@ public class SaleCommodityItemPO {
 	}
 
 	public String getType() {
-		return this.type;
+		return type;
 	}
 
 	public void setType(String type) {
@@ -49,7 +57,7 @@ public class SaleCommodityItemPO {
 	}
 
 	public int getNumber() {
-		return this.number;
+		return number;
 	}
 
 	public void setNumber(int number) {
@@ -57,31 +65,27 @@ public class SaleCommodityItemPO {
 	}
 
 	public double getPrice() {
-		return this.price;
+		return price;
 	}
 
 	public void setPrice(double price) {
 		this.price = price;
 	}
 
+	public double getTotal() {
+		return total;
+	}
+
+	public void setTotal(double total) {
+		this.total = total;
+	}
+
 	public String getComment() {
-		return this.comment;
+		return comment;
 	}
 
 	public void setComment(String comment) {
 		this.comment = comment;
-	}
-
-	public double getTotal() {
-		return this.total;
-	}
-
-	public String getID() {
-		return ID;
-	}
-
-	public void setID(String iD) {
-		ID = iD;
 	}
 
 }

@@ -5,8 +5,11 @@ import java.util.ArrayList;
 
 import po.SaleCommodityItemPO;
 import po.SalesPO;
+import vo.SalesVO;
 import message.ResultMessage;
+import dataenum.BillType;
 import dataenum.Storage;
+import dataservice.DataFactoryService;
 import dataservice.SaleDataService;
 /**
  * Sale和SaleDataService是依赖关系
@@ -47,43 +50,62 @@ public class Sale {
 		return beforePrice - allowance - voucher;
 	}
 
-	public ResultMessage addSale(String client, String salesman,
-			String user, Storage storage, 
+	/**
+	 * 
+	 * @param client
+	 * @param salesman
+	 * @param user
+	 * @param storage
+	 * @param allowance
+	 * @param voucher
+	 * @param remark
+	 * @return
+	 */
+	public ResultMessage addSale(String client, String salesman,String user, Storage storage, 
 			double allowance, double voucher, String remark) {
 		try {
-			SaleDataService saleData = (SaleDataService)Naming.lookup("rmi://127.0.0.1:8888/factory");
+			DataFactoryService factory = (DataFactoryService)Naming.lookup("rmi://127.0.0.1:8888/factory");
+			SaleDataService saleData = (SaleDataService)factory.getSaleData();
 			double beforePrice = saleList.getBeforePrice();
 			double afterPrice = getAfterPrice(beforePrice, allowance, voucher);
 			String ID = saleData.getID();
-			
-			ArrayList<SaleCommodityItemPO> commoditisePO= new ArrayList<SaleCommodityItemPO>();
-			// TODO
-		
+			po = new SalesPO(ID, client, salesman, user, storage, saleList.getCommodities(), 
+					beforePrice, allowance, voucher, remark, afterPrice, BillType.SALE);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
 		
-		return null;
+		return ResultMessage.SUCCESS;
 	}
 
 	public ResultMessage addSaleBack(String client,String salesman, String user, 
 			Storage storage, double allowance, double voucher, String remark){
 		try {
-			SaleDataService saleData = (SaleDataService)Naming.lookup("rmi://127.0.0.1:8888/factory");
+			DataFactoryService factory = (DataFactoryService)Naming.lookup("rmi://127.0.0.1:8888/factory");
+			SaleDataService saleData = (SaleDataService)factory.getSaleData();
+			double beforePrice = saleList.getBeforePrice();
+			double afterPrice = getAfterPrice(beforePrice, allowance, voucher);
+			String ID = saleData.getID();
+			po = new SalesPO(ID, client, salesman, user, storage, saleList.getCommodities(), 
+					beforePrice, allowance, voucher, remark, afterPrice, BillType.SALEBACK);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
-		return null;
+		return ResultMessage.SUCCESS;
 	}
 
 	public ResultMessage submit() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 	
 	public SaleList getSaleList(){
 		return saleList;
+	}
+	
+	public ArrayList<SalesVO> show(){
+		return null;
 	}
 
 }

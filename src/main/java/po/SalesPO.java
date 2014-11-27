@@ -62,7 +62,12 @@ public class SalesPO extends PersistentObject{
 		this.voucher = voucher;
 		this.remark = remark;
 		this.afterPrice = afterPrice;
-		this.setType(type);
+		this.type = type;
+	}
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 
@@ -71,18 +76,8 @@ public class SalesPO extends PersistentObject{
 	}
 
 
-	public void setId(String id) {
-		this.id = id;
-	}
-
-
 	public String getClient() {
 		return client;
-	}
-
-
-	public void setClient(String client) {
-		this.client = client;
 	}
 
 
@@ -91,18 +86,8 @@ public class SalesPO extends PersistentObject{
 	}
 
 
-	public void setStorage(Storage storage) {
-		this.storage = storage;
-	}
-
-
 	public String getSalesman() {
 		return salesman;
-	}
-
-
-	public void setSalesman(String salesman) {
-		this.salesman = salesman;
 	}
 
 
@@ -111,18 +96,8 @@ public class SalesPO extends PersistentObject{
 	}
 
 
-	public void setUser(String user) {
-		this.user = user;
-	}
-
-
 	public ArrayList<SaleCommodityItemPO> getCommodities() {
 		return commodities;
-	}
-
-
-	public void setCommodities(ArrayList<SaleCommodityItemPO> commodities) {
-		this.commodities = commodities;
 	}
 
 
@@ -131,18 +106,8 @@ public class SalesPO extends PersistentObject{
 	}
 
 
-	public void setBeforePrice(double beforePrice) {
-		this.beforePrice = beforePrice;
-	}
-
-
 	public double getAllowance() {
 		return allowance;
-	}
-
-
-	public void setAllowance(double allowance) {
-		this.allowance = allowance;
 	}
 
 
@@ -151,18 +116,8 @@ public class SalesPO extends PersistentObject{
 	}
 
 
-	public void setVoucher(double voucher) {
-		this.voucher = voucher;
-	}
-
-
 	public double getAfterPrice() {
 		return afterPrice;
-	}
-
-
-	public void setAfterPrice(double afterPrice) {
-		this.afterPrice = afterPrice;
 	}
 
 
@@ -171,18 +126,8 @@ public class SalesPO extends PersistentObject{
 	}
 
 
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
-
-
 	public BillType getType() {
 		return type;
-	}
-
-
-	public void setType(BillType type) {
-		this.type = type;
 	}
 
 	

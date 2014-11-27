@@ -98,8 +98,8 @@ public class Commodity implements CommodityInfo, businesslogic.purchasebl.Commod
 		return 	po.getType();
 	}
 
-	public String getID(String ID) {
-		po = commodityData.find(ID, FindTypeCommo.ID).get(0);
+	public String getID(String name, String type) {
+		po = commodityData.find(name+type, null).get(0);
 		return po.getID();
 	}
 

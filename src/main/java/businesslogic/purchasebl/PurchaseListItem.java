@@ -40,8 +40,8 @@ public class PurchaseListItem {
 		this.name = name;
 		this.number = number;
 		info = new Commodity();
-		this.ID = info.getID(name);
 		this.type = info.getType(name);
+		this.ID = info.getID(name, type);
 		this.price = price;
 		this.total = number * price;
 		this.remark = remark;
