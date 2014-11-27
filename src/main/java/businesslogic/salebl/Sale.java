@@ -77,6 +77,7 @@ public class Sale {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			return ResultMessage.FAILURE;
 		} 
 		
 		return ResultMessage.SUCCESS;
@@ -105,6 +106,7 @@ public class Sale {
 			saleData.insert(po);
 		} catch (Exception e) {
 			e.printStackTrace();
+			return ResultMessage.FAILURE;
 		} 
 		return ResultMessage.SUCCESS;
 	}

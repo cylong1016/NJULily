@@ -27,7 +27,7 @@ public class CommoditySort {
 				new CommoditySortPO(
 						commoditySortData.getID(), 
 						sortName, 
-						commoditySortData.find(parentSort.name), null);
+						commoditySortData.find(parentSort.name));
 		commoditySortData.insert(po);
 		return ResultMessage.SUCCESS;
 	}
@@ -52,8 +52,7 @@ public class CommoditySort {
 				new CommoditySortPO(
 						sort.ID, 
 						sort.name, 
-						commoditySortData.find(sort.name).getFather(),
-						commoditySortData.find(sort.name).getChildren());
+						commoditySortData.find(sort.name).getFather());
 		commoditySortData.update(po);
 		return ResultMessage.SUCCESS;
 	}
