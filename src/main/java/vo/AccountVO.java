@@ -15,9 +15,9 @@ public class AccountVO {
 	/** 账户名*/
 	public String name;
 	/** 账户余额 */
-	public int money;
+	public double money;
 	
-	public AccountVO(String name, int money){
+	public AccountVO(String name, double money){
 		this.name = name;
 		this.money = money;
 	}

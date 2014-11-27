@@ -15,9 +15,9 @@ public class AccountPO {
 	/** 账户名*/
 	private String name;
 	/** 账户余额 */
-	private int money;
+	private double money;
 	
-	public AccountPO(String name, int money){
+	public AccountPO(String name, double money){
 		this.name = name;
 		this.money = money;
 	}
@@ -26,16 +26,8 @@ public class AccountPO {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public int getMoney() {
+	public double getMoney() {
 		return money;
-	}
-
-	public void setMoney(int money) {
-		this.money = money;
 	}
 	
 	

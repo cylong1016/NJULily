@@ -1,5 +1,8 @@
 package businesslogicservice;
 
+import java.util.ArrayList;
+
+import vo.AccountVO;
 import message.ResultMessage;
 
 
@@ -20,29 +23,29 @@ public interface AccountBLService {
 	/**
 	 * 
 	 * @param keyword
-	 * @return
+	 * @return 找到的账户集合
 	 */
-	public ResultMessage findAccount(String keyword);
+	public ArrayList<AccountVO> findAccount(String keyword);
 
 	/**
 	 * 
 	 * @param name
 	 * @param money
-	 * @return
+	 * @return 成功与否
 	 */
-	public ResultMessage addAccount(String name, int money);
+	public ResultMessage addAccount(String name, double money);
 	
 	/**
 	 * 
 	 * @param name
-	 * @return
+	 * @return 成功与否
 	 */
 	public ResultMessage deleteAccount(String name);
 
 	/**
 	 * 
 	 * @param name
-	 * @return
+	 * @return 成功与否
 	 */
 	public ResultMessage updAccount(String name);
 }
