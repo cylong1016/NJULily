@@ -30,16 +30,6 @@ public interface SaleBLService {
 	 * @return
 	 */
 	public void addCommodities(String name,  int num, double price,  String remark);
-	
-	/**
-	 * 得到商品折让后的价格
-	 * @param beforePrice
-	 * @param allowance
-	 * @param voucher
-	 * @return
-	 */
-	public double getAfterPrice(double beforePrice, double allowance, double voucher);
-
 
 	/**
 	 * 制定出新的销售单

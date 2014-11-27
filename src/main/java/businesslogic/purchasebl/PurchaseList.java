@@ -2,6 +2,8 @@ package businesslogic.purchasebl;
 
 import java.util.ArrayList;
 
+import po.CommodityItemPO;
+
 public class PurchaseList {
 	
 	private ArrayList<PurchaseListItem> commodities;
@@ -24,7 +26,14 @@ public class PurchaseList {
 		return beforePrice;
 	}
 	
-	public ArrayList<PurchaseListItem> getCommodities() {
-		return commodities;
+	public ArrayList<CommodityItemPO> getCommodities() {
+		ArrayList<CommodityItemPO> commoditiesPO = new ArrayList<CommodityItemPO>();
+		for (int i = 0; i < commodities.size(); i++) {
+			PurchaseListItem c = commodities.get(i);
+			CommodityItemPO po = new CommodityItemPO(c.getID(), c.getName(), 
+					c.getType(), c.getNumber(), c.getPrice(), c.getTotal(), c.getRemark());
+			commoditiesPO.add(po);
+		}
+		return commoditiesPO;
 	}
 }

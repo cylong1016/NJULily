@@ -21,12 +21,6 @@ public class SaleController implements SaleBLService{
 		sale.addCommodities(name, num, price, remark);
 	}
 
-
-	public double getAfterPrice(double beforePrice, double allowance,
-			double voucher) {
-		return sale.getAfterPrice(beforePrice, allowance, voucher);
-	}
-
 	public ResultMessage addSale(String client, String salesman,
 			String user, Storage storage, double allowance, double voucher, String remark) {
 		return sale.addSale(client, salesman, user, storage, allowance, voucher, remark);

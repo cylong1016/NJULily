@@ -3,45 +3,41 @@ package businesslogic.purchasebl;
 import java.util.ArrayList;
 
 import message.ResultMessage;
-import vo.ClientVO;
-import vo.SaleCommodityItemVO;
-import vo.UserVO;
+import vo.PurchaseVO;
 import dataenum.Storage;
 import businesslogicservice.PurchaseBLService;
 
 public class PurchaseController implements PurchaseBLService{
-
-	public ResultMessage getID() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	private Purchase purchase;
+	
+	public PurchaseController(){
+		purchase = new Purchase();
 	}
 
-	public ResultMessage addCommodities(String name, int num, double price,
+	public void addCommodities(String name, int num, double price,
 			String remark) {
+		purchase.addCommodities(name, num, price, remark);
+	}
+
+	public ResultMessage addPur(String ID, String client, String user,
+			Storage storage, double sumPrice, String remark) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public ResultMessage getBeforePrice(ArrayList<SaleCommodityItemVO> commodities) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public ResultMessage addSale(String ID, ClientVO client, UserVO user,
-			Storage storage, ArrayList<SaleCommodityItemVO> commodities,
-			int sumPrice, String remark) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public ResultMessage addSaleBack(String ID, ClientVO client, UserVO user,
-			Storage storage, ArrayList<SaleCommodityItemVO> commodities,
-			int sumPrice) {
+	public ResultMessage addPurBack(String ID, String client, String user,
+			Storage storage, double sumPrice, String remark) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public ResultMessage submit() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<PurchaseVO> show() {
 		// TODO Auto-generated method stub
 		return null;
 	}

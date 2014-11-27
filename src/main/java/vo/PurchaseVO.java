@@ -26,14 +26,14 @@ public class PurchaseVO {
 	/** 操作员 */
 	public UserVO user;	
 	/** 商品列表清单 */
-	public ArrayList<SaleCommodityItemVO> commodities;
+	public ArrayList<CommodityItemVO> commodities;
 	/** 总额*/
 	public int sumPrice;
 	/** 备注 */
 	public String remark;
 	
 	public PurchaseVO(String ID, ClientVO client, UserVO user,  Storage storage, 
-			ArrayList<SaleCommodityItemVO> commodities, int sumPrice) {
+			ArrayList<CommodityItemVO> commodities, int sumPrice) {
 		
 		this.id = ID;
 		this.client = client;

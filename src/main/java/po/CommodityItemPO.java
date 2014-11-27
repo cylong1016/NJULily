@@ -5,7 +5,7 @@ package po;
  * @author cylong
  * @version Oct 31, 2014 3:26:07 PM
  */
-public class SaleCommodityItemPO {
+public class CommodityItemPO {
 	
 	/** 商品编号*/
 	private String ID;
@@ -22,7 +22,7 @@ public class SaleCommodityItemPO {
 	/** 商品备注 */
 	private String comment;
 
-	public SaleCommodityItemPO(String id, String name, String type, int number, double price, double total, String comment) {
+	public CommodityItemPO(String id, String name, String type, int number, double price, double total, String comment) {
 		this.ID = id;
 		this.name = name;
 		this.type = type;

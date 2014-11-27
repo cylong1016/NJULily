@@ -32,7 +32,7 @@ public class SalesPO extends PersistentObject{
 	/** 操作员 */
 	private String user;	
 	/** 商品列表清单 */
-	private ArrayList<SaleCommodityItemPO> commodities;
+	private ArrayList<CommodityItemPO> commodities;
 	/** 折让前总额*/
 	private double beforePrice;
 	/** 折让金额*/
@@ -48,7 +48,7 @@ public class SalesPO extends PersistentObject{
 	
 	
 	public SalesPO(String ID, String client, String salesman, String user,  Storage storage, 
-			ArrayList<SaleCommodityItemPO> commodities, double beforePrice, double allowance, 
+			ArrayList<CommodityItemPO> commodities, double beforePrice, double allowance, 
 			double voucher, String remark , double afterPrice, BillType type){
 		super(ID);
 		this.id = ID;
@@ -96,7 +96,7 @@ public class SalesPO extends PersistentObject{
 	}
 
 
-	public ArrayList<SaleCommodityItemPO> getCommodities() {
+	public ArrayList<CommodityItemPO> getCommodities() {
 		return commodities;
 	}
 

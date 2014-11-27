@@ -5,7 +5,7 @@ package vo;
  * @author cylong
  * @version Oct 31, 2014 3:41:16 PM
  */
-public class SaleCommodityItemVO extends ValueObject {
+public class CommodityItemVO extends ValueObject {
 
 	/** 商品名称 */
 	public String name;
@@ -20,7 +20,7 @@ public class SaleCommodityItemVO extends ValueObject {
 	/** 商品备注 */
 	public String comment;
 
-	public SaleCommodityItemVO(String id, String name, String type, int number, double price, double total, String comment) {
+	public CommodityItemVO(String id, String name, String type, int number, double price, double total, String comment) {
 		super();
 		this.name = name;
 		this.type = type;

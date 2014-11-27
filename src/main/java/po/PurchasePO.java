@@ -2,6 +2,7 @@ package po;
 
 import java.util.ArrayList;
 
+import dataenum.BillType;
 import dataenum.Storage;
 
 
@@ -23,20 +24,22 @@ public class PurchasePO extends PersistentObject{
 	/** 单据编号 */
 	private String id;	
 	/** 客户 */
-	private ClientPO client;
+	private String client;
 	/** 仓库 */
 	private Storage storage;
 	/** 操作员 */
-	private UserPO user;	
+	private String user;	
 	/** 商品列表清单 */
-	private ArrayList<SaleCommodityItemPO> commodities;
+	private ArrayList<CommodityItemPO> commodities;
 	/** 总额*/
-	private int sumPrice;
+	private double sumPrice;
 	/** 备注 */
 	private String remark;
 	
-	public PurchasePO(String ID, ClientPO client, UserPO user,  Storage storage, 
-			ArrayList<SaleCommodityItemPO> commodities, int sumPrice){
+	private BillType type;
+	
+	public PurchasePO(String ID, String client, String user,  Storage storage, 
+			ArrayList<CommodityItemPO> commodities, double sumPrice, BillType type){
 		super(ID);
 		this.id = ID;
 		this.client = client;
@@ -44,50 +47,36 @@ public class PurchasePO extends PersistentObject{
 		this.storage = storage;
 		this.commodities = commodities;
 		this.sumPrice = sumPrice;
+		this.type = type;
 	}
 	
 	public String getId() {
 		return id;
 	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public ClientPO getClient() {
+
+	public String getClient() {
 		return client;
 	}
-	public void setClient(ClientPO client) {
-		this.client = client;
-	}
+
 	public Storage getStorage() {
 		return storage;
 	}
-	public void setStorage(Storage storage) {
-		this.storage = storage;
-	}
-	public UserPO getUser() {
+
+	public String getUser() {
 		return user;
 	}
-	public void setUser(UserPO user) {
-		this.user = user;
-	}
-	public ArrayList<SaleCommodityItemPO> getCommodities() {
+
+	public ArrayList<CommodityItemPO> getCommodities() {
 		return commodities;
 	}
-	public void setCommodities(ArrayList<SaleCommodityItemPO> commodities) {
-		this.commodities = commodities;
-	}
-	public int getSumPrice() {
+
+	public double getSumPrice() {
 		return sumPrice;
 	}
-	public void setSumPrice(int sumPrice) {
-		this.sumPrice = sumPrice;
-	}
+
 	public String getRemark() {
 		return remark;
 	}
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
-	
+
 	
 }

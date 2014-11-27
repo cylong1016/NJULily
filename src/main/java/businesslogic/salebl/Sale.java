@@ -3,7 +3,6 @@ package businesslogic.salebl;
 import java.rmi.Naming;
 import java.util.ArrayList;
 
-import po.SaleCommodityItemPO;
 import po.SalesPO;
 import vo.SalesVO;
 import message.ResultMessage;
@@ -51,7 +50,7 @@ public class Sale {
 	}
 
 	/**
-	 * 
+	 * 建立销售单
 	 * @param client
 	 * @param salesman
 	 * @param user
@@ -71,7 +70,7 @@ public class Sale {
 			String ID = saleData.getID();
 			po = new SalesPO(ID, client, salesman, user, storage, saleList.getCommodities(), 
 					beforePrice, allowance, voucher, remark, afterPrice, BillType.SALE);
-			
+			saleData.insert(po);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
@@ -79,6 +78,17 @@ public class Sale {
 		return ResultMessage.SUCCESS;
 	}
 
+	/**
+	 * 建立销售退货单
+	 * @param client
+	 * @param salesman
+	 * @param user
+	 * @param storage
+	 * @param allowance
+	 * @param voucher
+	 * @param remark
+	 * @return
+	 */
 	public ResultMessage addSaleBack(String client,String salesman, String user, 
 			Storage storage, double allowance, double voucher, String remark){
 		try {
@@ -89,6 +99,7 @@ public class Sale {
 			String ID = saleData.getID();
 			po = new SalesPO(ID, client, salesman, user, storage, saleList.getCommodities(), 
 					beforePrice, allowance, voucher, remark, afterPrice, BillType.SALEBACK);
+			saleData.insert(po);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
@@ -105,6 +116,14 @@ public class Sale {
 	}
 	
 	public ArrayList<SalesVO> show(){
+		DataFactoryService factory;
+		try {
+			factory = (DataFactoryService)Naming.lookup("rmi://127.0.0.1:8888/factory");
+			SaleDataService saleData = (SaleDataService)factory.getSaleData();
+			// TODO 需要一个返回所有的PO的方法
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 		return null;
 	}
 
