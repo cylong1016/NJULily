@@ -59,7 +59,7 @@ public class ClientManagementUI extends MyPanel implements ActionListener{
 		this.add(button_showAll);	
 		
 		//add a table for showing the information of the clients(the table is contained in a scroll pane)
-		String[] headers = {"行号","客户编号","客户分类","客户星级"
+		String[] headers = {"客户编号","客户分类","客户星级"
 				,"客户名称","默认业务员","应收付差额","应收","应付"};
 		MyTable table = new MyTable(headers);
 		
