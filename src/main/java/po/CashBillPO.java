@@ -18,15 +18,15 @@ public class CashBillPO extends PersistentObject{
 	/** 编号 */
 	private String id;
 	/** 操作员 */
-	private UserPO user;
+	private String user;
 	/** 银行账户 */
-	private AccountPO account;
+	private String account;
 	/**  条目清单*/
 	private ArrayList<CashItemPO> bills;
 	/** 汇款总额 */
 	private int sumMoney;
 	
-	public CashBillPO(String id, UserPO user, AccountPO account, ArrayList<CashItemPO> bills, int sumMoney) {
+	public CashBillPO(String id, String user, String account, ArrayList<CashItemPO> bills, int sumMoney) {
 		super(id);
 		this.id = id;
 		this.user = user;
@@ -35,46 +35,29 @@ public class CashBillPO extends PersistentObject{
 		this.sumMoney = sumMoney;
 	}
 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	public String getId() {
 		return id;
 	}
 
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public UserPO getUser() {
+	public String getUser() {
 		return user;
 	}
 
-	public void setUser(UserPO user) {
-		this.user = user;
-	}
-
-	public AccountPO getAccount() {
+	public String getAccount() {
 		return account;
-	}
-
-	public void setAccount(AccountPO account) {
-		this.account = account;
 	}
 
 	public ArrayList<CashItemPO> getBills() {
 		return bills;
 	}
 
-	public void setBills(ArrayList<CashItemPO> bills) {
-		this.bills = bills;
-	}
-
 	public int getSumMoney() {
 		return sumMoney;
 	}
-
-	public void setSumMoney(int sumMoney) {
-		this.sumMoney = sumMoney;
-	}
-	
 	
 	
 }

@@ -16,37 +16,26 @@ public class CommoditySortController implements CommoditySortBLService{
 	
 	private CommoditySort commoditySort;
 	
-	public ResultMessage addCommoSort(String sortName,
-			CommoditySortVO parentSort) {
-		
+	public CommoditySortController() {
+		commoditySort = new CommoditySort();
+	}
+	
+	public ResultMessage addCommoSort(String sortName, CommoditySortVO parentSort) {	
 		return commoditySort.addCommoSort(sortName, parentSort);
 	}
 
-	
-	public ResultMessage deleteCommoSort(CommoditySortVO sort) {
-		return commoditySort.deleteCommoSort(sort);
-	}
-
-	public ResultMessage updCommoSort(CommoditySortVO sort) {		
-		return commoditySort.updCommoSort(sort);
-	}
-
-
 	public ArrayList<CommoditySortVO> show() {
-		// TODO Auto-generated method stub
-		return null;
+		return commoditySort.show();
 	}
 
 
 	public ResultMessage deleteCommoSort(String ID) {
-		// TODO Auto-generated method stub
-		return null;
+		return commoditySort.deleteCommoSort(ID);
 	}
 
 
 	public ResultMessage updCommoSort(String ID, String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return commoditySort.updCommoSort(ID, name);
 	}
 
 }

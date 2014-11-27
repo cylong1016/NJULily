@@ -1,28 +1,30 @@
-package po;
+package businesslogic.cashbillbl;
 
 /**
- * 现金费用单中的条目清单
+ * 条目清单中包括：条目名，金额，备注。
  * @author Zing
- * @version 2014年10月31日下午5:58:44
+ * @version Nov 27, 201411:09:11 PM
  */
-public class CashItemPO {
-	/** 条目名 */
+public class CashBillItem {
 	private String name;
-	/** 金额 */
+	
 	private double money;
-	/** 备注 */
+	
 	private String remark;
 	
-	public CashItemPO(String name, double money, String remark){
+	public CashBillItem() {
+	}
+	
+	public CashBillItem(String name, double money, String remark) {
 		this.name = name;
 		this.money = money;
 		this.remark = remark;
-		
 	}
 
 	public String getName() {
 		return name;
 	}
+
 	public double getMoney() {
 		return money;
 	}
@@ -30,5 +32,7 @@ public class CashItemPO {
 	public String getRemark() {
 		return remark;
 	}
+	
+	
 
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.junit.runner.notification.Failure;
 
+import businesslogic.approvalbl.WaitApproval;
 import businesslogic.clientbl.Client;
 import po.SalesPO;
 import vo.SalesVO;
@@ -19,7 +20,7 @@ import dataservice.SaleDataService;
  * @author Zing
  * @version Nov 15, 201410:07:38 AM
  */
-public class Sale {
+public class Sale extends WaitApproval{
 	
 	private SaleList saleList;
 	
@@ -31,6 +32,18 @@ public class Sale {
 		
 	public Sale() {
 		this.saleList = new SaleList();
+	}
+	
+	/**
+	 * 每次要创建单据前，都要根据单据的类型得到ID
+	 * @param type
+	 * @return
+	 */
+	public String getID(BillType type) {
+		this.type = type;
+		SaleDataService saleData = getSaleData();
+		this.ID = saleData.getID(type);
+		return ID;
 	}
 	
 	/**
@@ -60,25 +73,13 @@ public class Sale {
 		try {
 			DataFactoryService factory = (DataFactoryService)Naming.lookup("rmi://127.0.0.1:8888/factory");
 			SaleDataService saleData = (SaleDataService)factory.getSaleData();
-			return saleData;
-			
+			return saleData;		
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		} 
 	}
 	
-	public ApprovalDataService getApprovalData(){
-		try {
-			DataFactoryService factory = (DataFactoryService)Naming.lookup("rmi://127.0.0.1:8888/factory");
-			ApprovalDataService approvalData = (ApprovalDataService)factory.getApprovalData();
-			return approvalData;
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		} 
-	}
 
 	/**
 	 * 建立销售单
@@ -105,18 +106,6 @@ public class Sale {
 		SaleDataService saleData = getSaleData();
 		// TODO
 		return null;
-	}
-	
-	/**
-	 * 每次要创建单据前，都要根据单据的类型得到ID
-	 * @param type
-	 * @return
-	 */
-	public String getID(BillType type) {
-		this.type = type;
-		SaleDataService saleData = getSaleData();
-		this.ID = saleData.getID(type);
-		return ID;
 	}
 
 	public ResultMessage submit(String clientID, Storage storage, double allowance, double voucher, String remark) {

@@ -19,7 +19,7 @@ public class CheckCommodityItemVO {
 	/** 库存均价 */
 
 	
-	public CheckCommodityItemVO(String name, String type, int number, int aveMoney, String today, String lot) {
+	public CheckCommodityItemVO(String name, String type, int number, double aveMoney, String today, String lot) {
 		this.name = name;
 		this.type = type;
 		this.number = number;

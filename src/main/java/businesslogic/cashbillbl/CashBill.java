@@ -1,5 +1,90 @@
 package businesslogic.cashbillbl;
 
-public class CashBill {
+import java.rmi.Naming;
+import java.util.ArrayList;
 
+import businesslogic.approvalbl.WaitApproval;
+import po.CashBillPO;
+import po.CashItemPO;
+import message.ResultMessage;
+import dataenum.BillType;
+import dataservice.CashBillDataService;
+import dataservice.DataFactoryService;
+import dataservice.SaleDataService;
+/**
+ * 制定现金费用单
+ * (管理报销等现金操作，单据中包含：
+ * 单据编号（XJFYD-yyyyMMdd-xxxxx), 操作员（当前登录用户），银行账户，条目清单，总额。
+ * 条目清单中包括：条目名，金额，备注。
+ * 需要通过审批后才可将此单据入账。入账后将会减少该账户的余额。
+ * @author Zing
+ * @version Nov 27, 201411:13:32 PM
+ */
+public class CashBill extends WaitApproval{
+	
+	private String ID;
+	
+	private ArrayList<CashBillItem> items;
+	
+	private CashBillPO po;
+	
+	public CashBill() {
+		items = new ArrayList<CashBillItem>();
+	}
+	
+	public CashBillDataService getCashBillData(){
+		try {
+			DataFactoryService factory = (DataFactoryService)Naming.lookup("rmi://127.0.0.1:8888/factory");
+			CashBillDataService cashBillData = (CashBillDataService)factory.getCashBillData();
+			return cashBillData;		
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} 
+	}
+	
+	public String getID(BillType type) {
+		CashBillDataService cashBillData = getCashBillData();
+		this.ID = cashBillData.getID();
+		return ID;
+	}
+
+	public void addBillItem(String name, double money, String remark) {
+		CashBillItem item = new CashBillItem(name, money, remark);
+		items.add(item);
+	}
+	
+	public ArrayList<CashItemPO> getCashItemPO(){
+		ArrayList<CashItemPO> pos = new ArrayList<CashItemPO>();
+		for (int i = 0; i < items.size(); i++) {
+			CashBillItem item = items.get(i);
+			CashItemPO po = new CashItemPO(item.getName(), item.getMoney(), item.getRemark());
+			pos.add(po);
+		}
+		return pos;
+	}
+
+	public double getSumMoney() {
+		double sum = 0;
+		for (int i = 0; i < items.size(); i++) {
+			sum += items.get(i).getMoney();
+		}
+		return sum;
+	}
+
+	public CashBillPO addCashBill(String account) {
+		po = new CashBillPO(ID, user, account, getCashItemPO(), getSumMoney());
+		return po;
+	}
+
+	public ResultMessage submit(String account) {
+		addCashBill(account);
+		getApprovalData().insert(po);
+		return ResultMessage.SUCCESS;
+	}
+	
+	public ResultMessage save(String account) {
+		// TODO 存在本地
+		return null;
+	}
 }

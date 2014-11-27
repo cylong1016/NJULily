@@ -19,9 +19,9 @@ public class InventoryBillVO {
 	/** 商品集合（赠送单） */
 	public ArrayList<CommodityVO> commodities;
 	/** 客户 */
-	public ClientVO client;
+	public String clientID;
 	/** 商品（报损、报溢、报警） */
-	public CommodityVO commodity;
+	public String commodityID;
 	/** 报损、报溢数量*/
 	public int num;
 	/** 赠送商品的数量*/
@@ -29,16 +29,16 @@ public class InventoryBillVO {
 	/** 单子类型，报损／报溢／报警*/
 	public BillType billType;
 	
-	public InventoryBillVO(BillType billType, CommodityVO commodity, int num) {
+	public InventoryBillVO(BillType billType, String commodityID, int num) {
 		this.billType = billType;
-		this.commodity = commodity;
+		this.commodityID = commodityID;
 		this.num = num;
 	}
 	
-	public InventoryBillVO(ArrayList<CommodityVO> commodities, int giftNum, ClientVO client) {
+	public InventoryBillVO(ArrayList<CommodityVO> commodities, int giftNum, String clientID) {
 		this.commodities = commodities;
 		this.giftNum = giftNum;
-		this.client = client;
+		this.clientID = clientID;
 	}
 
 }

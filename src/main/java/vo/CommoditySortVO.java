@@ -1,5 +1,7 @@
 package vo;
 
+import java.util.ArrayList;
+
 /**
  * 商品分类值对象
  * @author cylong
@@ -15,9 +17,9 @@ public class CommoditySortVO extends ValueObject{
 	
 	public CommoditySortVO father;
 	
-	public CommoditySortVO children;
+	public ArrayList<CommoditySortVO> children;
 	
-	public CommoditySortVO(String ID, String name, CommoditySortVO father, CommoditySortVO children){
+	public CommoditySortVO(String ID, String name, CommoditySortVO father, ArrayList<CommoditySortVO> children){
 		super();
 		this.name = name;
 		this.father = father;

@@ -1,9 +1,5 @@
 package businesslogicservice;
 
-import java.util.ArrayList;
-
-import vo.GiftCommodityItemVO;
-import dataenum.BillType;
 import message.ResultMessage;
 
 /**
@@ -26,52 +22,52 @@ public interface InventoryBLService {
 	 */
 	public ResultMessage viewInventory (String beginDate, String endDate);
 	
-	/**
-	 * 显示截至盘点时间的库存快照
-	 * @return
-	 */
-	public ResultMessage checkRecord();
-	
-	/**
-	 * TODO 是直接添加商品的VO还是添加字符串之类的？
-	 * 添加商品到商品赠送单中
-	 * @param commodity
-	 * @return
-	 */
-	public ResultMessage addCommodity(String ID, int number);
-	
-	/**
-	 * 生成相应的库存赠送单
-	 * @param commodities
-	 * @return
-	 */
-	public ResultMessage giftRecord(ArrayList<GiftCommodityItemVO> commodities);
-	
-	/**
-	 * 生成相应的库存报溢单
-	 * @param commodity
-	 * @param num
-	 * @return
-	 */
-	public ResultMessage overflowRecord(BillType billType, String commodityID, int num, String remark);
-	
-	/**
-	 * 生成相应的库存报损单
-	 * @param commodity
-	 * @param num
-	 * @return
-	 */
-	public ResultMessage lossRecord(BillType billType, String commodityID, int num, String remark);
-	
-	/**
-	 * 生成相应的库存报警单
-	 * @param commodity
-	 * @param num
-	 * @return
-	 */
-	public ResultMessage alarmRecord(BillType billType, String commodityID, int nowNum, int alarmNum, String remark);
-
-
-
+//	/**
+//	 * 显示截至盘点时间的库存快照
+//	 * @return
+//	 */
+//	public ResultMessage checkRecord();
+//	
+//	/**
+//	 * TODO 是直接添加商品的VO还是添加字符串之类的？
+//	 * 添加商品到商品赠送单中
+//	 * @param commodity
+//	 * @return
+//	 */
+//	public ResultMessage addCommodity(String ID, int number);
+//	
+//	/**
+//	 * 生成相应的库存赠送单
+//	 * @param commodities
+//	 * @return
+//	 */
+//	public ResultMessage giftRecord();
+//	
+//	/**
+//	 * 生成相应的库存报溢单
+//	 * @param commodity
+//	 * @param num
+//	 * @return
+//	 */
+//	public ResultMessage overflowRecord(BillType billType, String commodityID, int num, String remark);
+//	
+//	/**
+//	 * 生成相应的库存报损单
+//	 * @param commodity
+//	 * @param num
+//	 * @return
+//	 */
+//	public ResultMessage lossRecord(BillType billType, String commodityID, int num, String remark);
+//	
+//	/**
+//	 * 生成相应的库存报警单
+//	 * @param commodity
+//	 * @param num
+//	 * @return
+//	 */
+//	public ResultMessage alarmRecord(BillType billType, String commodityID, int nowNum, int alarmNum, String remark);
+//
+//
+//
 
 }

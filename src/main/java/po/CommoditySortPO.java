@@ -1,7 +1,6 @@
 package po;
 
 import java.util.ArrayList;
-
 /**
  * 商品分类持久化对象
  * @author cylong
@@ -15,7 +14,7 @@ public class CommoditySortPO extends PersistentObject {
 
 	private CommoditySortPO father;
 
-	private CommoditySortPO children;
+	private  ArrayList<CommoditySortPO> children;
 
 	private ArrayList<CommodityPO> commodities;
 
@@ -23,16 +22,8 @@ public class CommoditySortPO extends PersistentObject {
 		super(ID);
 		this.name = name;
 		this.father = father;
-		commodities = new ArrayList<CommodityPO>();
 	}
 
-	public void setChildren(CommoditySortPO children) {
-		this.children = children;
-	}
-
-	public void addCommodity(CommodityPO po) {
-		commodities.add(po);
-	}
 
 	public String getName() {
 		return name;
@@ -42,8 +33,12 @@ public class CommoditySortPO extends PersistentObject {
 		return father;
 	}
 
-	public CommoditySortPO getChildren() {
+	public ArrayList<CommoditySortPO> getChildren() {
 		return children;
+	}
+
+	public ArrayList<CommodityPO> getCommodities() {
+		return commodities;
 	}
 
 }
