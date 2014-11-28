@@ -80,7 +80,6 @@ public class Commodity implements CommodityInfo, businesslogic.purchasebl.Commod
 	}
 
 	public ArrayList<String> getAllID() {
-		// TODO 给我一个提供所有商品ID的方法
 		commodityData.getAllID();
 		return null;
 	}

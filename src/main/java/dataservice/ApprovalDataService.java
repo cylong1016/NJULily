@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import message.ResultMessage;
 import po.AccountBillPO;
+import po.CashBillPO;
 import po.InventoryBillPO;
 import po.PersistentObject;
 import po.PurchasePO;
@@ -52,12 +53,21 @@ public interface ApprovalDataService extends DataService {
 
 	/**
 	 * 添加一个需要审批的赠送单、报溢单、报损单、报警单
-	 * @param po 需要审批的 赠送单、报溢单、报损单、报警单
+	 * @param po 需要审批的赠送单、报溢单、报损单、报警单
 	 * @return 处理信息
 	 * @author cylong
 	 * @version 2014年11月28日 上午11:52:09
 	 */
 	public ResultMessage insert(InventoryBillPO po);
+
+	/**
+	 * 添加一个需要审批的现金费用单
+	 * @param po 需要审批的现金费用单
+	 * @return 处理信息
+	 * @author cylong
+	 * @version 2014年11月28日 下午12:25:38
+	 */
+	public ResultMessage insert(CashBillPO po);
 
 	/**
 	 * 审批过后删除销售（销售退货）单
@@ -96,28 +106,47 @@ public interface ApprovalDataService extends DataService {
 	public ResultMessage delete(InventoryBillPO po);
 
 	/**
+	 * 审批过后删除现金费用单
+	 * @param po 现金费用单
+	 * @return 处理信息
+	 * @author cylong
+	 * @version 2014年11月28日 下午12:26:12
+	 */
+	public ResultMessage delete(CashBillPO po);
+
+	/**
 	 * @return 全部需要审批的销售（销售退货）单
 	 * @author cylong
-	 * @version 2014年11月28日  下午12:04:30
+	 * @version 2014年11月28日 下午12:04:30
 	 */
 	public ArrayList<SalesPO> getAllSaleBills();
+
 	/**
 	 * @return 全部需要审批的进货（进货退货）单
 	 * @author cylong
-	 * @version 2014年11月28日  下午12:04:36
+	 * @version 2014年11月28日 下午12:04:36
 	 */
 	public ArrayList<PersistentObject> getAllPurchaseBills();
+
 	/**
 	 * @return 全部需要审批的收款（付款）单
 	 * @author cylong
-	 * @version 2014年11月28日  下午12:04:41
+	 * @version 2014年11月28日 下午12:04:41
 	 */
 	public ArrayList<PersistentObject> getAllAccountBills();
+
 	/**
 	 * @return 全部需要审批的赠送单、报溢单、报损单、报警单
 	 * @author cylong
-	 * @version 2014年11月28日  下午12:04:46
+	 * @version 2014年11月28日 下午12:04:46
 	 */
 	public ArrayList<PersistentObject> getAllInventoryBills();
+
+	/**
+	 * @return 全部需要审批的现金费用单
+	 * @author cylong
+	 * @version 2014年11月28日 下午12:04:46
+	 */
+	public ArrayList<CashBillPO> getAllCashBills();
 
 }
