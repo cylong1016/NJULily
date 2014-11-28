@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import message.ResultMessage;
 import vo.CommoditySortVO;
-import businesslogicservice.CommoditySortBLService;
+import blservice.commoditysortblservice.CommoditySortBLService;
 
 /**
  * 实现CommoditySortBLService的类

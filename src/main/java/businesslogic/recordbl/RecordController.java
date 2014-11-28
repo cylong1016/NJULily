@@ -1,6 +1,6 @@
 package businesslogic.recordbl;
 
-import businesslogicservice.RecordBLService;
+import blservice.recordblservice.RecordBLService;
 import message.ResultMessage;
 import vo.ValueObject;
 import dataenum.BillType;

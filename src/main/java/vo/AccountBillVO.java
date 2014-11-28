@@ -2,6 +2,8 @@ package vo;
 
 import java.util.ArrayList;
 
+import dataenum.BillState;
+
 /**
  * 付款单收款单值对象
  * @author cylong
@@ -25,13 +27,16 @@ public class AccountBillVO extends ValueObject{
 	public ArrayList<BillItemVO> bills;
 	/** 汇款总额 */
 	public double sumMoney;
+	/** 单据状态 */
+	public BillState state;
 
-	public AccountBillVO(String ID, String clientID, String clientName, UserVO user, ArrayList<BillItemVO> bills, double sumMoney) {
+	public AccountBillVO(String ID, String clientID, String clientName, UserVO user, ArrayList<BillItemVO> bills, double sumMoney, BillState state) {
 		this.ID = ID;
 		this.clientID = clientID;
 		this.clientName = clientName;
 		this.user = user;
 		this.bills = bills;
 		this.sumMoney = sumMoney;
+		this.state = state;
 	}
 }

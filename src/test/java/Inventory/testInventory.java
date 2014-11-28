@@ -24,7 +24,7 @@ public class testInventory {
 		mi.add(new MockCommodity("asdaw", "S12q"));
 		mi.add(new MockCommodity("a1", "SQQ"));
 		
-		MockCheckList mcl = new MockCheckList("0123",mi);
+		MockCheckList mcl = new MockCheckList("0123");
 		
 		MockViewListItem mvli = new MockViewListItem();
 		mvli.add(mal1);

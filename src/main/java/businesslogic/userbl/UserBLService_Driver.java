@@ -1,7 +1,7 @@
 package businesslogic.userbl;
 
 import vo.UserVO;
-import businesslogicservice.UserBLService;
+import blservice.userblservice.UserBLService;
 import dataenum.UserIdentity;
 
 

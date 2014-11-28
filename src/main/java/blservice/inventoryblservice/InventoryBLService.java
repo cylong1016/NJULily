@@ -1,4 +1,4 @@
-package businesslogicservice;
+package blservice.inventoryblservice;
 
 import vo.InventoryBillVO;
 import vo.InventoryCheckVO;

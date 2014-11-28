@@ -126,21 +126,21 @@ public interface ApprovalDataService extends DataService {
 	 * @author cylong
 	 * @version 2014年11月28日 下午12:04:36
 	 */
-	public ArrayList<PersistentObject> getAllPurchaseBills();
+	public ArrayList<PurchasePO> getAllPurchaseBills();
 
 	/**
 	 * @return 全部需要审批的收款（付款）单
 	 * @author cylong
 	 * @version 2014年11月28日 下午12:04:41
 	 */
-	public ArrayList<PersistentObject> getAllAccountBills();
+	public ArrayList<AccountBillPO> getAllAccountBills();
 
 	/**
 	 * @return 全部需要审批的赠送单、报溢单、报损单、报警单
 	 * @author cylong
 	 * @version 2014年11月28日 下午12:04:46
 	 */
-	public ArrayList<PersistentObject> getAllInventoryBills();
+	public ArrayList<InventoryBillPO> getAllInventoryBills();
 
 	/**
 	 * @return 全部需要审批的现金费用单

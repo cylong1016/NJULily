@@ -2,6 +2,7 @@ package vo;
 
 import java.util.ArrayList;
 
+import dataenum.BillState;
 import dataenum.Storage;
 
 
@@ -31,9 +32,11 @@ public class PurchaseVO {
 	public int sumPrice;
 	/** 备注 */
 	public String remark;
+	/** 单据状态 */
+	public BillState state;
 	
 	public PurchaseVO(String ID, ClientVO client, UserVO user,  Storage storage, 
-			ArrayList<CommodityItemVO> commodities, int sumPrice) {
+			ArrayList<CommodityItemVO> commodities, int sumPrice, BillState state) {
 		
 		this.id = ID;
 		this.client = client;
@@ -41,5 +44,6 @@ public class PurchaseVO {
 		this.storage = storage;
 		this.commodities = commodities;
 		this.sumPrice = sumPrice;
+		this.state = state;
 	}
 }

@@ -1,4 +1,4 @@
-package businesslogicservice;
+package blservice.recordblservice;
 
 import vo.ValueObject;
 import dataenum.BillType;

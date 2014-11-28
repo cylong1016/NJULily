@@ -8,7 +8,7 @@ import vo.UserVO;
 import dataenum.ClientCategory;
 import dataenum.ClientLevel;
 import dataenum.FindTypeClient;
-import businesslogicservice.ClientBLService;
+import blservice.clientblservice.ClientBLService;
 
 /**
  * 实现客户的ClientBLService接口

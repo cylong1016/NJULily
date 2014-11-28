@@ -2,6 +2,7 @@ package po;
 
 import java.util.ArrayList;
 
+import dataenum.BillState;
 import dataenum.BillType;
 
 /**
@@ -20,10 +21,12 @@ public class InventoryBillPO extends PersistentObject {
 	private String commodityID;
 	/** 报损、报溢数量 */
 	private int num;
-	/** 备注*/
+	/** 备注 */
 	private String remark;
 	/** 单子类型，报损／报溢／报警 */
 	private BillType billType;
+	/** 单据状态 */
+	private BillState state;
 
 	public InventoryBillPO(BillType billType, ArrayList<GiftCommodityItemPO> commodities, int num, String remark) {
 		super(id);
@@ -31,16 +34,22 @@ public class InventoryBillPO extends PersistentObject {
 		this.commodities = commodities;
 		this.num = num;
 		this.remark = remark;
+		this.state = BillState.APPROVALING;
 	}
 
 	public InventoryBillPO(ArrayList<GiftCommodityItemPO> commodities, String remark) {
 		super(id);
 		this.commodities = commodities;
 		this.remark = remark;
+		this.state = BillState.APPROVALING;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public BillState getState() {
+		return this.state;
+	}
+
+	public void setState(BillState state) {
+		this.state = state;
 	}
 
 	public static String getId() {
@@ -54,7 +63,7 @@ public class InventoryBillPO extends PersistentObject {
 	public int getNum() {
 		return num;
 	}
-	
+
 	public BillType getBillType() {
 		return billType;
 	}

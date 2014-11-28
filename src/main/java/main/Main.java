@@ -2,9 +2,9 @@ package main;
 
 
 import ui.differui.inventory.frame.Frame_Inventory;
+import blservice.userblservice.UserBLService;
 import businesslogic.userbl.UserBLService_Driver;
 import businesslogic.userbl.UserBLService_Stub;
-import businesslogicservice.UserBLService;
 
 /**
  * @author cylong

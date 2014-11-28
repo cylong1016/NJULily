@@ -1,4 +1,4 @@
-package businesslogicservice;
+package blservice.accountblservice;
 
 import java.util.ArrayList;
 

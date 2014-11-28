@@ -1,4 +1,4 @@
-package businesslogicservice;
+package blservice.approvalblservice;
 
 import po.PersistentObject;
 import message.ResultMessage;

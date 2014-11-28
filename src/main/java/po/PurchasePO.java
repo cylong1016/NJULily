@@ -2,6 +2,7 @@ package po;
 
 import java.util.ArrayList;
 
+import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Storage;
 
@@ -31,8 +32,10 @@ public class PurchasePO extends PersistentObject {
 	private double sumPrice;
 	/** 备注 */
 	private String remark;
-
+	/** 单据类型 */
 	private BillType type;
+	/** 单据状态 */
+	private BillState state;
 
 	public PurchasePO(String ID, String client, String user, Storage storage, ArrayList<CommodityItemPO> commodities, double sumPrice, BillType type) {
 		super(ID);
@@ -43,6 +46,15 @@ public class PurchasePO extends PersistentObject {
 		this.commodities = commodities;
 		this.sumPrice = sumPrice;
 		this.type = type;
+		this.state = BillState.APPROVALING;
+	}
+
+	public BillState getState() {
+		return this.state;
+	}
+
+	public void setState(BillState state) {
+		this.state = state;
 	}
 
 	public String getId() {

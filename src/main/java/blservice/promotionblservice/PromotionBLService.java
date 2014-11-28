@@ -1,4 +1,4 @@
-package businesslogicservice;
+package blservice.promotionblservice;
 
 import message.ResultMessage;
 

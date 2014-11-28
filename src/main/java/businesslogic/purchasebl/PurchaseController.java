@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import message.ResultMessage;
 import vo.PurchaseVO;
 import dataenum.Storage;
-import businesslogicservice.PurchaseBLService;
+import blservice.purchaseblservice.PurchaseBLService;
 
 public class PurchaseController implements PurchaseBLService{
 	

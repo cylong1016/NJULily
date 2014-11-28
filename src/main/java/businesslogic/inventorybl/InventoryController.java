@@ -3,7 +3,7 @@ package businesslogic.inventorybl;
 import vo.InventoryBillVO;
 import vo.InventoryCheckVO;
 import message.ResultMessage;
-import businesslogicservice.InventoryBLService;
+import blservice.inventoryblservice.InventoryBLService;
 
 public class InventoryController implements InventoryBLService{
 	

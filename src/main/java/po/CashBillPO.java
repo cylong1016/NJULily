@@ -2,6 +2,8 @@ package po;
 
 import java.util.ArrayList;
 
+import dataenum.BillState;
+
 /**
  * 现金费用单
  * 管理报销等现金操作，单据中包含：单据编号（XJFYD-yyyyMMdd-xxxxx）,
@@ -10,7 +12,8 @@ import java.util.ArrayList;
  * @author Zing
  * @version 2014年10月31日下午5:55:13
  */
-public class CashBillPO extends PersistentObject{
+public class CashBillPO extends PersistentObject {
+
 	/**
 	 * 
 	 */
@@ -21,11 +24,13 @@ public class CashBillPO extends PersistentObject{
 	private String user;
 	/** 银行账户 */
 	private String account;
-	/**  条目清单*/
+	/** 条目清单 */
 	private ArrayList<CashItemPO> bills;
 	/** 汇款总额 */
 	private int sumMoney;
-	
+	/** 单据状态 */
+	private BillState state;
+
 	public CashBillPO(String id, String user, String account, ArrayList<CashItemPO> bills, int sumMoney) {
 		super(id);
 		this.id = id;
@@ -33,6 +38,15 @@ public class CashBillPO extends PersistentObject{
 		this.account = account;
 		this.bills = bills;
 		this.sumMoney = sumMoney;
+		this.state = BillState.APPROVALING;
+	}
+
+	public BillState getState() {
+		return this.state;
+	}
+
+	public void setState(BillState state) {
+		this.state = state;
 	}
 
 	public static long getSerialversionuid() {
@@ -58,6 +72,5 @@ public class CashBillPO extends PersistentObject{
 	public int getSumMoney() {
 		return sumMoney;
 	}
-	
-	
+
 }

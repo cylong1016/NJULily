@@ -1,4 +1,4 @@
-package businesslogicservice;
+package blservice.cashbillblservice;
 
 import message.ResultMessage;
 import dataenum.BillType;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import vo.AccountVO;
 import message.ResultMessage;
-import businesslogicservice.AccountBLService;
+import blservice.accountblservice.AccountBLService;
 
 public class AccountController implements AccountBLService{
 	

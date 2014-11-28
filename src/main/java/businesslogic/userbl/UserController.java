@@ -14,7 +14,7 @@ import dataservice.UserDataService;
  * @author Zing
  * @version 2014年11月3日下午7:59:35
  */
-public class UserController implements businesslogicservice.UserBLService{
+public class UserController implements blservice.userblservice.UserBLService{
 
 	private User user;
 	

@@ -1,7 +1,7 @@
 package businesslogic.cashbillbl;
 import message.ResultMessage;
 import dataenum.BillType;
-import businesslogicservice.CashBillBLService;
+import blservice.cashbillblservice.CashBillBLService;
 
 /**
  * 建立现金费用单

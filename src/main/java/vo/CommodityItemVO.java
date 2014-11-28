@@ -18,16 +18,16 @@ public class CommodityItemVO extends ValueObject {
 	/** 总价 */
 	public double total;
 	/** 商品备注 */
-	public String comment;
+	public String remark;
 
-	public CommodityItemVO(String id, String name, String type, int number, double price, double total, String comment) {
+	public CommodityItemVO(String ID, int number, double price, String remark, String name, String type) {
 		super();
+		this.ID = ID;
 		this.name = name;
 		this.type = type;
 		this.number = number;
 		this.price = price;
-		this.total = total;
-		this.comment = comment;
+		this.remark = remark;
 	}
 
 }

@@ -2,6 +2,8 @@ package po;
 
 import java.util.ArrayList;
 
+import dataenum.BillState;
+
 /**
  * 收款单付款单持久化对象
  * @author cylong
@@ -26,6 +28,8 @@ public class AccountBillPO extends PersistentObject {
 	private ArrayList<BillItemPO> bills;
 	/** 汇款总额 */
 	private double sumMoney;
+	/** 单据状态 */
+	private BillState state;
 
 	public AccountBillPO(String ID, String clientID, String clientName, UserPO user, ArrayList<BillItemPO> bills, double sumMoney) {
 		super(ID);
@@ -35,6 +39,15 @@ public class AccountBillPO extends PersistentObject {
 		this.user = user;
 		this.bills = bills;
 		this.sumMoney = sumMoney;
+		this.state = BillState.APPROVALING;
+	}
+
+	public BillState getState() {
+		return this.state;
+	}
+
+	public void setState(BillState state) {
+		this.state = state;
 	}
 
 	public String getClientID() {

@@ -2,6 +2,7 @@ package vo;
 
 import java.util.ArrayList;
 
+import dataenum.BillState;
 import dataenum.BillType;
 
 
@@ -28,11 +29,14 @@ public class InventoryBillVO {
 	public String remark;
 	/** 单子类型，报损／报溢／报警*/
 	public BillType billType;
+	/** 单据状态 */
+	public BillState state;
 	
-	public InventoryBillVO(BillType billType, String commodityID, int num, String remark) {
+	public InventoryBillVO(BillType billType, String commodityID, int num, String remark, BillState state) {
 		this.billType = billType;
 		this.commodityID = commodityID;
 		this.num = num;
+		this.state = state;
 	}
 	
 	public InventoryBillVO(ArrayList<GiftCommodityItemVO> commodities, String remark) {
