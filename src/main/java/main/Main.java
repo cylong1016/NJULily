@@ -20,7 +20,9 @@ public class Main {
 		
 		
 		//UI test
-	
+//		Frame_Salesman fs = new Frame_Salesman();
+//		fs.setVisible(true);
+		
 		Frame_Inventory fi = new Frame_Inventory();
 		fi.setVisible(true);
 		

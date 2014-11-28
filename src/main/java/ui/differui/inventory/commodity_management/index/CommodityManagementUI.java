@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 
+import ui.commonui.exitfunction.ExitFunctionFrame;
 import ui.commonui.myui.MyComboBox;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyPanel;
@@ -17,6 +18,7 @@ import ui.commonui.myui.MyTree;
 import ui.differui.inventory.commodity_management.addgood.CommodityAddingUI;
 import ui.differui.inventory.commodity_management.addsort.SortAddingUI;
 import ui.differui.inventory.commodity_management.detailgood.CommodityDetailUI;
+import ui.differui.inventory.commodity_management.detailsort.SortDetailUI;
 
 public class CommodityManagementUI extends MyPanel implements ActionListener{
 	
@@ -141,6 +143,20 @@ public class CommodityManagementUI extends MyPanel implements ActionListener{
 		if(events.getSource() == button_cam){
 			CommodityDetailUI cdu = new CommodityDetailUI();
 			cdu.setVisible(true);
+		}
+		
+		if(events.getSource() == button_cam2){
+			SortDetailUI sdu = new SortDetailUI();
+			sdu.setVisible(true);
+		}
+		
+		if(events.getSource() == button_return){
+			ExitFunctionFrame efp = new ExitFunctionFrame("CommodityManagementUI");
+			efp.setVisible(true);
+		}
+		
+		if(events.getSource() == button_close){
+			this.setVisible(false);
 		}
 	}
 }
