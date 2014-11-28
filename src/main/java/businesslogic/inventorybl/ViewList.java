@@ -1,5 +1,7 @@
 package businesslogic.inventorybl;
 
+import java.util.ArrayList;
+
 /**
  * 库存查看
  * 设定一个时间段，查看此时间段内的
@@ -10,7 +12,20 @@ package businesslogic.inventorybl;
  */
 public class ViewList {
 	
-	public ViewList(String beginDate, String endDate) {
-		
+	private String beginDate;
+	
+	private String endDate;
+	
+	private ArrayList<ViewListItem> items;
+	
+	public ViewList() {
 	}
+	
+	public ViewList(String beginDate, String endDate) {
+		this.beginDate = beginDate;
+		this.endDate = endDate;
+		items = new ArrayList<ViewListItem>();
+	}
+	
+	
 }

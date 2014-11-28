@@ -7,6 +7,7 @@ import org.junit.runner.notification.Failure;
 
 import businesslogic.approvalbl.WaitApproval;
 import businesslogic.clientbl.Client;
+import businesslogic.inventorybl.info.SaleInfo;
 import po.SalesPO;
 import vo.SalesVO;
 import message.ResultMessage;
@@ -20,7 +21,7 @@ import dataservice.SaleDataService;
  * @author Zing
  * @version Nov 15, 201410:07:38 AM
  */
-public class Sale extends WaitApproval{
+public class Sale extends WaitApproval implements SaleInfo{
 	
 	private SaleList saleList;
 	
@@ -48,10 +49,6 @@ public class Sale extends WaitApproval{
 	
 	/**
 	 * 添加商品
-	 * @param ID
-	 * @param num
-	 * @param price
-	 * @param remark
 	 */
 	public void addCommodities(String ID, int num, double price, String remark) {
 		SaleListItem item = new SaleListItem(ID, num, price, remark);
@@ -60,9 +57,6 @@ public class Sale extends WaitApproval{
 
 	/**
 	 * 得到折让后的价格
-	 * @param beforePrice
-	 * @param allowance
-	 * @param voucher
 	 * @return
 	 */
 	public double getAfterPrice(double beforePrice, double allowance, double voucher) {
@@ -83,13 +77,6 @@ public class Sale extends WaitApproval{
 
 	/**
 	 * 建立销售单
-	 * @param client
-	 * @param salesman
-	 * @param user
-	 * @param storage
-	 * @param allowance
-	 * @param voucher
-	 * @param remark
 	 * @return
 	 */
 	public SalesPO add(String clientID,  Storage storage, double allowance, double voucher, String remark, BillType type) {
@@ -138,6 +125,16 @@ public class Sale extends WaitApproval{
 		}
 		// TODO 保存在本地
 		return ResultMessage.SUCCESS;
+	}
+
+	public ArrayList<Double> getMoney(String begin, String end) {
+		// TODO 需要根据日期查询ID的方法，返回我一个arrylistID。或者我自己查，那就提供一个返回所有PO的方法
+		SaleDataService saleData = getSaleData();
+		return null;
+	}
+
+	public ArrayList<Integer> getNumber(String begin, String end) {
+		return null;
 	}
 
 }

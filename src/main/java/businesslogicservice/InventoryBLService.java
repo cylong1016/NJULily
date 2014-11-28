@@ -22,12 +22,12 @@ public interface InventoryBLService {
 	 */
 	public ResultMessage viewInventory (String beginDate, String endDate);
 	
-//	/**
-//	 * 显示截至盘点时间的库存快照
-//	 * @return
-//	 */
-//	public ResultMessage checkRecord();
-//	
+	/**
+	 * 显示截至盘点时间的库存快照
+	 * @return
+	 */
+	public ResultMessage checkRecord();
+	
 //	/**
 //	 * TODO 是直接添加商品的VO还是添加字符串之类的？
 //	 * 添加商品到商品赠送单中

@@ -16,7 +16,7 @@ import dataservice.DataFactoryService;
  * @author Zing
  * @version 2014年11月9日下午2:53:19
  */
-public class Commodity implements CommodityInfo, businesslogic.purchasebl.CommodityInfo{
+public class Commodity implements CommodityInfo, businesslogic.purchasebl.CommodityInfo, businesslogic.inventorybl.info.CommodityInfo{
 	
 	private CommodityDataService commodityData;
 	
@@ -77,6 +77,12 @@ public class Commodity implements CommodityInfo, businesslogic.purchasebl.Commod
 	public String getName(String ID) {
 		po = commodityData.find(ID, FindTypeCommo.ID).get(0);
 		return po.getName();
+	}
+
+	public ArrayList<String> getAllID() {
+		// TODO 给我一个提供所有商品ID的方法
+		commodityData.getAllID();
+		return null;
 	}
 
 

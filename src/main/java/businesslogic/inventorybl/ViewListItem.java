@@ -1,11 +1,19 @@
 package businesslogic.inventorybl;
 
-import java.util.ArrayList;
-
 public class ViewListItem {
 	
-	ArrayList<String> saleID;
+	private double saleMoney;
 	
-	ArrayList<String> purID;
+	private double purMoney;
+	
+	private int saleNumber;
+	
+	private int purNumber;
+	
+	public ViewListItem() {
+	}
+
+
+	
 
 }

@@ -11,6 +11,11 @@ public class InventoryController implements InventoryBLService{
 		inventory = new Inventory();
 	}
 	public ResultMessage viewInventory(String beginDate, String endDate) {
+		inventory.viewInventory(beginDate, endDate);
+		return null;
+	}
+	public ResultMessage checkRecord() {
+		inventory.checkRecord();
 		return null;
 	}
 
