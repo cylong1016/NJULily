@@ -93,5 +93,10 @@ public class Commodity implements CommodityInfo, businesslogic.purchasebl.Commod
 		return po.getPurPrice();
 	}
 
+	public double getPurPrice(String ID) {
+		po = commodityData.find(ID);
+		return po.getPurPrice();
+	}
+
 
 }

@@ -15,29 +15,28 @@ public class InventoryBillPO extends PersistentObject {
 	/** 单据ID */
 	private static String id;
 	/** 商品集合（赠送单） */
-	private ArrayList<CommodityPO> commodities;
-	/** 客户 */
-	private String clientID;
+	private ArrayList<GiftCommodityItemPO> commodities;
 	/** 商品（报损、报溢、报警） */
 	private String commodityID;
 	/** 报损、报溢数量 */
 	private int num;
-	/** 赠送商品的数量 */
-	private int giftNum;
+	/** 备注*/
+	private String remark;
 	/** 单子类型，报损／报溢／报警 */
 	private BillType billType;
 
-	public InventoryBillPO(BillType billType, ArrayList<CommodityPO> commodities, int num) {
+	public InventoryBillPO(BillType billType, ArrayList<GiftCommodityItemPO> commodities, int num, String remark) {
 		super(id);
 		this.billType = billType;
+		this.commodities = commodities;
 		this.num = num;
+		this.remark = remark;
 	}
 
-	public InventoryBillPO(ArrayList<CommodityPO> commodities, int giftNum, String clientID) {
+	public InventoryBillPO(ArrayList<GiftCommodityItemPO> commodities, String remark) {
 		super(id);
 		this.commodities = commodities;
-		this.giftNum = giftNum;
-		this.clientID = clientID;
+		this.remark = remark;
 	}
 
 	public static long getSerialversionuid() {
@@ -48,14 +47,6 @@ public class InventoryBillPO extends PersistentObject {
 		return id;
 	}
 
-	public ArrayList<CommodityPO> getCommodities() {
-		return commodities;
-	}
-
-	public String getClientID() {
-		return clientID;
-	}
-
 	public String getCommodityID() {
 		return commodityID;
 	}
@@ -63,13 +54,16 @@ public class InventoryBillPO extends PersistentObject {
 	public int getNum() {
 		return num;
 	}
-
-	public int getGiftNum() {
-		return giftNum;
-	}
-
+	
 	public BillType getBillType() {
 		return billType;
 	}
 
+	public String getRemark() {
+		return remark;
+	}
+
+	public ArrayList<GiftCommodityItemPO> getCommodities() {
+		return commodities;
+	}
 }

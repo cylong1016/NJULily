@@ -13,5 +13,7 @@ public interface CommodityInfo {
 	public int getNumber(String ID);
 	
 	public double getAvePrice(String ID);
+	
+	public double getPurPrice(String ID);
 
 }

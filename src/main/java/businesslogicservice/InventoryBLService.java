@@ -1,7 +1,6 @@
 package businesslogicservice;
 
-import java.util.ArrayList;
-
+import vo.InventoryBillVO;
 import vo.InventoryCheckVO;
 import message.ResultMessage;
 
@@ -29,22 +28,25 @@ public interface InventoryBLService {
 	 * 显示截至盘点时间的库存快照
 	 * @return
 	 */
-	public ArrayList<InventoryCheckVO> checkRecord();
+	public InventoryCheckVO checkRecord();
 	
-//	/**
-//	 * TODO 是直接添加商品的VO还是添加字符串之类的？
-//	 * 添加商品到商品赠送单中
-//	 * @param commodity
-//	 * @return
-//	 */
-//	public ResultMessage addCommodity(String ID, int number);
-//	
-//	/**
-//	 * 生成相应的库存赠送单
-//	 * @param commodities
-//	 * @return
-//	 */
-//	public ResultMessage giftRecord();
+	/**
+	 * TODO 是直接添加商品的VO还是添加字符串之类的？
+	 * 添加商品到商品赠送单中
+	 * @param commodity
+	 * @return
+	 */
+	public void addCommodity(String ID, int number);
+	
+	/**
+	 * 生成相应的库存赠送单
+	 * @param commodities
+	 * @return
+	 */
+	public void buildGift();
+	
+	public InventoryBillVO submit(String remark);
+	
 //	
 //	/**
 //	 * 生成相应的库存报溢单

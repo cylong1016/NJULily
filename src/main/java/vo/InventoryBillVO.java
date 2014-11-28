@@ -17,28 +17,27 @@ import dataenum.BillType;
  */
 public class InventoryBillVO {
 	/** 商品集合（赠送单） */
-	public ArrayList<CommodityVO> commodities;
-	/** 客户 */
-	public String clientID;
+	public ArrayList<GiftCommodityItemVO> commodities;
 	/** 商品（报损、报溢、报警） */
 	public String commodityID;
 	/** 报损、报溢数量*/
 	public int num;
 	/** 赠送商品的数量*/
 	public int giftNum;
+	/** 添加备注 */
+	public String remark;
 	/** 单子类型，报损／报溢／报警*/
 	public BillType billType;
 	
-	public InventoryBillVO(BillType billType, String commodityID, int num) {
+	public InventoryBillVO(BillType billType, String commodityID, int num, String remark) {
 		this.billType = billType;
 		this.commodityID = commodityID;
 		this.num = num;
 	}
 	
-	public InventoryBillVO(ArrayList<CommodityVO> commodities, int giftNum, String clientID) {
+	public InventoryBillVO(ArrayList<GiftCommodityItemVO> commodities, String remark) {
 		this.commodities = commodities;
-		this.giftNum = giftNum;
-		this.clientID = clientID;
+		this.remark = remark;
 	}
 
 }
