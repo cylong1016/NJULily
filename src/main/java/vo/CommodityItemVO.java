@@ -1,7 +1,7 @@
 package vo;
 
 /**
- * 商品条目
+ * 商品条目值对象
  * @author cylong
  * @version Oct 31, 2014 3:41:16 PM
  */

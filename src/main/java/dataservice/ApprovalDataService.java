@@ -6,7 +6,6 @@ import message.ResultMessage;
 import po.AccountBillPO;
 import po.CashBillPO;
 import po.InventoryBillPO;
-import po.PersistentObject;
 import po.PurchasePO;
 import po.SalesPO;
 
@@ -18,56 +17,49 @@ import po.SalesPO;
 public interface ApprovalDataService extends DataService {
 
 	/**
-	 * 更新账单的状态
-	 * @param po
-	 * @return 处理结果
-	 */
-	public ResultMessage update(SalesPO po);
-
-	/**
-	 * 添加一个需要审批的销售（销售退货）单
+	 * 更新一个需要审批的销售（销售退货）单
 	 * @param po 需要审批的销售（销售退货）单
 	 * @return 处理信息
 	 * @author cylong
 	 * @version Nov 15, 2014 2:54:57 PM
 	 */
-	public ResultMessage insert(SalesPO po);
+	public ResultMessage update(SalesPO po);
 
 	/**
-	 * 添加一个需要审批的进货（进货退货）单
+	 * 更新一个需要审批的进货（进货退货）单
 	 * @param po 需要审批的进货（进货退货）单
 	 * @return 处理信息
 	 * @author cylong
 	 * @version 2014年11月28日 上午11:51:40
 	 */
-	public ResultMessage insert(PurchasePO po);
+	public ResultMessage update(PurchasePO po);
 
 	/**
-	 * 添加一个需要审批的收款（付款）单
+	 * 更新一个需要审批的收款（付款）单
 	 * @param po 需要审批的收款（付款）单
 	 * @return 处理信息
 	 * @author cylong
 	 * @version 2014年11月28日 上午11:52:09
 	 */
-	public ResultMessage insert(AccountBillPO po);
+	public ResultMessage update(AccountBillPO po);
 
 	/**
-	 * 添加一个需要审批的赠送单、报溢单、报损单、报警单
+	 * 更新一个需要审批的赠送单、报溢单、报损单、报警单
 	 * @param po 需要审批的赠送单、报溢单、报损单、报警单
 	 * @return 处理信息
 	 * @author cylong
 	 * @version 2014年11月28日 上午11:52:09
 	 */
-	public ResultMessage insert(InventoryBillPO po);
+	public ResultMessage update(InventoryBillPO po);
 
 	/**
-	 * 添加一个需要审批的现金费用单
+	 * 更新一个需要审批的现金费用单
 	 * @param po 需要审批的现金费用单
 	 * @return 处理信息
 	 * @author cylong
 	 * @version 2014年11月28日 下午12:25:38
 	 */
-	public ResultMessage insert(CashBillPO po);
+	public ResultMessage update(CashBillPO po);
 
 	/**
 	 * 审批过后删除销售（销售退货）单

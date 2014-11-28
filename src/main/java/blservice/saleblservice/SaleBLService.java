@@ -6,7 +6,6 @@ import message.ResultMessage;
 import vo.CommodityItemVO;
 import vo.SalesVO;
 import dataenum.BillType;
-import dataenum.Storage;
 
 /**
  * 负责实现销售界面所需要的服务
@@ -50,8 +49,8 @@ public interface SaleBLService {
 
 	/**
 	 * 创建销售（销售退货）单时需要的除商品以外的数据（变成审批状态）
-	 * @see blservice.saleblservice.SaleInputInfo
 	 * @param inputInfo
+	 * @see blservice.saleblservice.SaleInputInfo
 	 * @return 处理结果
 	 * @author cylong
 	 * @version 2014年11月28日 下午7:40:43
@@ -60,8 +59,8 @@ public interface SaleBLService {
 
 	/**
 	 * 创建销售（销售退货）单时需要的除商品以外的数据（变成草稿状态）
-	 * @see blservice.saleblservice.SaleInputInfo
 	 * @param inputInfo
+	 * @see blservice.saleblservice.SaleInputInfo
 	 * @return 处理结果
 	 * @author cylong
 	 * @version 2014年11月28日 下午7:40:24

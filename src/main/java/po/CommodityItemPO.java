@@ -1,7 +1,7 @@
 package po;
 
 /**
- * 商品条目
+ * 一条商品记录
  * @author cylong
  * @version Oct 31, 2014 3:26:07 PM
  */
