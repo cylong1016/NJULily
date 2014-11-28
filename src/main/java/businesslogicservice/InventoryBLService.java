@@ -1,5 +1,8 @@
 package businesslogicservice;
 
+import java.util.ArrayList;
+
+import vo.InventoryCheckVO;
 import message.ResultMessage;
 
 /**
@@ -26,7 +29,7 @@ public interface InventoryBLService {
 	 * 显示截至盘点时间的库存快照
 	 * @return
 	 */
-	public ResultMessage checkRecord();
+	public ArrayList<InventoryCheckVO> checkRecord();
 	
 //	/**
 //	 * TODO 是直接添加商品的VO还是添加字符串之类的？

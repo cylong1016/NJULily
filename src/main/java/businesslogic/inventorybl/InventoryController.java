@@ -1,5 +1,8 @@
 package businesslogic.inventorybl;
 
+import java.util.ArrayList;
+
+import vo.InventoryCheckVO;
 import message.ResultMessage;
 import businesslogicservice.InventoryBLService;
 
@@ -14,7 +17,7 @@ public class InventoryController implements InventoryBLService{
 		inventory.viewInventory(beginDate, endDate);
 		return null;
 	}
-	public ResultMessage checkRecord() {
+	public ArrayList<InventoryCheckVO> checkRecord() {
 		inventory.checkRecord();
 		return null;
 	}

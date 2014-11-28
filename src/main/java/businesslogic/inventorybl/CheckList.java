@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import po.CheckCommodityItemPO;
 import businesslogic.commoditybl.Commodity;
 import businesslogic.inventorybl.info.CommodityInfo;
 
@@ -55,8 +56,14 @@ public class CheckList {
 		return lot;
 	}
 
-	public ArrayList<CheckListItem> getItems() {
-		return items;
+	public ArrayList<CheckCommodityItemPO> getItems() {
+		ArrayList<CheckCommodityItemPO> pos = new ArrayList<CheckCommodityItemPO>(); 
+		for (int i = 0; i < items.size(); i++) {
+			CheckListItem item = items.get(i);
+			CheckCommodityItemPO po = new CheckCommodityItemPO(item.getName(), item.getType(), item.getNumber(), item.getAvePrice());
+			pos.add(po);
+		}	
+		return pos;
 	}
 
 	

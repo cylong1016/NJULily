@@ -1,4 +1,4 @@
-package vo;
+package po;
 
 /**
  * 库存盘点的商品条目
@@ -7,23 +7,37 @@ package vo;
  * 盘点时，系统自动根据当前盘点时间生成一个截止点，这个点就是批次（日期）批号（序号），在这个截点之后做的交易是不计入盘点的。
  * 行号就是所有商品展示时的行号。
  * @author Zing
- * @version 2014年11月8日下午7:58:01
+ * @version Nov 28, 20141:33:37 PM
  */
-public class CheckCommodityItemVO {
+public class CheckCommodityItemPO {
 	/** 商品名 */
-	public String name;
+	private String name;
 	/** 类型 */
-	public String type;
+	private String type;
 	/** 库存数量 */
-	public int number;
+	private int number;
 	/** 库存均价 */
-	public double avePrice;
+	private double avePrice;
 	
-	public CheckCommodityItemVO(String name, String type, int number, double avePrice) {
+	public CheckCommodityItemPO(String name, String type, int number, double avePrice) {
 		this.name = name;
 		this.type = type;
 		this.number = number;
-		this.avePrice = avePrice;
 	}
-		
+
+	public String getName() {
+		return name;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public int getNumber() {
+		return number;
+	}
+
+	public double getAvePrice() {
+		return avePrice;
+	}
 }
