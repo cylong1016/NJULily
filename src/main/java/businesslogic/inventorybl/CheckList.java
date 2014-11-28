@@ -41,7 +41,7 @@ public class CheckList {
 		CommodityInfo info = new Commodity();
 		ArrayList<String> IDs = info.getAllID();
 		for (int i = 0; i < IDs.size(); i++) {
-			
+			CheckListItem item = new CheckListItem(IDs.get(i));
 		}
 		return null;
 	}

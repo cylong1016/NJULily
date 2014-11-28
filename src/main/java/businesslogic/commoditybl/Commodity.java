@@ -70,12 +70,12 @@ public class Commodity implements CommodityInfo, businesslogic.purchasebl.Commod
 	}
 
 	public String getType(String ID) {
-		po = commodityData.find(ID, FindTypeCommo.ID).get(0);
+		po = commodityData.find(ID);
 		return 	po.getType();
 	}
 
 	public String getName(String ID) {
-		po = commodityData.find(ID, FindTypeCommo.ID).get(0);
+		po = commodityData.find(ID);
 		return po.getName();
 	}
 
@@ -83,6 +83,15 @@ public class Commodity implements CommodityInfo, businesslogic.purchasebl.Commod
 		// TODO 给我一个提供所有商品ID的方法
 		commodityData.getAllID();
 		return null;
+	}
+
+	public int getNumber(String ID) {
+		po = commodityData.find(ID);
+		return 0;
+	}
+
+	public double getAvePrice(String ID) {
+		return 0;
 	}
 
 

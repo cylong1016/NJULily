@@ -1,5 +1,8 @@
 package businesslogic.inventorybl;
 
+import businesslogic.commoditybl.Commodity;
+import businesslogic.inventorybl.info.CommodityInfo;
+
 /**
  * 包括之前所有的各种商品的名称，型号，库存数量，库存均价，批次，批号
  * 盘点时，系统自动根据当前盘点时间生成一个截止点，这个点就是批次（日期）批号（序号）
@@ -16,7 +19,13 @@ public class CheckListItem {
 	/** 库存均价 */
 	private double avePrice;
 	
-	public CheckListItem() {
+	private String commodityID;
+	
+	public CheckListItem(String commodityID) {
+		this.commodityID = commodityID;
+		CommodityInfo info = new Commodity();
+		this.name = info.getName(ID);
+		this.type = info.getType(ID);
 	}
 
 }
