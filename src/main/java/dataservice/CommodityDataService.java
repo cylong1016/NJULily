@@ -28,13 +28,22 @@ public interface CommodityDataService extends DataService {
 	public ArrayList<CommodityPO> find(String keywords, FindTypeCommo type);
 	
 	/**
+	 * 以商品ID精确查找一件商品
+	 * @param ID
+	 * @return CommodityPO
+	 * @author cylong
+	 * @version 2014年11月28日  上午11:42:32
+	 */
+	public CommodityPO find(String ID);
+	
+	/**
 	 * 已商品的名字查找其所有的型号
 	 * @param name
 	 * @return 商品型号的ArrayList
 	 * @author cylong
 	 * @version Nov 15, 2014  11:10:25 AM
 	 */
-	public ArrayList<String> find(String name);
+	public ArrayList<String> findType(String name);
 
 	/**
 	 * 以ID删除商品数据
