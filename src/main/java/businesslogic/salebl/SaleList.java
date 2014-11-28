@@ -1,7 +1,7 @@
 package businesslogic.salebl;
 
 import java.util.ArrayList;
-
+import dataenum.Storage;
 import po.CommodityItemPO;
 /**
  * 销售列表的一些处理
@@ -10,9 +10,23 @@ import po.CommodityItemPO;
  * @version Nov 27, 201410:59:45 AM
  */
 public class SaleList {
+	/** 客户 */
+	private String clientID;
+	/** 仓库 */
+	private Storage storage;
+	/** 商品列表清单 */
 	private ArrayList<SaleListItem> commodities;
-	
+	/** 折让前总额*/
 	private double beforePrice;
+	/** 折让金额*/
+	private double allowance;
+	/** 代金券总额*/
+	private double voucher;
+	/** 折让后总额*/
+	private double afterPrice;
+	/** 备注 */
+	private String remark;
+
 	
 	public SaleList() {
 		commodities = new ArrayList<SaleListItem>();
@@ -33,7 +47,16 @@ public class SaleList {
 		}
 		return beforePrice;
 	}
-	
+
+	/**
+	 * 得到折让后的价格
+	 * @return
+	 */
+	public double getAfterPrice() {
+		this.afterPrice = beforePrice - allowance - voucher;
+		return afterPrice;
+	}
+
 	/**
 	 * 进行po的转换
 	 * @return
@@ -48,4 +71,46 @@ public class SaleList {
 		}
 		return commoditiesPO;
 	}
+
+	public String getClientID() {
+		return clientID;
+	}
+
+	public void setClientID(String clientID) {
+		this.clientID = clientID;
+	}
+
+	public Storage getStorage() {
+		return storage;
+	}
+
+	public void setStorage(Storage storage) {
+		this.storage = storage;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public double getAllowance() {
+		return allowance;
+	}
+
+	public void setAllowance(double allowance) {
+		this.allowance = allowance;
+	}
+
+	public double getVoucher() {
+		return voucher;
+	}
+
+	public void setVoucher(double voucher) {
+		this.voucher = voucher;
+	}
+	
+	
 }

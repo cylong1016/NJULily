@@ -1,7 +1,6 @@
 package businesslogic.clientbl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import businesslogic.salebl.ClientInfo;
 import message.ResultMessage;
@@ -88,12 +87,12 @@ public class Client implements businesslogic.accountbillbl.ClientInfo, ClientInf
 	 * @see bussinesslogic.salebl.ClientInfo#getClients
 	 */
 	public String getSalesman(String ID) {
-		po = clientData.find(ID, FindTypeClient.ID).get(0);
+		po = clientData.find(ID);
 		return po.getSalesman();
 	}
 
-	public String getNamee(String ID) {
-		po = clientData.find(ID, FindTypeClient.ID).get(0);
+	public String getName(String ID) {
+		po = clientData.find(ID);
 		return po.getName();
 	}
 

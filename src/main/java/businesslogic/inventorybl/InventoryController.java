@@ -29,7 +29,7 @@ public class InventoryController implements InventoryBLService{
 	}
 	
 	public InventoryBillVO submit(String remark) {
-		return inventory.giftRecord(remark);
+		return inventory.submit(remark);
 	}
 
 	//public void submit(BillType type, )

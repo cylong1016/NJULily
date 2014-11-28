@@ -3,6 +3,8 @@ package businesslogic.inventorybl;
 import java.rmi.Naming;
 import java.util.ArrayList;
 
+import config.RMI;
+import businesslogic.approvalbl.WaitApproval;
 import po.InventoryBillPO;
 import po.InventoryCheckPO;
 import po.InventoryViewPO;
@@ -12,7 +14,7 @@ import dataservice.DataFactoryService;
 import dataservice.InventoryDataService;
 import message.ResultMessage;
 
-public class Inventory {
+public class Inventory extends WaitApproval{
 	
 	private GiftList list;
 	
@@ -22,7 +24,7 @@ public class Inventory {
 	
 	public InventoryDataService getInventoryData(){
 		try {
-			DataFactoryService factory = (DataFactoryService)Naming.lookup("rmi://127.0.0.1:8888/factory");
+			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
 			InventoryDataService inventoryData = (InventoryDataService)factory.getInventoryData();
 			return inventoryData;		
 		} catch (Exception e) {
@@ -56,7 +58,6 @@ public class Inventory {
 	}
 	
 	public InventoryBillPO getGiftRecord(){
-		
 		InventoryBillPO po = new InventoryBillPO(list.getCommodityPOs(), list.getRemark());
 		return po;
 	}
@@ -64,7 +65,7 @@ public class Inventory {
 	public InventoryBillVO submit(String remark){
 		list.setRemark(remark);
 		InventoryDataService inventoryData = getInventoryData();
-		
+		getApprovalData().insert(getGiftRecord());
 		return null;
 	}
 }
