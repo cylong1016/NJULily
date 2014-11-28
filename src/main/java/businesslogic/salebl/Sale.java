@@ -3,38 +3,37 @@ package businesslogic.salebl;
 import java.rmi.Naming;
 import java.util.ArrayList;
 
-import org.junit.runner.notification.Failure;
-
+import message.ResultMessage;
+import po.SalesPO;
+import vo.SalesVO;
 import businesslogic.approvalbl.WaitApproval;
 import businesslogic.clientbl.Client;
 import businesslogic.inventorybl.info.SaleInfo;
-import po.SalesPO;
-import vo.SalesVO;
-import message.ResultMessage;
+import config.RMI;
 import dataenum.BillType;
 import dataenum.Storage;
-import dataservice.ApprovalDataService;
 import dataservice.DataFactoryService;
 import dataservice.SaleDataService;
+
 /**
  * Sale和SaleDataService是依赖关系
  * @author Zing
  * @version Nov 15, 201410:07:38 AM
  */
-public class Sale extends WaitApproval implements SaleInfo{
-	
+public class Sale extends WaitApproval implements SaleInfo {
+
 	private SaleList saleList;
-	
+
 	private SalesPO po;
-	
+
 	private BillType type;
-	
+
 	private String ID;
-		
+
 	public Sale() {
 		this.saleList = new SaleList();
 	}
-	
+
 	/**
 	 * 每次要创建单据前，都要根据单据的类型得到ID
 	 * @param type
@@ -46,7 +45,7 @@ public class Sale extends WaitApproval implements SaleInfo{
 		this.ID = saleData.getID(type);
 		return ID;
 	}
-	
+
 	/**
 	 * 添加商品
 	 */
@@ -62,34 +61,33 @@ public class Sale extends WaitApproval implements SaleInfo{
 	public double getAfterPrice(double beforePrice, double allowance, double voucher) {
 		return beforePrice - allowance - voucher;
 	}
-	
-	public SaleDataService getSaleData(){
+
+	public SaleDataService getSaleData() {
 		try {
-			DataFactoryService factory = (DataFactoryService)Naming.lookup("rmi://127.0.0.1:8888/factory");
+			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
 			SaleDataService saleData = (SaleDataService)factory.getSaleData();
-			return saleData;		
+			return saleData;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
-		} 
+		}
 	}
-	
 
 	/**
 	 * 建立销售单
 	 * @return
 	 */
-	public SalesPO add(String clientID,  Storage storage, double allowance, double voucher, String remark, BillType type) {
+	public SalesPO add(String clientID, Storage storage, double allowance, double voucher, String remark, BillType type) {
 		double beforePrice = saleList.getBeforePrice();
 		double afterPrice = getAfterPrice(beforePrice, allowance, voucher);
-		ClientInfo info = new Client();		
-		po = new SalesPO(ID, info.getNamee(clientID), info.getSalesman(clientID), user, storage, saleList.getCommodities(), beforePrice, allowance, voucher, remark, afterPrice, type);
-		
+		ClientInfo info = new Client();
+		// TODO user从文件中读取当前登陆的用户
+		po = new SalesPO(ID, info.getNamee(clientID), info.getSalesman(clientID), 
+				"user", storage, saleList.getCommodities(), beforePrice, allowance, voucher, remark, afterPrice, type);
 		return po;
 	}
 
-
-	public ArrayList<SalesVO> show(){
+	public ArrayList<SalesVO> show() {
 		SaleDataService saleData = getSaleData();
 		// TODO
 		return null;
@@ -97,7 +95,7 @@ public class Sale extends WaitApproval implements SaleInfo{
 
 	public ResultMessage submit(String clientID, Storage storage, double allowance, double voucher, String remark) {
 		SalesPO po = null;
-		switch (type) {
+		switch(type) {
 		case SALE:
 			po = add(clientID, storage, allowance, voucher, remark, BillType.SALE);
 			break;
@@ -107,13 +105,13 @@ public class Sale extends WaitApproval implements SaleInfo{
 		default:
 			break;
 		}
-		getApprovalData().insert(po);		
+		getApprovalData().insert(po);
 		return ResultMessage.SUCCESS;
 	}
 
 	public ResultMessage save(String clientID, Storage storage, double allowance, double voucher, String remark) {
 		SalesPO po = null;
-		switch (type) {
+		switch(type) {
 		case SALE:
 			po = add(clientID, storage, allowance, voucher, remark, BillType.SALE);
 			break;
