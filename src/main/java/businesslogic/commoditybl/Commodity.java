@@ -80,17 +80,17 @@ public class Commodity implements CommodityInfo, businesslogic.purchasebl.Commod
 	}
 
 	public ArrayList<String> getAllID() {
-		commodityData.getAllID();
-		return null;
+		return 	commodityData.getAllID();
 	}
 
 	public int getNumber(String ID) {
 		po = commodityData.find(ID);
-		return 0;
+		return po.getInventoryNum();
 	}
 
 	public double getAvePrice(String ID) {
-		return 0;
+		po = commodityData.find(ID);
+		return po.getPurPrice();
 	}
 
 

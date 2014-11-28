@@ -44,69 +44,41 @@ public class CommodityPO extends PersistentObject {
 		this.salePrice = salePrice;
 	}
 
-	public String getName() {
-		return this.name;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public String getName() {
+		return name;
 	}
 
 	public String getType() {
-		return this.type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public int getInventoryNum() {
-		return this.inventoryNum;
-	}
-
-	public void setInventoryNum(int inventoryNum) {
-		this.inventoryNum = inventoryNum;
-	}
-
-	public double getPurPrice() {
-		return this.purPrice;
-	}
-
-	public void setPurPrice(double purPrice) {
-		this.purPrice = purPrice;
-	}
-
-	public double getSalePrice() {
-		return this.salePrice;
-	}
-
-	public void setSalePrice(double salePrice) {
-		this.salePrice = salePrice;
-	}
-
-	public double getRecentPurPrice() {
-		return this.recentPurPrice;
-	}
-
-	public void setRecentPurPrice(double recentPurPrice) {
-		this.recentPurPrice = recentPurPrice;
-	}
-
-	public double getRecentSalePrice() {
-		return this.recentSalePrice;
-	}
-
-	public void setRecentSalePrice(double recentSalePrice) {
-		this.recentSalePrice = recentSalePrice;
+		return type;
 	}
 
 	public CommoditySortPO getSort() {
 		return sort;
 	}
 
-	public void setSort(CommoditySortPO sort) {
-		this.sort = sort;
+	public int getInventoryNum() {
+		return inventoryNum;
 	}
 
+	public double getPurPrice() {
+		return purPrice;
+	}
+
+	public double getSalePrice() {
+		return salePrice;
+	}
+
+	public double getRecentPurPrice() {
+		return recentPurPrice;
+	}
+
+	public double getRecentSalePrice() {
+		return recentSalePrice;
+	}
+	
 
 }

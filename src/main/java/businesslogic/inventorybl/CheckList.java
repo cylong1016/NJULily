@@ -42,8 +42,9 @@ public class CheckList {
 		ArrayList<String> IDs = info.getAllID();
 		for (int i = 0; i < IDs.size(); i++) {
 			CheckListItem item = new CheckListItem(IDs.get(i));
+			items.add(item);
 		}
-		return null;
+		return items;
 	}
 
 	public String getToday() {

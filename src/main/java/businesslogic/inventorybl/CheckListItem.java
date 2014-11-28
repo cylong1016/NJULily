@@ -21,11 +21,34 @@ public class CheckListItem {
 	
 	private String commodityID;
 	
-	public CheckListItem(String commodityID) {
-		this.commodityID = commodityID;
+	public CheckListItem(String ID) {
+		this.commodityID = ID;
 		CommodityInfo info = new Commodity();
 		this.name = info.getName(ID);
 		this.type = info.getType(ID);
+		this.number = info.getNumber(ID);
+		this.avePrice = info.getAvePrice(ID);
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public int getNumber() {
+		return number;
+	}
+
+	public double getAvePrice() {
+		return avePrice;
+	}
+
+	public String getCommodityID() {
+		return commodityID;
+	}
+
+	
 }
