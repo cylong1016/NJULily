@@ -56,7 +56,7 @@ public class Sale extends WaitApproval implements SaleInfo {
 	}
 
 	/**
-	 * 添加商品
+	 * 添加一条商品信息
 	 */
 	public void addCommodities(String ID, int num, double price, String remark) {
 		SaleListItem item = new SaleListItem(ID, num, price, remark);
@@ -77,8 +77,9 @@ public class Sale extends WaitApproval implements SaleInfo {
 	}
 
 	public ArrayList<SalesVO> show() {
-		//SaleDataService saleData = getSaleData();
-		// TODO
+
+		SaleDataService saleData = getSaleData();
+		// saleData.getAllSaleBills();
 		return null;
 	}
 
