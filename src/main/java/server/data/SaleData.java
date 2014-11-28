@@ -1,5 +1,7 @@
 package server.data;
 
+import java.util.ArrayList;
+
 import message.ResultMessage;
 import po.SalesPO;
 import dataenum.BillType;
@@ -68,10 +70,10 @@ public class SaleData implements SaleDataService {
 	}
 
 	/**
-	 * @see dataservice.SaleDataService#save(po.SalesPO)
+	 * @see dataservice.SaleDataService#getAllSaleBills()
 	 */
 	@Override
-	public ResultMessage save(SalesPO po) {
+	public ArrayList<SalesPO> getAllSaleBills() {
 		return null;
 	}
 
