@@ -24,9 +24,6 @@ public class HistoryInventoryCheckingUI extends MyPanel implements ActionListene
 	
 	public HistoryInventoryCheckingUI(){
 		
-		String no = "ICL0001";
-		String date = "2014/11/28";
-		
 		//the information bar
 		JLabel infoBar = new JLabel("                     历史库存盘点单查看");
 		infoBar.setBounds(0, 0, 1100, 20);

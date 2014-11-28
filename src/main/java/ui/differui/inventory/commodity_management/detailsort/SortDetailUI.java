@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import ui.commonui.myui.MyWindow;
-import ui.differui.inventory.commodity_management.addsort.SortAddingPanel;
 
 public class SortDetailUI extends MyWindow implements ActionListener{
 

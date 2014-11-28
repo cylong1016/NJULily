@@ -13,9 +13,11 @@ import ui.differui.inventory.commodity_management.addsort.SortAddingUI;
 import ui.differui.inventory.commodity_management.detailgood.CommodityDetailUI;
 import ui.differui.inventory.commodity_management.detailsort.SortDetailUI;
 import ui.differui.inventory.commodity_management.index.CommodityManagementUI;
+import ui.differui.inventory.gift.GiftUI;
 import ui.differui.inventory.inventory_checking.HistoryInventoryCheckingUI;
 import ui.differui.inventory.inventory_checking.InventoryCheckingUI;
 import ui.differui.inventory.inventory_checking.PerformInventoryChecking;
+import ui.differui.inventory.inventory_review.InventoryReviewUI;
 import ui.differui.salesman.client_management.adding.ClientAddingUI;
 import ui.differui.salesman.client_management.detail.ClientDetailUI;
 import ui.differui.salesman.client_management.index.ClientManagementUI;
@@ -74,6 +76,8 @@ public class ExitFunctionPanel extends MyPanel implements ActionListener{
 			case "InventoryCheckingUI": InventoryCheckingUI.button_close.doClick();break;
 			case "HistoryInventoryCheckingUI": HistoryInventoryCheckingUI.button_close.doClick();break;
 			case "PerformInventoryChecking": PerformInventoryChecking.button_close.doClick();break;
+			case "GiftUI": GiftUI.button_close.doClick();break;
+			case "InventoryReviewUI": InventoryReviewUI.button_close.doClick();break;
 			}
 			ExitFunctionFrame.button_close.doClick();
 		}

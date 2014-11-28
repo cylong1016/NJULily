@@ -10,7 +10,6 @@ import javax.swing.table.DefaultTableModel;
 
 import ui.commonui.exitfunction.ExitFunctionFrame;
 
-import ui.commonui.myui.MyComboBox;
 import ui.commonui.myui.MyJButton;
 
 import ui.commonui.myui.MyPanel;
