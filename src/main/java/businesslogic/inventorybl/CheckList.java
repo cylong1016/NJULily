@@ -39,6 +39,10 @@ public class CheckList {
 	
 	public ArrayList<CheckListItem> addItems(){
 		CommodityInfo info = new Commodity();
+		ArrayList<String> IDs = info.getAllID();
+		for (int i = 0; i < IDs.size(); i++) {
+			
+		}
 		return null;
 	}
 
