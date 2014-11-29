@@ -23,33 +23,33 @@ import vo.PromotionVO;
 public interface PromotionBLService {
 	
 	/**
-	 * 
-	 * @param type
-	 * @return
+	 * 显示已有的销售策略给ui
+	 * @param type 策略类型
+	 * @return 促销策略Arraylist
 	 * @author Zing
 	 * @version Nov 29, 2014 7:00:30 PM
 	 */
 	public ArrayList<PromotionVO> show(PromotionType type);
 	
 	/**
-	 * 
-	 * @param type
-	 * @return
+	 * 在添加一个销售策略时调用，得到ID
+	 * @param type 销售策略的ID
+	 * @return 策略类型
 	 * @author Zing
 	 * @version Nov 29, 2014 7:00:34 PM
 	 */
 	public String getID(PromotionType type);
 	
 	/**
-	 * 
+	 * 添加商品到特价包
 	 * @param vo
 	 * @author Zing
 	 * @version Nov 29, 2014 7:00:37 PM
 	 */
-	public void addCommodity(CommodityVO vo);
+	public void addBargain(CommodityVO vo);
 		
 	/**
-	 * 
+	 * 添加商品到赠送单中
 	 * @param vo
 	 * @author Zing
 	 * @version Nov 29, 2014 7:00:40 PM
@@ -57,9 +57,9 @@ public interface PromotionBLService {
 	public void addGifts(CommodityVO vo);
 	
 	/**
-	 * 
-	 * @param info
-	 * @return
+	 * 提交策略
+	 * @param info 其他信息
+	 * @return 成功与否
 	 * @author Zing
 	 * @version Nov 29, 2014 7:00:42 PM
 	 */
