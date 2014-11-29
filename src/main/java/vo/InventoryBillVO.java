@@ -18,30 +18,21 @@ import dataenum.BillType;
  */
 public class InventoryBillVO {
 	/** 商品集合（赠送单） */
-	public ArrayList<GiftCommodityItemVO> commodities;
+	public ArrayList<InventoryCommoItemVO> commodities;
 	/** 商品（报损、报溢、报警） */
 	public String commodityID;
-	/** 报损、报溢数量*/
-	public int num;
-	/** 赠送商品的数量*/
-	public int giftNum;
 	/** 添加备注 */
 	public String remark;
-	/** 单子类型，报损／报溢／报警*/
+	/** 单子类型，报损／报溢／报警/赠送*/
 	public BillType billType;
 	/** 单据状态 */
 	public BillState state;
 	
-	public InventoryBillVO(BillType billType, String commodityID, int num, String remark, BillState state) {
+	public InventoryBillVO(BillType billType, ArrayList<InventoryCommoItemVO> commodities, String remark, BillState state) {
 		this.billType = billType;
-		this.commodityID = commodityID;
-		this.num = num;
-		this.state = state;
-	}
-	
-	public InventoryBillVO(ArrayList<GiftCommodityItemVO> commodities, String remark) {
 		this.commodities = commodities;
 		this.remark = remark;
+		this.state = state;
 	}
 
 }

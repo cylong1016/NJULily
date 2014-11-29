@@ -19,7 +19,7 @@ public class PurchasePO extends PersistentObject {
 
 	private static final long serialVersionUID = 1L;
 	/** 单据编号 */
-	private String id;
+	private String ID;
 	/** 客户 */
 	private String client;
 	/** 仓库 */
@@ -39,7 +39,7 @@ public class PurchasePO extends PersistentObject {
 
 	public PurchasePO(String ID, String client, String user, Storage storage, ArrayList<CommodityItemPO> commodities, double sumPrice, BillType type) {
 		super(ID);
-		this.id = ID;
+		this.ID = ID;
 		this.client = client;
 		this.user = user;
 		this.storage = storage;
@@ -57,8 +57,8 @@ public class PurchasePO extends PersistentObject {
 		this.state = state;
 	}
 
-	public String getId() {
-		return id;
+	public String getID() {
+		return ID;
 	}
 
 	public String getClient() {

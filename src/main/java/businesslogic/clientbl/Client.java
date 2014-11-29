@@ -15,7 +15,7 @@ import dataenum.FindTypeClient;
 import dataservice.ClientDataService;
 import dataservice.DataFactoryService;
 
-public class Client implements businesslogic.accountbillbl.ClientInfo, ClientInfo_Sale {
+public class Client implements businesslogic.accountbillbl.ClientInfo, ClientInfo_Sale, businesslogic.purchasebl.ClientInfo {
 
 	private ClientDataService clientData;
 
@@ -123,12 +123,16 @@ public class Client implements businesslogic.accountbillbl.ClientInfo, ClientInf
 	}
 
 	/**
+<<<<<<< HEAD
 	 * 模糊查找客户
 	 * @param keywords 关键字
 	 * @param type 查找类型
 	 * @return 满足条件的客户
 	 * @author cylong
 	 * @version 2014年11月29日 下午4:29:04
+=======
+	 * @see ClientInfo_Sale.salebl.ClientInfo#getClients
+>>>>>>> origin/master
 	 */
 	public ArrayList<ClientVO> findClient(String keywords, FindTypeClient type) {
 		ArrayList<ClientPO> clientsPO = clientData.find(keywords, type);

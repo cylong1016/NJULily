@@ -25,6 +25,8 @@ public class CommodityPO extends PersistentObject {
 	private double recentPurPrice;
 	/** 商品最近售价 */
 	private double recentSalePrice;
+	/** 商品警戒数量 */
+	private int alarmNumber;
 
 	/**
 	 * @param id 商品id
@@ -42,6 +44,7 @@ public class CommodityPO extends PersistentObject {
 		this.sort = sort;
 		this.purPrice = purPrice;
 		this.salePrice = salePrice;
+		this.setAlarmNumber(0);
 	}
 
 	public static long getSerialversionuid() {
@@ -78,6 +81,14 @@ public class CommodityPO extends PersistentObject {
 
 	public double getRecentSalePrice() {
 		return recentSalePrice;
+	}
+
+	public int getAlarmNumber() {
+		return alarmNumber;
+	}
+
+	public void setAlarmNumber(int alarmNumber) {
+		this.alarmNumber = alarmNumber;
 	}
 	
 
