@@ -1,5 +1,8 @@
 package blservice.inventoryblservice;
 
+import java.util.ArrayList;
+
+import dataenum.BillType;
 import vo.InventoryBillVO;
 import vo.InventoryCheckVO;
 import message.ResultMessage;
@@ -30,49 +33,23 @@ public interface InventoryBLService {
 	 */
 	public InventoryCheckVO checkRecord();
 	
+	public ArrayList<InventoryBillVO> show(BillType type);
+	
+	public ArrayList<InventoryBillVO> show();
+	
+	public void buildBill(BillType type);
+	
+	
 	/**
-	 * TODO 是直接添加商品的VO还是添加字符串之类的？
-	 * 添加商品到商品赠送单中
+	 * 添加商品到单中
 	 * @param commodity
 	 * @return
 	 */
 	public void addCommodity(String ID, int number);
 	
-	/**
-	 * 生成相应的库存赠送单
-	 * @param commodities
-	 * @return
-	 */
-	public void buildGift();
 	
-	public InventoryBillVO submit(String remark);
+	public ResultMessage submit(String remark);
 	
-//	
-//	/**
-//	 * 生成相应的库存报溢单
-//	 * @param commodity
-//	 * @param num
-//	 * @return
-//	 */
-//	public ResultMessage overflowRecord(BillType billType, String commodityID, int num, String remark);
-//	
-//	/**
-//	 * 生成相应的库存报损单
-//	 * @param commodity
-//	 * @param num
-//	 * @return
-//	 */
-//	public ResultMessage lossRecord(BillType billType, String commodityID, int num, String remark);
-//	
-//	/**
-//	 * 生成相应的库存报警单
-//	 * @param commodity
-//	 * @param num
-//	 * @return
-//	 */
-//	public ResultMessage alarmRecord(BillType billType, String commodityID, int nowNum, int alarmNum, String remark);
-//
-//
-//
+	public ResultMessage save(String remark);
 
 }

@@ -22,6 +22,8 @@ public class CommodityVO {
 	public double recentPurPrice;
 	/** 商品最近售价 */
 	public double recentSalePrice;
+	/** 商品警戒数量 */
+	public int alarmNumber;
 	
 	public CommodityVO(String name, String type, int inventoryNum, 
 			double purPrice, double salePrice, double recentPurpPrice, double recentSalePrice){

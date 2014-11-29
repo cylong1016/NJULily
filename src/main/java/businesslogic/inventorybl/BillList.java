@@ -1,8 +1,8 @@
 package businesslogic.inventorybl;
 
 import java.util.ArrayList;
-import po.GiftCommodityItemPO;
-import vo.GiftCommodityItemVO;
+import po.InventoryCommoItemPO;
+import vo.InventoryCommoItemVO;
 
 /**
  * 库存赠送单
@@ -11,23 +11,23 @@ import vo.GiftCommodityItemVO;
  * @author Zing
  * @version Nov 28, 20142:49:20 PM
  */
-public class GiftList {
-	private ArrayList<GiftListItem> items;
+public class BillList {
+	private ArrayList<BillListItem> items;
 	private String remark;
 	
-	public GiftList() {
-		items = new ArrayList<GiftListItem>();
+	public BillList() {
+		items = new ArrayList<BillListItem>();
 	}
 	
-	public void addItem(GiftListItem item){
+	public void addItem(BillListItem item){
 		items.add(item);
 	}
 	
-	public ArrayList<GiftCommodityItemVO> getCommodityVOs(){
+	public ArrayList<InventoryCommoItemVO> getCommodityVOs(){
 		return null;
 	}
 	
-	public ArrayList<GiftCommodityItemPO> getCommodityPOs(){
+	public ArrayList<InventoryCommoItemPO> getCommodityPOs(){
 		return null;
 	}
 

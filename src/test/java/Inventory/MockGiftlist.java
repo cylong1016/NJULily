@@ -2,9 +2,9 @@ package Inventory;
 
 import java.util.ArrayList;
 
-import businesslogic.inventorybl.GiftList;
+import businesslogic.inventorybl.BillList;
 
-public class MockGiftlist extends GiftList{
+public class MockGiftlist extends BillList{
 	
 	private ArrayList<MockGiftCommodityItem> giftCommodities;
 	private ArrayList<MockGiftlist> giftList;

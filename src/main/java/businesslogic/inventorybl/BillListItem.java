@@ -3,7 +3,7 @@ package businesslogic.inventorybl;
 import businesslogic.commoditybl.Commodity;
 import businesslogic.inventorybl.info.CommodityInfo;
 
-public class GiftListItem {
+public class BillListItem {
 	private String ID;
 	/** 商品名称 */
 	private String name;
@@ -16,10 +16,10 @@ public class GiftListItem {
 	
 	private CommodityInfo info;
 	
-	public GiftListItem() {
+	public BillListItem() {
 	}
 	
-	public GiftListItem(String ID, int number) {
+	public BillListItem(String ID, int number) {
 		info = new Commodity();
 		this.number = number;
 		this.ID = ID;

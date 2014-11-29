@@ -14,31 +14,19 @@ public class InventoryBillPO extends PersistentObject {
 
 	private static final long serialVersionUID = 1L;
 	/** 单据ID */
-	private static String id;
+	private static String ID;
 	/** 商品集合（赠送单） */
-	private ArrayList<GiftCommodityItemPO> commodities;
-	/** 商品（报损、报溢、报警） */
-	private String commodityID;
-	/** 报损、报溢数量 */
-	private int num;
+	private ArrayList<InventoryCommoItemPO> commodities;
 	/** 备注 */
 	private String remark;
-	/** 单子类型，报损／报溢／报警 */
+	/** 单子类型，报损／报溢／报警/赠送 */
 	private BillType billType;
 	/** 单据状态 */
 	private BillState state;
 
-	public InventoryBillPO(BillType billType, ArrayList<GiftCommodityItemPO> commodities, int num, String remark) {
-		super(id);
+	public InventoryBillPO(BillType billType, ArrayList<InventoryCommoItemPO> commodities, String remark) {
+		super(ID);
 		this.billType = billType;
-		this.commodities = commodities;
-		this.num = num;
-		this.remark = remark;
-		this.state = BillState.APPROVALING;
-	}
-
-	public InventoryBillPO(ArrayList<GiftCommodityItemPO> commodities, String remark) {
-		super(id);
 		this.commodities = commodities;
 		this.remark = remark;
 		this.state = BillState.APPROVALING;
@@ -52,18 +40,9 @@ public class InventoryBillPO extends PersistentObject {
 		this.state = state;
 	}
 
-	public static String getId() {
-		return id;
+	public String getID() {
+		return ID;
 	}
-
-	public String getCommodityID() {
-		return commodityID;
-	}
-
-	public int getNum() {
-		return num;
-	}
-
 	public BillType getBillType() {
 		return billType;
 	}
@@ -72,7 +51,7 @@ public class InventoryBillPO extends PersistentObject {
 		return remark;
 	}
 
-	public ArrayList<GiftCommodityItemPO> getCommodities() {
+	public ArrayList<InventoryCommoItemPO> getCommodities() {
 		return commodities;
 	}
 }

@@ -32,12 +32,12 @@ public class PurchaseListItem {
 	public PurchaseListItem(){
 	}
 	
-	public PurchaseListItem(String name, int number, double price, String remark){
-		this.name = name;
+	public PurchaseListItem(String ID, int number, double price, String remark){
 		this.number = number;
+		this.ID = ID;
 		info = new Commodity();
-		this.type = info.getType(name);
-		this.ID = info.getID(name, type);
+		this.name = info.getName(ID);
+		this.type = info.getType(ID);
 		this.price = price;
 		this.total = number * price;
 		this.remark = remark;

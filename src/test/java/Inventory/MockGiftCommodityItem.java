@@ -1,9 +1,9 @@
 package Inventory;
 
-import businesslogic.inventorybl.GiftListItem;
+import businesslogic.inventorybl.BillListItem;
 
 
-public class MockGiftCommodityItem extends GiftListItem{
+public class MockGiftCommodityItem extends BillListItem{
 	private MockCommodity commodity;
 	private int number;
 	

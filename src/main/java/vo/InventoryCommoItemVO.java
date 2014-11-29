@@ -1,6 +1,7 @@
 package vo;
 
-public class GiftCommodityItemVO {
+public class InventoryCommoItemVO {
+	/** 商品ID */
 	public String ID;
 	/** 商品名称 */
 	public String name;
@@ -11,7 +12,7 @@ public class GiftCommodityItemVO {
 	/** 商品进价 */
 	public double purPrice;
 	
-	public GiftCommodityItemVO(String ID, String name, String type, int number, double purPrice) {
+	public InventoryCommoItemVO(String ID, String name, String type, int number, double purPrice) {
 		this.ID = ID;
 		this.name = name;
 		this.type = type;

@@ -86,11 +86,11 @@ public class Sale implements SaleInfo {
 	private SalesPO buildSales() {
 		double beforePrice = list.getBeforePrice();
 		double afterPrice = list.getAfterPrice();
-		ClientInfo info = new Client();
+		ClientInfo_Sale info = new Client();
 		String clientName = info.getName(list.getClientID());
-		String saleman = info.getSalesman(list.getClientID());
+		String salesman = info.getSalesman(list.getClientID());
 		// TODO user从文件中读取当前登陆的用户
-		po = new SalesPO(ID, clientName, saleman, "user", list.getStorage(), list.getCommodities(), beforePrice, list.getAllowance(), list.getVoucher(), list.getRemark(), afterPrice, type);
+		po = new SalesPO(ID, clientName, salesman, "user", list.getStorage(), list.getCommodities(), beforePrice, list.getAllowance(), list.getVoucher(), list.getRemark(), afterPrice, type);
 		return po;
 	}
 
@@ -152,7 +152,7 @@ public class Sale implements SaleInfo {
 			int number = po.getNumber();
 			double price = po.getPrice();
 			String remark = po.getRemark();
-			CommodityInfo info = new Commodity();
+			CommodityInfo_Sale info = new Commodity();
 			String name = info.getName(ID);
 			String type = info.getType(ID);
 			CommodityItemVO vo = new CommodityItemVO(ID, number, price, remark, name, type);

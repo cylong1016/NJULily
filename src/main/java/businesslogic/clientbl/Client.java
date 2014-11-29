@@ -2,7 +2,7 @@ package businesslogic.clientbl;
 
 import java.util.ArrayList;
 
-import businesslogic.salebl.ClientInfo;
+import businesslogic.salebl.ClientInfo_Sale;
 import message.ResultMessage;
 import po.ClientPO;
 import vo.ClientVO;
@@ -11,7 +11,7 @@ import dataenum.ClientLevel;
 import dataenum.FindTypeClient;
 import dataservice.ClientDataService;
 
-public class Client implements businesslogic.accountbillbl.ClientInfo, ClientInfo{
+public class Client implements businesslogic.accountbillbl.ClientInfo, ClientInfo_Sale, businesslogic.purchasebl.ClientInfo{
 
 	/** 客户类别：进货商、销售商 */
 	public ClientCategory category;
@@ -84,7 +84,7 @@ public class Client implements businesslogic.accountbillbl.ClientInfo, ClientInf
 	}
 
 	/**
-	 * @see bussinesslogic.salebl.ClientInfo#getClients
+	 * @see ClientInfo_Sale.salebl.ClientInfo#getClients
 	 */
 	public String getSalesman(String ID) {
 		po = clientData.find(ID);

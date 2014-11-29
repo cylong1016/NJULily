@@ -21,22 +21,22 @@ public class PurchaseVO {
 	/** 单据编号 */
 	public String id;	
 	/** 客户 */
-	public ClientVO client;
+	public String client;
 	/** 仓库 */
 	public Storage storage;
 	/** 操作员 */
-	public UserVO user;	
+	public String user;	
 	/** 商品列表清单 */
 	public ArrayList<CommodityItemVO> commodities;
 	/** 总额*/
-	public int sumPrice;
+	public double sumPrice;
 	/** 备注 */
 	public String remark;
 	/** 单据状态 */
 	public BillState state;
 	
-	public PurchaseVO(String ID, ClientVO client, UserVO user,  Storage storage, 
-			ArrayList<CommodityItemVO> commodities, int sumPrice, BillState state) {
+	public PurchaseVO(String ID, String client, String user,  Storage storage, 
+			ArrayList<CommodityItemVO> commodities, double sumPrice, BillState state) {
 		
 		this.id = ID;
 		this.client = client;

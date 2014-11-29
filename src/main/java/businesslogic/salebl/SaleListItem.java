@@ -30,7 +30,7 @@ public class SaleListItem {
 	/** 商品备注 */
 	private String remark;
 	
-	CommodityInfo info;
+	CommodityInfo_Sale info;
 	
 	public SaleListItem(){
 		

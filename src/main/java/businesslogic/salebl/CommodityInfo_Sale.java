@@ -4,7 +4,7 @@ package businesslogic.salebl;
  * 由Commodity实现，获得商品的信息
  * @author Zing
  */
-public interface CommodityInfo {
+public interface CommodityInfo_Sale {
 	
 	public String getType(String ID);
 	

@@ -3,8 +3,11 @@ package businesslogic.purchasebl;
 import java.util.ArrayList;
 
 import message.ResultMessage;
+import vo.CommodityItemVO;
 import vo.PurchaseVO;
+import dataenum.BillType;
 import dataenum.Storage;
+import blservice.purchaseblservice.PurInputInfo;
 import blservice.purchaseblservice.PurchaseBLService;
 
 public class PurchaseController implements PurchaseBLService{
@@ -14,31 +17,24 @@ public class PurchaseController implements PurchaseBLService{
 	public PurchaseController(){
 		purchase = new Purchase();
 	}
-
-	public void addCommodities(String name, int num, double price,
-			String remark) {
-		purchase.addCommodities(name, num, price, remark);
-	}
-
-	public ResultMessage addPur(String ID, String client, String user,
-			Storage storage, double sumPrice, String remark) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public ResultMessage addPurBack(String ID, String client, String user,
-			Storage storage, double sumPrice, String remark) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public ResultMessage submit() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	public ArrayList<PurchaseVO> show() {
-		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getID(BillType type) {
+		return null;
+	}
+
+	public void addCommodities(CommodityItemVO item) {
+		
+	}
+
+	public ResultMessage submit(PurInputInfo info) {
+		return null;
+	}
+
+	public ResultMessage save(PurInputInfo info) {
 		return null;
 	}
 
