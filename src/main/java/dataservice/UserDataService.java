@@ -21,7 +21,7 @@ public interface UserDataService extends DataService {
 
 	/**
 	 * 根据用户ID查找用户
-	 * @param username
+	 * @param ID
 	 * @return 用户持久化用户数据，如果返回 null则不存在
 	 */
 	public UserPO find(String ID);
@@ -39,12 +39,12 @@ public interface UserDataService extends DataService {
 	 * @return 处理结果
 	 */
 	public ResultMessage update(UserPO po);
-	
+
 	/**
 	 * 显示全部客户
 	 * @return 返回所有客户的集合
- 	 * @author cylong
-	 * @version Nov 8, 2014  9:35:06 PM
+	 * @author cylong
+	 * @version Nov 8, 2014 9:35:06 PM
 	 */
 	public ArrayList<UserPO> show();
 

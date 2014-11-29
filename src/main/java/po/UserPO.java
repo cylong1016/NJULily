@@ -22,8 +22,8 @@ public class UserPO extends PersistentObject {
 	/** 用户身份 */
 	private UserIdentity iden;
 
-	public UserPO(String id, String username, String password, UserIdentity iden) {
-		super(id);
+	public UserPO(String ID, String username, String password, UserIdentity iden) {
+		super(ID);
 		this.username = username;
 		this.password = password;
 		this.iden = iden;

@@ -1,58 +1,78 @@
 package businesslogic.userbl;
 
-
 import java.util.ArrayList;
 
-import po.UserPO;
-import vo.UserVO;
 import message.ResultMessage;
-import dataenum.UserIdentity;
-import dataservice.UserDataService;
+import vo.UserVO;
+import blservice.userblservice.LoginInfo;
 
 /**
- * 用户逻辑层
+ * @see blservice.userblservice.UserBLService
  * @author Zing
  * @version 2014年11月3日下午7:59:35
  */
-public class UserController implements blservice.userblservice.UserBLService{
+public class UserController implements blservice.userblservice.UserBLService {
 
 	private User user;
-	
+
 	public UserController() {
 		this.user = new User();
 	}
-	
+
+	/**
+	 * @see blservice.userblservice.UserBLService#show()
+	 */
+	@Override
 	public ArrayList<UserVO> show() {
-		// TODO Auto-generated method stub
-		return null;
+		return user.show();
 	}
 
-	public ResultMessage login(String username, String password,
-			boolean isRemembered) {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * @see blservice.userblservice.UserBLService#getID()
+	 */
+	@Override
+	public String getID() {
+		return user.getID();
 	}
 
-	public String returnUserName(boolean isRemembered) {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * @see blservice.userblservice.UserBLService#login(blservice.userblservice.LoginInfo)
+	 */
+	@Override
+	public ResultMessage login(LoginInfo loaginInfo) {
+		return user.login(loaginInfo);
 	}
 
-	public ResultMessage addUser(String username, String password,
-			UserIdentity position) {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * @see blservice.userblservice.UserBLService#returnUserID()
+	 */
+	@Override
+	public String returnUserID() {
+		return user.returnUserID();
 	}
 
-	public ResultMessage deleteUser(String username) {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * @see blservice.userblservice.UserBLService#addUser(vo.UserVO)
+	 */
+	@Override
+	public ResultMessage addUser(UserVO vo) {
+		return user.addUser(vo);
 	}
 
-	public ResultMessage updateUser(String username, String password,
-			UserIdentity newPosition, UserVO user) {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * @see blservice.userblservice.UserBLService#deleteUser(java.lang.String)
+	 */
+	@Override
+	public ResultMessage deleteUser(String ID) {
+		return user.deleteUser(ID);
 	}
-	
+
+	/**
+	 * @see blservice.userblservice.UserBLService#updateUser(vo.UserVO)
+	 */
+	@Override
+	public ResultMessage updateUser(UserVO vo) {
+		return user.updateUser(vo);
+	}
+
 }

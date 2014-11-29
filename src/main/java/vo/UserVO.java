@@ -16,8 +16,9 @@ public class UserVO extends ValueObject {
 	/** 用户身份 */
 	public UserIdentity iden;
 
-	public UserVO(String id, String name, String password, UserIdentity iden) {
+	public UserVO(String ID, String name, String password, UserIdentity iden) {
 		super();
+		this.ID = ID;
 		this.name = name;
 		this.password = password;
 		this.iden = iden;

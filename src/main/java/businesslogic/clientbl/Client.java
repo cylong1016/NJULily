@@ -103,7 +103,8 @@ public class Client implements businesslogic.accountbillbl.ClientInfo, ClientInf
 		double payable = po.getPayable();
 		double receivableLimit = po.getReceivableLimit();
 		String salesman = po.getSalesman();
-		ClientVO vo = new ClientVO(ID, category, level, name, phone, address, post, email, receivable, payable, receivableLimit, salesman);
+		ClientVO vo =
+						new ClientVO(ID, category, level, name, phone, address, post, email, receivable, payable, receivableLimit, salesman);
 		return vo;
 	}
 
@@ -123,16 +124,12 @@ public class Client implements businesslogic.accountbillbl.ClientInfo, ClientInf
 	}
 
 	/**
-<<<<<<< HEAD
 	 * 模糊查找客户
 	 * @param keywords 关键字
 	 * @param type 查找类型
 	 * @return 满足条件的客户
 	 * @author cylong
 	 * @version 2014年11月29日 下午4:29:04
-=======
-	 * @see ClientInfo_Sale.salebl.ClientInfo#getClients
->>>>>>> origin/master
 	 */
 	public ArrayList<ClientVO> findClient(String keywords, FindTypeClient type) {
 		ArrayList<ClientPO> clientsPO = clientData.find(keywords, type);
@@ -178,7 +175,10 @@ public class Client implements businesslogic.accountbillbl.ClientInfo, ClientInf
 		po.setAddress(vo.address);
 		po.setPost(vo.post);
 		po.setEmail(vo.email);
-		po.setReceivableLimit(vo.receivableLimit, userInfo.getUserIden());
+		boolean b = po.setReceivableLimit(vo.receivableLimit, userInfo.getUserIden());
+		if (!b) {
+			return ResultMessage.FAILURE;	// 权限不够，更新失败
+		}
 		po.setSalesman(vo.salesman);
 		return clientData.update(po);
 	}
