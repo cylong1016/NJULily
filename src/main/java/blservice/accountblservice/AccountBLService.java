@@ -2,9 +2,9 @@ package blservice.accountblservice;
 
 import java.util.ArrayList;
 
-import vo.AccountVO;
 import message.ResultMessage;
-
+import vo.AccountVO;
+import dataenum.FindTypeAccount;
 
 /**
  * 负责实现公司账户界面所需要的服务
@@ -20,32 +20,43 @@ import message.ResultMessage;
  * @version 2014年10月28日下午6:04:46
  */
 public interface AccountBLService {
-	/**
-	 * 
-	 * @param keyword
-	 * @return 找到的账户集合
-	 */
-	public ArrayList<AccountVO> findAccount(String keyword);
 
 	/**
-	 * 
-	 * @param name
-	 * @param money
-	 * @return 成功与否
+	 * 显示全部账户
+	 * @return 返回全部客户的ArrayList
 	 */
-	public ResultMessage addAccount(String name, double money);
-	
-	/**
-	 * 
-	 * @param name
-	 * @return 成功与否
-	 */
-	public ResultMessage deleteAccount(String name);
+	public ArrayList<AccountVO> show();
 
 	/**
-	 * 
+	 * 根据关键字和查找类型进行模糊查找
+	 * @param keywords 关键字
+	 * @param type 查找类型；null为全部类型
+	 * @return 全部的账户VO
+	 * @author cylong
+	 * @version 2014年11月30日 上午2:11:51
+	 */
+	public ArrayList<AccountVO> find(String keywords, FindTypeAccount type);
+
+	/**
+	 * 添加账户
+	 * @param vo AccountVO
+	 * @return 是否成功
+	 * @author cylong
+	 * @version 2014年11月30日 上午2:19:17
+	 */
+	public ResultMessage add(AccountVO vo);
+
+	/**
+	 * 按名称删除账户
 	 * @param name
 	 * @return 成功与否
 	 */
-	public ResultMessage updAccount(String name);
+	public ResultMessage delete(String name);
+
+	/**
+	 * 更新账户
+	 * @param vo AccountVO
+	 * @return 成功与否
+	 */
+	public ResultMessage update(AccountVO vo);
 }

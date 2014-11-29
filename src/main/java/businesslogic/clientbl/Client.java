@@ -26,8 +26,7 @@ public class Client implements businesslogic.accountbillbl.ClientInfo, ClientInf
 	public Client() {
 		try {
 			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
-			ClientDataService clientData = factory.getClientData();
-			this.clientData = clientData;
+			this.clientData = factory.getClientData();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

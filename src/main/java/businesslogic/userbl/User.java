@@ -24,8 +24,7 @@ public class User implements UserInfo_Client {
 		currentUser = new DefineList<UserPO>("data/loginInfo.ser");
 		try {
 			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
-			UserDataService userData = factory.getUserData();
-			this.userData = userData;
+			this.userData = factory.getUserData();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

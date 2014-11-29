@@ -1,10 +1,6 @@
 package main;
 
-
 import ui.differui.inventory.frame.Frame_Inventory;
-import blservice.userblservice.UserBLService;
-import businesslogic.userbl.UserBLService_Driver;
-import businesslogic.userbl.UserBLService_Stub;
 
 /**
  * @author cylong
@@ -14,17 +10,13 @@ public class Main {
 
 	public static void main(String[] args) {
 		System.out.println("测试：");
-		UserBLService userBL = new UserBLService_Stub();
-		UserBLService_Driver driver = new UserBLService_Driver();
-		driver.drive(userBL);
-		
-		
+
 		//UI test
-//		Frame_Salesman fs = new Frame_Salesman();
-//		fs.setVisible(true);
-		
+		//		Frame_Salesman fs = new Frame_Salesman();
+		//		fs.setVisible(true);
+
 		Frame_Inventory fi = new Frame_Inventory();
 		fi.setVisible(true);
-		
+
 	}
 }
