@@ -7,7 +7,7 @@ import java.util.Date;
 import po.CheckCommodityItemPO;
 import vo.CheckCommodityItemVO;
 import businesslogic.commoditybl.Commodity;
-import businesslogic.inventorybl.info.CommodityInfo;
+import businesslogic.inventorybl.info.CommodityInfo_Inventory;
 
 /**
  * 库存盘点（盘点的是之前所有的库存快照，包括之前所有的各种商品的名称，型号，库存数量，库存均价，批次，批号， 并且显示行号。
@@ -40,7 +40,7 @@ public class CheckList {
 	}
 	
 	public ArrayList<CheckListItem> addItems(){
-		CommodityInfo info = new Commodity();
+		CommodityInfo_Inventory info = new Commodity();
 		ArrayList<String> IDs = info.getAllID();
 		for (int i = 0; i < IDs.size(); i++) {
 			CheckListItem item = new CheckListItem(IDs.get(i));

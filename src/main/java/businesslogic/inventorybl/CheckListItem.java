@@ -1,7 +1,7 @@
 package businesslogic.inventorybl;
 
 import businesslogic.commoditybl.Commodity;
-import businesslogic.inventorybl.info.CommodityInfo;
+import businesslogic.inventorybl.info.CommodityInfo_Inventory;
 
 /**
  * 包括之前所有的各种商品的名称，型号，库存数量，库存均价，批次，批号
@@ -23,7 +23,7 @@ public class CheckListItem {
 	
 	public CheckListItem(String ID) {
 		this.commodityID = ID;
-		CommodityInfo info = new Commodity();
+		CommodityInfo_Inventory info = new Commodity();
 		this.name = info.getName(ID);
 		this.type = info.getType(ID);
 		this.number = info.getNumber(ID);

@@ -69,8 +69,7 @@ public class SaleList {
 		ArrayList<CommodityItemPO> commoditiesPO = new ArrayList<CommodityItemPO>();
 		for(int i = 0; i < commodities.size(); i++) {
 			SaleListItem c = commodities.get(i);
-			CommodityItemPO po = new CommodityItemPO(c.getID(), 
-					c.getNumber(), c.getPrice(), c.getTotal(), c.getRemark());
+			CommodityItemPO po = new CommodityItemPO(c.getID(), c.getNumber(), c.getPrice(), c.getRemark());
 			commoditiesPO.add(po);
 		}
 		return commoditiesPO;

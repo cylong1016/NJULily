@@ -60,6 +60,8 @@ public class Inventory{
 		this.type = type;
 		list = new BillList();
 	}
+	
+	
 	public ArrayList<InventoryBillVO> show(BillType type) {
 		// TODO Auto-generated method stub
 		return null;

@@ -1,5 +1,9 @@
 package blservice.promotionblservice;
 
+import java.util.ArrayList;
+
+import vo.CommodityVO;
+import vo.PromotionVO;
 import message.ResultMessage;
 
 /**
@@ -9,9 +13,7 @@ import message.ResultMessage;
  */
 public interface PromotionBLService {
 	
-	/**
-	 * 得到销售策略
-	 * @return
-	 */
-	public ResultMessage promote();
+	public ArrayList<PromotionVO> show();
+	
+	public void addCommodity(CommodityVO vo)
 }

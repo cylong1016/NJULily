@@ -1,7 +1,7 @@
 package businesslogic.inventorybl;
 
 import businesslogic.commoditybl.Commodity;
-import businesslogic.inventorybl.info.CommodityInfo;
+import businesslogic.inventorybl.info.CommodityInfo_Inventory;
 
 public class BillListItem {
 	private String ID;
@@ -14,7 +14,7 @@ public class BillListItem {
 	/** 商品进价 */
 	private double purPrice;
 	
-	private CommodityInfo info;
+	private CommodityInfo_Inventory info;
 	
 	public BillListItem() {
 	}
@@ -48,7 +48,7 @@ public class BillListItem {
 		return purPrice;
 	}
 
-	public CommodityInfo getInfo() {
+	public CommodityInfo_Inventory getInfo() {
 		return info;
 	}
 	

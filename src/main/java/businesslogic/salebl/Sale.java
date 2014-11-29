@@ -11,7 +11,7 @@ import vo.SalesVO;
 import blservice.saleblservice.SaleInputInfo;
 import businesslogic.clientbl.Client;
 import businesslogic.commoditybl.Commodity;
-import businesslogic.inventorybl.info.SaleInfo;
+import businesslogic.inventorybl.info.SaleInfo_Inventory;
 import config.RMI;
 import dataenum.BillState;
 import dataenum.BillType;
@@ -24,7 +24,7 @@ import dataservice.SaleDataService;
  * @author Zing
  * @version Nov 15, 2014 10:07:38 AM
  */
-public class Sale implements SaleInfo {
+public class Sale implements SaleInfo_Inventory {
 
 	/** 销售单 */
 	private SaleList list;

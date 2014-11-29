@@ -18,7 +18,7 @@ public class CommodityItemPO {
 	/** 商品备注 */
 	private String remark;
 
-	public CommodityItemPO(String id, int number, double price, double total, String remark) {
+	public CommodityItemPO(String id, int number, double price, String remark) {
 		this.ID = id;
 		this.number = number;
 		this.price = price;

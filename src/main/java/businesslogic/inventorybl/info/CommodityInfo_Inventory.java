@@ -2,7 +2,7 @@ package businesslogic.inventorybl.info;
 
 import java.util.ArrayList;
 
-public interface CommodityInfo {
+public interface CommodityInfo_Inventory {
 	
 	public ArrayList<String> getAllID();
 	
