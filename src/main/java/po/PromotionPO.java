@@ -16,16 +16,14 @@ public class PromotionPO extends PersistentObject{
 	private String endDate;
 	/** 特价包 */
 	private ArrayList<CommodityItemPO> bargains;
-	/** 特价包的总价 */
+	/** 特价包的总价/总价 */
 	private double total;
 	/** 客户等级 */
 	private ClientLevel level;
 	/** 赠品单 */
 	private ArrayList<CommodityItemPO> gifts;
 	/** 购买的商品 */
-	private CommodityItemPO commodity;
-	/** 商品数量 */
-	private int number;
+	private ArrayList<CommodityItemPO> commodities;
 	/** 折扣 */
 	private double allowance;
 	/** 代金券 */
@@ -77,12 +75,11 @@ public class PromotionPO extends PersistentObject{
 	 * @param allowance
 	 * @param voucher
 	 */
-	public PromotionPO(String ID, String beginDate, String endDate, CommodityItemPO commodity, int number, ArrayList<CommodityItemPO> gifts, double allowance, int voucher){
+	public PromotionPO(String ID, String beginDate, String endDate, ArrayList<CommodityItemPO> commodities, ArrayList<CommodityItemPO> gifts, double allowance, int voucher){
 		super(ID);
 		this.beginDate = beginDate;
 		this.endDate = endDate;
-		this.commodity = commodity;
-		this.number = number;
+		this.commodities = commodities;
 		this.gifts = gifts;
 		this.voucher = voucher;
 		this.type = PromotionType.COMMODITY;
@@ -126,10 +123,6 @@ public class PromotionPO extends PersistentObject{
 		return gifts;
 	}
 
-	public CommodityItemPO getCommodity() {
-		return commodity;
-	}
-
 	public double getAllowance() {
 		return allowance;
 	}
@@ -142,16 +135,16 @@ public class PromotionPO extends PersistentObject{
 		return type;
 	}
 
-	public int getNumber() {
-		return number;
-	}
-
 	public String getBeginDate() {
 		return beginDate;
 	}
 	
 	public String getEndDate() {
 		return endDate;
+	}
+
+	public ArrayList<CommodityItemPO> getCommodities() {
+		return commodities;
 	}
 
 }

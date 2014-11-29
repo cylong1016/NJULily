@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import message.ResultMessage;
 import dataenum.PromotionType;
+import vo.CommodityItemVO;
 import vo.CommodityVO;
 import vo.PromotionVO;
 
@@ -46,7 +47,7 @@ public interface PromotionBLService {
 	 * @author Zing
 	 * @version Nov 29, 2014 7:00:37 PM
 	 */
-	public void addBargain(CommodityVO vo);
+	public void addBargain(CommodityItemVO vo);
 		
 	/**
 	 * 添加商品到赠送单中
@@ -54,7 +55,7 @@ public interface PromotionBLService {
 	 * @author Zing
 	 * @version Nov 29, 2014 7:00:40 PM
 	 */
-	public void addGifts(CommodityVO vo);
+	public void addGifts(CommodityItemVO vo);
 	
 	/**
 	 * 提交策略
@@ -64,4 +65,13 @@ public interface PromotionBLService {
 	 * @version Nov 29, 2014 7:00:42 PM
 	 */
 	public ResultMessage submit(PromoInputInfo info);
+	
+	/**
+	 * 提交策略
+	 * @param total 策略1中的总价（因为不用其他参数了）
+	 * @return 成功与否
+	 * @author Zing
+	 * @version Nov 30, 2014 12:58:10 AM
+	 */
+	public ResultMessage submit(double total);
 }

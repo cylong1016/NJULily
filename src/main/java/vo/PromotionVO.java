@@ -21,9 +21,7 @@ public class PromotionVO extends ValueObject{
 	/** 赠品单 */
 	public ArrayList<CommodityItemVO> gifts;
 	/** 购买的商品 */
-	public CommodityItemVO commodity;
-	/** 商品数量 */
-	public int number;
+	public ArrayList<CommodityItemVO> commodities;
 	/** 折扣 */
 	public double allowance;
 	/** 代金券 */
@@ -69,18 +67,17 @@ public class PromotionVO extends ValueObject{
 	 * @param ID
 	 * @param beginDate
 	 * @param endDate
-	 * @param commodity
+	 * @param commodities
 	 * @param number
 	 * @param gifts
 	 * @param allowance
 	 * @param voucher
 	 */
-	public PromotionVO(String ID, String beginDate, String endDate, CommodityItemVO commodity, int number, ArrayList<CommodityItemVO> gifts, double allowance, int voucher){
+	public PromotionVO(String ID, String beginDate, String endDate, ArrayList<CommodityItemVO> commodities, ArrayList<CommodityItemVO> gifts, double allowance, int voucher){
 		this.ID = ID;
 		this.beginDate = beginDate;
 		this.endDate = endDate;
-		this.commodity = commodity;
-		this.number = number;
+		this.commodities = commodities;
 		this.gifts = gifts;
 		this.voucher = voucher;
 		this.type = PromotionType.COMMODITY;

@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import message.ResultMessage;
 import po.CommodityPO;
 import vo.CommodityVO;
+import businesslogic.inventorybl.info.CommodityInfo_Inventory;
+import businesslogic.promotionbl.CommodityInfo_Promotion;
 import businesslogic.salebl.CommodityInfo_Sale;
 import dataenum.FindTypeCommo;
 import dataservice.CommodityDataService;
@@ -16,7 +18,7 @@ import dataservice.DataFactoryService;
  * @author Zing
  * @version 2014年11月9日下午2:53:19
  */
-public class Commodity implements CommodityInfo_Sale, businesslogic.purchasebl.CommodityInfo, businesslogic.inventorybl.info.CommodityInfo_Inventory{
+public class Commodity implements CommodityInfo_Sale, businesslogic.purchasebl.CommodityInfo, CommodityInfo_Inventory, CommodityInfo_Promotion{
 	
 	private CommodityDataService commodityData;
 	

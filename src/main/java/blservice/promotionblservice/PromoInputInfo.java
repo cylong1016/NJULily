@@ -1,6 +1,8 @@
 package blservice.promotionblservice;
 
 
+import java.util.ArrayList;
+
 import vo.CommodityItemVO;
 import dataenum.ClientLevel;
 
@@ -19,9 +21,7 @@ public class PromoInputInfo {
 	/** 客户等级 */
 	public ClientLevel level;
 	/** 购买的商品 */
-	public CommodityItemVO commodity;
-	/** 商品数量 */
-	public int number;
+	public ArrayList<CommodityItemVO> commodities;
 	/** 折扣 */
 	public double allowance;
 	/** 代金券 */
@@ -41,11 +41,10 @@ public class PromoInputInfo {
 		this.voucher = voucher;
 	}
 	
-	public PromoInputInfo(String beginDate, String endDate, CommodityItemVO commodity, int number, double allowance, int voucher) {
+	public PromoInputInfo(String beginDate, String endDate, ArrayList<CommodityItemVO> commodities, double allowance, int voucher) {
 		this.beginDate = beginDate;
 		this.endDate = endDate;
-		this.commodity = commodity;
-		this.number = number;
+		this.commodities = commodities;
 		this.allowance = allowance;
 		this.voucher = voucher;
 	}

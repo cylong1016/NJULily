@@ -3,6 +3,7 @@ package businesslogic.promotionbl;
 import java.util.ArrayList;
 
 import message.ResultMessage;
+import vo.CommodityItemVO;
 import vo.CommodityVO;
 import vo.PromotionVO;
 import dataenum.PromotionType;
@@ -25,18 +26,22 @@ public class PromotionController implements PromotionBLService{
 		return promotion.getID(type);
 	}
 
-	public void addBargain(CommodityVO vo) {
+	public void addBargain(CommodityItemVO vo) {
 		promotion.addBargain(vo);
 		
 	}
 
-	public void addGifts(CommodityVO vo) {
+	public void addGifts(CommodityItemVO vo) {
 		promotion.addGifts(vo);
 		
 	}
 
 	public ResultMessage submit(PromoInputInfo info) {
 		return promotion.submit(info);
+	}
+
+	public ResultMessage submit(double total) {
+		return promotion.submit(total);
 	}
 
 }
