@@ -10,7 +10,6 @@ import dataenum.ClientLevel;
  */
 public class ClientVO extends ValueObject {
 	
-
 	/** 客户类别：进货商、销售商 */
 	public ClientCategory category;
 	/** 客户级别：1-5（vip） */
@@ -34,8 +33,9 @@ public class ClientVO extends ValueObject {
 	/** 默认业务员 */
 	public String salesman;
 
-	public ClientVO(ClientCategory category, ClientLevel level, String name, String phone, String address, 
+	public ClientVO(String ID, ClientCategory category, ClientLevel level, String name, String phone, String address, 
 			String post, String email, double receivable, double payable, double receivableLimit, String salesman) {
+		this.ID = ID;
 		this.category = category;
 		this.level = level;
 		this.name = name;

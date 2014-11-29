@@ -2,11 +2,9 @@ package blservice.clientblservice;
 
 import java.util.ArrayList;
 
-import dataenum.ClientCategory;
-import dataenum.ClientLevel;
-import dataenum.FindTypeClient;
-import vo.ClientVO;
 import message.ResultMessage;
+import vo.ClientVO;
+import dataenum.FindTypeClient;
 
 /**
  * 负责实现客户管理界面所需要的服务
@@ -25,57 +23,53 @@ import message.ResultMessage;
  * @version 2014年10月28日下午5:26:29
  */
 public interface ClientBLService {
-	
+
 	/**
-	 * 显示客户
-	 * @return
+	 * 界面创建客户的时候获取可用ID
+	 * @return ID（供界面显示）
+	 * @author cylong
+	 * @version 2014年11月29日  下午4:43:54
+	 */
+	public String getID();
+	/**
+	 * 显示全部客户
+	 * @return 返回全部客户的ArrayList
 	 */
 	public ArrayList<ClientVO> show();
-	
+
 	/**
-	 * 查找客户
-	 * @param keywords
-	 * @param id
-	 * @return
+	 * 查找客户（模糊查找）
+	 * @param keywords 关键字
+	 * @param type 按照客户类型查找，null 为模糊查找
+	 * @return 满足条件的全部客户
+	 * @author cylong
+	 * @version 2014年11月29日 下午3:30:49
 	 */
 	public ArrayList<ClientVO> findClient(String keywords, FindTypeClient type);
-	
+
 	/**
-	 * 添加客户
-	 * @param kind
-	 * @param name
-	 * @param level
-	 * @param phone
-	 * @param address
-	 * @param post
-	 * @param email
-	 * @param salesman
-	 * @return
+	 * 添加一位客户VO
+	 * @param ClientVO
+	 * @return 处理信息
+	 * @author cylong
+	 * @version 2014年11月29日 下午3:40:03
 	 */
-	public ResultMessage addClient(ClientCategory category, String name, ClientLevel level, 
-			String phone, String address, String post, String email, double receivableLimit, String salesman);
-	
+	public ResultMessage addClient(ClientVO vo);
+
 	/**
-	 * 修改客户
-	 * @param kind
-	 * @param name
-	 * @param level
-	 * @param phoneNum
-	 * @param address
-	 * @param email
-	 * @param post
-	 * @param salesman
-	 * @return
+	 * 更新一位客户
+	 * @param vo
+	 * @return 处理信息
+	 * @author cylong
+	 * @version 2014年11月29日 下午3:40:36
 	 */
-	public ResultMessage updClient(String ID, ClientCategory kind, String name, ClientLevel level, 
-			String phoneNum, String address, String email, String post, String salesman);
-	
+	public ResultMessage updClient(ClientVO vo);
+
 	/**
-	 * 删除客户
-	 * @param name
-	 * @return
+	 * 以ID删除客户
+	 * @param ID
+	 * @return 处理信息
 	 */
 	public ResultMessage deletClient(String ID);
-	
-	
+
 }

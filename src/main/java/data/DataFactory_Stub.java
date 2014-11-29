@@ -2,8 +2,20 @@ package data;
 
 import java.rmi.RemoteException;
 
+import dataservice.AccountBillDataService;
+import dataservice.AccountDataService;
+import dataservice.AccountaInitDataService;
+import dataservice.ApprovalDataService;
+import dataservice.CashBillDataService;
+import dataservice.ClientDataService;
+import dataservice.CommodityDataService;
+import dataservice.CommoditySortDataService;
 import dataservice.DataFactoryService;
-import dataservice.DataService;
+import dataservice.InventoryDataService;
+import dataservice.PromotionDataService;
+import dataservice.PurchaseDataService;
+import dataservice.RecordDataService;
+import dataservice.SaleDataService;
 import dataservice.UserDataService;
 
 /**
@@ -15,7 +27,7 @@ public class DataFactory_Stub implements DataFactoryService {
 	/**
 	 * @see dataservice.DataFactoryService#getUserData()
 	 */
-	public DataService getUserData() {
+	public UserDataService getUserData() {
 		UserDataService userData = new UserDataService_Stub();
 		return userData;
 	}
@@ -23,93 +35,86 @@ public class DataFactory_Stub implements DataFactoryService {
 	/**
 	 * @see dataservice.DataFactoryService#getAccountaInitData()
 	 */
-	public DataService getAccountaInitData() {
+	public AccountaInitDataService getAccountaInitData() {
 		return null;
 	}
 
 	/**
 	 * @see dataservice.DataFactoryService#getAccountData()
 	 */
-	public DataService getAccountData() {
+	public AccountDataService getAccountData() {
 		return null;
 	}
 
 	/**
 	 * @see dataservice.DataFactoryService#getApprovalData()
 	 */
-	public DataService getApprovalData() {
+	public ApprovalDataService getApprovalData() {
 		return null;
 	}
 
 	/**
 	 * @see dataservice.DataFactoryService#getClientData()
 	 */
-	public DataService getClientData() {
+	public ClientDataService getClientData() {
 		return null;
 	}
 
 	/**
 	 * @see dataservice.DataFactoryService#getCommodityData()
 	 */
-	public DataService getCommodityData() {
+	public CommodityDataService getCommodityData() {
 		return null;
 	}
 
 	/**
 	 * @see dataservice.DataFactoryService#getCommoditySortData()
 	 */
-	public DataService getCommoditySortData() {
-		return null;
-	}
-
-	/**
-	 * @see dataservice.DataFactoryService#getFundData()
-	 */
-	public DataService getFundData() {
+	public CommoditySortDataService getCommoditySortData() {
 		return null;
 	}
 
 	/**
 	 * @see dataservice.DataFactoryService#getInventoryData()
 	 */
-	public DataService getInventoryData() {
+	public InventoryDataService getInventoryData() {
 		return null;
 	}
 
 	/**
 	 * @see dataservice.DataFactoryService#getPromotionData()
 	 */
-	public DataService getPromotionData() {
+	public PromotionDataService getPromotionData() {
 		return null;
 	}
 
 	/**
 	 * @see dataservice.DataFactoryService#getPurchaseData()
 	 */
-	public DataService getPurchaseData() {
+	public PurchaseDataService getPurchaseData() {
 		return null;
 	}
 
 	/**
 	 * @see dataservice.DataFactoryService#getRecordData()
 	 */
-	public DataService getRecordData() {
+	public RecordDataService getRecordData() {
 		return null;
 	}
 
 	/**
 	 * @see dataservice.DataFactoryService#getSaleData()
 	 */
-	public DataService getSaleData() {
+	public SaleDataService getSaleData() {
 		return null;
 	}
 
-	public DataService getAccountBillData() throws RemoteException {
+	public AccountBillDataService getAccountBillData() throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public DataService getCashBillData() throws RemoteException {
+	public CashBillDataService getCashBillData() throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}

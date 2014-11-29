@@ -3,8 +3,21 @@ package server.data;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
+import dataservice.AccountBillDataService;
+import dataservice.AccountDataService;
+import dataservice.AccountaInitDataService;
+import dataservice.ApprovalDataService;
+import dataservice.CashBillDataService;
+import dataservice.ClientDataService;
+import dataservice.CommodityDataService;
+import dataservice.CommoditySortDataService;
 import dataservice.DataFactoryService;
-import dataservice.DataService;
+import dataservice.InventoryDataService;
+import dataservice.PromotionDataService;
+import dataservice.PurchaseDataService;
+import dataservice.RecordDataService;
+import dataservice.SaleDataService;
+import dataservice.UserDataService;
 
 /**
  * 抽象工厂，返回数据层模块接口
@@ -28,105 +41,112 @@ public class DataFactory extends UnicastRemoteObject implements DataFactoryServi
 	/**
 	 * @see dataservice.DataFactoryService#getAccountaInitData()
 	 */
-	public DataService getAccountaInitData() throws RemoteException {
+	@Override
+	public AccountaInitDataService getAccountaInitData() throws RemoteException {
 		return null;
 	}
 
 	/**
 	 * @see dataservice.DataFactoryService#getAccountData()
 	 */
-	public DataService getAccountData() throws RemoteException {
+	@Override
+	public AccountDataService getAccountData() throws RemoteException {
 		return null;
 	}
 
 	/**
 	 * @see dataservice.DataFactoryService#getApprovalData()
 	 */
-	public DataService getApprovalData() throws RemoteException {
+	@Override
+	public ApprovalDataService getApprovalData() throws RemoteException {
 		return null;
 	}
 
 	/**
 	 * @see dataservice.DataFactoryService#getClientData()
 	 */
-	public DataService getClientData() throws RemoteException {
-		return new ClientData();
+	@Override
+	public ClientDataService getClientData() throws RemoteException {
+		return null;
 	}
 
 	/**
 	 * @see dataservice.DataFactoryService#getCommodityData()
 	 */
-	public DataService getCommodityData() throws RemoteException {
+	@Override
+	public CommodityDataService getCommodityData() throws RemoteException {
 		return null;
-	}
-
-	/**
-	 * @see dataservice.DataFactoryService#getFundData()
-	 */
-	public DataService getFundData() throws RemoteException {
-		return null;
-	}
-
-	/**
-	 * @see dataservice.DataFactoryService#getInventoryData()
-	 */
-	public DataService getInventoryData() throws RemoteException {
-		return null;
-	}
-
-	/**
-	 * @see dataservice.DataFactoryService#getPromotionData()
-	 */
-	public DataService getPromotionData() throws RemoteException {
-		return null;
-	}
-
-	/**
-	 * @see dataservice.DataFactoryService#getPurchaseData()
-	 */
-	public DataService getPurchaseData() throws RemoteException {
-		return null;
-	}
-
-	/**
-	 * @see dataservice.DataFactoryService#getRecordData()
-	 */
-	public DataService getRecordData() throws RemoteException {
-		return null;
-	}
-
-	/**
-	 * @see dataservice.DataFactoryService#getSaleData()
-	 */
-	public DataService getSaleData() throws RemoteException {
-		return null;
-	}
-
-	/**
-	 * @see dataservice.DataFactoryService#getUserData()
-	 */
-	public DataService getUserData() throws RemoteException {
-		return new UserData();
 	}
 
 	/**
 	 * @see dataservice.DataFactoryService#getCommoditySortData()
 	 */
-	public DataService getCommoditySortData() throws RemoteException {
+	@Override
+	public CommoditySortDataService getCommoditySortData() throws RemoteException {
 		return null;
 	}
 
 	/**
 	 * @see dataservice.DataFactoryService#getAccountBillData()
 	 */
-	public DataService getAccountBillData() throws RemoteException {
+	@Override
+	public AccountBillDataService getAccountBillData() throws RemoteException {
+		return null;
+	}
+
+	/**
+	 * @see dataservice.DataFactoryService#getInventoryData()
+	 */
+	@Override
+	public InventoryDataService getInventoryData() throws RemoteException {
+		return null;
+	}
+
+	/**
+	 * @see dataservice.DataFactoryService#getPromotionData()
+	 */
+	@Override
+	public PromotionDataService getPromotionData() throws RemoteException {
+		return null;
+	}
+
+	/**
+	 * @see dataservice.DataFactoryService#getPurchaseData()
+	 */
+	@Override
+	public PurchaseDataService getPurchaseData() throws RemoteException {
+		return null;
+	}
+
+	/**
+	 * @see dataservice.DataFactoryService#getRecordData()
+	 */
+	@Override
+	public RecordDataService getRecordData() throws RemoteException {
+		return null;
+	}
+
+	/**
+	 * @see dataservice.DataFactoryService#getSaleData()
+	 */
+	@Override
+	public SaleDataService getSaleData() throws RemoteException {
+		return null;
+	}
+
+	/**
+	 * @see dataservice.DataFactoryService#getUserData()
+	 */
+	@Override
+	public UserDataService getUserData() throws RemoteException {
 		return null;
 	}
 
 	/**
 	 * @see dataservice.DataFactoryService#getCashBillData()
 	 */
-	public DataService getCashBillData() throws RemoteException {
+	@Override
+	public CashBillDataService getCashBillData() throws RemoteException {
 		return null;
 	}
 

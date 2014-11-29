@@ -37,7 +37,7 @@ public class ClientPO extends PersistentObject {
 	private String salesman;
 
 	/**
-	 * @param id 客户id
+	 * @param ID 客户ID
 	 * @param category 客户类别：进货商、销售商
 	 * @param level 客户级别：1-5（vip）
 	 * @param name 客户姓名
@@ -50,9 +50,9 @@ public class ClientPO extends PersistentObject {
 	 * @author cylong
 	 * @version Oct 26, 2014 12:55:54 PM
 	 */
-	public ClientPO(String id, ClientCategory category, ClientLevel level, String name, String phone, String address, 
+	public ClientPO(String ID, ClientCategory category, ClientLevel level, String name, String phone, String address, 
 			String post, String email, double receivableLimit, String salesman) {
-		super(id);
+		super(ID);
 		this.category = category;
 		this.level = level;
 		this.name = name;

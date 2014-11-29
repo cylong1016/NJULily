@@ -1,79 +1,36 @@
 package businesslogic.clientbl;
 
+import java.rmi.Naming;
 import java.util.ArrayList;
 
-import businesslogic.salebl.ClientInfo;
 import message.ResultMessage;
 import po.ClientPO;
 import vo.ClientVO;
+import businesslogic.salebl.ClientInfo_Sale;
+import businesslogic.userbl.User;
+import config.RMI;
 import dataenum.ClientCategory;
 import dataenum.ClientLevel;
 import dataenum.FindTypeClient;
 import dataservice.ClientDataService;
+import dataservice.DataFactoryService;
 
-public class Client implements businesslogic.accountbillbl.ClientInfo, ClientInfo{
-
-	/** 客户类别：进货商、销售商 */
-	public ClientCategory category;
-	/** 客户级别：1-5（vip） */
-	public ClientLevel level;
-	/** 客户姓名 */
-	public String name;
-	/** 客户电话 */
-	public String phone;
-	/** 客户地址 */
-	public String address;
-	/** 客户邮编 */
-	public String post;
-	/** 客户电子邮箱 */
-	public String email;
-	/** 客户应收 */
-	public double receivable;
-	/** 客户应付 */
-	public double payable;
-	/** 客户应收额度 */
-	public double receivableLimit;
-	/** 默认业务员 */
-	public String salesman;
-
-	public ArrayList<ClientVO> clients;
+public class Client implements businesslogic.accountbillbl.ClientInfo, ClientInfo_Sale {
 
 	private ClientDataService clientData;
 
-	private ClientPO po;
-
-	public ArrayList<ClientVO> show() {
-		// TODO 就for转换就可以了
-		// clientData.show();
-		return null;
-	}
-
 	/**
-	 * 模糊查找
-	 * @param keywords
-	 * @param type
-	 * @return
+	 * @author cylong
+	 * @version 2014年11月29日 下午3:26:27
 	 */
-	public ArrayList<ClientVO> findClient(String keywords, FindTypeClient type) {
-		// TODO 
-		clientData.find(keywords, type);
-		return null;
-	}
-
-	public ResultMessage addClient(ClientCategory category, String name, ClientLevel level, String phone, String address, String post, String email, double receivableLimit, String salesman) {
-		po = new ClientPO(clientData.getID(), category, level, name, phone, address, post, email, receivableLimit, salesman);
-		clientData.insert(po);
-		return null;
-	}
-
-	public ResultMessage updClient(String ID, ClientCategory kind, String name, ClientLevel level, String phoneNum, String address, String email, String post, String salesman) {
-		po = new ClientPO(ID, kind, level, name, phoneNum, address, post, email, receivableLimit, salesman);
-		clientData.update(po);
-		return null;
-	}
-
-	public ResultMessage deletClient(String ID) {
-		return clientData.delete(ID);
+	public Client() {
+		try {
+			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
+			ClientDataService clientData = factory.getClientData();
+			this.clientData = clientData;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -84,16 +41,153 @@ public class Client implements businesslogic.accountbillbl.ClientInfo, ClientInf
 	}
 
 	/**
-	 * @see bussinesslogic.salebl.ClientInfo#getClients
+	 * @see businesslogic.salebl.ClientInfo#getSalesman(java.lang.String)
 	 */
 	public String getSalesman(String ID) {
-		po = clientData.find(ID);
+		ClientPO po = clientData.find(ID);
 		return po.getSalesman();
 	}
 
+	/**
+	 * @see businesslogic.salebl.ClientInfo#getName(java.lang.String)
+	 */
 	public String getName(String ID) {
-		po = clientData.find(ID);
+		ClientPO po = clientData.find(ID);
 		return po.getName();
+	}
+
+	/**
+	 * 返回全部的客户
+	 * @author cylong
+	 * @version 2014年11月29日 下午4:10:31
+	 */
+	public ArrayList<ClientVO> show() {
+		ArrayList<ClientPO> clientsPO = clientData.show();
+		ArrayList<ClientVO> clientsVO = posToVOs(clientsPO);
+		return clientsVO;
+	}
+
+	/**
+	 * 将全部的ClientPO转化成ClientVO
+	 * @param clientsPO ArrayList<ClientPO>
+	 * @return ArrayList<ClientVO>
+	 * @author cylong
+	 * @version 2014年11月29日 下午4:31:51
+	 */
+	private ArrayList<ClientVO> posToVOs(ArrayList<ClientPO> clientsPO) {
+		ArrayList<ClientVO> clientsVO = new ArrayList<ClientVO>();
+		for(int i = 0; i < clientsPO.size(); i++) {
+			ClientPO po = clientsPO.get(i);
+			clientsVO.add(poToVO(po));
+		}
+		return clientsVO;
+	}
+
+	/**
+	 * 将一个ClientPO转化成VO
+	 * @param po ClientPO
+	 * @return ClientVO
+	 * @author cylong
+	 * @version 2014年11月29日 下午4:37:21
+	 */
+	private ClientVO poToVO(ClientPO po) {
+		String ID = po.getID();
+		ClientCategory category = po.getCategory();
+		ClientLevel level = po.getLevel();
+		String name = po.getName();
+		String phone = po.getPhone();
+		String address = po.getAddress();
+		String post = po.getPost();
+		String email = po.getEmail();
+		double receivable = po.getReceivable();
+		double payable = po.getPayable();
+		double receivableLimit = po.getReceivableLimit();
+		String salesman = po.getSalesman();
+		ClientVO vo = new ClientVO(ID, category, level, name, phone, address, post, email, receivable, payable, receivableLimit, salesman);
+		return vo;
+	}
+
+	private ClientPO voToPO(ClientVO vo) {
+		String ID = vo.ID;
+		ClientCategory category = vo.category;
+		ClientLevel level = vo.level;
+		String name = vo.name;
+		String phone = vo.phone;
+		String address = vo.address;
+		String post = vo.post;
+		String email = vo.email;
+		double receivableLimit = vo.receivableLimit;
+		String salesman = vo.salesman;
+		ClientPO po = new ClientPO(ID, category, level, name, phone, address, post, email, receivableLimit, salesman);
+		return po;
+	}
+
+	/**
+	 * 模糊查找客户
+	 * @param keywords 关键字
+	 * @param type 查找类型
+	 * @return 满足条件的客户
+	 * @author cylong
+	 * @version 2014年11月29日 下午4:29:04
+	 */
+	public ArrayList<ClientVO> findClient(String keywords, FindTypeClient type) {
+		ArrayList<ClientPO> clientsPO = clientData.find(keywords, type);
+		ArrayList<ClientVO> clientsVO = posToVOs(clientsPO);
+		return clientsVO;
+	}
+
+	/**
+	 * 添加一位客户
+	 * @param vo ClientVO
+	 * @return
+	 * @author cylong
+	 * @version 2014年11月29日 下午4:35:22
+	 */
+	public ResultMessage addClient(ClientVO vo) {
+		ClientPO po = voToPO(vo);
+		return clientData.insert(po);
+	}
+
+	/**
+	 * @return 创建客户时候的新ID
+	 * @author cylong
+	 * @version 2014年11月29日 下午4:47:04
+	 */
+	public String getID() {
+		return clientData.getID();
+	}
+
+	/**
+	 * 更新客户信息
+	 * @param vo ClientVO
+	 * @return 处理结果
+	 * @author cylong
+	 * @version 2014年11月29日 下午4:49:10
+	 */
+	public ResultMessage updClient(ClientVO vo) {
+		UserInfo_Client userInfo = new User();
+		ClientPO po = clientData.find(vo.ID);	// 从数据层获得相应的client
+		po.setCategory(vo.category);
+		po.setLevel(vo.level);
+		po.setName(vo.name);
+		po.setPhone(vo.phone);
+		po.setAddress(vo.address);
+		po.setPost(vo.post);
+		po.setEmail(vo.email);
+		po.setReceivableLimit(vo.receivableLimit, userInfo.getUserIden());
+		po.setSalesman(vo.salesman);
+		return clientData.update(po);
+	}
+
+	/**
+	 * 以客户ID删除客户
+	 * @param ID
+	 * @return
+	 * @author cylong
+	 * @version 2014年11月29日 下午5:17:16
+	 */
+	public ResultMessage deletClient(String ID) {
+		return clientData.delete(ID);
 	}
 
 }
