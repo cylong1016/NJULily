@@ -20,25 +20,31 @@ public class Record {
 	
 	SaleDetailList saleDetailList;
 	
-	BussinessProList bussinessProList;
+	BusinessProList bussinessProList;
 	
-	BussinessStateList bussinessStateList;
+	BusinessStateList bussinessStateList;
 	
 	public Record() {
 	}
 	
+	/**
+	 * 得到销售明细表
+	 * @param info
+	 * @return
+	 * @author Zing
+	 * @version Nov 30, 2014 2:21:46 PM
+	 */
 	public ArrayList<SaleDetailVO> saleDetail(RecordInputInfo info) {
 		this.beginDate = info.beginDate;
 		this.endDate = info.endDate;
-		saleDetailList = new SaleDetailList(info);
-		if () {
-			
-		}
-		saleDetailList.getSaleDetail(getID());
-		return null;
+		saleDetailList = new SaleDetailList(info.commodityName, info.clientName, info.salesman, info.storage);
+		return saleDetailList.getSaleDetail(getID());
 	}
 
 	public ArrayList<ValueObject> bussinessPro(RecordInputInfo info) {
+		this.beginDate = info.beginDate;
+		this.endDate = info.endDate;
+		bussinessProList = new BusinessProList(info.billType, info.clientName, info.salesman, info.storage);
 		return null;
 	}
 
@@ -67,6 +73,12 @@ public class Record {
 		return null;
 	}
 	
+	/**
+	 * 得到所有的日期区间内的ID
+	 * @return
+	 * @author Zing
+	 * @version Nov 30, 2014 1:50:47 PM
+	 */
 	private ArrayList<String> getID() {
 		ArrayList<String> IDs = new ArrayList<String>();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");

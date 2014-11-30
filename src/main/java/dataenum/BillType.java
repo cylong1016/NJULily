@@ -3,6 +3,7 @@ package dataenum;
 public enum BillType {
 	EXPENSE,	// 收款单
 	PAY,		// 付款单
+	CASH,		// 现金费用单
 	SALE,		// 销售单
 	SALEBACK,	// 销售退货单
 	PURCHASE,	// 进货单

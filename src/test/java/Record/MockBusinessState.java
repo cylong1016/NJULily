@@ -2,9 +2,9 @@ package Record;
 
 import java.util.ArrayList;
 
-import businesslogic.recordbl.BussinessStateList;
+import businesslogic.recordbl.BusinessStateList;
 
-public class MockBusinessState extends BussinessStateList{
+public class MockBusinessState extends BusinessStateList{
 	ArrayList<MockSale> sales;
 	double total;
 	public MockBusinessState(){

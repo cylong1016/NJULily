@@ -5,14 +5,17 @@ import java.util.ArrayList;
 
 import message.ResultMessage;
 import po.CommodityItemPO;
+import po.CommodityPO;
 import po.SalesPO;
 import vo.CommodityItemVO;
 import vo.SalesVO;
+import vo.ValueObject;
 import blservice.saleblservice.SaleInputInfo;
 import businesslogic.clientbl.Client;
 import businesslogic.commoditybl.Commodity;
 import businesslogic.inventorybl.info.SaleInfo_Inventory;
 import businesslogic.recordbl.info.SaleInfo_Record;
+import businesslogic.recordbl.info.ValueObjectInfo_Record;
 import config.RMI;
 import dataenum.BillState;
 import dataenum.BillType;
@@ -25,7 +28,7 @@ import dataservice.SaleDataService;
  * @author Zing
  * @version Nov 15, 2014 10:07:38 AM
  */
-public class Sale implements SaleInfo_Inventory, SaleInfo_Record{
+public class Sale implements SaleInfo_Inventory, SaleInfo_Record, ValueObjectInfo_Record{
 
 	/** 销售单 */
 	private SaleList list;
@@ -102,8 +105,9 @@ public class Sale implements SaleInfo_Inventory, SaleInfo_Record{
 	 * @version 2014年11月28日 下午8:36:47
 	 */
 	// TODO 按类型分吧？
-	public ArrayList<SalesVO> show() {
-		ArrayList<SalesVO> billsVO = new ArrayList<SalesVO>();
+	// 这样改行不行？
+	public ArrayList<ValueObject> show(BillType type) {
+		ArrayList<ValueObject> billsVO = new ArrayList<ValueObject>();
 		SaleDataService saleData = getSaleData();
 		ArrayList<SalesPO> billsPO = saleData.getAllSaleBills();
 		for(int i = 0; i < billsPO.size(); i++) {
@@ -206,16 +210,53 @@ public class Sale implements SaleInfo_Inventory, SaleInfo_Record{
 		return null;
 	}
 
-	public String getSaleDetailVO(String ID, String clientName,
-			String salesman, Storage storage, String commodityName) {
+	public String getSaleDetailVO(String ID, String clientName, String salesman, Storage storage) {
 		SaleDataService saleData = getSaleData();
-		ArrayList<String> IDs = saleData.getAllID();
+		ArrayList<String> IDs = saleData.getAllID(BillType.SALE);
 		for (int i = 0; i < IDs.size(); i++) {
 			SalesPO po = saleData.find(IDs.get(i));
-			if (po.getID().contains(ID)) {
-				
+			if (IDs.get(i).contains(ID)) {
+				if (po.getClient().equals(clientName) && po.getSalesman().endsWith(salesman) && po.getStorage().equals(storage)) {
+					return IDs.get(i);
+				}
 			}
 		}
+		return null;
+	}
+
+	public String getCommodity(String ID, String commodityName) {
+		this.ID = ID;
+		ArrayList<CommodityItemPO> POs= getSaleData().find(ID).getCommodities();
+		for (int i = 0; i < POs.size(); i++) {
+			if (POs.get(i).getName().equals(commodityName)) {
+				return POs.get(i).getID();
+			}
+		}
+		return null;
+	}
+
+	public String getName(String ID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getType(String ID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int getNumber(String ID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public double getPrice(String ID) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public ArrayList<ValueObject> getBills(BillType billType) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

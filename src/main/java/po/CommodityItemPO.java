@@ -9,6 +9,10 @@ public class CommodityItemPO {
 
 	/** 商品编号 */
 	private String ID;
+	/** 商品名 */
+	private String name;
+	/** 商品型号 */
+	private String type;
 	/** 商品数量 */
 	private int number;
 	/** 商品 单价 */
@@ -18,6 +22,7 @@ public class CommodityItemPO {
 	/** 商品备注 */
 	private String remark;
 
+	// TODO 需要有商品的名字和类型
 	public CommodityItemPO(String ID, int number, double price, String remark) {
 		this.ID = ID;
 		this.number = number;
@@ -51,6 +56,14 @@ public class CommodityItemPO {
 
 	public String getRemark() {
 		return remark;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getType() {
+		return type;
 	}
 
 }

@@ -1,8 +1,6 @@
 package vo;
 
-import dataenum.BillType;
-import dataenum.Date;
-import dataenum.Storage;
+import java.util.ArrayList;
 
 /**
  * 经营历程表
@@ -17,26 +15,24 @@ import dataenum.Storage;
  * @version 2014年11月2日下午3:45:41
  */
 public class BussinessProVO {
-	/** 起始时间 */
-	public Date begin;
-	/** 结束时间 */
-	public Date end;
-	/** 单据类型 */
-	public BillType billType;
-	/** 客户 */
-	public ClientVO client;
-	/** 业务员 */
-	public UserVO salesman;
-	/** 仓库 */
-	public Storage storage;
 	
-	public BussinessProVO(Date begin, Date end, BillType billType, ClientVO client, UserVO salesman, Storage storage) {
-		this.begin = begin;
-		this.end = end;
-		this.billType = billType;
-		this.client = client;
-		this.salesman = salesman;
-		this.storage = storage;
-		
+	public ArrayList<SalesVO> sale;
+	
+	public ArrayList<PurchaseVO> purchase;
+	
+	public ArrayList<AccountBillVO> accountBill;
+	
+	public ArrayList<CashBillVO> cashBill;
+	
+	public ArrayList<InventoryBillVO> inventoryBill;
+	
+	public BussinessProVO(ArrayList<SalesVO> sale, ArrayList<PurchaseVO> purchase, ArrayList<AccountBillVO> accountBill, 
+			ArrayList<CashBillVO> cashBill, ArrayList<InventoryBillVO> inventoryBill) {
+		this.sale = sale;
+		this.purchase = purchase;
+		this.accountBill = accountBill;
+		this.cashBill = cashBill;
+		this.inventoryBill = inventoryBill;
 	}
+
 }

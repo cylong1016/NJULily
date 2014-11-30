@@ -28,47 +28,29 @@ public class SaleDetailList {
 	public SaleInfo_Record info;
 	
 	SaleDetailListItem item;
-	
-	public SaleDetailList(RecordInputInfo info) {
-		this.clientName = info.clientName;
-		this.salesman = info.salesman;
-		this.storage = info.storage;
-		this.commodityName = info.commodityName;
+		
+	public SaleDetailList(String commodityName, String clientName, String salesman, Storage storage) {
+		this.clientName = clientName;
+		this.salesman = salesman;
+		this.storage = storage;
+		this.commodityName = commodityName;
 	}
 	
 	public ArrayList<SaleDetailVO> getSaleDetail(ArrayList<String> IDs) {
 		info = new Sale();
+		ArrayList<SaleDetailVO> VOs = new ArrayList<SaleDetailVO>();
 		for (int i = 0; i < IDs.size(); i++) {
-			String ID = info.getSaleDetailVO(IDs.get(i), clientName, salesman, storage, commodityName);
-			
+			String ID = info.getSaleDetailVO(IDs.get(i), clientName, salesman, storage);
+			if (ID != null) {
+				item = new SaleDetailListItem(ID, commodityName);
+				if (item.ID != null) {
+					String date = item.ID.substring(4, 12);
+					SaleDetailVO vo = new SaleDetailVO(date, item.name, item.type, item.number, item.price);
+					VOs.add(vo);
+				}
+			}
 		}
-		return null;
+		return VOs;
 	}
 	
-//	private ArrayList<String> getID() {
-//		ArrayList<String> IDs = new ArrayList<String>();
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-//		try {
-//			Date begin = sdf.parse(beginDate);
-//			Date end = sdf.parse(endDate);
-//			double between = (end.getTime() - begin.getTime())/1000;
-//			double day = between/24/3600;
-//			for (int i = 0; i < day; i++) {
-//				Calendar cd = Calendar.getInstance();
-//				cd.setTime(sdf.parse(beginDate));
-//				cd.add(Calendar.DATE, i);
-//				String ID = sdf.format(cd.getTime());
-//				IDs.add(ID);
-//			}		
-//		} catch (ParseException e) {
-//			e.printStackTrace();
-//		}
-//		//XSD-yyyyMMdd
-//		return IDs;
-//	}
-	private ArrayList<SaleDetailVO> find() {
-		
-		return null;
-	}
-
 }
