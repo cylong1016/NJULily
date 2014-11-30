@@ -1,19 +1,17 @@
 package businesslogic.clientbl;
 
-import java.rmi.Naming;
 import java.util.ArrayList;
 
 import message.ResultMessage;
 import po.ClientPO;
+import server.data.ClientData;
 import vo.ClientVO;
 import businesslogic.salebl.ClientInfo_Sale;
 import businesslogic.userbl.User;
-import config.RMI;
 import dataenum.ClientCategory;
 import dataenum.ClientLevel;
 import dataenum.FindTypeClient;
 import dataservice.ClientDataService;
-import dataservice.DataFactoryService;
 
 public class Client implements businesslogic.accountbillbl.ClientInfo, ClientInfo_Sale, businesslogic.purchasebl.ClientInfo_Purchase {
 
@@ -24,12 +22,13 @@ public class Client implements businesslogic.accountbillbl.ClientInfo, ClientInf
 	 * @version 2014年11月29日 下午3:26:27
 	 */
 	public Client() {
-		try {
-			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
-			this.clientData = factory.getClientData();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		try {
+//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
+//			this.clientData = factory.getClientData();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		this.clientData = new ClientData();
 	}
 
 	/**
@@ -102,8 +101,7 @@ public class Client implements businesslogic.accountbillbl.ClientInfo, ClientInf
 		double payable = po.getPayable();
 		double receivableLimit = po.getReceivableLimit();
 		String salesman = po.getSalesman();
-		ClientVO vo =
-						new ClientVO(ID, category, level, name, phone, address, post, email, receivable, payable, receivableLimit, salesman);
+		ClientVO vo = new ClientVO(ID, category, level, name, phone, address, post, email, receivable, payable, receivableLimit, salesman);
 		return vo;
 	}
 

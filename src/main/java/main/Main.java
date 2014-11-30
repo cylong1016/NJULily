@@ -12,8 +12,7 @@ import ui.differui.salesman.client.ClientManagementUI;
 public class Main {
 
 	public static void main(String[] args) {
-		System.out.println("测试：");
-
+		
 		//UI test
 		ClientManagementUI cm = new ClientManagementUI();
 		cm.setVisible(true);

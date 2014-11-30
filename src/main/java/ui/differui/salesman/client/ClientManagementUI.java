@@ -6,22 +6,34 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import dataenum.ClientCategory;
+import businesslogic.clientbl.ClientController;
 import ui.commonui.myui.MyBackground;
 import ui.commonui.myui.MyComboBox;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyTable;
 import ui.commonui.myui.MyTextField;
 import ui.differui.salesman.frame.Frame_Salesman;
+import vo.ClientVO;
 
 public class ClientManagementUI extends Frame_Salesman implements ActionListener{
 	
 	private static final long serialVersionUID = 1L;
 	
 	MyJButton button_return, button_add, button_cam;
+	MyTable table;
+	public static MyJButton button_showAll;
+	
+	static int rowNum;
+	
+	ClientController controller;
 	
 	public ClientManagementUI(){
+		
+		controller = new ClientController();
 		
 		Color foreColor = new Color(158, 213, 220);
 		Color backColor = new Color(53, 84, 94);
@@ -51,7 +63,7 @@ public class ClientManagementUI extends Frame_Salesman implements ActionListener
 		this.add(button_search);		
 		
 		//add a button for showing all the client to the table
-		MyJButton button_showAll = new MyJButton("显示全部客户");
+		button_showAll = new MyJButton("显示全部客户");
 		button_showAll.setBounds(1070, 70, 130, 25);
 		button_showAll.addActionListener(this);
 		button_showAll.setBackground(backColor);
@@ -60,8 +72,8 @@ public class ClientManagementUI extends Frame_Salesman implements ActionListener
 		
 		//add a table for showing the information of the clients(the table is contained in a scroll pane)
 		String[] headers = {"客户编号","客户分类","客户星级"
-				,"客户名称","默认业务员","应收付差额","应收","应付"};
-		MyTable table = new MyTable(headers);
+				,"客户名称","默认业务员","应收付差额","应收","应付","应付额度"};
+		table = new MyTable(headers);
 		
 		JScrollPane jsp=new JScrollPane(table);
 		JTableHeader head = table.getTableHeader();
@@ -105,11 +117,9 @@ public class ClientManagementUI extends Frame_Salesman implements ActionListener
 		button_return.setBackground(backColor);
 		button_return.setForeground(foreColor);
 		this.add(button_return);	
-		
-		
-		
+			
 		// the background
-		MyBackground background = new MyBackground("ui/image/salesman/client/background.png");
+		MyBackground background = new MyBackground("ui/image/salesman/background.png");
 		this.add(background);
 		
 	}
@@ -123,6 +133,47 @@ public class ClientManagementUI extends Frame_Salesman implements ActionListener
 		if(events.getSource() == button_cam){
 			ClientDetailUI window_cam = new ClientDetailUI();
 			window_cam.setVisible(true);
+		}
+		if(events.getSource() == button_showAll){
+			
+			DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+		
+			if(rowNum != 0)
+				for(int i = 0; i <= rowNum; i++)
+					tableModel.removeRow(0);
+			
+			rowNum = 0;
+			
+			controller = new ClientController();
+			for(int i = 0; i < controller.show().size(); i++){
+				ClientVO cvo = controller.show().get(i);
+				
+				String[] str = {cvo.ID, getCategory(cvo.category.toString()), getLevel(cvo.level.toString())
+						, cvo.name,"",String.valueOf(cvo.receivable - cvo.payable)
+						,String.valueOf(cvo.receivable), String.valueOf(cvo.payable),String.valueOf(cvo.receivableLimit)};
+				tableModel.addRow(str);
+				rowNum = i;
+			}		
+		}
+	}
+	
+	private String getCategory(String str){
+		switch(str){
+		case "PURCHASE_PERSON" : return "进货商";
+		case "SALES_PERSON" : return "销售商";
+		case "BOTH" :  return "进货商/销售商(两者都是)";
+		default : return null;
+		}
+	}
+	
+	private String getLevel(String str){
+		switch(str){
+		case "LEVEL_1" : return "一星级";
+		case "LEVEL_2" : return "二星级";
+		case "LEVEL_3" :  return "三星级";
+		case "LEVEL_4" : return "四星级";
+		case "VIP" :  return "五星级(VIP)";
+		default : return null;
 		}
 	}
 

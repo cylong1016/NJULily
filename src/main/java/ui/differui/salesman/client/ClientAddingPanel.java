@@ -9,12 +9,17 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+import message.ResultMessage;
+import dataenum.ClientCategory;
+import dataenum.ClientLevel;
+import businesslogic.clientbl.ClientController;
 import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.exitfunction.ExitFunctionFrame;
 import ui.commonui.myui.MyComboBox;
 import ui.commonui.myui.MyPanel;
 import ui.commonui.myui.MyTextField;
 import ui.commonui.warning.WarningFrame;
+import vo.ClientVO;
 
 public class ClientAddingPanel extends MyPanel implements ActionListener{
 
@@ -24,6 +29,8 @@ public class ClientAddingPanel extends MyPanel implements ActionListener{
 	MyComboBox comboBox_category, comboBox_level;
 	JButton button_add, button_return;
 	public static JButton addConform;
+	
+	ClientController controller; 
 	
 	public ClientAddingPanel(){
 			
@@ -185,15 +192,45 @@ public class ClientAddingPanel extends MyPanel implements ActionListener{
 		}	
 		
 		if(events.getSource() == addConform){
-			WarningFrame wp = new WarningFrame("已成功添加客户！");
-			wp.setVisible(true);
-			ClientAddingUI.button_close.doClick();
-			
-			//
-			System.out.println("tianjia");
+			controller = new ClientController();	
+			ResultMessage res = controller.addClient(new ClientVO(
+				controller.getID(), getCategory(comboBox_category.getSelectedIndex())
+				, getLevel(comboBox_level.getSelectedIndex()), textField_name.getText()
+				, textField_phone.getText(), textField_address.getText(), 
+				textField_post.getText(), textField_email.getText(),
+				0, 0, Double.parseDouble(textField_limit.getText()), ""));
+			if(res.equals(ResultMessage.SUCCESS)) {
+				WarningFrame wp = new WarningFrame("已成功添加客户！");
+				wp.setVisible(true);
+				ClientAddingUI.button_close.doClick();
+				ClientManagementUI.button_showAll.doClick();
+			} else {
+				WarningFrame wp = new WarningFrame("客户已经被添加！");
+				wp.setVisible(true);
+			}			
 		}
 	}
 		
+	private ClientCategory getCategory(int i){
+		switch (i){
+			case 1: return ClientCategory.PURCHASE_PERSON;
+			case 2: return ClientCategory.SALES_PERSON;
+			case 3: return ClientCategory.BOTH;
+			default: return null;
+		}		
+	}
+	
+	private ClientLevel getLevel(int i){
+		switch (i){
+			case 1: return ClientLevel.LEVEL_1;
+			case 2: return ClientLevel.LEVEL_2;
+			case 3: return ClientLevel.LEVEL_3;
+			case 4: return ClientLevel.LEVEL_4;
+			case 5: return ClientLevel.VIP;
+			default: return null;
+		}		
+	}
+	
 	public String getinfo(){
 		return textField_name.getText();
 	}
