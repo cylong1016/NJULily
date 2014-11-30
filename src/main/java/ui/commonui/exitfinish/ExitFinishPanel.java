@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyPanel;
 import ui.differui.salesman.client.ClientAddingPanel;
+import ui.differui.salesman.client.ClientManagementUI;
 
 public class ExitFinishPanel extends MyPanel implements ActionListener{
 
@@ -64,6 +65,8 @@ public class ExitFinishPanel extends MyPanel implements ActionListener{
 			switch(flag){
 				case "ClientAddingPanel":	ClientAddingPanel.addConform.doClick();
 											break;
+										
+				case "Delete a Client": ClientManagementUI.button_delete.doClick();
 			}
 			ExitFinishFrame.button_close.doClick();
 		}

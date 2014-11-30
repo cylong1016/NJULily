@@ -192,19 +192,24 @@ public class ClientAddingPanel extends MyPanel implements ActionListener{
 		}	
 		
 		if(events.getSource() == addConform){
+			
 			controller = new ClientController();	
+			
 			ResultMessage res = controller.addClient(new ClientVO(
 				controller.getID(), getCategory(comboBox_category.getSelectedIndex())
 				, getLevel(comboBox_level.getSelectedIndex()), textField_name.getText()
 				, textField_phone.getText(), textField_address.getText(), 
 				textField_post.getText(), textField_email.getText(),
 				0, 0, Double.parseDouble(textField_limit.getText()), ""));
+			
 			if(res.equals(ResultMessage.SUCCESS)) {
+				
 				WarningFrame wp = new WarningFrame("已成功添加客户！");
 				wp.setVisible(true);
 				ClientAddingUI.button_close.doClick();
 				ClientManagementUI.button_showAll.doClick();
-			} else {
+				
+			}else{
 				WarningFrame wp = new WarningFrame("客户已经被添加！");
 				wp.setVisible(true);
 			}			

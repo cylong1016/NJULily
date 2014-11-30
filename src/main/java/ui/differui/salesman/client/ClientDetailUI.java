@@ -1,6 +1,5 @@
 package ui.differui.salesman.client;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,6 +8,7 @@ import javax.swing.JButton;
 import ui.commonui.exitfunction.ExitFunctionFrame;
 import ui.commonui.myui.MyButton;
 import ui.commonui.myui.MyWindow;
+import vo.ClientVO;
 
 public class ClientDetailUI extends MyWindow implements ActionListener{
 	
@@ -17,12 +17,12 @@ public class ClientDetailUI extends MyWindow implements ActionListener{
 	MyButton button_return;
 	public static JButton button_close;
 	
-	public ClientDetailUI(){
+	public ClientDetailUI(ClientVO cvo){
 		button_return = new MyButton(630 + 240, 610 + 45, 100, 20);
 		button_return.addActionListener(this);
 		this.add(button_return);
 		
-		ClientDetailPanel cdp = new ClientDetailPanel();
+		ClientDetailPanel cdp = new ClientDetailPanel(cvo);
 		cdp.setOpaque(true);
 		cdp.setBounds(240, 45, 800, 650);
 		this.add(cdp);
