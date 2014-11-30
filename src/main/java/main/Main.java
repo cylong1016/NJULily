@@ -1,6 +1,6 @@
 package main;
 
-import ui.differui.salesman.client.ClientManagementUI;
+import ui.differui.salesman.frame.Frame_Salesman;
 
 
 
@@ -14,8 +14,8 @@ public class Main {
 	public static void main(String[] args) {
 		
 		//UI test
-		ClientManagementUI cm = new ClientManagementUI();
-		cm.setVisible(true);
+		Frame_Salesman fm = new Frame_Salesman();
+		fm.setVisible(true);
 
 	}
 }

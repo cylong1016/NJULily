@@ -1,42 +1,58 @@
 package ui.differui.salesman.client;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import message.ResultMessage;
 import dataenum.ClientCategory;
 import businesslogic.clientbl.ClientController;
+import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.myui.MyBackground;
 import ui.commonui.myui.MyComboBox;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyTable;
 import ui.commonui.myui.MyTextField;
+import ui.commonui.warning.WarningFrame;
 import ui.differui.salesman.frame.Frame_Salesman;
 import vo.ClientVO;
 
-public class ClientManagementUI extends Frame_Salesman implements ActionListener{
+public class ClientManagementUI extends JLabel implements ActionListener{
 	
 	private static final long serialVersionUID = 1L;
 	
-	MyJButton button_return, button_add, button_cam;
+	MyJButton button_return, button_add, button_cam, button_del;
 	MyTable table;
 	public static MyJButton button_showAll;
-	
+	public static JButton button_delete;
+	String deleteID = "";
 	static int rowNum;
 	
 	ClientController controller;
 	
 	public ClientManagementUI(){
+		this.setLayout(null);
 		
 		controller = new ClientController();
 		
 		Color foreColor = new Color(158, 213, 220);
 		Color backColor = new Color(53, 84, 94);
+		
+		JLabel word = new JLabel("客户管理");
+		word.setFont(new Font("黑体", Font.BOLD, 18));
+		word.setBackground(null);
+		word.setBounds(85, 22, 100, 30);
+		word.setForeground(Color.WHITE);
+		word.setVisible(true);
+		this.add(word);
 		
 		//add a combo box (for choosing the selected way)
 		String[] comboBoxStr = {"-------请选择一种搜索方式-------", "模糊查找"
@@ -70,6 +86,10 @@ public class ClientManagementUI extends Frame_Salesman implements ActionListener
 		button_showAll.setForeground(foreColor);
 		this.add(button_showAll);	
 		
+		button_delete = new JButton();
+		button_delete.addActionListener(this);
+		this.add(button_delete);
+		
 		//add a table for showing the information of the clients(the table is contained in a scroll pane)
 		String[] headers = {"客户编号","客户分类","客户星级"
 				,"客户名称","默认业务员","应收付差额","应收","应付","应付额度"};
@@ -95,7 +115,7 @@ public class ClientManagementUI extends Frame_Salesman implements ActionListener
 		this.add(button_add);	
 		
 		//add a button for deleting a selected client
-		MyJButton button_del = new MyJButton("删除所选客户");
+		button_del = new MyJButton("删除所选客户");
 		button_del.setBounds(165 + 420 + 125, 610 - 26, 130, 25);
 		button_del.addActionListener(this);
 		button_del.setBackground(backColor);
@@ -119,12 +139,12 @@ public class ClientManagementUI extends Frame_Salesman implements ActionListener
 		this.add(button_return);	
 			
 		// the background
-		MyBackground background = new MyBackground("ui/image/salesman/background.png");
-		this.add(background);
+		this.setBackground(null);
 		
 	}
 	
 	public void actionPerformed(ActionEvent events) {
+			
 		if(events.getSource() == button_add){
 			ClientAddingUI window_add = new ClientAddingUI();
 			window_add.setVisible(true);
@@ -134,6 +154,9 @@ public class ClientManagementUI extends Frame_Salesman implements ActionListener
 			ClientDetailUI window_cam = new ClientDetailUI();
 			window_cam.setVisible(true);
 		}
+		
+		/////////////////////////////FUNCTION SHOWALL////////////////////////////
+		
 		if(events.getSource() == button_showAll){
 			
 			DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
@@ -154,6 +177,33 @@ public class ClientManagementUI extends Frame_Salesman implements ActionListener
 				tableModel.addRow(str);
 				rowNum = i;
 			}		
+		}
+		
+		/////////////////////////////FUNCTION DEL////////////////////////////
+		
+		if(events.getSource() == button_del){
+				
+			if(table.getSelectedRow() < 0){
+				WarningFrame wf = new WarningFrame("请选择要进行删除的客户！");
+				wf.setVisible(true);
+			}else{
+				deleteID = (String) table.getValueAt(table.getSelectedRow(), 0);
+				ExitFinishFrame ef = new ExitFinishFrame("Delete a Client");
+				ef.setVisible(true);
+			}
+		}
+		
+		if(events.getSource() == button_delete){
+			controller = new ClientController();
+			ResultMessage rm = controller.deletClient(deleteID);
+			if(rm.equals(ResultMessage.SUCCESS)){
+				WarningFrame wp = new WarningFrame("已成功删除该客户！");
+				wp.setVisible(true);
+				ClientManagementUI.button_showAll.doClick();
+			}else{
+				WarningFrame wp = new WarningFrame("无法删除该客户！");
+				wp.setVisible(true);
+			}
 		}
 	}
 	
