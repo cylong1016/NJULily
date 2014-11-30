@@ -1,10 +1,12 @@
 package businesslogic.recordbl;
 
+import java.util.ArrayList;
+
 import blservice.recordblservice.RecordBLService;
+import blservice.recordblservice.RecordInputInfo;
 import message.ResultMessage;
+import vo.SaleDetailVO;
 import vo.ValueObject;
-import dataenum.BillType;
-import dataenum.Storage;
 
 /**
  * 查看销售明细表（统计一段时间内商品的销售情况（应该就是查询销售出货单据记录），
@@ -22,14 +24,12 @@ public class RecordController implements RecordBLService{
 		record = new Record();
 	}
 
-	public ResultMessage saleDetail(String begin, String end, String commodity,
-			String client, String salesman, Storage Storage) {
-		return record.saleDetail(begin, end, commodity, client, salesman, Storage);
+	public ArrayList<SaleDetailVO> saleDetail(RecordInputInfo info) {
+		return record.saleDetail(info);
 	}
 
-	public ResultMessage bussinessPro(String begin, String end,
-			BillType billType, String client, String salesman, Storage storage) {
-		return record.bussinessPro(begin, end, billType, client, salesman, storage);
+	public ArrayList<ValueObject> bussinessPro(RecordInputInfo info) {
+		return record.bussinessPro(info);
 	}
 
 	public ResultMessage red(ValueObject valueRecord) {
@@ -40,8 +40,8 @@ public class RecordController implements RecordBLService{
 		return record.copyRed(valueRecord);
 	}
 
-	public ResultMessage businessState(String begin, String end) {
-		return record.businessState(begin, end);
+	public ResultMessage businessState(RecordInputInfo info) {
+		return record.businessState(info);
 	}
 
 

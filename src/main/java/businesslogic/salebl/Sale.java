@@ -12,6 +12,7 @@ import blservice.saleblservice.SaleInputInfo;
 import businesslogic.clientbl.Client;
 import businesslogic.commoditybl.Commodity;
 import businesslogic.inventorybl.info.SaleInfo_Inventory;
+import businesslogic.recordbl.info.SaleInfo_Record;
 import config.RMI;
 import dataenum.BillState;
 import dataenum.BillType;
@@ -24,7 +25,7 @@ import dataservice.SaleDataService;
  * @author Zing
  * @version Nov 15, 2014 10:07:38 AM
  */
-public class Sale implements SaleInfo_Inventory {
+public class Sale implements SaleInfo_Inventory, SaleInfo_Record{
 
 	/** 销售单 */
 	private SaleList list;
@@ -202,6 +203,13 @@ public class Sale implements SaleInfo_Inventory {
 	}
 
 	public ArrayList<Integer> getNumber(String begin, String end) {
+		return null;
+	}
+
+	public String getSaleDetailVO(String ID, String clientName,
+			String salesman, Storage storage, String commodityName) {
+		SaleDataService saleData = getSaleData();
+		ArrayList<String> IDs = saleData.getAllID();
 		return null;
 	}
 

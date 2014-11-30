@@ -29,16 +29,22 @@ public interface CommodityBLService {
 	public ArrayList<CommodityVO> showCommo();
 	
 	/**
-	 * 添加商品
-	 * @param sortName 商品分类
-	 * @param name 商品名称
-	 * @param type 商品类型
-	 * @param purPrice 商品进价
-	 * @param salePrice 商品售价
+	 * 在创建一个商品的时候，得到商品的ID
 	 * @return
+	 * @author Zing
+	 * @version Nov 30, 2014 10:31:48 AM
 	 */
-	public ResultMessage addCommo(String sortID, String name, 
-			String type, double purPrice, double salePrice);
+	public String getID();
+	
+	/**
+	 *  添加商品
+	 * @param sortID
+	 * @param info
+	 * @return
+	 * @author Zing
+	 * @version Nov 30, 2014 10:37:08 AM
+	 */
+	public ResultMessage addCommo(CommodityInputInfo info);
 
 	/**
 	 * 删除商品
@@ -49,14 +55,14 @@ public interface CommodityBLService {
 
 	/**
 	 * 更改商品信息
-	 * @param name 商品名称
-	 * @param sortName 商品分类
-	 * @param type 商品类型
-	 * @param purPrice 商品进价
-	 * @param salePrice 商品售价
+	 * @param sortID
+	 * @param ID
+	 * @param info
 	 * @return
+	 * @author Zing
+	 * @version Nov 30, 2014 10:37:46 AM
 	 */
-	public ResultMessage updCommo(String sortID, String ID, String name, String type, double purPrice, double salePrice);
+	public ResultMessage updCommo(String ID, CommodityInputInfo info);
 
 	/**
 	 * 查找商品

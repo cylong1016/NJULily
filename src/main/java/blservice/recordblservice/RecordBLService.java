@@ -1,8 +1,9 @@
 package blservice.recordblservice;
 
+import java.util.ArrayList;
+
+import vo.SaleDetailVO;
 import vo.ValueObject;
-import dataenum.BillType;
-import dataenum.Storage;
 import message.ResultMessage;
 
 /**
@@ -19,36 +20,21 @@ public interface RecordBLService {
 	
 	/**
 	 * 制定销售明细表
-	 * 销售明细表
-	 * 统计一段时间内商品的销售情况（应该就是查询销售出货单据记录）
-	 * 筛选条件有：时间区间，商品名，客户，业务员，仓库。
-	 * 显示符合上述条件的商品销售记录，以列表形式显示，
-	 * 列表中包含如下信息：时间（精确到天），商品名，型号，数量，单价，总额。
-	 * 需要支持导出数据。
-	 * @param begin
-	 * @param end
-	 * @param commodity
-	 * @param client
-	 * @param salesman
-	 * @param Storage
+	 * @param info
 	 * @return
+	 * @author Zing
+	 * @version Nov 30, 2014 10:26:24 AM
 	 */
-	public ResultMessage saleDetail(String begin, String end, String commodity, 
-			String client, String salesman, Storage Storage);
+	public ArrayList<SaleDetailVO> saleDetail(RecordInputInfo info);
 	
 	/**
 	 * 制定经营历程表
-	 * 
-	 * @param begin
-	 * @param end
-	 * @param billType
-	 * @param client
-	 * @param salesman
-	 * @param storage
+	 * @param info
 	 * @return
+	 * @author Zing
+	 * @version Nov 30, 2014 10:26:12 AM
 	 */
-	public ResultMessage bussinessPro(String begin, String end, BillType billType, 
-			String client, String salesman, Storage storage);
+	public ArrayList<ValueObject> bussinessPro(RecordInputInfo info);
 	
 	/**
 	 * 添加红冲
@@ -72,5 +58,5 @@ public interface RecordBLService {
 	 * @param kind
 	 * @return
 	 */
-	public ResultMessage businessState(String begin, String end);
+	public ResultMessage businessState(RecordInputInfo info);
 }

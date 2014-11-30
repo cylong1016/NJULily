@@ -3,9 +3,11 @@ package businesslogic.commoditybl;
 import java.rmi.Naming;
 import java.util.ArrayList;
 
+import config.RMI;
 import message.ResultMessage;
 import po.CommodityPO;
 import vo.CommodityVO;
+import blservice.commodityblservice.CommodityInputInfo;
 import businesslogic.inventorybl.info.CommodityInfo_Inventory;
 import businesslogic.promotionbl.CommodityInfo_Promotion;
 import businesslogic.salebl.CommodityInfo_Sale;
@@ -30,8 +32,9 @@ public class Commodity implements CommodityInfo_Sale, businesslogic.purchasebl.C
 	
 	public Commodity() {
 		try {
-			DataFactoryService factory = (DataFactoryService)Naming.lookup("rmi://127.0.0.1:1994/factory");
-			commodityData = (CommodityDataService)factory.getCommodityData();
+			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
+			commodityData = factory.getCommodityData();
+			commoditySortData = factory.getCommoditySortData();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -42,8 +45,8 @@ public class Commodity implements CommodityInfo_Sale, businesslogic.purchasebl.C
 		return ID;
 	}
 	
-	public ResultMessage addCommo(String sortID, String name, String type, double purPrice, double salePrice) {
-		po = new CommodityPO(getID(), name, commoditySortData.find(sortID), type, purPrice, salePrice);
+	public ResultMessage addCommo(CommodityInputInfo info) {
+		po = new CommodityPO(ID, info.name, commoditySortData.find(info.sortID), info.type, info.purPrice, info.salePrice);
 		commodityData.insert(po);
 		return ResultMessage.SUCCESS;
 	}
@@ -57,8 +60,8 @@ public class Commodity implements CommodityInfo_Sale, businesslogic.purchasebl.C
 			return ResultMessage.FAILURE;
 	}
 
-	public ResultMessage updCommo(String sortID, String ID, String name, String type, double purPrice, double salePrice){
-		po = new CommodityPO(ID, name, commoditySortData.find(sortID), type, purPrice, salePrice);	
+	public ResultMessage updCommo(String ID, CommodityInputInfo info){
+		po = new CommodityPO(ID, info.name, commoditySortData.find(info.sortID), info.type, info.purPrice, info.salePrice);	
 		return commodityData.update(po);
 	}
 
@@ -67,7 +70,7 @@ public class Commodity implements CommodityInfo_Sale, businesslogic.purchasebl.C
 	}
 
 	public ArrayList<CommodityVO> showCommo() {
-		// TODO
+		//
 		return null;
 	}
 

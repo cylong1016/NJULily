@@ -7,6 +7,7 @@ import po.CommodityPO;
 import message.ResultMessage;
 import vo.CommodityVO;
 import blservice.commodityblservice.CommodityBLService;
+import blservice.commodityblservice.CommodityInputInfo;
 
 public class CommodityController implements CommodityBLService{
 	
@@ -15,17 +16,21 @@ public class CommodityController implements CommodityBLService{
 	public CommodityController() {
 		commodity = new Commodity();
 	}
+
+	public String getID() {
+		return commodity.getID();
+	}
 	
-	public ResultMessage addCommo(String sortID, String name, String type, double purPrice, double salePrice) {
-		return 	commodity.addCommo(sortID, name, type, purPrice, salePrice);
+	public ResultMessage addCommo(CommodityInputInfo info) {
+		return 	commodity.addCommo(info);
 	}
 
 	public ResultMessage deletCommo(String ID) {
 			return commodity.deletCommo(ID);
 	}
 
-	public ResultMessage updCommo(String sortID, String ID, String name, String type, double purPrice, double salePrice) {
-		return commodity.updCommo(sortID, ID, name, type, purPrice, salePrice);
+	public ResultMessage updCommo(String ID, CommodityInputInfo info) {
+		return commodity.updCommo(ID,info);
 	}
 
 	public ArrayList<CommodityPO> findCommo(String info, FindTypeCommo type) {
