@@ -64,6 +64,27 @@ public class ClientPO extends PersistentObject {
 	}
 
 	/**
+	 * 名字相同的客户就是重复的客户
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ClientPO other = (ClientPO)obj;
+		if (this.name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!this.name.equals(other.name))
+			return false;
+		return true;
+	}
+
+	/**
 	 * 模糊查询时候使用
 	 * @see java.lang.Object#toString()
 	 */

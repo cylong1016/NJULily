@@ -50,4 +50,25 @@ public class AccountPO extends PersistentObject {
 		return this.ID + this.name + this.money;
 	}
 
+	/**
+	 * 名字相同的账户就是重复的账户
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AccountPO other = (AccountPO)obj;
+		if (this.name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!this.name.equals(other.name))
+			return false;
+		return true;
+	}
+
 }

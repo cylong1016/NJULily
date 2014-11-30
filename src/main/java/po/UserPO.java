@@ -29,6 +29,27 @@ public class UserPO extends PersistentObject {
 		this.iden = iden;
 	}
 
+	/**
+	 * 名称相同的用户就是相同的用户
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UserPO other = (UserPO)obj;
+		if (this.username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!this.username.equals(other.username))
+			return false;
+		return true;
+	}
+
 	public String getUsername() {
 		return this.username;
 	}
