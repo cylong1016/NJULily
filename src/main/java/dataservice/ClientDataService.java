@@ -2,7 +2,6 @@ package dataservice;
 
 import java.util.ArrayList;
 
-import message.ResultMessage;
 import po.ClientPO;
 import dataenum.FindTypeClient;
 
@@ -11,14 +10,7 @@ import dataenum.FindTypeClient;
  * @author cylong
  * @version Oct 26, 2014 3:53:40 PM
  */
-public interface ClientDataService extends DataService {
-
-	/**
-	 * 添加一条客户信息
-	 * @param po
-	 * @return 处理结果
-	 */
-	public ResultMessage insert(ClientPO po);
+public interface ClientDataService extends CommonDataService<ClientPO> {
 
 	/**
 	 * 根据查找类型和关键字查找客户，不区分关键字的大小写
@@ -26,35 +18,4 @@ public interface ClientDataService extends DataService {
 	 * @return 客户持久化数据
 	 */
 	public ArrayList<ClientPO> find(String keywords, FindTypeClient type);
-
-	/**
-	 * 以ID精确查找客户
-	 * @param ID
-	 * @return ClientPO
-	 * @author cylong
-	 * @version 2014年11月27日  下午10:55:27
-	 */
-	public ClientPO find(String ID);
-	/**
-	 * 以ID删除客户信息
-	 * @param ID
-	 * @return 处理结果
-	 */
-	public ResultMessage delete(String ID);
-
-	/**
-	 * 更新客户信息
-	 * @param po
-	 * @return 处理结果
-	 */
-	public ResultMessage update(ClientPO po);
-	
-	/**
-	 * 显示全部的客户
-	 * @return 返回
-	 * @author cylong
-	 * @version Nov 8, 2014  9:36:35 PM
-	 */
-	public ArrayList<ClientPO> show();
-
 }

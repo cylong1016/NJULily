@@ -22,6 +22,14 @@ import dataenum.FindTypeAccount;
 public interface AccountBLService {
 
 	/**
+	 * 界面创建账户的时候获取可用ID
+	 * @return ID（供界面显示）
+	 * @author cylong
+	 * @version 2014年11月30日 下午1:15:10
+	 */
+	public String getID();
+
+	/**
 	 * 显示全部账户
 	 * @return 返回全部客户的ArrayList
 	 */
@@ -48,10 +56,10 @@ public interface AccountBLService {
 
 	/**
 	 * 按名称删除账户
-	 * @param name
+	 * @param ID
 	 * @return 成功与否
 	 */
-	public ResultMessage delete(String name);
+	public ResultMessage delete(String ID);
 
 	/**
 	 * 更新账户

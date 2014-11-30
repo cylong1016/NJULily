@@ -2,7 +2,6 @@ package dataservice;
 
 import java.util.ArrayList;
 
-import message.ResultMessage;
 import po.AccountPO;
 import dataenum.FindTypeAccount;
 
@@ -11,14 +10,7 @@ import dataenum.FindTypeAccount;
  * @author cylong
  * @version Oct 26, 2014 3:53:26 PM
  */
-public interface AccountDataService extends DataService {
-
-	/**
-	 * 添加一条账户信息
-	 * @param po
-	 * @return 处理结果
-	 */
-	public ResultMessage insert(AccountPO po);
+public interface AccountDataService extends CommonDataService<AccountPO> {
 
 	/**
 	 * 以keywords查看账户信息，type是以什么方式查找，null代表模糊查找
@@ -26,36 +18,5 @@ public interface AccountDataService extends DataService {
 	 * @return 账户持久化对象
 	 */
 	public ArrayList<AccountPO> find(String keywords, FindTypeAccount type);
-	
-	/**
-	 * 以账户名精确查找
-	 * @param name 帐户名
-	 * @return AccountPO
-	 * @author cylong
-	 * @version 2014年11月30日  上午2:37:18
-	 */
-	public AccountPO find(String name);
-
-	/**
-	 * 以账户名称删除账户
-	 * @param name
-	 * @return 处理结果
-	 */
-	public ResultMessage delete(String name);
-
-	/**
-	 * 更新账户
-	 * @param po
-	 * @return 处理结果
-	 */
-	public ResultMessage update(AccountPO po);
-
-	/**
-	 * 得到全部的账户信息
-	 * @return 全部的AccountPO
-	 * @author cylong
-	 * @version 2014年11月30日 上午2:30:33
-	 */
-	public ArrayList<AccountPO> show();
 
 }

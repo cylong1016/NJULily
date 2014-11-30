@@ -9,7 +9,7 @@ import po.PersistentObject;
  * @author cylong
  * @version Oct 26, 2014 3:50:39 PM
  */
-public interface RecordDataService extends DataService {
+public interface RecordDataService {
 
 	/**
 	 * 查看销售明细表

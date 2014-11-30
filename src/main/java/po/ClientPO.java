@@ -50,8 +50,7 @@ public class ClientPO extends PersistentObject {
 	 * @author cylong
 	 * @version Oct 26, 2014 12:55:54 PM
 	 */
-	public ClientPO(String ID, ClientCategory category, ClientLevel level, String name, String phone, String address, 
-			String post, String email, double receivableLimit, String salesman) {
+	public ClientPO(String ID, ClientCategory category, ClientLevel level, String name, String phone, String address, String post, String email, double receivableLimit, String salesman) {
 		super(ID);
 		this.category = category;
 		this.level = level;
@@ -62,6 +61,16 @@ public class ClientPO extends PersistentObject {
 		this.email = email;
 		this.receivableLimit = receivableLimit;
 		this.salesman = salesman;
+	}
+
+	/**
+	 * 模糊查询时候使用
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return ID + category + level + name + phone + address + post + email + receivable + payable + receivableLimit
+				+ salesman;
 	}
 
 	public ClientCategory getCategory() {

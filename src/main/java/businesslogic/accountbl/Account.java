@@ -46,23 +46,23 @@ public class Account implements AccountInfo_AccountBill {
 	}
 
 	public ResultMessage add(AccountVO vo) {
-		po = new AccountPO(vo.name, vo.money);
+		po = new AccountPO(vo.ID, vo.name, vo.money);
 		return accountData.insert(po);
 	}
 
 	/**
 	 * 以帐户名删除账户
-	 * @param name 帐户名
+	 * @param ID 帐户名
 	 * @return 处理结果
 	 * @author cylong
 	 * @version 2014年11月30日 上午2:40:10
 	 */
-	public ResultMessage delete(String name) {
-		po = accountData.find(name);
+	public ResultMessage delete(String ID) {
+		po = accountData.find(ID);
 		if (po == null) {
 			return ResultMessage.FAILURE;
 		}
-		return accountData.delete(name);
+		return accountData.delete(ID);
 	}
 
 	/**
@@ -77,7 +77,7 @@ public class Account implements AccountInfo_AccountBill {
 		if (po == null) {
 			return ResultMessage.FAILURE;
 		}
-		po = new AccountPO(vo.name, vo.money);
+		po = new AccountPO(vo.ID, vo.name, vo.money);
 		return accountData.update(po);
 	}
 
@@ -105,10 +105,20 @@ public class Account implements AccountInfo_AccountBill {
 	 * @version 2014年11月30日 上午2:35:43
 	 */
 	public AccountVO poToVO(AccountPO po) {
+		String ID = po.getID();
 		String name = po.getName();
 		double money = po.getMoney();
-		AccountVO vo = new AccountVO(name, money);
+		AccountVO vo = new AccountVO(ID, name, money);
 		return vo;
+	}
+
+	/**
+	 * @return 新建账户时候可用的ID
+	 * @author cylong
+	 * @version 2014年11月30日 下午1:15:58
+	 */
+	public String getID() {
+		return accountData.getID();
 	}
 
 }

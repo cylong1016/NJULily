@@ -14,7 +14,7 @@ import po.SalesPO;
  * @author cylong
  * @version Oct 26, 2014 3:51:31 PM
  */
-public interface ApprovalDataService extends DataService {
+public interface ApprovalDataService {
 
 	/**
 	 * 更新一个需要审批的销售（销售退货）单

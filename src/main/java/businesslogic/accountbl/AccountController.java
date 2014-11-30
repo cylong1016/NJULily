@@ -48,8 +48,8 @@ public class AccountController implements AccountBLService {
 	 * @see blservice.accountblservice.AccountBLService#delete(java.lang.String)
 	 */
 	@Override
-	public ResultMessage delete(String name) {
-		return account.delete(name);
+	public ResultMessage delete(String ID) {
+		return account.delete(ID);
 	}
 
 	/**
@@ -58,6 +58,14 @@ public class AccountController implements AccountBLService {
 	@Override
 	public ResultMessage update(AccountVO vo) {
 		return account.update(vo);
+	}
+
+	/**
+	 * @see blservice.accountblservice.AccountBLService#getID()
+	 */
+	@Override
+	public String getID() {
+		return account.getID();
 	}
 
 }

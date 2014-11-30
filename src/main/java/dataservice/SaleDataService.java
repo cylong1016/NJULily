@@ -2,7 +2,6 @@ package dataservice;
 
 import java.util.ArrayList;
 
-import message.ResultMessage;
 import po.SalesPO;
 import dataenum.BillType;
 
@@ -11,7 +10,7 @@ import dataenum.BillType;
  * @author cylong
  * @version Oct 26, 2014 3:52:59 PM
  */
-public interface SaleDataService extends DataService {
+public interface SaleDataService extends CommonDataService<SalesPO> {
 
 	/**
 	 * 按照是销售单还是销售退货单返回ID
@@ -23,37 +22,10 @@ public interface SaleDataService extends DataService {
 	public String getID(BillType type);
 
 	/**
-	 * 插入账单
-	 * @param po
-	 * @return 处理结果
-	 */
-	public ResultMessage insert(SalesPO po);
-
-	/**
-	 * 以ID查找账单
-	 * @param ID
-	 * @return 销售（销售退货）单
-	 */
-	public SalesPO find(String ID);
-
-	/**
-	 * 以ID删除账单
-	 * @param ID
-	 * @return 处理结果
-	 */
-	public ResultMessage delete(String ID);
-
-	/**
-	 * 更新账单
-	 * @param po
-	 * @return 处理结果
-	 */
-	public ResultMessage update(SalesPO po);
-
-	/**
-	 * @return 全部的销售（销售退货）单
+	 * @param type 销售单或者销售退货单
+	 * @return 该类型单据的全部的ID
 	 * @author cylong
-	 * @version 2014年11月28日 上午11:48:41
+	 * @version 2014年11月30日 上午11:50:06
 	 */
-	public ArrayList<SalesPO> getAllSaleBills();
+	public ArrayList<String> getAllID(BillType type);
 }

@@ -8,6 +8,10 @@
 		<path>data/UserList.ser</path>
 		<initID>10000</initID>
 	</UserData>
+	<AccountData>
+		<path>data/AccountList.ser</path>
+		<initID>10000</initID>
+	</AccountData>
 	<CommoditySortData>
 		<path>data/CommoditySortList.ser</path>
 		<initID>10000</initID>

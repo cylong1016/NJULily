@@ -10,14 +10,17 @@ package po;
  * @author Zing
  * @version 2014年10月31日下午9:28:20
  */
-public class AccountPO {
+public class AccountPO extends PersistentObject {
 
+	/** serialVersionUID */
+	private static final long serialVersionUID = 4686479473110791245L;
 	/** 账户名 */
 	private String name;
 	/** 账户余额 */
 	private double money;
 
-	public AccountPO(String name, double money) {
+	public AccountPO(String ID, String name, double money) {
+		super(ID);
 		this.name = name;
 		this.money = money;
 	}
@@ -36,6 +39,15 @@ public class AccountPO {
 
 	public double getMoney() {
 		return money;
+	}
+
+	/**
+	 * 模糊查询时候使用
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return this.ID + this.name + this.money;
 	}
 
 }
