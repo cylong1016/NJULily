@@ -27,6 +27,14 @@ public class Account implements AccountInfo_AccountBill {
 		this.accountData = new AccountData();
 	}
 
+	/**
+	 * 查找账户
+	 * @param keywords 关键字
+	 * @param type 查找类型； null为模糊查找
+	 * @return 返回满足条件的全部账户
+	 * @author cylong
+	 * @version 2014年12月1日 上午2:22:44
+	 */
 	public ArrayList<AccountVO> find(String keywords, FindTypeAccount type) {
 		ArrayList<AccountPO> AccountsPO = accountData.find(keywords, type);
 		ArrayList<AccountVO> AccountsVO = new ArrayList<AccountVO>();
@@ -38,14 +46,21 @@ public class Account implements AccountInfo_AccountBill {
 		return AccountsVO;
 	}
 
+	/**
+	 * 添加账户
+	 * @param vo AccountVO
+	 * @return 处理信息
+	 * @author cylong
+	 * @version 2014年12月1日 上午2:23:30
+	 */
 	public ResultMessage add(AccountVO vo) {
 		po = new AccountPO(vo.ID, vo.name, vo.money);
 		return accountData.insert(po);
 	}
 
 	/**
-	 * 以帐户名删除账户
-	 * @param ID 帐户名
+	 * 以帐户ID删除账户
+	 * @param ID 帐户ID
 	 * @return 处理结果
 	 * @author cylong
 	 * @version 2014年11月30日 上午2:40:10
@@ -75,8 +90,8 @@ public class Account implements AccountInfo_AccountBill {
 	}
 
 	/**
-	 * @return
-	 * @author cylong 全部的AccountVO
+	 * @return 全部的AccountVO
+	 * @author cylong
 	 * @version 2014年11月30日 上午2:23:57
 	 */
 	public ArrayList<AccountVO> show() {

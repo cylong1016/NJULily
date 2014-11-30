@@ -17,10 +17,12 @@ public class User implements UserInfo_Client, UserInfo_AccountBill {
 
 	private UserDataService userData;
 	private DefineList<UserPO> currentUser;
+	private DefineList<UserPO> currentUserTemp;
 	private UserPO current;	// 当前登录的用户
 
 	public User() {
 		currentUser = new DefineList<UserPO>("data/loginInfo.ser");
+		currentUserTemp = new DefineList<UserPO>("data/loginInfoTemp.ser");
 		//		try {
 		//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
 		//			this.userData = factory.getUserData();
@@ -54,9 +56,11 @@ public class User implements UserInfo_Client, UserInfo_AccountBill {
 		} else if (!loginInfo.password.equals(current.getPassword())) {
 			return ResultMessage.FAILURE;
 		}
-		if (loginInfo.isRemembered) {	// 保存当前登录的用户
+		if (loginInfo.isRemembered) {	// 保存当前登录的用户的帐户名
 			currentUser.clear();
 			currentUser.add(current);
+			currentUserTemp.clear();
+			currentUserTemp.add(current);	// 记录当前登录的用户的信息
 		} else {	// 删除记住的账号
 			currentUser.clear();
 		}
@@ -70,7 +74,7 @@ public class User implements UserInfo_Client, UserInfo_AccountBill {
 	 * @version 2014年11月29日 下午9:25:38
 	 */
 	public String returnUserID() {
-		if (currentUser.size() > 0) {
+		if (!currentUser.isEmpty()) {
 			return currentUser.get(0).getID();
 		}
 		return null;
@@ -126,14 +130,6 @@ public class User implements UserInfo_Client, UserInfo_AccountBill {
 	}
 
 	/**
-	 * @see businesslogic.clientbl.UserInfo_Client#getUserIden()
-	 */
-	@Override
-	public UserIdentity getUserIden() {
-		return current.getIden();
-	}
-
-	/**
 	 * UserVO转化成UserPO
 	 * @param vo UserVO
 	 * @return UserPO
@@ -170,6 +166,14 @@ public class User implements UserInfo_Client, UserInfo_AccountBill {
 	 */
 	@Override
 	public String getUserID() {
-		return current.getID();
+		return currentUserTemp.get(0).getID();
+	}
+
+	/**
+	 * @see businesslogic.clientbl.UserInfo_Client#getUserIden()
+	 */
+	@Override
+	public UserIdentity getUserIden() {
+		return currentUserTemp.get(0).getIden();
 	}
 }
