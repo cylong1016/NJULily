@@ -27,6 +27,8 @@ public class SaleDetailList {
 	
 	public SaleInfo_Record info;
 	
+	SaleDetailListItem item;
+	
 	public SaleDetailList(RecordInputInfo info) {
 		this.clientName = info.clientName;
 		this.salesman = info.salesman;

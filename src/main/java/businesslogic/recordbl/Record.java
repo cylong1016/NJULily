@@ -31,6 +31,9 @@ public class Record {
 		this.beginDate = info.beginDate;
 		this.endDate = info.endDate;
 		saleDetailList = new SaleDetailList(info);
+		if () {
+			
+		}
 		saleDetailList.getSaleDetail(getID());
 		return null;
 	}

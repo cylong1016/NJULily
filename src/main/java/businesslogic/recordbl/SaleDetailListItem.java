@@ -1,6 +1,10 @@
 package businesslogic.recordbl;
 
+import businesslogic.recordbl.info.SaleInfo_Record;
+import businesslogic.salebl.Sale;
+
 public class SaleDetailListItem {
+	public String ID;
 	/** 商品名称 */
 	public String name;
 	/** 商品型号 */
@@ -11,5 +15,11 @@ public class SaleDetailListItem {
 	public double price;
 	/** 总价 */
 	public double total;
+	
+	public SaleInfo_Record info;
+	
+	public SaleDetailListItem(String ID) {
+		info = new Sale();
+	}
 
 }

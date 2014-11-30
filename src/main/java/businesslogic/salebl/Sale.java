@@ -210,6 +210,12 @@ public class Sale implements SaleInfo_Inventory, SaleInfo_Record{
 			String salesman, Storage storage, String commodityName) {
 		SaleDataService saleData = getSaleData();
 		ArrayList<String> IDs = saleData.getAllID();
+		for (int i = 0; i < IDs.size(); i++) {
+			SalesPO po = saleData.find(IDs.get(i));
+			if (po.getID().contains(ID)) {
+				
+			}
+		}
 		return null;
 	}
 

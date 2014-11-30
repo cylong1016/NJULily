@@ -12,12 +12,23 @@ package vo;
  */
 public class SaleDetailVO {
 	public String date;
-	/** 商品 */
-	public CommodityItemVO commodity;
+	/** 商品名称 */
+	public String name;
+	/** 商品型号 */
+	public String type;
+	/** 商品数量 */
+	public int number;
+	/** 商品 单价 */
+	public double price;
+	/** 总价 */
+	public double total;
 	
 	
-	public SaleDetailVO(String date, CommodityItemVO commodity) {
-		this.date = date;
-		this.commodity = commodity;
+	public SaleDetailVO(String date, String name, String type, int number, double price) {
+		this.name = name;
+		this.type = type;
+		this.number = number;
+		this.price = price;
+		this.total = price * number;
 	}
 }
