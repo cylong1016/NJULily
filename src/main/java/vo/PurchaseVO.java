@@ -3,6 +3,7 @@ package vo;
 import java.util.ArrayList;
 
 import dataenum.BillState;
+import dataenum.BillType;
 import dataenum.Storage;
 
 
@@ -16,7 +17,7 @@ import dataenum.Storage;
  * @author Zing
  * @version 2014年10月31日下午4:55:34
  */
-public class PurchaseVO {
+public class PurchaseVO extends ValueObject{
 	
 	/** 单据编号 */
 	public String id;	
@@ -32,12 +33,13 @@ public class PurchaseVO {
 	public double sumPrice;
 	/** 备注 */
 	public String remark;
+	public BillType type;
 	/** 单据状态 */
 	public BillState state;
 	
-	public PurchaseVO(String ID, String client, String user,  Storage storage, 
+	public PurchaseVO(BillType type, String ID, String client, String user,  Storage storage, 
 			ArrayList<CommodityItemVO> commodities, double sumPrice, BillState state) {
-		
+		this.type = type; 
 		this.id = ID;
 		this.client = client;
 		this.user = user;

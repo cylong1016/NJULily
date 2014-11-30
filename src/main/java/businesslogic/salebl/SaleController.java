@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import message.ResultMessage;
 import vo.CommodityItemVO;
-import vo.ValueObject;
+import vo.SalesVO;
 import blservice.saleblservice.SaleBLService;
 import blservice.saleblservice.SaleInputInfo;
 import dataenum.BillType;
@@ -32,7 +32,7 @@ public class SaleController implements SaleBLService {
 	/**
 	 * @see blservice.saleblservice.SaleBLService#show()
 	 */
-	public ArrayList<ValueObject> show(BillType type) {
+	public ArrayList<SalesVO> show(BillType type) {
 		return sale.show(type);
 	}
 

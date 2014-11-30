@@ -15,7 +15,7 @@ import dataenum.Date;
  * @version 2014年11月2日下午3:50:31
  * TODO 这个要怎么弄……
  */
-public class BussinessStateVO {
+public class BusinessStateVO {
 	/** 起始时间 */
 	public Date begin;
 	/** 结束时间 */
@@ -45,7 +45,7 @@ public class BussinessStateVO {
 	/** 利润 */
 	public double profit;
 	
-	public BussinessStateVO(Date begin, Date end){
+	public BusinessStateVO(Date begin, Date end){
 		this.begin = begin;
 		this.end = end;
 	}

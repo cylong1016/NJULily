@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * @author Zing
  * @version 2014年11月2日下午3:45:41
  */
-public class BussinessProVO {
+public class BusinessProVO {
 	
 	public ArrayList<SalesVO> sale;
 	
@@ -26,7 +26,7 @@ public class BussinessProVO {
 	
 	public ArrayList<InventoryBillVO> inventoryBill;
 	
-	public BussinessProVO(ArrayList<SalesVO> sale, ArrayList<PurchaseVO> purchase, ArrayList<AccountBillVO> accountBill, 
+	public BusinessProVO(ArrayList<SalesVO> sale, ArrayList<PurchaseVO> purchase, ArrayList<AccountBillVO> accountBill, 
 			ArrayList<CashBillVO> cashBill, ArrayList<InventoryBillVO> inventoryBill) {
 		this.sale = sale;
 		this.purchase = purchase;

@@ -2,11 +2,13 @@ package businesslogic.accountbillbl;
 
 import java.util.HashMap;
 
+import businesslogic.recordbl.info.ValueObjectInfo_Record;
 import message.ResultMessage;
 import po.UserPO;
+import vo.AccountBillVO;
 import dataenum.BillType;
 
-public class AccountBill {
+public class AccountBill implements ValueObjectInfo_Record<AccountBillVO>{
 
 	/** 编号 */
 	private String id;

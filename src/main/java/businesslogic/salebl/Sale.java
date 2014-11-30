@@ -5,14 +5,12 @@ import java.util.ArrayList;
 
 import message.ResultMessage;
 import po.CommodityItemPO;
-import po.CommodityPO;
 import po.SalesPO;
 import vo.CommodityItemVO;
 import vo.SalesVO;
 import vo.ValueObject;
 import blservice.saleblservice.SaleInputInfo;
 import businesslogic.clientbl.Client;
-import businesslogic.commoditybl.Commodity;
 import businesslogic.inventorybl.info.SaleInfo_Inventory;
 import businesslogic.recordbl.info.SaleInfo_Record;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
@@ -28,7 +26,7 @@ import dataservice.SaleDataService;
  * @author Zing
  * @version Nov 15, 2014 10:07:38 AM
  */
-public class Sale extends POToVO implements SaleInfo_Inventory, SaleInfo_Record, ValueObjectInfo_Record{
+public class Sale extends POToVO implements SaleInfo_Inventory, SaleInfo_Record, ValueObjectInfo_Record<SalesVO>{
 
 	/** 销售单 */
 	private SaleList list;
@@ -104,12 +102,10 @@ public class Sale extends POToVO implements SaleInfo_Inventory, SaleInfo_Record,
 	 * @author cylong
 	 * @version 2014年11月28日 下午8:36:47
 	 */
-	// TODO 按类型分吧？
-	// 这样改行不行？
-	public ArrayList<ValueObject> show(BillType type) {
-		ArrayList<ValueObject> billsVO = new ArrayList<ValueObject>();
+	public ArrayList<SalesVO> show(BillType type) {
+		ArrayList<SalesVO> billsVO = new ArrayList<SalesVO>();
 		SaleDataService saleData = getSaleData();
-		ArrayList<SalesPO> billsPO = saleData.getAllSaleBills();
+		ArrayList<SalesPO> billsPO = saleData.show();
 		for(int i = 0; i < billsPO.size(); i++) {
 			SalesPO po = billsPO.get(i);
 			SalesVO vo = poToVo(po);
@@ -223,7 +219,7 @@ public class Sale extends POToVO implements SaleInfo_Inventory, SaleInfo_Record,
 
 	public int getNumber(String ID) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 	public double getPrice(String ID) {

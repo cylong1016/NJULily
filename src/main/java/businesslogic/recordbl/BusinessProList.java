@@ -8,7 +8,6 @@ import businesslogic.inventorybl.Inventory;
 import businesslogic.purchasebl.Purchase;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
 import businesslogic.salebl.Sale;
-import vo.SaleDetailVO;
 import vo.ValueObject;
 import dataenum.BillType;
 import dataenum.Storage;
@@ -72,9 +71,12 @@ public class BusinessProList {
 		}
 		ArrayList<ValueObject> VOs = new ArrayList<ValueObject>();
 		for (int i = 0; i < IDs.size(); i++) {
-			String ID = info.getID(ID, clientName, salesman, storage)
+			String ID = info.getID(IDs.get(i), clientName, salesman, storage);
+			if (ID != null) {
+				VOs = info.show(billType);
+				return VOs;
+			}
 		}
-		return VOs;
 		return null;
 	}
 

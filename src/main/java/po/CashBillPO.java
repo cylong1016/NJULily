@@ -19,7 +19,7 @@ public class CashBillPO extends PersistentObject {
 	 */
 	private static final long serialVersionUID = 1L;
 	/** 编号 */
-	private String id;
+	private String ID;
 	/** 操作员 */
 	private String user;
 	/** 银行账户 */
@@ -27,17 +27,17 @@ public class CashBillPO extends PersistentObject {
 	/** 条目清单 */
 	private ArrayList<CashItemPO> bills;
 	/** 汇款总额 */
-	private double sumMoney;
+	private double total;
 	/** 单据状态 */
 	private BillState state;
 
-	public CashBillPO(String id, String user, String account, ArrayList<CashItemPO> bills, double sumMoney) {
-		super(id);
-		this.id = id;
+	public CashBillPO(String ID, String user, String account, ArrayList<CashItemPO> bills, double total) {
+		super(ID);
+		this.ID = ID;
 		this.user = user;
 		this.account = account;
 		this.bills = bills;
-		this.sumMoney = sumMoney;
+		this.total = total;
 		this.state = BillState.APPROVALING;
 	}
 
@@ -53,8 +53,8 @@ public class CashBillPO extends PersistentObject {
 		return serialVersionUID;
 	}
 
-	public String getId() {
-		return id;
+	public String getID() {
+		return ID;
 	}
 
 	public String getUser() {
@@ -69,8 +69,8 @@ public class CashBillPO extends PersistentObject {
 		return bills;
 	}
 
-	public double getSumMoney() {
-		return sumMoney;
+	public double getTotal() {
+		return total;
 	}
 
 }

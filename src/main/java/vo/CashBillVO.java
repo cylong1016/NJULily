@@ -11,27 +11,27 @@ import dataenum.BillState;
  * @author Zing
  * @version 2014年10月31日下午5:56:51
  */
-public class CashBillVO {
+public class CashBillVO extends ValueObject{
 	
 	/** 编号 */
 	public String id;
 	/** 操作员 */
-	public UserVO user;
+	public String user;
 	/** 银行账户 */
-	public AccountVO account;
+	public String account;
 	/**  条目清单*/
 	public ArrayList<CashItemVO> bills;
 	/** 汇款总额 */
-	public int sumMoney;
+	public double total;
 	/** 单据状态 */
 	public BillState state;
 	
-	public CashBillVO(String id, UserVO user, AccountVO account, ArrayList<CashItemVO> bills, int sumMoney, BillState state) {
+	public CashBillVO(String id, String user, String account, ArrayList<CashItemVO> bills, double total, BillState state) {
 		this.id = id;
 		this.user = user;
 		this.account = account;
 		this.bills = bills;
-		this.sumMoney = sumMoney;
+		this.total = total;
 		this.state = state;
 	}
 

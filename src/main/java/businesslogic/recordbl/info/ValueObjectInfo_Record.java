@@ -6,9 +6,9 @@ import dataenum.BillType;
 import dataenum.Storage;
 import vo.ValueObject;
 
-public interface ValueObjectInfo_Record {
+public interface ValueObjectInfo_Record<VO extends ValueObject> {
 	
-	public ArrayList<ValueObject> show(BillType billType);
+	public ArrayList<VO> show(BillType billType);
 	
 	public String getID(String ID, String clientName, String salesman, Storage storage);
 }

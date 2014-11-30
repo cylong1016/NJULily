@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import blservice.recordblservice.RecordBLService;
 import blservice.recordblservice.RecordInputInfo;
 import message.ResultMessage;
+import vo.BusinessStateVO;
 import vo.SaleDetailVO;
 import vo.ValueObject;
 
@@ -40,7 +41,7 @@ public class RecordController implements RecordBLService{
 		return record.copyRed(valueRecord);
 	}
 
-	public ResultMessage businessState(RecordInputInfo info) {
+	public BusinessStateVO businessState(RecordInputInfo info) {
 		return record.businessState(info);
 	}
 

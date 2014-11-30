@@ -10,11 +10,11 @@ public class CashItemVO {
 	/** 条目名 */
 	public String name;
 	/** 金额 */
-	public int money;
+	public double money;
 	/** 备注 */
 	public String remark;
 	
-	public CashItemVO(String name, int money, String remark){
+	public CashItemVO(String name, double money, String remark){
 		this.name = name;
 		this.money = money;
 		this.remark = remark;

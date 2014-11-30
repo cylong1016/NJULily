@@ -4,6 +4,7 @@ import java.rmi.Naming;
 import java.util.ArrayList;
 
 import businesslogic.promotionbl.InventoryInfo_Promotion;
+import businesslogic.recordbl.info.ValueObjectInfo_Record;
 import businesslogic.salebl.POToVO;
 import config.RMI;
 import po.CommodityItemPO;
@@ -14,11 +15,12 @@ import vo.InventoryCheckVO;
 import vo.ValueObject;
 import dataenum.BillState;
 import dataenum.BillType;
+import dataenum.Storage;
 import dataservice.DataFactoryService;
 import dataservice.InventoryDataService;
 import message.ResultMessage;
 
-public class Inventory extends POToVO implements InventoryInfo_Promotion{
+public class Inventory extends POToVO implements InventoryInfo_Promotion, ValueObjectInfo_Record<InventoryBillVO>{
 	
 	private BillList list;
 		
@@ -69,14 +71,8 @@ public class Inventory extends POToVO implements InventoryInfo_Promotion{
 	
 	
 	public ArrayList<InventoryBillVO> show(BillType type) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	public ArrayList<ValueObject> show(BillType type, int a){
-		ArrayList<ValueObject> VOs = new ArrayList<ValueObject>();
-		InventoryDataService inventoryData = getInventoryData();
-		ArrayList<InventoryBillPO> POs = inventoryData.getAllBills(BillType type);
+		ArrayList<InventoryBillVO> VOs = new ArrayList<InventoryBillVO>();
+		ArrayList<InventoryBillPO> POs = getInventoryData().show(type);
 		for (int i = 0; i < POs.size(); i++) {
 			InventoryBillPO po = POs.get(i);
 			InventoryBillVO vo = poToVo(po);
@@ -92,7 +88,7 @@ public class Inventory extends POToVO implements InventoryInfo_Promotion{
 		String remark = po.getRemark();
 		BillState state = po.getState();
 		InventoryBillVO vo = new InventoryBillVO(ID, billType, commodities, remark, state);
-		return null;
+		return vo;
 	}
 
 	public void addCommodity(String ID, int number) {
@@ -119,6 +115,12 @@ public class Inventory extends POToVO implements InventoryInfo_Promotion{
 
 	public ArrayList<InventoryBillVO> getGifts() {
 		return show(BillType.GIFT);
+	}
+
+	public String getID(String ID, String clientName, String salesman,
+			Storage storage) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

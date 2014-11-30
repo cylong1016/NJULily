@@ -2,6 +2,7 @@ package blservice.recordblservice;
 
 import java.util.ArrayList;
 
+import vo.BusinessStateVO;
 import vo.SaleDetailVO;
 import vo.ValueObject;
 import message.ResultMessage;
@@ -58,5 +59,5 @@ public interface RecordBLService {
 	 * @param kind
 	 * @return
 	 */
-	public ResultMessage businessState(RecordInputInfo info);
+	public BusinessStateVO businessState(RecordInputInfo info);
 }

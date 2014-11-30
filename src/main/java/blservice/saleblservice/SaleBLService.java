@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import message.ResultMessage;
 import vo.CommodityItemVO;
-import vo.ValueObject;
+import vo.SalesVO;
 import dataenum.BillType;
 
 /**
@@ -28,7 +28,7 @@ public interface SaleBLService {
 	 * @author cylong
 	 * @version 2014年11月28日 下午4:14:35
 	 */
-	public ArrayList<ValueObject> show(BillType type);
+	public ArrayList<SalesVO> show(BillType type);
 
 	/**
 	 * 新建销售（销售退货）单的时候返回给界面显示单据的ID

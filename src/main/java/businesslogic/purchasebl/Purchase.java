@@ -6,9 +6,8 @@ import java.util.ArrayList;
 import config.RMI;
 import blservice.purchaseblservice.PurInputInfo;
 import businesslogic.clientbl.Client;
-import businesslogic.commoditybl.Commodity;
-import businesslogic.salebl.CommodityInfo_Sale;
-import po.CommodityItemPO;
+import businesslogic.recordbl.info.ValueObjectInfo_Record;
+import businesslogic.salebl.POToVO;
 import po.PurchasePO;
 import message.ResultMessage;
 import vo.CommodityItemVO;
@@ -19,7 +18,7 @@ import dataenum.Storage;
 import dataservice.DataFactoryService;
 import dataservice.PurchaseDataService;
 
-public class Purchase {
+public class Purchase extends POToVO implements ValueObjectInfo_Record<PurchaseVO>{
 	
 	private PurchaseList list;
 	
@@ -44,10 +43,14 @@ public class Purchase {
 		} 
 	}
 	
-	public ArrayList<PurchaseVO> show() {
-		PurchaseDataService purchaseData = getPurData();
-		// TODO 等着getAllBill的方法
-		return null;
+	public ArrayList<PurchaseVO> show(BillType type) {
+		ArrayList<PurchaseVO> VOs = new ArrayList<PurchaseVO>();
+		ArrayList<PurchasePO> POs = getPurData().show();
+		for (int i = 0; i < POs.size(); i++) {
+			PurchaseVO vo = poToVO(POs.get(i));
+			VOs.add(vo);
+		}
+		return VOs;
 	}
 
 	public String getID(BillType type) {
@@ -99,27 +102,14 @@ public class Purchase {
 		double sumPrice = po.getSumPrice();
 		BillType type = po.getType();
 		BillState state = po.getState();
-		PurchaseVO vo = new PurchaseVO(ID, client, user, storage, commodities, sumPrice, state);
+		PurchaseVO vo = new PurchaseVO(type, ID, client, user, storage, commodities, sumPrice, state);
 		return vo;
 		
 	}
-	
-	private ArrayList<CommodityItemVO> itemPOToVO(ArrayList<CommodityItemPO> itemsPO){
-		ArrayList<CommodityItemVO> itemsVO = new ArrayList<CommodityItemVO>();
-		for(int i = 0; i < itemsPO.size(); i++) {
-			CommodityItemPO po = itemsPO.get(i);
-			String ID = po.getID();
-			int number = po.getNumber();
-			double price = po.getPrice();
-			String remark = po.getRemark();
-			CommodityInfo_Sale info = new Commodity();
-			String name = info.getName(ID);
-			String type = info.getType(ID);
-			CommodityItemVO vo = new CommodityItemVO(ID, number, price, remark, name, type);
-			itemsVO.add(vo);
-		}
-		return itemsVO;
-	}
 
+	public String getID(String ID, String clientName, String salesman,
+			Storage storage) {
+		return null;
+	}
 
 }

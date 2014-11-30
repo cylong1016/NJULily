@@ -8,6 +8,7 @@ import java.util.Date;
 
 import blservice.recordblservice.RecordInputInfo;
 import message.ResultMessage;
+import vo.BusinessStateVO;
 import vo.SaleDetailVO;
 import vo.ValueObject;
 
@@ -45,7 +46,7 @@ public class Record {
 		this.beginDate = info.beginDate;
 		this.endDate = info.endDate;
 		bussinessProList = new BusinessProList(info.billType, info.clientName, info.salesman, info.storage);
-		return null;
+		return bussinessProList.getBusinessPro(getID());
 	}
 
 	public ResultMessage red(ValueObject valueRecord) {
@@ -58,8 +59,11 @@ public class Record {
 		return null;
 	}
 
-	public ResultMessage businessState(RecordInputInfo info) {
-		// TODO Auto-generated method stub
+	public BusinessStateVO businessState(RecordInputInfo info) {	
+		this.beginDate = info.beginDate;
+		this.endDate = info.endDate;
+		bussinessStateList = new BusinessStateList();
+		
 		return null;
 	}
 
