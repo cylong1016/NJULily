@@ -12,8 +12,10 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import po.ClientPO;
 import message.ResultMessage;
 import dataenum.ClientCategory;
+import dataenum.FindTypeClient;
 import businesslogic.clientbl.ClientController;
 import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.myui.MyBackground;
@@ -150,11 +152,6 @@ public class ClientManagementUI extends JLabel implements ActionListener{
 			window_add.setVisible(true);
 		}
 		
-		if(events.getSource() == button_cam){
-			ClientDetailUI window_cam = new ClientDetailUI();
-			window_cam.setVisible(true);
-		}
-		
 		/////////////////////////////FUNCTION SHOWALL////////////////////////////
 		
 		if(events.getSource() == button_showAll){
@@ -172,7 +169,7 @@ public class ClientManagementUI extends JLabel implements ActionListener{
 				ClientVO cvo = controller.show().get(i);
 				
 				String[] str = {cvo.ID, getCategory(cvo.category.toString()), getLevel(cvo.level.toString())
-						, cvo.name,"",String.valueOf(cvo.receivable - cvo.payable)
+						, cvo.name,cvo.salesman,String.valueOf(cvo.receivable - cvo.payable)
 						,String.valueOf(cvo.receivable), String.valueOf(cvo.payable),String.valueOf(cvo.receivableLimit)};
 				tableModel.addRow(str);
 				rowNum = i;
@@ -194,8 +191,11 @@ public class ClientManagementUI extends JLabel implements ActionListener{
 		}
 		
 		if(events.getSource() == button_delete){
+			
 			controller = new ClientController();
+			
 			ResultMessage rm = controller.deletClient(deleteID);
+			
 			if(rm.equals(ResultMessage.SUCCESS)){
 				WarningFrame wp = new WarningFrame("已成功删除该客户！");
 				wp.setVisible(true);
@@ -205,6 +205,25 @@ public class ClientManagementUI extends JLabel implements ActionListener{
 				wp.setVisible(true);
 			}
 		}
+		
+		/////////////////////////////FUNCTION CAM////////////////////////////
+
+		if(events.getSource() == button_cam){
+			
+			controller = new ClientController();
+			
+			if(table.getSelectedRow() < 0){
+				WarningFrame wf = new WarningFrame("请选择要进行查看或修改的客户！");
+				wf.setVisible(true);
+			}else{
+				
+				ClientVO cvo = controller.findClient((String) table.getValueAt(table.getSelectedRow(), 0), FindTypeClient.ID).get(0);
+				
+				ClientDetailUI window_cam = new ClientDetailUI(cvo);
+				window_cam.setVisible(true);
+			}			
+		}
+		
 	}
 	
 	private String getCategory(String str){

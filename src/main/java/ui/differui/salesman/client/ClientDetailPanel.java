@@ -3,18 +3,21 @@ package ui.differui.salesman.client;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import businesslogic.clientbl.Client;
 import ui.commonui.myui.MyButton;
 import ui.commonui.myui.MyComboBox;
 import ui.commonui.myui.MyLabel;
 import ui.commonui.myui.MyPanel;
 import ui.commonui.myui.MyTable;
 import ui.commonui.myui.MyTextField;
+import vo.ClientVO;
 
 public class ClientDetailPanel extends MyPanel implements ActionListener{
 
@@ -23,8 +26,13 @@ public class ClientDetailPanel extends MyPanel implements ActionListener{
 	MyTextField textField_name, textField_phone, textField_address, textField_post, textField_email, textField_limit;
 	MyComboBox comboBox_category, comboBox_level;
 	MyButton button_modify, button_check;
+	String id, name, phone, address, post, email, limit; 
 	
-	public ClientDetailPanel(){
+	public void setInformation(){
+		
+	}
+	
+	public ClientDetailPanel(ClientVO cvo){
 			
 		int x1 = 80, y1 = 55, x2 = 390, y2 = -66;
 		
@@ -67,6 +75,7 @@ public class ClientDetailPanel extends MyPanel implements ActionListener{
 		
 		MyTextField textField_id = new MyTextField(110 + x1, 10 + y1, 200, 25);
 		textField_id.setEditable(false);
+		textField_id.setText(cvo.ID);
 		this.add(textField_id);
 		
 		
@@ -79,6 +88,7 @@ public class ClientDetailPanel extends MyPanel implements ActionListener{
 		
 		MyTextField textField_salesman = new MyTextField(110 + x2, 130 + y2, 200, 25);
 		textField_salesman.setEditable(false);
+		textField_salesman.setText(cvo.salesman);
 		this.add(textField_salesman);
 		
 		//ui for name
@@ -89,6 +99,7 @@ public class ClientDetailPanel extends MyPanel implements ActionListener{
 		this.add(word_name);
 		
 		textField_name = new MyTextField(110 + x1, 50 + y1, 200, 25);
+		textField_name.setText(cvo.name);
 		this.add(textField_name);
 		
 		//ui for category
@@ -100,6 +111,11 @@ public class ClientDetailPanel extends MyPanel implements ActionListener{
 		
 		String[] comboBoxStr = {"----------请选择一种分类----------", "进货商", "销售商", "进货商/销售商(两者都是)"};
 		comboBox_category = new MyComboBox(110 + x1, 90 + y1, 200, 25,comboBoxStr);
+		switch(cvo.category.toString()){
+			case "PURCHASE_PERSON" : comboBox_category.setSelectedIndex(1);break;
+			case "SALES_PERSON" : comboBox_category.setSelectedIndex(2);break;
+			default : comboBox_category.setSelectedIndex(3);break;
+		}
 		this.add(comboBox_category);
 		
 		//ui for level
@@ -110,8 +126,15 @@ public class ClientDetailPanel extends MyPanel implements ActionListener{
 		this.add(word_level);
 		
 		String[] comboBoxStr2 = {"----------请选择起始星级----------", "一星", "二星", "三星", "四星", "五星(VIP)"};
-		comboBox_category = new MyComboBox(110 + x1, 130 + y1, 200, 25,comboBoxStr2);
-		this.add(comboBox_category);
+		comboBox_level = new MyComboBox(110 + x1, 130 + y1, 200, 25,comboBoxStr2);
+		switch(cvo.level.toString()){
+			case "LEVEL_1" : comboBox_level.setSelectedIndex(1);break;
+			case "LEVEL_2" : comboBox_level.setSelectedIndex(2);break;
+			case "LEVEL_3" : comboBox_level.setSelectedIndex(3);break;
+			case "LEVEL_4" : comboBox_level.setSelectedIndex(4);break;
+			default : comboBox_level.setSelectedIndex(5);break;
+		}
+		this.add(comboBox_level);
 		
 		
 		//ui for receivableLimit
@@ -122,6 +145,7 @@ public class ClientDetailPanel extends MyPanel implements ActionListener{
 		this.add(word_limit);
 		
 		textField_limit = new MyTextField(110 + x1, 170 + y1, 180, 25);
+		textField_limit.setText(String.valueOf(cvo.receivableLimit));
 		this.add(textField_limit);
 		
 		JLabel word_limit_yuan = new JLabel("元",JLabel.CENTER);
@@ -138,6 +162,7 @@ public class ClientDetailPanel extends MyPanel implements ActionListener{
 		this.add(word_phone);
 		
 		textField_phone = new MyTextField(110 + x2, 170 + y2, 200, 25);
+		textField_phone.setText(cvo.phone);
 		this.add(textField_phone);
 		
 		//ui for address
@@ -148,6 +173,7 @@ public class ClientDetailPanel extends MyPanel implements ActionListener{
 		this.add(word_address);
 		
 		textField_address = new MyTextField(110 + x2, 210 + y2, 200, 25);
+		textField_address.setText(cvo.address);
 		this.add(textField_address);
 		
 		//ui for post
@@ -158,6 +184,7 @@ public class ClientDetailPanel extends MyPanel implements ActionListener{
 		this.add(word_post);
 		
 		textField_post = new MyTextField(110 + x2, 250 + y2, 200, 25);
+		textField_post.setText(cvo.post);
 		this.add(textField_post);
 		
 		//ui for email
@@ -168,6 +195,7 @@ public class ClientDetailPanel extends MyPanel implements ActionListener{
 		this.add(word_email);
 		
 		textField_email = new MyTextField(110 + x2, 290 + y2, 200, 25);
+		textField_email.setText(cvo.email);
 		this.add(textField_email);
 		
 		//table for receivable and payable information
@@ -177,7 +205,8 @@ public class ClientDetailPanel extends MyPanel implements ActionListener{
 		head2.setForeground(foreColor);
 		head2.setBackground(backColor);
 		
-		String[] str = {"100", "200", "-100"};
+		String[] str = {String.valueOf(cvo.payable), 
+				String.valueOf(cvo.receivable), String.valueOf(cvo.payable - cvo.receivable)};
 		DefaultTableModel tableModel_rap = (DefaultTableModel) table_rap.getModel();
 		tableModel_rap.addRow(str);
 		
@@ -208,8 +237,7 @@ public class ClientDetailPanel extends MyPanel implements ActionListener{
 		label_return.setBackground(backColor);
 		label_return.setText("返回");
 		this.add(label_return);
-		
-		
+			
 		//ui for button motify and check
 		MyLabel label_motify = new MyLabel(490 + 140, 390 - 180 + 65, 100, 20);
 		label_motify.setForeground(foreColor);
