@@ -3,6 +3,7 @@ package po;
 import java.util.ArrayList;
 
 import dataenum.BillState;
+import dataenum.BillType;
 
 /**
  * 收款单付款单持久化对象
@@ -10,36 +11,55 @@ import dataenum.BillState;
  * @version Oct 26, 2014 2:18:04 PM
  */
 /**
- * 修改原因：将clientPO改成clientID和clientName因为clientPO中很多东西是不需要的，保存太多浪费
+ * 修改原因：将clientPO改成clientID因为clientPO中很多东西是不需要的，保存太多浪费
  * 删除了id属性，因为在父类中有id属性了
  * @author cylong
  * @version Nov 16, 2014 3:42:42 PM
  */
 public class AccountBillPO extends PersistentObject {
 
-	private static final long serialVersionUID = 1L;
+	/** serialVersionUID */
+	private static final long serialVersionUID = 5795283762610233239L;
 	/** 客户ID */
 	private String clientID;
-	/** 客户名称 */
-	private String clientName;
-	/** 操作员 */
-	private UserPO user;
+	/** 操作员ID */
+	private String userID;
 	/** 转账列表 */
-	private ArrayList<BillItemPO> bills;
+	private ArrayList<AccountBillItemPO> bills;
 	/** 汇款总额 */
 	private double sumMoney;
 	/** 单据状态 */
 	private BillState state;
+	/** 区分收款单和付款单 */
+	private BillType type;
 
-	public AccountBillPO(String ID, String clientID, String clientName, UserPO user, ArrayList<BillItemPO> bills, double sumMoney) {
+	public AccountBillPO(String ID, String clientID, String userID, ArrayList<AccountBillItemPO> bills, BillType type) {
 		super(ID);
 		this.ID = ID;
 		this.clientID = clientID;
-		this.clientName = clientName;
-		this.user = user;
+		this.userID = userID;
 		this.bills = bills;
-		this.sumMoney = sumMoney;
+		this.type = type;
 		this.state = BillState.APPROVALING;
+		this.sumMoney = calcSumMoney();
+	}
+
+	/**
+	 * 根据转账列表结算汇款总额
+	 * @return 总额
+	 * @author cylong
+	 * @version 2014年11月30日 下午11:57:18
+	 */
+	public double calcSumMoney() {
+		double sum = 0;
+		for(int i = 0; i < bills.size(); i++) {
+			sum += bills.get(i).getMoney();
+		}
+		return sum;
+	}
+
+	public BillType getType() {
+		return this.type;
 	}
 
 	public BillState getState() {
@@ -58,27 +78,15 @@ public class AccountBillPO extends PersistentObject {
 		this.clientID = clientID;
 	}
 
-	public String getClientName() {
-		return this.clientName;
+	public String getUserID() {
+		return this.userID;
 	}
 
-	public void setClientName(String clientName) {
-		this.clientName = clientName;
-	}
-
-	public UserPO getUser() {
-		return user;
-	}
-
-	public void setUser(UserPO user) {
-		this.user = user;
-	}
-
-	public ArrayList<BillItemPO> getBills() {
+	public ArrayList<AccountBillItemPO> getBills() {
 		return bills;
 	}
 
-	public void setBills(ArrayList<BillItemPO> bills) {
+	public void setBills(ArrayList<AccountBillItemPO> bills) {
 		this.bills = bills;
 	}
 

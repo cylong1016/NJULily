@@ -3,6 +3,7 @@ package blservice.accountbillblservice;
 import java.util.HashMap;
 
 import message.ResultMessage;
+import vo.AccountBillItemVO;
 import dataenum.BillType;
 
 /**
@@ -17,7 +18,6 @@ import dataenum.BillType;
  */
 /**
  * 修改了getID、addBillItem、getSumMoney、addExpenses、addPay方法
- * 添加了addClient方法
  * @author cylong
  * @version Nov 16, 2014 3:48:21 PM
  */
@@ -29,28 +29,21 @@ public interface AccountBillBLService {
 	 * @return 可用的ID
 	 */
 	public String getID(BillType type);
-	
+
 	/**
 	 * @return 全部的客户ID和客户名 Key=>ID、value=>name
 	 * @author cylong
-	 * @version Nov 16, 2014  3:58:24 PM
+	 * @version Nov 16, 2014 3:58:24 PM
 	 */
 	public HashMap<String, String> getAllClients();
 
 	/**
-	 * 添加客户【界面传过来客户ID和客户名，添加客户的时候有一个下拉列表选择存在的客户】
-	 * @param clientID
+	 * @return 全部的账户ID和账户名 Key=>ID、value=>name
 	 * @author cylong
-	 * @version Nov 16, 2014 3:14:54 PM
+	 * @version Nov 16, 2014 4:00:14 PM
 	 */
-	public ResultMessage addClient(String clientID, String clientName);
+	public HashMap<String, String> getAllAccounts();
 
-	/**
-	 * @return 全部的账户ID和账户名  Key=>ID、value=>name
-	 * @author cylong
-	 * @version Nov 16, 2014  4:00:14 PM
-	 */
-	public HashMap<String, String> getAllAccountName();
 	/**
 	 * 添加转账列表【界面有一个下拉列表选择账户名】
 	 * @param accountName
@@ -58,7 +51,7 @@ public interface AccountBillBLService {
 	 * @param remark
 	 * @return 是否成功
 	 */
-	public ResultMessage addBillItem(String accountName, int money, String remark);
+	public ResultMessage addBillItem(AccountBillItemVO vo);
 
 	/**
 	 * 得到总额，界面显示
@@ -68,19 +61,33 @@ public interface AccountBillBLService {
 
 	/**
 	 * 建立新的收款单
-	 * @return 是否成功
+	 * @param clientID 客户的ID【添加客户的时候有一个下拉列表选择存在的客户】
+	 * @return 处理结果
+	 * @author cylong
+	 * @version 2014年11月30日 下午10:32:37
 	 */
-	public ResultMessage addExpenses();
+	public ResultMessage addExpenses(String clientID);
 
 	/**
-	 * 建立付款单
-	 * @return 是否成功
+	 * 建立新的付款单
+	 * @param clientID 客户ID【添加客户的时候有一个下拉列表选择存在的客户】
+	 * @return 处理结果
+	 * @author cylong
+	 * @version 2014年11月30日 下午10:33:10
 	 */
-	public ResultMessage addPay();
+	public ResultMessage addPay(String clientID);
 
 	/**
-	 * 提交单据
+	 * 提交单据进行审批
 	 * @return 是否成功
 	 */
 	public ResultMessage submit();
+
+	/**
+	 * 保存成草稿状态
+	 * @return 处理结果
+	 * @author cylong
+	 * @version 2014年11月30日 下午10:36:23
+	 */
+	public ResultMessage save();
 }

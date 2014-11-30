@@ -21,8 +21,8 @@ public class ClientData extends CommonData<ClientPO> implements ClientDataServic
 	@Override
 	public void init() {
 		ParseXML parsexml = new ParseXML("ClientData");
-		filePath = parsexml.getPath();
-		initID = parsexml.getInitID();
+		filePath = parsexml.getValue("path");
+		initID = parsexml.getValue("initID");
 		poList = new DefineList<ClientPO>(filePath);
 	}
 

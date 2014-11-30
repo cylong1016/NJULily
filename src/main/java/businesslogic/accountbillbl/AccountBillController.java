@@ -3,11 +3,12 @@ package businesslogic.accountbillbl;
 import java.util.HashMap;
 
 import message.ResultMessage;
-import dataenum.BillType;
+import vo.AccountBillItemVO;
 import blservice.accountbillblservice.AccountBillBLService;
+import dataenum.BillType;
 
 /**
- * 实现AccountBillBLService接口，并通过调用AccountBill来完成收款单和付款单的创建
+ * 实现AccountBillBLService接口，并通过调用AccountBill来完成收款单和付款单的创建查看
  * @see blservice.accountbillblservice.AccountBillBLService
  * @see businesslogic.accountbillbl.AccountBill
  * @author cylong
@@ -17,9 +18,14 @@ public class AccountBillController implements AccountBillBLService {
 
 	private AccountBill accountBill;
 
+	public AccountBillController() {
+		accountBill = new AccountBill();
+	}
+
 	/**
 	 * @see blservice.accountbillblservice.AccountBillBLService#getID(dataenum.BillType)
 	 */
+	@Override
 	public String getID(BillType type) {
 		return accountBill.getID(type);
 	}
@@ -27,56 +33,64 @@ public class AccountBillController implements AccountBillBLService {
 	/**
 	 * @see blservice.accountbillblservice.AccountBillBLService#getAllClients()
 	 */
+	@Override
 	public HashMap<String, String> getAllClients() {
 		return accountBill.getAllClients();
 	}
 
 	/**
-	 * @see blservice.accountbillblservice.AccountBillBLService#addClient(java.lang.String, java.lang.String)
+	 * @see blservice.accountbillblservice.AccountBillBLService#getAllAccounts()
 	 */
-	public ResultMessage addClient(String clientID, String clientName) {
-		return accountBill.addClient(clientID, clientName);
+	@Override
+	public HashMap<String, String> getAllAccounts() {
+		return accountBill.getAllAccounts();
 	}
 
 	/**
-	 * @see blservice.accountbillblservice.AccountBillBLService#getAllAccountName()
+	 * @see blservice.accountbillblservice.AccountBillBLService#addBillItem(vo.AccountBillItemVO)
 	 */
-	public HashMap<String, String> getAllAccountName() {
-		return accountBill.getAllAccountName();
-	}
-
-	/**
-	 * @see blservice.accountbillblservice.AccountBillBLService#addBillItem(java.lang.String, int, java.lang.String)
-	 */
-	public ResultMessage addBillItem(String accountName, int money, String remark) {
-		return accountBill.addBillItem(accountName, money, remark);
+	@Override
+	public ResultMessage addBillItem(AccountBillItemVO vo) {
+		return accountBill.addBillItem(vo);
 	}
 
 	/**
 	 * @see blservice.accountbillblservice.AccountBillBLService#getSumMoney()
 	 */
+	@Override
 	public double getSumMoney() {
 		return accountBill.getSumMoney();
 	}
 
 	/**
-	 * @see blservice.accountbillblservice.AccountBillBLService#addExpenses()
+	 * @see blservice.accountbillblservice.AccountBillBLService#addExpenses(java.lang.String)
 	 */
-	public ResultMessage addExpenses() {
-		return accountBill.addExpenses();
+	@Override
+	public ResultMessage addExpenses(String clientID) {
+		return accountBill.addExpenses(clientID);
 	}
 
 	/**
-	 * @see blservice.accountbillblservice.AccountBillBLService#addPay()
+	 * @see blservice.accountbillblservice.AccountBillBLService#addPay(java.lang.String)
 	 */
-	public ResultMessage addPay() {
-		return accountBill.addPay();
+	@Override
+	public ResultMessage addPay(String clientID) {
+		return accountBill.addPay(clientID);
 	}
 
 	/**
 	 * @see blservice.accountbillblservice.AccountBillBLService#submit()
 	 */
+	@Override
 	public ResultMessage submit() {
 		return accountBill.submit();
+	}
+
+	/**
+	 * @see blservice.accountbillblservice.AccountBillBLService#save()
+	 */
+	@Override
+	public ResultMessage save() {
+		return accountBill.save();
 	}
 }

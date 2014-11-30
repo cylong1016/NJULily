@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import dataenum.ClientLevel;
 import dataenum.PromotionType;
 
-public class PromotionPO extends PersistentObject{
+public class PromotionPO extends PersistentObject {
 
 	private static final long serialVersionUID = 1L;
-	/** 促销策略编号*/
+	/** 促销策略编号 */
 	private String ID;
-	/** 促销起始时间*/
+	/** 促销起始时间 */
 	private String beginDate;
-	/** 促销结束时间*/
+	/** 促销结束时间 */
 	private String endDate;
 	/** 特价包 */
 	private ArrayList<CommodityItemPO> bargains;
@@ -30,8 +30,7 @@ public class PromotionPO extends PersistentObject{
 	private int voucher;
 	/** 促销策略类型 */
 	private PromotionType type;
-	
-		
+
 	/**
 	 * 销售策略1:制定一个特价包
 	 * @param ID
@@ -46,7 +45,7 @@ public class PromotionPO extends PersistentObject{
 		this.total = total;
 		this.type = PromotionType.BARGAINS;
 	}
-	
+
 	/**
 	 * 策略2:根据客户等级，制定赠送包/折扣/代金券
 	 * @param ID
@@ -63,7 +62,7 @@ public class PromotionPO extends PersistentObject{
 		this.voucher = voucher;
 		this.type = PromotionType.CLIENT;
 	}
-	
+
 	/**
 	 * 策略3:根据购买的商品，制定赠送包／折扣／代金券
 	 * @param ID
@@ -75,7 +74,7 @@ public class PromotionPO extends PersistentObject{
 	 * @param allowance
 	 * @param voucher
 	 */
-	public PromotionPO(String ID, String beginDate, String endDate, ArrayList<CommodityItemPO> commodities, ArrayList<CommodityItemPO> gifts, double allowance, int voucher){
+	public PromotionPO(String ID, String beginDate, String endDate, ArrayList<CommodityItemPO> commodities, ArrayList<CommodityItemPO> gifts, double allowance, int voucher) {
 		super(ID);
 		this.beginDate = beginDate;
 		this.endDate = endDate;
@@ -84,7 +83,7 @@ public class PromotionPO extends PersistentObject{
 		this.voucher = voucher;
 		this.type = PromotionType.COMMODITY;
 	}
-	
+
 	/**
 	 * 策略4:根据购买的商品总价，制定折扣／赠送赠品／代金券
 	 * @param ID
@@ -92,7 +91,7 @@ public class PromotionPO extends PersistentObject{
 	 * @param allowance
 	 * @param voucher
 	 */
-	public PromotionPO(String ID, String beginDate, String endDate, double total,  ArrayList<CommodityItemPO> gifts, double allowance, int voucher) {
+	public PromotionPO(String ID, String beginDate, String endDate, double total, ArrayList<CommodityItemPO> gifts, double allowance, int voucher) {
 		super(ID);
 		this.beginDate = beginDate;
 		this.endDate = endDate;
@@ -138,7 +137,7 @@ public class PromotionPO extends PersistentObject{
 	public String getBeginDate() {
 		return beginDate;
 	}
-	
+
 	public String getEndDate() {
 		return endDate;
 	}

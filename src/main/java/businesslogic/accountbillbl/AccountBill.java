@@ -1,14 +1,17 @@
 package businesslogic.accountbillbl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
-import businesslogic.recordbl.info.ValueObjectInfo_Record;
 import message.ResultMessage;
 import po.UserPO;
 import vo.AccountBillVO;
+import vo.AccountBillItemVO;
+import businesslogic.recordbl.info.ValueObjectInfo_Record;
 import dataenum.BillType;
+import dataenum.Storage;
 
-public class AccountBill implements ValueObjectInfo_Record<AccountBillVO>{
+public class AccountBill implements ValueObjectInfo_Record<AccountBillVO> {
 
 	/** 编号 */
 	private String id;
@@ -37,11 +40,11 @@ public class AccountBill implements ValueObjectInfo_Record<AccountBillVO>{
 		return ResultMessage.SUCCESS;
 	}
 
-	public HashMap<String, String> getAllAccountName() {
+	public HashMap<String, String> getAllAccounts() {
 		return null;
 	}
 
-	public ResultMessage addBillItem(String accountName, int money, String remark) {
+	public ResultMessage addBillItem(AccountBillItemVO vo) {
 		bills.addBillItem(accountName, money, remark);
 		sumMoney = bills.getSumMoney();
 		return ResultMessage.SUCCESS;
@@ -51,15 +54,42 @@ public class AccountBill implements ValueObjectInfo_Record<AccountBillVO>{
 		return this.sumMoney;
 	}
 
-	public ResultMessage addExpenses() {
+	public ResultMessage addExpenses(String clientID) {
 		return null;
 	}
 
-	public ResultMessage addPay() {
+	public ResultMessage addPay(String clientID) {
 		return null;
 	}
 
 	public ResultMessage submit() {
+		return null;
+	}
+
+	/**
+	 * 收款（付款）单保存成草稿状态
+	 * @return 处理结果
+	 * @author cylong
+	 * @version 2014年11月30日 下午10:43:20
+	 */
+	public ResultMessage save() {
+		return null;
+	}
+
+	/**
+	 * @see businesslogic.recordbl.info.ValueObjectInfo_Record#show(dataenum.BillType)
+	 */
+	@Override
+	public ArrayList<AccountBillVO> show(BillType billType) {
+		return null;
+	}
+
+	/**
+	 * @see businesslogic.recordbl.info.ValueObjectInfo_Record#getID(java.lang.String, java.lang.String,
+	 *      java.lang.String, dataenum.Storage)
+	 */
+	@Override
+	public String getID(String ID, String clientName, String salesman, Storage storage) {
 		return null;
 	}
 }

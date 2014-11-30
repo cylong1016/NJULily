@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import dataservice.CommonDataService;
 import message.ResultMessage;
 import po.PersistentObject;
+import server.common.Common;
 import server.io.DefineList;
 
 /**
@@ -31,8 +32,9 @@ public abstract class CommonData<PO extends PersistentObject> implements CommonD
 			return initID;
 		}
 		String currentID = poList.get(poList.size() - 1).getID();
-		long id = Long.parseLong(currentID);
+		int id = Integer.parseInt(currentID);
 		currentID = String.valueOf(id + 1);
+		currentID = Common.intToString(id + 1, 7);
 		return currentID;
 	}
 

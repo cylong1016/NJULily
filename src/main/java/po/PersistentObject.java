@@ -47,7 +47,7 @@ public class PersistentObject implements Serializable {
 	public String getDate() {
 		return this.date;
 	}
-	
+
 	/**
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */

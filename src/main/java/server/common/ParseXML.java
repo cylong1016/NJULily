@@ -20,12 +20,7 @@ import org.xml.sax.SAXException;
  */
 public class ParseXML {
 
-	public static void main(String[] args) {
-		System.out.println(new ParseXML("ClientData").getPath());
-	}
-
-	private String path;
-	private String initID;
+	private Element element;
 
 	public ParseXML(String node) {
 		try {
@@ -36,9 +31,7 @@ public class ParseXML {
 			// step3: 解析一个xml文档，获得Document对象（根结点）  
 			Document doc = docBuilder.parse(new File("config/DataService.xml"));
 			NodeList list = doc.getElementsByTagName(node);
-			Element element = (Element)list.item(0);
-			path = element.getElementsByTagName("path").item(0).getFirstChild().getNodeValue();
-			initID = element.getElementsByTagName("initID").item(0).getFirstChild().getNodeValue();
+			element = (Element)list.item(0);
 		} catch (DOMException e) {
 			e.printStackTrace();
 		} catch (ParserConfigurationException e) {
@@ -50,12 +43,16 @@ public class ParseXML {
 		}
 	}
 
-	public String getPath() {
-		return this.path;
-	}
-
-	public String getInitID() {
-		return this.initID;
+	/**
+	 * 根据Key获得value
+	 * @param key
+	 * @return value
+	 * @author cylong
+	 * @version 2014年11月30日 下午11:03:03
+	 */
+	public String getValue(String key) {
+		String value = element.getElementsByTagName(key).item(0).getFirstChild().getNodeValue();
+		return value;
 	}
 
 }

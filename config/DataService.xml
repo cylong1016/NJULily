@@ -2,18 +2,19 @@
 <DataService>
 	<ClientData>
 		<path>data/ClientList.ser</path>
-		<initID>10000</initID>
+		<initID>1</initID>
 	</ClientData>
 	<UserData>
 		<path>data/UserList.ser</path>
-		<initID>10000</initID>
+		<initID>1</initID>
 	</UserData>
 	<AccountData>
 		<path>data/AccountList.ser</path>
-		<initID>10000</initID>
+		<initID>1</initID>
 	</AccountData>
-	<CommoditySortData>
-		<path>data/CommoditySortList.ser</path>
-		<initID>10000</initID>
-	</CommoditySortData>
+	<AccountBillData>
+		<path>data/AccountBillList.ser</path>
+		<initID>1</initID>
+		<dateFormat>yyyyMMdd</dateFormat>
+	</AccountBillData>
 </DataService>

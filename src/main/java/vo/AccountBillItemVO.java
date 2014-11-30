@@ -6,21 +6,21 @@ package vo;
  * @version 2014年10月31日下午5:52:30
  */
 /**
- * 修改原因: @see po.BillItemPO
+ * 修改原因: @see po.AccountBillItemPO
  * @author cylong
  * @version Nov 16, 2014 3:40:03 PM
  */
-public class BillItemVO {
+public class AccountBillItemVO {
 
 	/** 银行账户 */
-	public String accountName;
+	public String accountID;
 	/** 转账金额 */
 	public int money;
 	/** 备注 */
 	public String remark;
 
-	public BillItemVO(String accountName, int money, String remark) {
-		this.accountName = accountName;
+	public AccountBillItemVO(String accountID, int money, String remark) {
+		this.accountID = accountID;
 		this.money = money;
 		this.remark = remark;
 	}

@@ -14,9 +14,6 @@ import dataenum.BillState;
  */
 public class CashBillPO extends PersistentObject {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	/** 编号 */
 	private String ID;

@@ -32,4 +32,19 @@ public class Common {
 		return false;
 	}
 	
+	/**
+	 * 将int转化成String
+	 * @param val int值
+	 * @param bit String的长度，不足的以0补齐
+	 * @return 转化后的String
+	 * @author cylong
+	 * @version 2014年11月30日  下午11:14:02
+	 */
+	public static String intToString(int val, int bit) {
+		String res = Integer.toString(val);
+		for(int i = res.length(); i < bit; i++) {
+			res = 0 + res;
+		}
+		return res;
+	}
 }

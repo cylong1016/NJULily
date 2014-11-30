@@ -1,12 +1,16 @@
 package po;
 
+import java.io.Serializable;
+
 /**
  * 一条商品记录
  * @author cylong
  * @version Oct 31, 2014 3:26:07 PM
  */
-public class CommodityItemPO {
+public class CommodityItemPO implements Serializable {
 
+	/** serialVersionUID */
+	private static final long serialVersionUID = 1L;
 	/** 商品编号 */
 	private String ID;
 	/** 商品名 */
@@ -31,7 +35,7 @@ public class CommodityItemPO {
 		this.remark = remark;
 		this.total = price * number;
 	}
-	
+
 	public CommodityItemPO(String ID, int number, double price) {
 		this.ID = ID;
 		this.number = number;

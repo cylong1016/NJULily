@@ -1,5 +1,7 @@
 package po;
 
+import java.io.Serializable;
+
 /**
  * 库存盘点的商品条目
  * 盘点的是当天的库存快照，包括当天的各种商品的名称，型号，库存数量，库存均价，批次，批号， 并且显示行号。
@@ -9,7 +11,10 @@ package po;
  * @author Zing
  * @version Nov 28, 20141:33:37 PM
  */
-public class CheckCommodityItemPO {
+public class CheckCommodityItemPO implements Serializable {
+
+	/** serialVersionUID */
+	private static final long serialVersionUID = 1L;
 	/** 商品名 */
 	private String name;
 	/** 类型 */
@@ -18,7 +23,7 @@ public class CheckCommodityItemPO {
 	private int number;
 	/** 库存均价 */
 	private double avePrice;
-	
+
 	public CheckCommodityItemPO(String name, String type, int number, double avePrice) {
 		this.name = name;
 		this.type = type;

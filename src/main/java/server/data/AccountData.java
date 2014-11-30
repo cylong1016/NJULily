@@ -21,8 +21,8 @@ public class AccountData extends CommonData<AccountPO> implements AccountDataSer
 	@Override
 	public void init() {
 		ParseXML parsexml = new ParseXML("AccountData");
-		filePath = parsexml.getPath();
-		initID = parsexml.getInitID();
+		filePath = parsexml.getValue("path");
+		initID = parsexml.getValue("initID");
 		poList = new DefineList<AccountPO>(filePath);
 	}
 

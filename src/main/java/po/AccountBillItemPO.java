@@ -1,5 +1,7 @@
 package po;
 
+import java.io.Serializable;
+
 /**
  * 收款、付款单中的转账列表
  * @author Zing
@@ -10,17 +12,19 @@ package po;
  * @author cylong
  * @version Nov 16, 2014 3:41:28 PM
  */
-public class BillItemPO {
+public class AccountBillItemPO implements Serializable {
 
-	/** 银行账户 */
-	private String accountName;
+	/** serialVersionUID */
+	private static final long serialVersionUID = -4954487055647124897L;
+	/** 银行账户ID */
+	private String accountID;
 	/** 转账金额 */
 	private int money;
 	/** 备注 */
 	private String remark;
 
-	public BillItemPO(String accountName, int money, String remark) {
-		this.accountName = accountName;
+	public AccountBillItemPO(String accountID, int money, String remark) {
+		this.accountID = accountID;
 		this.money = money;
 		this.remark = remark;
 	}
@@ -41,12 +45,12 @@ public class BillItemPO {
 		this.remark = remark;
 	}
 
-	public String getAccountName() {
-		return accountName;
+	public String getAccountID() {
+		return this.accountID;
 	}
 
-	public void setAccountName(String accountName) {
-		this.accountName = accountName;
+	public void setAccountID(String accountID) {
+		this.accountID = accountID;
 	}
 
 }
