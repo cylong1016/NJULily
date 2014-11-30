@@ -1,16 +1,14 @@
 package businesslogic.accountbl;
 
-import java.rmi.Naming;
 import java.util.ArrayList;
 
 import message.ResultMessage;
 import po.AccountPO;
+import server.data.AccountData;
 import vo.AccountVO;
 import businesslogic.accountbillbl.AccountInfo_AccountBill;
-import config.RMI;
 import dataenum.FindTypeAccount;
 import dataservice.AccountDataService;
-import dataservice.DataFactoryService;
 
 public class Account implements AccountInfo_AccountBill {
 
@@ -19,12 +17,13 @@ public class Account implements AccountInfo_AccountBill {
 	private AccountPO po;
 
 	public Account() {
-		try {
-			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
-			accountData = factory.getAccountData();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		try {
+//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
+//			accountData = factory.getAccountData();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		this.accountData = new AccountData();
 	}
 
 	/**

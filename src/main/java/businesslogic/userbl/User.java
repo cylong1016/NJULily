@@ -1,17 +1,15 @@
 package businesslogic.userbl;
 
-import java.rmi.Naming;
 import java.util.ArrayList;
 
 import message.ResultMessage;
 import po.UserPO;
+import server.data.UserData;
 import server.io.DefineList;
 import vo.UserVO;
 import blservice.userblservice.LoginInfo;
 import businesslogic.clientbl.UserInfo_Client;
-import config.RMI;
 import dataenum.UserIdentity;
-import dataservice.DataFactoryService;
 import dataservice.UserDataService;
 
 public class User implements UserInfo_Client {
@@ -22,12 +20,13 @@ public class User implements UserInfo_Client {
 
 	public User() {
 		currentUser = new DefineList<UserPO>("data/loginInfo.ser");
-		try {
-			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
-			this.userData = factory.getUserData();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		try {
+//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
+//			this.userData = factory.getUserData();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		this.userData = new UserData();
 	}
 
 	/**
