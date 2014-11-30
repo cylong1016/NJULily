@@ -1,4 +1,4 @@
-package ui.differui.salesman.client_management.adding;
+package ui.differui.salesman.client;
 
 
 import java.awt.Color;
@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.exitfunction.ExitFunctionFrame;
 import ui.commonui.myui.MyButton;
 import ui.commonui.myui.MyWindow;
@@ -36,7 +37,6 @@ public class ClientAddingUI extends MyWindow implements ActionListener{
 		
 		cap = new ClientAddingPanel();
 		cap.setOpaque(true);
-		cap.setBackground(new Color(0, 0, 0));
 		cap.setBounds(340, 135, 600, 450);
 		this.add(cap);
 		
@@ -50,9 +50,8 @@ public class ClientAddingUI extends MyWindow implements ActionListener{
 		}
 		
 		if(events.getSource() == button_add){
-			this.setVisible(false);
-			System.out.println("adding client process...");
-			System.out.println(cap.getinfo());
+			ExitFinishFrame eff = new ExitFinishFrame("ClientAddingUI");
+			eff.setVisible(true);
 		}
 		
 		if(events.getSource() == button_close){

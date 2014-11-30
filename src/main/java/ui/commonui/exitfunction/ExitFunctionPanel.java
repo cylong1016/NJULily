@@ -8,19 +8,8 @@ import javax.swing.JLabel;
 
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyPanel;
-import ui.differui.inventory.commodity_management.addgood.CommodityAddingUI;
-import ui.differui.inventory.commodity_management.addsort.SortAddingUI;
-import ui.differui.inventory.commodity_management.detailgood.CommodityDetailUI;
-import ui.differui.inventory.commodity_management.detailsort.SortDetailUI;
-import ui.differui.inventory.commodity_management.index.CommodityManagementUI;
-import ui.differui.inventory.gift.GiftUI;
-import ui.differui.inventory.inventory_checking.HistoryInventoryCheckingUI;
-import ui.differui.inventory.inventory_checking.InventoryCheckingUI;
-import ui.differui.inventory.inventory_checking.PerformInventoryChecking;
-import ui.differui.inventory.inventory_review.InventoryReviewUI;
-import ui.differui.salesman.client_management.adding.ClientAddingUI;
-import ui.differui.salesman.client_management.detail.ClientDetailUI;
-import ui.differui.salesman.client_management.index.ClientManagementUI;
+import ui.differui.salesman.client.ClientAddingUI;
+import ui.differui.salesman.client.ClientDetailUI;
 
 public class ExitFunctionPanel extends MyPanel implements ActionListener{
 
@@ -34,50 +23,45 @@ public class ExitFunctionPanel extends MyPanel implements ActionListener{
 		int width = 400;
 		int height = 130;
 		
+		Color foreColor = new Color(158, 213, 220);
+		Color backColor = new Color(53, 84, 94);
+		
 		this.setBounds((1280 - width) / 2, (720 - height) / 2, width, height);
 		
 		//information bar
 		JLabel infoBar = new JLabel("确认是否退出此功能",JLabel.CENTER);
 		infoBar.setBounds(0, 0, width, 20);
 		infoBar.setOpaque(true);
-		infoBar.setForeground(Color.black);
-		infoBar.setBackground(new Color(0, 1, 1, 0.5f));
+		infoBar.setForeground(foreColor);
+		infoBar.setBackground(backColor);
 		this.add(infoBar);
 		
 		//button to choose to close the program
 		button_yes = new MyJButton("是");
 		button_yes.setBounds(40, 60, 120, 25);
-		button_yes.setForeground(Color.BLACK);
-		button_yes.setBackground(new Color(0, 1, 1, 0.65f));
+		button_yes.setForeground(foreColor);
+		button_yes.setBackground(backColor);
 		button_yes.addActionListener(this);
 		this.add(button_yes);
 		
 		//button not to choose to close the program
 		button_no = new MyJButton("否");
 		button_no.setBounds(240, 60, 120, 25);
-		button_no.setForeground(Color.BLACK);
-		button_no.setBackground(new Color(0, 1, 1, 0.65f));
+		button_no.setForeground(foreColor);
+		button_no.setBackground(backColor);
 		button_no.addActionListener(this);
 		this.add(button_no);
 		
 	}
 	
 	public void actionPerformed(ActionEvent events){
+		
 		if(events.getSource() == button_yes){
 			switch(flag){
 			case "ClientAddingUI": ClientAddingUI.button_close.doClick();break;
-			case "ClientManagementUI": ClientManagementUI.button_close.doClick();break;
+			
 			case "ClientDetailUI": ClientDetailUI.button_close.doClick();break;
-			case "CommodityAddingUI": CommodityAddingUI.button_close.doClick();break;
-			case "SortAddingUI": SortAddingUI.button_close.doClick();break;
-			case "CommodityDetailUI": CommodityDetailUI.button_close.doClick();break;
-			case "SortDetailUI": SortDetailUI.button_close.doClick();break;
-			case "CommodityManagementUI": CommodityManagementUI.button_close.doClick();break;
-			case "InventoryCheckingUI": InventoryCheckingUI.button_close.doClick();break;
-			case "HistoryInventoryCheckingUI": HistoryInventoryCheckingUI.button_close.doClick();break;
-			case "PerformInventoryChecking": PerformInventoryChecking.button_close.doClick();break;
-			case "GiftUI": GiftUI.button_close.doClick();break;
-			case "InventoryReviewUI": InventoryReviewUI.button_close.doClick();break;
+			
 			}
 			ExitFunctionFrame.button_close.doClick();
 		}

@@ -1,61 +1,61 @@
-package ui.differui.salesman.client_management.index;
-
+package ui.differui.salesman.client;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
+import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
+import javax.swing.table.JTableHeader;
 
-import ui.commonui.exitfunction.ExitFunctionFrame;
+import ui.commonui.myui.MyBackground;
 import ui.commonui.myui.MyComboBox;
 import ui.commonui.myui.MyJButton;
-import ui.commonui.myui.MyPanel;
 import ui.commonui.myui.MyTable;
 import ui.commonui.myui.MyTextField;
-import ui.differui.salesman.client_management.adding.ClientAddingUI;
-import ui.differui.salesman.client_management.detail.ClientDetailUI;
+import ui.differui.salesman.frame.Frame_Salesman;
 
-public class ClientManagementUI extends MyPanel implements ActionListener{
-
-	private static final long serialVersionUID = 1L;
-
-	MyJButton button_return, button_add, button_cam;
+public class ClientManagementUI extends Frame_Salesman implements ActionListener{
 	
-	public static JButton button_close;
+	private static final long serialVersionUID = 1L;
+	
+	MyJButton button_return, button_add, button_cam;
 	
 	public ClientManagementUI(){
 		
-		JLabel infoBar = new JLabel("                     客户管理");
-		infoBar.setBounds(0, 0, 1100, 20);
-		infoBar.setOpaque(true);
-		infoBar.setForeground(new Color(1, 1, 1, 0.55f));
-		infoBar.setBackground(new Color(1, 1, 1, 0.05f));
-		this.add(infoBar);
+		Color foreColor = new Color(158, 213, 220);
+		Color backColor = new Color(53, 84, 94);
 		
 		//add a combo box (for choosing the selected way)
 		String[] comboBoxStr = {"-------请选择一种搜索方式-------", "模糊查找"
 				, "客户编号(ID)", "客户星级", "客户分类", "客户名称", "默认业务员"};
-		MyComboBox comboBox = new MyComboBox(25, 15 + 20, 200, 25,comboBoxStr);
+		MyComboBox comboBox = new MyComboBox(75, 70, 200, 25,comboBoxStr);
+		comboBox.setBackground(backColor);
+		comboBox.setForeground(foreColor);
 		this.add(comboBox);
 		
 		//add a text field (for typing the selected way)
-		MyTextField textField = new MyTextField(235, 15 + 20, 200, 25);
-		textField.setText("在此输入搜索关键字");
+		MyTextField textField = new MyTextField(300, 70, 200, 25);
+		textField.setText("  在此输入搜索关键字");
+		textField.setBackground(backColor);
+		textField.setForeground(foreColor);
+		textField.setBorder(BorderFactory.createEmptyBorder());
 		this.add(textField);
 		
 		//add a button for starting the searching process
 		MyJButton button_search = new MyJButton("搜索");
-		button_search.setBounds(445, 15 + 20, 130, 25);
+		button_search.setBounds(525, 70, 130, 25);
 		button_search.addActionListener(this);
+		button_search.setBackground(backColor);
+		button_search.setForeground(foreColor);
 		this.add(button_search);		
 		
 		//add a button for showing all the client to the table
 		MyJButton button_showAll = new MyJButton("显示全部客户");
-		button_showAll.setBounds(944, 15 + 20, 130, 25);
+		button_showAll.setBounds(1070, 70, 130, 25);
 		button_showAll.addActionListener(this);
+		button_showAll.setBackground(backColor);
+		button_showAll.setForeground(foreColor);
 		this.add(button_showAll);	
 		
 		//add a table for showing the information of the clients(the table is contained in a scroll pane)
@@ -64,60 +64,66 @@ public class ClientManagementUI extends MyPanel implements ActionListener{
 		MyTable table = new MyTable(headers);
 		
 		JScrollPane jsp=new JScrollPane(table);
-		jsp.setBounds(25, 50 + 20, 1050, 550);
+		JTableHeader head = table.getTableHeader();
+		head.setBackground(backColor);
+		head.setForeground(foreColor);
+		jsp.setBounds(75, 120, 1125, 450);
 		jsp.getViewport().setBackground(new Color(0,0,0,0.3f));
 		jsp.setOpaque(false);
+		jsp.setBorder(BorderFactory.createEmptyBorder());
 		jsp.setVisible(true);
 		this.add(jsp);
 		
 		//add a button for adding a new client
 		button_add = new MyJButton("新增一名客户");
-		button_add.setBounds(25 + 420, 610 + 20, 130, 25);
+		button_add.setBounds(25 + 420 + 125, 610 - 26, 130, 25);
+		button_add.setBackground(backColor);
+		button_add.setForeground(foreColor);
 		button_add.addActionListener(this);
 		this.add(button_add);	
 		
 		//add a button for deleting a selected client
 		MyJButton button_del = new MyJButton("删除所选客户");
-		button_del.setBounds(165 + 420, 610 + 20, 130, 25);
+		button_del.setBounds(165 + 420 + 125, 610 - 26, 130, 25);
 		button_del.addActionListener(this);
+		button_del.setBackground(backColor);
+		button_del.setForeground(foreColor);
 		this.add(button_del);	
 		
 		//add a button for checking and modifying the information of a selected client
 		button_cam = new MyJButton("修改或查看所选客户详细信息");
-		button_cam.setBounds(305 + 420, 610 + 20, 210, 25);
+		button_cam.setBounds(305 + 420 + 125, 610 - 26, 210, 25);
 		button_cam.addActionListener(this);
+		button_cam.setBackground(backColor);
+		button_cam.setForeground(foreColor);
 		this.add(button_cam);	
 		
 		//add a button for returning to the last UI
 		button_return = new MyJButton("返回");
-		button_return.setBounds(525 + 450, 610 + 20, 100, 25);
+		button_return.setBounds(525 + 450 + 125, 610 - 26, 100, 25);
 		button_return.addActionListener(this);
+		button_return.setBackground(backColor);
+		button_return.setForeground(foreColor);
 		this.add(button_return);	
 		
-		button_close = new JButton();
-		button_close.addActionListener(this);
-		this.add(button_close);
-					
+		
+		
+		// the background
+		MyBackground background = new MyBackground("ui/image/salesman/client/background.png");
+		this.add(background);
+		
 	}
 	
 	public void actionPerformed(ActionEvent events) {
-		if(events.getSource() == button_return){
-			ExitFunctionFrame eff = new ExitFunctionFrame("ClientManagementUI");
-			eff.setVisible(true);
-		}
-		
 		if(events.getSource() == button_add){
 			ClientAddingUI window_add = new ClientAddingUI();
 			window_add.setVisible(true);
 		}
 		
 		if(events.getSource() == button_cam){
-			ClientDetailUI window_detail = new ClientDetailUI();
-			window_detail.setVisible(true);
-		}
-		
-		if(events.getSource() == button_close){
-			this.setVisible(false);
+			ClientDetailUI window_cam = new ClientDetailUI();
+			window_cam.setVisible(true);
 		}
 	}
+
 }

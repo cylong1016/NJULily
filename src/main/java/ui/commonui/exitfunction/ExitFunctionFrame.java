@@ -20,7 +20,7 @@ public class ExitFunctionFrame extends MyWindow implements ActionListener{
 		
 		efp = new ExitFunctionPanel();
 		efp.setOpaque(true);
-		efp.setBackground(new Color(0, 0, 0));
+		efp.setBackground(new Color(0, 0, 0, 0.8f));
 		efp.setFlag(flag);
 		this.add(efp);
 		
@@ -28,7 +28,7 @@ public class ExitFunctionFrame extends MyWindow implements ActionListener{
 		button_close.addActionListener(this);
 		this.add(button_close);
 		
-		this.setBackground(new Color(0, 0, 0, 0.8f));
+		this.setBackground(new Color(0, 0, 0, 0.6f));
 			
 	}
 	

@@ -1,6 +1,9 @@
 package main;
 
-import ui.differui.inventory.frame.Frame_Inventory;
+import ui.differui.salesman.client.ClientManagementUI;
+
+
+
 
 /**
  * @author cylong
@@ -12,11 +15,8 @@ public class Main {
 		System.out.println("测试：");
 
 		//UI test
-		//		Frame_Salesman fs = new Frame_Salesman();
-		//		fs.setVisible(true);
-
-		Frame_Inventory fi = new Frame_Inventory();
-		fi.setVisible(true);
+		ClientManagementUI cm = new ClientManagementUI();
+		cm.setVisible(true);
 
 	}
 }

@@ -27,7 +27,7 @@ public class InventoryCheckingUI extends MyPanel implements ActionListener{
 		String date = "2014/11/28";
 		
 		//the information bar
-		JLabel infoBar = new JLabel("                     库存盘点");
+		JLabel infoBar = new JLabel("                     创建库存盘点单");
 		infoBar.setBounds(0, 0, 1100, 20);
 		infoBar.setOpaque(true);
 		infoBar.setForeground(new Color(1, 1, 1, 0.55f));
@@ -89,6 +89,7 @@ public void actionPerformed(ActionEvent events) {
 		if(events.getSource() == button_return){
 			ExitFunctionFrame efp = new ExitFunctionFrame("InventoryCheckingUI");
 			efp.setVisible(true);
+			
 		}
 		
 		if(events.getSource() == button_close){

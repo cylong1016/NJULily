@@ -1,4 +1,4 @@
-package ui.commonui.exitprogram;
+package ui.commonui.exitfinish;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -6,27 +6,29 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 
+import ui.commonui.exitfunction.ExitFunctionFrame;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyPanel;
 
-public class ExitProgramPanel extends MyPanel implements ActionListener{
+public class ExitFinishPanel extends MyPanel implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 
 	MyJButton button_yes, button_no;
+	String flag;
 	
-	public ExitProgramPanel(){
+	public ExitFinishPanel(){
 		
 		int width = 400;
 		int height = 130;
 		
-		this.setBounds((1280 - width) / 2, (720 - height) / 2, width, height);
-		
 		Color foreColor = new Color(158, 213, 220);
 		Color backColor = new Color(53, 84, 94);
 		
+		this.setBounds((1280 - width) / 2, (720 - height) / 2, width, height);
+		
 		//information bar
-		JLabel infoBar = new JLabel("确认是否退出系统",JLabel.CENTER);
+		JLabel infoBar = new JLabel("确认是否进行此操作",JLabel.CENTER);
 		infoBar.setBounds(0, 0, width, 20);
 		infoBar.setOpaque(true);
 		infoBar.setForeground(foreColor);
@@ -52,13 +54,12 @@ public class ExitProgramPanel extends MyPanel implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent events){
-		if(events.getSource() == button_yes){
-			System.exit(0);
+		if(events.getSource() == button_no){	
+			ExitFinishFrame.button_close.doClick();
 		}
-		
-		if(events.getSource() == button_no){
-			this.setVisible(false);
-			ExitProgramFrame.button_close.doClick();
-		}
+	}
+	
+	public void setFlag(String _flag){
+		flag = _flag;
 	}
 }

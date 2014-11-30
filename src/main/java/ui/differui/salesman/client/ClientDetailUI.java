@@ -1,4 +1,4 @@
-package ui.differui.salesman.client_management.detail;
+package ui.differui.salesman.client;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -24,7 +24,6 @@ public class ClientDetailUI extends MyWindow implements ActionListener{
 		
 		ClientDetailPanel cdp = new ClientDetailPanel();
 		cdp.setOpaque(true);
-		cdp.setBackground(new Color(0, 0, 0));
 		cdp.setBounds(240, 45, 800, 650);
 		this.add(cdp);
 		
