@@ -28,7 +28,7 @@ import dataservice.SaleDataService;
  * @author Zing
  * @version Nov 15, 2014 10:07:38 AM
  */
-public class Sale implements SaleInfo_Inventory, SaleInfo_Record, ValueObjectInfo_Record{
+public class Sale extends POToVO implements SaleInfo_Inventory, SaleInfo_Record, ValueObjectInfo_Record{
 
 	/** 销售单 */
 	private SaleList list;
@@ -144,30 +144,6 @@ public class Sale implements SaleInfo_Inventory, SaleInfo_Record, ValueObjectInf
 	}
 
 	/**
-	 * 销售（销售退货）单中的商品条目PO转化成VO
-	 * @param itemsPO
-	 * @return
-	 * @author cylong
-	 * @version 2014年11月28日  下午9:12:57
-	 */
-	private ArrayList<CommodityItemVO> itemPOToVO(ArrayList<CommodityItemPO> itemsPO) {
-		ArrayList<CommodityItemVO> itemsVO = new ArrayList<CommodityItemVO>();
-		for(int i = 0; i < itemsPO.size(); i++) {
-			CommodityItemPO po = itemsPO.get(i);
-			String ID = po.getID();
-			int number = po.getNumber();
-			double price = po.getPrice();
-			String remark = po.getRemark();
-			CommodityInfo_Sale info = new Commodity();
-			String name = info.getName(ID);
-			String type = info.getType(ID);
-			CommodityItemVO vo = new CommodityItemVO(ID, number, price, remark, name, type);
-			itemsVO.add(vo);
-		}
-		return itemsVO;
-	}
-
-	/**
 	 * 提交销售（销售退货）单，等待审批
 	 * @param inputInfo
 	 * @author Zing
@@ -210,7 +186,7 @@ public class Sale implements SaleInfo_Inventory, SaleInfo_Record, ValueObjectInf
 		return null;
 	}
 
-	public String getSaleDetailVO(String ID, String clientName, String salesman, Storage storage) {
+	public String getID(String ID, String clientName, String salesman, Storage storage) {
 		SaleDataService saleData = getSaleData();
 		ArrayList<String> IDs = saleData.getAllID(BillType.SALE);
 		for (int i = 0; i < IDs.size(); i++) {

@@ -20,7 +20,7 @@ import dataservice.SaleDataService;
  * @author Zing
  * @version Nov 27, 201411:13:32 PM
  */
-public class CashBill extends WaitApproval{
+public class CashBill{
 	
 	private String ID;
 	
@@ -73,13 +73,13 @@ public class CashBill extends WaitApproval{
 	}
 
 	public CashBillPO addCashBill(String account) {
-		po = new CashBillPO(ID, user, account, getCashItemPO(), getSumMoney());
+		po = new CashBillPO(ID, "user", account, getCashItemPO(), getSumMoney());
 		return po;
 	}
 
 	public ResultMessage submit(String account) {
 		addCashBill(account);
-		getApprovalData().insert(po);
+		getCashBillData().insert(po);
 		return ResultMessage.SUCCESS;
 	}
 	

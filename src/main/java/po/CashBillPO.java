@@ -27,11 +27,11 @@ public class CashBillPO extends PersistentObject {
 	/** 条目清单 */
 	private ArrayList<CashItemPO> bills;
 	/** 汇款总额 */
-	private int sumMoney;
+	private double sumMoney;
 	/** 单据状态 */
 	private BillState state;
 
-	public CashBillPO(String id, String user, String account, ArrayList<CashItemPO> bills, int sumMoney) {
+	public CashBillPO(String id, String user, String account, ArrayList<CashItemPO> bills, double sumMoney) {
 		super(id);
 		this.id = id;
 		this.user = user;
@@ -69,7 +69,7 @@ public class CashBillPO extends PersistentObject {
 		return bills;
 	}
 
-	public int getSumMoney() {
+	public double getSumMoney() {
 		return sumMoney;
 	}
 

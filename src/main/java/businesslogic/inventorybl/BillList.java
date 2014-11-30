@@ -3,7 +3,6 @@ package businesslogic.inventorybl;
 import java.util.ArrayList;
 
 import po.CommodityItemPO;
-import vo.CommodityItemVO;
 
 /**
  * 库存赠送单
@@ -24,12 +23,14 @@ public class BillList {
 		items.add(item);
 	}
 	
-	public ArrayList<CommodityItemVO> getCommodityVOs(){
-		return null;
-	}
-	
 	public ArrayList<CommodityItemPO> getCommodityPOs(){
-		return null;
+		ArrayList<CommodityItemPO> POs = new ArrayList<CommodityItemPO>();
+		for (int i = 0; i < items.size(); i++) {
+			BillListItem item = items.get(i);
+			CommodityItemPO po = new CommodityItemPO(item.getID(), item.getNumber(), item.getPurPrice());
+			POs.add(po);
+		}
+		return POs;
 	}
 
 	public String getRemark() {

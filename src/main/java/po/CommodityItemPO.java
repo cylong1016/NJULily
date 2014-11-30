@@ -22,9 +22,10 @@ public class CommodityItemPO {
 	/** 商品备注 */
 	private String remark;
 
-	// TODO 需要有商品的名字和类型
-	public CommodityItemPO(String ID, int number, double price, String remark) {
+	// TODO 需要有商品的名字
+	public CommodityItemPO(String ID, String name, int number, double price, String remark) {
 		this.ID = ID;
+		this.name = name;
 		this.number = number;
 		this.price = price;
 		this.remark = remark;

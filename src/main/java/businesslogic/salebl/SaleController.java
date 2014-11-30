@@ -33,7 +33,7 @@ public class SaleController implements SaleBLService {
 	 * @see blservice.saleblservice.SaleBLService#show()
 	 */
 	public ArrayList<ValueObject> show(BillType type) {
-		return sale.show();
+		return sale.show(type);
 	}
 
 	/**

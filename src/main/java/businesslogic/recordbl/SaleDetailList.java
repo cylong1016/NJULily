@@ -40,7 +40,7 @@ public class SaleDetailList {
 		info = new Sale();
 		ArrayList<SaleDetailVO> VOs = new ArrayList<SaleDetailVO>();
 		for (int i = 0; i < IDs.size(); i++) {
-			String ID = info.getSaleDetailVO(IDs.get(i), clientName, salesman, storage);
+			String ID = info.getID(IDs.get(i), clientName, salesman, storage);
 			if (ID != null) {
 				item = new SaleDetailListItem(ID, commodityName);
 				if (item.ID != null) {

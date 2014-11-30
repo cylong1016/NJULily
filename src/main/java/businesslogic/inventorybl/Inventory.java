@@ -4,16 +4,21 @@ import java.rmi.Naming;
 import java.util.ArrayList;
 
 import businesslogic.promotionbl.InventoryInfo_Promotion;
+import businesslogic.salebl.POToVO;
 import config.RMI;
+import po.CommodityItemPO;
 import po.InventoryBillPO;
+import vo.CommodityItemVO;
 import vo.InventoryBillVO;
 import vo.InventoryCheckVO;
+import vo.ValueObject;
+import dataenum.BillState;
 import dataenum.BillType;
 import dataservice.DataFactoryService;
 import dataservice.InventoryDataService;
 import message.ResultMessage;
 
-public class Inventory implements InventoryInfo_Promotion{
+public class Inventory extends POToVO implements InventoryInfo_Promotion{
 	
 	private BillList list;
 		
@@ -67,11 +72,29 @@ public class Inventory implements InventoryInfo_Promotion{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	public ArrayList<InventoryBillVO> show() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public ArrayList<ValueObject> show(BillType type, int a){
+		ArrayList<ValueObject> VOs = new ArrayList<ValueObject>();
+		InventoryDataService inventoryData = getInventoryData();
+		ArrayList<InventoryBillPO> POs = inventoryData.getAllBills(BillType type);
+		for (int i = 0; i < POs.size(); i++) {
+			InventoryBillPO po = POs.get(i);
+			InventoryBillVO vo = poToVo(po);
+			VOs.add(vo);
+		}
+		return VOs;
 	}
 	
+	private InventoryBillVO poToVo(InventoryBillPO po) {
+		String ID = po.getID();
+		BillType billType = po.getBillType();
+		ArrayList<CommodityItemVO> commodities = itemPOToVO(po.getCommodities());
+		String remark = po.getRemark();
+		BillState state = po.getState();
+		InventoryBillVO vo = new InventoryBillVO(ID, billType, commodities, remark, state);
+		return null;
+	}
+
 	public void addCommodity(String ID, int number) {
 		BillListItem item = new BillListItem(ID, number);
 		list.addItem(item);

@@ -72,15 +72,7 @@ public class BusinessProList {
 		}
 		ArrayList<ValueObject> VOs = new ArrayList<ValueObject>();
 		for (int i = 0; i < IDs.size(); i++) {
-			String ID = info.getSaleDetailVO(IDs.get(i), clientName, salesman, storage);
-			if (ID != null) {
-				item = new SaleDetailListItem(ID, commodityName);
-				if (item.ID != null) {
-					String date = item.ID.substring(4, 12);
-					SaleDetailVO vo = new SaleDetailVO(date, item.name, item.type, item.number, item.price);
-					VOs.add(vo);
-				}
-			}
+			String ID = info.getID(ID, clientName, salesman, storage)
 		}
 		return VOs;
 		return null;

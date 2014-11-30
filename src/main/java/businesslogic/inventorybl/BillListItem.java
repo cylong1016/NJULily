@@ -13,6 +13,8 @@ public class BillListItem {
 	private int number;
 	/** 商品进价 */
 	private double purPrice;
+	/** 商品总价 */
+	private double total;
 	
 	private CommodityInfo_Inventory info;
 	
@@ -26,6 +28,7 @@ public class BillListItem {
 		this.name = info.getName(ID);
 		this.type = info.getType(ID);
 		this.purPrice = info.getPurPrice(ID);
+		this.total = number * purPrice;
 	}
 
 	public String getID() {
@@ -51,6 +54,10 @@ public class BillListItem {
 	public CommodityInfo_Inventory getInfo() {
 		return info;
 	}
-	
+
+	public double getTotal() {
+		return total;
+	}
+
 	
 }

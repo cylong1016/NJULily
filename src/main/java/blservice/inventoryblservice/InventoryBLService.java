@@ -35,8 +35,12 @@ public interface InventoryBLService {
 	
 	public ArrayList<InventoryBillVO> show(BillType type);
 	
-	public ArrayList<InventoryBillVO> show();
-	
+	/**
+	 * 建立库存报警单、报损单、报溢单、赠送单之前需要调用，确定建立的单据类型
+	 * @param type
+	 * @author Zing
+	 * @version Nov 30, 2014 3:41:46 PM
+	 */
 	public void buildBill(BillType type);
 	
 	
@@ -47,9 +51,22 @@ public interface InventoryBLService {
 	 */
 	public void addCommodity(String ID, int number);
 	
-	
+	/**
+	 * 提交单据
+	 * @param remark
+	 * @return
+	 * @author Zing
+	 * @version Nov 30, 2014 4:03:43 PM
+	 */
 	public ResultMessage submit(String remark);
 	
+	/**
+	 * 
+	 * @param remark
+	 * @return
+	 * @author Zing
+	 * @version Nov 30, 2014 4:03:51 PM
+	 */
 	public ResultMessage save(String remark);
 
 }
