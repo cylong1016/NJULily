@@ -1,7 +1,5 @@
 package ui.differui.salesman.client;
 
-
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,19 +16,10 @@ public class ClientAddingUI extends MyWindow implements ActionListener{
 
 	MyButton button_return;
 	ClientAddingPanel cap;
-	MyButton button_add;
 	public static JButton button_close;
 	
 	public ClientAddingUI(){
-		
-		button_return = new MyButton(490 + 340, 415 + 135, 100, 25);
-		button_return.addActionListener(this);
-		this.add(button_return);
-		
-		button_add = new MyButton(490 + 340, 390 + 135, 100, 25);
-		button_add.addActionListener(this);
-		this.add(button_add);
-		
+				
 		button_close = new JButton();
 		button_close.addActionListener(this);
 		this.add(button_close);
@@ -44,20 +33,10 @@ public class ClientAddingUI extends MyWindow implements ActionListener{
 	
 	public void actionPerformed(ActionEvent events) {
 		
-		if(events.getSource() == button_return){
-			ExitFunctionFrame epf = new ExitFunctionFrame("ClientAddingUI");
-			epf.setVisible(true);
-		}
-		
-		if(events.getSource() == button_add){
-			ExitFinishFrame eff = new ExitFinishFrame("ClientAddingUI");
-			eff.setVisible(true);
-		}
-		
 		if(events.getSource() == button_close){
 			this.setVisible(false);
 		}
 		
 	}
-		
+
 }

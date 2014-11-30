@@ -1,4 +1,4 @@
-package ui.commonui.exitfinish;
+package ui.commonui.warning;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -6,22 +6,22 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import ui.commonui.exitfinish.ExitFinishPanel;
 import ui.commonui.myui.MyWindow;
 
-public class ExitFinishFrame extends MyWindow implements ActionListener{
+public class WarningFrame extends MyWindow implements ActionListener{
 	
 	private static final long serialVersionUID = 1L;
 
-	ExitFinishPanel efp;
+	WarningPanel efp;
 	public static JButton button_close;
 	
 	
-	public ExitFinishFrame(String flag){
+	public WarningFrame(String name){
 		
-		efp = new ExitFinishPanel();
+		efp = new WarningPanel(name);
 		efp.setOpaque(true);
 		efp.setBackground(new Color(0, 0, 0, 0.8f));
-		efp.setFlag(flag);
 		this.add(efp);
 		
 		button_close = new JButton();
@@ -33,7 +33,6 @@ public class ExitFinishFrame extends MyWindow implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent events) {
-		
 		if(events.getSource() == button_close){
 			this.setVisible(false);
 		}

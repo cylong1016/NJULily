@@ -3,21 +3,27 @@ package ui.differui.salesman.client;
 import java.awt.Color;
 
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
 import javax.swing.JLabel;
 
-
+import ui.commonui.exitfinish.ExitFinishFrame;
+import ui.commonui.exitfunction.ExitFunctionFrame;
 import ui.commonui.myui.MyComboBox;
-
-import ui.commonui.myui.MyLabel;
 import ui.commonui.myui.MyPanel;
 import ui.commonui.myui.MyTextField;
+import ui.commonui.warning.WarningFrame;
 
-public class ClientAddingPanel extends MyPanel {
+public class ClientAddingPanel extends MyPanel implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 
 	MyTextField textField_name, textField_phone, textField_address, textField_post, textField_email, textField_limit;
 	MyComboBox comboBox_category, comboBox_level;
+	JButton button_add, button_return;
+	public static JButton addConform;
 	
 	public ClientAddingPanel(){
 			
@@ -33,7 +39,7 @@ public class ClientAddingPanel extends MyPanel {
 		infoBar.setForeground(foreColor);
 		infoBar.setBackground(backColor);
 		this.add(infoBar);
-		
+				
 		//ui for tips
 		JLabel word_tip1 = new JLabel("* 必填:",JLabel.CENTER);
 		word_tip1.setForeground(Color.RED);
@@ -76,8 +82,8 @@ public class ClientAddingPanel extends MyPanel {
 		this.add(word_level);
 		
 		String[] comboBoxStr2 = {"----------请选择起始星级----------", "一星", "二星", "三星", "四星", "五星(VIP)"};
-		comboBox_category = new MyComboBox(110 + x1, 130 + y1, 200, 25,comboBoxStr2);
-		this.add(comboBox_category);
+		comboBox_level = new MyComboBox(110 + x1, 130 + y1, 200, 25,comboBoxStr2);
+		this.add(comboBox_level);
 		
 		//ui for receivableLimit
 		JLabel word_limit = new JLabel("* 应收额度:",JLabel.CENTER);
@@ -136,19 +142,56 @@ public class ClientAddingPanel extends MyPanel {
 		this.add(textField_email);
 			
 		//the label for button_return
-		MyLabel label_return = new MyLabel(490 , 420 , 100, 20);
-		label_return.setForeground(foreColor);
-		label_return.setBackground(backColor);
-		label_return.setText("返回");
-		this.add(label_return);
+		button_return = new JButton();
+		button_return.setBounds(490 , 420, 100, 20);
+		button_return.setForeground(foreColor);
+		button_return.setBackground(backColor);
+		button_return.setText("返回");
+		button_return.addActionListener(this);
+		this.add(button_return);
 		
 		//ui for button add
-		MyLabel label_add = new MyLabel(490 , 390, 100, 20);
-		label_add.setForeground(foreColor);
-		label_add.setBackground(backColor);
-		label_add.setText("确认添加");
-		this.add(label_add);
+		button_add = new JButton();
+		button_add.setBounds(490 , 390, 100, 20);
+		button_add.setForeground(foreColor);
+		button_add.setBackground(backColor);
+		button_add.setText("确认添加");
+		button_add.addActionListener(this);
+		this.add(button_add);
+		
+		addConform = new JButton();
+		addConform.addActionListener(this);
+		this.add(addConform);
 			
+	}
+	
+	public void actionPerformed(ActionEvent events) {
+		
+		if(events.getSource() == button_return){
+			ExitFunctionFrame epf = new ExitFunctionFrame("ClientAddingUI");
+			epf.setVisible(true);
+		}
+		
+		if(events.getSource() == button_add){
+			
+			if(!textField_name.getText().isEmpty() && !textField_limit.getText().isEmpty() 
+					&& comboBox_category.getSelectedIndex() != 0 && comboBox_level.getSelectedIndex() != 0){
+				ExitFinishFrame eff = new ExitFinishFrame("ClientAddingPanel");
+				eff.setVisible(true);
+			}else{
+				WarningFrame wp = new WarningFrame("*请检查信息填写是否正确！");
+				wp.setVisible(true);
+			}	
+		}	
+		
+		if(events.getSource() == addConform){
+			WarningFrame wp = new WarningFrame("已成功添加客户！");
+			wp.setVisible(true);
+			ClientAddingUI.button_close.doClick();
+			
+			//
+			System.out.println("tianjia");
+		}
 	}
 		
 	public String getinfo(){

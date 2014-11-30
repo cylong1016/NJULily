@@ -33,6 +33,7 @@ public class ExitFunctionFrame extends MyWindow implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent events) {
+		
 		if(events.getSource() == button_close){
 			this.setVisible(false);
 		}

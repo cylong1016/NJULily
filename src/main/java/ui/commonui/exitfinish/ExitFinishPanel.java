@@ -6,9 +6,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 
-import ui.commonui.exitfunction.ExitFunctionFrame;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyPanel;
+import ui.differui.salesman.client.ClientAddingPanel;
 
 public class ExitFinishPanel extends MyPanel implements ActionListener{
 
@@ -54,9 +54,20 @@ public class ExitFinishPanel extends MyPanel implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent events){
+		
 		if(events.getSource() == button_no){	
 			ExitFinishFrame.button_close.doClick();
 		}
+		
+		if(events.getSource() == button_yes){
+			
+			switch(flag){
+				case "ClientAddingPanel":	ClientAddingPanel.addConform.doClick();
+											break;
+			}
+			ExitFinishFrame.button_close.doClick();
+		}
+		
 	}
 	
 	public void setFlag(String _flag){
