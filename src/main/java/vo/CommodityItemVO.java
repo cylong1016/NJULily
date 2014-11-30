@@ -29,5 +29,21 @@ public class CommodityItemVO extends ValueObject {
 		this.price = price;
 		this.remark = remark;
 	}
+	
+	/**
+	 * 库存商品用
+	 * @param ID
+	 * @param name
+	 * @param type
+	 * @param number
+	 * @param price
+	 */
+	public CommodityItemVO(String ID, String name, String type, int number, double price) {
+		this.ID = ID;
+		this.name = name;
+		this.type = type;
+		this.number = number;
+		this.price = price;
+	}
 
 }

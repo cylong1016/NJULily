@@ -100,6 +100,7 @@ public class Sale implements SaleInfo_Inventory {
 	 * @author cylong
 	 * @version 2014年11月28日 下午8:36:47
 	 */
+	// TODO 按类型分吧？
 	public ArrayList<SalesVO> show() {
 		ArrayList<SalesVO> billsVO = new ArrayList<SalesVO>();
 		SaleDataService saleData = getSaleData();

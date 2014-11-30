@@ -15,7 +15,7 @@ import dataenum.FindTypeClient;
 import dataservice.ClientDataService;
 import dataservice.DataFactoryService;
 
-public class Client implements businesslogic.accountbillbl.ClientInfo, ClientInfo_Sale, businesslogic.purchasebl.ClientInfo {
+public class Client implements businesslogic.accountbillbl.ClientInfo, ClientInfo_Sale, businesslogic.purchasebl.ClientInfo_Purchase {
 
 	private ClientDataService clientData;
 
@@ -40,7 +40,7 @@ public class Client implements businesslogic.accountbillbl.ClientInfo, ClientInf
 	}
 
 	/**
-	 * @see businesslogic.salebl.ClientInfo#getSalesman(java.lang.String)
+	 * @see businesslogic.salebl.ClientInfo_Purchase#getSalesman(java.lang.String)
 	 */
 	public String getSalesman(String ID) {
 		ClientPO po = clientData.find(ID);
@@ -48,7 +48,7 @@ public class Client implements businesslogic.accountbillbl.ClientInfo, ClientInf
 	}
 
 	/**
-	 * @see businesslogic.salebl.ClientInfo#getName(java.lang.String)
+	 * @see businesslogic.salebl.ClientInfo_Purchase#getName(java.lang.String)
 	 */
 	public String getName(String ID) {
 		ClientPO po = clientData.find(ID);

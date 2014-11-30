@@ -18,7 +18,7 @@ import dataservice.DataFactoryService;
  * @author Zing
  * @version 2014年11月9日下午2:53:19
  */
-public class Commodity implements CommodityInfo_Sale, businesslogic.purchasebl.CommodityInfo, CommodityInfo_Inventory, CommodityInfo_Promotion{
+public class Commodity implements CommodityInfo_Sale, businesslogic.purchasebl.CommodityInfo_Purchase, CommodityInfo_Inventory, CommodityInfo_Promotion{
 	
 	private CommodityDataService commodityData;
 	

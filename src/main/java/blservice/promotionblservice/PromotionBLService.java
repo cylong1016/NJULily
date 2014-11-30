@@ -1,11 +1,10 @@
 package blservice.promotionblservice;
 
 import java.util.ArrayList;
-
 import message.ResultMessage;
 import dataenum.PromotionType;
 import vo.CommodityItemVO;
-import vo.CommodityVO;
+import vo.InventoryBillVO;
 import vo.PromotionVO;
 
 /**
@@ -31,6 +30,14 @@ public interface PromotionBLService {
 	 * @version Nov 29, 2014 7:00:30 PM
 	 */
 	public ArrayList<PromotionVO> show(PromotionType type);
+	
+	/**
+	 * 查看已经有的赠送单，帮助总经理制定策略
+	 * @return 赠送单
+	 * @author Zing
+	 * @version Nov 30, 2014 9:39:47 AM
+	 */
+	public ArrayList<InventoryBillVO> showGifts();
 	
 	/**
 	 * 在添加一个销售策略时调用，得到ID
@@ -66,12 +73,4 @@ public interface PromotionBLService {
 	 */
 	public ResultMessage submit(PromoInputInfo info);
 	
-	/**
-	 * 提交策略
-	 * @param total 策略1中的总价（因为不用其他参数了）
-	 * @return 成功与否
-	 * @author Zing
-	 * @version Nov 30, 2014 12:58:10 AM
-	 */
-	public ResultMessage submit(double total);
 }

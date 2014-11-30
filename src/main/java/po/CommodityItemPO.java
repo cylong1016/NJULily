@@ -18,11 +18,18 @@ public class CommodityItemPO {
 	/** 商品备注 */
 	private String remark;
 
-	public CommodityItemPO(String id, int number, double price, String remark) {
-		this.ID = id;
+	public CommodityItemPO(String ID, int number, double price, String remark) {
+		this.ID = ID;
 		this.number = number;
 		this.price = price;
 		this.remark = remark;
+		this.total = price * number;
+	}
+	
+	public CommodityItemPO(String ID, int number, double price) {
+		this.ID = ID;
+		this.number = number;
+		this.price = price;
 		this.total = price * number;
 	}
 

@@ -1,10 +1,9 @@
 package businesslogic.promotionbl;
 
 import java.util.ArrayList;
-
 import message.ResultMessage;
 import vo.CommodityItemVO;
-import vo.CommodityVO;
+import vo.InventoryBillVO;
 import vo.PromotionVO;
 import dataenum.PromotionType;
 import blservice.promotionblservice.PromoInputInfo;
@@ -20,6 +19,10 @@ public class PromotionController implements PromotionBLService{
 
 	public ArrayList<PromotionVO> show(PromotionType type) {
 		return promotion.show(type);
+	}
+	
+	public ArrayList<InventoryBillVO> showGifts() {
+		return promotion.showGifts();
 	}
 
 	public String getID(PromotionType type) {
@@ -38,10 +41,6 @@ public class PromotionController implements PromotionBLService{
 
 	public ResultMessage submit(PromoInputInfo info) {
 		return promotion.submit(info);
-	}
-
-	public ResultMessage submit(double total) {
-		return promotion.submit(total);
 	}
 
 }

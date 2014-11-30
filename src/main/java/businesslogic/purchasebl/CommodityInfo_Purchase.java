@@ -1,6 +1,6 @@
 package businesslogic.purchasebl;
 
-public interface CommodityInfo {
+public interface CommodityInfo_Purchase {
 	
 	public String getType(String ID);
 	

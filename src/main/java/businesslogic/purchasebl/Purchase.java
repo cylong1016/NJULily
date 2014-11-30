@@ -5,12 +5,10 @@ import java.util.ArrayList;
 
 import config.RMI;
 import blservice.purchaseblservice.PurInputInfo;
-import businesslogic.accountbillbl.ClientInfo;
 import businesslogic.clientbl.Client;
 import businesslogic.commoditybl.Commodity;
 import businesslogic.salebl.CommodityInfo_Sale;
 import po.CommodityItemPO;
-import po.CommodityPO;
 import po.PurchasePO;
 import message.ResultMessage;
 import vo.CommodityItemVO;
@@ -79,7 +77,7 @@ public class Purchase {
 
 	private PurchasePO buildPur() {
 		double sumPrice = list.getBeforePrice();
-		businesslogic.purchasebl.ClientInfo info = new Client();
+		businesslogic.purchasebl.ClientInfo_Purchase info = new Client();
 		String clientName = info.getName(list.getClientID());
 		Storage storage = list.getStorage();
 		po = new PurchasePO(ID, clientName, "user", storage, list.getCommodities(), sumPrice, type);	

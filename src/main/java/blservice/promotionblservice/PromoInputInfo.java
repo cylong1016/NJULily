@@ -49,4 +49,12 @@ public class PromoInputInfo {
 		this.voucher = voucher;
 	}
 	
+	public PromoInputInfo(String beginDate, String endDate, double total, double allowance, int voucher) {
+		this.beginDate = beginDate;
+		this.endDate = endDate;
+		this.total = total;
+		this.allowance = allowance;
+		this.voucher = voucher;
+	}
+	
 }

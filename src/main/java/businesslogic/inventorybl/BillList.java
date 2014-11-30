@@ -1,8 +1,9 @@
 package businesslogic.inventorybl;
 
 import java.util.ArrayList;
-import po.InventoryCommoItemPO;
-import vo.InventoryCommoItemVO;
+
+import po.CommodityItemPO;
+import vo.CommodityItemVO;
 
 /**
  * 库存赠送单
@@ -23,11 +24,11 @@ public class BillList {
 		items.add(item);
 	}
 	
-	public ArrayList<InventoryCommoItemVO> getCommodityVOs(){
+	public ArrayList<CommodityItemVO> getCommodityVOs(){
 		return null;
 	}
 	
-	public ArrayList<InventoryCommoItemPO> getCommodityPOs(){
+	public ArrayList<CommodityItemPO> getCommodityPOs(){
 		return null;
 	}
 

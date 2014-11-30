@@ -16,7 +16,7 @@ public class InventoryBillPO extends PersistentObject {
 	/** 单据ID */
 	private static String ID;
 	/** 商品集合（赠送单） */
-	private ArrayList<InventoryCommoItemPO> commodities;
+	private ArrayList<CommodityItemPO> commodities;
 	/** 备注 */
 	private String remark;
 	/** 单子类型，报损／报溢／报警/赠送 */
@@ -24,7 +24,7 @@ public class InventoryBillPO extends PersistentObject {
 	/** 单据状态 */
 	private BillState state;
 
-	public InventoryBillPO(BillType billType, ArrayList<InventoryCommoItemPO> commodities, String remark) {
+	public InventoryBillPO(BillType billType, ArrayList<CommodityItemPO> commodities, String remark) {
 		super(ID);
 		this.billType = billType;
 		this.commodities = commodities;
@@ -51,7 +51,7 @@ public class InventoryBillPO extends PersistentObject {
 		return remark;
 	}
 
-	public ArrayList<InventoryCommoItemPO> getCommodities() {
+	public ArrayList<CommodityItemPO> getCommodities() {
 		return commodities;
 	}
 }

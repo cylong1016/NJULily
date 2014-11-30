@@ -3,7 +3,6 @@ package blservice.purchaseblservice;
 import java.util.ArrayList;
 
 import dataenum.BillType;
-import dataenum.Storage;
 import vo.CommodityItemVO;
 import vo.PurchaseVO;
 import message.ResultMessage;

@@ -3,6 +3,7 @@ package businesslogic.inventorybl;
 import java.rmi.Naming;
 import java.util.ArrayList;
 
+import businesslogic.promotionbl.InventoryInfo_Promotion;
 import config.RMI;
 import po.InventoryBillPO;
 import vo.InventoryBillVO;
@@ -12,7 +13,7 @@ import dataservice.DataFactoryService;
 import dataservice.InventoryDataService;
 import message.ResultMessage;
 
-public class Inventory{
+public class Inventory implements InventoryInfo_Promotion{
 	
 	private BillList list;
 		
@@ -91,6 +92,10 @@ public class Inventory{
 	private InventoryBillPO getInventoryBill(){
 		InventoryBillPO po = new InventoryBillPO(type, list.getCommodityPOs(), list.getRemark());
 		return po;
+	}
+
+	public ArrayList<InventoryBillVO> getGifts() {
+		return show(BillType.GIFT);
 	}
 	
 }

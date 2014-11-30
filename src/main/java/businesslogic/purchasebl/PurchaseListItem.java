@@ -1,7 +1,7 @@
 package businesslogic.purchasebl;
 
 import businesslogic.commoditybl.Commodity;
-import businesslogic.purchasebl.CommodityInfo;
+import businesslogic.purchasebl.CommodityInfo_Purchase;
 
 /**
  * 其中入库商品列表包含的信息有：
@@ -27,7 +27,7 @@ public class PurchaseListItem {
 	/** 商品备注 */
 	private String remark;
 	
-	CommodityInfo info;
+	CommodityInfo_Purchase info;
 	
 	public PurchaseListItem(){
 	}
@@ -71,7 +71,7 @@ public class PurchaseListItem {
 		return remark;
 	}
 
-	public CommodityInfo getInfo() {
+	public CommodityInfo_Purchase getInfo() {
 		return info;
 	}
 	
