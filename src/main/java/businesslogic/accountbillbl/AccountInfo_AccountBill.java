@@ -1,8 +1,6 @@
 package businesslogic.accountbillbl;
 
-import java.util.ArrayList;
-
-import po.AccountPO;
+import java.util.HashMap;
 
 /**
  * @author cylong
@@ -10,5 +8,10 @@ import po.AccountPO;
  */
 public interface AccountInfo_AccountBill {
 
-	public ArrayList<AccountPO> getAllAccount();
+	/**
+	 * @return 全部的账户ID和账户名 Key=>ID、value=>name
+	 * @author cylong
+	 * @version 2014年12月1日 上午1:23:52
+	 */
+	public HashMap<String, String> getAllAccounts();
 }

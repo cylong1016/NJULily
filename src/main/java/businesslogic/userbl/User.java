@@ -8,11 +8,12 @@ import server.data.UserData;
 import server.io.DefineList;
 import vo.UserVO;
 import blservice.userblservice.LoginInfo;
+import businesslogic.accountbillbl.UserInfo_AccountBill;
 import businesslogic.clientbl.UserInfo_Client;
 import dataenum.UserIdentity;
 import dataservice.UserDataService;
 
-public class User implements UserInfo_Client {
+public class User implements UserInfo_Client, UserInfo_AccountBill {
 
 	private UserDataService userData;
 	private DefineList<UserPO> currentUser;
@@ -20,12 +21,12 @@ public class User implements UserInfo_Client {
 
 	public User() {
 		currentUser = new DefineList<UserPO>("data/loginInfo.ser");
-//		try {
-//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
-//			this.userData = factory.getUserData();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		//		try {
+		//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
+		//			this.userData = factory.getUserData();
+		//		} catch (Exception e) {
+		//			e.printStackTrace();
+		//		}
 		this.userData = new UserData();
 	}
 
@@ -162,5 +163,13 @@ public class User implements UserInfo_Client {
 		UserIdentity iden = po.getIden();
 		UserVO vo = new UserVO(ID, username, password, iden);
 		return vo;
+	}
+
+	/**
+	 * @see businesslogic.accountbillbl.UserInfo_AccountBill#getUserID()
+	 */
+	@Override
+	public String getUserID() {
+		return current.getID();
 	}
 }

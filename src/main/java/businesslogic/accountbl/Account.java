@@ -1,6 +1,7 @@
 package businesslogic.accountbl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import message.ResultMessage;
 import po.AccountPO;
@@ -17,20 +18,13 @@ public class Account implements AccountInfo_AccountBill {
 	private AccountPO po;
 
 	public Account() {
-//		try {
-//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
-//			accountData = factory.getAccountData();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		//		try {
+		//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
+		//			accountData = factory.getAccountData();
+		//		} catch (Exception e) {
+		//			e.printStackTrace();
+		//		}
 		this.accountData = new AccountData();
-	}
-
-	/**
-	 * @see businesslogic.accountbillbl.AccountInfo_AccountBill#getAllAccount()
-	 */
-	public ArrayList<AccountPO> getAllAccount() {
-		return accountData.show();
 	}
 
 	public ArrayList<AccountVO> find(String keywords, FindTypeAccount type) {
@@ -118,6 +112,20 @@ public class Account implements AccountInfo_AccountBill {
 	 */
 	public String getID() {
 		return accountData.getID();
+	}
+
+	/**
+	 * @see businesslogic.accountbillbl.AccountInfo_AccountBill#getAllAccounts()
+	 */
+	@Override
+	public HashMap<String, String> getAllAccounts() {
+		ArrayList<AccountVO> accountsVO = show();
+		HashMap<String, String> accounts = new HashMap<String, String>();
+		for(int i = 0; i < accountsVO.size(); i++) {
+			AccountVO vo = accountsVO.get(i);
+			accounts.put(vo.ID, vo.name);
+		}
+		return accounts;
 	}
 
 }

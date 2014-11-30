@@ -50,8 +50,8 @@ public class AccountBillController implements AccountBillBLService {
 	 * @see blservice.accountbillblservice.AccountBillBLService#addBillItem(vo.AccountBillItemVO)
 	 */
 	@Override
-	public ResultMessage addBillItem(AccountBillItemVO vo) {
-		return accountBill.addBillItem(vo);
+	public void addBillItem(AccountBillItemVO vo) {
+		accountBill.addBillItem(vo);
 	}
 
 	/**
@@ -63,19 +63,11 @@ public class AccountBillController implements AccountBillBLService {
 	}
 
 	/**
-	 * @see blservice.accountbillblservice.AccountBillBLService#addExpenses(java.lang.String)
+	 * @see blservice.accountbillblservice.AccountBillBLService#addAccountBill(java.lang.String)
 	 */
 	@Override
-	public ResultMessage addExpenses(String clientID) {
-		return accountBill.addExpenses(clientID);
-	}
-
-	/**
-	 * @see blservice.accountbillblservice.AccountBillBLService#addPay(java.lang.String)
-	 */
-	@Override
-	public ResultMessage addPay(String clientID) {
-		return accountBill.addPay(clientID);
+	public void addAccountBill(String clientID) {
+		accountBill.addAccountBill(clientID);
 	}
 
 	/**

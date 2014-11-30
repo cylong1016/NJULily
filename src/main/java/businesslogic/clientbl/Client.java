@@ -1,6 +1,7 @@
 package businesslogic.clientbl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import message.ResultMessage;
 import po.ClientPO;
@@ -13,7 +14,7 @@ import dataenum.ClientLevel;
 import dataenum.FindTypeClient;
 import dataservice.ClientDataService;
 
-public class Client implements businesslogic.accountbillbl.ClientInfo, ClientInfo_Sale, businesslogic.purchasebl.ClientInfo_Purchase {
+public class Client implements businesslogic.accountbillbl.ClientInfo_AccountBill, ClientInfo_Sale, businesslogic.purchasebl.ClientInfo_Purchase {
 
 	private ClientDataService clientData;
 
@@ -22,20 +23,13 @@ public class Client implements businesslogic.accountbillbl.ClientInfo, ClientInf
 	 * @version 2014年11月29日 下午3:26:27
 	 */
 	public Client() {
-//		try {
-//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
-//			this.clientData = factory.getClientData();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		//		try {
+		//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
+		//			this.clientData = factory.getClientData();
+		//		} catch (Exception e) {
+		//			e.printStackTrace();
+		//		}
 		this.clientData = new ClientData();
-	}
-
-	/**
-	 * @see businesslogic.accountbillbl.ClientInfo#getAllClients()
-	 */
-	public ArrayList<ClientPO> getAllClients() {
-		return null;
 	}
 
 	/**
@@ -101,7 +95,8 @@ public class Client implements businesslogic.accountbillbl.ClientInfo, ClientInf
 		double payable = po.getPayable();
 		double receivableLimit = po.getReceivableLimit();
 		String salesman = po.getSalesman();
-		ClientVO vo = new ClientVO(ID, category, level, name, phone, address, post, email, receivable, payable, receivableLimit, salesman);
+		ClientVO vo =
+						new ClientVO(ID, category, level, name, phone, address, post, email, receivable, payable, receivableLimit, salesman);
 		return vo;
 	}
 
@@ -189,6 +184,20 @@ public class Client implements businesslogic.accountbillbl.ClientInfo, ClientInf
 	 */
 	public ResultMessage deletClient(String ID) {
 		return clientData.delete(ID);
+	}
+
+	/**
+	 * @see businesslogic.accountbillbl.ClientInfo_AccountBill#getAllClients()
+	 */
+	@Override
+	public HashMap<String, String> getAllClients() {
+		ArrayList<ClientVO> clientsVO = show();
+		HashMap<String, String> clients = new HashMap<String, String>();
+		for(int i = 0; i < clientsVO.size(); i++) {
+			ClientVO vo = clientsVO.get(i);
+			clients.put(vo.ID, vo.name);
+		}
+		return clients;
 	}
 
 }

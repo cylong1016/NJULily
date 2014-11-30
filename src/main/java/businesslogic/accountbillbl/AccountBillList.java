@@ -2,7 +2,8 @@ package businesslogic.accountbillbl;
 
 import java.util.ArrayList;
 
-import message.ResultMessage;
+import po.AccountBillItemPO;
+import vo.AccountBillItemVO;
 
 /**
  * 转账列表，并提供返回总额方法
@@ -12,20 +13,38 @@ import message.ResultMessage;
 public class AccountBillList {
 
 	private double sumMoney = 0;
-	private ArrayList<BillItem> billList;
+	private ArrayList<AccountBillItemVO> billList;
 
 	public AccountBillList() {
-		billList = new ArrayList<BillItem>();
+		billList = new ArrayList<AccountBillItemVO>();
 	}
 
-	public ResultMessage addBillItem(String accountName, int money, String remark) {
-		BillItem item = new BillItem(accountName, money, remark);
-		sumMoney += money;
+	public void addBillItem(AccountBillItemVO vo) {
+		AccountBillItemVO item = new AccountBillItemVO(vo.accountID, vo.money, vo.remark);
+		sumMoney += vo.money;
 		billList.add(item);
-		return ResultMessage.SUCCESS;
 	}
 	
 	public double getSumMoney() {
 		return this.sumMoney;
+	}
+	
+	/**
+	 * voList转化成poList
+	 * @return poList
+	 * @author cylong
+	 * @version 2014年12月1日  上午1:13:19
+	 */
+	public ArrayList<AccountBillItemPO> toPOList() {
+		ArrayList<AccountBillItemPO> poList = new ArrayList<AccountBillItemPO>();
+		for(int i = 0; i < billList.size(); i++) {
+			AccountBillItemVO vo = billList.get(i);
+			String accountID = vo.accountID;
+			int money = vo.money;
+			String remark = vo.remark;
+			AccountBillItemPO po = new AccountBillItemPO(accountID, money, remark);
+			poList.add(po);
+		}
+		return poList;
 	}
 }

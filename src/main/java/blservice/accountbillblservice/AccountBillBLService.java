@@ -21,6 +21,11 @@ import dataenum.BillType;
  * @author cylong
  * @version Nov 16, 2014 3:48:21 PM
  */
+/**
+ * 将addExpenses、addPay方法合为一个addAccountBill方法
+ * @author cylong
+ * @version 2014年12月1日  上午1:53:23
+ */
 public interface AccountBillBLService {
 
 	/**
@@ -45,13 +50,12 @@ public interface AccountBillBLService {
 	public HashMap<String, String> getAllAccounts();
 
 	/**
-	 * 添加转账列表【界面有一个下拉列表选择账户名】
-	 * @param accountName
-	 * @param money
-	 * @param remark
-	 * @return 是否成功
+	 * 添加转账列表的一条记录
+	 * @param vo
+	 * @author cylong
+	 * @version 2014年12月1日  上午1:52:39
 	 */
-	public ResultMessage addBillItem(AccountBillItemVO vo);
+	public void addBillItem(AccountBillItemVO vo);
 
 	/**
 	 * 得到总额，界面显示
@@ -60,22 +64,12 @@ public interface AccountBillBLService {
 	public double getSumMoney();
 
 	/**
-	 * 建立新的收款单
+	 * 建立新的收款单（付款单），单据类型在前面的getID方法已经得到
 	 * @param clientID 客户的ID【添加客户的时候有一个下拉列表选择存在的客户】
-	 * @return 处理结果
 	 * @author cylong
 	 * @version 2014年11月30日 下午10:32:37
 	 */
-	public ResultMessage addExpenses(String clientID);
-
-	/**
-	 * 建立新的付款单
-	 * @param clientID 客户ID【添加客户的时候有一个下拉列表选择存在的客户】
-	 * @return 处理结果
-	 * @author cylong
-	 * @version 2014年11月30日 下午10:33:10
-	 */
-	public ResultMessage addPay(String clientID);
+	public void addAccountBill(String clientID);
 
 	/**
 	 * 提交单据进行审批
