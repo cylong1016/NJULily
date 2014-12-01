@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -230,31 +231,81 @@ public class ClientManagementUI extends JLabel implements ActionListener{
 		/////////////////////////////SEARCH////////////////////////////
 		if(events.getSource() == button_search){
 			if(comboBox.getSelectedIndex() == 0){
+				
 				WarningFrame wf = new WarningFrame("请选择一种搜索方式");
 				wf.setVisible(true);
+				
 			}else{
+				
+				controller = new ClientController();
+				ArrayList<ClientVO> list = controller.findClient(textField.getText(), getType(comboBox.getSelectedIndex()));
+				
+				if(list.size() == 0){
+					WarningFrame wf = new WarningFrame("没有符合条件的客户！");
+					wf.setVisible(true);
+				}else{
+					
+					DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+					
+					if(rowNum != 0)
+						for(int k = 0; k <= rowNum; k++)
+							tableModel.removeRow(0);
+					
+					rowNum = 0;
+					
+					
+					
+					for(int i = 0; i < list.size(); i++){
+										
+						ClientVO cvo = list.get(i);
+						
+						String[] str = {cvo.ID, getCategory(cvo.category.toString()), getLevel(cvo.level.toString())
+								, cvo.name,cvo.salesman,String.valueOf(cvo.receivable - cvo.payable)
+								,String.valueOf(cvo.receivable), String.valueOf(cvo.payable),String.valueOf(cvo.receivableLimit)};
+						tableModel.addRow(str);
+						rowNum = i;
+					}	
+					
+					WarningFrame wf = new WarningFrame("共有  " + list.size() + "  名客户符合条件！");
+					wf.setVisible(true);
+				}
+				
 				
 			}
 		}
 	}
 	
+	// "模糊查找", "客户编号(ID)", "客户星级", "客户分类", "客户名称", "默认业务员"
+	
+	private FindTypeClient getType(int i){
+		switch(i){
+			case 1: return null;
+			case 2: return FindTypeClient.ID;
+			case 3: return FindTypeClient.LEVEL;
+			case 5: return FindTypeClient.NAME;
+			case 6: return FindTypeClient.SALESMAN;
+			default: return FindTypeClient.KIND;
+		}
+	}
+	
+	
 	private String getCategory(String str){
 		switch(str){
-		case "PURCHASE_PERSON" : return "进货商";
-		case "SALES_PERSON" : return "销售商";
-		case "BOTH" :  return "进货商/销售商(两者都是)";
-		default : return null;
+			case "PURCHASE_PERSON" : return "进货商";
+			case "SALES_PERSON" : return "销售商";
+			case "BOTH" :  return "进货商/销售商(两者都是)";
+			default : return null;
 		}
 	}
 	
 	private String getLevel(String str){
 		switch(str){
-		case "LEVEL_1" : return "一星级";
-		case "LEVEL_2" : return "二星级";
-		case "LEVEL_3" :  return "三星级";
-		case "LEVEL_4" : return "四星级";
-		case "VIP" :  return "五星级(VIP)";
-		default : return null;
+			case "LEVEL_1" : return "一星级";
+			case "LEVEL_2" : return "二星级";
+			case "LEVEL_3" :  return "三星级";
+			case "LEVEL_4" : return "四星级";
+			case "VIP" :  return "五星级(VIP)";
+			default : return null;
 		}
 	}
 
