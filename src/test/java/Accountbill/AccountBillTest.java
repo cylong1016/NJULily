@@ -25,15 +25,6 @@ public class AccountBillTest {
 
 	/**
 	 * Test method for
-	 * {@link businesslogic.accountbillbl.AccountBill#addClient(java.lang.String, java.lang.String)}.
-	 */
-	@Test
-	public void testAddClient() {
-		accountBill.addClient("1", "客户1");
-	}
-
-	/**
-	 * Test method for
 	 * {@link businesslogic.accountbillbl.AccountBill#addBillItem(java.lang.String, int, java.lang.String)}.
 	 */
 	@Test
@@ -45,8 +36,6 @@ public class AccountBillTest {
 	 */
 	@Test
 	public void testGetSumMoney() {
-		accountBill.addBillItem("账户1", 1000, "转账测试0");
-		accountBill.addBillItem("账户1", 500, "转账测试1");
 		assertEquals(1500.0, accountBill.getSumMoney(), 0);
 	}
 

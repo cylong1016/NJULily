@@ -12,7 +12,7 @@ public class testBussinessState {
 		MockSale sale2 = new MockSale(200);
 		
 		
-		MockBusinessState businessState = new MockBusinessState();
+		MockBusinessState businessState = new MockBusinessState(null);
 		businessState.add(sale1);
 		businessState.add(sale2);
 		
