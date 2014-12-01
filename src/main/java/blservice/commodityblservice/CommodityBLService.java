@@ -26,15 +26,25 @@ public interface CommodityBLService {
 	/**
 	 * 显示所有的商品
 	 */
-	public ArrayList<CommodityVO> showCommo();
+	public ArrayList<CommodityVO> show();
+	
+	/**
+	 * 根据ID显示特定商品信息
+	 * @param ID
+	 * @return
+	 * @author Zing
+	 * @version Dec 1, 2014 7:54:14 PM
+	 */
+	public CommodityVO show(String ID);
 	
 	/**
 	 * 在创建一个商品的时候，得到商品的ID
+	 * 需要父类的ID来确定商品的ID
 	 * @return
 	 * @author Zing
 	 * @version Nov 30, 2014 10:31:48 AM
 	 */
-	public String getID();
+	public String getID(String sortID);
 	
 	/**
 	 *  添加商品
@@ -69,7 +79,7 @@ public interface CommodityBLService {
 	 * @param name 商品名称
 	 * @return
 	 */
-	public ArrayList<CommodityPO> findCommo(String info, FindTypeCommo type);
+	public ArrayList<CommodityVO> findCommo(String info, FindTypeCommo type);
 
 
 }

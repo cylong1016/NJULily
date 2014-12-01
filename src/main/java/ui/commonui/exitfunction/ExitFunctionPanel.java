@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyPanel;
+import ui.differui.inventory.frame.Frame_Inventory;
 import ui.differui.salesman.client.ClientAddingUI;
 import ui.differui.salesman.client.ClientDetailUI;
 
@@ -61,6 +62,12 @@ public class ExitFunctionPanel extends MyPanel implements ActionListener{
 			case "ClientAddingUI": ClientAddingUI.button_close.doClick();break;
 			
 			case "ClientDetailUI": ClientDetailUI.button_close.doClick();break;
+			
+			case "Inventory": 	Frame_Inventory.visibleFalse(Frame_Inventory.flag);
+								Frame_Inventory.visibleTrue(Frame_Inventory.destination);
+								Frame_Inventory.flag = Frame_Inventory.destination;
+								System.out.print(Frame_Inventory.flag);
+								break;
 			
 			}
 			ExitFunctionFrame.button_close.doClick();

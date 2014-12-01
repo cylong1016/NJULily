@@ -22,12 +22,15 @@ public class SortAddingPanel extends MyPanel implements ActionListener{
 		
 		String str = "Plipala";
 		
+		Color foreColor = new Color(158, 213, 220);
+		Color backColor = new Color(53, 84, 94);
+		
 		//information bar
 		JLabel infoBar = new JLabel("新增商品分类",JLabel.CENTER);
 		infoBar.setBounds(0, 0 , 600, 20);
 		infoBar.setOpaque(true);
-		infoBar.setForeground(Color.black);
-		infoBar.setBackground(new Color(0, 1, 1, 0.5f));
+		infoBar.setForeground(foreColor);
+		infoBar.setBackground(backColor);
 		this.add(infoBar);
 		
 		//texts

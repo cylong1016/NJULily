@@ -37,14 +37,14 @@ public class CommodityPO extends PersistentObject {
 	 * @author cylong
 	 * @version Oct 26, 2014 1:21:03 PM
 	 */
-	public CommodityPO(String ID, String name, String sortID, String type, double purPrice, double salePrice) {
+	public CommodityPO(String ID, String name, String sortID, String type, double purPrice, double salePrice, int alarmNumber) {
 		super(ID);
 		this.name = name;
 		this.type = type;
 		this.sortID = sortID;
 		this.purPrice = purPrice;
 		this.salePrice = salePrice;
-		this.setAlarmNumber(0);
+		this.alarmNumber = alarmNumber;
 	}
 
 	/**
@@ -90,7 +90,7 @@ public class CommodityPO extends PersistentObject {
 	}
 
 	public String getSortID() {
-		return this.sortID;
+		return sortID;
 	}
 
 	public int getInventoryNum() {

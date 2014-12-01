@@ -27,8 +27,8 @@ public class CommoditySort {
 		} 
 	}
 	
-	public String getID(){
-		this.ID = commoditySortData.getID();
+	public String getID(String fatherID){
+		this.ID = commoditySortData.getID(fatherID);
 		return ID;
 	}
 	

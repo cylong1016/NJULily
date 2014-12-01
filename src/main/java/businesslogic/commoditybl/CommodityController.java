@@ -17,8 +17,17 @@ public class CommodityController implements CommodityBLService{
 		commodity = new Commodity();
 	}
 
-	public String getID() {
-		return commodity.getID();
+	public String getID(String sortID) {
+		return commodity.getID(sortID);
+	}
+	
+	public ArrayList<CommodityVO> show() {
+		return commodity.show();
+		
+	}
+	
+	public CommodityVO show(String ID) {
+		return commodity.show(ID);
 	}
 	
 	public ResultMessage addCommo(CommodityInputInfo info) {
@@ -33,14 +42,10 @@ public class CommodityController implements CommodityBLService{
 		return commodity.updCommo(ID,info);
 	}
 
-	public ArrayList<CommodityPO> findCommo(String info, FindTypeCommo type) {
+	public ArrayList<CommodityVO> findCommo(String info, FindTypeCommo type) {
 		return commodity.findCommo(info, type);
 	}
 
-	public ArrayList<CommodityVO> showCommo() {
-		return commodity.showCommo();
-		
-	}
 
 
 }

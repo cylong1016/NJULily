@@ -8,7 +8,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import ui.commonui.myui.MyPanel;
-import ui.differui.inventory.frame.Frame_Inventory;
 
 public class InventoryCheckingIndex extends MyPanel implements ActionListener{
 	
@@ -48,10 +47,7 @@ public class InventoryCheckingIndex extends MyPanel implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent events){
-		if(events.getSource() == bt_IC){
-			Frame_Inventory.bt_IC.doClick();
-			this.setVisible(false);
-		}
+	
 	}
 
 }

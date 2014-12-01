@@ -25,11 +25,12 @@ public interface CommoditySortBLService {
 	
 	/**
 	 * 创建商品分类的时候调用，显示商品分类ID
+	 * 需要传父类的ID
 	 * @return
 	 * @author Zing
 	 * @version Dec 1, 2014 6:45:00 PM
 	 */
-	public String getID();
+	public String getID(String fatherID);
 	
 	/**
 	 * 添加商品分类
