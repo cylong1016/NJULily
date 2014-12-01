@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <DataService>
 	<Data>
 		<name>ClientData</name>
@@ -21,6 +21,7 @@
 	<Data>
 		<name>AccountBillData</name>
 		<path>data/AccountBillList.ser</path>
+		<expenseID>SKD-20141102</expenseID>
 		<initID>1</initID>
 		<IDMaxBit>5</IDMaxBit>
 		<dateFormat>yyyyMMdd</dateFormat>

@@ -1,11 +1,19 @@
 package server.common;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
@@ -15,29 +23,19 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
- * 对XML文件进行解析
+ * 对XML文件进行解析（读取修改）
  * @author cylong
  * @version 2014年11月26日 下午3:32:05
  */
-/**
- * @author cylong
- * @version 2014年12月2日 上午1:05:24
- */
 public class ParseXML {
-
-	public static void main(String[] args) {
-		ParseXML p = new ParseXML("ClientData");
-		System.out.println(p.getValue("name"));
-		p.setValue("name", "cylong");
-		System.out.println(p.getValue("name"));
-	}
 
 	private Element theData;
 	private Element root;
+	private Document xmldoc;
+	private String xmlPath = "config/DataService.xml";
 
 	public ParseXML(String name) {
 		try {
@@ -46,7 +44,7 @@ public class ParseXML {
 			// step 2:获得具体的dom解析器  
 			DocumentBuilder docBuilder = dbfactory.newDocumentBuilder();
 			// step3: 解析一个xml文档，获得Document对象（根结点）  
-			Document xmldoc = docBuilder.parse(new File("config/DataService.xml"));
+			xmldoc = docBuilder.parse(new File(xmlPath));
 			root = xmldoc.getDocumentElement();
 			theData = (Element)selectSingleNode("/DataService/Data[name='" + name + "']", root);
 		} catch (DOMException e) {
@@ -74,6 +72,7 @@ public class ParseXML {
 
 	public void setValue(String tag, String value) {
 		theData.getElementsByTagName(tag).item(0).setTextContent(value);
+		saveXml(xmlPath, xmldoc);
 	}
 
 	/**
@@ -91,5 +90,33 @@ public class ParseXML {
 			e.printStackTrace();
 		}
 		return result;
+	}
+
+	/**
+	 * 将Document输出到文件
+	 * @param fileName
+	 * @param doc
+	 * @author cylong
+	 * @version 2014年12月2日 上午3:19:08
+	 */
+	public void saveXml(String fileName, Document doc) {
+		TransformerFactory transFactory = TransformerFactory.newInstance();
+		try {
+			Transformer transformer = transFactory.newTransformer();
+			transformer.setOutputProperty("indent", "yes");
+
+			DOMSource source = new DOMSource();
+			source.setNode(doc);
+			StreamResult result = new StreamResult();
+			result.setOutputStream(new FileOutputStream(fileName));
+
+			transformer.transform(source, result);
+		} catch (TransformerConfigurationException e) {
+			e.printStackTrace();
+		} catch (TransformerException e) {
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 }

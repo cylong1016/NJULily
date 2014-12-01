@@ -8,17 +8,15 @@ import po.AccountBillPO;
 import server.common.Common;
 import server.common.ParseXML;
 import server.data.CommonData;
-import server.io.DefineList;
 import dataenum.BillType;
-import dataenum.Storage;
-import dataservice.TableInfoService;
 import dataservice.accountbilldataservice.AccountBillDataService;
+import dataservice.accountbilldataservice.AccountBillInfoService;
 
 /**
  * @author cylong
  * @version 2014年11月30日 下午10:50:32
  */
-public class AccountBillData extends CommonData<AccountBillPO> implements AccountBillDataService, TableInfoService {
+public class AccountBillData extends CommonData<AccountBillPO> implements AccountBillDataService {
 
 	/** 付款单或付款单最大ID */
 	private int maxID;
@@ -95,6 +93,14 @@ public class AccountBillData extends CommonData<AccountBillPO> implements Accoun
 			}
 		}
 		return bills;
+	}
+
+	/**
+	 * @see dataservice.accountbilldataservice.AccountBillDataService#getInfo()
+	 */
+	@Override
+	public AccountBillInfoService getInfo() {
+		return new AccountBillInfo();
 	}
 
 }
