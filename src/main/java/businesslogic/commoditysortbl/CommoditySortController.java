@@ -28,8 +28,8 @@ public class CommoditySortController implements CommoditySortBLService{
 		return commoditySort.show(ID);
 	}
 	
-	public String getID() {
-		return commoditySort.getID();
+	public String getID(String fatherID) {
+		return commoditySort.getID(fatherID);
 	}
 	
 	public ResultMessage addCommoSort(String sortName, String fatherID) {	

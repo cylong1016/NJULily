@@ -13,8 +13,8 @@ public class CommodityPO extends PersistentObject {
 	private String name;
 	/** 商品型号 */
 	private String type;
-	/** 商品分类 */
-	private CommoditySortPO sort;
+	/** 商品分类ID */
+	private String sortID;
 	/** 商品库存数量 */
 	private int inventoryNum;
 	/** 商品进价 */
@@ -37,14 +37,14 @@ public class CommodityPO extends PersistentObject {
 	 * @author cylong
 	 * @version Oct 26, 2014 1:21:03 PM
 	 */
-	public CommodityPO(String id, String name, CommoditySortPO sort, String type, double purPrice, double salePrice) {
-		super(id);
+	public CommodityPO(String ID, String name, String sortID, String type, double purPrice, double salePrice, int alarmNumber) {
+		super(ID);
 		this.name = name;
 		this.type = type;
-		this.sort = sort;
+		this.sortID = sortID;
 		this.purPrice = purPrice;
 		this.salePrice = salePrice;
-		this.setAlarmNumber(0);
+		this.alarmNumber = alarmNumber;
 	}
 
 	public static long getSerialversionuid() {
@@ -59,8 +59,8 @@ public class CommodityPO extends PersistentObject {
 		return type;
 	}
 
-	public CommoditySortPO getSort() {
-		return sort;
+	public String getSortID() {
+		return sortID;
 	}
 
 	public int getInventoryNum() {

@@ -12,13 +12,14 @@ public class CommodityPOtoVO {
 			String ID = po.getID();
 			String name = po.getName();
 			String type = po.getType();
+			String sortID = po.getSortID();
 			int inventoryNum = po.getInventoryNum();
 			double purPrice = po.getPurPrice();
 			double salePrice = po.getSalePrice();
 			double recentPurpPrice = po.getRecentPurPrice();
 			double recentSalePrice = po.getRecentSalePrice();
 			int alarmNumber = po.getAlarmNumber();
-			CommodityVO vo = new CommodityVO(ID, name, type, inventoryNum, purPrice, salePrice, recentPurpPrice, recentSalePrice, alarmNumber);
+			CommodityVO vo = new CommodityVO(ID, name, type, sortID, inventoryNum, purPrice, salePrice, recentPurpPrice, recentSalePrice, alarmNumber);
 			itemsVO.add(vo);
 		}
 		return itemsVO;

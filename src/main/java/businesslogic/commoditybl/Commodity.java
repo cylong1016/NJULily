@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import config.RMI;
 import message.ResultMessage;
 import po.CommodityPO;
+import po.CommoditySortPO;
 import vo.CommodityVO;
 import blservice.commodityblservice.CommodityInputInfo;
 import businesslogic.inventorybl.info.CommodityInfo_Inventory;
@@ -20,7 +21,7 @@ import dataservice.commondata.DataFactoryService;
  * @author Zing
  * @version 2014年11月9日下午2:53:19
  */
-public class Commodity implements CommodityInfo_Sale, businesslogic.purchasebl.CommodityInfo_Purchase, CommodityInfo_Inventory, CommodityInfo_Promotion{
+public class Commodity {
 	
 	private CommodityDataService commodityData;
 	
@@ -40,68 +41,140 @@ public class Commodity implements CommodityInfo_Sale, businesslogic.purchasebl.C
 		}
 	}
 	
-	public String getID(){
-		ID = commodityData.getID();
+	/**
+	 * 
+	 * @param sortID
+	 * @return
+	 * @author Zing
+	 * @version Dec 1, 2014 9:16:41 PM
+	 */
+	public String getID(String sortID){
+		ID = commodityData.getID(sortID);
 		return ID;
 	}
 	
-	public ResultMessage addCommo(CommodityInputInfo info) {
-		po = new CommodityPO(ID, info.name, commoditySortData.find(info.sortID), info.type, info.purPrice, info.salePrice);
-		commodityData.insert(po);
-		return ResultMessage.SUCCESS;
-	}
-
-	public ResultMessage deletCommo(String id) {
-		po = commodityData.find(id, FindTypeCommo.ID).get(0);
-		if (po!=null) {
-			return commodityData.delete(po.getID());
+	/**
+	 * 返回所有的商品
+	 * @return
+	 * @author Zing
+	 * @version Dec 1, 2014 9:16:44 PM
+	 */
+	public ArrayList<CommodityVO> show() {
+		ArrayList<CommodityVO> VOs = new ArrayList<CommodityVO>();
+		ArrayList<String> IDs = commodityData.getAllID();
+		for (String ID : IDs) {
+			CommodityVO vo = show(ID);
+			VOs.add(vo);
 		}
-		else 
-			return ResultMessage.FAILURE;
+		return VOs;
 	}
-
+	
+	/**
+	 * 根据ID返回商品VO
+	 * @param ID
+	 * @return
+	 * @author Zing
+	 * @version Dec 1, 2014 9:16:47 PM
+	 */
+	public CommodityVO show(String ID) {
+		CommodityPO po = commodityData.find(ID);
+		CommodityVO vo = POToVO(po);
+		return vo;
+	}
+	
+	/**
+	 * 添加商品
+	 * @param info
+	 * @return
+	 * @author Zing
+	 * @version Dec 1, 2014 8:57:15 PM
+	 */
+	public ResultMessage addCommo(CommodityInputInfo info) {
+		po = new CommodityPO(ID, info.name, info.sortID, info.type, info.purPrice, info.salePrice, 0);
+		ResultMessage result = commodityData.insert(po);
+		if (result != ResultMessage.SUCCESS) {
+			return result;
+		}
+		// 如果添加成功，更新商品分类的信息
+		CommoditySortPO sortPO = commoditySortData.find(info.sortID);
+		sortPO.addCommodityID(ID);
+		commoditySortData.update(sortPO);
+		return result;
+	}
+	
+	/**
+	 * 删除商品（只有没有被操作过才可以）
+	 * @param id
+	 * @return
+	 * @author Zing
+	 * @version Dec 1, 2014 8:57:57 PM
+	 */
+	public ResultMessage deletCommo(String ID) {
+		double purPrice = commodityData.find(ID).getPurPrice();
+		if (purPrice == 0) {
+			return ResultMessage.FAILURE;
+		}
+		// 如果可以删除该商品，就顺便删除分类中的该商品
+		String sortID = commodityData.find(ID).getSortID();
+		CommoditySortPO sortPO = commoditySortData.find(sortID);
+		sortPO.removeCommodity(ID);
+		commoditySortData.update(sortPO);
+		return commodityData.delete(ID);
+	}
+	
+	/**
+	 * 更新商品信息
+	 * @param ID
+	 * @param info
+	 * @return
+	 * @author Zing
+	 * @version Dec 1, 2014 9:32:00 PM
+	 */
 	public ResultMessage updCommo(String ID, CommodityInputInfo info){
-		po = new CommodityPO(ID, info.name, commoditySortData.find(info.sortID), info.type, info.purPrice, info.salePrice);	
+		po = new CommodityPO(ID, info.name, info.sortID, info.type, info.purPrice, info.salePrice, info.alarmNumber);	
 		return commodityData.update(po);
 	}
-
-	public ArrayList<CommodityPO> findCommo(String info, FindTypeCommo type) {
-		return commodityData.find(info, type);
+	
+	/**
+	 * 返回符合查找条件的商品VO集合
+	 * @param info
+	 * @param type
+	 * @return
+	 * @author Zing
+	 * @version Dec 1, 2014 9:30:58 PM
+	 */
+	public ArrayList<CommodityVO> findCommo(String info, FindTypeCommo type) {
+		ArrayList<CommodityVO> VOs = new ArrayList<CommodityVO>();
+		ArrayList<CommodityPO> POs = commodityData.find(info, type);
+		for (CommodityPO po : POs) {
+			CommodityVO vo = POToVO(po);
+			VOs.add(vo);
+		}
+		return VOs;
 	}
-
-	public ArrayList<CommodityVO> showCommo() {
-		//
-		return null;
+	
+	/**
+	 * 把一个商品PO转换成VO
+	 * @param po
+	 * @return 一个商品VO
+	 * @author Zing
+	 * @version Dec 1, 2014 9:33:15 PM
+	 */
+	private CommodityVO POToVO(CommodityPO po) {
+		String ID = po.getID();
+		String name = po.getName();
+		String type = po.getType();
+		String sortID = po.getSortID();
+		int inventoryNum = po.getInventoryNum();
+		double purPrice = po.getPurPrice();
+		double salePrice = po.getSalePrice();
+		double recentPurpPrice = po.getRecentPurPrice();
+		double recentSalePrice = po.getRecentSalePrice();
+		int alarmNumber = po.getAlarmNumber();
+		CommodityVO vo = new CommodityVO(ID, name, type, sortID, inventoryNum,
+				purPrice, salePrice, recentPurpPrice, recentSalePrice,
+				alarmNumber);
+		return vo;
 	}
-
-	public String getType(String ID) {
-		po = commodityData.find(ID);
-		return 	po.getType();
-	}
-
-	public String getName(String ID) {
-		po = commodityData.find(ID);
-		return po.getName();
-	}
-
-	public ArrayList<String> getAllID() {
-		return 	commodityData.getAllID();
-	}
-
-	public int getNumber(String ID) {
-		po = commodityData.find(ID);
-		return po.getInventoryNum();
-	}
-
-	public double getAvePrice(String ID) {
-		po = commodityData.find(ID);
-		return po.getPurPrice();
-	}
-
-	public double getPurPrice(String ID) {
-		po = commodityData.find(ID);
-		return po.getPurPrice();
-	}
-
 
 }

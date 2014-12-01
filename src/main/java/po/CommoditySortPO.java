@@ -11,8 +11,6 @@ public class CommoditySortPO extends PersistentObject {
 
 	private static final long serialVersionUID = 1L;
 	
-	private String ID;
-
 	private String name;
 
 	private String fatherID;
@@ -53,6 +51,16 @@ public class CommoditySortPO extends PersistentObject {
 	
 	public void addCommodityID(String commodityID) {
 		this.commoditiesID.add(commodityID);
+	}
+
+
+	public void removeCommodity(String ID) {
+		for (int i = 0; i < commoditiesID.size(); i++) {
+			if (ID == commoditiesID.get(i)) {
+				commoditiesID.remove(i);
+				return;
+			}
+		}
 	}
 
 }
