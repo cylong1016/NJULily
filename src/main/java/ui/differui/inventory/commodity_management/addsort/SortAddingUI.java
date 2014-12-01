@@ -1,6 +1,5 @@
 package ui.differui.inventory.commodity_management.addsort;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,7 +17,6 @@ public class SortAddingUI extends MyWindow implements ActionListener{
 		
 		SortAddingPanel sap = new SortAddingPanel();
 		sap.setOpaque(true);
-		sap.setBackground(new Color(0, 0, 0));
 		sap.setBounds(340, 250, 600, 185);
 		this.add(sap);
 		

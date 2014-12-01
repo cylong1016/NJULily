@@ -1,9 +1,7 @@
 package main;
 
+import ui.differui.inventory.frame.Frame_Inventory;
 import ui.differui.salesman.frame.Frame_Salesman;
-
-
-
 
 /**
  * @author cylong
@@ -14,8 +12,14 @@ public class Main {
 	public static void main(String[] args) {
 		
 		//UI test
-		Frame_Salesman fm = new Frame_Salesman();
+//		Frame_Login lf = new Frame_Login();
+//		lf.setVisible(true);
+		
+		Frame_Inventory fm = new Frame_Inventory();
 		fm.setVisible(true);
-
+		
+//		Frame_Salesman fs = new Frame_Salesman();
+//		fs.setVisible(true);
+		
 	}
 }
