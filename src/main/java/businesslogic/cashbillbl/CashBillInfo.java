@@ -22,7 +22,7 @@ public class CashBillInfo implements ValueObjectInfo_Record<CashBillVO>{
 		return null;
 	}
 
-	public CashBillVO show(String ID) {
+	public CashBillVO find(String ID) {
 		// TODO Auto-generated method stub
 		return null;
 	}

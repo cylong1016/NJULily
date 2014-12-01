@@ -2,16 +2,16 @@ package dataservice;
 
 import java.util.ArrayList;
 
-import dataservice.commondata.DataService;
 import message.ResultMessage;
 import po.AccountaInitPO;
+import dataservice.commondata.DataService;
 
 /**
  * 提供期初建账数据集体载入、保存、增加、查看服务
  * @author cylong
  * @version Oct 26, 2014 3:54:11 PM
  */
-public interface AccountaInitDataService extends DataService {
+public interface AccountaInitDataService extends DataService<AccountaInitPO> {
 
 	/**
 	 * 向序列化数据中插入一个期初建账信息
@@ -25,7 +25,7 @@ public interface AccountaInitDataService extends DataService {
 	 * 查看所有期初建账信息，装入ArrayList中
 	 * @return 所有期初建账信息
 	 * @author cylong
-	 * @version Nov 3, 2014  8:42:08 PM
+	 * @version Nov 3, 2014 8:42:08 PM
 	 */
-	public ArrayList<AccountaInitPO> getAllMsg ();
+	public ArrayList<AccountaInitPO> getAllMsg();
 }

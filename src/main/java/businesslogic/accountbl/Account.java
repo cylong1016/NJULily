@@ -125,4 +125,16 @@ public class Account {
 		return accountData.getID();
 	}
 
+	/**
+	 * 根据账户ID精确查找账户
+	 * @param ID 账户ID
+	 * @return AccountVO
+	 * @author cylong
+	 * @version 2014年12月1日 下午5:02:16
+	 */
+	public AccountVO find(String ID) {
+		AccountPO po = accountData.find(ID);
+		return poToVO(po);
+	}
+
 }

@@ -14,7 +14,7 @@ public interface ValueObjectInfo_Record<VO extends ValueObject> {
 	 * @author Zing
 	 * @version Dec 1, 2014 2:32:24 PM
 	 */
-	public VO show(String ID);
+	public VO find(String ID);
 	
 	/**
 	 * 

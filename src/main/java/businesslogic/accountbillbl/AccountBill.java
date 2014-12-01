@@ -206,4 +206,16 @@ public class AccountBill {
 		return null;
 	}
 
+	/**
+	 * 根据ID精确查找账单
+	 * @param ID 账单ID
+	 * @return AccountBillVO
+	 * @author cylong
+	 * @version 2014年12月1日 下午5:07:56
+	 */
+	public AccountBillVO find(String ID) {
+		AccountBillPO po = accountBillData.find(ID);
+		return poToVO(po);
+	}
+
 }

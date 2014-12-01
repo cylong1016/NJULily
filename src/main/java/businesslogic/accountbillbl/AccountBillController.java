@@ -103,4 +103,12 @@ public class AccountBillController implements AccountBillBLService {
 	public ArrayList<AccountBillVO> show(BillType type) {
 		return accountBill.show(type);
 	}
+
+	/**
+	 * @see blservice.accountbillblservice.AccountBillBLService#find(java.lang.String)
+	 */
+	@Override
+	public AccountBillVO find(String ID) {
+		return accountBill.find(ID);
+	}
 }

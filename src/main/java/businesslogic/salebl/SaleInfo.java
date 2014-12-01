@@ -52,7 +52,7 @@ public class SaleInfo extends Info<SaleDataService> implements SaleInfo_Inventor
 		return IDs;
 	}
 	
-	public SalesVO show(String ID) {
+	public SalesVO find(String ID) {
 		SalesVO vo = sale.poToVo(getData().find(ID));
 		return vo;
 	}

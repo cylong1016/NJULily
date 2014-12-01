@@ -37,6 +37,14 @@ public class AccountController implements AccountBLService {
 	}
 
 	/**
+	 * @see blservice.accountblservice.AccountBLService#find(java.lang.String)
+	 */
+	@Override
+	public AccountVO find(String ID) {
+		return account.find(ID);
+	}
+
+	/**
 	 * @see blservice.accountblservice.AccountBLService#add(vo.AccountVO)
 	 */
 	@Override

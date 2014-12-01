@@ -1,15 +1,15 @@
 package dataservice;
 
-import dataservice.commondata.DataService;
 import message.ResultMessage;
 import po.CommoditySortPO;
+import dataservice.commondata.DataService;
 
 /**
  * 提供商品分类数据集体载入、保存、增删改查服务
  * @author cylong
  * @version Oct 26, 2014 3:55:35 PM
  */
-public interface CommoditySortDataService extends DataService {
+public interface CommoditySortDataService extends DataService<CommoditySortPO> {
 
 	/**
 	 * 插入一个商品分类节点

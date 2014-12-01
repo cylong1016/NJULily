@@ -1,5 +1,6 @@
 package dataservice;
 
+import po.PromotionPO;
 import dataservice.commondata.DataService;
 
 /**
@@ -7,6 +8,6 @@ import dataservice.commondata.DataService;
  * @author cylong
  * @version Oct 26, 2014 3:54:50 PM
  */
-public interface PromotionDataService extends DataService {
+public interface PromotionDataService extends DataService<PromotionPO> {
 	// TODO PromotionDataService接口定义
 }

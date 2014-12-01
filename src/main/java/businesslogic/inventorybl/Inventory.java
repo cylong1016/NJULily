@@ -73,7 +73,7 @@ public class Inventory extends POToVO {
 	
 	public ArrayList<InventoryBillVO> show(BillType type) {
 		ArrayList<InventoryBillVO> VOs = new ArrayList<InventoryBillVO>();
-		ArrayList<InventoryBillPO> POs = getInventoryData().show(type);
+		ArrayList<InventoryBillPO> POs = getInventoryData().find(type);
 		for (int i = 0; i < POs.size(); i++) {
 			InventoryBillPO po = POs.get(i);
 			InventoryBillVO vo = poToVo(po);

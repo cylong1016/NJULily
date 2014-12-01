@@ -11,7 +11,7 @@ import po.PersistentObject;
  * @author cylong
  * @version 2014年11月30日 上午10:52:18
  */
-public interface CommonDataService<PO extends PersistentObject> extends DataService {
+public interface CommonDataService<PO extends PersistentObject> extends DataService<PO> {
 
 	/**
 	 * 向序列化文件中添加一个po
