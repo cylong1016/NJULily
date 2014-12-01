@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import config.RMI;
 import blservice.purchaseblservice.PurInputInfo;
 import businesslogic.clientbl.Client;
+import businesslogic.recordbl.info.PurchaseInfo_Record;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
 import businesslogic.salebl.POToVO;
 import po.PurchasePO;
@@ -18,7 +19,7 @@ import dataenum.Storage;
 import dataservice.DataFactoryService;
 import dataservice.PurchaseDataService;
 
-public class Purchase extends POToVO implements ValueObjectInfo_Record<PurchaseVO>{
+public class Purchase extends POToVO implements ValueObjectInfo_Record<PurchaseVO>, PurchaseInfo_Record{
 	
 	private PurchaseList list;
 	

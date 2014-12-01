@@ -1,5 +1,15 @@
 package businesslogic.recordbl;
 
+import java.util.ArrayList;
+
+import vo.BusinessStateVO;
+import businesslogic.inventorybl.Inventory;
+import businesslogic.purchasebl.Purchase;
+import businesslogic.recordbl.info.InventoryInfo_Record;
+import businesslogic.recordbl.info.PurchaseInfo_Record;
+import businesslogic.recordbl.info.SaleInfo_Record;
+import businesslogic.salebl.Sale;
+
 /**
  * 查看经营情况表（统计显示一段时间内的经营收支状况和利润。
  * 经营收入显示为折让后，并显示出折让了多少。
@@ -15,5 +25,22 @@ package businesslogic.recordbl;
  * @version Nov 30, 2014 4:30:38 PM
  */
 public class BusinessStateList {
+	SaleInfo_Record saleInfo;
+	
+	PurchaseInfo_Record purchaseInfo;
+	
+	InventoryInfo_Record inventoryInfo;
+	
+	public BusinessStateList() {
+		saleInfo = new Sale();
+		purchaseInfo = new Purchase();
+		inventoryInfo = new Inventory();
+	}
+
+	public BusinessStateVO getBusinessState(ArrayList<String> ID) {
+		saleInfo.get
+		return null;
+	}
+	
 	
 }

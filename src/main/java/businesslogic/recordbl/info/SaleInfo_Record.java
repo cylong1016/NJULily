@@ -15,5 +15,11 @@ public interface SaleInfo_Record {
 	public int getNumber(String ID);
 	
 	public double getPrice(String ID);
+	
+	public double getAfterPrice(String ID);
+	
+	public double getVoucher(String ID);
+	
+	public double getAllowance(String ID);
 
 }

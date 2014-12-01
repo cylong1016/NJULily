@@ -63,6 +63,7 @@ public class Record {
 		this.beginDate = info.beginDate;
 		this.endDate = info.endDate;
 		bussinessStateList = new BusinessStateList();
+		BusinessStateVO vo = bussinessStateList.getBusinessState(getID());
 		
 		return null;
 	}

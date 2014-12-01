@@ -4,6 +4,7 @@ import java.rmi.Naming;
 import java.util.ArrayList;
 
 import businesslogic.promotionbl.InventoryInfo_Promotion;
+import businesslogic.recordbl.info.InventoryInfo_Record;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
 import businesslogic.salebl.POToVO;
 import config.RMI;
@@ -20,7 +21,7 @@ import dataservice.DataFactoryService;
 import dataservice.InventoryDataService;
 import message.ResultMessage;
 
-public class Inventory extends POToVO implements InventoryInfo_Promotion, ValueObjectInfo_Record<InventoryBillVO>{
+public class Inventory extends POToVO implements InventoryInfo_Promotion, ValueObjectInfo_Record<InventoryBillVO>, InventoryInfo_Record{
 	
 	private BillList list;
 		

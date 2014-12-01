@@ -208,7 +208,12 @@ public class Sale extends POToVO implements SaleInfo_Inventory, SaleInfo_Record,
 	}
 
 	public String getName(String ID) {
-		// TODO Auto-generated method stub
+		ArrayList<CommodityItemPO> commodityPo = getSaleData().find(this.ID).getCommodities();
+		for (int i = 0; i < commodityPo.size(); i++) {
+			if (commodityPo.get(i).getID().equals(ID)) {
+				return 
+			}
+		}
 		return null;
 	}
 
@@ -230,6 +235,21 @@ public class Sale extends POToVO implements SaleInfo_Inventory, SaleInfo_Record,
 	public ArrayList<ValueObject> getBills(BillType billType) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public double getAfterPrice(String ID) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public double getVoucher(String ID) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public double getAllowance(String ID) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
