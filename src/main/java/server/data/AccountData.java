@@ -33,6 +33,14 @@ public class AccountData extends CommonData<AccountPO> implements AccountDataSer
 	public ArrayList<AccountPO> find(String keywords, FindTypeAccount type) {
 		keywords = keywords.toLowerCase(); // 为了不区分大小写
 		ArrayList<AccountPO> accounts = new ArrayList<AccountPO>();
+		if (type == null) {	// 查找账户全部信息
+			for(AccountPO account : poList.getInList()) {
+				if (account.toString().toLowerCase().contains(keywords)) {
+					accounts.add(account);
+				}
+			}
+			return accounts;
+		}
 		switch(type) {
 		case ID:
 			for(AccountPO account : poList.getInList()) {
@@ -56,11 +64,6 @@ public class AccountData extends CommonData<AccountPO> implements AccountDataSer
 			}
 			break;
 		default:
-			for(AccountPO account : poList.getInList()) {
-				if (account.toString().toLowerCase().contains(keywords)) {
-					accounts.add(account);
-				}
-			}
 			break;
 		}
 

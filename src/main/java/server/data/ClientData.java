@@ -33,6 +33,14 @@ public class ClientData extends CommonData<ClientPO> implements ClientDataServic
 	public ArrayList<ClientPO> find(String keywords, FindTypeClient type) {
 		keywords = keywords.toLowerCase(); // 为了不区分大小写
 		ArrayList<ClientPO> clients = new ArrayList<ClientPO>();
+		if(type == null) {	// 查找客户全部信息
+			for(ClientPO client : poList.getInList()) {
+				if (client.toString().toLowerCase().contains(keywords)) {
+					clients.add(client);
+				}
+			}
+			return clients;
+		}
 		switch(type) {
 		case ID:
 			for(ClientPO client : poList.getInList()) {
@@ -119,11 +127,6 @@ public class ClientData extends CommonData<ClientPO> implements ClientDataServic
 			}
 			break;
 		default:
-			for(ClientPO client : poList.getInList()) {
-				if (client.toString().toLowerCase().contains(keywords)) {
-					clients.add(client);
-				}
-			}
 			break;
 		}
 		return clients;
