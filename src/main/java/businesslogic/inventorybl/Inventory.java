@@ -17,8 +17,8 @@ import vo.ValueObject;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Storage;
-import dataservice.InventoryDataService;
-import dataservice.commondata.DataFactoryService;
+import dataservice.DataFactoryService;
+import dataservice.inventorydataservice.InventoryDataService;
 import message.ResultMessage;
 
 public class Inventory extends CommodityItemPOtoVO {

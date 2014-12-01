@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import po.PurchasePO;
 import po.SalesPO;
-import server.data.PurchaseData;
+import server.data.purchasedata.PurchaseData;
 import businesslogic.approvalbl.ValueObject_Approval;
 import businesslogic.common.Info;
 import businesslogic.recordbl.info.PurchaseInfo_Record;
@@ -14,7 +14,7 @@ import vo.SalesVO;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Storage;
-import dataservice.PurchaseDataService;
+import dataservice.purchasedataservice.PurchaseDataService;
 
 public class PurchaseInfo extends Info<PurchaseDataService> implements ValueObjectInfo_Record<PurchaseVO>, PurchaseInfo_Record, ValueObject_Approval<PurchaseVO>{
 	

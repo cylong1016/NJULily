@@ -1,34 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataService>
-	<ClientData>
+	<Data>
+		<name>ClientData</name>
 		<path>data/ClientList.ser</path>
 		<initID>1</initID>
 		<IDMaxBit>5</IDMaxBit>
-	</ClientData>
-	<UserData>
+	</Data>
+	<Data>
+		<name>UserData</name>
 		<path>data/UserList.ser</path>
 		<initID>1</initID>
 		<IDMaxBit>5</IDMaxBit>
-	</UserData>
-	<AccountData>
+	</Data>
+	<Data>
+		<name>AccountData</name>
 		<path>data/AccountList.ser</path>
 		<initID>1</initID>
 		<IDMaxBit>5</IDMaxBit>
-	</AccountData>
-	<AccountBillData>
+	</Data>
+	<Data>
+		<name>AccountBillData</name>
 		<path>data/AccountBillList.ser</path>
 		<initID>1</initID>
 		<IDMaxBit>5</IDMaxBit>
 		<dateFormat>yyyyMMdd</dateFormat>
-	</AccountBillData>
-	<CommodityData>
+	</Data>
+	<Data>
+		<name>CommodityData</name>
 		<path>data/CommodityList.ser</path>
 		<initID>1</initID>
 		<IDMaxBit>5</IDMaxBit>
-	</CommodityData>
-	<CommoditySortData>
+	</Data>
+	<Data>
+		<name>CommoditySortData</name>
 		<path>data/CommoditySortList.ser</path>
 		<initID>1</initID>
 		<IDMaxBit>2</IDMaxBit>
-	</CommoditySortData>
+	</Data>
 </DataService>

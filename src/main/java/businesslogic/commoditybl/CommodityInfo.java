@@ -3,7 +3,7 @@ package businesslogic.commoditybl;
 import java.util.ArrayList;
 
 import po.CommodityPO;
-import dataservice.CommodityDataService;
+import dataservice.commoditydataservice.CommodityDataService;
 import businesslogic.inventorybl.info.CommodityInfo_Inventory;
 import businesslogic.promotionbl.CommodityInfo_Promotion;
 import businesslogic.salebl.CommodityInfo_Sale;

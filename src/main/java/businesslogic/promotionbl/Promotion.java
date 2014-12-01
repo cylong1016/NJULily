@@ -13,8 +13,8 @@ import vo.PromotionVO;
 import blservice.promotionblservice.PromoInputInfo;
 import businesslogic.inventorybl.Inventory;
 import dataenum.PromotionType;
-import dataservice.PromotionDataService;
-import dataservice.commondata.DataFactoryService;
+import dataservice.DataFactoryService;
+import dataservice.promotiondataservice.PromotionDataService;
 
 /**
  * 策略1:制定一个特价包

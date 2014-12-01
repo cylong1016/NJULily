@@ -13,9 +13,9 @@ import businesslogic.inventorybl.info.CommodityInfo_Inventory;
 import businesslogic.promotionbl.CommodityInfo_Promotion;
 import businesslogic.salebl.CommodityInfo_Sale;
 import dataenum.FindTypeCommo;
-import dataservice.CommodityDataService;
-import dataservice.CommoditySortDataService;
-import dataservice.commondata.DataFactoryService;
+import dataservice.DataFactoryService;
+import dataservice.commoditydataservice.CommodityDataService;
+import dataservice.commoditysortdataservice.CommoditySortDataService;
 /**
  * 商品管理
  * @author Zing

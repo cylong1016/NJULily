@@ -13,7 +13,7 @@ import vo.SalesVO;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Storage;
-import dataservice.SaleDataService;
+import dataservice.saledataservice.SaleDataService;
 
 public class SaleInfo extends Info<SaleDataService> implements SaleInfo_Inventory, SaleInfo_Record, ValueObjectInfo_Record<SalesVO>, ValueObject_Approval<SalesVO>{
 	

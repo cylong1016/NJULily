@@ -7,7 +7,7 @@ import po.SalesPO;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Storage;
-import dataservice.InventoryDataService;
+import dataservice.inventorydataservice.InventoryDataService;
 import vo.InventoryBillVO;
 import vo.SalesVO;
 import businesslogic.approvalbl.ValueObject_Approval;

@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 import message.ResultMessage;
 import po.UserPO;
-import server.data.UserData;
+import server.data.userdata.UserData;
 import server.io.DefineList;
 import vo.UserVO;
 import blservice.userblservice.LoginInfo;
 import dataenum.UserIdentity;
-import dataservice.UserDataService;
+import dataservice.userdataservice.UserDataService;
 
 public class User {
 

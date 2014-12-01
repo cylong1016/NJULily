@@ -4,8 +4,8 @@ import java.rmi.Naming;
 import java.util.ArrayList;
 
 import config.RMI;
-import dataservice.ApprovalDataService;
-import dataservice.commondata.DataFactoryService;
+import dataservice.DataFactoryService;
+import dataservice.approvaldataservice.ApprovalDataService;
 import businesslogic.accountbillbl.AccountBillInfo;
 import businesslogic.cashbillbl.CashBillInfo;
 import businesslogic.inventorybl.InventoryInfo;

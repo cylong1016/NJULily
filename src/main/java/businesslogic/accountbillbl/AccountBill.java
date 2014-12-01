@@ -6,7 +6,7 @@ import java.util.HashMap;
 import message.ResultMessage;
 import po.AccountBillItemPO;
 import po.AccountBillPO;
-import server.data.AccountBillData;
+import server.data.accountbilldata.AccountBillData;
 import vo.AccountBillItemVO;
 import vo.AccountBillVO;
 import businesslogic.accountbl.AccountInfo;
@@ -14,7 +14,7 @@ import businesslogic.clientbl.ClientInfo;
 import businesslogic.userbl.UserInfo;
 import dataenum.BillState;
 import dataenum.BillType;
-import dataservice.AccountBillDataService;
+import dataservice.accountbilldataservice.AccountBillDataService;
 
 public class AccountBill {
 

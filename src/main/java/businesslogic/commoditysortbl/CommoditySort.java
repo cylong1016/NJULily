@@ -7,8 +7,8 @@ import config.RMI;
 import message.ResultMessage;
 import po.CommoditySortPO;
 import vo.CommoditySortVO;
-import dataservice.CommoditySortDataService;
-import dataservice.commondata.DataFactoryService;
+import dataservice.DataFactoryService;
+import dataservice.commoditysortdataservice.CommoditySortDataService;
 
 public class CommoditySort {
 	

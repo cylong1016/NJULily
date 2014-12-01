@@ -2,17 +2,18 @@ package businesslogic.common;
 
 import java.util.ArrayList;
 
+import po.PersistentObject;
 import dataenum.BillType;
 import dataenum.Storage;
-import dataservice.commondata.DataInfo;
+import dataservice.TableInfoService;
 
-public abstract class Info<Data extends DataInfo> {
+public abstract class Info<ApprovalPO extends PersistentObject> {
 
-	protected abstract Data getData();
+	protected abstract TableInfoService<ApprovalPO> getData();
 
 	protected ArrayList<String> getID(String ID, String clientName, String salesman, Storage storage, BillType type) {
 		ArrayList<String> IDs = new ArrayList<String>();
-		Data data = getData();
+		TableInfoService<ApprovalPO> data = getData();
 		if (ID != null) {
 			for(String id : data.getAllID(type)) {
 				if (id.contains(ID)) {

@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 import message.ResultMessage;
 import po.ClientPO;
-import server.data.ClientData;
+import server.data.clientdata.ClientData;
 import vo.ClientVO;
 import businesslogic.userbl.UserInfo;
 import dataenum.ClientCategory;
 import dataenum.ClientLevel;
 import dataenum.FindTypeClient;
-import dataservice.ClientDataService;
+import dataservice.clientdataservice.ClientDataService;
 
 public class Client {
 

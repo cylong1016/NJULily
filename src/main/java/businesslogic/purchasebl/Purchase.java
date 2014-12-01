@@ -14,8 +14,8 @@ import vo.PurchaseVO;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Storage;
-import dataservice.PurchaseDataService;
-import dataservice.commondata.DataFactoryService;
+import dataservice.DataFactoryService;
+import dataservice.purchasedataservice.PurchaseDataService;
 
 public class Purchase extends CommodityItemPOtoVO {
 	
