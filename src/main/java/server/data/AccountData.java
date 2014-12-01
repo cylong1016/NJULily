@@ -47,7 +47,7 @@ public class AccountData extends CommonData<AccountPO> implements AccountDataSer
 			break;
 		case MONEY:
 			for(AccountPO account : poList.getInList()) {
-				if (Double.toString(account.getMoney()).toLowerCase().contains(keywords)) {
+				if (Double.toString(account.getMoney()).contains(keywords)) {
 					accounts.add(account);
 				}
 			}
@@ -62,7 +62,6 @@ public class AccountData extends CommonData<AccountPO> implements AccountDataSer
 		default:
 			break;
 		}
-
 		return accounts;
 	}
 }

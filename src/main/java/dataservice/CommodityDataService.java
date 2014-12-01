@@ -20,13 +20,12 @@ public interface CommodityDataService extends CommonDataService<CommodityPO> {
 	public ArrayList<CommodityPO> find(String keywords, FindTypeCommo type);
 
 	/**
-	 * 已商品的ID查找其所有的型号
-	 * @param ID
-	 * @return 商品型号的ArrayList
+	 * @param fatherID 商品父类的ID
+	 * @return 新建商品的ID
 	 * @author cylong
-	 * @version Nov 15, 2014 11:10:25 AM
+	 * @version 2014年12月1日 下午9:20:35
 	 */
-	public ArrayList<String> findType(String ID);
+	public String getID(String fatherID);
 
 	/**
 	 * @return 全部商品的ID

@@ -135,10 +135,12 @@ public class User {
 	 */
 	private UserPO voToPO(UserVO vo) {
 		String ID = vo.ID;
-		String username = vo.name;
+		String username = vo.username;
+		String name = vo.name;
 		String password = vo.password;
+		String phone = vo.phone;
 		UserIdentity iden = vo.iden;
-		UserPO po = new UserPO(ID, username, password, iden);
+		UserPO po = new UserPO(ID, username, name, password, phone, iden);
 		return po;
 	}
 
@@ -152,9 +154,11 @@ public class User {
 	private UserVO poToVO(UserPO po) {
 		String ID = po.getID();
 		String username = po.getUsername();
+		String name = po.getName();
 		String password = po.getPassword();
+		String phone = po.getPhone();
 		UserIdentity iden = po.getIden();
-		UserVO vo = new UserVO(ID, username, password, iden);
+		UserVO vo = new UserVO(ID, username, name, password, phone, iden);
 		return vo;
 	}
 

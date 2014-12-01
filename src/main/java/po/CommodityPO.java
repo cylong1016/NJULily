@@ -13,8 +13,8 @@ public class CommodityPO extends PersistentObject {
 	private String name;
 	/** 商品型号 */
 	private String type;
-	/** 商品分类 */
-	private CommoditySortPO sort;
+	/** 商品分类ID */
+	private String sortID;
 	/** 商品库存数量 */
 	private int inventoryNum;
 	/** 商品进价 */
@@ -29,7 +29,7 @@ public class CommodityPO extends PersistentObject {
 	private int alarmNumber;
 
 	/**
-	 * @param id 商品id
+	 * @param ID 商品ID
 	 * @param name 商品名称
 	 * @param type 商品类型
 	 * @param purPrice 商品默认进价
@@ -37,18 +37,48 @@ public class CommodityPO extends PersistentObject {
 	 * @author cylong
 	 * @version Oct 26, 2014 1:21:03 PM
 	 */
-	public CommodityPO(String id, String name, CommoditySortPO sort, String type, double purPrice, double salePrice) {
-		super(id);
+	public CommodityPO(String ID, String name, String sortID, String type, double purPrice, double salePrice) {
+		super(ID);
 		this.name = name;
 		this.type = type;
-		this.sort = sort;
+		this.sortID = sortID;
 		this.purPrice = purPrice;
 		this.salePrice = salePrice;
 		this.setAlarmNumber(0);
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	/**
+	 * 模糊查询的时候使用
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return name + type + inventoryNum + purPrice + salePrice + recentPurPrice + recentSalePrice + alarmNumber + ID;
+	}
+
+	/**
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CommodityPO other = (CommodityPO)obj;
+		if (this.name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!this.name.equals(other.name))
+			return false;
+		if (this.type == null) {
+			if (other.type != null)
+				return false;
+		} else if (!this.type.equals(other.type))
+			return false;
+		return true;
 	}
 
 	public String getName() {
@@ -59,8 +89,8 @@ public class CommodityPO extends PersistentObject {
 		return type;
 	}
 
-	public CommoditySortPO getSort() {
-		return sort;
+	public String getSortID() {
+		return this.sortID;
 	}
 
 	public int getInventoryNum() {
@@ -90,6 +120,5 @@ public class CommodityPO extends PersistentObject {
 	public void setAlarmNumber(int alarmNumber) {
 		this.alarmNumber = alarmNumber;
 	}
-	
 
 }

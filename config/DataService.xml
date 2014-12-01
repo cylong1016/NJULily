@@ -3,22 +3,32 @@
 	<ClientData>
 		<path>data/ClientList.ser</path>
 		<initID>1</initID>
+		<IDMaxBit>5</IDMaxBit>
 	</ClientData>
 	<UserData>
 		<path>data/UserList.ser</path>
 		<initID>1</initID>
+		<IDMaxBit>5</IDMaxBit>
 	</UserData>
 	<AccountData>
 		<path>data/AccountList.ser</path>
 		<initID>1</initID>
+		<IDMaxBit>5</IDMaxBit>
 	</AccountData>
 	<AccountBillData>
 		<path>data/AccountBillList.ser</path>
 		<initID>1</initID>
+		<IDMaxBit>5</IDMaxBit>
 		<dateFormat>yyyyMMdd</dateFormat>
 	</AccountBillData>
 	<CommodityData>
 		<path>data/CommodityList.ser</path>
 		<initID>1</initID>
+		<IDMaxBit>5</IDMaxBit>
 	</CommodityData>
+	<CommoditySortData>
+		<path>data/CommoditySortList.ser</path>
+		<initID>1</initID>
+		<IDMaxBit>2</IDMaxBit>
+	</CommoditySortData>
 </DataService>

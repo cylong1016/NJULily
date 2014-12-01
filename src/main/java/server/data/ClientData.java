@@ -19,7 +19,7 @@ public class ClientData extends CommonData<ClientPO> implements ClientDataServic
 	 */
 	@Override
 	public void init() {
-		parsexml = new ParseXML("CommodityData");
+		parsexml = new ParseXML("ClientData");
 	}
 
 	/**
@@ -82,7 +82,7 @@ public class ClientData extends CommonData<ClientPO> implements ClientDataServic
 			break;
 		case PAYABLE:
 			for(ClientPO client : poList.getInList()) {
-				if (Double.toString(client.getPayable()).toLowerCase().contains(keywords)) {
+				if (Double.toString(client.getPayable()).contains(keywords)) {
 					clients.add(client);
 				}
 			}
@@ -103,14 +103,14 @@ public class ClientData extends CommonData<ClientPO> implements ClientDataServic
 			break;
 		case RECEIVABLE:
 			for(ClientPO client : poList.getInList()) {
-				if (Double.toString(client.getReceivable()).toLowerCase().contains(keywords)) {
+				if (Double.toString(client.getReceivable()).contains(keywords)) {
 					clients.add(client);
 				}
 			}
 			break;
 		case RECEIVABLELIMIT:
 			for(ClientPO client : poList.getInList()) {
-				if (Double.toString(client.getReceivable()).toLowerCase().contains(keywords)) {
+				if (Double.toString(client.getReceivable()).contains(keywords)) {
 					clients.add(client);
 				}
 			}

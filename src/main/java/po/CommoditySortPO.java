@@ -10,14 +10,14 @@ import java.util.ArrayList;
 public class CommoditySortPO extends PersistentObject {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private String ID;
 
 	private String name;
 
 	private String fatherID;
 
-	private  ArrayList<String> childrenID;
+	private ArrayList<String> childrenID;
 
 	private ArrayList<String> commoditiesID;
 
@@ -30,6 +30,9 @@ public class CommoditySortPO extends PersistentObject {
 		this.commoditiesID = commoditiesID;
 	}
 
+	public String getID() {
+		return this.ID;
+	}
 
 	public String getName() {
 		return name;
@@ -50,7 +53,7 @@ public class CommoditySortPO extends PersistentObject {
 	public void addChildID(String childID) {
 		this.commoditiesID.add(childID);
 	}
-	
+
 	public void addCommodityID(String commodityID) {
 		this.commoditiesID.add(commodityID);
 	}

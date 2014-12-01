@@ -19,12 +19,15 @@ public abstract class CommonData<PO extends PersistentObject> implements CommonD
 	protected DefineList<PO> poList;
 	protected String filePath;
 	protected String initID;
+	protected int IDMaxBit;
 	protected ParseXML parsexml;
 
 	public CommonData() {
 		init();	// 初始化parsexml
 		filePath = parsexml.getValue("path");
 		initID = parsexml.getValue("initID");
+		IDMaxBit = Integer.parseInt(parsexml.getValue("IDMaxBit"));
+		initID = Common.intToString(Integer.parseInt(initID), IDMaxBit);	// 转化初始化ID为固定位数
 		poList = new DefineList<PO>(filePath);
 	}
 
@@ -37,9 +40,8 @@ public abstract class CommonData<PO extends PersistentObject> implements CommonD
 			return initID;
 		}
 		String currentID = poList.get(poList.size() - 1).getID();
-		int id = Integer.parseInt(currentID);
-		currentID = String.valueOf(id + 1);
-		currentID = Common.intToString(id + 1, 7);
+		int ID = Integer.parseInt(currentID);
+		currentID = Common.intToString(ID + 1, IDMaxBit);
 		return currentID;
 	}
 

@@ -46,10 +46,6 @@ public class CashBillPO extends PersistentObject {
 		this.state = state;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
 	public String getID() {
 		return ID;
 	}

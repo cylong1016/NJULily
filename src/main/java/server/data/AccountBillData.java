@@ -23,7 +23,6 @@ public class AccountBillData extends CommonData<AccountBillPO> implements Accoun
 	private int maxID;
 	/** 当天日期 */
 	private String currentDate;
-	private int maxBit = 5;	// 最大数量的位数
 
 	/**
 	 * @see dataservice.commondata.DataService#init()
@@ -53,9 +52,9 @@ public class AccountBillData extends CommonData<AccountBillPO> implements Accoun
 			if (this.maxID > 0) {
 				switch(type) {
 				case EXPENSE:
-					return "SKD-" + currentDate + "-" + Common.intToString(this.maxID + 1, maxBit);
+					return "SKD-" + currentDate + "-" + Common.intToString(this.maxID + 1, IDMaxBit);
 				case PAY:
-					return "FKD-" + currentDate + "-" + Common.intToString(this.maxID + 1, maxBit);
+					return "FKD-" + currentDate + "-" + Common.intToString(this.maxID + 1, IDMaxBit);
 				default:
 					return null;
 				}
@@ -65,20 +64,22 @@ public class AccountBillData extends CommonData<AccountBillPO> implements Accoun
 		// 不包含该类型的账单的时候
 		switch(type) {
 		case EXPENSE:
-			return "SKD-" + currentDate + "-" + Common.intToString(this.maxID + 1, maxBit);
+			return "SKD-" + currentDate + "-" + Common.intToString(this.maxID + 1, IDMaxBit);
 		case PAY:
-			return "FKD-" + currentDate + "-" + Common.intToString(this.maxID + 1, maxBit);
+			return "FKD-" + currentDate + "-" + Common.intToString(this.maxID + 1, IDMaxBit);
 		default:
 			return null;
 		}
 	}
 
 	/**
-	 * @deprecated 请用getID(BillType type)方法
+	 * 默认得到收款单ID
+	 * @deprecated cylong的失误不要在意！
+	 * @see server.data.CommonData#getID()
 	 */
 	@Override
 	public String getID() {
-		return null;
+		return getID(BillType.EXPENSE);
 	}
 
 	/**
