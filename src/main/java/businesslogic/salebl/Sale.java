@@ -9,6 +9,7 @@ import vo.CommodityItemVO;
 import vo.SalesVO;
 import blservice.saleblservice.SaleInputInfo;
 import businesslogic.clientbl.Client;
+import businesslogic.common.POToVO;
 import config.RMI;
 import dataenum.BillState;
 import dataenum.BillType;
@@ -126,7 +127,7 @@ public class Sale extends POToVO {
 	private SalesPO buildSales() {
 		double beforePrice = list.getBeforePrice();
 		double afterPrice = list.getAfterPrice();
-		ClientInfo_Sale info = new Client();
+		ClientInfo_Sale info = new ClientInfo();
 		String clientName = info.getName(list.getClientID());
 		String salesman = info.getSalesman(list.getClientID());
 		// TODO user从文件中读取当前登陆的用户

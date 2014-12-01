@@ -1,5 +1,7 @@
 package businesslogic.recordbl.info;
 
+import java.util.ArrayList;
+
 import dataenum.Storage;
 import vo.ValueObject;
 
@@ -24,5 +26,5 @@ public interface ValueObjectInfo_Record<VO extends ValueObject> {
 	 * @author Zing
 	 * @version Dec 1, 2014 2:17:52 PM
 	 */
-	public String getID(String ID, String clientName, String salesman, Storage storage);
+	public ArrayList<String> getID(String ID, String clientName, String salesman, Storage storage);
 }

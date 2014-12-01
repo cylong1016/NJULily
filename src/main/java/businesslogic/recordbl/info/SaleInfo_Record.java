@@ -1,10 +1,12 @@
 package businesslogic.recordbl.info;
 
+import java.util.ArrayList;
+
 import dataenum.Storage;
 
 public interface SaleInfo_Record {
 	
-	public String getID(String ID, String clientName, String salesman, Storage storage);
+	public ArrayList<String> getID(String ID, String clientName, String salesman, Storage storage);
 	
 	public String getCommodityID(String ID, String CommodityName);
 

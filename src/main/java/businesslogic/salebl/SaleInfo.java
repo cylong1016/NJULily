@@ -2,6 +2,7 @@ package businesslogic.salebl;
 
 import java.util.ArrayList;
 
+import businesslogic.common.Info;
 import businesslogic.inventorybl.info.SaleInfo_Inventory;
 import businesslogic.recordbl.info.SaleInfo_Record;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
@@ -12,7 +13,7 @@ import dataenum.BillType;
 import dataenum.Storage;
 import dataservice.SaleDataService;
 
-public class SaleInfo  implements SaleInfo_Inventory, SaleInfo_Record, ValueObjectInfo_Record<SalesVO>{
+public class SaleInfo extends Info<SaleDataService> implements SaleInfo_Inventory, SaleInfo_Record, ValueObjectInfo_Record<SalesVO>{
 	
 	private Sale sale;
 	
@@ -22,10 +23,9 @@ public class SaleInfo  implements SaleInfo_Inventory, SaleInfo_Record, ValueObje
 		sale = new Sale();
 	}
 	
-	public SaleDataService getSaleData() {
+	protected  SaleDataService getData() {
 		return sale.getSaleData();
 	}
-	
 	
 	
 	/**
@@ -34,7 +34,7 @@ public class SaleInfo  implements SaleInfo_Inventory, SaleInfo_Record, ValueObje
 	
 	public ArrayList<Double> getMoney(String begin, String end) {
 		// TODO 需要根据日期查询ID的方法，返回我一个arrylistID。或者我自己查，那就提供一个返回所有PO的方法
-		//		SaleDataService saleData = getSaleData();
+		//		SaleDataService saleData = getData();
 		return null;
 	}
 
@@ -43,31 +43,23 @@ public class SaleInfo  implements SaleInfo_Inventory, SaleInfo_Record, ValueObje
 	}
 
 	/**
-	 * 根据查找条件查找销售单，返回销售单的ID
+	 * 根据查找条件查找销售单，返回销售单的ID集合
 	 * String ID 的格式为 yyyyMMdd
 	 */
-	public String getID(String ID, String clientName, String salesman, Storage storage) {
-		SaleDataService saleData = getSaleData();
-		ArrayList<String> IDs = saleData.getAllID(BillType.SALE);
-		for (int i = 0; i < IDs.size(); i++) {
-			SalesPO po = saleData.find(IDs.get(i));
-			if (IDs.get(i).contains(ID)) {
-				if (po.getClient().equals(clientName) && po.getSalesman().endsWith(salesman) && po.getStorage().equals(storage)) {
-					return IDs.get(i);
-				}
-			}
-		}
-		return null;
+	public ArrayList<String> getID(String ID, String clientName, String salesman, Storage storage) {
+		ArrayList<String> IDs = new ArrayList<String>();
+		IDs = getID(ID, clientName, salesman, storage, BillType.SALE);
+		return IDs;
 	}
 	
 	public SalesVO show(String ID) {
-		SalesVO vo = sale.poToVo(getSaleData().find(ID));
+		SalesVO vo = sale.poToVo(getData().find(ID));
 		return vo;
 	}
 
 	public String getCommodityID(String ID, String commodityName) {
 		this.ID = ID;
-		ArrayList<CommodityItemPO> POs= getSaleData().find(ID).getCommodities();
+		ArrayList<CommodityItemPO> POs= getData().find(ID).getCommodities();
 		for (int i = 0; i < POs.size(); i++) {
 			if (POs.get(i).getName().equals(commodityName)) {
 				return POs.get(i).getID();
@@ -84,7 +76,7 @@ public class SaleInfo  implements SaleInfo_Inventory, SaleInfo_Record, ValueObje
 	 * @version Dec 1, 2014 9:04:04 AM
 	 */
 	private CommodityItemPO findCommodityItemPO(String ID) {
-		ArrayList<CommodityItemPO> commodityPo = getSaleData().find(this.ID).getCommodities();
+		ArrayList<CommodityItemPO> commodityPo = getData().find(this.ID).getCommodities();
 		for (int i = 0; i < commodityPo.size(); i++) {
 			if (commodityPo.get(i).getID().equals(ID)) {
 				return commodityPo.get(i);
@@ -115,7 +107,7 @@ public class SaleInfo  implements SaleInfo_Inventory, SaleInfo_Record, ValueObje
 	 * 查找指定销售单的折扣后价格（不包括代金券）
 	 */
 	public double getBeforePrice(String ID) {
-		SalesPO po = getSaleData().find(ID);
+		SalesPO po = getData().find(ID);
 		return po.getBeforePrice();
 	}
 
@@ -123,14 +115,14 @@ public class SaleInfo  implements SaleInfo_Inventory, SaleInfo_Record, ValueObje
 	 * 查找指定销售单的代金券
 	 */
 	public double getVoucher(String ID) {
-		return getSaleData().find(ID).getVoucher();
+		return getData().find(ID).getVoucher();
 	}
 
 	/**
 	 * 查找指定销售单的折扣
 	 */
 	public double getAllowance(String ID) {
-		return getSaleData().find(ID).getVoucher();
+		return getData().find(ID).getVoucher();
 	}
 
 }

@@ -3,14 +3,11 @@ package businesslogic.recordbl;
 import java.util.ArrayList;
 
 import businesslogic.accountbillbl.AccountBill;
-import businesslogic.cashbillbl.CashBill;
-import businesslogic.inventorybl.Inventory;
+import businesslogic.cashbillbl.CashBillInfo;
 import businesslogic.inventorybl.InventoryInfo;
-import businesslogic.purchasebl.Purchase;
 import businesslogic.purchasebl.PurchaseInfo;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
 import businesslogic.salebl.SaleInfo;
-import ui.differui.inventory.frame.InventoryIndex;
 import vo.ValueObject;
 import dataenum.BillType;
 import dataenum.Storage;
@@ -67,19 +64,13 @@ public class BusinessProList {
 			info = new AccountBill();
 			break;
 		case CASH:
-			info = new CashBill();
+			info = new CashBillInfo();
 			break;
 		default:
 			break;
 		}
 		ArrayList<ValueObject> VOs = new ArrayList<ValueObject>();
-		for (int i = 0; i < IDs.size(); i++) {
-			String ID = info.getID(IDs.get(i), clientName, salesman, storage);
-			if (ID != null) {
-				ValueObject vo = info.show(ID);
-				VOs.add(vo);
-			}
-		}
+		// TODO
 		return VOs;
 	}
 

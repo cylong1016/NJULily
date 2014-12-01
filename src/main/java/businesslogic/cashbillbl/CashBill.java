@@ -4,8 +4,8 @@ import java.rmi.Naming;
 import java.util.ArrayList;
 
 import config.RMI;
+import businesslogic.common.POToVO;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
-import businesslogic.salebl.POToVO;
 import po.CashBillPO;
 import po.CashItemPO;
 import vo.CashBillVO;
@@ -96,7 +96,7 @@ public class CashBill {
 
 	public ArrayList<CashBillVO> show(BillType billType) {
 		ArrayList<CashBillVO> VOs = new ArrayList<CashBillVO>();
-		ArrayList<CashBillPO> POs = getCashBillData().show();
+		ArrayList<CashBillPO> POs = getCashBillData().show(billType);
 		for (int i = 0; i < POs.size(); i++) {
 			CashBillVO vo = POToVO(POs.get(i));
 			VOs.add(vo);

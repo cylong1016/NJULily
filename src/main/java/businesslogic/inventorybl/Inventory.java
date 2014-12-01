@@ -3,10 +3,10 @@ package businesslogic.inventorybl;
 import java.rmi.Naming;
 import java.util.ArrayList;
 
+import businesslogic.common.POToVO;
 import businesslogic.promotionbl.InventoryInfo_Promotion;
 import businesslogic.recordbl.info.InventoryInfo_Record;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
-import businesslogic.salebl.POToVO;
 import config.RMI;
 import po.CommodityItemPO;
 import po.InventoryBillPO;

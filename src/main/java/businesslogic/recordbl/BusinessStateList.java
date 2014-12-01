@@ -3,14 +3,11 @@ package businesslogic.recordbl;
 import java.util.ArrayList;
 
 import vo.BusinessStateVO;
-import businesslogic.inventorybl.Inventory;
 import businesslogic.inventorybl.InventoryInfo;
-import businesslogic.purchasebl.Purchase;
 import businesslogic.purchasebl.PurchaseInfo;
 import businesslogic.recordbl.info.InventoryInfo_Record;
 import businesslogic.recordbl.info.PurchaseInfo_Record;
 import businesslogic.recordbl.info.SaleInfo_Record;
-import businesslogic.salebl.Sale;
 import businesslogic.salebl.SaleInfo;
 
 /**

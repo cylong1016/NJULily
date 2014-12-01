@@ -1,10 +1,11 @@
-package businesslogic.salebl;
+package businesslogic.common;
 
 import java.util.ArrayList;
 
 import po.CommodityItemPO;
 import vo.CommodityItemVO;
 import businesslogic.commoditybl.Commodity;
+import businesslogic.salebl.CommodityInfo_Sale;
 
 public class POToVO {
 

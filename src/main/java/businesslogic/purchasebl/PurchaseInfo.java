@@ -1,12 +1,16 @@
 package businesslogic.purchasebl;
 
+import java.util.ArrayList;
+
+import businesslogic.common.Info;
 import businesslogic.recordbl.info.PurchaseInfo_Record;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
 import vo.PurchaseVO;
+import dataenum.BillType;
 import dataenum.Storage;
 import dataservice.PurchaseDataService;
 
-public class PurchaseInfo implements ValueObjectInfo_Record<PurchaseVO>, PurchaseInfo_Record{
+public class PurchaseInfo extends Info<PurchaseDataService> implements ValueObjectInfo_Record<PurchaseVO>, PurchaseInfo_Record{
 	
 	private Purchase purchase;
 	
@@ -14,16 +18,18 @@ public class PurchaseInfo implements ValueObjectInfo_Record<PurchaseVO>, Purchas
 		purchase = new Purchase();
 	}
 	
-	private PurchaseDataService getPurData() {
+	public PurchaseDataService getData() {
 		return purchase.getPurData();
 	}
 	
 	
-	public String getID(String ID, String clientName, String salesman, Storage storage) {
-		return null;
+	public ArrayList<String> getID(String ID, String clientName, String salesman, Storage storage) {
+		ArrayList<String> IDs = new ArrayList<String>();
+		IDs = getID(ID, clientName, salesman, storage, BillType.PURCHASE);
+		return IDs;
 	}
 
 	public PurchaseVO show(String ID) {
-		return purchase.poToVO(getPurData().find(ID));
+		return purchase.poToVO(getData().find(ID));
 	}
 }
