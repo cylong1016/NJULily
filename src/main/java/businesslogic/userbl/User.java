@@ -8,16 +8,14 @@ import server.data.UserData;
 import server.io.DefineList;
 import vo.UserVO;
 import blservice.userblservice.LoginInfo;
-import businesslogic.accountbillbl.UserInfo_AccountBill;
-import businesslogic.clientbl.UserInfo_Client;
 import dataenum.UserIdentity;
 import dataservice.UserDataService;
 
-public class User implements UserInfo_Client, UserInfo_AccountBill {
+public class User {
 
 	private UserDataService userData;
-	private DefineList<UserPO> currentUser;
-	private DefineList<UserPO> currentUserTemp;
+	private DefineList<UserPO> currentUser;	// 保存用户名
+	private DefineList<UserPO> currentUserTemp;	// 用户的登录信息
 	private UserPO current;	// 当前登录的用户
 
 	public User() {
@@ -121,8 +119,7 @@ public class User implements UserInfo_Client, UserInfo_AccountBill {
 	public ArrayList<UserVO> show() {
 		ArrayList<UserVO> usersVO = new ArrayList<UserVO>();
 		ArrayList<UserPO> usersPO = userData.show();
-		for(int i = 0; i < usersPO.size(); i++) {
-			UserPO po = usersPO.get(i);
+		for(UserPO po : usersPO) {
 			UserVO vo = poToVO(po);
 			usersVO.add(vo);
 		}
@@ -161,19 +158,4 @@ public class User implements UserInfo_Client, UserInfo_AccountBill {
 		return vo;
 	}
 
-	/**
-	 * @see businesslogic.accountbillbl.UserInfo_AccountBill#getUserID()
-	 */
-	@Override
-	public String getUserID() {
-		return currentUserTemp.get(0).getID();
-	}
-
-	/**
-	 * @see businesslogic.clientbl.UserInfo_Client#getUserIden()
-	 */
-	@Override
-	public UserIdentity getUserIden() {
-		return currentUserTemp.get(0).getIden();
-	}
 }

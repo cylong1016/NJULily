@@ -1,9 +1,11 @@
 package businesslogic.accountbillbl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import message.ResultMessage;
 import vo.AccountBillItemVO;
+import vo.AccountBillVO;
 import blservice.accountbillblservice.AccountBillBLService;
 import dataenum.BillType;
 
@@ -84,5 +86,21 @@ public class AccountBillController implements AccountBillBLService {
 	@Override
 	public ResultMessage save() {
 		return accountBill.save();
+	}
+
+	/**
+	 * @see blservice.accountbillblservice.AccountBillBLService#show()
+	 */
+	@Override
+	public ArrayList<AccountBillVO> show() {
+		return accountBill.show();
+	}
+
+	/**
+	 * @see blservice.accountbillblservice.AccountBillBLService#show(dataenum.BillType)
+	 */
+	@Override
+	public ArrayList<AccountBillVO> show(BillType type) {
+		return accountBill.show(type);
 	}
 }

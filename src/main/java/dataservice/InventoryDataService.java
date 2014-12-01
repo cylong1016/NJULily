@@ -1,5 +1,6 @@
 package dataservice;
 
+import dataservice.commondata.DataService;
 import message.ResultMessage;
 import po.InventoryBillPO;
 

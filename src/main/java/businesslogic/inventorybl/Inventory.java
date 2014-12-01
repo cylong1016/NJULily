@@ -17,8 +17,8 @@ import vo.ValueObject;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Storage;
-import dataservice.DataFactoryService;
 import dataservice.InventoryDataService;
+import dataservice.commondata.DataFactoryService;
 import message.ResultMessage;
 
 public class Inventory extends POToVO implements InventoryInfo_Promotion, ValueObjectInfo_Record<InventoryBillVO>, InventoryInfo_Record{

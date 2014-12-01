@@ -1,22 +1,18 @@
 package businesslogic.clientbl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import message.ResultMessage;
 import po.ClientPO;
 import server.data.ClientData;
 import vo.ClientVO;
-import businesslogic.accountbillbl.ClientInfo_AccountBill;
-import businesslogic.purchasebl.ClientInfo_Purchase;
-import businesslogic.salebl.ClientInfo_Sale;
-import businesslogic.userbl.User;
+import businesslogic.userbl.UserInfo;
 import dataenum.ClientCategory;
 import dataenum.ClientLevel;
 import dataenum.FindTypeClient;
 import dataservice.ClientDataService;
 
-public class Client implements ClientInfo_AccountBill, ClientInfo_Sale, ClientInfo_Purchase {
+public class Client {
 
 	private ClientDataService clientData;
 
@@ -33,7 +29,6 @@ public class Client implements ClientInfo_AccountBill, ClientInfo_Sale, ClientIn
 		//		}
 		this.clientData = new ClientData();
 	}
-
 
 	/**
 	 * 返回全部的客户
@@ -116,6 +111,18 @@ public class Client implements ClientInfo_AccountBill, ClientInfo_Sale, ClientIn
 	}
 
 	/**
+	 * 以ID精确查找客户
+	 * @param ID 客户ID
+	 * @return ClientVO
+	 * @author cylong
+	 * @version 2014年12月1日 下午2:55:47
+	 */
+	public ClientVO findClient(String ID) {
+		ClientPO po = clientData.find(ID);
+		return poToVO(po);
+	}
+
+	/**
 	 * 添加一位客户
 	 * @param vo ClientVO
 	 * @return
@@ -144,7 +151,7 @@ public class Client implements ClientInfo_AccountBill, ClientInfo_Sale, ClientIn
 	 * @version 2014年11月29日 下午4:49:10
 	 */
 	public ResultMessage updClient(ClientVO vo) {
-		UserInfo_Client userInfo = new User();
+		UserInfo_Client userInfo = new UserInfo();
 		ClientPO po = clientData.find(vo.ID);	// 从数据层获得相应的client
 		po.setCategory(vo.category);
 		po.setLevel(vo.level);
@@ -153,9 +160,11 @@ public class Client implements ClientInfo_AccountBill, ClientInfo_Sale, ClientIn
 		po.setAddress(vo.address);
 		po.setPost(vo.post);
 		po.setEmail(vo.email);
-		boolean b = po.setReceivableLimit(vo.receivableLimit, userInfo.getUserIden());
-		if (!b) {
-			return ResultMessage.FAILURE;	// 权限不够，更新失败
+		if (vo.receivableLimit != po.getReceivableLimit()) {	// 仅最高权限可以修改
+			boolean b = po.setReceivableLimit(vo.receivableLimit, userInfo.getUserIden());
+			if (!b) {
+				return ResultMessage.FAILURE;	// 权限不够，更新失败
+			}
 		}
 		po.setSalesman(vo.salesman);
 		return clientData.update(po);
@@ -172,33 +181,4 @@ public class Client implements ClientInfo_AccountBill, ClientInfo_Sale, ClientIn
 		return clientData.delete(ID);
 	}
 
-	/**
-	 * @see businesslogic.accountbillbl.ClientInfo_AccountBill#getAllClients()
-	 */
-	@Override
-	public HashMap<String, String> getAllClients() {
-		ArrayList<ClientVO> clientsVO = show();
-		HashMap<String, String> clients = new HashMap<String, String>();
-		for(int i = 0; i < clientsVO.size(); i++) {
-			ClientVO vo = clientsVO.get(i);
-			clients.put(vo.ID, vo.name);
-		}
-		return clients;
-	}
-
-	/**
-	 * @see businesslogic.salebl.ClientInfo_Purchase#getSalesman(java.lang.String)
-	 */
-	public String getSalesman(String ID) {
-		ClientPO po = clientData.find(ID);
-		return po.getSalesman();
-	}
-	
-	/**
-	 * @see businesslogic.salebl.ClientInfo_Purchase#getName(java.lang.String)
-	 */
-	public String getName(String ID) {
-		ClientPO po = clientData.find(ID);
-		return po.getName();
-	}
 }

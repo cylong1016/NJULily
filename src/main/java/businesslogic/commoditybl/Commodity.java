@@ -14,7 +14,7 @@ import businesslogic.salebl.CommodityInfo_Sale;
 import dataenum.FindTypeCommo;
 import dataservice.CommodityDataService;
 import dataservice.CommoditySortDataService;
-import dataservice.DataFactoryService;
+import dataservice.commondata.DataFactoryService;
 /**
  * 商品管理
  * @author Zing

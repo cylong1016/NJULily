@@ -30,15 +30,14 @@ public class AccountBillList {
 	}
 	
 	/**
-	 * voList转化成poList
+	 * itemVOList转化成itemPOList
 	 * @return poList
 	 * @author cylong
 	 * @version 2014年12月1日  上午1:13:19
 	 */
 	public ArrayList<AccountBillItemPO> toPOList() {
 		ArrayList<AccountBillItemPO> poList = new ArrayList<AccountBillItemPO>();
-		for(int i = 0; i < billList.size(); i++) {
-			AccountBillItemVO vo = billList.get(i);
+		for(AccountBillItemVO vo : billList) {
 			String accountID = vo.accountID;
 			int money = vo.money;
 			String remark = vo.remark;

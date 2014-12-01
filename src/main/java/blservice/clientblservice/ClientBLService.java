@@ -48,6 +48,14 @@ public interface ClientBLService {
 	public ArrayList<ClientVO> findClient(String keywords, FindTypeClient type);
 
 	/**
+	 * 以ID精确查找客户
+	 * @param ID 客户
+	 * @return ClientVO
+	 * @author cylong
+	 * @version 2014年12月1日  下午2:54:12
+	 */
+	public ClientVO findClient(String ID);
+	/**
 	 * 添加一位客户VO
 	 * @param ClientVO
 	 * @return 处理信息

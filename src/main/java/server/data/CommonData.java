@@ -24,7 +24,7 @@ public abstract class CommonData<PO extends PersistentObject> implements CommonD
 	}
 
 	/**
-	 * @see dataservice.DataService#getID()
+	 * @see dataservice.commondata.DataService#getID()
 	 */
 	@Override
 	public String getID() {

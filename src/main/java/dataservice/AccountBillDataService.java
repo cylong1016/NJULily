@@ -1,5 +1,7 @@
 package dataservice;
 
+import java.util.ArrayList;
+
 import po.AccountBillPO;
 import dataenum.BillType;
 
@@ -18,4 +20,13 @@ public interface AccountBillDataService extends CommonDataService<AccountBillPO>
 	 * @version 2014年11月30日 下午10:54:18
 	 */
 	public String getID(BillType type);
+	
+	/**
+	 * 按照单据类型返回单据【收款单或者付款单】
+	 * @param type
+	 * @return
+	 * @author cylong
+	 * @version 2014年12月1日  下午3:13:56
+	 */
+	public ArrayList<AccountBillPO> show(BillType type);
 }

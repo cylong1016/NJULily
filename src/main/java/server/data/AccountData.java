@@ -16,7 +16,7 @@ import dataservice.AccountDataService;
 public class AccountData extends CommonData<AccountPO> implements AccountDataService {
 
 	/**
-	 * @see dataservice.DataService#init()
+	 * @see dataservice.commondata.DataService#init()
 	 */
 	@Override
 	public void init() {

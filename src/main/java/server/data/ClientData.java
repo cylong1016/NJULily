@@ -16,7 +16,7 @@ import dataservice.ClientDataService;
 public class ClientData extends CommonData<ClientPO> implements ClientDataService {
 
 	/**
-	 * @see dataservice.DataService#init()
+	 * @see dataservice.commondata.DataService#init()
 	 */
 	@Override
 	public void init() {

@@ -11,13 +11,13 @@ import dataservice.CashBillDataService;
 import dataservice.ClientDataService;
 import dataservice.CommodityDataService;
 import dataservice.CommoditySortDataService;
-import dataservice.DataFactoryService;
 import dataservice.InventoryDataService;
 import dataservice.PromotionDataService;
 import dataservice.PurchaseDataService;
 import dataservice.RecordDataService;
 import dataservice.SaleDataService;
 import dataservice.UserDataService;
+import dataservice.commondata.DataFactoryService;
 
 /**
  * 抽象工厂，返回数据层模块接口
@@ -39,7 +39,7 @@ public class DataFactory extends UnicastRemoteObject implements DataFactoryServi
 	}
 
 	/**
-	 * @see dataservice.DataFactoryService#getAccountaInitData()
+	 * @see dataservice.commondata.DataFactoryService#getAccountaInitData()
 	 */
 	@Override
 	public AccountaInitDataService getAccountaInitData() throws RemoteException {
@@ -47,7 +47,7 @@ public class DataFactory extends UnicastRemoteObject implements DataFactoryServi
 	}
 
 	/**
-	 * @see dataservice.DataFactoryService#getAccountData()
+	 * @see dataservice.commondata.DataFactoryService#getAccountData()
 	 */
 	@Override
 	public AccountDataService getAccountData() throws RemoteException {
@@ -55,7 +55,7 @@ public class DataFactory extends UnicastRemoteObject implements DataFactoryServi
 	}
 
 	/**
-	 * @see dataservice.DataFactoryService#getApprovalData()
+	 * @see dataservice.commondata.DataFactoryService#getApprovalData()
 	 */
 	@Override
 	public ApprovalDataService getApprovalData() throws RemoteException {
@@ -63,7 +63,7 @@ public class DataFactory extends UnicastRemoteObject implements DataFactoryServi
 	}
 
 	/**
-	 * @see dataservice.DataFactoryService#getClientData()
+	 * @see dataservice.commondata.DataFactoryService#getClientData()
 	 */
 	@Override
 	public ClientDataService getClientData() throws RemoteException {
@@ -71,7 +71,7 @@ public class DataFactory extends UnicastRemoteObject implements DataFactoryServi
 	}
 
 	/**
-	 * @see dataservice.DataFactoryService#getCommodityData()
+	 * @see dataservice.commondata.DataFactoryService#getCommodityData()
 	 */
 	@Override
 	public CommodityDataService getCommodityData() throws RemoteException {
@@ -79,7 +79,7 @@ public class DataFactory extends UnicastRemoteObject implements DataFactoryServi
 	}
 
 	/**
-	 * @see dataservice.DataFactoryService#getCommoditySortData()
+	 * @see dataservice.commondata.DataFactoryService#getCommoditySortData()
 	 */
 	@Override
 	public CommoditySortDataService getCommoditySortData() throws RemoteException {
@@ -87,7 +87,7 @@ public class DataFactory extends UnicastRemoteObject implements DataFactoryServi
 	}
 
 	/**
-	 * @see dataservice.DataFactoryService#getAccountBillData()
+	 * @see dataservice.commondata.DataFactoryService#getAccountBillData()
 	 */
 	@Override
 	public AccountBillDataService getAccountBillData() throws RemoteException {
@@ -95,7 +95,7 @@ public class DataFactory extends UnicastRemoteObject implements DataFactoryServi
 	}
 
 	/**
-	 * @see dataservice.DataFactoryService#getInventoryData()
+	 * @see dataservice.commondata.DataFactoryService#getInventoryData()
 	 */
 	@Override
 	public InventoryDataService getInventoryData() throws RemoteException {
@@ -103,7 +103,7 @@ public class DataFactory extends UnicastRemoteObject implements DataFactoryServi
 	}
 
 	/**
-	 * @see dataservice.DataFactoryService#getPromotionData()
+	 * @see dataservice.commondata.DataFactoryService#getPromotionData()
 	 */
 	@Override
 	public PromotionDataService getPromotionData() throws RemoteException {
@@ -111,7 +111,7 @@ public class DataFactory extends UnicastRemoteObject implements DataFactoryServi
 	}
 
 	/**
-	 * @see dataservice.DataFactoryService#getPurchaseData()
+	 * @see dataservice.commondata.DataFactoryService#getPurchaseData()
 	 */
 	@Override
 	public PurchaseDataService getPurchaseData() throws RemoteException {
@@ -119,7 +119,7 @@ public class DataFactory extends UnicastRemoteObject implements DataFactoryServi
 	}
 
 	/**
-	 * @see dataservice.DataFactoryService#getRecordData()
+	 * @see dataservice.commondata.DataFactoryService#getRecordData()
 	 */
 	@Override
 	public RecordDataService getRecordData() throws RemoteException {
@@ -127,7 +127,7 @@ public class DataFactory extends UnicastRemoteObject implements DataFactoryServi
 	}
 
 	/**
-	 * @see dataservice.DataFactoryService#getSaleData()
+	 * @see dataservice.commondata.DataFactoryService#getSaleData()
 	 */
 	@Override
 	public SaleDataService getSaleData() throws RemoteException {
@@ -135,7 +135,7 @@ public class DataFactory extends UnicastRemoteObject implements DataFactoryServi
 	}
 
 	/**
-	 * @see dataservice.DataFactoryService#getUserData()
+	 * @see dataservice.commondata.DataFactoryService#getUserData()
 	 */
 	@Override
 	public UserDataService getUserData() throws RemoteException {
@@ -143,7 +143,7 @@ public class DataFactory extends UnicastRemoteObject implements DataFactoryServi
 	}
 
 	/**
-	 * @see dataservice.DataFactoryService#getCashBillData()
+	 * @see dataservice.commondata.DataFactoryService#getCashBillData()
 	 */
 	@Override
 	public CashBillDataService getCashBillData() throws RemoteException {

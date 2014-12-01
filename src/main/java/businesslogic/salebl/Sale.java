@@ -18,8 +18,8 @@ import config.RMI;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Storage;
-import dataservice.DataFactoryService;
 import dataservice.SaleDataService;
+import dataservice.commondata.DataFactoryService;
 
 /**
  * 处理销售，创建销售（销售退货单）

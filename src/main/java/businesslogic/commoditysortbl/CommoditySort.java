@@ -7,7 +7,7 @@ import message.ResultMessage;
 import po.CommoditySortPO;
 import vo.CommoditySortVO;
 import dataservice.CommoditySortDataService;
-import dataservice.DataFactoryService;
+import dataservice.commondata.DataFactoryService;
 
 public class CommoditySort {
 	

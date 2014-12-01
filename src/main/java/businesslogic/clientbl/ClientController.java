@@ -56,6 +56,14 @@ public class ClientController implements ClientBLService {
 	}
 
 	/**
+	 * @see blservice.clientblservice.ClientBLService#findClient(java.lang.String)
+	 */
+	@Override
+	public ClientVO findClient(String ID) {
+		return client.findClient(ID);
+	}
+
+	/**
 	 * @see blservice.clientblservice.ClientBLService#addClient(vo.ClientVO)
 	 */
 	@Override

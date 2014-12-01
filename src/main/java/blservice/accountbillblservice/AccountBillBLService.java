@@ -1,9 +1,11 @@
 package blservice.accountbillblservice;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import message.ResultMessage;
 import vo.AccountBillItemVO;
+import vo.AccountBillVO;
 import dataenum.BillType;
 
 /**
@@ -70,6 +72,24 @@ public interface AccountBillBLService {
 	 * @version 2014年11月30日 下午10:32:37
 	 */
 	public void addAccountBill(String clientID);
+	
+	/**
+	 * 显示全部的收款单和付款单
+	 * @return ArrayList<AccountBillVO>
+	 * @author cylong
+	 * @version 2014年12月1日  下午3:09:43
+	 */
+	public ArrayList<AccountBillVO> show();
+	
+	/**
+	 * 返回全部的收款单或者付款单【传入单据类型】
+	 * @param type 单据类型
+	 * @return ArrayList<AccountBillVO>
+	 * @author cylong
+	 * @version 2014年12月1日  下午3:10:03
+	 */
+	public ArrayList<AccountBillVO> show(BillType type);
+	
 
 	/**
 	 * 提交单据进行审批

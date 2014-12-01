@@ -1,6 +1,7 @@
 package server.data;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import po.AccountBillPO;
@@ -14,7 +15,7 @@ import dataservice.AccountBillDataService;
  * @author cylong
  * @version 2014年11月30日 下午10:50:32
  */
-public class AccountBillData extends CommonData<AccountBillPO> implements AccountBillDataService {
+public class AccountBillData extends CommonData<AccountBillPO> implements AccountBillDataService, DataInfo {
 
 	/** 付款单或付款单最大ID */
 	private int maxID;
@@ -23,7 +24,7 @@ public class AccountBillData extends CommonData<AccountBillPO> implements Accoun
 	private int maxBit = 5;	// 最大数量的位数
 
 	/**
-	 * @see dataservice.DataService#init()
+	 * @see dataservice.commondata.DataService#init()
 	 */
 	@Override
 	public void init() {
@@ -79,5 +80,19 @@ public class AccountBillData extends CommonData<AccountBillPO> implements Accoun
 	@Override
 	public String getID() {
 		return null;
+	}
+
+	/**
+	 * @see dataservice.AccountBillDataService#show(dataenum.BillType)
+	 */
+	@Override
+	public ArrayList<AccountBillPO> show(BillType type) {
+		ArrayList<AccountBillPO> bills = new ArrayList<AccountBillPO>();
+		for(AccountBillPO po : poList.getInList()) {
+			if(po.getType().equals(type)) {
+				bills.add(po);
+			}
+		}
+		return bills;
 	}
 }

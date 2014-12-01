@@ -1,10 +1,12 @@
-package dataservice;
+package dataservice.commondata;
+
+import po.PersistentObject;
 
 /**
  * @author cylong
  * @version Oct 26, 2014 7:00:12 PM
  */
-public interface DataService {
+public interface DataService<PO extends PersistentObject> {
 
 	/**
 	 * 初始化数据层接口的信息
@@ -20,4 +22,13 @@ public interface DataService {
 	 * @version Nov 3, 2014  9:15:35 PM
 	 */
 	public String getID();
+	
+	/**
+	 * 以ID查找PO
+	 * @param ID po的ID
+	 * @return PO extends PersistentObject
+	 * @author cylong
+	 * @version 2014年12月1日  下午4:09:43
+	 */
+	public PO find(String ID);
 }

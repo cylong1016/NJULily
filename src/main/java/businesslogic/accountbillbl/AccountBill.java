@@ -9,15 +9,14 @@ import po.AccountBillPO;
 import server.data.AccountBillData;
 import vo.AccountBillItemVO;
 import vo.AccountBillVO;
-import businesslogic.accountbl.Account;
-import businesslogic.clientbl.Client;
-import businesslogic.recordbl.info.ValueObjectInfo_Record;
-import businesslogic.userbl.User;
+import businesslogic.accountbl.AccountInfo;
+import businesslogic.clientbl.ClientInfo;
+import businesslogic.userbl.UserInfo;
+import dataenum.BillState;
 import dataenum.BillType;
-import dataenum.Storage;
 import dataservice.AccountBillDataService;
 
-public class AccountBill implements ValueObjectInfo_Record<AccountBillVO> {
+public class AccountBill {
 
 	/** 编号 */
 	private String ID;
@@ -62,7 +61,7 @@ public class AccountBill implements ValueObjectInfo_Record<AccountBillVO> {
 	 * @version 2014年12月1日 上午1:33:04
 	 */
 	public HashMap<String, String> getAllClients() {
-		ClientInfo_AccountBill clientInfo = new Client();
+		ClientInfo_AccountBill clientInfo = new ClientInfo();
 		return clientInfo.getAllClients();
 	}
 
@@ -72,7 +71,7 @@ public class AccountBill implements ValueObjectInfo_Record<AccountBillVO> {
 	 * @version 2014年12月1日 上午1:36:29
 	 */
 	public HashMap<String, String> getAllAccounts() {
-		AccountInfo_AccountBill accountInfo = new Account();
+		AccountInfo_AccountBill accountInfo = new AccountInfo();
 		return accountInfo.getAllAccounts();
 	}
 
@@ -104,10 +103,86 @@ public class AccountBill implements ValueObjectInfo_Record<AccountBillVO> {
 	 * @version 2014年12月1日 上午1:39:47
 	 */
 	public void addAccountBill(String clientID) {
-		UserInfo_AccountBill userInfo = new User();
+		UserInfo_AccountBill userInfo = new UserInfo();
 		String userID = userInfo.getUserID();
 		ArrayList<AccountBillItemPO> billsPO = bills.toPOList();
 		po = new AccountBillPO(ID, clientID, userID, billsPO, type);
+	}
+
+	/**
+	 * @return 全部的收款单和付款单
+	 * @author cylong
+	 * @version 2014年12月1日 下午3:21:44
+	 */
+	public ArrayList<AccountBillVO> show() {
+		ArrayList<AccountBillPO> billsPO = accountBillData.show();
+		ArrayList<AccountBillVO> billsVO = billsPOToBillsVO(billsPO);
+		return billsVO;
+	}
+
+	/**
+	 * 根据单据类型返回单子（收款单，付款单）
+	 * @param type 单据类型
+	 * @return ArrayList<AccountBillVO>
+	 * @author cylong
+	 * @version 2014年12月1日 下午3:22:01
+	 */
+	public ArrayList<AccountBillVO> show(BillType type) {
+		ArrayList<AccountBillPO> billsPO = accountBillData.show(type);
+		ArrayList<AccountBillVO> billsVO = billsPOToBillsVO(billsPO);
+		return billsVO;
+	}
+
+	/**
+	 * 将收款单（付款单）的PO集合转化成VO集合
+	 * @param billsPO
+	 * @return ArrayList<AccountBillVO>
+	 * @author cylong
+	 * @version 2014年12月1日 下午3:45:32
+	 */
+	private ArrayList<AccountBillVO> billsPOToBillsVO(ArrayList<AccountBillPO> billsPO) {
+		ArrayList<AccountBillVO> billsVO = new ArrayList<AccountBillVO>();
+		for(AccountBillPO po : billsPO) {
+			AccountBillVO vo = poToVO(po);
+			billsVO.add(vo);
+		}
+		return billsVO;
+	}
+
+	/**
+	 * 将AccountBillPO转化成AccountBillVO
+	 * @param po AccountBillPO
+	 * @return AccountBillVO
+	 * @author cylong
+	 * @version 2014年12月1日 下午3:40:52
+	 */
+	public AccountBillVO poToVO(AccountBillPO po) {
+		String ID = po.getID();
+		String clientID = po.getClientID();
+		String userID = po.getUserID();
+		ArrayList<AccountBillItemVO> bills = toItemVOList(po.getBills());
+		BillState state = po.getState();
+		BillType type = po.getType();
+		AccountBillVO vo = new AccountBillVO(ID, clientID, userID, bills, state, type);
+		return vo;
+	}
+
+	/**
+	 * itemPOList转化成itemVOList
+	 * @return itemVOList
+	 * @author cylong
+	 * @version 2014年12月1日 上午1:13:19
+	 */
+	public ArrayList<AccountBillItemVO> toItemVOList(ArrayList<AccountBillItemPO> itemPOList) {
+		ArrayList<AccountBillItemVO> itemVOList = new ArrayList<AccountBillItemVO>();
+		for(AccountBillItemPO po : itemPOList) {
+			String accountID = po.getAccountID();
+			int money = po.getMoney();
+			String remark = po.getRemark();
+			AccountBillItemVO vo = new AccountBillItemVO(accountID, money, remark);
+			itemVOList.add(vo);
+		}
+		return itemVOList;
 	}
 
 	/**
@@ -131,22 +206,4 @@ public class AccountBill implements ValueObjectInfo_Record<AccountBillVO> {
 		return null;
 	}
 
-	/**
-	 * @see businesslogic.recordbl.info.ValueObjectInfo_Record#show(dataenum.BillType)
-	 */
-	@Override
-	public ArrayList<AccountBillVO> show(BillType billType) {
-		// TODO cylong求告知这个方法是干什么的
-		return null;
-	}
-
-	/**
-	 * @see businesslogic.recordbl.info.ValueObjectInfo_Record#getID(java.lang.String, java.lang.String,
-	 *      java.lang.String, dataenum.Storage)
-	 */
-	@Override
-	public String getID(String ID, String clientName, String salesman, Storage storage) {
-		// TODO cylong求告知这个方法是干什么的
-		return null;
-	}
 }

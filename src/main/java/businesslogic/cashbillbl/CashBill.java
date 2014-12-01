@@ -15,8 +15,8 @@ import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Storage;
 import dataservice.CashBillDataService;
-import dataservice.DataFactoryService;
 import dataservice.SaleDataService;
+import dataservice.commondata.DataFactoryService;
 /**
  * 制定现金费用单
  * (管理报销等现金操作，单据中包含：

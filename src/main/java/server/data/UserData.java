@@ -13,7 +13,7 @@ import dataservice.UserDataService;
 public class UserData extends CommonData<UserPO> implements UserDataService {
 
 	/**
-	 * @see dataservice.DataService#init()
+	 * @see dataservice.commondata.DataService#init()
 	 */
 	@Override
 	public void init() {

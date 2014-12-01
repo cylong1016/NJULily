@@ -5,16 +5,17 @@ import java.util.ArrayList;
 import po.SalesPO;
 import dataenum.BillType;
 import dataservice.SaleDataService;
+import dataservice.commondata.DataInfo;
 
 /**
  * @see dataservice.SaleDataService
  * @author cylong
  * @version 2014年11月27日 下午7:53:50
  */
-public class SaleData extends CommonData<SalesPO> implements SaleDataService {
+public class SaleData extends CommonData<SalesPO> implements SaleDataService, DataInfo {
 
 	/**
-	 * @see dataservice.DataService#init()
+	 * @see dataservice.commondata.DataService#init()
 	 */
 	@Override
 	public void init() {

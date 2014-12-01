@@ -1,17 +1,15 @@
 package businesslogic.accountbl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import message.ResultMessage;
 import po.AccountPO;
 import server.data.AccountData;
 import vo.AccountVO;
-import businesslogic.accountbillbl.AccountInfo_AccountBill;
 import dataenum.FindTypeAccount;
 import dataservice.AccountDataService;
 
-public class Account implements AccountInfo_AccountBill {
+public class Account {
 
 	private AccountDataService accountData;
 
@@ -38,8 +36,7 @@ public class Account implements AccountInfo_AccountBill {
 	public ArrayList<AccountVO> find(String keywords, FindTypeAccount type) {
 		ArrayList<AccountPO> AccountsPO = accountData.find(keywords, type);
 		ArrayList<AccountVO> AccountsVO = new ArrayList<AccountVO>();
-		for(int i = 0; i < AccountsPO.size(); i++) {
-			AccountPO po = AccountsPO.get(i);
+		for(AccountPO po : AccountsPO) {
 			AccountVO vo = poToVO(po);
 			AccountsVO.add(vo);
 		}
@@ -97,8 +94,7 @@ public class Account implements AccountInfo_AccountBill {
 	public ArrayList<AccountVO> show() {
 		ArrayList<AccountVO> AccountsVO = new ArrayList<AccountVO>();
 		ArrayList<AccountPO> AccountsPO = accountData.show();
-		for(int i = 0; i < AccountsPO.size(); i++) {
-			AccountPO po = AccountsPO.get(i);
+		for(AccountPO po : AccountsPO) {
 			AccountVO vo = poToVO(po);
 			AccountsVO.add(vo);
 		}
@@ -127,20 +123,6 @@ public class Account implements AccountInfo_AccountBill {
 	 */
 	public String getID() {
 		return accountData.getID();
-	}
-
-	/**
-	 * @see businesslogic.accountbillbl.AccountInfo_AccountBill#getAllAccounts()
-	 */
-	@Override
-	public HashMap<String, String> getAllAccounts() {
-		ArrayList<AccountVO> accountsVO = show();
-		HashMap<String, String> accounts = new HashMap<String, String>();
-		for(int i = 0; i < accountsVO.size(); i++) {
-			AccountVO vo = accountsVO.get(i);
-			accounts.put(vo.ID, vo.name);
-		}
-		return accounts;
 	}
 
 }

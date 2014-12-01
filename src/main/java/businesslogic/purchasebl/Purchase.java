@@ -16,8 +16,8 @@ import vo.PurchaseVO;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Storage;
-import dataservice.DataFactoryService;
 import dataservice.PurchaseDataService;
+import dataservice.commondata.DataFactoryService;
 
 public class Purchase extends POToVO implements ValueObjectInfo_Record<PurchaseVO>, PurchaseInfo_Record{
 	

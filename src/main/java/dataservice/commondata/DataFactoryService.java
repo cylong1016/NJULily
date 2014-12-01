@@ -1,7 +1,22 @@
-package dataservice;
+package dataservice.commondata;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+
+import dataservice.AccountBillDataService;
+import dataservice.AccountDataService;
+import dataservice.AccountaInitDataService;
+import dataservice.ApprovalDataService;
+import dataservice.CashBillDataService;
+import dataservice.ClientDataService;
+import dataservice.CommodityDataService;
+import dataservice.CommoditySortDataService;
+import dataservice.InventoryDataService;
+import dataservice.PromotionDataService;
+import dataservice.PurchaseDataService;
+import dataservice.RecordDataService;
+import dataservice.SaleDataService;
+import dataservice.UserDataService;
 
 /**
  * 抽象工厂，返回数据层模块接口
