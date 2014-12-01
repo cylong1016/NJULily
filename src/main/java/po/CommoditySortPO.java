@@ -1,6 +1,7 @@
 package po;
 
 import java.util.ArrayList;
+
 /**
  * 商品分类持久化对象
  * @author cylong
@@ -9,19 +10,24 @@ import java.util.ArrayList;
 public class CommoditySortPO extends PersistentObject {
 
 	private static final long serialVersionUID = 1L;
+	
+	private String ID;
 
 	private String name;
 
-	private CommoditySortPO father;
+	private String fatherID;
 
-	private  ArrayList<CommoditySortPO> children;
+	private  ArrayList<String> childrenID;
 
-	private ArrayList<CommodityPO> commodities;
+	private ArrayList<String> commoditiesID;
 
-	public CommoditySortPO(String ID, String name, CommoditySortPO father) {
+	public CommoditySortPO(String ID, String name, String fatherID, ArrayList<String> childrenID, ArrayList<String> commoditiesID) {
 		super(ID);
+		this.ID = ID;
 		this.name = name;
-		this.father = father;
+		this.fatherID = fatherID;
+		this.childrenID = childrenID;
+		this.commoditiesID = commoditiesID;
 	}
 
 
@@ -29,16 +35,24 @@ public class CommoditySortPO extends PersistentObject {
 		return name;
 	}
 
-	public CommoditySortPO getFather() {
-		return father;
+	public String getFatherID() {
+		return fatherID;
 	}
 
-	public ArrayList<CommoditySortPO> getChildren() {
-		return children;
+	public ArrayList<String> getChildrenID() {
+		return childrenID;
 	}
 
-	public ArrayList<CommodityPO> getCommodities() {
-		return commodities;
+	public ArrayList<String> getCommoditiesID() {
+		return commoditiesID;
+	}
+
+	public void addChildID(String childID) {
+		this.commoditiesID.add(childID);
+	}
+	
+	public void addCommodityID(String commodityID) {
+		this.commoditiesID.add(commodityID);
 	}
 
 }

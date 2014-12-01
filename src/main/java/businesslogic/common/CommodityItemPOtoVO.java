@@ -7,12 +7,11 @@ import vo.CommodityItemVO;
 import businesslogic.commoditybl.Commodity;
 import businesslogic.salebl.CommodityInfo_Sale;
 
-public class POToVO {
+public class CommodityItemPOtoVO {
 
 	public ArrayList<CommodityItemVO> itemPOToVO(ArrayList<CommodityItemPO> itemsPO) {
 		ArrayList<CommodityItemVO> itemsVO = new ArrayList<CommodityItemVO>();
-		for(int i = 0; i < itemsPO.size(); i++) {
-			CommodityItemPO po = itemsPO.get(i);
+		for(CommodityItemPO po : itemsPO) {
 			String ID = po.getID();
 			int number = po.getNumber();
 			double price = po.getPrice();

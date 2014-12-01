@@ -4,7 +4,7 @@ import java.rmi.Naming;
 import java.util.ArrayList;
 
 import config.RMI;
-import businesslogic.common.POToVO;
+import businesslogic.common.CommodityItemPOtoVO;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
 import po.CashBillPO;
 import po.CashItemPO;

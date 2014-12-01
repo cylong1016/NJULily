@@ -3,7 +3,7 @@ package businesslogic.inventorybl;
 import java.rmi.Naming;
 import java.util.ArrayList;
 
-import businesslogic.common.POToVO;
+import businesslogic.common.CommodityItemPOtoVO;
 import businesslogic.promotionbl.InventoryInfo_Promotion;
 import businesslogic.recordbl.info.InventoryInfo_Record;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
@@ -21,7 +21,7 @@ import dataservice.InventoryDataService;
 import dataservice.commondata.DataFactoryService;
 import message.ResultMessage;
 
-public class Inventory extends POToVO {
+public class Inventory extends CommodityItemPOtoVO {
 	
 	private BillList list;
 		

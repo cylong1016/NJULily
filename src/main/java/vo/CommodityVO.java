@@ -8,6 +8,7 @@ package vo;
  */
 public class CommodityVO {
 	
+	public String ID;
 	/** 商品名称 */
 	public String name;
 	/** 商品型号 */
@@ -25,9 +26,9 @@ public class CommodityVO {
 	/** 商品警戒数量 */
 	public int alarmNumber;
 	
-	public CommodityVO(String name, String type, int inventoryNum, 
-			double purPrice, double salePrice, double recentPurpPrice, double recentSalePrice){
+	public CommodityVO(String ID, String name, String type, int inventoryNum, double purPrice, double salePrice, double recentPurpPrice, double recentSalePrice, int alarmNumber){
 		super();
+		this.ID = ID;
 		this.name = name;
 		this.type = type;
 		this.inventoryNum =inventoryNum;
@@ -35,6 +36,7 @@ public class CommodityVO {
 		this.salePrice = salePrice;
 		this.recentPurPrice = recentPurpPrice;
 		this.recentSalePrice = recentSalePrice;
+		this.alarmNumber = alarmNumber;
 	}
 	
 }

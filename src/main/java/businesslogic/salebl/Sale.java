@@ -9,7 +9,7 @@ import vo.CommodityItemVO;
 import vo.SalesVO;
 import blservice.saleblservice.SaleInputInfo;
 import businesslogic.clientbl.Client;
-import businesslogic.common.POToVO;
+import businesslogic.common.CommodityItemPOtoVO;
 import config.RMI;
 import dataenum.BillState;
 import dataenum.BillType;
@@ -22,7 +22,7 @@ import dataservice.commondata.DataFactoryService;
  * @author Zing
  * @version Nov 15, 2014 10:07:38 AM
  */
-public class Sale extends POToVO {
+public class Sale extends CommodityItemPOtoVO {
 
 	/** 销售单 */
 	private SaleList list;

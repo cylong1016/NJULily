@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import config.RMI;
 import blservice.purchaseblservice.PurInputInfo;
 import businesslogic.clientbl.Client;
-import businesslogic.common.POToVO;
+import businesslogic.common.CommodityItemPOtoVO;
 import po.PurchasePO;
 import message.ResultMessage;
 import vo.CommodityItemVO;
@@ -17,7 +17,7 @@ import dataenum.Storage;
 import dataservice.PurchaseDataService;
 import dataservice.commondata.DataFactoryService;
 
-public class Purchase extends POToVO {
+public class Purchase extends CommodityItemPOtoVO {
 	
 	private PurchaseList list;
 	

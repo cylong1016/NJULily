@@ -20,14 +20,21 @@ public class CommoditySortController implements CommoditySortBLService{
 		commoditySort = new CommoditySort();
 	}
 	
-	public ResultMessage addCommoSort(String sortName, CommoditySortVO parentSort) {	
-		return commoditySort.addCommoSort(sortName, parentSort);
-	}
-
 	public ArrayList<CommoditySortVO> show() {
 		return commoditySort.show();
 	}
-
+	
+	public CommoditySortVO show(String ID) {
+		return commoditySort.show(ID);
+	}
+	
+	public String getID() {
+		return commoditySort.getID();
+	}
+	
+	public ResultMessage addCommoSort(String sortName, String fatherID) {	
+		return commoditySort.addCommoSort(sortName, fatherID);
+	}
 
 	public ResultMessage deleteCommoSort(String ID) {
 		return commoditySort.deleteCommoSort(ID);
