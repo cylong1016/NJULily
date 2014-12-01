@@ -101,7 +101,6 @@ public class Record {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		//XSD-yyyyMMdd
 		return IDs;
 	}
 

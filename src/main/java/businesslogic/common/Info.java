@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import dataenum.BillType;
 import dataenum.Storage;
-import dataservice.DataService;
 import dataservice.SaleDataService;
 
 public abstract class Info<Data extends DataService> {

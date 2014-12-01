@@ -2,7 +2,7 @@ package businesslogic.recordbl;
 
 import java.util.ArrayList;
 
-import businesslogic.accountbillbl.AccountBill;
+import businesslogic.accountbillbl.AccountBillInfo;
 import businesslogic.cashbillbl.CashBillInfo;
 import businesslogic.inventorybl.InventoryInfo;
 import businesslogic.purchasebl.PurchaseInfo;
@@ -61,7 +61,7 @@ public class BusinessProList {
 			break;
 		case PAY:
 		case EXPENSE:
-			info = new AccountBill();
+			info = new AccountBillInfo();
 			break;
 		case CASH:
 			info = new CashBillInfo();
@@ -70,6 +70,12 @@ public class BusinessProList {
 			break;
 		}
 		ArrayList<ValueObject> VOs = new ArrayList<ValueObject>();
+		for (String id : IDs) {
+			ArrayList<String> billIDs = info.getID(id, clientName, salesman, storage);
+			for (String billID : billIDs) {
+				info.
+			}
+		}
 		// TODO
 		return VOs;
 	}
