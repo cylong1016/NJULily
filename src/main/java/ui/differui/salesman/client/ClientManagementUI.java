@@ -163,12 +163,15 @@ public class ClientManagementUI extends JLabel implements ActionListener{
 			DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		
 			if(rowNum != 0)
-				for(int i = 0; i <= rowNum; i++)
+				for(int i = 0; i < rowNum; i++)
 					tableModel.removeRow(0);
 			
 			rowNum = 0;
 			
 			controller = new ClientController();
+			
+			rowNum = controller.show().size();
+			
 			for(int i = 0; i < controller.show().size(); i++){
 				ClientVO cvo = controller.show().get(i);
 				
@@ -176,7 +179,6 @@ public class ClientManagementUI extends JLabel implements ActionListener{
 						, cvo.name,cvo.salesman,String.valueOf(cvo.receivable - cvo.payable)
 						,String.valueOf(cvo.receivable), String.valueOf(cvo.payable),String.valueOf(cvo.receivableLimit)};
 				tableModel.addRow(str);
-				rowNum = i;
 			}		
 		}
 		
@@ -248,24 +250,24 @@ public class ClientManagementUI extends JLabel implements ActionListener{
 					DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 					
 					if(rowNum != 0)
-						for(int k = 0; k <= rowNum; k++)
+						for(int k = 0; k < rowNum; k++)
 							tableModel.removeRow(0);
 					
 					rowNum = 0;
-					
-					
-					
+														
 					for(int i = 0; i < list.size(); i++){
 										
 						ClientVO cvo = list.get(i);
+						
+						rowNum = list.size();
 						
 						String[] str = {cvo.ID, getCategory(cvo.category.toString()), getLevel(cvo.level.toString())
 								, cvo.name,cvo.salesman,String.valueOf(cvo.receivable - cvo.payable)
 								,String.valueOf(cvo.receivable), String.valueOf(cvo.payable),String.valueOf(cvo.receivableLimit)};
 						tableModel.addRow(str);
-						rowNum = i;
+						
 					}	
-					
+								
 					WarningFrame wf = new WarningFrame("共有  " + list.size() + "  名客户符合条件！");
 					wf.setVisible(true);
 				}
