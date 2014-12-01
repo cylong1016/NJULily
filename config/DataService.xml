@@ -17,4 +17,8 @@
 		<initID>1</initID>
 		<dateFormat>yyyyMMdd</dateFormat>
 	</AccountBillData>
+	<CommodityData>
+		<path>data/CommodityList.ser</path>
+		<initID>1</initID>
+	</CommodityData>
 </DataService>

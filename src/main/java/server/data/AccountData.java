@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import po.AccountPO;
 import server.common.ParseXML;
-import server.io.DefineList;
 import dataenum.FindTypeAccount;
 import dataservice.AccountDataService;
 
@@ -20,10 +19,7 @@ public class AccountData extends CommonData<AccountPO> implements AccountDataSer
 	 */
 	@Override
 	public void init() {
-		ParseXML parsexml = new ParseXML("AccountData");
-		filePath = parsexml.getValue("path");
-		initID = parsexml.getValue("initID");
-		poList = new DefineList<AccountPO>(filePath);
+		parsexml = new ParseXML("AccountData");
 	}
 
 	/**

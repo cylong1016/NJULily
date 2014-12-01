@@ -1,7 +1,5 @@
 package dataservice;
 
-import java.util.ArrayList;
-
 import po.SalesPO;
 import dataenum.BillType;
 
@@ -21,11 +19,4 @@ public interface SaleDataService extends CommonDataService<SalesPO> {
 	 */
 	public String getID(BillType type);
 
-	/**
-	 * @param type 销售单或者销售退货单
-	 * @return 该类型单据的全部的ID
-	 * @author cylong
-	 * @version 2014年11月30日 上午11:50:06
-	 */
-	public ArrayList<String> getAllID(BillType type);
 }

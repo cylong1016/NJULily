@@ -2,11 +2,12 @@ package server.data;
 
 import java.util.ArrayList;
 
-import dataservice.CommonDataService;
 import message.ResultMessage;
 import po.PersistentObject;
 import server.common.Common;
+import server.common.ParseXML;
 import server.io.DefineList;
+import dataservice.CommonDataService;
 
 /**
  * 数据层常用的操作，增删改查
@@ -18,9 +19,13 @@ public abstract class CommonData<PO extends PersistentObject> implements CommonD
 	protected DefineList<PO> poList;
 	protected String filePath;
 	protected String initID;
+	protected ParseXML parsexml;
 
 	public CommonData() {
-		init();
+		init();	// 初始化parsexml
+		filePath = parsexml.getValue("path");
+		initID = parsexml.getValue("initID");
+		poList = new DefineList<PO>(filePath);
 	}
 
 	/**

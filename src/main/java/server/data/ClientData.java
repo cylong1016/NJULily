@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import po.ClientPO;
 import server.common.ParseXML;
-import server.io.DefineList;
 import dataenum.FindTypeClient;
 import dataservice.ClientDataService;
 
@@ -20,10 +19,7 @@ public class ClientData extends CommonData<ClientPO> implements ClientDataServic
 	 */
 	@Override
 	public void init() {
-		ParseXML parsexml = new ParseXML("ClientData");
-		filePath = parsexml.getValue("path");
-		initID = parsexml.getValue("initID");
-		poList = new DefineList<ClientPO>(filePath);
+		parsexml = new ParseXML("CommodityData");
 	}
 
 	/**
@@ -33,7 +29,7 @@ public class ClientData extends CommonData<ClientPO> implements ClientDataServic
 	public ArrayList<ClientPO> find(String keywords, FindTypeClient type) {
 		keywords = keywords.toLowerCase(); // 为了不区分大小写
 		ArrayList<ClientPO> clients = new ArrayList<ClientPO>();
-		if(type == null) {	// 查找客户全部信息
+		if (type == null) {	// 查找客户全部信息
 			for(ClientPO client : poList.getInList()) {
 				if (client.toString().toLowerCase().contains(keywords)) {
 					clients.add(client);

@@ -30,10 +30,7 @@ public class AccountBillData extends CommonData<AccountBillPO> implements Accoun
 	 */
 	@Override
 	public void init() {
-		ParseXML parsexml = new ParseXML("AccountBillData");
-		filePath = parsexml.getValue("path");
-		poList = new DefineList<AccountBillPO>(filePath);
-		initID = parsexml.getValue("initID");
+		parsexml = new ParseXML("AccountBillData");
 		maxID = 0; // 默认的最大ID为0
 		String dateFormat = parsexml.getValue("dateFormat");
 		SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
