@@ -21,6 +21,15 @@ public class ClientData extends CommonData<ClientPO> implements ClientDataServic
 	@Override
 	public void init() {
 		parsexml = new ParseXML("ClientData");
+		prefix = parsexml.getValue("prefix");
+	}
+
+	/**
+	 * @see server.data.CommonData#getID()
+	 */
+	@Override
+	public String getID() {
+		return prefix + super.getID();
 	}
 
 	/**

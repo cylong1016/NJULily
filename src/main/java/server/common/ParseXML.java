@@ -80,7 +80,7 @@ public class ParseXML {
 	 * @author cylong
 	 * @version 2014年12月2日 上午1:05:34
 	 */
-	public Node selectSingleNode(String express, Object source) {
+	private Node selectSingleNode(String express, Object source) {
 		Node result = null;
 		XPathFactory xpathFactory = XPathFactory.newInstance();
 		XPath xpath = xpathFactory.newXPath();
@@ -99,7 +99,7 @@ public class ParseXML {
 	 * @author cylong
 	 * @version 2014年12月2日 上午3:19:08
 	 */
-	public void saveXml(String fileName, Document doc) {
+	private void saveXml(String fileName, Document doc) {
 		TransformerFactory transFactory = TransformerFactory.newInstance();
 		try {
 			Transformer transformer = transFactory.newTransformer();

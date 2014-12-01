@@ -24,6 +24,7 @@ public class CommodityData extends CommonData<CommodityPO> implements CommodityD
 	@Override
 	public void init() {
 		parsexml = new ParseXML("CommodityData");
+		prefix = parsexml.getValue("prefix");
 	}
 
 	/**
@@ -36,12 +37,13 @@ public class CommodityData extends CommonData<CommodityPO> implements CommodityD
 		}
 		CommoditySortData sortData = new CommoditySortData();
 		CommoditySortPO sortPO = sortData.find(fatherID);
-		String newID = sortPO.getID() + "-" + getID();
+		String newID = sortPO.getID() + "-" + prefix + super.getID();
 		return newID;
 	}
 
 	/**
-	 * @see dataservice.commoditydataservice.CommodityDataService#find(java.lang.String, dataenum.FindTypeCommo)
+	 * @see dataservice.commoditydataservice.CommodityDataService#find(java.lang.String,
+	 *      dataenum.FindTypeCommo)
 	 */
 	@Override
 	public ArrayList<CommodityPO> find(String keywords, FindTypeCommo type) {

@@ -21,6 +21,15 @@ public class AccountData extends CommonData<AccountPO> implements AccountDataSer
 	@Override
 	public void init() {
 		parsexml = new ParseXML("AccountData");
+		prefix = parsexml.getValue("prefix");
+	}
+
+	/**
+	 * @see server.data.CommonData#getID()
+	 */
+	@Override
+	public String getID() {
+		return prefix + super.getID();
 	}
 
 	/**

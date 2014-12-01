@@ -18,5 +18,14 @@ public class UserData extends CommonData<UserPO> implements UserDataService {
 	@Override
 	public void init() {
 		parsexml = new ParseXML("UserData");
+		prefix = parsexml.getValue("prefix");
+	}
+	
+	/**
+	 * @see server.data.CommonData#getID()
+	 */
+	@Override
+	public String getID() {
+		return prefix + super.getID();
 	}
 }

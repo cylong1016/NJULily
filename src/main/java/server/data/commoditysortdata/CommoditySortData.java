@@ -1,11 +1,10 @@
 package server.data.commoditysortdata;
 
 import message.ResultMessage;
-import dataservice.commoditysortdataservice.CommoditySortDataService;
 import po.CommoditySortPO;
-import server.common.Common;
 import server.common.ParseXML;
 import server.data.CommonData;
+import dataservice.commoditysortdataservice.CommoditySortDataService;
 
 /**
  * @see dataservice.commoditysortdataservice.CommoditySortDataService
@@ -32,21 +31,6 @@ public class CommoditySortData extends CommonData<CommoditySortPO> implements Co
 		}
 		CommoditySortPO po = find(fatherID);
 		String newID = po.getID() + "-" + getID();
-		return newID;
-	}
-
-	/**
-	 * 得到分类当前ID
-	 * @see server.data.CommonData#getID()
-	 */
-	@Override
-	public String getID() {
-		if (poList.isEmpty()) {
-			return initID;
-		}
-		String currentID = poList.get(poList.size() - 1).getID();
-		String[] splitID = currentID.split("-");
-		String newID = Common.intToString(Integer.parseInt(splitID[splitID.length - 1]) + 1, IDMaxBit);
 		return newID;
 	}
 

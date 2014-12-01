@@ -17,17 +17,22 @@ import dataservice.CommonDataService;
 public abstract class CommonData<PO extends PersistentObject> implements CommonDataService<PO> {
 
 	protected DefineList<PO> poList;
+	/** 保存文件的路径 */
 	protected String filePath;
-	protected String initID;
+	/** ID前缀 */
+	protected String prefix;
+	/** 当前最大ID */
+	protected int maxID;
+	/** ID最大位数 */
 	protected int IDMaxBit;
+	/** 解析xml文件 */
 	protected ParseXML parsexml;
 
 	public CommonData() {
 		init();	// 初始化parsexml
 		filePath = parsexml.getValue("path");
-		initID = parsexml.getValue("initID");
+		maxID = Integer.parseInt(parsexml.getValue("maxID"));
 		IDMaxBit = Integer.parseInt(parsexml.getValue("IDMaxBit"));
-		initID = Common.intToString(Integer.parseInt(initID), IDMaxBit);	// 转化初始化ID为固定位数
 		poList = new DefineList<PO>(filePath);
 	}
 
@@ -36,12 +41,8 @@ public abstract class CommonData<PO extends PersistentObject> implements CommonD
 	 */
 	@Override
 	public String getID() {
-		if (poList.isEmpty()) {
-			return initID;
-		}
-		String currentID = poList.get(poList.size() - 1).getID();
-		int ID = Integer.parseInt(currentID);
-		currentID = Common.intToString(ID + 1, IDMaxBit);
+		String currentID = Common.intToString((maxID += 1), IDMaxBit);
+		parsexml.setValue("maxID", currentID);
 		return currentID;
 	}
 

@@ -3,39 +3,46 @@
 	<Data>
 		<name>ClientData</name>
 		<path>data/ClientList.ser</path>
-		<initID>1</initID>
+		<prefix>KH</prefix>
+		<maxID>0</maxID>
 		<IDMaxBit>5</IDMaxBit>
 	</Data>
 	<Data>
 		<name>UserData</name>
 		<path>data/UserList.ser</path>
+		<prefix>YH</prefix>
 		<initID>1</initID>
+		<maxID>1</maxID>
 		<IDMaxBit>5</IDMaxBit>
 	</Data>
 	<Data>
 		<name>AccountData</name>
 		<path>data/AccountList.ser</path>
-		<initID>1</initID>
+		<prefix>ZH</prefix>
+		<maxID>0</maxID>
 		<IDMaxBit>5</IDMaxBit>
 	</Data>
 	<Data>
 		<name>AccountBillData</name>
 		<path>data/AccountBillList.ser</path>
-		<expenseID>SKD-20141102</expenseID>
-		<initID>1</initID>
+		<expenseID>SKD</expenseID>
+		<payID>FKD</payID>
+		<maxID>0</maxID>
 		<IDMaxBit>5</IDMaxBit>
 		<dateFormat>yyyyMMdd</dateFormat>
+		<dateRecord>20141111</dateRecord>
 	</Data>
 	<Data>
 		<name>CommodityData</name>
 		<path>data/CommodityList.ser</path>
-		<initID>1</initID>
+		<prefix>SP</prefix>
+		<maxID>0</maxID>
 		<IDMaxBit>5</IDMaxBit>
 	</Data>
 	<Data>
 		<name>CommoditySortData</name>
 		<path>data/CommoditySortList.ser</path>
-		<initID>1</initID>
+		<maxID>0</maxID>
 		<IDMaxBit>2</IDMaxBit>
 	</Data>
 </DataService>
