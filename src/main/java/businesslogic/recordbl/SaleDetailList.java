@@ -36,7 +36,7 @@ public class SaleDetailList {
 	
 	public ArrayList<SaleDetailVO> getSaleDetail(ArrayList<String> IDs) {
 		info = new SaleInfo();
-		if (IDs == null) {
+		if (IDs.isEmpty()) {
 			addVOs(null);
 		}
 		else {

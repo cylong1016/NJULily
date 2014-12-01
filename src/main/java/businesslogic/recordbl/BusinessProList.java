@@ -35,12 +35,15 @@ public class BusinessProList {
 	public Storage storage;
 	
 	public ValueObjectInfo_Record<?> info;
+	
+	ArrayList<ValueObject> VOs;
 		
 	public BusinessProList(BillType billType, String clientName, String salesman, Storage storage) {
 		this.billType = billType;
 		this.clientName = clientName;
 		this.salesman = salesman;
 		this.storage = storage;
+		this.VOs = new ArrayList<ValueObject>();
 	}
 	
 	// TODO 这里是不是可以用抽象工厂？
@@ -69,15 +72,23 @@ public class BusinessProList {
 		default:
 			break;
 		}
-		ArrayList<ValueObject> VOs = new ArrayList<ValueObject>();
-		for (String id : IDs) {
-			ArrayList<String> billIDs = info.getID(id, clientName, salesman, storage);
-			for (String billID : billIDs) {
-				info.
+		if (IDs.isEmpty()) {
+			addVOs(null);
+		}
+		else {
+			for (String id : IDs) {
+				addVOs(id);
 			}
 		}
-		// TODO
+		
 		return VOs;
+	}
+	
+	private void addVOs(String id) {
+		ArrayList<String> billIDs = info.getID(id, clientName, salesman, storage);
+		for (String billID : billIDs) {
+			VOs.add(info.find(billID));
+		}
 	}
 
 	

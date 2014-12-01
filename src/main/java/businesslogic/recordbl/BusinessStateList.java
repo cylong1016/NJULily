@@ -34,13 +34,10 @@ public class BusinessStateList {
 	public double overflowIncome;
 	/** 成本调价收入*/
 	public double costIncome;
-	/** 进货退货差价*/
-	public double purAndBackIncome;
 	/** 代金券与实际收款差额收入*/
 	public double voucherIncome;
 	/** 折让*/
 	public double allowance;
-	
 	/** （也就是总支出）*/
 	public double totalExpen;
 	/** 销售成本*/

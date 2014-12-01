@@ -26,8 +26,6 @@ public class BusinessStateVO {
 	public double overflowIncome;
 	/** 成本调价收入*/
 	public double costIncome;
-	/** 进货退货差价*/
-	public double purAndBackIncome;
 	/** 代金券与实际收款差额收入*/
 	public double voucherIncome;
 	/** 折让*/
@@ -43,13 +41,12 @@ public class BusinessStateVO {
 	/** 利润 */
 	public double profit;
 	
-	public BusinessStateVO(double saleIncome, double totalIncome, double overflowIncome, double costIncome, double purAndBackIncome, double voucherIncome, double allowance, 
+	public BusinessStateVO(double saleIncome, double totalIncome, double overflowIncome, double costIncome, double voucherIncome, double allowance, 
 			double saleCost, double totalExpen ,double lossExpen, double giftExpen, double profit){
 		this.saleIncome = saleIncome;
 		this.totalIncome = totalIncome;
 		this.overflowIncome = overflowIncome;
 		this.costIncome = costIncome;
-		this.purAndBackIncome = purAndBackIncome;
 		this.voucherIncome = voucherIncome;
 		this.allowance = allowance;
 		this.saleCost = saleCost;
