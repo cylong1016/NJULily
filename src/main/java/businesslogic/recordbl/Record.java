@@ -62,8 +62,7 @@ public class Record {
 	public BusinessStateVO businessState(RecordInputInfo info) {	
 		this.beginDate = info.beginDate;
 		this.endDate = info.endDate;
-		bussinessStateList = new BusinessStateList();
-		BusinessStateVO vo = bussinessStateList.getBusinessState(getID());
+		bussinessStateList = new BusinessStateList(getID());
 		
 		return null;
 	}

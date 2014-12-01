@@ -4,8 +4,8 @@ import java.rmi.Naming;
 import java.util.ArrayList;
 
 import config.RMI;
+import businesslogic.common.POToVO;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
-import businesslogic.salebl.POToVO;
 import po.CashBillPO;
 import po.CashItemPO;
 import vo.CashBillVO;
@@ -26,7 +26,7 @@ import dataservice.commondata.DataFactoryService;
  * @author Zing
  * @version Nov 27, 201411:13:32 PM
  */
-public class CashBill implements ValueObjectInfo_Record<CashBillVO>{
+public class CashBill {
 	
 	private String ID;
 	
@@ -96,7 +96,7 @@ public class CashBill implements ValueObjectInfo_Record<CashBillVO>{
 
 	public ArrayList<CashBillVO> show(BillType billType) {
 		ArrayList<CashBillVO> VOs = new ArrayList<CashBillVO>();
-		ArrayList<CashBillPO> POs = getCashBillData().show();
+		ArrayList<CashBillPO> POs = getCashBillData().show(billType);
 		for (int i = 0; i < POs.size(); i++) {
 			CashBillVO vo = POToVO(POs.get(i));
 			VOs.add(vo);
@@ -125,9 +125,4 @@ public class CashBill implements ValueObjectInfo_Record<CashBillVO>{
 		return VOs;
 	}
 
-	public String getID(String ID, String clientName, String salesman,
-			Storage storage) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

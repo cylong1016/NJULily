@@ -3,10 +3,10 @@ package businesslogic.inventorybl;
 import java.rmi.Naming;
 import java.util.ArrayList;
 
+import businesslogic.common.POToVO;
 import businesslogic.promotionbl.InventoryInfo_Promotion;
 import businesslogic.recordbl.info.InventoryInfo_Record;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
-import businesslogic.salebl.POToVO;
 import config.RMI;
 import po.CommodityItemPO;
 import po.InventoryBillPO;
@@ -21,7 +21,7 @@ import dataservice.InventoryDataService;
 import dataservice.commondata.DataFactoryService;
 import message.ResultMessage;
 
-public class Inventory extends POToVO implements InventoryInfo_Promotion, ValueObjectInfo_Record<InventoryBillVO>, InventoryInfo_Record{
+public class Inventory extends POToVO {
 	
 	private BillList list;
 		
@@ -112,16 +112,6 @@ public class Inventory extends POToVO implements InventoryInfo_Promotion, ValueO
 	private InventoryBillPO getInventoryBill(){
 		InventoryBillPO po = new InventoryBillPO(type, list.getCommodityPOs(), list.getRemark());
 		return po;
-	}
-
-	public ArrayList<InventoryBillVO> getGifts() {
-		return show(BillType.GIFT);
-	}
-
-	public String getID(String ID, String clientName, String salesman,
-			Storage storage) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 }

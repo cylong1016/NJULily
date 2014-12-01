@@ -3,11 +3,11 @@ package businesslogic.recordbl;
 import java.util.ArrayList;
 
 import businesslogic.accountbillbl.AccountBill;
-import businesslogic.cashbillbl.CashBill;
-import businesslogic.inventorybl.Inventory;
-import businesslogic.purchasebl.Purchase;
+import businesslogic.cashbillbl.CashBillInfo;
+import businesslogic.inventorybl.InventoryInfo;
+import businesslogic.purchasebl.PurchaseInfo;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
-import businesslogic.salebl.Sale;
+import businesslogic.salebl.SaleInfo;
 import vo.ValueObject;
 import dataenum.BillType;
 import dataenum.Storage;
@@ -34,7 +34,7 @@ public class BusinessProList {
 	
 	public Storage storage;
 	
-	public ValueObjectInfo_Record info;
+	public ValueObjectInfo_Record<?> info;
 		
 	public BusinessProList(BillType billType, String clientName, String salesman, Storage storage) {
 		this.billType = billType;
@@ -48,36 +48,30 @@ public class BusinessProList {
 		switch (billType) {
 		case SALE:
 		case SALEBACK:
-			info = new Sale();
+			info = new SaleInfo();
 			break;
 		case PURCHASE:
 		case PURCHASEBACK:
-			info = new Purchase();
+			info = new PurchaseInfo();
 			break;
 		case GIFT:
 		case OVERFLOW:
 		case LOSS:
-			info = new Inventory();
+			info = new InventoryInfo();
 			break;
 		case PAY:
 		case EXPENSE:
 			info = new AccountBill();
 			break;
 		case CASH:
-			info = new CashBill();
+			info = new CashBillInfo();
 			break;
 		default:
 			break;
 		}
 		ArrayList<ValueObject> VOs = new ArrayList<ValueObject>();
-		for (int i = 0; i < IDs.size(); i++) {
-			String ID = info.getID(IDs.get(i), clientName, salesman, storage);
-			if (ID != null) {
-				VOs = info.show(billType);
-				return VOs;
-			}
-		}
-		return null;
+		// TODO
+		return VOs;
 	}
 
 	

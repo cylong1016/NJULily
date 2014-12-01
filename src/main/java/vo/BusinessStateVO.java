@@ -1,7 +1,5 @@
 package vo;
 
-import dataenum.Date;
-
 /**
  * 经营情况表
  * 统计显示一段时间内的经营收支状况和利润。
@@ -17,13 +15,13 @@ import dataenum.Date;
  */
 public class BusinessStateVO {
 	/** 起始时间 */
-	public Date begin;
+	public String begin;
 	/** 结束时间 */
-	public Date end;
+	public String end;
 	/** 销售收入*/
 	public double saleIncome;
-	/** 商品类收入（折让后的总收入）*/
-	public double commodityIncome;
+	/**（折让后的总收入）*/
+	public double totalIncome;
 	/** 商品报溢收入*/
 	public double overflowIncome;
 	/** 成本调价收入*/
@@ -36,8 +34,8 @@ public class BusinessStateVO {
 	public double allowance;
 	/** 销售成本*/
 	public double saleCost;
-	/** 商品类支出（也就是总支出）*/
-	public double commodityExpen;
+	/** （也就是总支出）*/
+	public double totalExpen;
 	/** 商品报损*/
 	public double lossExpen;
 	/** 赠送支出*/
@@ -45,8 +43,20 @@ public class BusinessStateVO {
 	/** 利润 */
 	public double profit;
 	
-	public BusinessStateVO(Date begin, Date end){
-		this.begin = begin;
-		this.end = end;
+	public BusinessStateVO(double saleIncome, double totalIncome, double overflowIncome, double costIncome, double purAndBackIncome, double voucherIncome, double allowance, 
+			double saleCost, double totalExpen ,double lossExpen, double giftExpen, double profit){
+		this.saleIncome = saleIncome;
+		this.totalIncome = totalIncome;
+		this.overflowIncome = overflowIncome;
+		this.costIncome = costIncome;
+		this.purAndBackIncome = purAndBackIncome;
+		this.voucherIncome = voucherIncome;
+		this.allowance = allowance;
+		this.saleCost = saleCost;
+		this.totalExpen =totalExpen;
+		this.lossExpen = lossExpen;
+		this.giftExpen = giftExpen;
+		this.profit = profit;
+
 	}
 }

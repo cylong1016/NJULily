@@ -6,9 +6,7 @@ import java.util.ArrayList;
 import config.RMI;
 import blservice.purchaseblservice.PurInputInfo;
 import businesslogic.clientbl.Client;
-import businesslogic.recordbl.info.PurchaseInfo_Record;
-import businesslogic.recordbl.info.ValueObjectInfo_Record;
-import businesslogic.salebl.POToVO;
+import businesslogic.common.POToVO;
 import po.PurchasePO;
 import message.ResultMessage;
 import vo.CommodityItemVO;
@@ -19,7 +17,7 @@ import dataenum.Storage;
 import dataservice.PurchaseDataService;
 import dataservice.commondata.DataFactoryService;
 
-public class Purchase extends POToVO implements ValueObjectInfo_Record<PurchaseVO>, PurchaseInfo_Record{
+public class Purchase extends POToVO {
 	
 	private PurchaseList list;
 	
@@ -94,7 +92,7 @@ public class Purchase extends POToVO implements ValueObjectInfo_Record<PurchaseV
 		list.setRemark(info.remark);
 	}
 
-	private PurchaseVO poToVO(PurchasePO po){
+	public PurchaseVO poToVO(PurchasePO po){
 		String ID = po.getID();
 		String client = po.getClient();
 		String user = po.getUser();
@@ -106,11 +104,6 @@ public class Purchase extends POToVO implements ValueObjectInfo_Record<PurchaseV
 		PurchaseVO vo = new PurchaseVO(type, ID, client, user, storage, commodities, sumPrice, state);
 		return vo;
 		
-	}
-
-	public String getID(String ID, String clientName, String salesman,
-			Storage storage) {
-		return null;
 	}
 
 }

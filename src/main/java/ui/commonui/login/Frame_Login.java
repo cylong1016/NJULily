@@ -3,9 +3,9 @@
 
 
 import java.awt.Color;
-import java.awt.Dimension;
+
 import java.awt.Font;
-import java.awt.Toolkit;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -14,7 +14,6 @@ import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 
-import ui.commonui.myui.IOforUI;
 import ui.commonui.myui.MyBackground;
 import ui.commonui.myui.MyButton;
 import ui.commonui.myui.MyFrame;
@@ -34,13 +33,6 @@ public class Frame_Login extends MyFrame implements ActionListener{
 	MyButton button_Enter, button_checkbox;
 	
 	public Frame_Login(){
-		Dimension scrSize=Toolkit.getDefaultToolkit().getScreenSize();
-		IOforUI io = new IOforUI();
-		
-		int X = getLocation(scrSize.width,1280);
-		int Y = getLocation(scrSize.height,720);
-		io.writeTo(getCurrentLocation(X, Y),"ui/data/location.txt" );
-		this.setLocation(X, Y);
 		
 		//a text field for user name input 
 		userNameField = new MyTextField(850, 200, 240, 48);
@@ -132,10 +124,6 @@ public class Frame_Login extends MyFrame implements ActionListener{
 			this.setVisible(false);
 		}
 	}
-	
-	private int getLocation(int a,int b){
-		return (a-b)/2;
-	}
-	
+
 	
 }
