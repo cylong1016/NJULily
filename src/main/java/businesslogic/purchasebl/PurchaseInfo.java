@@ -29,7 +29,7 @@ public class PurchaseInfo extends Info<PurchaseDataService> implements ValueObje
 		return IDs;
 	}
 
-	public PurchaseVO show(String ID) {
+	public PurchaseVO find(String ID) {
 		return purchase.poToVO(getData().find(ID));
 	}
 }

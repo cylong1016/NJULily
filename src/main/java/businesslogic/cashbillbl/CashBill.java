@@ -96,7 +96,7 @@ public class CashBill {
 
 	public ArrayList<CashBillVO> show(BillType billType) {
 		ArrayList<CashBillVO> VOs = new ArrayList<CashBillVO>();
-		ArrayList<CashBillPO> POs = getCashBillData().show(billType);
+		ArrayList<CashBillPO> POs = getCashBillData().find(billType);
 		for (int i = 0; i < POs.size(); i++) {
 			CashBillVO vo = POToVO(POs.get(i));
 			VOs.add(vo);

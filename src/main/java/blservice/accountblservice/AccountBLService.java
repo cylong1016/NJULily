@@ -46,6 +46,15 @@ public interface AccountBLService {
 	public ArrayList<AccountVO> find(String keywords, FindTypeAccount type);
 
 	/**
+	 * 根据ID精确查找
+	 * @param ID 收款单（付款单ID）
+	 * @return AccountVO
+	 * @author cylong
+	 * @version 2014年12月1日 下午5:00:10
+	 */
+	public AccountVO find(String ID);
+
+	/**
 	 * 添加账户
 	 * @param vo AccountVO
 	 * @return 是否成功

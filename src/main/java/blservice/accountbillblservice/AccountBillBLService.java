@@ -26,7 +26,7 @@ import dataenum.BillType;
 /**
  * 将addExpenses、addPay方法合为一个addAccountBill方法
  * @author cylong
- * @version 2014年12月1日  上午1:53:23
+ * @version 2014年12月1日 上午1:53:23
  */
 public interface AccountBillBLService {
 
@@ -36,6 +36,15 @@ public interface AccountBillBLService {
 	 * @return 可用的ID
 	 */
 	public String getID(BillType type);
+
+	/**
+	 * 根据ID精确查找账单
+	 * @param ID 账单ID
+	 * @return AccountBillVO
+	 * @author cylong
+	 * @version 2014年12月1日 下午5:05:51
+	 */
+	public AccountBillVO find(String ID);
 
 	/**
 	 * @return 全部的客户ID和客户名 Key=>ID、value=>name
@@ -55,7 +64,7 @@ public interface AccountBillBLService {
 	 * 添加转账列表的一条记录
 	 * @param vo
 	 * @author cylong
-	 * @version 2014年12月1日  上午1:52:39
+	 * @version 2014年12月1日 上午1:52:39
 	 */
 	public void addBillItem(AccountBillItemVO vo);
 
@@ -72,24 +81,23 @@ public interface AccountBillBLService {
 	 * @version 2014年11月30日 下午10:32:37
 	 */
 	public void addAccountBill(String clientID);
-	
+
 	/**
 	 * 显示全部的收款单和付款单
 	 * @return ArrayList<AccountBillVO>
 	 * @author cylong
-	 * @version 2014年12月1日  下午3:09:43
+	 * @version 2014年12月1日 下午3:09:43
 	 */
 	public ArrayList<AccountBillVO> show();
-	
+
 	/**
 	 * 返回全部的收款单或者付款单【传入单据类型】
 	 * @param type 单据类型
 	 * @return ArrayList<AccountBillVO>
 	 * @author cylong
-	 * @version 2014年12月1日  下午3:10:03
+	 * @version 2014年12月1日 下午3:10:03
 	 */
 	public ArrayList<AccountBillVO> show(BillType type);
-	
 
 	/**
 	 * 提交单据进行审批

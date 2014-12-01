@@ -9,7 +9,9 @@ import server.common.Common;
 import server.common.ParseXML;
 import server.io.DefineList;
 import dataenum.BillType;
+import dataenum.Storage;
 import dataservice.AccountBillDataService;
+import dataservice.commondata.DataInfo;
 
 /**
  * @author cylong
@@ -62,7 +64,7 @@ public class AccountBillData extends CommonData<AccountBillPO> implements Accoun
 				}
 			}
 		}
-		
+
 		// 不包含该类型的账单的时候
 		switch(type) {
 		case EXPENSE:
@@ -89,10 +91,11 @@ public class AccountBillData extends CommonData<AccountBillPO> implements Accoun
 	public ArrayList<AccountBillPO> show(BillType type) {
 		ArrayList<AccountBillPO> bills = new ArrayList<AccountBillPO>();
 		for(AccountBillPO po : poList.getInList()) {
-			if(po.getType().equals(type)) {
+			if (po.getType().equals(type)) {
 				bills.add(po);
 			}
 		}
 		return bills;
 	}
+
 }

@@ -31,7 +31,7 @@ public class InventoryInfo  implements InventoryInfo_Promotion, ValueObjectInfo_
 		return null;
 	}
 
-	public InventoryBillVO show(String ID) {
+	public InventoryBillVO find(String ID) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -4,10 +4,9 @@ import java.util.ArrayList;
 
 import dataenum.BillType;
 import dataenum.Storage;
-import dataservice.DataService;
-import dataservice.SaleDataService;
+import dataservice.commondata.DataService;
 
-public abstract class Info<Data extends DataService> {
+public abstract class Info<Data extends DataService<PersistentObject>> {
 	
 	protected abstract Data getData();
 	

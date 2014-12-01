@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import vo.AccountBillVO;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
-import dataenum.BillType;
 import dataenum.Storage;
 
 /**
@@ -20,11 +19,11 @@ public class AccountBillInfo implements ValueObjectInfo_Record<AccountBillVO> {
 	}
 
 	/**
-	 * @see businesslogic.recordbl.info.ValueObjectInfo_Record#show(dataenum.BillType)
+	 * @see businesslogic.recordbl.info.ValueObjectInfo_Record#find(java.lang.String)
 	 */
 	@Override
-	public ArrayList<AccountBillVO> show(BillType billType) {
-		return accountBill.show(billType);
+	public AccountBillVO find(String ID) {
+		return accountBill.find(ID);
 	}
 
 	/**
@@ -32,8 +31,9 @@ public class AccountBillInfo implements ValueObjectInfo_Record<AccountBillVO> {
 	 *      java.lang.String, dataenum.Storage)
 	 */
 	@Override
-	public String getID(String ID, String clientName, String salesman, Storage storage) {
-		// TODO cylong求告知这个方法是干什么的
+	public ArrayList<String> getID(String ID, String clientName, String salesman, Storage storage) {
+		// TODO ArrayList<String> getID(String ID, String clientName, String salesman, Storage storage)
 		return null;
 	}
+
 }

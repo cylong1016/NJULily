@@ -1,6 +1,5 @@
 package po;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -19,7 +18,7 @@ import java.util.ArrayList;
  * @author Zing
  * @version 2014年11月2日下午3:54:10
  */
-public class AccountaInitPO implements Serializable {
+public class AccountaInitPO extends PersistentObject {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = -2898348688803208513L;
@@ -30,7 +29,8 @@ public class AccountaInitPO implements Serializable {
 
 	private ArrayList<AccountPO> accounts;
 
-	public AccountaInitPO(ArrayList<CommodityPO> commodities, ArrayList<ClientPO> clients, ArrayList<AccountPO> accounts) {
+	public AccountaInitPO(String ID, ArrayList<CommodityPO> commodities, ArrayList<ClientPO> clients, ArrayList<AccountPO> accounts) {
+		super(ID);
 		this.commodities = commodities;
 		this.clients = clients;
 		this.accounts = accounts;
