@@ -26,7 +26,7 @@ import dataservice.SaleDataService;
  * @author Zing
  * @version Nov 27, 201411:13:32 PM
  */
-public class CashBill implements ValueObjectInfo_Record<CashBillVO>{
+public class CashBill {
 	
 	private String ID;
 	
@@ -125,9 +125,4 @@ public class CashBill implements ValueObjectInfo_Record<CashBillVO>{
 		return VOs;
 	}
 
-	public String getID(String ID, String clientName, String salesman,
-			Storage storage) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

@@ -131,22 +131,14 @@ public class AccountBill implements ValueObjectInfo_Record<AccountBillVO> {
 		return null;
 	}
 
-	/**
-	 * @see businesslogic.recordbl.info.ValueObjectInfo_Record#show(dataenum.BillType)
-	 */
-	@Override
 	public ArrayList<AccountBillVO> show(BillType billType) {
-		// TODO cylong求告知这个方法是干什么的
+		// TODO Auto-generated method stub
 		return null;
 	}
 
-	/**
-	 * @see businesslogic.recordbl.info.ValueObjectInfo_Record#getID(java.lang.String, java.lang.String,
-	 *      java.lang.String, dataenum.Storage)
-	 */
-	@Override
-	public String getID(String ID, String clientName, String salesman, Storage storage) {
-		// TODO cylong求告知这个方法是干什么的
+	public String getID(String ID, String clientName, String salesman,
+			Storage storage) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 }

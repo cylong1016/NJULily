@@ -19,7 +19,7 @@ import dataenum.Storage;
 import dataservice.DataFactoryService;
 import dataservice.PurchaseDataService;
 
-public class Purchase extends POToVO implements ValueObjectInfo_Record<PurchaseVO>, PurchaseInfo_Record{
+public class Purchase extends POToVO {
 	
 	private PurchaseList list;
 	
@@ -94,7 +94,7 @@ public class Purchase extends POToVO implements ValueObjectInfo_Record<PurchaseV
 		list.setRemark(info.remark);
 	}
 
-	private PurchaseVO poToVO(PurchasePO po){
+	public PurchaseVO poToVO(PurchasePO po){
 		String ID = po.getID();
 		String client = po.getClient();
 		String user = po.getUser();
@@ -106,11 +106,6 @@ public class Purchase extends POToVO implements ValueObjectInfo_Record<PurchaseV
 		PurchaseVO vo = new PurchaseVO(type, ID, client, user, storage, commodities, sumPrice, state);
 		return vo;
 		
-	}
-
-	public String getID(String ID, String clientName, String salesman,
-			Storage storage) {
-		return null;
 	}
 
 }

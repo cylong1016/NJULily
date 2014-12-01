@@ -1,7 +1,7 @@
 package businesslogic.recordbl;
 
 import businesslogic.recordbl.info.SaleInfo_Record;
-import businesslogic.salebl.Sale;
+import businesslogic.salebl.SaleInfo;
 
 public class SaleDetailListItem {
 	public String ID;
@@ -19,8 +19,8 @@ public class SaleDetailListItem {
 	public SaleInfo_Record info;
 	
 	public SaleDetailListItem(String ID, String commodityName) {
-		info = new Sale();
-		this.ID = info.getCommodity(ID, commodityName);
+		info = new SaleInfo();
+		this.ID = info.getCommodityID(ID, commodityName);
 		if (this.ID != null) {
 			this.name = info.getName(this.ID);
 			this.type = info.getType(this.ID);

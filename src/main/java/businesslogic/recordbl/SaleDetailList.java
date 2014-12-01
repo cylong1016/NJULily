@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import dataenum.Storage;
 import vo.SaleDetailVO;
 import businesslogic.recordbl.info.SaleInfo_Record;
-import businesslogic.salebl.Sale;
+import businesslogic.salebl.SaleInfo;
 
 public class SaleDetailList {
 
@@ -32,7 +32,7 @@ public class SaleDetailList {
 	}
 	
 	public ArrayList<SaleDetailVO> getSaleDetail(ArrayList<String> IDs) {
-		info = new Sale();
+		info = new SaleInfo();
 		ArrayList<SaleDetailVO> VOs = new ArrayList<SaleDetailVO>();
 		for (int i = 0; i < IDs.size(); i++) {
 			String ID = info.getID(IDs.get(i), clientName, salesman, storage);

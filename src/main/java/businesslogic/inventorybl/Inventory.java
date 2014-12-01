@@ -21,7 +21,7 @@ import dataservice.DataFactoryService;
 import dataservice.InventoryDataService;
 import message.ResultMessage;
 
-public class Inventory extends POToVO implements InventoryInfo_Promotion, ValueObjectInfo_Record<InventoryBillVO>, InventoryInfo_Record{
+public class Inventory extends POToVO {
 	
 	private BillList list;
 		
@@ -112,16 +112,6 @@ public class Inventory extends POToVO implements InventoryInfo_Promotion, ValueO
 	private InventoryBillPO getInventoryBill(){
 		InventoryBillPO po = new InventoryBillPO(type, list.getCommodityPOs(), list.getRemark());
 		return po;
-	}
-
-	public ArrayList<InventoryBillVO> getGifts() {
-		return show(BillType.GIFT);
-	}
-
-	public String getID(String ID, String clientName, String salesman,
-			Storage storage) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 }

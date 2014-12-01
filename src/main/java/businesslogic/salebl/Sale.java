@@ -4,16 +4,11 @@ import java.rmi.Naming;
 import java.util.ArrayList;
 
 import message.ResultMessage;
-import po.CommodityItemPO;
 import po.SalesPO;
 import vo.CommodityItemVO;
 import vo.SalesVO;
-import vo.ValueObject;
 import blservice.saleblservice.SaleInputInfo;
 import businesslogic.clientbl.Client;
-import businesslogic.inventorybl.info.SaleInfo_Inventory;
-import businesslogic.recordbl.info.SaleInfo_Record;
-import businesslogic.recordbl.info.ValueObjectInfo_Record;
 import config.RMI;
 import dataenum.BillState;
 import dataenum.BillType;
@@ -26,7 +21,7 @@ import dataservice.SaleDataService;
  * @author Zing
  * @version Nov 15, 2014 10:07:38 AM
  */
-public class Sale extends POToVO implements SaleInfo_Inventory, SaleInfo_Record, ValueObjectInfo_Record<SalesVO>{
+public class Sale extends POToVO {
 
 	/** 销售单 */
 	private SaleList list;
@@ -82,21 +77,6 @@ public class Sale extends POToVO implements SaleInfo_Inventory, SaleInfo_Record,
 	}
 
 	/**
-	 * 建立销售单
-	 * @return SalePO
-	 */
-	private SalesPO buildSales() {
-		double beforePrice = list.getBeforePrice();
-		double afterPrice = list.getAfterPrice();
-		ClientInfo_Sale info = new Client();
-		String clientName = info.getName(list.getClientID());
-		String salesman = info.getSalesman(list.getClientID());
-		// TODO user从文件中读取当前登陆的用户
-		po = new SalesPO(ID, clientName, salesman, "user", list.getStorage(), list.getCommodities(), beforePrice, list.getAllowance(), list.getVoucher(), list.getRemark(), afterPrice, type);
-		return po;
-	}
-
-	/**
 	 * 界面显示全部的销售（销售退货）单
 	 * @return 销售（销售退货）单的ArrayList
 	 * @author cylong
@@ -113,32 +93,7 @@ public class Sale extends POToVO implements SaleInfo_Inventory, SaleInfo_Record,
 		}
 		return billsVO;
 	}
-
-	/**
-	 * 将销售（销售退货）单的PO转化成VO
-	 * @param po
-	 * @return SalesVO
-	 * @author cylong
-	 * @version 2014年11月28日  下午9:12:11
-	 */
-	private SalesVO poToVo(SalesPO po) {
-		String ID = po.getID();
-		String client = po.getClient();
-		Storage storage = po.getStorage();
-		String salesman = po.getSalesman();
-		String user = po.getUser();
-		String remark = po.getRemark();
-		double beforePrice = po.getBeforePrice();
-		double allowance = po.getAllowance();
-		double voucher = po.getVoucher();
-		double afterPrice = po.getAfterPrice();
-		BillType type = po.getType();
-		BillState state = po.getState();
-		ArrayList<CommodityItemVO> commodities = itemPOToVO(po.getCommodities());
-		SalesVO vo = new SalesVO(ID, client, storage, user, salesman, commodities, remark, beforePrice, allowance, voucher, afterPrice, type, state);
-		return vo;
-	}
-
+	
 	/**
 	 * 提交销售（销售退货）单，等待审批
 	 * @param inputInfo
@@ -163,6 +118,47 @@ public class Sale extends POToVO implements SaleInfo_Inventory, SaleInfo_Record,
 		// TODO 保存在本地
 		return ResultMessage.SUCCESS;
 	}
+	
+	/**
+	 * 建立销售单
+	 * @return SalePO
+	 */
+	private SalesPO buildSales() {
+		double beforePrice = list.getBeforePrice();
+		double afterPrice = list.getAfterPrice();
+		ClientInfo_Sale info = new Client();
+		String clientName = info.getName(list.getClientID());
+		String salesman = info.getSalesman(list.getClientID());
+		// TODO user从文件中读取当前登陆的用户
+		po = new SalesPO(ID, clientName, salesman, "user", list.getStorage(), list.getCommodities(), beforePrice, list.getAllowance(), list.getVoucher(), list.getRemark(), afterPrice, type);
+		return po;
+	}
+
+	/**
+	 * 将销售（销售退货）单的PO转化成VO
+	 * @param po
+	 * @return SalesVO
+	 * @author cylong
+	 * @version 2014年11月28日  下午9:12:11
+	 */
+	public SalesVO poToVo(SalesPO po) {
+		String ID = po.getID();
+		String client = po.getClient();
+		Storage storage = po.getStorage();
+		String salesman = po.getSalesman();
+		String user = po.getUser();
+		String remark = po.getRemark();
+		double beforePrice = po.getBeforePrice();
+		double allowance = po.getAllowance();
+		double voucher = po.getVoucher();
+		double afterPrice = po.getAfterPrice();
+		BillType type = po.getType();
+		BillState state = po.getState();
+		ArrayList<CommodityItemVO> commodities = itemPOToVO(po.getCommodities());
+		SalesVO vo = new SalesVO(ID, client, storage, user, salesman, commodities, remark, beforePrice, allowance, voucher, afterPrice, type, state);
+		return vo;
+	}
+
 
 	private void setInputInfo(SaleInputInfo inputInfo) {
 		list.setClientID(inputInfo.clientID);
@@ -171,85 +167,6 @@ public class Sale extends POToVO implements SaleInfo_Inventory, SaleInfo_Record,
 		list.setVoucher(inputInfo.voucher);
 		list.setRemark(inputInfo.remark);
 	}
-
-	public ArrayList<Double> getMoney(String begin, String end) {
-		// TODO 需要根据日期查询ID的方法，返回我一个arrylistID。或者我自己查，那就提供一个返回所有PO的方法
-		//		SaleDataService saleData = getSaleData();
-		return null;
-	}
-
-	public ArrayList<Integer> getNumber(String begin, String end) {
-		return null;
-	}
-
-	public String getID(String ID, String clientName, String salesman, Storage storage) {
-		SaleDataService saleData = getSaleData();
-		ArrayList<String> IDs = saleData.getAllID(BillType.SALE);
-		for (int i = 0; i < IDs.size(); i++) {
-			SalesPO po = saleData.find(IDs.get(i));
-			if (IDs.get(i).contains(ID)) {
-				if (po.getClient().equals(clientName) && po.getSalesman().endsWith(salesman) && po.getStorage().equals(storage)) {
-					return IDs.get(i);
-				}
-			}
-		}
-		return null;
-	}
-
-	public String getCommodity(String ID, String commodityName) {
-		this.ID = ID;
-		ArrayList<CommodityItemPO> POs= getSaleData().find(ID).getCommodities();
-		for (int i = 0; i < POs.size(); i++) {
-			if (POs.get(i).getName().equals(commodityName)) {
-				return POs.get(i).getID();
-			}
-		}
-		return null;
-	}
-
-	public String getName(String ID) {
-		ArrayList<CommodityItemPO> commodityPo = getSaleData().find(this.ID).getCommodities();
-		for (int i = 0; i < commodityPo.size(); i++) {
-			if (commodityPo.get(i).getID().equals(ID)) {
-				return 
-			}
-		}
-		return null;
-	}
-
-	public String getType(String ID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public int getNumber(String ID) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public double getPrice(String ID) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public ArrayList<ValueObject> getBills(BillType billType) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public double getAfterPrice(String ID) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public double getVoucher(String ID) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public double getAllowance(String ID) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
 
 }
