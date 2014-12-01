@@ -153,6 +153,10 @@ public class Commodity {
 		return VOs;
 	}
 	
+	public CommodityDataService getCommodityData() {
+		return this.commodityData;
+	}
+	
 	/**
 	 * 把一个商品PO转换成VO
 	 * @param po

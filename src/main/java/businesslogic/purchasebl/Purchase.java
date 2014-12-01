@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import config.RMI;
 import blservice.purchaseblservice.PurInputInfo;
-import businesslogic.clientbl.Client;
+import businesslogic.clientbl.ClientInfo;
 import businesslogic.common.CommodityItemPOtoVO;
 import po.PurchasePO;
 import message.ResultMessage;
@@ -34,7 +34,7 @@ public class Purchase extends CommodityItemPOtoVO {
 	public PurchaseDataService getPurData(){
 		try {
 			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
-			PurchaseDataService purData = (PurchaseDataService)factory.getPurchaseData();
+			PurchaseDataService purData = factory.getPurchaseData();
 			return purData;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -79,7 +79,7 @@ public class Purchase extends CommodityItemPOtoVO {
 
 	private PurchasePO buildPur() {
 		double sumPrice = list.getBeforePrice();
-		businesslogic.purchasebl.ClientInfo_Purchase info = new Client();
+		businesslogic.purchasebl.ClientInfo_Purchase info = new ClientInfo();
 		String clientName = info.getName(list.getClientID());
 		Storage storage = list.getStorage();
 		po = new PurchasePO(ID, clientName, "user", storage, list.getCommodities(), sumPrice, type);	

@@ -2,6 +2,7 @@ package businesslogic.salebl;
 
 import java.util.ArrayList;
 
+import businesslogic.approvalbl.ValueObject_Approval;
 import businesslogic.common.Info;
 import businesslogic.inventorybl.info.SaleInfo_Inventory;
 import businesslogic.recordbl.info.SaleInfo_Record;
@@ -9,11 +10,12 @@ import businesslogic.recordbl.info.ValueObjectInfo_Record;
 import po.CommodityItemPO;
 import po.SalesPO;
 import vo.SalesVO;
+import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Storage;
 import dataservice.SaleDataService;
 
-public class SaleInfo extends Info<SaleDataService> implements SaleInfo_Inventory, SaleInfo_Record, ValueObjectInfo_Record<SalesVO>{
+public class SaleInfo extends Info<SaleDataService> implements SaleInfo_Inventory, SaleInfo_Record, ValueObjectInfo_Record<SalesVO>, ValueObject_Approval<SalesVO>{
 	
 	private Sale sale;
 	
@@ -49,6 +51,7 @@ public class SaleInfo extends Info<SaleDataService> implements SaleInfo_Inventor
 	public ArrayList<String> getID(String ID, String clientName, String salesman, Storage storage) {
 		ArrayList<String> IDs = new ArrayList<String>();
 		IDs = getID(ID, clientName, salesman, storage, BillType.SALE);
+		IDs.addAll(getID(ID, clientName, salesman, storage, BillType.SALEBACK));
 		return IDs;
 	}
 	
@@ -123,6 +126,25 @@ public class SaleInfo extends Info<SaleDataService> implements SaleInfo_Inventor
 	 */
 	public double getAllowance(String ID) {
 		return getData().find(ID).getVoucher();
+	}
+
+	/**
+	 * 查找需要审批的单子
+	 */
+	public ArrayList<SalesVO> findApproval() {
+		ArrayList<SalesPO> POs = getData().show();
+		ArrayList<SalesPO> approvalPO = new ArrayList<SalesPO>();
+		for (SalesPO po : POs) {
+			if (po.getState() == BillState.APPROVALING) {
+				approvalPO.add(po);
+			}
+		}
+		ArrayList<SalesVO> VOs = new ArrayList<SalesVO>();
+		for (SalesPO po : approvalPO) {
+			SalesVO vo = sale.poToVo(po);
+			VOs.add(vo);
+		}
+		return VOs;
 	}
 
 }

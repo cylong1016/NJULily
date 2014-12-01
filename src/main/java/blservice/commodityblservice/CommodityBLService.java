@@ -1,7 +1,6 @@
 package blservice.commodityblservice;
 
 import java.util.ArrayList;
-import po.CommodityPO;
 import dataenum.FindTypeCommo;
 import vo.CommodityVO;
 import message.ResultMessage;

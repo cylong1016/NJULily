@@ -104,7 +104,7 @@ public class CashBill {
 		return VOs;
 	}
 
-	private CashBillVO POToVO(CashBillPO po) {
+	public CashBillVO POToVO(CashBillPO po) {
 		String ID = po.getID();
 		String user = po.getUser();
 		String account = po.getAccount();

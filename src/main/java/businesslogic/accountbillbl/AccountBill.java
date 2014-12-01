@@ -218,4 +218,7 @@ public class AccountBill {
 		return poToVO(po);
 	}
 
+	public AccountBillDataService getAccountBillData() {
+		return this.accountBillData;
+	}
 }

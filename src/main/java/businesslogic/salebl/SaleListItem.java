@@ -1,6 +1,6 @@
 package businesslogic.salebl;
 
-import businesslogic.commoditybl.Commodity;
+import businesslogic.commoditybl.CommodityInfo;
 
 /**
  * 出货商品清单中要显示
@@ -39,7 +39,7 @@ public class SaleListItem {
 	public SaleListItem(String ID, int number, double price, String remark) {
 		this.ID = ID;
 		this.number = number;
-		info = new Commodity();
+		info = new CommodityInfo();
 		this.name = info.getName(ID);
 		this.type = info.getType(ID);
 		this.price = price;

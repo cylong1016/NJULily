@@ -82,7 +82,7 @@ public class Inventory extends CommodityItemPOtoVO {
 		return VOs;
 	}
 	
-	private InventoryBillVO poToVo(InventoryBillPO po) {
+	public InventoryBillVO poToVo(InventoryBillPO po) {
 		String ID = po.getID();
 		BillType billType = po.getBillType();
 		ArrayList<CommodityItemVO> commodities = itemPOToVO(po.getCommodities());

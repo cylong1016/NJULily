@@ -3,7 +3,6 @@ package businesslogic.commoditybl;
 import java.util.ArrayList;
 
 import dataenum.FindTypeCommo;
-import po.CommodityPO;
 import message.ResultMessage;
 import vo.CommodityVO;
 import blservice.commodityblservice.CommodityBLService;

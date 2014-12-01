@@ -1,6 +1,9 @@
 package blservice.approvalblservice;
 
-import po.PersistentObject;
+import java.util.ArrayList;
+
+import vo.ApprovalVO;
+import vo.ValueObject;
 import message.ResultMessage;
 
 
@@ -14,25 +17,30 @@ import message.ResultMessage;
  * @author Zing
  * @version 2014年10月28日下午7:43:52
  */
+/**
+ * 审批接口
+ * @author Zing
+ * @version Dec 1, 2014 11:02:26 PM
+ */
 public interface ApprovalBLService {
-	
+		
 	/**
 	 * 查看单据内容
 	 * @param record
 	 * @return
 	 */
-	public ResultMessage checkRecord(PersistentObject po);
+	public ApprovalVO show();
 	
 	/**
 	 * 修改单据内容
 	 * @return
 	 */
-	public ResultMessage updRecord();
+	public ResultMessage updateBill(ArrayList<ValueObject> VOs);
 	
 	/**
 	 * 确认单据内容没有错误
 	 * @return
 	 */
-	public ResultMessage submitRecord();
+	public ResultMessage passBill(ArrayList<ApprovalVO> VOs);
 
 }
