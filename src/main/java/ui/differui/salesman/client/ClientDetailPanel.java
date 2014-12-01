@@ -3,30 +3,41 @@ package ui.differui.salesman.client;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
+
+
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-import businesslogic.clientbl.Client;
+import message.ResultMessage;
+import dataenum.ClientCategory;
+import dataenum.ClientLevel;
+import dataenum.FindTypeClient;
+import businesslogic.clientbl.ClientController;
+import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.myui.MyButton;
 import ui.commonui.myui.MyComboBox;
 import ui.commonui.myui.MyLabel;
 import ui.commonui.myui.MyPanel;
 import ui.commonui.myui.MyTable;
 import ui.commonui.myui.MyTextField;
+import ui.commonui.warning.WarningFrame;
 import vo.ClientVO;
 
 public class ClientDetailPanel extends MyPanel implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 
-	MyTextField textField_name, textField_phone, textField_address, textField_post, textField_email, textField_limit;
+	MyTextField textField_id, textField_name, textField_phone, textField_address, 
+		textField_post, textField_email, textField_limit, textField_salesman;
 	MyComboBox comboBox_category, comboBox_level;
 	MyButton button_modify, button_check;
+	public static JButton bt_modify;
 	String id, name, phone, address, post, email, limit; 
+	double receivable, payable;
 	
 	public void setInformation(){
 		
@@ -73,7 +84,7 @@ public class ClientDetailPanel extends MyPanel implements ActionListener{
 		word_id.setBounds(33 + x1, 10 + y1, 65, 25);
 		this.add(word_id);
 		
-		MyTextField textField_id = new MyTextField(110 + x1, 10 + y1, 200, 25);
+		textField_id = new MyTextField(110 + x1, 10 + y1, 200, 25);
 		textField_id.setEditable(false);
 		textField_id.setText(cvo.ID);
 		this.add(textField_id);
@@ -86,7 +97,7 @@ public class ClientDetailPanel extends MyPanel implements ActionListener{
 		word_salesman.setBounds(36 + x2, 130 + y2, 60, 25);
 		this.add(word_salesman);
 		
-		MyTextField textField_salesman = new MyTextField(110 + x2, 130 + y2, 200, 25);
+		textField_salesman = new MyTextField(110 + x2, 130 + y2, 200, 25);
 		textField_salesman.setEditable(false);
 		textField_salesman.setText(cvo.salesman);
 		this.add(textField_salesman);
@@ -205,8 +216,11 @@ public class ClientDetailPanel extends MyPanel implements ActionListener{
 		head2.setForeground(foreColor);
 		head2.setBackground(backColor);
 		
+		payable = cvo.payable;
+		receivable = cvo.receivable;
+		
 		String[] str = {String.valueOf(cvo.payable), 
-				String.valueOf(cvo.receivable), String.valueOf(cvo.payable - cvo.receivable)};
+				String.valueOf(cvo.receivable), String.valueOf(payable - receivable)};
 		DefaultTableModel tableModel_rap = (DefaultTableModel) table_rap.getModel();
 		tableModel_rap.addRow(str);
 		
@@ -258,16 +272,82 @@ public class ClientDetailPanel extends MyPanel implements ActionListener{
 		button_check = new MyButton(630, 580, 100, 20);
 		button_check.addActionListener(this);
 		this.add(button_check);
+		
+		bt_modify = new JButton();
+		bt_modify.addActionListener(this);
+		this.add(bt_modify);
 	}
 	
 	public void actionPerformed(ActionEvent events) {
 		
+		
+		///////////////////////FUNCTION MODIFY///////////////////////////
+		
 		if(events.getSource() == button_modify){
-			System.out.println("modifying the infornation of the client ...");
+			
+			if(comboBox_level.getSelectedIndex() == 0 || comboBox_category.getSelectedIndex() == 0 
+					|| textField_name.getText().isEmpty() || textField_limit.getText().isEmpty()){
+				
+				WarningFrame wf = new WarningFrame("请检查信息填写是否正确！");
+				wf.setVisible(true);
+				
+			}else{
+				ExitFinishFrame eff = new ExitFinishFrame("Modify a client");
+				eff.setVisible(true);
+			}
+		}
+		
+		if(events.getSource() == bt_modify){
+					
+			ClientController controller = new ClientController();
+			
+			ResultMessage rm = controller.updClient(new ClientVO(textField_id.getText(), getCategory(comboBox_category.getSelectedIndex()),
+					getLevel(comboBox_level.getSelectedIndex()), textField_name.getText(), textField_phone.getText(),
+					textField_address.getText(), textField_post.getText(), textField_email.getText(),receivable, payable
+					, Double.valueOf(textField_limit.getText()), textField_salesman.getText()));	
+			
+			if(rm.equals(ResultMessage.SUCCESS)){
+				WarningFrame wf = new WarningFrame("客户信息修改成功！");
+				wf.setVisible(true);
+				
+				this.setVisible(false);
+				
+				ClientManagementUI.button_showAll.doClick();
+				
+				ClientVO cvo2 = controller.findClient(textField_id.getText(), FindTypeClient.ID).get(0);
+				
+				ClientDetailUI cdf = new ClientDetailUI(cvo2);
+				cdf.setVisible(true);
+				
+			}else{
+				WarningFrame wf = new WarningFrame("客户信息修改失败！");
+				wf.setVisible(true);
+			}
+			
 		}
 		
 		if(events.getSource() == button_check){
 			System.out.println("now checking ...");
 		}
+	}
+	
+	private ClientCategory getCategory(int i){
+		switch (i){
+			case 1: return ClientCategory.PURCHASE_PERSON;
+			case 2: return ClientCategory.SALES_PERSON;
+			case 3: return ClientCategory.BOTH;
+			default: return null;
+		}		
+	}
+	
+	private ClientLevel getLevel(int i){
+		switch (i){
+			case 1: return ClientLevel.LEVEL_1;
+			case 2: return ClientLevel.LEVEL_2;
+			case 3: return ClientLevel.LEVEL_3;
+			case 4: return ClientLevel.LEVEL_4;
+			case 5: return ClientLevel.VIP;
+			default: return null;
+		}		
 	}
 }

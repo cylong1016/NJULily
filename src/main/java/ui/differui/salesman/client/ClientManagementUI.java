@@ -31,10 +31,13 @@ public class ClientManagementUI extends JLabel implements ActionListener{
 	
 	private static final long serialVersionUID = 1L;
 	
-	MyJButton button_return, button_add, button_cam, button_del;
+	MyJButton button_return, button_add, button_cam, button_del, button_search;
 	MyTable table;
 	public static MyJButton button_showAll;
 	public static JButton button_delete;
+	MyComboBox comboBox;
+	MyTextField textField;
+	
 	String deleteID = "";
 	static int rowNum;
 	
@@ -59,13 +62,13 @@ public class ClientManagementUI extends JLabel implements ActionListener{
 		//add a combo box (for choosing the selected way)
 		String[] comboBoxStr = {"-------请选择一种搜索方式-------", "模糊查找"
 				, "客户编号(ID)", "客户星级", "客户分类", "客户名称", "默认业务员"};
-		MyComboBox comboBox = new MyComboBox(75, 70, 200, 25,comboBoxStr);
+		comboBox = new MyComboBox(75, 70, 200, 25,comboBoxStr);
 		comboBox.setBackground(backColor);
 		comboBox.setForeground(foreColor);
 		this.add(comboBox);
 		
 		//add a text field (for typing the selected way)
-		MyTextField textField = new MyTextField(300, 70, 200, 25);
+		textField = new MyTextField(300, 70, 200, 25);
 		textField.setText("  在此输入搜索关键字");
 		textField.setBackground(backColor);
 		textField.setForeground(foreColor);
@@ -73,7 +76,7 @@ public class ClientManagementUI extends JLabel implements ActionListener{
 		this.add(textField);
 		
 		//add a button for starting the searching process
-		MyJButton button_search = new MyJButton("搜索");
+		button_search = new MyJButton("搜索");
 		button_search.setBounds(525, 70, 130, 25);
 		button_search.addActionListener(this);
 		button_search.setBackground(backColor);
@@ -224,6 +227,15 @@ public class ClientManagementUI extends JLabel implements ActionListener{
 			}			
 		}
 		
+		/////////////////////////////SEARCH////////////////////////////
+		if(events.getSource() == button_search){
+			if(comboBox.getSelectedIndex() == 0){
+				WarningFrame wf = new WarningFrame("请选择一种搜索方式");
+				wf.setVisible(true);
+			}else{
+				
+			}
+		}
 	}
 	
 	private String getCategory(String str){
