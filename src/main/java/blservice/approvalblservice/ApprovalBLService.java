@@ -42,6 +42,6 @@ public interface ApprovalBLService {
 	 * 确认单据内容没有错误
 	 * @return
 	 */
-	public ResultMessage passBill(ArrayList<ValueObject> VOs);
+	public ResultMessage passBill(ArrayList<ValueObject> VOs, ArrayList<BillType> billTypes);
 
 }

@@ -7,13 +7,14 @@ import po.AccountPO;
 import vo.AccountVO;
 import businesslogic.accountainitbl.info.AccountInfo_Init;
 import businesslogic.accountbillbl.AccountInfo_AccountBill;
+import businesslogic.cashbillbl.AccountInfo_CashBill;
 
 /**
  * 共外部获得账户信息
  * @author cylong
  * @version 2014年12月1日 下午2:59:53
  */
-public class AccountInfo implements AccountInfo_AccountBill, AccountInfo_Init{
+public class AccountInfo implements AccountInfo_AccountBill, AccountInfo_Init, AccountInfo_CashBill{
 
 	private Account account;
 
@@ -41,5 +42,18 @@ public class AccountInfo implements AccountInfo_AccountBill, AccountInfo_Init{
 
 	public ArrayList<AccountVO> getAccountVOs(ArrayList<AccountPO> POs) {
 		return account.POstoVOs(POs);
+	}
+
+	/**
+	 * 现金费用单通过审批后， 对应的账户的余额减少
+	 */
+	public void changeMoney(String accountName, double money) {
+		ArrayList<AccountPO> POs = account.getAccountData().show();
+		for (AccountPO po : POs) {
+			if (po.getName().equals(accountName)) {
+				po.setMoney(po.getMoney()-money);
+				return;
+			}
+		}
 	}
 }

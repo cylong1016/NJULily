@@ -14,4 +14,5 @@ public interface AccountInfo_AccountBill {
 	 * @version 2014年12月1日 上午1:23:52
 	 */
 	public HashMap<String, String> getAllAccounts();
+	
 }
