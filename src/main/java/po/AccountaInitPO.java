@@ -22,6 +22,10 @@ public class AccountaInitPO extends PersistentObject {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = -2898348688803208513L;
+	
+	private String date;
+	
+	private ArrayList<CommoditySortPO> commoditySorts;
 
 	private ArrayList<CommodityPO> commodities;
 
@@ -29,8 +33,10 @@ public class AccountaInitPO extends PersistentObject {
 
 	private ArrayList<AccountPO> accounts;
 
-	public AccountaInitPO(String ID, ArrayList<CommodityPO> commodities, ArrayList<ClientPO> clients, ArrayList<AccountPO> accounts) {
+	public AccountaInitPO(String ID, String date, ArrayList<CommoditySortPO> commoditySorts, ArrayList<CommodityPO> commodities, ArrayList<ClientPO> clients, ArrayList<AccountPO> accounts) {
 		super(ID);
+		this.date = date;
+		this.commoditySorts = commoditySorts;
 		this.commodities = commodities;
 		this.clients = clients;
 		this.accounts = accounts;
@@ -40,24 +46,21 @@ public class AccountaInitPO extends PersistentObject {
 		return commodities;
 	}
 
-	public void setCommodities(ArrayList<CommodityPO> commodities) {
-		this.commodities = commodities;
-	}
-
 	public ArrayList<ClientPO> getClients() {
 		return clients;
-	}
-
-	public void setClients(ArrayList<ClientPO> clients) {
-		this.clients = clients;
 	}
 
 	public ArrayList<AccountPO> getAccounts() {
 		return accounts;
 	}
 
-	public void setAccounts(ArrayList<AccountPO> accounts) {
-		this.accounts = accounts;
+	public ArrayList<CommoditySortPO> getCommoditySorts() {
+		return commoditySorts;
 	}
+
+	public String getDate() {
+		return date;
+	}
+
 
 }

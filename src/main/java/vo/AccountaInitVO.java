@@ -20,13 +20,22 @@ import java.util.ArrayList;
  */
 public class AccountaInitVO {
 	
+	public String ID;
+	
+	public String date;
+	
+	public ArrayList<CommoditySortVO> commoditySorts;
+	
 	public ArrayList<CommodityVO> commodities;
 	
 	public ArrayList<ClientVO> clients;
 	
 	public ArrayList<AccountVO> accounts;
 	
-	public AccountaInitVO(ArrayList<CommodityVO> commodities, ArrayList<ClientVO> clients, ArrayList<AccountVO> accounts){
+	public AccountaInitVO(String ID, String date, ArrayList<CommoditySortVO> commoditySorts, ArrayList<CommodityVO> commodities, ArrayList<ClientVO> clients, ArrayList<AccountVO> accounts){
+		this.ID = ID;
+		this.date = date;
+		this.commoditySorts = commoditySorts;
 		this.commodities = commodities;
 		this.clients = clients;
 		this.accounts = accounts;

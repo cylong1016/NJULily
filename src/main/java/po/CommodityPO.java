@@ -27,6 +27,10 @@ public class CommodityPO extends PersistentObject {
 	private double recentSalePrice;
 	/** 商品警戒数量 */
 	private int alarmNumber;
+	
+	private double aveSale;
+	
+	private double avePur;
 
 	/**
 	 * @param ID 商品ID

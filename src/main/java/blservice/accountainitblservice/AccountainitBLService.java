@@ -2,10 +2,7 @@ package blservice.accountainitblservice;
 
 import java.util.ArrayList;
 
-import vo.AccountVO;
-import vo.ClientVO;
-import vo.CommoditySortVO;
-import vo.CommodityVO;
+import vo.AccountaInitVO;
 import message.ResultMessage;
 
 /**
@@ -25,30 +22,21 @@ import message.ResultMessage;
  * @version 2014年10月28日下午5:36:24
  */
 public interface AccountainitBLService {
-	// TODO 需要建立Accountainit里面的商品条目、客户条目、账户条目吗？？？？
-	public ResultMessage addCommodity(CommoditySortVO sort, String name, String kind, String type);
-	
-	public ResultMessage addClient(String kind, String name, String phone);
-	
-	public ResultMessage addAccount(String name, int money);
 	
 	/**
-	 * 建立
-	 * @param commodities
-	 * @param clients
-	 * @param accounts
+	 * 建账
 	 * @return
+	 * @author Zing
+	 * @version Dec 2, 2014 7:00:20 PM
 	 */
-	public ResultMessage addInit(ArrayList<CommodityVO> commodities, ArrayList<ClientVO> clients, ArrayList<AccountVO> accounts);
-	
+	public ResultMessage buildAccount();
+
 	/**
-	 * 返回上年的平均进价和售价
-	 * @param time
-	 * @param purPrice
-	 * @param salePrice
+	 * 查看以往的期初建账信息
 	 * @return
+	 * @author Zing
+	 * @version Dec 2, 2014 7:00:23 PM
 	 */
-	public ResultMessage getEverage(int time, double purPrice, double salePrice);
-
-
+	public ArrayList<AccountaInitVO> show();
+	
 }

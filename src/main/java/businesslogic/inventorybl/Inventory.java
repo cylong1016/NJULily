@@ -4,20 +4,14 @@ import java.rmi.Naming;
 import java.util.ArrayList;
 
 import businesslogic.common.ChangeCommodityItems;
-import businesslogic.promotionbl.InventoryInfo_Promotion;
-import businesslogic.recordbl.info.InventoryInfo_Record;
-import businesslogic.recordbl.info.ValueObjectInfo_Record;
 import config.RMI;
-import po.CommodityItemPO;
 import po.InventoryBillPO;
 import vo.CommodityItemVO;
 import vo.InventoryBillVO;
 import vo.InventoryCheckVO;
 import vo.InventoryViewVO;
-import vo.ValueObject;
 import dataenum.BillState;
 import dataenum.BillType;
-import dataenum.Storage;
 import dataservice.DataFactoryService;
 import dataservice.inventorydataservice.InventoryDataService;
 import message.ResultMessage;
@@ -76,6 +70,10 @@ public class Inventory extends ChangeCommodityItems {
 		return vo;
 	}
 	
+	public String getID(BillType type) {
+		return getInventoryBill().getID();
+	}
+	
 	/**
 	 * 最开始要创建单据的时候，确定单据类型
 	 * @param type
@@ -96,7 +94,7 @@ public class Inventory extends ChangeCommodityItems {
 	 */
 	public ArrayList<InventoryBillVO> show(BillType type) {
 		ArrayList<InventoryBillVO> VOs = new ArrayList<InventoryBillVO>();
-		ArrayList<InventoryBillPO> POs = getInventoryData().show(type);
+		ArrayList<InventoryBillPO> POs = getInventoryData().show();
 		for (int i = 0; i < POs.size(); i++) {
 			InventoryBillPO po = POs.get(i);
 			InventoryBillVO vo = poToVo(po);
