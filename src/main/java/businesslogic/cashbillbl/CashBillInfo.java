@@ -12,11 +12,12 @@ import dataservice.TableInfoService;
 import dataservice.cashbilldataservice.CashBillDataService;
 import vo.CashBillVO;
 import vo.CashItemVO;
-import businesslogic.approvalbl.ValueObject_Approval;
+import businesslogic.approvalbl.info.CashBillInfo_Approval;
+import businesslogic.approvalbl.info.ValueObject_Approval;
 import businesslogic.common.Info;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
 
-public class CashBillInfo extends Info<CashBillPO> implements ValueObjectInfo_Record<CashBillVO>, ValueObject_Approval<CashBillVO>{
+public class CashBillInfo extends Info<CashBillPO> implements ValueObjectInfo_Record<CashBillVO>, ValueObject_Approval<CashBillVO>, CashBillInfo_Approval{
 	
 	private CashBill cashBill;
 	

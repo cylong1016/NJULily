@@ -5,21 +5,20 @@ import java.util.ArrayList;
 import message.ResultMessage;
 import po.CommodityItemPO;
 import po.InventoryBillPO;
-import po.SalesPO;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Storage;
 import dataservice.TableInfoService;
 import dataservice.inventorydataservice.InventoryDataService;
 import vo.InventoryBillVO;
-import vo.SalesVO;
-import businesslogic.approvalbl.ValueObject_Approval;
+import businesslogic.approvalbl.info.InventoryInfo_Approval;
+import businesslogic.approvalbl.info.ValueObject_Approval;
 import businesslogic.common.Info;
 import businesslogic.promotionbl.InventoryInfo_Promotion;
 import businesslogic.recordbl.info.InventoryInfo_Record;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
 
-public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInfo_Promotion, ValueObjectInfo_Record<InventoryBillVO>, InventoryInfo_Record, ValueObject_Approval<InventoryBillVO>{
+public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInfo_Promotion, ValueObjectInfo_Record<InventoryBillVO>, InventoryInfo_Record, ValueObject_Approval<InventoryBillVO>, InventoryInfo_Approval{
 
 	private Inventory inventory;
 	
@@ -62,7 +61,6 @@ public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInf
 	/**
 	 * 返回需要审批的VO
 	 */
-	// TODO 需要库存单据的show方法 返回所有PO给我
 	public ArrayList<InventoryBillVO> findApproval() {
 		ArrayList<InventoryBillPO> POs = getInventoryData().show();
 		ArrayList<InventoryBillPO> approvalPO = new ArrayList<InventoryBillPO>();
@@ -80,10 +78,11 @@ public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInf
 	}
 
 	public ResultMessage update(InventoryBillVO vo) {
+		String ID = vo.ID;
 		BillType billType = vo.billType;
 		String remark = vo.remark;
 		ArrayList<CommodityItemPO> commodities = inventory.itemsVOtoPO(vo.commodities);
-		InventoryBillPO po = new InventoryBillPO(billType, commodities, remark);
-		return null;
+		InventoryBillPO po = new InventoryBillPO(ID, billType, commodities, remark);
+		return getInventoryData().update(po);
 	}
 }

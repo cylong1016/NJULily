@@ -129,9 +129,10 @@ public class Sale extends ChangeCommodityItems {
 		double afterPrice = list.getAfterPrice();
 		ClientInfo_Sale info = new ClientInfo();
 		String clientName = info.getName(list.getClientID());
+		String clientID = list.getClientID();
 		String salesman = info.getSalesman(list.getClientID());
 		// TODO user从文件中读取当前登陆的用户
-		po = new SalesPO(ID, clientName, salesman, "user", list.getStorage(), list.getCommodities(), beforePrice, list.getAllowance(), list.getVoucher(), list.getRemark(), afterPrice, type);
+		po = new SalesPO(ID, clientID, clientName, salesman, "user", list.getStorage(), list.getCommodities(), beforePrice, list.getAllowance(), list.getVoucher(), list.getRemark(), afterPrice, type);
 		return po;
 	}
 
@@ -144,6 +145,7 @@ public class Sale extends ChangeCommodityItems {
 	 */
 	public SalesVO poToVo(SalesPO po) {
 		String ID = po.getID();
+		String clientID = po.getClientID();
 		String client = po.getClient();
 		Storage storage = po.getStorage();
 		String salesman = po.getSalesman();
@@ -156,7 +158,7 @@ public class Sale extends ChangeCommodityItems {
 		BillType type = po.getType();
 		BillState state = po.getState();
 		ArrayList<CommodityItemVO> commodities = itemPOToVO(po.getCommodities());
-		SalesVO vo = new SalesVO(ID, client, storage, user, salesman, commodities, remark, beforePrice, allowance, voucher, afterPrice, type, state);
+		SalesVO vo = new SalesVO(ID, clientID, client, storage, user, salesman, commodities, remark, beforePrice, allowance, voucher, afterPrice, type, state);
 		return vo;
 	}
 

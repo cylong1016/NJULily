@@ -3,7 +3,8 @@ package businesslogic.salebl;
 import java.util.ArrayList;
 
 import message.ResultMessage;
-import businesslogic.approvalbl.ValueObject_Approval;
+import businesslogic.approvalbl.info.SaleInfo_Approval;
+import businesslogic.approvalbl.info.ValueObject_Approval;
 import businesslogic.common.Info;
 import businesslogic.inventorybl.info.SaleInfo_Inventory;
 import businesslogic.recordbl.info.SaleInfo_Record;
@@ -17,7 +18,7 @@ import dataenum.Storage;
 import dataservice.TableInfoService;
 import dataservice.saledataservice.SaleDataService;
 
-public class SaleInfo extends Info<SalesPO> implements SaleInfo_Inventory, SaleInfo_Record, ValueObjectInfo_Record<SalesVO>, ValueObject_Approval<SalesVO>{
+public class SaleInfo extends Info<SalesPO> implements SaleInfo_Inventory, SaleInfo_Record, ValueObjectInfo_Record<SalesVO>, ValueObject_Approval<SalesVO>, SaleInfo_Approval{
 	
 	private Sale sale;
 	
@@ -157,8 +158,12 @@ public class SaleInfo extends Info<SalesPO> implements SaleInfo_Inventory, SaleI
 		return VOs;
 	}
 
+	/**
+	 * 更新销售单
+	 */
 	public ResultMessage update(SalesVO vo) {
 		String ID = vo.ID;
+		String clientID = vo.clientID;
 		String client = vo.client;
 		String salesman = vo.salesman;
 		String user = vo.user;
@@ -170,7 +175,7 @@ public class SaleInfo extends Info<SalesPO> implements SaleInfo_Inventory, SaleI
 		double afterPrice = vo.afterPrice;
 		BillType type = vo.type;
 		ArrayList<CommodityItemPO> commodities = sale.itemsVOtoPO(vo.commodities);
-		SalesPO po = new SalesPO(ID, client, salesman, user, storage, commodities, beforePrice, allowance, voucher, remark, afterPrice, type);
+		SalesPO po = new SalesPO(ID, clientID, client, salesman, user, storage, commodities, beforePrice, allowance, voucher, remark, afterPrice, type);
 		return getSaleData().update(po);
 	}
 

@@ -8,6 +8,12 @@ import dataenum.BillType;
 import dataservice.DataFactoryService;
 import dataservice.approvaldataservice.ApprovalDataService;
 import businesslogic.accountbillbl.AccountBillInfo;
+import businesslogic.approvalbl.info.AccountBill_Approval;
+import businesslogic.approvalbl.info.CashBillInfo_Approval;
+import businesslogic.approvalbl.info.InventoryInfo_Approval;
+import businesslogic.approvalbl.info.PurchaseInfo_Approval;
+import businesslogic.approvalbl.info.SaleInfo_Approval;
+import businesslogic.approvalbl.info.ValueObject_Approval;
 import businesslogic.cashbillbl.CashBillInfo;
 import businesslogic.inventorybl.InventoryInfo;
 import businesslogic.purchasebl.PurchaseInfo;
@@ -58,40 +64,66 @@ public class Approval {
 	 * @author Zing
 	 * @version Dec 2, 2014 2:11:54 PM
 	 */
-	// TODO 这边用泛型？
+	
 	public ResultMessage updateBill(ValueObject vo, BillType billType) {
-		ValueObject_Approval<?> info;
 		switch (billType) {
 		case SALE:
 		case SALEBACK:
-			info = new SaleInfo();
-			break;
+			return updateBill((SalesVO)vo);
 		case PURCHASE:
 		case PURCHASEBACK:
-			info = new PurchaseInfo();
-			break;
+			return updateBill((PurchaseVO)vo);
 		case GIFT:
 		case OVERFLOW:
 		case LOSS:
-			info = new InventoryInfo();
-			break;
+			return updateBill((InventoryBillVO)vo);
 		case PAY:
 		case EXPENSE:
-			info = new AccountBillInfo();
-			break;
+			return updateBill((AccountBillVO)vo);
 		case CASH:
-			info = new CashBillInfo();
-			break;
+			return updateBill((CashBillVO)vo);
 		default:
 			break;
 		}
-		return null;
+		return ResultMessage.FAILURE;
+	}
+	
+	private ResultMessage updateBill(SalesVO vo) {
+		SaleInfo_Approval info = new SaleInfo();
+		return info.update(vo);
+	}
+	
+	private ResultMessage updateBill(PurchaseVO vo) {
+		PurchaseInfo_Approval info = new PurchaseInfo();
+		return info.update(vo);
+	}
+	
+	private ResultMessage updateBill(InventoryBillVO vo) {
+		InventoryInfo_Approval info = new InventoryInfo();
+		return info.update(vo);
+	}
+	
+	private ResultMessage updateBill(CashBillVO vo) {
+		CashBillInfo_Approval info = new CashBillInfo();
+		return info.update(vo);
+	}
+	
+	private ResultMessage updateBill(AccountBillVO vo) {
+		AccountBill_Approval info = new AccountBillInfo();
+		return info.update(vo);
 	}
 
+	/**
+	 * 单子通过审核（可以批量，单要同一种类型的才可以）
+	 * @param VOs
+	 * @return
+	 * @author Zing
+	 * @version Dec 2, 2014 9:22:47 PM
+	 */
 	public ResultMessage passBill(ArrayList<ValueObject> VOs) {
-		// TODO Auto-generated method stub
 		return null;
 	}
+	
 
 	private ApprovalDataService getApprovalData() {
 		try {

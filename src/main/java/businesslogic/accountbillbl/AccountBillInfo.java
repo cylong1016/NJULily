@@ -7,7 +7,8 @@ import po.AccountBillItemPO;
 import po.AccountBillPO;
 import vo.AccountBillItemVO;
 import vo.AccountBillVO;
-import businesslogic.approvalbl.ValueObject_Approval;
+import businesslogic.approvalbl.info.AccountBill_Approval;
+import businesslogic.approvalbl.info.ValueObject_Approval;
 import businesslogic.common.Info;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
 import dataenum.BillState;
@@ -19,7 +20,7 @@ import dataservice.TableInfoService;
  * @author cylong
  * @version 2014年12月1日 下午3:02:45
  */
-public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectInfo_Record<AccountBillVO>, ValueObject_Approval<AccountBillVO> {
+public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectInfo_Record<AccountBillVO>, ValueObject_Approval<AccountBillVO>, AccountBill_Approval{
 
 	private AccountBill accountBill;
 

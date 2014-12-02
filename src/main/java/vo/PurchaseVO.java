@@ -20,7 +20,9 @@ import dataenum.Storage;
 public class PurchaseVO extends ValueObject{
 	
 	/** 单据编号 */
-	public String id;	
+	public String ID;
+	/** 客户ID */
+	public String clientID;
 	/** 客户 */
 	public String client;
 	/** 仓库 */
@@ -37,10 +39,11 @@ public class PurchaseVO extends ValueObject{
 	/** 单据状态 */
 	public BillState state;
 	
-	public PurchaseVO(BillType type, String ID, String client, String user,  Storage storage, 
+	public PurchaseVO(BillType type, String ID, String clientID, String client, String user,  Storage storage, 
 			ArrayList<CommodityItemVO> commodities, double beforePrice, BillState state) {
 		this.type = type; 
-		this.id = ID;
+		this.ID = ID;
+		this.clientID = clientID;
 		this.client = client;
 		this.user = user;
 		this.storage = storage;

@@ -82,7 +82,7 @@ public class Purchase extends ChangeCommodityItems {
 		businesslogic.purchasebl.ClientInfo_Purchase info = new ClientInfo();
 		String clientName = info.getName(list.getClientID());
 		Storage storage = list.getStorage();
-		po = new PurchasePO(ID, clientName, "user", storage, list.getCommodities(), sumPrice, list.getRemark(), type);	
+		po = new PurchasePO(ID, list.getClientID(), clientName, "user", storage, list.getCommodities(), sumPrice, list.getRemark(), type);	
 		return po;
 	}
 	
@@ -94,6 +94,7 @@ public class Purchase extends ChangeCommodityItems {
 
 	public PurchaseVO poToVO(PurchasePO po){
 		String ID = po.getID();
+		String clientID = po.getClientID();
 		String client = po.getClient();
 		String user = po.getUser();
 		Storage storage = po.getStorage();
@@ -101,7 +102,7 @@ public class Purchase extends ChangeCommodityItems {
 		double sumPrice = po.getBeforePrice();
 		BillType type = po.getType();
 		BillState state = po.getState();
-		PurchaseVO vo = new PurchaseVO(type, ID, client, user, storage, commodities, sumPrice, state);
+		PurchaseVO vo = new PurchaseVO(type, ID, clientID, client, user, storage, commodities, sumPrice, state);
 		return vo;
 		
 	}

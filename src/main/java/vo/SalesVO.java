@@ -19,6 +19,8 @@ public class SalesVO extends ValueObject{
 
 	/** 单据编号 */
 	public String ID;
+	/** 客户ID */
+	public String clientID;
 	/** 客户 */
 	public String client;
 	/** 仓库 */
@@ -55,9 +57,10 @@ public class SalesVO extends ValueObject{
 	 * @param voucher
 	 * @param afterPrice
 	 */
-	public SalesVO(String ID, String client, Storage storage, String user, String salesman, ArrayList<CommodityItemVO> commodities, String remark, double beforePrice, double allowance, double voucher, double afterPrice, BillType type, BillState state) {
+	public SalesVO(String ID, String clientID, String client, Storage storage, String user, String salesman, ArrayList<CommodityItemVO> commodities, String remark, double beforePrice, double allowance, double voucher, double afterPrice, BillType type, BillState state) {
 		this.ID = ID;
 		this.salesman = salesman;
+		this.clientID = clientID;
 		this.client = client;
 		this.storage = storage;
 		this.user = user;

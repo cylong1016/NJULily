@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import message.ResultMessage;
 import po.CommodityItemPO;
 import po.PurchasePO;
-import businesslogic.approvalbl.ValueObject_Approval;
+import businesslogic.approvalbl.info.PurchaseInfo_Approval;
+import businesslogic.approvalbl.info.ValueObject_Approval;
 import businesslogic.common.Info;
 import businesslogic.inventorybl.info.PurchaseInfo_Inventory;
 import businesslogic.recordbl.info.PurchaseInfo_Record;
@@ -17,7 +18,7 @@ import dataenum.Storage;
 import dataservice.TableInfoService;
 import dataservice.purchasedataservice.PurchaseDataService;
 
-public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Record<PurchaseVO>, PurchaseInfo_Record, ValueObject_Approval<PurchaseVO>, PurchaseInfo_Inventory{
+public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Record<PurchaseVO>, PurchaseInfo_Record, ValueObject_Approval<PurchaseVO>, PurchaseInfo_Inventory, PurchaseInfo_Approval{
 	
 	private Purchase purchase;
 	
@@ -77,6 +78,7 @@ public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Re
 
 	public ResultMessage update(PurchaseVO vo) {
 		String ID = vo.ID;
+		String clientID = vo.clientID;
 		String client = vo.client;
 		String user = vo.user;
 		Storage storage = vo.storage;
@@ -84,7 +86,7 @@ public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Re
 		double beforePrice = vo.beforePrice;
 		BillType type = vo.type;
 		ArrayList<CommodityItemPO> commodities = purchase.itemsVOtoPO(vo.commodities);
-		PurchasePO po = new PurchasePO(ID, client, user, storage, commodities, beforePrice, remark, type);
+		PurchasePO po = new PurchasePO(ID, clientID, client, user, storage, commodities, beforePrice, remark, type);
 		return getPurchaseData().update(po);
 	}
 
