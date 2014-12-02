@@ -37,10 +37,10 @@ public class ClientAddingPanel extends MyPanel implements ActionListener{
 		int x1 = 120, y1 = 10, x2 = 120, y2 = 75;
 		
 		Color foreColor = new Color(158, 213, 220);
-		Color backColor = new Color(53, 84, 94);
+		Color backColor = new Color(46, 52, 101);
 		
 		//information bar
-		JLabel infoBar = new JLabel("新增一位客户",JLabel.CENTER);
+		JLabel infoBar = new JLabel("新增一位用户",JLabel.CENTER);
 		infoBar.setBounds(0, 0, 600, 20);
 		infoBar.setOpaque(true);
 		infoBar.setForeground(foreColor);
@@ -210,7 +210,7 @@ public class ClientAddingPanel extends MyPanel implements ActionListener{
 				ClientManagementUI.button_showAll.doClick();
 				
 			}else{
-				WarningFrame wp = new WarningFrame("客户已经被添加！");
+				WarningFrame wp = new WarningFrame("无法添加客户！");
 				wp.setVisible(true);
 			}			
 		}

@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyPanel;
+import ui.differui.admin.AdminAddingUI;
 import ui.differui.inventory.frame.Frame_Inventory;
 import ui.differui.salesman.client.ClientAddingUI;
 import ui.differui.salesman.client.ClientDetailUI;
@@ -25,7 +26,7 @@ public class ExitFunctionPanel extends MyPanel implements ActionListener{
 		int height = 130;
 		
 		Color foreColor = new Color(158, 213, 220);
-		Color backColor = new Color(53, 84, 94);
+		Color backColor = new Color(46, 52, 101);
 		
 		this.setBounds((1280 - width) / 2, (720 - height) / 2, width, height);
 		
@@ -59,15 +60,16 @@ public class ExitFunctionPanel extends MyPanel implements ActionListener{
 		
 		if(events.getSource() == button_yes){
 			switch(flag){
-			case "ClientAddingUI": ClientAddingUI.button_close.doClick();break;
+			case "ClientAddingUI" : ClientAddingUI.button_close.doClick();break;
 			
-			case "ClientDetailUI": ClientDetailUI.button_close.doClick();break;
+			case "ClientDetailUI" : ClientDetailUI.button_close.doClick();break;
 			
-			case "Inventory": 	Frame_Inventory.visibleFalse(Frame_Inventory.flag);
+			case "Inventory" : 	Frame_Inventory.visibleFalse(Frame_Inventory.flag);
 								Frame_Inventory.visibleTrue(Frame_Inventory.destination);
 								Frame_Inventory.flag = Frame_Inventory.destination;
-								System.out.print(Frame_Inventory.flag);
 								break;
+								
+			case "AdminAddingUI" : AdminAddingUI.button_close.doClick();break;
 			
 			}
 			ExitFunctionFrame.button_close.doClick();

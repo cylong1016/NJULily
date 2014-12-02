@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyPanel;
+import ui.differui.admin.AdminAddingPanel;
 import ui.differui.salesman.client.ClientAddingPanel;
 import ui.differui.salesman.client.ClientDetailPanel;
 import ui.differui.salesman.client.ClientManagementUI;
@@ -25,7 +26,7 @@ public class ExitFinishPanel extends MyPanel implements ActionListener{
 		int height = 130;
 		
 		Color foreColor = new Color(158, 213, 220);
-		Color backColor = new Color(53, 84, 94);
+		Color backColor = new Color(46, 52, 101);
 		
 		this.setBounds((1280 - width) / 2, (720 - height) / 2, width, height);
 		
@@ -70,6 +71,8 @@ public class ExitFinishPanel extends MyPanel implements ActionListener{
 				case "Delete a Client": ClientManagementUI.button_delete.doClick();break;
 				
 				case "Modify a client" : ClientDetailPanel.bt_modify.doClick();break;
+				
+				case "AdminAddingPanel" : AdminAddingPanel.addConform.doClick();break;
 				
 			}
 			ExitFinishFrame.button_close.doClick();

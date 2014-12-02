@@ -22,7 +22,7 @@ public class WarningPanel extends MyPanel implements ActionListener{
 		int height = 130;
 		
 		Color foreColor = new Color(158, 213, 220);
-		Color backColor = new Color(53, 84, 94);
+		Color backColor = new Color(46, 52, 101);
 		
 		this.setBounds((1280 - width) / 2, (720 - height) / 2, width, height);
 		

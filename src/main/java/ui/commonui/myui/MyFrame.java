@@ -8,6 +8,7 @@ import java.awt.event.MouseMotionAdapter;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.UIManager;
 
 import ui.commonui.exitprogram.ExitProgramFrame;
 
@@ -21,6 +22,8 @@ public class MyFrame extends JFrame {
 	int xx, yy, X0, Y0, X, Y, openTime = 0;	 
     
 	public MyFrame(){	
+		
+		//setWindowStyle ();
 		
 		Dimension scrSize=Toolkit.getDefaultToolkit().getScreenSize();
 			
@@ -93,6 +96,14 @@ public class MyFrame extends JFrame {
 		return String.valueOf(X) + ";" + String.valueOf(Y);
 	}
 	
+//	private  void setWindowStyle () {
+//		try {
+//			String windows = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
+//			UIManager.setLookAndFeel(windows);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 	
 	
 }

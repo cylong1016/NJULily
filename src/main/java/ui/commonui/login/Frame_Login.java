@@ -3,9 +3,7 @@
 
 
 import java.awt.Color;
-
 import java.awt.Font;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -14,6 +12,10 @@ import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 
+import dataenum.UserIdentity;
+import message.ResultMessage;
+import blservice.userblservice.LoginInfo;
+import businesslogic.userbl.UserController;
 import ui.commonui.myui.MyBackground;
 import ui.commonui.myui.MyButton;
 import ui.commonui.myui.MyFrame;
@@ -25,12 +27,13 @@ import ui.differui.salesman.frame.Frame_Salesman;
 public class Frame_Login extends MyFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
-	int i = 0;
+	boolean flag = false;
 	
 	MyTextField userNameField;
 	MyPasswordField passwordField;
 	MyLabel label_field1, label_field2, label_checkbox;
 	MyButton button_Enter, button_checkbox;
+	MyBackground loginBackground2;
 	
 	public Frame_Login(){
 		
@@ -66,13 +69,12 @@ public class Frame_Login extends MyFrame implements ActionListener{
 		
 		//the button for action login
 		button_Enter = new MyButton(782,450,320,60);
-		button_Enter.setIcon(new ImageIcon("ui/image/login/loginButton.png"));
 		button_Enter.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent arg0) {
-				button_Enter.setIcon(new ImageIcon("ui/image/login/loginButton2.png"));
+				loginBackground2.setVisible(true);
 			}
 			public void mouseExited(MouseEvent arg0) {
-				button_Enter.setIcon(new ImageIcon("ui/image/login/loginButton.png"));
+				loginBackground2.setVisible(false);
 			}
 			}); 
 		button_Enter.addActionListener(this);
@@ -82,12 +84,14 @@ public class Frame_Login extends MyFrame implements ActionListener{
 		MyButton button_checkbox = new MyButton(800,390,25,25);
 		button_checkbox.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent arg0){
-					if(i % 2 == 0){
+					if(flag == false){
 						label_checkbox.setVisible(true);
+						flag = true;
 					}else{
 						label_checkbox.setVisible(false);
+						flag = false;
 					}
-					i++;
+					
 				}
 			});
 		this.add(button_checkbox);
@@ -110,8 +114,12 @@ public class Frame_Login extends MyFrame implements ActionListener{
 		label_checkbox.setVisible(false);
 		label_checkbox.setOpaque(false);
 		this.add(label_checkbox);
-		
+			
 		//initialize the background for this frame
+		loginBackground2 = new MyBackground("ui/image/login/loginBackground2.png");
+		loginBackground2.setVisible(false);
+		this.add(loginBackground2);
+		
 		MyBackground loginBackground = new MyBackground("ui/image/login/loginBackground.png");
 		this.add(loginBackground);
 			
@@ -119,11 +127,13 @@ public class Frame_Login extends MyFrame implements ActionListener{
 	
 	public void actionPerformed(ActionEvent events) {
 		if(events.getSource() == button_Enter){
-			Frame_Salesman fs = new Frame_Salesman();
-			fs.setVisible(true);
-			this.setVisible(false);
+			UserController controller = new UserController();
+			UserIdentity rm = controller.login(new LoginInfo(userNameField.getText()
+					, new String(passwordField.getPassword()),flag));
+			
+			if(rm == null){
+				System.out.println("failue");
+			}
 		}
 	}
-
-	
 }
