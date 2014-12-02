@@ -9,6 +9,7 @@ import businesslogic.recordbl.info.SaleInfo_Record;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
 import po.CommodityItemPO;
 import po.SalesPO;
+import server.data.saledata.SaleData;
 import vo.SalesVO;
 import dataenum.BillState;
 import dataenum.BillType;

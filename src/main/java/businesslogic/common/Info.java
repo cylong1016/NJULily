@@ -8,7 +8,8 @@ import dataenum.Storage;
 import dataservice.TableInfoService;
 
 public abstract class Info<ApprovalPO extends PersistentObject> {
-
+	/* 你这样改是什么意思？？这个类是为了给查看经营历程表用的，为什么是ApprovalPO？？？？
+	 */
 	protected abstract TableInfoService<ApprovalPO> getData();
 
 	protected ArrayList<String> getID(String ID, String clientName, String salesman, Storage storage, BillType type) {
