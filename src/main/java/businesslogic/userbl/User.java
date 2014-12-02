@@ -47,7 +47,7 @@ public class User {
 	 * @author cylong
 	 * @version 2014年11月29日 下午9:24:17
 	 */
-	public ResultMessage login(LoginInfo loginInfo) {
+	public UserIdentity login(LoginInfo loginInfo) {
 		ArrayList<UserPO> pos = userData.show();
 		for(UserPO po : pos) {
 			if (po.getUsername().equals(loginInfo.username)) {
@@ -56,9 +56,9 @@ public class User {
 			}
 		}
 		if (current == null) {
-			return ResultMessage.FAILURE;
+			return null;
 		} else if (!loginInfo.password.equals(current.getPassword())) {
-			return ResultMessage.FAILURE;
+			return null;
 		}
 		if (loginInfo.isRemembered) {	// 保存当前登录的用户的帐户名
 			currentUser.clear();
@@ -68,7 +68,7 @@ public class User {
 		} else {	// 删除记住的账号
 			currentUser.clear();
 		}
-		return ResultMessage.SUCCESS;
+		return current.getIden();
 	}
 
 	/**

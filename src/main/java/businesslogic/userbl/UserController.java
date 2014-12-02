@@ -2,6 +2,7 @@ package businesslogic.userbl;
 
 import java.util.ArrayList;
 
+import dataenum.UserIdentity;
 import message.ResultMessage;
 import vo.UserVO;
 import blservice.userblservice.LoginInfo;
@@ -39,7 +40,7 @@ public class UserController implements blservice.userblservice.UserBLService {
 	 * @see blservice.userblservice.UserBLService#login(blservice.userblservice.LoginInfo)
 	 */
 	@Override
-	public ResultMessage login(LoginInfo loaginInfo) {
+	public UserIdentity login(LoginInfo loaginInfo) {
 		return user.login(loaginInfo);
 	}
 

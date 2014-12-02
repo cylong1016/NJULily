@@ -2,6 +2,7 @@ package blservice.userblservice;
 
 import java.util.ArrayList;
 
+import dataenum.UserIdentity;
 import message.ResultMessage;
 import vo.UserVO;
 
@@ -38,11 +39,11 @@ public interface UserBLService {
 	/**
 	 * 验证用户登录
 	 * @param loaginInfo
-	 * @return 返回登陆结果（成功、失败）
+	 * @return 返回登录用户的身份 null为登录失败
 	 * @author cylong
 	 * @version 2014年11月29日 下午6:39:53
 	 */
-	public ResultMessage login(LoginInfo loaginInfo);
+	public UserIdentity login(LoginInfo loaginInfo);
 
 	/**
 	 * 返回用户保存的username
