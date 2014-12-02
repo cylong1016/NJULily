@@ -1,5 +1,7 @@
 package dataservice.inventorydataservice;
 
+import java.util.ArrayList;
+
 import po.InventoryBillPO;
 import dataenum.BillType;
 import dataservice.CommonDataService;
@@ -17,7 +19,7 @@ public interface InventoryDataService extends CommonDataService<InventoryBillPO>
 	 * @param type （赠送单、报溢单、报损单、报警单）
 	 * @return 相应单据的ID
 	 * @author cylong
-	 * @version 2014年12月2日  下午5:53:27
+	 * @version 2014年12月2日 下午5:53:27
 	 */
 	public String getID(BillType type);
 
@@ -34,4 +36,12 @@ public interface InventoryDataService extends CommonDataService<InventoryBillPO>
 	 * @version 2014年12月2日 上午2:45:01
 	 */
 	public TableInfoService<InventoryBillPO> getInfo();
+
+	/**
+	 * @param type 单据类型
+	 * @return 按照单据类型返回单据
+	 * @author cylong
+	 * @version 2014年12月2日 下午10:02:54
+	 */
+	public ArrayList<InventoryBillPO> show(BillType type);
 }
