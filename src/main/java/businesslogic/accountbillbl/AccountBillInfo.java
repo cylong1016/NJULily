@@ -24,6 +24,10 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 		accountBill = new AccountBill();
 	}
 
+	/**
+	 * @see dataservice.accountbilldataservice.AccountBillDataService
+	 * @see businesslogic.common.Info#getData()
+	 */
 	@Override
 	protected TableInfoService<AccountBillPO> getData() {
 		return accountBill.getAccountBillData().getInfo();

@@ -11,7 +11,7 @@ import dataenum.Storage;
  * @author cylong
  * @version 2014年12月1日  下午4:03:20
  */
-public interface TableInfoService<ApprovalPO extends PersistentObject> {
+public interface TableInfoService<PO extends PersistentObject> {
 	
 	/**
 	 * 根据单据类型返回全部的单据ID
@@ -50,10 +50,10 @@ public interface TableInfoService<ApprovalPO extends PersistentObject> {
 	public Storage getStorage(String billID);
 	
 	/**
-	 * @return 全部需要审批的某种单子
+	 * @return 全部的单子
 	 * @author cylong
 	 * @version 2014年12月2日  上午3:04:02
 	 */
-	public ArrayList<ApprovalPO> show();
+	public ArrayList<PO> show();
 	
 }
