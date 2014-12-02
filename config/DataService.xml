@@ -86,4 +86,11 @@
 		<dateFormat>yyyyMMdd</dateFormat>
 		<dateRecord>20141111</dateRecord>
 	</Data>
+	<Data>
+		<name>AccountInitData</name>
+		<path>data/AccountInitList.ser</path>
+		<prefix>INIT</prefix>
+		<maxID>0</maxID>
+		<IDMaxBit>5</IDMaxBit>
+	</Data>
 </DataService>
