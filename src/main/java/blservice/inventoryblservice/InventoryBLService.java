@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import dataenum.BillType;
 import vo.InventoryBillVO;
 import vo.InventoryCheckVO;
+import vo.InventoryViewVO;
 import message.ResultMessage;
 
 /**
@@ -25,7 +26,7 @@ public interface InventoryBLService {
 	 * @param endDate
 	 * @return
 	 */
-	public ResultMessage viewInventory (String beginDate, String endDate);
+	public InventoryViewVO viewInventory (String beginDate, String endDate);
 	
 	/**
 	 * 显示截至盘点时间的库存快照
@@ -33,6 +34,13 @@ public interface InventoryBLService {
 	 */
 	public InventoryCheckVO checkRecord();
 	
+	/**
+	 * 查看某种库存单据（赠送单、报警单、报损单、报溢单）
+	 * @param type
+	 * @return
+	 * @author Zing
+	 * @version Dec 2, 2014 5:57:18 PM
+	 */
 	public ArrayList<InventoryBillVO> show(BillType type);
 	
 	/**

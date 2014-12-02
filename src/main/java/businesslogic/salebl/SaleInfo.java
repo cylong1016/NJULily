@@ -22,9 +22,23 @@ public class SaleInfo extends Info<SalesPO> implements SaleInfo_Inventory, SaleI
 	private Sale sale;
 	
 	private String ID;
+	
+	private ArrayList<String> saleIDs;
+	
+	private ArrayList<String> backIDs;
 
 	public SaleInfo() {
 		sale = new Sale();
+	}
+	
+	public SaleInfo(ArrayList<String> IDs) {
+		sale = new Sale();
+		saleIDs = new ArrayList<String>();
+		backIDs = new ArrayList<String>();
+		for (String id : IDs) {
+			saleIDs.addAll(getID(id, null, null, null, BillType.SALE));
+			backIDs.addAll(getID(id, null, null, null, BillType.SALEBACK));
+		}
 	}
 	
 	protected  TableInfoService<SalesPO> getData() {
@@ -39,16 +53,6 @@ public class SaleInfo extends Info<SalesPO> implements SaleInfo_Inventory, SaleI
 	/**
 	 * 以下是其他包中的SaleInfo接口的方法
 	 */
-	
-	public ArrayList<Double> getMoney(String begin, String end) {
-		// TODO 需要根据日期查询ID的方法，返回我一个arrylistID。或者我自己查，那就提供一个返回所有PO的方法
-		//		SaleDataService saleData = getData();
-		return null;
-	}
-
-	public ArrayList<Integer> getNumber(String begin, String end) {
-		return null;
-	}
 
 	/**
 	 * 根据查找条件查找销售单，返回销售单的ID集合
@@ -113,7 +117,7 @@ public class SaleInfo extends Info<SalesPO> implements SaleInfo_Inventory, SaleI
 	// 以上都是对销售单中商品列表的某个商品的查询（根据ID）
 	
 	/**
-	 * 查找指定销售单的折扣后价格（不包括代金券）
+	 * 查找指定销售单（销售退货单）的折扣后价格（不包括代金券）
 	 */
 	public double getBeforePrice(String ID) {
 		SalesPO po = getSaleData().find(ID);
@@ -168,6 +172,50 @@ public class SaleInfo extends Info<SalesPO> implements SaleInfo_Inventory, SaleI
 		ArrayList<CommodityItemPO> commodities = sale.itemsVOtoPO(vo.commodities);
 		SalesPO po = new SalesPO(ID, client, salesman, user, storage, commodities, beforePrice, allowance, voucher, remark, afterPrice, type);
 		return getSaleData().update(po);
+	}
+
+	public double getMoney() {
+		if (saleIDs.isEmpty() && backIDs.isEmpty()) {
+			return 0;
+		}
+		double saleMoney = 0;
+		for (String id : saleIDs) {
+			saleMoney += getBeforePrice(id);
+		}
+		for (String id : backIDs) {
+			saleMoney -= getBeforePrice(id);
+		}
+		return saleMoney;
+	}
+
+	public int getNumber() {
+		if (saleIDs.isEmpty() && backIDs.isEmpty()) {
+			return 0;
+		}
+		int saleNumber = 0;
+		for (String id : saleIDs) {
+			saleNumber += getAllCommoditiesNumber(id);
+		}
+		for (String id : backIDs) {
+			saleNumber -= getAllCommoditiesNumber(id);
+		}
+		return saleNumber;
+	}
+	
+	/**
+	 * 得到一个销售单中的所有商品的数量
+	 * @param ID
+	 * @return
+	 * @author Zing
+	 * @version Dec 2, 2014 5:15:27 PM
+	 */
+	private int getAllCommoditiesNumber(String ID) {
+		ArrayList<CommodityItemPO> POs = getSaleData().find(ID).getCommodities();
+		int number = 0;
+		for (CommodityItemPO po : POs) {
+			number += po.getNumber();
+		}
+		return number;
 	}
 	
 

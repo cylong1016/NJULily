@@ -14,13 +14,16 @@ import java.util.ArrayList;
 public class InventoryCheckVO {
 	/** 商品列表 */
 	public ArrayList<CheckCommodityItemVO> commodities;
+	/** 库存均价 */
+	public double avePrice;
 	/** 批号 */
 	public String today;
 	/** 批次 */
 	public String lot;
 	
-	public InventoryCheckVO(ArrayList<CheckCommodityItemVO> commodities, String today, String lot) {
+	public InventoryCheckVO(ArrayList<CheckCommodityItemVO> commodities, double avePrice, String today, String lot) {
 		this.commodities = commodities;
+		this.avePrice =avePrice;
 		this.today = today;
 		this.lot = lot;
 	}

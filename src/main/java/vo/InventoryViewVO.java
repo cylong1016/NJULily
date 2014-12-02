@@ -14,4 +14,11 @@ public class InventoryViewVO {
 	/** 入库金额（也就是进货金额） */
 	public double purMoney;
 	
+	public InventoryViewVO(int saleNumber, int purNumber, double saleMoney, double purMoney) {
+		this.saleNumber = saleNumber;
+		this.purNumber = purNumber;
+		this.saleMoney = saleMoney;
+		this.purMoney = purMoney;
+	}
+	
 }

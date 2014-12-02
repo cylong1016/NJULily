@@ -45,6 +45,11 @@ public class CommodityController implements CommodityBLService{
 		return commodity.findCommo(info, type);
 	}
 
+	public ResultMessage setAlarm(ArrayList<String> IDs, int alarmNumber) {
+		return commodity.setAlarm(IDs, alarmNumber);
+	}
+
+
 
 
 }

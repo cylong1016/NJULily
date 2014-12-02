@@ -9,9 +9,6 @@ import po.CommodityPO;
 import po.CommoditySortPO;
 import vo.CommodityVO;
 import blservice.commodityblservice.CommodityInputInfo;
-import businesslogic.inventorybl.info.CommodityInfo_Inventory;
-import businesslogic.promotionbl.CommodityInfo_Promotion;
-import businesslogic.salebl.CommodityInfo_Sale;
 import dataenum.FindTypeCommo;
 import dataservice.DataFactoryService;
 import dataservice.commoditydataservice.CommodityDataService;
@@ -151,6 +148,30 @@ public class Commodity {
 			VOs.add(vo);
 		}
 		return VOs;
+	}
+	
+	/**
+	 * 设置某些商品的警戒数量
+	 * @param IDs 那些商品的ID
+	 * @param alarmNumber 警戒数量
+	 * @return
+	 * @author Zing
+	 * @version Dec 2, 2014 5:37:06 PM
+	 */
+	public ResultMessage setAlarm(ArrayList<String> IDs, int alarmNumber) {
+		// 如果选择更改的商品现在数量少于设置的警戒数量，返回false
+		for (String ID : IDs) {
+			CommodityPO po = commodityData.find(ID);
+			if (po.getInventoryNum() < alarmNumber) {
+				return ResultMessage.FAILURE;
+			}
+		}
+		for (String ID : IDs) {
+			CommodityPO po = commodityData.find(ID);
+			po.setAlarmNumber(alarmNumber);
+			commodityData.update(po);
+		}
+		return ResultMessage.SUCCESS;
 	}
 	
 	public CommodityDataService getCommodityData() {

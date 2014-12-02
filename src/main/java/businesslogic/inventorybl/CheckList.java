@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import po.CheckCommodityItemPO;
 import vo.CheckCommodityItemVO;
 import businesslogic.commoditybl.CommodityInfo;
 import businesslogic.inventorybl.info.CommodityInfo_Inventory;
@@ -18,12 +17,17 @@ import businesslogic.inventorybl.info.CommodityInfo_Inventory;
  * @version Nov 28, 201410:51:02 AM
  */
 public class CheckList {
+	/** 库存均价 */
+	private double avePrice;
 	/** 批号 */
 	private String today;
 	/** 批次 */
 	private String lot;
 	
 	private ArrayList<CheckListItem> items;
+	/** 库存总数 */
+	public int totalNumber;
+	public double totalPrice;
 	
 	public CheckList(String lot) {
 		this.lot = lot;
@@ -42,8 +46,8 @@ public class CheckList {
 	public ArrayList<CheckListItem> addItems(){
 		CommodityInfo_Inventory info = new CommodityInfo();
 		ArrayList<String> IDs = info.getAllID();
-		for (int i = 0; i < IDs.size(); i++) {
-			CheckListItem item = new CheckListItem(IDs.get(i));
+		for (String ID : IDs) {
+			CheckListItem item = new CheckListItem(ID);
 			items.add(item);
 		}
 		return items;
@@ -56,25 +60,21 @@ public class CheckList {
 	public String getLot() {
 		return lot;
 	}
-
-	public ArrayList<CheckCommodityItemPO> getItemsPO() {
-		ArrayList<CheckCommodityItemPO> pos = new ArrayList<CheckCommodityItemPO>(); 
-		for (int i = 0; i < items.size(); i++) {
-			CheckListItem item = items.get(i);
-			CheckCommodityItemPO po = new CheckCommodityItemPO(item.getName(), item.getType(), item.getNumber(), item.getAvePrice());
-			pos.add(po);
-		}	
-		return pos;
-	}
 	
 	public ArrayList<CheckCommodityItemVO> getItemsVO() {
 		ArrayList<CheckCommodityItemVO> vos = new ArrayList<CheckCommodityItemVO>();
-		for (int i = 0; i < items.size(); i++) {
-			CheckListItem item = items.get(i);
-			CheckCommodityItemVO vo = new CheckCommodityItemVO(item.getName(), item.getType(), item.getNumber(), item.getAvePrice());
+		for (CheckListItem item : items) {
+			CheckCommodityItemVO vo = new CheckCommodityItemVO(item.getName(), item.getType(), item.getNumber(), item.getPrice());
+			totalNumber += item.getNumber();
+			totalPrice += item.getPrice();
 			vos.add(vo);
 		}	
 		return vos;
+	}
+
+	public double getAvePrice() {
+		avePrice = totalPrice/totalNumber;
+		return avePrice;
 	}
 
 	

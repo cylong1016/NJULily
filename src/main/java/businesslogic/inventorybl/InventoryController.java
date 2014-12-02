@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import dataenum.BillType;
 import vo.InventoryBillVO;
 import vo.InventoryCheckVO;
+import vo.InventoryViewVO;
 import message.ResultMessage;
 import blservice.inventoryblservice.InventoryBLService;
 
@@ -15,9 +16,8 @@ public class InventoryController implements InventoryBLService{
 	public InventoryController() {
 		inventory = new Inventory();
 	}
-	public ResultMessage viewInventory(String beginDate, String endDate) {
-		inventory.viewInventory(beginDate, endDate);
-		return null;
+	public InventoryViewVO viewInventory(String beginDate, String endDate) {
+		return inventory.viewInventory(beginDate, endDate);
 	}
 	public InventoryCheckVO checkRecord() {
 		return inventory.checkRecord();

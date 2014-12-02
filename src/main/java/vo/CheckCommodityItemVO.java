@@ -16,14 +16,14 @@ public class CheckCommodityItemVO {
 	public String type;
 	/** 库存数量 */
 	public int number;
-	/** 库存均价 */
-	public double avePrice;
+	/** 每个商品价格 */
+	public double price;
 	
-	public CheckCommodityItemVO(String name, String type, int number, double avePrice) {
+	public CheckCommodityItemVO(String name, String type, int number, double price) {
 		this.name = name;
 		this.type = type;
 		this.number = number;
-		this.avePrice = avePrice;
+		this.price = price;
 	}
 		
 }

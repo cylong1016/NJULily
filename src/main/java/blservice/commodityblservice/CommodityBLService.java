@@ -79,6 +79,16 @@ public interface CommodityBLService {
 	 * @return
 	 */
 	public ArrayList<CommodityVO> findCommo(String info, FindTypeCommo type);
+	
+	/**
+	 * 设置某些商品的警戒数量
+	 * @param IDs 商品们的ID
+	 * @param alarmNumber 警戒数量
+	 * @return
+	 * @author Zing
+	 * @version Dec 2, 2014 5:36:08 PM
+	 */
+	public ResultMessage setAlarm(ArrayList<String> IDs, int alarmNumber);
 
 
 }
