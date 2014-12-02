@@ -48,7 +48,13 @@ public class User {
 	 * @version 2014年11月29日 下午9:24:17
 	 */
 	public ResultMessage login(LoginInfo loginInfo) {
-		current = userData.find(loginInfo.ID);
+		ArrayList<UserPO> pos = userData.show();
+		for(UserPO po : pos) {
+			if (po.getUsername().equals(loginInfo.username)) {
+				current = po;
+				break;
+			}
+		}
 		if (current == null) {
 			return ResultMessage.FAILURE;
 		} else if (!loginInfo.password.equals(current.getPassword())) {
@@ -71,11 +77,11 @@ public class User {
 	 * @author cylong
 	 * @version 2014年11月29日 下午9:25:38
 	 */
-	public String returnUserID() {
-		if (!currentUser.isEmpty()) {
-			return currentUser.get(0).getID();
+	public String returnUsername() {
+		if (currentUser.isEmpty()) {
+			return null;
 		}
-		return null;
+		return currentUser.get(0).getID();
 	}
 
 	/**
@@ -85,7 +91,7 @@ public class User {
 	 * @author cylong
 	 * @version 2014年11月29日 下午9:29:55
 	 */
-	public ResultMessage addUser(UserVO vo) {
+	public ResultMessage add(UserVO vo) {
 		UserPO po = voToPO(vo);
 		return userData.insert(po);
 	}
@@ -97,7 +103,7 @@ public class User {
 	 * @author cylong
 	 * @version 2014年11月29日 下午9:30:23
 	 */
-	public ResultMessage deleteUser(String ID) {
+	public ResultMessage delete(String ID) {
 		return userData.delete(ID);
 	}
 
@@ -105,7 +111,7 @@ public class User {
 	 * 更新用户信息
 	 * 如果该用户没有权限更改的，ui上禁止更改
 	 */
-	public ResultMessage updateUser(UserVO vo) {
+	public ResultMessage update(UserVO vo) {
 		UserPO po = voToPO(vo);
 		return userData.update(po);
 	}

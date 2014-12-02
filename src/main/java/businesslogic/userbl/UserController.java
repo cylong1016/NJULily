@@ -44,35 +44,35 @@ public class UserController implements blservice.userblservice.UserBLService {
 	}
 
 	/**
-	 * @see blservice.userblservice.UserBLService#returnUserID()
+	 * @see blservice.userblservice.UserBLService#returnUsername()
 	 */
 	@Override
-	public String returnUserID() {
-		return user.returnUserID();
+	public String returnUsername() {
+		return user.returnUsername();
 	}
 
 	/**
-	 * @see blservice.userblservice.UserBLService#addUser(vo.UserVO)
+	 * @see blservice.userblservice.UserBLService#add(vo.UserVO)
 	 */
 	@Override
-	public ResultMessage addUser(UserVO vo) {
-		return user.addUser(vo);
+	public ResultMessage add(UserVO vo) {
+		return user.add(vo);
 	}
 
 	/**
-	 * @see blservice.userblservice.UserBLService#deleteUser(java.lang.String)
+	 * @see blservice.userblservice.UserBLService#delete(java.lang.String)
 	 */
 	@Override
-	public ResultMessage deleteUser(String ID) {
-		return user.deleteUser(ID);
+	public ResultMessage delete(String ID) {
+		return user.delete(ID);
 	}
 
 	/**
-	 * @see blservice.userblservice.UserBLService#updateUser(vo.UserVO)
+	 * @see blservice.userblservice.UserBLService#update(vo.UserVO)
 	 */
 	@Override
-	public ResultMessage updateUser(UserVO vo) {
-		return user.updateUser(vo);
+	public ResultMessage update(UserVO vo) {
+		return user.update(vo);
 	}
 
 }

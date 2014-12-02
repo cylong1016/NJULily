@@ -7,16 +7,15 @@ package blservice.userblservice;
  */
 public class LoginInfo {
 
-	/** 登陆ID */
-	public String ID;
+	/** 登陆用户名 */
+	public String username;
 	/** 密码 */
 	public String password;
 	/** 是否记住密码 */
 	public boolean isRemembered;
 
-	public LoginInfo(String iD, String password, boolean isRemembered) {
-		super();
-		this.ID = iD;
+	public LoginInfo(String username, String password, boolean isRemembered) {
+		this.username = username;
 		this.password = password;
 		this.isRemembered = isRemembered;
 	}

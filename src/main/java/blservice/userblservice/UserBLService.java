@@ -45,12 +45,12 @@ public interface UserBLService {
 	public ResultMessage login(LoginInfo loaginInfo);
 
 	/**
-	 * 返回用户保存的ID
-	 * @return 用户登录ID或者null
+	 * 返回用户保存的username
+	 * @return 用户登录username或者null
 	 * @author cylong
 	 * @version 2014年11月29日 下午6:42:27
 	 */
-	public String returnUserID();
+	public String returnUsername();
 
 	/**
 	 * 添加一位用户
@@ -59,14 +59,14 @@ public interface UserBLService {
 	 * @author cylong
 	 * @version 2014年11月29日 下午6:43:15
 	 */
-	public ResultMessage addUser(UserVO vo);
+	public ResultMessage add(UserVO vo);
 
 	/**
 	 * 根据用户ID删除用户
 	 * @param ID
 	 * @return 处理结果
 	 */
-	public ResultMessage deleteUser(String ID);
+	public ResultMessage delete(String ID);
 
 	/**
 	 * 更新一位用户信息
@@ -75,6 +75,6 @@ public interface UserBLService {
 	 * @author cylong
 	 * @version 2014年11月29日 下午6:44:29
 	 */
-	public ResultMessage updateUser(UserVO vo);
+	public ResultMessage update(UserVO vo);
 
 }
