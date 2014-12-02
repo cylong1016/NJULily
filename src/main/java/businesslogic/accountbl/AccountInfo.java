@@ -3,7 +3,9 @@ package businesslogic.accountbl;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import po.AccountPO;
 import vo.AccountVO;
+import businesslogic.accountainitbl.info.AccountInfo_Init;
 import businesslogic.accountbillbl.AccountInfo_AccountBill;
 
 /**
@@ -11,7 +13,7 @@ import businesslogic.accountbillbl.AccountInfo_AccountBill;
  * @author cylong
  * @version 2014年12月1日 下午2:59:53
  */
-public class AccountInfo implements AccountInfo_AccountBill {
+public class AccountInfo implements AccountInfo_AccountBill, AccountInfo_Init{
 
 	private Account account;
 
@@ -31,5 +33,13 @@ public class AccountInfo implements AccountInfo_AccountBill {
 			accounts.put(vo.ID, vo.name);
 		}
 		return accounts;
+	}
+
+	public ArrayList<AccountPO> getAccountPOs() {
+		return account.getAccountData().show();
+	}
+
+	public ArrayList<AccountVO> getAccountVOs(ArrayList<AccountPO> POs) {
+		return account.POstoVOs(POs);
 	}
 }

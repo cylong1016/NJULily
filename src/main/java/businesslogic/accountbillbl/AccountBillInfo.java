@@ -35,6 +35,7 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 	protected TableInfoService<AccountBillPO> getData() {
 		return accountBill.getAccountBillData().getInfo();
 	}
+	
 
 	/**
 	 * @see businesslogic.recordbl.info.ValueObjectInfo_Record#find(java.lang.String)
@@ -55,7 +56,7 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 	}
 
 	/**
-	 * 返回需要进行审核的单子（包括付款单和收款单）
+	 * 返回需要进行审核的单子（包括付款单x和收款单）
 	 */
 	public ArrayList<AccountBillVO> findApproval() {
 		ArrayList<AccountBillPO> POs = getData().show();

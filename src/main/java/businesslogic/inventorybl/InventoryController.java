@@ -23,8 +23,8 @@ public class InventoryController implements InventoryBLService{
 		return inventory.checkRecord();
 	}
 
-	public void buildBill(BillType type) {
-		inventory.buildBill(type);
+	public String getID(BillType type) {
+		return inventory.getID(type);
 	}
 	public void addCommodity(String ID, int number) {
 		inventory.addCommodity(ID, number);	
@@ -37,11 +37,6 @@ public class InventoryController implements InventoryBLService{
 		return inventory.save(remark);
 	}
 	public ArrayList<InventoryBillVO> show(BillType type) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	public ArrayList<InventoryBillVO> show() {
-		// TODO Auto-generated method stub
-		return null;
+		return inventory.show(type);
 	}
 }

@@ -92,15 +92,25 @@ public class Account {
 	 * @version 2014年11月30日 上午2:23:57
 	 */
 	public ArrayList<AccountVO> show() {
-		ArrayList<AccountVO> AccountsVO = new ArrayList<AccountVO>();
-		ArrayList<AccountPO> AccountsPO = accountData.show();
-		for(AccountPO po : AccountsPO) {
-			AccountVO vo = poToVO(po);
-			AccountsVO.add(vo);
-		}
-		return AccountsVO;
+		return POstoVOs(accountData.show());
 	}
-
+	
+	/**
+	 * 把PO集合转换成VO集合
+	 * @param POs
+	 * @return
+	 * @author Zing
+	 * @version Dec 2, 2014 8:44:58 PM
+	 */
+	public ArrayList<AccountVO> POstoVOs(ArrayList<AccountPO> POs) {
+		ArrayList<AccountVO> VOs = new ArrayList<AccountVO>();
+		for(AccountPO po : POs) {
+			AccountVO vo = poToVO(po);
+			VOs.add(vo);
+		}
+		return VOs;
+	}
+ 
 	/**
 	 * AccountPO转化成AccountVO
 	 * @param po AccountPO
@@ -136,5 +146,11 @@ public class Account {
 		AccountPO po = accountData.find(ID);
 		return poToVO(po);
 	}
+
+	public AccountDataService getAccountData() {
+		return accountData;
+	}
+	
+	
 
 }

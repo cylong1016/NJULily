@@ -28,6 +28,11 @@ public class CommodityVO {
 	/** 商品警戒数量 */
 	public int alarmNumber;
 	
+	/** 每次销售后计算平均售价 */
+	public double aveSale;
+	/** 每次进货后计算平均进价 */
+	public double avePur;
+	
 	public CommodityVO(String ID, String name, String type, String sortID, int inventoryNum, double purPrice, double salePrice, double recentPurpPrice, double recentSalePrice, int alarmNumber){
 		super();
 		this.ID = ID;
@@ -40,6 +45,24 @@ public class CommodityVO {
 		this.recentPurPrice = recentPurpPrice;
 		this.recentSalePrice = recentSalePrice;
 		this.alarmNumber = alarmNumber;
+	}
+	
+	/**
+	 * 期初建账的商品条目
+	 * @param ID
+	 * @param name
+	 * @param type
+	 * @param sortID
+	 * @param aveSale
+	 * @param avePur
+	 */
+	public CommodityVO(String ID, String name, String type, String sortID, double aveSale, double avePur) {
+		this.ID = ID;
+		this.name = name;
+		this.type = type;
+		this.sortID = sortID;
+		this.aveSale = aveSale;
+		this.avePur = avePur;
 	}
 	
 }

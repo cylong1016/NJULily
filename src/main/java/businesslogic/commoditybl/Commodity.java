@@ -75,7 +75,7 @@ public class Commodity {
 	 */
 	public CommodityVO show(String ID) {
 		CommodityPO po = commodityData.find(ID);
-		CommodityVO vo = POToVO(po);
+		CommodityVO vo = POtoVO(po);
 		return vo;
 	}
 	
@@ -144,7 +144,7 @@ public class Commodity {
 		ArrayList<CommodityVO> VOs = new ArrayList<CommodityVO>();
 		ArrayList<CommodityPO> POs = commodityData.find(info, type);
 		for (CommodityPO po : POs) {
-			CommodityVO vo = POToVO(po);
+			CommodityVO vo = POtoVO(po);
 			VOs.add(vo);
 		}
 		return VOs;
@@ -185,7 +185,7 @@ public class Commodity {
 	 * @author Zing
 	 * @version Dec 1, 2014 9:33:15 PM
 	 */
-	private CommodityVO POToVO(CommodityPO po) {
+	private CommodityVO POtoVO(CommodityPO po) {
 		String ID = po.getID();
 		String name = po.getName();
 		String type = po.getType();

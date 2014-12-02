@@ -14,7 +14,7 @@ public class InventoryBillPO extends PersistentObject {
 
 	private static final long serialVersionUID = 1L;
 	/** 单据ID */
-	private static String ID;
+	private String ID;
 	/** 商品集合（赠送单） */
 	private ArrayList<CommodityItemPO> commodities;
 	/** 备注 */
@@ -24,8 +24,9 @@ public class InventoryBillPO extends PersistentObject {
 	/** 单据状态 */
 	private BillState state;
 
-	public InventoryBillPO(BillType billType, ArrayList<CommodityItemPO> commodities, String remark) {
+	public InventoryBillPO(String ID, BillType billType, ArrayList<CommodityItemPO> commodities, String remark) {
 		super(ID);
+		this.ID = ID;
 		this.billType = billType;
 		this.commodities = commodities;
 		this.remark = remark;

@@ -28,8 +28,9 @@ public class CommodityPO extends PersistentObject {
 	/** 商品警戒数量 */
 	private int alarmNumber;
 	
+	/** 每次销售后计算平均售价 */
 	private double aveSale;
-	
+	/** 每次进货后计算平均进价 */
 	private double avePur;
 
 	/**
@@ -49,6 +50,25 @@ public class CommodityPO extends PersistentObject {
 		this.purPrice = purPrice;
 		this.salePrice = salePrice;
 		this.alarmNumber = alarmNumber;
+	}
+	
+	/**
+	 * 期初建账的商品信息
+	 * @param ID
+	 * @param name
+	 * @param type
+	 * @param sortID
+	 * @param aveSale
+	 * @param avePur
+	 */
+	public CommodityPO(String ID, String name, String type, String sortID, double aveSale, double avePur) {
+		super(ID);
+		this.ID = ID;
+		this.name = name;
+		this.type = type;
+		this.sortID = sortID;
+		this.aveSale = aveSale;
+		this.avePur = avePur;
 	}
 
 	/**
@@ -124,5 +144,31 @@ public class CommodityPO extends PersistentObject {
 	public void setAlarmNumber(int alarmNumber) {
 		this.alarmNumber = alarmNumber;
 	}
+
+	public double getAveSale() {
+		return aveSale;
+	}
+
+	public void setAveSale(double aveSale) {
+		this.aveSale = aveSale;
+	}
+
+	public double getAvePur() {
+		return avePur;
+	}
+
+	public void setAvePur(double avePur) {
+		this.avePur = avePur;
+	}
+
+	public void setRecentPurPrice(double recentPurPrice) {
+		this.recentPurPrice = recentPurPrice;
+	}
+
+	public void setRecentSalePrice(double recentSalePrice) {
+		this.recentSalePrice = recentSalePrice;
+	}
+	
+	
 
 }

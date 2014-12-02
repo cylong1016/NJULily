@@ -42,14 +42,14 @@ public interface InventoryBLService {
 	 * @version Dec 2, 2014 5:57:18 PM
 	 */
 	public ArrayList<InventoryBillVO> show(BillType type);
-	
+		
 	/**
-	 * 建立库存报警单、报损单、报溢单、赠送单之前需要调用，确定建立的单据类型
+	 * 建立库存报警单、报损单、报溢单、赠送单之前需要调用，确定建立的单据类型，得到ID
 	 * @param type
 	 * @author Zing
 	 * @version Nov 30, 2014 3:41:46 PM
 	 */
-	public void buildBill(BillType type);
+	public String getID(BillType type);
 	
 	
 	/**

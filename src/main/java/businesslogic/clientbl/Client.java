@@ -48,7 +48,7 @@ public class Client {
 	 * @author cylong
 	 * @version 2014年11月29日 下午4:31:51
 	 */
-	private ArrayList<ClientVO> posToVOs(ArrayList<ClientPO> clientsPO) {
+	public ArrayList<ClientVO> posToVOs(ArrayList<ClientPO> clientsPO) {
 		ArrayList<ClientVO> clientsVO = new ArrayList<ClientVO>();
 		for(int i = 0; i < clientsPO.size(); i++) {
 			ClientPO po = clientsPO.get(i);
@@ -180,5 +180,11 @@ public class Client {
 	public ResultMessage deletClient(String ID) {
 		return clientData.delete(ID);
 	}
+
+	public ClientDataService getClientData() {
+		return clientData;
+	}
+	
+	
 
 }

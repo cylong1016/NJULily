@@ -39,15 +39,24 @@ public class CommoditySort {
 	 * @version Dec 1, 2014 7:37:48 PM
 	 */
 	public ArrayList<CommoditySortVO> show() {
-		// TODO all 方法！！
-		ArrayList<CommoditySortPO> POs = null;
+		return allPOtoVO(commoditySortData.show());
+	}
+	
+	/**
+	 * 把每一个PO转VO
+	 * @param POs
+	 * @return
+	 * @author Zing
+	 * @version Dec 2, 2014 8:34:56 PM
+	 */
+	public ArrayList<CommoditySortVO> allPOtoVO(ArrayList<CommoditySortPO> POs) {
 		ArrayList<CommoditySortVO> VOs = new ArrayList<CommoditySortVO>();
 		for (CommoditySortPO po : POs) {	
 			VOs.add(POtoVO(po));
 		}
 		return VOs;
 	}
-	
+
 	/**
 	 * 根据商品分类的ID返回单个商品分类
 	 * @param ID
@@ -133,5 +142,11 @@ public class CommoditySort {
 		CommoditySortVO vo = new CommoditySortVO(ID, name, fatherID, childrenID, commoditiesID);
 		return vo;
 	}
+
+	public CommoditySortDataService getCommoditySortData() {
+		return commoditySortData;
+	}
+	
+	
 
 }

@@ -22,6 +22,8 @@ public class Inventory extends ChangeCommodityItems {
 		
 	private BillType type;
 	
+	private String ID;
+	
 	public Inventory() {
 		
 	}
@@ -70,19 +72,18 @@ public class Inventory extends ChangeCommodityItems {
 		return vo;
 	}
 	
-	public String getID(BillType type) {
-		return getInventoryBill().getID();
-	}
-	
 	/**
-	 * 最开始要创建单据的时候，确定单据类型
+	 * 最开始要创建单据时，确定单据类型，返回单据ID
 	 * @param type
+	 * @return
 	 * @author Zing
-	 * @version Nov 29, 2014 4:34:53 PM
+	 * @version Dec 2, 2014 7:17:13 PM
 	 */
-	public void buildBill(BillType type) {
+	public String getID(BillType type) {
 		this.type = type;
 		list = new BillList();
+		this.ID = getInventoryData().getID(type);
+		return ID;
 	}
 	
 	/**
@@ -94,7 +95,7 @@ public class Inventory extends ChangeCommodityItems {
 	 */
 	public ArrayList<InventoryBillVO> show(BillType type) {
 		ArrayList<InventoryBillVO> VOs = new ArrayList<InventoryBillVO>();
-		ArrayList<InventoryBillPO> POs = getInventoryData().show();
+		ArrayList<InventoryBillPO> POs = getInventoryData().show(type);
 		for (int i = 0; i < POs.size(); i++) {
 			InventoryBillPO po = POs.get(i);
 			InventoryBillVO vo = poToVo(po);
@@ -147,7 +148,7 @@ public class Inventory extends ChangeCommodityItems {
 	 * @version Dec 2, 2014 5:34:33 PM
 	 */
 	private InventoryBillPO getInventoryBill(){
-		InventoryBillPO po = new InventoryBillPO(type, list.getCommodityPOs(), list.getRemark());
+		InventoryBillPO po = new InventoryBillPO(ID, type, list.getCommodityPOs(), list.getRemark());
 		return po;
 	}
 	
