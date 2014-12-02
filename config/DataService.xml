@@ -45,4 +45,33 @@
 		<maxID>0</maxID>
 		<IDMaxBit>2</IDMaxBit>
 	</Data>
+	<Data>
+		<name>CashBillData</name>
+		<path>data/CashBillList.ser</path>
+		<prefix>XJFYD</prefix>
+		<maxID>0</maxID>
+		<IDMaxBit>5</IDMaxBit>
+		<dateFormat>yyyyMMdd</dateFormat>
+		<dateRecord>20141111</dateRecord>
+	</Data>
+	<Data>
+		<name>SaleData</name>
+		<path>data/SaleList.ser</path>
+		<saleID>XSD</saleID>
+		<salebackID>XSTHD</salebackID>
+		<maxID>0</maxID>
+		<IDMaxBit>5</IDMaxBit>
+		<dateFormat>yyyyMMdd</dateFormat>
+		<dateRecord>20141111</dateRecord>
+	</Data>
+	<Data>
+		<name>PurchaseData</name>
+		<path>data/PurchaseList.ser</path>
+		<purchaseID>JHD</purchaseID>
+		<purchasebackID>JHTHD</purchasebackID>
+		<maxID>0</maxID>
+		<IDMaxBit>5</IDMaxBit>
+		<dateFormat>yyyyMMdd</dateFormat>
+		<dateRecord>20141111</dateRecord>
+	</Data>
 </DataService>
