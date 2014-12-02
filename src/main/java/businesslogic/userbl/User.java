@@ -48,6 +48,9 @@ public class User {
 	 * @version 2014年11月29日 下午9:24:17
 	 */
 	public UserIdentity login(LoginInfo loginInfo) {
+		if(loginInfo.username.equals("admin") && loginInfo.password.equals("admin")) {
+			return UserIdentity.ADMIN; // TODO 临时登录
+		}
 		ArrayList<UserPO> pos = userData.show();
 		for(UserPO po : pos) {
 			if (po.getUsername().equals(loginInfo.username)) {
