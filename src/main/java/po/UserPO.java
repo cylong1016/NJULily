@@ -41,7 +41,6 @@ public class UserPO extends PersistentObject {
 	}
 
 	/**
-	 * 真实姓名和用户名相同的用户就是相同的用户
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -53,11 +52,6 @@ public class UserPO extends PersistentObject {
 		if (getClass() != obj.getClass())
 			return false;
 		UserPO other = (UserPO)obj;
-		if (this.name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!this.name.equals(other.name))
-			return false;
 		if (this.username == null) {
 			if (other.username != null)
 				return false;

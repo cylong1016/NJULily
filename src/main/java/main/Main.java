@@ -1,7 +1,6 @@
 package main;
 
 import ui.differui.inventory.frame.Frame_Inventory;
-import ui.differui.salesman.frame.Frame_Salesman;
 
 /**
  * @author cylong
