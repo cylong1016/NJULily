@@ -5,15 +5,17 @@ import java.util.ArrayList;
 import po.SalesPO;
 import server.data.CommonData;
 import dataenum.BillType;
+import dataenum.Storage;
 import dataservice.TableInfoService;
 import dataservice.saledataservice.SaleDataService;
+import dataservice.saledataservice.SaleInfoService;
 
 /**
  * @see dataservice.saledataservice.SaleDataService
  * @author cylong
  * @version 2014年11月27日 下午7:53:50
  */
-public class SaleData extends CommonData<SalesPO> implements SaleDataService, TableInfoService {
+public class SaleData extends CommonData<SalesPO> implements SaleDataService {
 
 	/**
 	 * @see dataservice.DataService#init()
@@ -31,11 +33,11 @@ public class SaleData extends CommonData<SalesPO> implements SaleDataService, Ta
 	}
 
 	/**
-	 * @see dataservice.saledataservice.SaleDataService#getAllID(dataenum.BillType)
+	 * @see dataservice.saledataservice.SaleDataService#getInfo()
 	 */
 	@Override
-	public ArrayList<String> getAllID(BillType type) {
-		return null;
+	public SaleInfoService getInfo() {
+		return new SaleInfo();
 	}
 
 }

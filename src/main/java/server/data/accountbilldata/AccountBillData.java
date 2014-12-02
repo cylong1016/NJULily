@@ -35,13 +35,13 @@ public class AccountBillData extends CommonData<AccountBillPO> implements Accoun
 		expenseID = parsexml.getValue("expenseID");
 		payID = parsexml.getValue("payID");
 		dateRecord = parsexml.getValue("dateRecord");
-		maxID = 0; // 默认的最大ID为0
 		String dateFormat = parsexml.getValue("dateFormat");
 		SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
 		currentDate = sdf.format(new Date());
 	}
 
 	/**
+	 * 超过一天最大ID数量时候返回null
 	 * @see dataservice.accountbilldataservice.AccountBillDataService#getID(dataenum.BillType)
 	 */
 	@Override
@@ -52,7 +52,11 @@ public class AccountBillData extends CommonData<AccountBillPO> implements Accoun
 			parsexml.setValue("dateRecord", currentDate);
 			maxID = 0;	// 初始化最大ID
 		}
-		return getPreID(type) + super.getID();
+		String ID = super.getID();
+		if(ID.length() > IDMaxBit) {	// 超过一天单据的最大数量
+			return null;
+		}
+		return getPreID(type) + ID;
 	}
 
 	/**
