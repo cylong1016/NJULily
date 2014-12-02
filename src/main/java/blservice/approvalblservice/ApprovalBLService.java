@@ -2,6 +2,7 @@ package blservice.approvalblservice;
 
 import java.util.ArrayList;
 
+import dataenum.BillType;
 import vo.ApprovalVO;
 import vo.ValueObject;
 import message.ResultMessage;
@@ -35,12 +36,12 @@ public interface ApprovalBLService {
 	 * 修改单据内容
 	 * @return
 	 */
-	public ResultMessage updateBill(ArrayList<ValueObject> VOs);
+	public ResultMessage updateBill(ValueObject vo, BillType billType);
 	
 	/**
 	 * 确认单据内容没有错误
 	 * @return
 	 */
-	public ResultMessage passBill(ArrayList<ApprovalVO> VOs);
+	public ResultMessage passBill(ArrayList<ValueObject> VOs);
 
 }

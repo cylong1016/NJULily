@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import config.RMI;
 import blservice.purchaseblservice.PurInputInfo;
 import businesslogic.clientbl.ClientInfo;
-import businesslogic.common.CommodityItemPOtoVO;
+import businesslogic.common.ChangeCommodityItems;
 import po.PurchasePO;
 import message.ResultMessage;
 import vo.CommodityItemVO;
@@ -17,7 +17,7 @@ import dataenum.Storage;
 import dataservice.DataFactoryService;
 import dataservice.purchasedataservice.PurchaseDataService;
 
-public class Purchase extends CommodityItemPOtoVO {
+public class Purchase extends ChangeCommodityItems {
 	
 	private PurchaseList list;
 	
@@ -82,7 +82,7 @@ public class Purchase extends CommodityItemPOtoVO {
 		businesslogic.purchasebl.ClientInfo_Purchase info = new ClientInfo();
 		String clientName = info.getName(list.getClientID());
 		Storage storage = list.getStorage();
-		po = new PurchasePO(ID, clientName, "user", storage, list.getCommodities(), sumPrice, type);	
+		po = new PurchasePO(ID, clientName, "user", storage, list.getCommodities(), sumPrice, list.getRemark(), type);	
 		return po;
 	}
 	
@@ -98,7 +98,7 @@ public class Purchase extends CommodityItemPOtoVO {
 		String user = po.getUser();
 		Storage storage = po.getStorage();
 		ArrayList<CommodityItemVO> commodities = itemPOToVO(po.getCommodities());
-		double sumPrice = po.getSumPrice();
+		double sumPrice = po.getBeforePrice();
 		BillType type = po.getType();
 		BillState state = po.getState();
 		PurchaseVO vo = new PurchaseVO(type, ID, client, user, storage, commodities, sumPrice, state);

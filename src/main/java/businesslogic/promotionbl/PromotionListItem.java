@@ -1,6 +1,6 @@
 package businesslogic.promotionbl;
 
-import businesslogic.commoditybl.Commodity;
+import businesslogic.commoditybl.CommodityInfo;
 
 public class PromotionListItem {
 	/** 商品编号 */
@@ -25,7 +25,7 @@ public class PromotionListItem {
 	 */
 	public PromotionListItem(String ID, int number) {
 		this.ID = ID;
-		info = new Commodity();
+		info = new CommodityInfo();
 		this.name = info.getName(ID);
 		this.type = info.getType(ID);
 		this.price = info.getPurPrice(ID);
@@ -40,7 +40,7 @@ public class PromotionListItem {
 	 */
 	public PromotionListItem(String ID, int number, double price) {
 		this.ID = ID;
-		info = new Commodity();
+		info = new CommodityInfo();
 		this.name = info.getName(ID);
 		this.type = info.getType(ID);
 		this.price = price;

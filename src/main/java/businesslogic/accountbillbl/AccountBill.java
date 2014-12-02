@@ -177,7 +177,7 @@ public class AccountBill {
 		ArrayList<AccountBillItemVO> itemVOList = new ArrayList<AccountBillItemVO>();
 		for(AccountBillItemPO po : itemPOList) {
 			String accountID = po.getAccountID();
-			int money = po.getMoney();
+			double money = po.getMoney();
 			String remark = po.getRemark();
 			AccountBillItemVO vo = new AccountBillItemVO(accountID, money, remark);
 			itemVOList.add(vo);

@@ -11,7 +11,7 @@ import vo.CommodityItemVO;
 import vo.InventoryBillVO;
 import vo.PromotionVO;
 import blservice.promotionblservice.PromoInputInfo;
-import businesslogic.inventorybl.Inventory;
+import businesslogic.inventorybl.InventoryInfo;
 import dataenum.PromotionType;
 import dataservice.DataFactoryService;
 import dataservice.promotiondataservice.PromotionDataService;
@@ -76,7 +76,7 @@ public class Promotion {
 	 * @version Nov 30, 2014 9:52:32 AM
 	 */
 	public ArrayList<InventoryBillVO> showGifts() {
-		InventoryInfo_Promotion info = new Inventory();
+		InventoryInfo_Promotion info = new InventoryInfo();
 		return info.getGifts();
 	}
 

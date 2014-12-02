@@ -8,8 +8,8 @@ import po.SalesPO;
 import vo.CommodityItemVO;
 import vo.SalesVO;
 import blservice.saleblservice.SaleInputInfo;
-import businesslogic.clientbl.Client;
-import businesslogic.common.CommodityItemPOtoVO;
+import businesslogic.clientbl.ClientInfo;
+import businesslogic.common.ChangeCommodityItems;
 import config.RMI;
 import dataenum.BillState;
 import dataenum.BillType;
@@ -22,7 +22,7 @@ import dataservice.saledataservice.SaleDataService;
  * @author Zing
  * @version Nov 15, 2014 10:07:38 AM
  */
-public class Sale extends CommodityItemPOtoVO {
+public class Sale extends ChangeCommodityItems {
 
 	/** 销售单 */
 	private SaleList list;

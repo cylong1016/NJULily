@@ -30,7 +30,7 @@ public class PurchaseVO extends ValueObject{
 	/** 商品列表清单 */
 	public ArrayList<CommodityItemVO> commodities;
 	/** 总额*/
-	public double sumPrice;
+	public double beforePrice;
 	/** 备注 */
 	public String remark;
 	public BillType type;
@@ -38,14 +38,14 @@ public class PurchaseVO extends ValueObject{
 	public BillState state;
 	
 	public PurchaseVO(BillType type, String ID, String client, String user,  Storage storage, 
-			ArrayList<CommodityItemVO> commodities, double sumPrice, BillState state) {
+			ArrayList<CommodityItemVO> commodities, double beforePrice, BillState state) {
 		this.type = type; 
 		this.id = ID;
 		this.client = client;
 		this.user = user;
 		this.storage = storage;
 		this.commodities = commodities;
-		this.sumPrice = sumPrice;
+		this.beforePrice = beforePrice;
 		this.state = state;
 	}
 }

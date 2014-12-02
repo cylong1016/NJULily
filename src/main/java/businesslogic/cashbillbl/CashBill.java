@@ -4,8 +4,6 @@ import java.rmi.Naming;
 import java.util.ArrayList;
 
 import config.RMI;
-import businesslogic.common.CommodityItemPOtoVO;
-import businesslogic.recordbl.info.ValueObjectInfo_Record;
 import po.CashBillPO;
 import po.CashItemPO;
 import vo.CashBillVO;
@@ -13,10 +11,8 @@ import vo.CashItemVO;
 import message.ResultMessage;
 import dataenum.BillState;
 import dataenum.BillType;
-import dataenum.Storage;
 import dataservice.DataFactoryService;
 import dataservice.cashbilldataservice.CashBillDataService;
-import dataservice.saledataservice.SaleDataService;
 /**
  * 制定现金费用单
  * (管理报销等现金操作，单据中包含：
@@ -93,10 +89,17 @@ public class CashBill {
 		// TODO 存在本地
 		return null;
 	}
-
+	
+	/**
+	 * 返回所有的现金费用单
+	 * @param billType
+	 * @return
+	 * @author Zing
+	 * @version Dec 2, 2014 1:56:03 PM
+	 */
 	public ArrayList<CashBillVO> show(BillType billType) {
 		ArrayList<CashBillVO> VOs = new ArrayList<CashBillVO>();
-		ArrayList<CashBillPO> POs = getCashBillData().find(billType);
+		ArrayList<CashBillPO> POs = getCashBillData().show();
 		for (int i = 0; i < POs.size(); i++) {
 			CashBillVO vo = POToVO(POs.get(i));
 			VOs.add(vo);

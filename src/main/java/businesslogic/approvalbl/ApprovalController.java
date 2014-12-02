@@ -2,6 +2,7 @@ package businesslogic.approvalbl;
 
 import java.util.ArrayList;
 
+import dataenum.BillType;
 import message.ResultMessage;
 import vo.ApprovalVO;
 import vo.ValueObject;
@@ -19,11 +20,11 @@ public class ApprovalController implements ApprovalBLService{
 		return approval.show();
 	}
 
-	public ResultMessage updateBill(ArrayList<ValueObject> VOs) {
-		return approval.updateBill(VOs);
+	public ResultMessage updateBill(ValueObject vo, BillType billType) {
+		return approval.updateBill(vo, billType);
 	}
 
-	public ResultMessage passBill(ArrayList<ApprovalVO> VOs) {
+	public ResultMessage passBill(ArrayList<ValueObject> VOs) {
 		return approval.passBill(VOs);
 	}
 

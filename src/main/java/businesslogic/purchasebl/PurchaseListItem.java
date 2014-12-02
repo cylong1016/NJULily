@@ -1,6 +1,6 @@
 package businesslogic.purchasebl;
 
-import businesslogic.commoditybl.Commodity;
+import businesslogic.commoditybl.CommodityInfo;
 import businesslogic.purchasebl.CommodityInfo_Purchase;
 
 /**
@@ -35,7 +35,7 @@ public class PurchaseListItem {
 	public PurchaseListItem(String ID, int number, double price, String remark){
 		this.number = number;
 		this.ID = ID;
-		info = new Commodity();
+		info = new CommodityInfo();
 		this.name = info.getName(ID);
 		this.type = info.getType(ID);
 		this.price = price;

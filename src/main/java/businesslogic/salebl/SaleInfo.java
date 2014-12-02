@@ -2,6 +2,7 @@ package businesslogic.salebl;
 
 import java.util.ArrayList;
 
+import message.ResultMessage;
 import businesslogic.approvalbl.ValueObject_Approval;
 import businesslogic.common.Info;
 import businesslogic.inventorybl.info.SaleInfo_Inventory;
@@ -9,14 +10,14 @@ import businesslogic.recordbl.info.SaleInfo_Record;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
 import po.CommodityItemPO;
 import po.SalesPO;
-import server.data.saledata.SaleData;
 import vo.SalesVO;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Storage;
+import dataservice.TableInfoService;
 import dataservice.saledataservice.SaleDataService;
 
-public class SaleInfo extends Info<SaleDataService> implements SaleInfo_Inventory, SaleInfo_Record, ValueObjectInfo_Record<SalesVO>, ValueObject_Approval<SalesVO>{
+public class SaleInfo extends Info<SalesPO> implements SaleInfo_Inventory, SaleInfo_Record, ValueObjectInfo_Record<SalesVO>, ValueObject_Approval<SalesVO>{
 	
 	private Sale sale;
 	
@@ -26,7 +27,11 @@ public class SaleInfo extends Info<SaleDataService> implements SaleInfo_Inventor
 		sale = new Sale();
 	}
 	
-	protected  SaleDataService getData() {
+	protected  TableInfoService<SalesPO> getData() {
+		return sale.getSaleData().getInfo();
+	}
+	
+	private SaleDataService getSaleData() {
 		return sale.getSaleData();
 	}
 	
@@ -57,13 +62,13 @@ public class SaleInfo extends Info<SaleDataService> implements SaleInfo_Inventor
 	}
 	
 	public SalesVO find(String ID) {
-		SalesVO vo = sale.poToVo(getData().find(ID));
+		SalesVO vo = sale.poToVo(getSaleData().find(ID));
 		return vo;
 	}
 
 	public String getCommodityID(String ID, String commodityName) {
 		this.ID = ID;
-		ArrayList<CommodityItemPO> POs= getData().find(ID).getCommodities();
+		ArrayList<CommodityItemPO> POs= getSaleData().find(ID).getCommodities();
 		for (int i = 0; i < POs.size(); i++) {
 			if (POs.get(i).getName().equals(commodityName)) {
 				return POs.get(i).getID();
@@ -80,7 +85,7 @@ public class SaleInfo extends Info<SaleDataService> implements SaleInfo_Inventor
 	 * @version Dec 1, 2014 9:04:04 AM
 	 */
 	private CommodityItemPO findCommodityItemPO(String ID) {
-		ArrayList<CommodityItemPO> commodityPo = getData().find(this.ID).getCommodities();
+		ArrayList<CommodityItemPO> commodityPo = getSaleData().find(this.ID).getCommodities();
 		for (int i = 0; i < commodityPo.size(); i++) {
 			if (commodityPo.get(i).getID().equals(ID)) {
 				return commodityPo.get(i);
@@ -111,7 +116,7 @@ public class SaleInfo extends Info<SaleDataService> implements SaleInfo_Inventor
 	 * 查找指定销售单的折扣后价格（不包括代金券）
 	 */
 	public double getBeforePrice(String ID) {
-		SalesPO po = getData().find(ID);
+		SalesPO po = getSaleData().find(ID);
 		return po.getBeforePrice();
 	}
 
@@ -119,21 +124,21 @@ public class SaleInfo extends Info<SaleDataService> implements SaleInfo_Inventor
 	 * 查找指定销售单的代金券
 	 */
 	public double getVoucher(String ID) {
-		return getData().find(ID).getVoucher();
+		return getSaleData().find(ID).getVoucher();
 	}
 
 	/**
 	 * 查找指定销售单的折扣
 	 */
 	public double getAllowance(String ID) {
-		return getData().find(ID).getVoucher();
+		return getSaleData().find(ID).getVoucher();
 	}
 
 	/**
 	 * 查找需要审批的单子
 	 */
 	public ArrayList<SalesVO> findApproval() {
-		ArrayList<SalesPO> POs = getData().show();
+		ArrayList<SalesPO> POs = getSaleData().show();
 		ArrayList<SalesPO> approvalPO = new ArrayList<SalesPO>();
 		for (SalesPO po : POs) {
 			if (po.getState() == BillState.APPROVALING) {
@@ -147,5 +152,23 @@ public class SaleInfo extends Info<SaleDataService> implements SaleInfo_Inventor
 		}
 		return VOs;
 	}
+
+	public ResultMessage update(SalesVO vo) {
+		String ID = vo.ID;
+		String client = vo.client;
+		String salesman = vo.salesman;
+		String user = vo.user;
+		Storage storage = vo.storage;
+		double beforePrice = vo.beforePrice;
+		double allowance = vo.allowance;
+		double voucher = vo.voucher;
+		String remark = vo.remark;
+		double afterPrice = vo.afterPrice;
+		BillType type = vo.type;
+		ArrayList<CommodityItemPO> commodities = sale.itemsVOtoPO(vo.commodities);
+		SalesPO po = new SalesPO(ID, client, salesman, user, storage, commodities, beforePrice, allowance, voucher, remark, afterPrice, type);
+		return getSaleData().update(po);
+	}
+	
 
 }

@@ -1,6 +1,6 @@
 package businesslogic.inventorybl;
 
-import businesslogic.commoditybl.Commodity;
+import businesslogic.commoditybl.CommodityInfo;
 import businesslogic.inventorybl.info.CommodityInfo_Inventory;
 
 /**
@@ -23,7 +23,7 @@ public class CheckListItem {
 	
 	public CheckListItem(String ID) {
 		this.commodityID = ID;
-		CommodityInfo_Inventory info = new Commodity();
+		CommodityInfo_Inventory info = new CommodityInfo();
 		this.name = info.getName(ID);
 		this.type = info.getType(ID);
 		this.number = info.getNumber(ID);

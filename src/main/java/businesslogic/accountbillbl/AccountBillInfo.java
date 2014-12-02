@@ -2,7 +2,10 @@ package businesslogic.accountbillbl;
 
 import java.util.ArrayList;
 
+import message.ResultMessage;
+import po.AccountBillItemPO;
 import po.AccountBillPO;
+import vo.AccountBillItemVO;
 import vo.AccountBillVO;
 import businesslogic.approvalbl.ValueObject_Approval;
 import businesslogic.common.Info;
@@ -51,6 +54,9 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 		return IDs;
 	}
 
+	/**
+	 * 返回需要进行审核的单子（包括付款单和收款单）
+	 */
 	public ArrayList<AccountBillVO> findApproval() {
 		ArrayList<AccountBillPO> POs = getData().show();
 		ArrayList<AccountBillPO> approvalPO = new ArrayList<AccountBillPO>();
@@ -65,6 +71,28 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 			VOs.add(vo);
 		}
 		return VOs;
+	}
+
+	public ResultMessage update(AccountBillVO vo) {
+		String ID = vo.ID;
+		String clientID = vo.clientID;
+		String userID = vo.userID;
+		BillType type = vo.type;
+		ArrayList<AccountBillItemPO> bills = itemsVOtoPO(vo.bills);
+		AccountBillPO po = new AccountBillPO(ID, clientID, userID, bills, type);
+		return accountBill.getAccountBillData().update(po);
+	}
+	
+	private ArrayList<AccountBillItemPO> itemsVOtoPO(ArrayList<AccountBillItemVO> VOs) {
+		ArrayList<AccountBillItemPO> POs = new ArrayList<AccountBillItemPO>();
+		for (AccountBillItemVO vo : VOs) {
+			String accountID = vo.accountID;
+			double money = vo.money;
+			String remark = vo.remark;
+			AccountBillItemPO po = new AccountBillItemPO(accountID, money, remark);
+			POs.add(po);
+		}
+		return POs;
 	}
 
 }

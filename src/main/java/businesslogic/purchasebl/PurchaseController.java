@@ -6,7 +6,6 @@ import message.ResultMessage;
 import vo.CommodityItemVO;
 import vo.PurchaseVO;
 import dataenum.BillType;
-import dataenum.Storage;
 import blservice.purchaseblservice.PurInputInfo;
 import blservice.purchaseblservice.PurchaseBLService;
 
@@ -18,24 +17,24 @@ public class PurchaseController implements PurchaseBLService{
 		purchase = new Purchase();
 	}
 	
-	public ArrayList<PurchaseVO> show() {
-		return null;
+	public ArrayList<PurchaseVO> show(BillType billType) {
+		return purchase.show(billType);
 	}
 
 	public String getID(BillType type) {
-		return null;
+		return purchase.getID(type);
 	}
 
 	public void addCommodities(CommodityItemVO item) {
-		
+		purchase.addCommodities(item);
 	}
 
 	public ResultMessage submit(PurInputInfo info) {
-		return null;
+		return purchase.submit(info);
 	}
 
 	public ResultMessage save(PurInputInfo info) {
-		return null;
+		return purchase.save(info);
 	}
 
 }

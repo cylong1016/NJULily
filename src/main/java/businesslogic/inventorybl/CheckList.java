@@ -6,7 +6,7 @@ import java.util.Date;
 
 import po.CheckCommodityItemPO;
 import vo.CheckCommodityItemVO;
-import businesslogic.commoditybl.Commodity;
+import businesslogic.commoditybl.CommodityInfo;
 import businesslogic.inventorybl.info.CommodityInfo_Inventory;
 
 /**
@@ -40,7 +40,7 @@ public class CheckList {
 	}
 	
 	public ArrayList<CheckListItem> addItems(){
-		CommodityInfo_Inventory info = new Commodity();
+		CommodityInfo_Inventory info = new CommodityInfo();
 		ArrayList<String> IDs = info.getAllID();
 		for (int i = 0; i < IDs.size(); i++) {
 			CheckListItem item = new CheckListItem(IDs.get(i));

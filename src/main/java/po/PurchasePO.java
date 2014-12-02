@@ -29,7 +29,7 @@ public class PurchasePO extends PersistentObject {
 	/** 商品列表清单 */
 	private ArrayList<CommodityItemPO> commodities;
 	/** 总额 */
-	private double sumPrice;
+	private double beforePrice;
 	/** 备注 */
 	private String remark;
 	/** 单据类型 */
@@ -37,15 +37,16 @@ public class PurchasePO extends PersistentObject {
 	/** 单据状态 */
 	private BillState state;
 
-	public PurchasePO(String ID, String client, String user, Storage storage, ArrayList<CommodityItemPO> commodities, double sumPrice, BillType type) {
+	public PurchasePO(String ID, String client, String user, Storage storage, ArrayList<CommodityItemPO> commodities, double beforePrice, String remark, BillType type) {
 		super(ID);
 		this.ID = ID;
 		this.client = client;
 		this.user = user;
 		this.storage = storage;
 		this.commodities = commodities;
-		this.sumPrice = sumPrice;
+		this.beforePrice = beforePrice;
 		this.type = type;
+		this.remark = remark;
 		this.state = BillState.APPROVALING;
 	}
 
@@ -77,8 +78,8 @@ public class PurchasePO extends PersistentObject {
 		return commodities;
 	}
 
-	public double getSumPrice() {
-		return sumPrice;
+	public double getBeforePrice() {
+		return beforePrice;
 	}
 
 	public String getRemark() {

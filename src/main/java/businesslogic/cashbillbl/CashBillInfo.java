@@ -2,19 +2,21 @@ package businesslogic.cashbillbl;
 
 import java.util.ArrayList;
 
+import message.ResultMessage;
 import po.CashBillPO;
-import po.PurchasePO;
+import po.CashItemPO;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Storage;
+import dataservice.TableInfoService;
 import dataservice.cashbilldataservice.CashBillDataService;
 import vo.CashBillVO;
-import vo.PurchaseVO;
+import vo.CashItemVO;
 import businesslogic.approvalbl.ValueObject_Approval;
 import businesslogic.common.Info;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
 
-public class CashBillInfo extends Info<CashBillDataService> implements ValueObjectInfo_Record<CashBillVO>, ValueObject_Approval<CashBillVO>{
+public class CashBillInfo extends Info<CashBillPO> implements ValueObjectInfo_Record<CashBillVO>, ValueObject_Approval<CashBillVO>{
 	
 	private CashBill cashBill;
 	
@@ -22,7 +24,11 @@ public class CashBillInfo extends Info<CashBillDataService> implements ValueObje
 		cashBill = new CashBill();
 	}
 	
-	public CashBillDataService getData() {
+	public TableInfoService<CashBillPO> getData() {
+		return cashBill.getCashBillData().getInfo();
+	}
+	
+	private CashBillDataService getCashBillData() {
 		return cashBill.getCashBillData();
 	}
 	
@@ -33,11 +39,11 @@ public class CashBillInfo extends Info<CashBillDataService> implements ValueObje
 	}
 
 	public CashBillVO find(String ID) {
-		return cashBill.POToVO(getData().find(ID));
+		return cashBill.POToVO(getCashBillData().find(ID));
 	}
 
 	public ArrayList<CashBillVO> findApproval() {
-		ArrayList<CashBillPO> POs = getData().show();
+		ArrayList<CashBillPO> POs = getCashBillData().show();
 		ArrayList<CashBillPO> approvalPO = new ArrayList<CashBillPO>();
 		for (CashBillPO po : POs) {
 			if (po.getState() == BillState.APPROVALING) {
@@ -50,5 +56,27 @@ public class CashBillInfo extends Info<CashBillDataService> implements ValueObje
 			VOs.add(vo);
 		}
 		return VOs;
+	}
+
+	public ResultMessage update(CashBillVO vo) {
+		String ID = vo.ID;
+		String user = vo.user;
+		String account = vo.account;
+		double total = vo.total;
+		ArrayList<CashItemPO> bills = itemsVOtoPO(vo.bills);
+		CashBillPO po = new CashBillPO(ID, user, account, bills, total);
+		return getCashBillData().update(po);
+	}
+	
+	private ArrayList<CashItemPO> itemsVOtoPO(ArrayList<CashItemVO> VOs) {
+		ArrayList<CashItemPO> POs = new ArrayList<CashItemPO>();
+		for (CashItemVO vo : VOs) {
+			String name = vo.name;
+			double money = vo.money;
+			String remark = vo.remark;
+			CashItemPO po = new CashItemPO(name, money, remark);
+			POs.add(po);
+		}
+		return POs;
 	}
 }

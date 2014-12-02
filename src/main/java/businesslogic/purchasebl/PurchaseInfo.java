@@ -2,21 +2,21 @@ package businesslogic.purchasebl;
 
 import java.util.ArrayList;
 
+import message.ResultMessage;
+import po.CommodityItemPO;
 import po.PurchasePO;
-import po.SalesPO;
-import server.data.purchasedata.PurchaseData;
 import businesslogic.approvalbl.ValueObject_Approval;
 import businesslogic.common.Info;
 import businesslogic.recordbl.info.PurchaseInfo_Record;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
 import vo.PurchaseVO;
-import vo.SalesVO;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Storage;
+import dataservice.TableInfoService;
 import dataservice.purchasedataservice.PurchaseDataService;
 
-public class PurchaseInfo extends Info<PurchaseDataService> implements ValueObjectInfo_Record<PurchaseVO>, PurchaseInfo_Record, ValueObject_Approval<PurchaseVO>{
+public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Record<PurchaseVO>, PurchaseInfo_Record, ValueObject_Approval<PurchaseVO>{
 	
 	private Purchase purchase;
 	
@@ -24,7 +24,11 @@ public class PurchaseInfo extends Info<PurchaseDataService> implements ValueObje
 		purchase = new Purchase();
 	}
 	
-	public PurchaseDataService getData() {
+	public TableInfoService<PurchasePO> getData() {
+		return purchase.getPurData().getInfo();
+	}
+	
+	private PurchaseDataService getPurchaseData() {
 		return purchase.getPurData();
 	}
 	
@@ -37,12 +41,12 @@ public class PurchaseInfo extends Info<PurchaseDataService> implements ValueObje
 	}
 
 	public PurchaseVO find(String ID) {
-		return purchase.poToVO(getData().find(ID));
+		return purchase.poToVO(getPurchaseData().find(ID));
 	}
 
 	
 	public ArrayList<PurchaseVO> findApproval() {
-		ArrayList<PurchasePO> POs = getData().show();
+		ArrayList<PurchasePO> POs = getPurchaseData().show();
 		ArrayList<PurchasePO> approvalPO = new ArrayList<PurchasePO>();
 		for (PurchasePO po : POs) {
 			if (po.getState() == BillState.APPROVALING) {
@@ -55,5 +59,18 @@ public class PurchaseInfo extends Info<PurchaseDataService> implements ValueObje
 			VOs.add(vo);
 		}
 		return VOs;
+	}
+
+	public ResultMessage update(PurchaseVO vo) {
+		String ID = vo.ID;
+		String client = vo.client;
+		String user = vo.user;
+		Storage storage = vo.storage;
+		String remark = vo.remark;
+		double beforePrice = vo.beforePrice;
+		BillType type = vo.type;
+		ArrayList<CommodityItemPO> commodities = purchase.itemsVOtoPO(vo.commodities);
+		PurchasePO po = new PurchasePO(ID, client, user, storage, commodities, beforePrice, remark, type);
+		return getPurchaseData().update(po);
 	}
 }

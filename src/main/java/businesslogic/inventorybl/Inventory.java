@@ -3,7 +3,7 @@ package businesslogic.inventorybl;
 import java.rmi.Naming;
 import java.util.ArrayList;
 
-import businesslogic.common.CommodityItemPOtoVO;
+import businesslogic.common.ChangeCommodityItems;
 import businesslogic.promotionbl.InventoryInfo_Promotion;
 import businesslogic.recordbl.info.InventoryInfo_Record;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
@@ -21,7 +21,7 @@ import dataservice.DataFactoryService;
 import dataservice.inventorydataservice.InventoryDataService;
 import message.ResultMessage;
 
-public class Inventory extends CommodityItemPOtoVO {
+public class Inventory extends ChangeCommodityItems {
 	
 	private BillList list;
 		
@@ -73,7 +73,7 @@ public class Inventory extends CommodityItemPOtoVO {
 	
 	public ArrayList<InventoryBillVO> show(BillType type) {
 		ArrayList<InventoryBillVO> VOs = new ArrayList<InventoryBillVO>();
-		ArrayList<InventoryBillPO> POs = getInventoryData().find(type);
+		ArrayList<InventoryBillPO> POs = getInventoryData().show(type);
 		for (int i = 0; i < POs.size(); i++) {
 			InventoryBillPO po = POs.get(i);
 			InventoryBillVO vo = poToVo(po);

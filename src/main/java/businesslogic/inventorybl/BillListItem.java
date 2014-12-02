@@ -1,6 +1,6 @@
 package businesslogic.inventorybl;
 
-import businesslogic.commoditybl.Commodity;
+import businesslogic.commoditybl.CommodityInfo;
 import businesslogic.inventorybl.info.CommodityInfo_Inventory;
 
 public class BillListItem {
@@ -22,7 +22,7 @@ public class BillListItem {
 	}
 	
 	public BillListItem(String ID, int number) {
-		info = new Commodity();
+		info = new CommodityInfo();
 		this.number = number;
 		this.ID = ID;
 		this.name = info.getName(ID);

@@ -24,7 +24,7 @@ public interface PurchaseBLService {
 	 * @author Zing
 	 * @version Nov 29, 2014 2:59:02 PM
 	 */
-	public ArrayList<PurchaseVO> show();
+	public ArrayList<PurchaseVO> show(BillType billType);
 	
 	/**
 	 *  新建进货（进货退货）单的时候返回给界面显示单据的ID

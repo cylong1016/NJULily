@@ -19,38 +19,27 @@ public class AccountBillItemPO implements Serializable {
 	/** 银行账户ID */
 	private String accountID;
 	/** 转账金额 */
-	private int money;
+	private double money;
 	/** 备注 */
 	private String remark;
 
-	public AccountBillItemPO(String accountID, int money, String remark) {
+	public AccountBillItemPO(String accountID, double money, String remark) {
 		this.accountID = accountID;
 		this.money = money;
 		this.remark = remark;
 	}
 
-	public int getMoney() {
+	public double getMoney() {
 		return money;
-	}
-
-	public void setMoney(int money) {
-		this.money = money;
 	}
 
 	public String getRemark() {
 		return remark;
 	}
 
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
-
 	public String getAccountID() {
 		return this.accountID;
 	}
 
-	public void setAccountID(String accountID) {
-		this.accountID = accountID;
-	}
 
 }
