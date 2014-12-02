@@ -13,7 +13,6 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 
 import dataenum.UserIdentity;
-import message.ResultMessage;
 import blservice.userblservice.LoginInfo;
 import businesslogic.userbl.UserController;
 import ui.commonui.myui.MyBackground;
@@ -22,7 +21,8 @@ import ui.commonui.myui.MyFrame;
 import ui.commonui.myui.MyLabel;
 import ui.commonui.myui.MyPasswordField;
 import ui.commonui.myui.MyTextField;
-import ui.differui.salesman.frame.Frame_Salesman;
+import ui.differui.admin.AdminUI;
+
 
 public class Frame_Login extends MyFrame implements ActionListener{
 
@@ -128,11 +128,18 @@ public class Frame_Login extends MyFrame implements ActionListener{
 	public void actionPerformed(ActionEvent events) {
 		if(events.getSource() == button_Enter){
 			UserController controller = new UserController();
-			UserIdentity rm = controller.login(new LoginInfo(userNameField.getText()
+			UserIdentity ui = controller.login(new LoginInfo(userNameField.getText()
 					, new String(passwordField.getPassword()),flag));
 			
-			if(rm == null){
-				System.out.println("failue");
+			
+			System.out.println(ui);
+			
+			if(ui == null){
+				System.out.println("failure");
+			}else if(ui.equals(UserIdentity.ADMIN)){
+				AdminUI au = new AdminUI();
+				au.setVisible(true);
+				this.setVisible(false);
 			}
 		}
 	}
