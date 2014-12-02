@@ -74,4 +74,16 @@
 		<dateFormat>yyyyMMdd</dateFormat>
 		<dateRecord>20141111</dateRecord>
 	</Data>
+	<Data>
+		<name>InventoryData</name>
+		<path>data/InventoryList.ser</path>
+		<overflowID>BYD</overflowID>
+		<lossID>BSD</lossID>
+		<alarmID>BJD</alarmID>
+		<giftID>ZSD</giftID>
+		<maxID>0</maxID>
+		<IDMaxBit>5</IDMaxBit>
+		<dateFormat>yyyyMMdd</dateFormat>
+		<dateRecord>20141111</dateRecord>
+	</Data>
 </DataService>

@@ -7,6 +7,7 @@ import po.PersistentObject;
 import server.common.Common;
 import server.common.ParseXML;
 import server.io.DefineList;
+import dataenum.BillType;
 import dataservice.CommonDataService;
 
 /**
@@ -27,6 +28,10 @@ public abstract class CommonData<PO extends PersistentObject> implements CommonD
 	protected int IDMaxBit;
 	/** 解析xml文件 */
 	protected ParseXML parsexml;
+	/** 当天日期 */
+	protected String currentDate;
+	/** 文件中记录的日期 */
+	protected String dateRecord;
 
 	public CommonData() {
 		init();	// 初始化parsexml
@@ -44,6 +49,42 @@ public abstract class CommonData<PO extends PersistentObject> implements CommonD
 		String currentID = Common.intToString((maxID += 1), IDMaxBit);
 		parsexml.setValue("maxID", currentID);
 		return currentID;
+	}
+
+	/**
+	 * 以单据类型返回单据ID
+	 * @param type 单据类型
+	 * @return 单据ID
+	 * @author cylong
+	 * @version 2014年12月2日 下午6:03:39
+	 */
+	public String getID(BillType type) {
+		String preID = getPreID(type);
+		if (preID == null) {
+			return null;
+		}
+		if (currentDate.equals(dateRecord)) {
+			maxID = Integer.parseInt(parsexml.getValue("maxID"));
+		} else {	// 过了一天
+			parsexml.setValue("dateRecord", currentDate);
+			maxID = 0;	// 初始化最大ID
+		}
+		String ID = getID();
+		if (ID.length() > IDMaxBit) {	// 超过一天单据的最大数量
+			return null;
+		}
+		return preID + ID;
+	}
+
+	/**
+	 * 按照单子类型返回ID的前缀，由子类实现
+	 * @param type
+	 * @return
+	 * @author cylong
+	 * @version 2014年12月2日 下午6:03:32
+	 */
+	protected String getPreID(BillType type) {
+		return null;
 	}
 
 	/**

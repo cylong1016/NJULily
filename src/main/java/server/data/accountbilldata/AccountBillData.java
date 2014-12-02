@@ -17,14 +17,10 @@ import dataservice.accountbilldataservice.AccountBillInfoService;
  */
 public class AccountBillData extends CommonData<AccountBillPO> implements AccountBillDataService {
 
-	/** 当天日期 */
-	private String currentDate;
 	/** SKD */
 	private String expenseID;
 	/** FKD */
 	private String payID;
-	/** 文件中记录的日期 */
-	private String dateRecord;
 
 	/**
 	 * @see dataservice.DataService#init()
@@ -41,32 +37,14 @@ public class AccountBillData extends CommonData<AccountBillPO> implements Accoun
 	}
 
 	/**
-	 * 超过一天最大ID数量时候返回null
-	 * @see dataservice.accountbilldataservice.AccountBillDataService#getID(dataenum.BillType)
-	 */
-	@Override
-	public String getID(BillType type) {
-		if (currentDate.equals(dateRecord)) {
-			maxID = Integer.parseInt(parsexml.getValue("maxID"));
-		} else {	// 过了一天
-			parsexml.setValue("dateRecord", currentDate);
-			maxID = 0;	// 初始化最大ID
-		}
-		String ID = super.getID();
-		if(ID.length() > IDMaxBit) {	// 超过一天单据的最大数量
-			return null;
-		}
-		return getPreID(type) + ID;
-	}
-
-	/**
 	 * 根据单据类型获得编号前缀
 	 * @param type 单据类型
 	 * @return ID前缀
 	 * @author cylong
 	 * @version 2014年12月2日 上午5:36:32
 	 */
-	private String getPreID(BillType type) {
+	@Override
+	protected String getPreID(BillType type) {
 		switch(type) {
 		case EXPENSE:
 			return expenseID + "-" + currentDate + "-";
