@@ -1,14 +1,15 @@
 package server.data.inventorydata;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import po.InventoryBillPO;
 import server.common.ParseXML;
 import server.data.CommonData;
 import dataenum.BillType;
+import dataservice.TableInfoService;
 import dataservice.inventorydataservice.InventoryDataService;
-import dataservice.inventorydataservice.InventoryInfoService;
 
 /**
  * dataservice.inventorydataservice.InventoryDataService
@@ -74,11 +75,21 @@ public class InventoryData extends CommonData<InventoryBillPO> implements Invent
 		return null;
 	}
 
+	public ArrayList<InventoryBillPO> show(BillType type) {
+		ArrayList<InventoryBillPO> typePOs = new ArrayList<InventoryBillPO>();
+		for(InventoryBillPO po : poList.getInList()) {
+			if (po.getBillType().equals(type)) {
+				typePOs.add(po);
+			}
+		}
+		return typePOs;
+	}
+
 	/**
 	 * @see dataservice.inventorydataservice.InventoryDataService#getInfo()
 	 */
 	@Override
-	public InventoryInfoService getInfo() {
+	public TableInfoService<InventoryBillPO> getInfo() {
 		return new InventoryInfo();
 	}
 

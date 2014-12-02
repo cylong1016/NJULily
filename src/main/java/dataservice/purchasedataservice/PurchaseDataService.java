@@ -3,6 +3,7 @@ package dataservice.purchasedataservice;
 import po.PurchasePO;
 import dataenum.BillType;
 import dataservice.CommonDataService;
+import dataservice.TableInfoService;
 
 /**
  * 提供进货（进货退货）数据集体载入、保存、增加、删除、查找
@@ -25,6 +26,6 @@ public interface PurchaseDataService extends CommonDataService<PurchasePO> {
 	 * @author cylong
 	 * @version 2014年12月2日 上午2:43:12
 	 */
-	public PurchaseInfoService getInfo();
+	public TableInfoService<PurchasePO> getInfo();
 
 }

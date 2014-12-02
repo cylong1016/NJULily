@@ -7,8 +7,8 @@ import po.SalesPO;
 import server.common.ParseXML;
 import server.data.CommonData;
 import dataenum.BillType;
+import dataservice.TableInfoService;
 import dataservice.saledataservice.SaleDataService;
-import dataservice.saledataservice.SaleInfoService;
 
 /**
  * @see dataservice.saledataservice.SaleDataService
@@ -58,7 +58,7 @@ public class SaleData extends CommonData<SalesPO> implements SaleDataService {
 	 * @see dataservice.saledataservice.SaleDataService#getInfo()
 	 */
 	@Override
-	public SaleInfoService getInfo() {
+	public TableInfoService<SalesPO> getInfo() {
 		return new SaleInfo();
 	}
 

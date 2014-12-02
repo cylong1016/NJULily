@@ -24,22 +24,22 @@ public class AccountBillList {
 		sumMoney += vo.money;
 		billList.add(item);
 	}
-	
+
 	public double getSumMoney() {
 		return this.sumMoney;
 	}
-	
+
 	/**
 	 * itemVOList转化成itemPOList
 	 * @return poList
 	 * @author cylong
-	 * @version 2014年12月1日  上午1:13:19
+	 * @version 2014年12月1日 上午1:13:19
 	 */
 	public ArrayList<AccountBillItemPO> toPOList() {
 		ArrayList<AccountBillItemPO> poList = new ArrayList<AccountBillItemPO>();
 		for(AccountBillItemVO vo : billList) {
 			String accountID = vo.accountID;
-			int money = vo.money;
+			double money = vo.money;
 			String remark = vo.remark;
 			AccountBillItemPO po = new AccountBillItemPO(accountID, money, remark);
 			poList.add(po);

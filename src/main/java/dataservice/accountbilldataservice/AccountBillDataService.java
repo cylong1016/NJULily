@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import po.AccountBillPO;
 import dataenum.BillType;
 import dataservice.CommonDataService;
+import dataservice.TableInfoService;
 
 /**
  * 收款单、付款单、现金单的集体载入、保存、查看修改操作
@@ -36,5 +37,5 @@ public interface AccountBillDataService extends CommonDataService<AccountBillPO>
 	 * @author cylong
 	 * @version 2014年12月2日 上午2:42:37
 	 */
-	public AccountBillInfoService getInfo();
+	public TableInfoService<AccountBillPO> getInfo();
 }

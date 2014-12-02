@@ -2,6 +2,7 @@ package dataservice.cashbilldataservice;
 
 import po.CashBillPO;
 import dataservice.CommonDataService;
+import dataservice.TableInfoService;
 
 public interface CashBillDataService extends CommonDataService<CashBillPO> {
 
@@ -10,5 +11,5 @@ public interface CashBillDataService extends CommonDataService<CashBillPO> {
 	 * @author cylong
 	 * @version 2014年12月2日 上午2:45:35
 	 */
-	public CashBillInfoService getInfo();
+	public TableInfoService<CashBillPO> getInfo();
 }

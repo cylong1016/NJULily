@@ -27,5 +27,5 @@ public interface AccountaInitDataService extends DataService<AccountaInitPO> {
 	 * @author cylong
 	 * @version Nov 3, 2014 8:42:08 PM
 	 */
-	public ArrayList<AccountaInitPO> getAllMsg();
+	public ArrayList<AccountaInitPO> show();
 }

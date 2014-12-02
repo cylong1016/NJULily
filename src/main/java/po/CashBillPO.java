@@ -30,7 +30,6 @@ public class CashBillPO extends PersistentObject {
 
 	public CashBillPO(String ID, String user, String account, ArrayList<CashItemPO> bills, double total) {
 		super(ID);
-		this.ID = ID;
 		this.user = user;
 		this.account = account;
 		this.bills = bills;

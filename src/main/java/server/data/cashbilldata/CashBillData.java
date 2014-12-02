@@ -6,11 +6,11 @@ import java.util.Date;
 import po.CashBillPO;
 import server.common.ParseXML;
 import server.data.CommonData;
+import dataservice.TableInfoService;
 import dataservice.cashbilldataservice.CashBillDataService;
-import dataservice.cashbilldataservice.CashBillInfoService;
 
 /**
- * dataservice.cashbilldataservice.CashBillDataService
+ * @see dataservice.cashbilldataservice.CashBillDataService
  * @author cylong
  * @version 2014年12月1日 下午4:19:54
  */
@@ -57,7 +57,7 @@ public class CashBillData extends CommonData<CashBillPO> implements CashBillData
 	 * @see dataservice.cashbilldataservice.CashBillDataService#getInfo()
 	 */
 	@Override
-	public CashBillInfoService getInfo() {
+	public TableInfoService<CashBillPO> getInfo() {
 		return new CashBillInfo();
 	}
 

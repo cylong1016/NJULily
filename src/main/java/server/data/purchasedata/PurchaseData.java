@@ -7,8 +7,8 @@ import po.PurchasePO;
 import server.common.ParseXML;
 import server.data.CommonData;
 import dataenum.BillType;
+import dataservice.TableInfoService;
 import dataservice.purchasedataservice.PurchaseDataService;
-import dataservice.purchasedataservice.PurchaseInfoService;
 
 /**
  * @see dataservice.purchasedataservice.PurchaseDataService
@@ -58,7 +58,7 @@ public class PurchaseData extends CommonData<PurchasePO> implements PurchaseData
 	 * @see dataservice.purchasedataservice.PurchaseDataService#getInfo()
 	 */
 	@Override
-	public PurchaseInfoService getInfo() {
+	public TableInfoService<PurchasePO> getInfo() {
 		return new PurchaseInfo();
 	}
 

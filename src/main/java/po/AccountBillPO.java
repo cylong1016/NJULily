@@ -12,7 +12,7 @@ import dataenum.BillType;
  */
 /**
  * 修改原因：将clientPO改成clientID因为clientPO中很多东西是不需要的，保存太多浪费
- * 删除了id属性，因为在父类中有id属性了
+ * 删除了ID属性，因为在父类中有ID属性了
  * @author cylong
  * @version Nov 16, 2014 3:42:42 PM
  */

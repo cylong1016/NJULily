@@ -3,6 +3,7 @@ package dataservice.inventorydataservice;
 import po.InventoryBillPO;
 import dataenum.BillType;
 import dataservice.CommonDataService;
+import dataservice.TableInfoService;
 
 /**
  * 提供库存单据的提交服务（赠送单、报溢单、报损单、报警单）
@@ -32,5 +33,5 @@ public interface InventoryDataService extends CommonDataService<InventoryBillPO>
 	 * @author cylong
 	 * @version 2014年12月2日 上午2:45:01
 	 */
-	public InventoryInfoService getInfo();
+	public TableInfoService<InventoryBillPO> getInfo();
 }

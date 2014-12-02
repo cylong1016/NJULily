@@ -3,6 +3,7 @@ package dataservice.saledataservice;
 import po.SalesPO;
 import dataenum.BillType;
 import dataservice.CommonDataService;
+import dataservice.TableInfoService;
 
 /**
  * 提供销售（销售退货）数据集体载入、保存、增加、删除、查找
@@ -25,5 +26,5 @@ public interface SaleDataService extends CommonDataService<SalesPO> {
 	 * @author cylong
 	 * @version 2014年12月2日 上午2:43:12
 	 */
-	public SaleInfoService getInfo();
+	public TableInfoService<SalesPO> getInfo();
 }

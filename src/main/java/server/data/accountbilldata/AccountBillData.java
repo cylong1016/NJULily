@@ -8,8 +8,8 @@ import po.AccountBillPO;
 import server.common.ParseXML;
 import server.data.CommonData;
 import dataenum.BillType;
+import dataservice.TableInfoService;
 import dataservice.accountbilldataservice.AccountBillDataService;
-import dataservice.accountbilldataservice.AccountBillInfoService;
 
 /**
  * @author cylong
@@ -73,7 +73,7 @@ public class AccountBillData extends CommonData<AccountBillPO> implements Accoun
 	 * @see dataservice.accountbilldataservice.AccountBillDataService#getInfo()
 	 */
 	@Override
-	public AccountBillInfoService getInfo() {
+	public TableInfoService<AccountBillPO> getInfo() {
 		return new AccountBillInfo();
 	}
 
