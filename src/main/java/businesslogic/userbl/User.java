@@ -9,6 +9,7 @@ import server.io.DefineList;
 import vo.UserVO;
 import blservice.userblservice.LoginInfo;
 import dataenum.UserIdentity;
+import dataservice.userdataservice.AdminInfo;
 import dataservice.userdataservice.UserDataService;
 
 public class User {
@@ -48,9 +49,13 @@ public class User {
 	 * @version 2014年11月29日 下午9:24:17
 	 */
 	public UserIdentity login(LoginInfo loginInfo) {
-		if(loginInfo.username.equals("admin") && loginInfo.password.equals("admin")) {
-			return UserIdentity.ADMIN; // TODO 临时登录
+		// 验证管理员登录
+		AdminInfo admin = new AdminInfo(loginInfo.username, loginInfo.password);
+		if (userData.checkAdmin(admin)) {
+			return admin.iden;
 		}
+
+		// 验证普通用户登录
 		ArrayList<UserPO> pos = userData.show();
 		for(UserPO po : pos) {
 			if (po.getUsername().equals(loginInfo.username)) {
@@ -169,6 +174,18 @@ public class User {
 		UserIdentity iden = po.getIden();
 		UserVO vo = new UserVO(ID, username, name, password, phone, iden);
 		return vo;
+	}
+
+	/**
+	 * 更新管理员密码
+	 * @param oldPass 旧密码
+	 * @param newPass 新密码
+	 * @return 成功、失败
+	 * @author cylong
+	 * @version 2014年12月3日 上午10:43:22
+	 */
+	public ResultMessage updateAdmin(String oldPass, String newPass) {
+		return userData.updateAdmin(oldPass, newPass);
 	}
 
 }

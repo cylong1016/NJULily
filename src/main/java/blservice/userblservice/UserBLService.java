@@ -77,5 +77,15 @@ public interface UserBLService {
 	 * @version 2014年11月29日 下午6:44:29
 	 */
 	public ResultMessage update(UserVO vo);
+	
+	/**
+	 * 更新Admin密码
+	 * @param oldPass 旧密码
+	 * @param newPass 新密码
+	 * @return 成功或者失败
+	 * @author cylong
+	 * @version 2014年12月3日  上午10:40:07
+	 */
+	public ResultMessage updateAdmin(String oldPass, String newPass);
 
 }

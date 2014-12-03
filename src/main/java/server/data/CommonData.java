@@ -24,6 +24,8 @@ public abstract class CommonData<PO extends PersistentObject> implements CommonD
 	protected String prefix;
 	/** 当前最大ID */
 	protected int maxID;
+	/** 添加一条记录后的账单 */
+	protected String currentID;
 	/** ID最大位数 */
 	protected int IDMaxBit;
 	/** 解析xml文件 */
@@ -46,9 +48,18 @@ public abstract class CommonData<PO extends PersistentObject> implements CommonD
 	 */
 	@Override
 	public String getID() {
-		String currentID = Common.intToString((maxID += 1), IDMaxBit);
-		parsexml.setValue("maxID", currentID);
+		currentID = Common.intToString((maxID + 1), IDMaxBit);
 		return currentID;
+	}
+
+	/**
+	 * 单据ID保存成功后增加ID，防止创建一半停止，但是ID增加的情况
+	 * @author cylong
+	 * @version 2014年12月3日 上午8:59:47
+	 */
+	private void addID() {
+		maxID++;
+		parsexml.setValue("maxID", currentID);
 	}
 
 	/**
@@ -84,7 +95,7 @@ public abstract class CommonData<PO extends PersistentObject> implements CommonD
 	 * @version 2014年12月2日 下午6:03:32
 	 */
 	protected String getPreID(BillType type) {
-		return null;
+		return "";
 	}
 
 	/**
@@ -96,6 +107,7 @@ public abstract class CommonData<PO extends PersistentObject> implements CommonD
 			return ResultMessage.FAILURE;
 		}
 		poList.add(po);
+		addID();
 		return ResultMessage.SUCCESS;
 	}
 

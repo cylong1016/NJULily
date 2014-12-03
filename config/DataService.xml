@@ -12,7 +12,7 @@
 		<path>data/UserList.ser</path>
 		<prefix>YH</prefix>
 		<initID>1</initID>
-		<maxID>00002</maxID>
+		<maxID>00007</maxID>
 		<IDMaxBit>5</IDMaxBit>
 	</Data>
 	<Data>
@@ -97,5 +97,7 @@
 		<name>PromotionData</name>
 		<path>data/PromotionList.ser</path>
 		<prefix>CXCL</prefix>
+		<maxID>0</maxID>
+		<IDMaxBit>5</IDMaxBit>
 	</Data>
 </DataService>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<DataService>
+	<Data>
+		<name>Admin</name>
+		<username>admin</username>
+		<password>admin</password>
+	</Data>
+</DataService>

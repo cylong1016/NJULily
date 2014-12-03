@@ -22,6 +22,8 @@ public class AccountInitData implements AccountaInitDataService {
 	protected String prefix;
 	/** 当前最大ID */
 	protected int maxID;
+	/** 添加时返回的临时ID */
+	private String currentID;
 	/** ID最大位数 */
 	protected int IDMaxBit;
 	/** 解析xml文件 */
@@ -49,9 +51,13 @@ public class AccountInitData implements AccountaInitDataService {
 	 */
 	@Override
 	public String getID() {
-		String currentID = Common.intToString((maxID += 1), IDMaxBit);
-		parsexml.setValue("maxID", currentID);
+		currentID = Common.intToString((maxID + 1), IDMaxBit);
 		return currentID;
+	}
+
+	private void addID() {
+		maxID++;
+		parsexml.setValue("maxID", currentID);
 	}
 
 	/**
@@ -76,6 +82,7 @@ public class AccountInitData implements AccountaInitDataService {
 			return ResultMessage.FAILURE;
 		}
 		initList.add(po);
+		addID();
 		return ResultMessage.SUCCESS;
 	}
 

@@ -38,6 +38,15 @@ public class ParseXML {
 	private String xmlPath = "config/DataService.xml";
 
 	public ParseXML(String name) {
+		init(xmlPath, name);
+	}
+
+	public ParseXML(String xmlPath, String name) {
+		this.xmlPath = xmlPath;
+		init(xmlPath, name);
+	}
+
+	private void init(String xmlPath, String name) {
 		try {
 			// step 1: 获得dom解析器工厂（工作的作用是用于创建具体的解析器）  
 			DocumentBuilderFactory dbfactory = DocumentBuilderFactory.newInstance();

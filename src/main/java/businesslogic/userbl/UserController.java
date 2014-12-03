@@ -76,4 +76,12 @@ public class UserController implements blservice.userblservice.UserBLService {
 		return user.update(vo);
 	}
 
+	/**
+	 * @see blservice.userblservice.UserBLService#updateAdmin(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public ResultMessage updateAdmin(String oldPass, String newPass) {
+		return user.updateAdmin(oldPass, newPass);
+	}
+
 }
