@@ -2,6 +2,7 @@ package server.data.accountdata;
 
 import java.util.ArrayList;
 
+import message.ResultMessage;
 import po.AccountPO;
 import server.common.ParseXML;
 import server.data.CommonData;
@@ -30,6 +31,21 @@ public class AccountData extends CommonData<AccountPO> implements AccountDataSer
 	@Override
 	public String getID() {
 		return prefix + super.getID();
+	}
+
+	/**
+	 * 名称存在就添加失败
+	 * @see server.data.CommonData#insert(po.PersistentObject)
+	 */
+	@Override
+	public ResultMessage insert(AccountPO po) {
+		for(AccountPO temp : poList.getInList()) {
+			if (temp.getName().equals(po.getName())) {
+				return ResultMessage.FAILURE;
+			}
+		}
+		super.insert(po);
+		return ResultMessage.SUCCESS;
 	}
 
 	/**

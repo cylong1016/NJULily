@@ -33,55 +33,72 @@ public class DefineList<E> implements Serializable {
 		save();
 		return b;
 	}
-	
+
 	public void add(int index, E element) {
 		inList.add(index, element);
 		save();
 	}
-	
+
 	public E get(int index) {
 		return inList.get(index);
 	}
-	
+
 	public void clear() {
 		inList.clear();
 		save();
 	}
-	
+
 	public E remove(int index) {
 		E e = inList.remove(index);
 		save();
 		return e;
 	}
-	
+
 	public boolean remove(Object o) {
 		boolean b = inList.remove(o);
 		save();
 		return b;
 	}
-	
+
 	public E set(int index, E element) {
 		E e = set(index, element);
 		save();
 		return e;
 	}
-	
+
 	public int size() {
 		return inList.size();
 	}
 
 	public boolean contains(E element) {
-		return inList.contains(element);
+		return indexOf(element) >= 0;
 	}
-	
+
+	/**
+	 * ArrayList中的indexOf参数是Object，故判断相等是两个变量地址相等
+	 * 我需要的相等是容器中元素自己的equals方法，所以不用ArrayList的indexOf方法
+	 * @param element
+	 * @return
+	 * @author cylong
+	 * @version 2014年12月3日 上午11:45:11
+	 */
 	public int indexOf(E element) {
-		return inList.indexOf(element);
+		if (element == null) {
+			for(int i = 0; i < size(); i++)
+				if (get(i) == null)
+					return i;
+		} else {
+			for(int i = 0; i < size(); i++)
+				if (element.equals(get(i)))
+					return i;
+		}
+		return -1;
 	}
-	
+
 	public boolean isEmpty() {
 		return inList.isEmpty();
 	}
-	
+
 	/**
 	 * @param filePath 保存的文件的路径，统一用相对路径保存在data文件夹下
 	 * @author cylong
@@ -156,5 +173,5 @@ public class DefineList<E> implements Serializable {
 			}
 		}
 	}
-	
+
 }

@@ -51,6 +51,10 @@ public class AccountInitData implements AccountaInitDataService {
 	 */
 	@Override
 	public String getID() {
+		if (initList.isEmpty()) {
+			maxID = 0;	// 初始化最大ID
+			parsexml.setValue("maxID", Common.intToString(maxID, IDMaxBit));
+		}
 		currentID = Common.intToString((maxID + 1), IDMaxBit);
 		return currentID;
 	}

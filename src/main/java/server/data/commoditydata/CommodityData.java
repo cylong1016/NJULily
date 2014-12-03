@@ -42,6 +42,23 @@ public class CommodityData extends CommonData<CommodityPO> implements CommodityD
 	}
 
 	/**
+	 * 名称和型号存在就添加失败
+	 * @see server.data.CommonData#insert(po.PersistentObject)
+	 */
+	@Override
+	public ResultMessage insert(CommodityPO po) {
+		for(CommodityPO temp : poList.getInList()) {
+			boolean hasName = temp.getName().equals(po.getName());
+			boolean hasType = temp.getType().equals(po.getType());
+			if (hasName && hasType) {
+				return ResultMessage.FAILURE;
+			}
+		}
+		super.insert(po);
+		return ResultMessage.SUCCESS;
+	}
+
+	/**
 	 * @see dataservice.commoditydataservice.CommodityDataService#find(java.lang.String,
 	 *      dataenum.FindTypeCommo)
 	 */

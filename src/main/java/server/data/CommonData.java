@@ -48,7 +48,11 @@ public abstract class CommonData<PO extends PersistentObject> implements CommonD
 	 */
 	@Override
 	public String getID() {
-		currentID = Common.intToString((maxID + 1), IDMaxBit);
+		if (poList.isEmpty()) {
+			maxID = 0;	// 初始化最大ID
+			parsexml.setValue("maxID", Common.intToString(maxID, IDMaxBit));
+		}
+		currentID = Common.intToString(maxID + 1, IDMaxBit);
 		return currentID;
 	}
 
@@ -59,7 +63,7 @@ public abstract class CommonData<PO extends PersistentObject> implements CommonD
 	 */
 	private void addID() {
 		maxID++;
-		parsexml.setValue("maxID", currentID);
+		parsexml.setValue("maxID", Common.intToString(maxID, IDMaxBit));
 	}
 
 	/**
@@ -95,7 +99,7 @@ public abstract class CommonData<PO extends PersistentObject> implements CommonD
 	 * @version 2014年12月2日 下午6:03:32
 	 */
 	protected String getPreID(BillType type) {
-		return "";
+		return null;
 	}
 
 	/**
@@ -103,9 +107,6 @@ public abstract class CommonData<PO extends PersistentObject> implements CommonD
 	 */
 	@Override
 	public ResultMessage insert(PO po) {
-		if (poList.contains(po)) {
-			return ResultMessage.FAILURE;
-		}
 		poList.add(po);
 		addID();
 		return ResultMessage.SUCCESS;
@@ -116,9 +117,9 @@ public abstract class CommonData<PO extends PersistentObject> implements CommonD
 	 */
 	@Override
 	public PO find(String ID) {
-		for(int i = 0; i < poList.size(); i++) {
-			if (poList.get(i).getID().equals(ID)) {
-				return poList.get(i);
+		for(PO po : poList.getInList()) {
+			if (po.getID().equals(ID)) {
+				return po;
 			}
 		}
 		return null;
@@ -143,12 +144,14 @@ public abstract class CommonData<PO extends PersistentObject> implements CommonD
 	 */
 	@Override
 	public ResultMessage update(PO po) {
-		int index = poList.indexOf(po);
-		if (index == -1) {
-			return ResultMessage.FAILURE;
+		for(int i = 0; i < poList.size(); i++) {
+			PO temp = poList.get(i);
+			if (temp.getID().equals(po.getID())) {
+				poList.set(i, po);
+				return ResultMessage.SUCCESS;
+			}
 		}
-		poList.set(index, po);
-		return ResultMessage.SUCCESS;
+		return ResultMessage.FAILURE;
 	}
 
 	/**

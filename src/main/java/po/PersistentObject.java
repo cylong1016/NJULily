@@ -48,24 +48,4 @@ public class PersistentObject implements Serializable {
 		return this.date;
 	}
 
-	/**
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		PersistentObject other = (PersistentObject)obj;
-		if (this.ID == null) {
-			if (other.ID != null)
-				return false;
-		} else if (!this.ID.equals(other.ID))
-			return false;
-		return true;
-	}
-
 }

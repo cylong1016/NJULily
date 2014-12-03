@@ -34,6 +34,25 @@ public class CommoditySortData extends CommonData<CommoditySortPO> implements Co
 		return newID;
 	}
 
+	/**
+	 * 名称存在就添加失败
+	 * @see server.data.CommonData#insert(po.PersistentObject)
+	 */
+	@Override
+	public ResultMessage insert(CommoditySortPO po) {
+		for(CommoditySortPO temp : poList.getInList()) {
+			if (temp.getName().equals(po.getName())) {
+				return ResultMessage.FAILURE;
+			}
+		}
+		super.insert(po);
+		return ResultMessage.SUCCESS;
+	}
+
+	/**
+	 * 有子类就不能删除
+	 * @see server.data.CommonData#delete(java.lang.String)
+	 */
 	@Override
 	public ResultMessage delete(String ID) {
 		CommoditySortPO po = find(ID);

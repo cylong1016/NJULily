@@ -32,6 +32,21 @@ public class UserData extends CommonData<UserPO> implements UserDataService {
 	}
 
 	/**
+	 * 用户名存在则添加失败
+	 * @see server.data.CommonData#insert(po.PersistentObject)
+	 */
+	@Override
+	public ResultMessage insert(UserPO po) {
+		for(UserPO temp : poList.getInList()) {
+			if (temp.getUsername().equals(po.getUsername())) {
+				return ResultMessage.FAILURE;
+			}
+		}
+		super.insert(po);
+		return ResultMessage.SUCCESS;
+	}
+
+	/**
 	 * @see dataservice.userdataservice.UserDataService#checkAdmin(dataservice.userdataservice.AdminInfo)
 	 */
 	@Override
@@ -69,4 +84,5 @@ public class UserData extends CommonData<UserPO> implements UserDataService {
 		}
 		return ResultMessage.FAILURE;
 	}
+
 }
