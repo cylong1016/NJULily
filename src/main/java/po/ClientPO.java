@@ -174,9 +174,17 @@ public class ClientPO extends PersistentObject {
 	public double getReceivable() {
 		return this.receivable;
 	}
+	
+	public void setReceivable(double receivable) {
+		this.receivable = receivable;
+	}
 
 	public double getPayable() {
 		return this.payable;
+	}
+
+	public void setPayable(double payable) {
+		this.payable = payable;
 	}
 
 	public String getSalesman() {

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import message.ResultMessage;
 import businesslogic.approvalbl.info.SaleInfo_Approval;
 import businesslogic.approvalbl.info.ValueObject_Approval;
+import businesslogic.clientbl.ClientInfo;
+import businesslogic.commoditybl.CommodityInfo;
 import businesslogic.common.Info;
 import businesslogic.inventorybl.info.SaleInfo_Inventory;
 import businesslogic.recordbl.info.SaleInfo_Record;
@@ -99,19 +101,19 @@ public class SaleInfo extends Info<SalesPO> implements SaleInfo_Inventory, SaleI
 		return null;
 	}
 
-	public String getName(String ID) {
+	public String getCommodityName(String ID) {
 		return findCommodityItemPO(ID).getName();
 	}
 
-	public String getType(String ID) {
+	public String getCommodityType(String ID) {
 		return findCommodityItemPO(ID).getType();
 	}
 
-	public int getNumber(String ID) {
+	public int getCommodityNumber(String ID) {
 		return findCommodityItemPO(ID).getNumber();
 	}
 
-	public double getPrice(String ID) {
+	public double getCommodityPrice(String ID) {
 		return findCommodityItemPO(ID).getPrice();
 	}
 	
@@ -221,6 +223,32 @@ public class SaleInfo extends Info<SalesPO> implements SaleInfo_Inventory, SaleI
 			number += po.getNumber();
 		}
 		return number;
+	}
+
+	/**
+	 * 通过销售单／销售退货单
+	 * 销售单：减少商品库存数量，增加客户应收金额
+	 * 销售退货单：增加商品库存数量，减少客户应收金额
+	 */
+	public void pass(SalesVO vo) {
+		SalesPO po = getSaleData().find(ID);
+		// 更新该单子的状态
+		po.setState(BillState.SUCCESS);
+		getSaleData().update(po);
+		// 更改商品库存数量、最近售价
+		CommodityInfo_Sale commodityInfo = new CommodityInfo();
+		ArrayList<CommodityItemPO> commodities = po.getCommodities();
+		for (CommodityItemPO commodity : commodities) {
+			commodityInfo.changeNumber(commodity.getID(), commodity.getNumber(), commodity.getPrice(), po.getType());
+		}
+		// 更改客户的应收金额
+		ClientInfo_Sale clientInfo = new ClientInfo();
+		if (po.getType() == BillType.SALE) {
+			clientInfo.changeReceivable(po.getClientID(), po.getAfterPrice());
+		}
+		else {
+			clientInfo.changeReceivable(po.getClientID(), -po.getAfterPrice());
+		}
 	}
 	
 

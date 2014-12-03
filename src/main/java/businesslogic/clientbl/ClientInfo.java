@@ -45,7 +45,7 @@ public class ClientInfo implements ClientInfo_AccountBill, ClientInfo_Sale, Clie
 	}
 
 	/**
-	 * @see businesslogic.salebl.ClientInfo_Purchase#getName(java.lang.String)
+	 * @see businesslogic.salebl.ClientInfo_Purchase#getCommodityName(java.lang.String)
 	 */
 	public String getName(String ID) {
 		ClientVO vo = client.findClient(ID);
@@ -57,5 +57,11 @@ public class ClientInfo implements ClientInfo_AccountBill, ClientInfo_Sale, Clie
 	}
 	public ArrayList<ClientVO> getClientVOs(ArrayList<ClientPO> POs) {
 		return client.posToVOs(POs);
+	}
+	
+	public void changeReceivable(String clientID, double afterPrice) {
+		ClientPO po = client.getClientData().find(clientID);
+		po.setReceivable(po.getReceivable() + afterPrice);
+		client.getClientData().update(po);
 	}
 }

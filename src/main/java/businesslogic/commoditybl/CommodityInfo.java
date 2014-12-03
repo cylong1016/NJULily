@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import po.CommodityPO;
 import vo.CommodityVO;
+import dataenum.BillType;
 import dataservice.commoditydataservice.CommodityDataService;
 import businesslogic.accountainitbl.info.CommodityInfo_Init;
 import businesslogic.inventorybl.info.CommodityInfo_Inventory;
@@ -107,6 +108,26 @@ public class CommodityInfo implements CommodityInfo_Sale, businesslogic.purchase
 		double avePur = po.getAvePur();
 		CommodityVO vo = new CommodityVO(ID, name, type, sortID, aveSale, avePur);
 		return vo;
+	}
+
+	public void changeNumber(String ID, int number, double price, BillType billType) {
+		CommodityPO po = commodityData.find(ID);
+		// 更改PO的数据
+		if (billType == BillType.SALE) { // 如果是销售单，需要减少库存数量，更改最近售价，更改平均售价，增加销售数量
+			int nowCommodityNumber = po.getInventoryNum() - number;
+			int nowSaleNumber = po.getSaleNumber() + number;
+			po.setInventoryNum(nowCommodityNumber);
+			po.setRecentSalePrice(price);
+			po.setAveSale((po.getAveSale() * po.getSaleNumber() + number * price) / nowSaleNumber);
+			po.setSaleNumber(nowSaleNumber);
+		}
+		else { // 如果是销售退款单，需要增加库存数量，更改平均售价，减少销售数量
+			int nowSaleNumber = po.getSaleNumber() - number;
+			po.setInventoryNum(po.getInventoryNum() + number);
+			po.setAveSale((po.getAveSale() * po.getSaleNumber() - number * price) / nowSaleNumber);
+			po.setSaleNumber(nowSaleNumber);
+		}
+		commodityData.update(po);
 	}
 
 }

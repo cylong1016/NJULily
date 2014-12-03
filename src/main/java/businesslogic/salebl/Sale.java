@@ -26,14 +26,11 @@ public class Sale extends ChangeCommodityItems {
 
 	/** 销售单 */
 	private SaleList list;
-
 	/** 销售单持久化对象 */
 	private SalesPO po;
-
 	/** 单据类型 */
 	/** 根据类型得到单据的ID */
 	private BillType type;
-
 	/** 单据的ID */
 	private String ID;
 
@@ -119,22 +116,6 @@ public class Sale extends ChangeCommodityItems {
 		// TODO 保存在本地
 		return ResultMessage.SUCCESS;
 	}
-	
-	/**
-	 * 建立销售单
-	 * @return SalePO
-	 */
-	private SalesPO buildSales() {
-		double beforePrice = list.getBeforePrice();
-		double afterPrice = list.getAfterPrice();
-		ClientInfo_Sale info = new ClientInfo();
-		String clientName = info.getName(list.getClientID());
-		String clientID = list.getClientID();
-		String salesman = info.getSalesman(list.getClientID());
-		// TODO user从文件中读取当前登陆的用户
-		po = new SalesPO(ID, clientID, clientName, salesman, "user", list.getStorage(), list.getCommodities(), beforePrice, list.getAllowance(), list.getVoucher(), list.getRemark(), afterPrice, type);
-		return po;
-	}
 
 	/**
 	 * 将销售（销售退货）单的PO转化成VO
@@ -161,8 +142,29 @@ public class Sale extends ChangeCommodityItems {
 		SalesVO vo = new SalesVO(ID, clientID, client, storage, user, salesman, commodities, remark, beforePrice, allowance, voucher, afterPrice, type, state);
 		return vo;
 	}
+	
+	/**
+	 * 建立销售单
+	 * @return SalePO
+	 */
+	private SalesPO buildSales() {
+		double beforePrice = list.getBeforePrice();
+		double afterPrice = list.getAfterPrice();
+		ClientInfo_Sale info = new ClientInfo();
+		String clientName = info.getName(list.getClientID());
+		String clientID = list.getClientID();
+		String salesman = info.getSalesman(list.getClientID());
+		// TODO user从文件中读取当前登陆的用户
+		po = new SalesPO(ID, clientID, clientName, salesman, "user", list.getStorage(), list.getCommodities(), beforePrice, list.getAllowance(), list.getVoucher(), list.getRemark(), afterPrice, type);
+		return po;
+	}
 
-
+	/**
+	 * 设置输入的数据
+	 * @param inputInfo
+	 * @author Zing
+	 * @version Dec 3, 2014 2:42:17 PM
+	 */
 	private void setInputInfo(SaleInputInfo inputInfo) {
 		list.setClientID(inputInfo.clientID);
 		list.setStorage(inputInfo.storage);

@@ -32,6 +32,10 @@ public class CommodityPO extends PersistentObject {
 	private double aveSale;
 	/** 每次进货后计算平均进价 */
 	private double avePur;
+	
+	private int saleNumber;
+	
+	private int purNumber;
 
 	/**
 	 * @param ID 商品ID
@@ -168,6 +172,27 @@ public class CommodityPO extends PersistentObject {
 	public void setRecentSalePrice(double recentSalePrice) {
 		this.recentSalePrice = recentSalePrice;
 	}
+
+	public int getSaleNumber() {
+		return saleNumber;
+	}
+
+	public void setSaleNumber(int saleNumber) {
+		this.saleNumber = saleNumber;
+	}
+
+	public int getPurNumber() {
+		return purNumber;
+	}
+
+	public void setPurNumber(int purNumber) {
+		this.purNumber = purNumber;
+	}
+
+	public void setInventoryNum(int inventoryNum) {
+		this.inventoryNum = inventoryNum;
+	}
+	
 	
 	
 

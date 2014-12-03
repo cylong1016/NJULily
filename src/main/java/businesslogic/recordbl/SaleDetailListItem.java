@@ -22,10 +22,10 @@ public class SaleDetailListItem {
 		info = new SaleInfo();
 		this.ID = info.getCommodityID(ID, commodityName);
 		if (this.ID != null) {
-			this.name = info.getName(this.ID);
-			this.type = info.getType(this.ID);
-			this.number = info.getNumber(this.ID);
-			this.price = info.getPrice(this.ID);
+			this.name = info.getCommodityName(this.ID);
+			this.type = info.getCommodityType(this.ID);
+			this.number = info.getCommodityNumber(this.ID);
+			this.price = info.getCommodityPrice(this.ID);
 			this.total = price * number;
 		}
 	}
