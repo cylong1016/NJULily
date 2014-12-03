@@ -24,8 +24,8 @@ public class ApprovalController implements ApprovalBLService{
 		return approval.updateBill(vo, billType);
 	}
 
-	public ResultMessage passBill(ArrayList<ValueObject> VOs) {
-		return approval.passBill(VOs);
+	public ResultMessage passBill(ArrayList<ValueObject> VOs, ArrayList<BillType> billTypes) {
+		return approval.passBill(VOs, billTypes);
 	}
 
 }

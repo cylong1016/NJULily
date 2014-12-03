@@ -8,11 +8,6 @@ import dataenum.BillType;
 import dataservice.DataFactoryService;
 import dataservice.approvaldataservice.ApprovalDataService;
 import businesslogic.accountbillbl.AccountBillInfo;
-import businesslogic.approvalbl.info.AccountBill_Approval;
-import businesslogic.approvalbl.info.CashBillInfo_Approval;
-import businesslogic.approvalbl.info.InventoryInfo_Approval;
-import businesslogic.approvalbl.info.PurchaseInfo_Approval;
-import businesslogic.approvalbl.info.SaleInfo_Approval;
 import businesslogic.approvalbl.info.ValueObject_Approval;
 import businesslogic.cashbillbl.CashBillInfo;
 import businesslogic.inventorybl.InventoryInfo;
@@ -27,6 +22,11 @@ import vo.PurchaseVO;
 import vo.SalesVO;
 import vo.ValueObject;
 
+/**
+ * 审批
+ * @author Zing
+ * @version Dec 2, 2014 11:48:42 PM
+ */
 public class Approval {
 
 	private ApprovalDataService approvalData;
@@ -57,7 +57,7 @@ public class Approval {
 	}
 
 	/**
-	 * 更新特定单据的数据 直接传递一个数据vo过来
+	 * 更新特定单据的数据 直接传递一个数据vo过来，还要有数据的类型
 	 * 
 	 * @param VOs
 	 * @return
@@ -66,62 +66,68 @@ public class Approval {
 	 */
 	
 	public ResultMessage updateBill(ValueObject vo, BillType billType) {
+		UpdateApproval update = new UpdateApproval();
 		switch (billType) {
 		case SALE:
 		case SALEBACK:
-			return updateBill((SalesVO)vo);
+			return update.updateBill((SalesVO)vo);
 		case PURCHASE:
 		case PURCHASEBACK:
-			return updateBill((PurchaseVO)vo);
+			return update.updateBill((PurchaseVO)vo);
 		case GIFT:
 		case OVERFLOW:
 		case LOSS:
-			return updateBill((InventoryBillVO)vo);
+			return update.updateBill((InventoryBillVO)vo);
 		case PAY:
 		case EXPENSE:
-			return updateBill((AccountBillVO)vo);
+			return update.updateBill((AccountBillVO)vo);
 		case CASH:
-			return updateBill((CashBillVO)vo);
+			return update.updateBill((CashBillVO)vo);
 		default:
 			break;
 		}
 		return ResultMessage.FAILURE;
 	}
 	
-	private ResultMessage updateBill(SalesVO vo) {
-		SaleInfo_Approval info = new SaleInfo();
-		return info.update(vo);
-	}
-	
-	private ResultMessage updateBill(PurchaseVO vo) {
-		PurchaseInfo_Approval info = new PurchaseInfo();
-		return info.update(vo);
-	}
-	
-	private ResultMessage updateBill(InventoryBillVO vo) {
-		InventoryInfo_Approval info = new InventoryInfo();
-		return info.update(vo);
-	}
-	
-	private ResultMessage updateBill(CashBillVO vo) {
-		CashBillInfo_Approval info = new CashBillInfo();
-		return info.update(vo);
-	}
-	
-	private ResultMessage updateBill(AccountBillVO vo) {
-		AccountBill_Approval info = new AccountBillInfo();
-		return info.update(vo);
-	}
 
 	/**
-	 * 单子通过审核（可以批量，单要同一种类型的才可以）
+	 * 单子通过审核（可以批量）
 	 * @param VOs
 	 * @return
 	 * @author Zing
 	 * @version Dec 2, 2014 9:22:47 PM
 	 */
-	public ResultMessage passBill(ArrayList<ValueObject> VOs) {
-		return null;
+	public ResultMessage passBill(ArrayList<ValueObject> VOs, ArrayList<BillType> billTypes) {
+		PassApproval pass = new PassApproval();
+		for (int i=0; i < VOs.size(); i++) {
+			BillType billType = billTypes.get(i);
+			ValueObject vo = VOs.get(i);
+			switch (billType) {
+			case SALE:
+			case SALEBACK:
+				pass.passBill((SalesVO)vo);
+				 break;
+			case PURCHASE:
+			case PURCHASEBACK:
+				pass.passBill((PurchaseVO)vo);
+				 break;
+			case GIFT:
+			case OVERFLOW:
+			case LOSS:
+				pass.passBill((InventoryBillVO)vo);
+				 break;
+			case PAY:
+			case EXPENSE:
+				pass.passBill((AccountBillVO)vo);
+				 break;
+			case CASH:
+				pass.passBill((CashBillVO)vo);
+				 break;
+			default:
+				break;
+			}
+		}
+		return ResultMessage.SUCCESS;
 	}
 	
 

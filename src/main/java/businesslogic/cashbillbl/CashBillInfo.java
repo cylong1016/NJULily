@@ -12,6 +12,7 @@ import dataservice.TableInfoService;
 import dataservice.cashbilldataservice.CashBillDataService;
 import vo.CashBillVO;
 import vo.CashItemVO;
+import businesslogic.accountbl.AccountInfo;
 import businesslogic.approvalbl.info.CashBillInfo_Approval;
 import businesslogic.approvalbl.info.ValueObject_Approval;
 import businesslogic.common.Info;
@@ -79,5 +80,20 @@ public class CashBillInfo extends Info<CashBillPO> implements ValueObjectInfo_Re
 			POs.add(po);
 		}
 		return POs;
+	}
+
+	public void pass(CashBillVO vo) {
+		CashBillPO po = getCashBillData().find(vo.ID);
+		// 更新该现金费用单的状态
+		po.setState(BillState.SUCCESS);
+		getCashBillData().update(po);
+		AccountInfo_CashBill info = new AccountInfo();
+		ArrayList<CashItemPO> items = po.getBills();
+		double money = 0;
+		for (CashItemPO item : items) {
+			money += item.getMoney();
+		}
+		// 更改对应账户的余额
+		info.changeMoney(po.getAccount(), money);
 	}
 }

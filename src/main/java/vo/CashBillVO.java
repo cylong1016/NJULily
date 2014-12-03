@@ -14,7 +14,7 @@ import dataenum.BillState;
 public class CashBillVO extends ValueObject{
 	
 	/** 编号 */
-	public String id;
+	public String ID;
 	/** 操作员 */
 	public String user;
 	/** 银行账户 */
@@ -26,8 +26,8 @@ public class CashBillVO extends ValueObject{
 	/** 单据状态 */
 	public BillState state;
 	
-	public CashBillVO(String id, String user, String account, ArrayList<CashItemVO> bills, double total, BillState state) {
-		this.id = id;
+	public CashBillVO(String ID, String user, String account, ArrayList<CashItemVO> bills, double total, BillState state) {
+		this.ID = ID;
 		this.user = user;
 		this.account = account;
 		this.bills = bills;

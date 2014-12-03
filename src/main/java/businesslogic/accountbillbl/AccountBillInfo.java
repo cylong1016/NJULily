@@ -97,4 +97,12 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 		return POs;
 	}
 
+	// TODO
+	public void pass(AccountBillVO vo) {
+		AccountBillPO po = accountBill.getAccountBillData().find(vo.ID);
+		po.setState(BillState.SUCCESS);
+		accountBill.getAccountBillData().update(po);
+		
+	}
+
 }
