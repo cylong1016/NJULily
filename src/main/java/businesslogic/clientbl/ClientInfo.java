@@ -64,4 +64,9 @@ public class ClientInfo implements ClientInfo_AccountBill, ClientInfo_Sale, Clie
 		po.setReceivable(po.getReceivable() + afterPrice);
 		client.getClientData().update(po);
 	}
+	public void changePayable(String clientID, double beforePrice) {
+		ClientPO po = client.getClientData().find(clientID);
+		po.setPayable(po.getPayable() + beforePrice);
+		client.getClientData().update(po);
+	}
 }

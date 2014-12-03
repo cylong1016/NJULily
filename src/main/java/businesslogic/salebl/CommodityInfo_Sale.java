@@ -33,5 +33,5 @@ public interface CommodityInfo_Sale {
 	 * @author Zing
 	 * @version Dec 3, 2014 2:24:59 PM
 	 */
-	public void changeNumber(String ID, int number, double price, BillType billType);
+	public void changeCommodityInfo(String ID, int number, double price, BillType billType);
 }

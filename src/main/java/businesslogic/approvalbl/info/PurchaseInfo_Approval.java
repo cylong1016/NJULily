@@ -12,4 +12,12 @@ public interface PurchaseInfo_Approval {
 	 * @version Dec 2, 2014 2:20:52 PM
 	 */
 	public ResultMessage update(PurchaseVO vo);
+
+	/**
+	 * 通过该进货／进货退货单，更改相应数据
+	 * @param vo
+	 * @author Zing
+	 * @version Dec 3, 2014 3:47:40 PM
+	 */
+	public void pass(PurchaseVO vo);
 }

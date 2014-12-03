@@ -110,22 +110,63 @@ public class CommodityInfo implements CommodityInfo_Sale, businesslogic.purchase
 		return vo;
 	}
 
-	public void changeNumber(String ID, int number, double price, BillType billType) {
+	/**
+	 * 更改商品数据，包括库存数量、最近进价、最近售价、平均进价、平均售价、销售数量、进货数量
+	 */
+	public void changeCommodityInfo(String ID, int number, double price, BillType billType) {
 		CommodityPO po = commodityData.find(ID);
 		// 更改PO的数据
-		if (billType == BillType.SALE) { // 如果是销售单，需要减少库存数量，更改最近售价，更改平均售价，增加销售数量
+		int nowSaleNumber = 0;
+		int nowPurNumber = 0;
+		switch (billType) {
+		case SALE: // 如果是销售单，需要减少库存数量，更改最近售价，更改平均售价，增加销售数量
 			int nowCommodityNumber = po.getInventoryNum() - number;
-			int nowSaleNumber = po.getSaleNumber() + number;
+			nowSaleNumber = po.getSaleNumber() + number;
 			po.setInventoryNum(nowCommodityNumber);
 			po.setRecentSalePrice(price);
 			po.setAveSale((po.getAveSale() * po.getSaleNumber() + number * price) / nowSaleNumber);
 			po.setSaleNumber(nowSaleNumber);
-		}
-		else { // 如果是销售退款单，需要增加库存数量，更改平均售价，减少销售数量
-			int nowSaleNumber = po.getSaleNumber() - number;
+			break;
+		case SALEBACK: // 如果是销售退款单，需要增加库存数量，更改平均售价，减少销售数量
+			nowSaleNumber = po.getSaleNumber() - number;
 			po.setInventoryNum(po.getInventoryNum() + number);
 			po.setAveSale((po.getAveSale() * po.getSaleNumber() - number * price) / nowSaleNumber);
 			po.setSaleNumber(nowSaleNumber);
+			break;
+		case PURCHASE: // 如果是销售退款单，需要增加库存数量，更改平均售价，减少销售数量
+			nowPurNumber = po.getPurNumber() + number;
+			po.setInventoryNum(po.getInventoryNum() + number);
+			po.setRecentPurPrice(price);
+			po.setAvePur((po.getAvePur() * po.getPurNumber() + number * price) / nowPurNumber);
+			po.setPurNumber(nowPurNumber);
+			break;
+		case PURCHASEBACK: // 如果是进货退货单，需要减少库存数量，更改平均进价，减少进货数量
+			nowPurNumber = po.getPurNumber() - number;
+			po.setInventoryNum(po.getInventoryNum() - number);
+			po.setAvePur((po.getAvePur() * po.getPurNumber() - number * price) / nowPurNumber);
+			po.setPurNumber(nowPurNumber);
+			break;
+		default:
+			break;
+		}
+		commodityData.update(po);
+	}
+
+	/**
+	 * 库存单据（赠送、报损、报溢）
+	 */
+	public void changeNumber(String ID, int number, BillType billType) {
+		CommodityPO po = commodityData.find(ID);
+		switch (billType) {
+		case OVERFLOW:
+			po.setInventoryNum(po.getInventoryNum() + number);
+			break;
+		case LOSS:
+		case GIFT:
+			po.setInventoryNum(po.getInventoryNum() - number);
+			break;
+		default:
+			break;
 		}
 		commodityData.update(po);
 	}
