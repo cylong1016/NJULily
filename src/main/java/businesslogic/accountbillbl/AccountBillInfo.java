@@ -22,7 +22,7 @@ import dataservice.TableInfoService;
  * @author cylong
  * @version 2014年12月1日 下午3:02:45
  */
-public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectInfo_Record<AccountBillVO>, ValueObject_Approval<AccountBillVO>, AccountBill_Approval{
+public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectInfo_Record<AccountBillVO>, ValueObject_Approval<AccountBillVO>, AccountBill_Approval {
 
 	private AccountBill accountBill;
 
@@ -38,7 +38,6 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 	protected TableInfoService<AccountBillPO> getData() {
 		return accountBill.getAccountBillData().getInfo();
 	}
-	
 
 	/**
 	 * @see businesslogic.recordbl.info.ValueObjectInfo_Record#find(java.lang.String)
@@ -80,20 +79,21 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 	public ResultMessage update(AccountBillVO vo) {
 		String ID = vo.ID;
 		String clientID = vo.clientID;
-		String userID = vo.userID;
+		String clientName = vo.clientName;
+		String username = vo.username;
 		BillType type = vo.type;
 		ArrayList<AccountBillItemPO> bills = itemsVOtoPO(vo.bills);
-		AccountBillPO po = new AccountBillPO(ID, clientID, userID, bills, type);
+		AccountBillPO po = new AccountBillPO(ID, clientID, clientName, username, bills, type);
 		return accountBill.getAccountBillData().update(po);
 	}
-	
+
 	private ArrayList<AccountBillItemPO> itemsVOtoPO(ArrayList<AccountBillItemVO> VOs) {
 		ArrayList<AccountBillItemPO> POs = new ArrayList<AccountBillItemPO>();
-		for (AccountBillItemVO vo : VOs) {
-			String accountID = vo.accountID;
+		for(AccountBillItemVO vo : VOs) {
+			String accountName = vo.accountName;
 			double money = vo.money;
 			String remark = vo.remark;
-			AccountBillItemPO po = new AccountBillItemPO(accountID, money, remark);
+			AccountBillItemPO po = new AccountBillItemPO(accountName, money, remark);
 			POs.add(po);
 		}
 		return POs;
@@ -110,8 +110,8 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 		// 更改银行账户的数据
 		ArrayList<AccountBillItemPO> billItemPOs = po.getBills();
 		AccountInfo_AccountBill accountInfo = new AccountInfo();
-		for (AccountBillItemPO billItem : billItemPOs) {
-			switch (vo.type) {
+		for(AccountBillItemPO billItem : billItemPOs) {
+			switch(vo.type) {
 			case PAY:
 				accountInfo.changeMoney(billItem.getAccountName(), billItem.getMoney());
 				break;
@@ -123,7 +123,7 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 			}
 		}
 		ClientInfo_AccountBill clientInfo = new ClientInfo();
-		switch (vo.type) {
+		switch(vo.type) {
 		case PAY:
 			clientInfo.changeReceivable(vo.clientID, vo.sumMoney);
 			break;

@@ -22,11 +22,11 @@ public class UserInfo implements UserInfo_Client, UserInfo_AccountBill {
 	}
 
 	/**
-	 * @see businesslogic.accountbillbl.UserInfo_AccountBill#getUserID()
+	 * @see businesslogic.accountbillbl.UserInfo_AccountBill#getUserName()
 	 */
 	@Override
-	public String getUserID() {
-		return current.getID();
+	public String getUserName() {
+		return current.getUsername();
 	}
 
 	/**

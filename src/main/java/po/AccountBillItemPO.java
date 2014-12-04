@@ -16,7 +16,7 @@ public class AccountBillItemPO implements Serializable {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = -4954487055647124897L;
-	/** 银行账户 */
+	/** 银行账户名 */
 	private String accountName;
 	/** 转账金额 */
 	private double money;
@@ -40,6 +40,5 @@ public class AccountBillItemPO implements Serializable {
 	public String getAccountName() {
 		return this.accountName;
 	}
-
 
 }

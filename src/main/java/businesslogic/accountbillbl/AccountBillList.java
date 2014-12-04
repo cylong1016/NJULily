@@ -20,7 +20,7 @@ public class AccountBillList {
 	}
 
 	public void addBillItem(AccountBillItemVO vo) {
-		AccountBillItemVO item = new AccountBillItemVO(vo.accountID, vo.money, vo.remark);
+		AccountBillItemVO item = new AccountBillItemVO(vo.accountName, vo.money, vo.remark);
 		sumMoney += vo.money;
 		billList.add(item);
 	}
@@ -38,10 +38,10 @@ public class AccountBillList {
 	public ArrayList<AccountBillItemPO> toPOList() {
 		ArrayList<AccountBillItemPO> poList = new ArrayList<AccountBillItemPO>();
 		for(AccountBillItemVO vo : billList) {
-			String accountID = vo.accountID;
+			String accountName = vo.accountName;
 			double money = vo.money;
 			String remark = vo.remark;
-			AccountBillItemPO po = new AccountBillItemPO(accountID, money, remark);
+			AccountBillItemPO po = new AccountBillItemPO(accountName, money, remark);
 			poList.add(po);
 		}
 		return poList;

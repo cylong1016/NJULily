@@ -1,19 +1,17 @@
 package businesslogic.promotionbl;
 
-import java.rmi.Naming;
 import java.util.ArrayList;
 
+import message.ResultMessage;
 import po.CommodityItemPO;
 import po.PromotionPO;
-import config.RMI;
-import message.ResultMessage;
+import server.data.promotiondata.PromotionData;
 import vo.CommodityItemVO;
 import vo.InventoryBillVO;
 import vo.PromotionVO;
 import blservice.promotionblservice.PromoInputInfo;
 import businesslogic.inventorybl.InventoryInfo;
 import dataenum.PromotionType;
-import dataservice.DataFactoryService;
 import dataservice.promotiondataservice.PromotionDataService;
 
 /**
@@ -25,38 +23,40 @@ import dataservice.promotiondataservice.PromotionDataService;
  * @version Nov 30, 2014 12:53:47 AM
  */
 public class Promotion {
-	/** 策略条目*/
+
+	/** 策略条目 */
 	private PromotionList list;
-	/** 策略编号*/
+	/** 策略编号 */
 	private String ID;
-	/** 促销起始时间*/
+	/** 促销起始时间 */
 	private String beginDate;
-	/** 促销结束时间*/
+	/** 促销结束时间 */
 	private String endDate;
-	/** 策略类型*/
+	/** 策略类型 */
 	private PromotionType type;
-	
+
 	public Promotion() {
 		list = new PromotionList();
 	}
-	
+
 	/**
 	 * 得到销售策略的数据层
 	 * @return
 	 * @author Zing
 	 * @version Nov 30, 2014 9:52:22 AM
 	 */
-	public PromotionDataService getPromotionData(){
-		try {
-			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
-			PromotionDataService promotionData = factory.getPromotionData();
-			return promotionData;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+	public PromotionDataService getPromotionData() {
+		//		try {
+		//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
+		//			PromotionDataService promotionData = factory.getPromotionData();
+		//			return promotionData;
+		//		} catch (Exception e) {
+		//			e.printStackTrace();
+		//			return null;
+		//		}
+		return new PromotionData();
 	}
-	
+
 	/**
 	 * 查看不同类型的销售策略
 	 * @param type
@@ -65,10 +65,10 @@ public class Promotion {
 	 * @version Nov 30, 2014 9:52:28 AM
 	 */
 	public ArrayList<PromotionVO> show(PromotionType type) {
-		
+		getPromotionData().show(type); // TODO 需要po转vo
 		return null;
 	}
-	
+
 	/**
 	 * 查看已经有的赠送单，帮助总经理制定销售策略
 	 * @return
@@ -125,17 +125,15 @@ public class Promotion {
 	public ResultMessage submit(PromoInputInfo info) {
 		setInputInfo(info);
 		PromotionPO po = buildPromotion();
-		// TODO 插入数据层中
-		return null;
+		return getPromotionData().insert(po);
 	}
 
 	/**
-	 * 
 	 * @param info
 	 * @author Zing
 	 * @version Nov 30, 2014 9:52:49 AM
 	 */
-	private void setInputInfo(PromoInputInfo info){
+	private void setInputInfo(PromoInputInfo info) {
 		this.beginDate = info.beginDate;
 		this.endDate = info.endDate;
 		list.setAllowance(info.allowance);
@@ -143,19 +141,18 @@ public class Promotion {
 		list.setLevel(info.level);
 		list.setTotal(info.total);
 	}
-	
+
 	/**
-	 * 
 	 * @return
 	 * @author Zing
 	 * @version Nov 30, 2014 9:52:54 AM
 	 */
-	private PromotionPO buildPromotion(){
+	private PromotionPO buildPromotion() {
 		PromotionPO po = null;
 		ArrayList<CommodityItemPO> gifts = list.getGifts();
 		double allowance = list.getAllowance();
 		int voucher = list.getVoucher();
-		switch (type) {
+		switch(type) {
 		case CLIENT:
 			po = new PromotionPO(ID, beginDate, endDate, list.getLevel(), gifts, allowance, voucher);
 			break;

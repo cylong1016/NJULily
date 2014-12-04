@@ -16,12 +16,19 @@ import dataenum.BillType;
  * @author cylong
  * @version Nov 16, 2014 3:38:40 PM
  */
+/**
+ * 操作员ID改为操作员name，添加客户姓名属性
+ * @author cylong
+ * @version 2014年12月4日 下午7:29:06
+ */
 public class AccountBillVO extends ValueObject {
 
 	/** 客户ID */
 	public String clientID;
-	/** 操作员ID */
-	public String userID;
+	/** 客户名 */
+	public String clientName;
+	/** 操作员name */
+	public String username;
 	/** 转账列表 */
 	public ArrayList<AccountBillItemVO> bills;
 	/** 汇款总额 */
@@ -31,10 +38,11 @@ public class AccountBillVO extends ValueObject {
 	/** 区分收款单和付款单 */
 	public BillType type;
 
-	public AccountBillVO(String ID, String clientID, String userID, ArrayList<AccountBillItemVO> bills, BillState state, BillType type) {
+	public AccountBillVO(String ID, String clientID, String clientName, String username, ArrayList<AccountBillItemVO> bills, BillState state, BillType type) {
 		this.ID = ID;
 		this.clientID = clientID;
-		this.userID = userID;
+		this.clientName = clientName;
+		this.username = username;
 		this.bills = bills;
 		this.sumMoney = this.calcSumMoney();
 		this.state = state;

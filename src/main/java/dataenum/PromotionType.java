@@ -5,5 +5,4 @@ public enum PromotionType {
 	CLIENT,
 	COMMODITY,
 	TOTAL
-
 }

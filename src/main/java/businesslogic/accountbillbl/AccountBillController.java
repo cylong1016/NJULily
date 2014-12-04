@@ -68,8 +68,8 @@ public class AccountBillController implements AccountBillBLService {
 	 * @see blservice.accountbillblservice.AccountBillBLService#addAccountBill(java.lang.String)
 	 */
 	@Override
-	public void addAccountBill(String clientID) {
-		accountBill.addAccountBill(clientID);
+	public void addAccountBill(String clientID, String clientName) {
+		accountBill.addAccountBill(clientID, clientName);
 	}
 
 	/**

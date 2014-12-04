@@ -80,7 +80,7 @@ public interface AccountBillBLService {
 	 * @author cylong
 	 * @version 2014年11月30日 下午10:32:37
 	 */
-	public void addAccountBill(String clientID);
+	public void addAccountBill(String clientID, String clientName);
 
 	/**
 	 * 显示全部的收款单和付款单

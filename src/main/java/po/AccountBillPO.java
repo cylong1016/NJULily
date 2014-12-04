@@ -16,14 +16,21 @@ import dataenum.BillType;
  * @author cylong
  * @version Nov 16, 2014 3:42:42 PM
  */
+/**
+ * 将操作员ID改为操作员name，添加用户name
+ * @author cylong
+ * @version 2014年12月4日 下午7:24:55
+ */
 public class AccountBillPO extends PersistentObject {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = 5795283762610233239L;
 	/** 客户ID */
 	private String clientID;
+	/** 客户name */
+	private String clientName;
 	/** 操作员ID */
-	private String userID;
+	private String username;
 	/** 转账列表 */
 	private ArrayList<AccountBillItemPO> bills;
 	/** 汇款总额 */
@@ -33,11 +40,12 @@ public class AccountBillPO extends PersistentObject {
 	/** 区分收款单和付款单 */
 	private BillType type;
 
-	public AccountBillPO(String ID, String clientID, String userID, ArrayList<AccountBillItemPO> bills, BillType type) {
+	public AccountBillPO(String ID, String clientID, String clientName, String username, ArrayList<AccountBillItemPO> bills, BillType type) {
 		super(ID);
 		this.ID = ID;
 		this.clientID = clientID;
-		this.userID = userID;
+		this.clientName = clientName;
+		this.username = username;
 		this.bills = bills;
 		this.type = type;
 		this.state = BillState.APPROVALING;
@@ -74,12 +82,16 @@ public class AccountBillPO extends PersistentObject {
 		return this.clientID;
 	}
 
+	public String getClientName() {
+		return this.clientName;
+	}
+
 	public void setClientID(String clientID) {
 		this.clientID = clientID;
 	}
 
-	public String getUserID() {
-		return this.userID;
+	public String getUsername() {
+		return this.username;
 	}
 
 	public ArrayList<AccountBillItemPO> getBills() {

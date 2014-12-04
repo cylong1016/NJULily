@@ -102,11 +102,18 @@ public class AccountBill {
 	 * @author cylong
 	 * @version 2014年12月1日 上午1:39:47
 	 */
-	public void addAccountBill(String clientID) {
+	/**
+	 * 添加一条账单（单据类型已经在前面的getID方法中获得）
+	 * @param clientID 客户ID
+	 * @param clientName 客户name
+	 * @author cylong
+	 * @version 2014年12月4日 下午7:34:15
+	 */
+	public void addAccountBill(String clientID, String clientName) {
 		UserInfo_AccountBill userInfo = new UserInfo();
-		String userID = userInfo.getUserID();
+		String username = userInfo.getUserName();
 		ArrayList<AccountBillItemPO> billsPO = bills.toPOList();
-		po = new AccountBillPO(ID, clientID, userID, billsPO, type);
+		po = new AccountBillPO(ID, clientID, clientName, username, billsPO, type);
 	}
 
 	/**
@@ -159,11 +166,12 @@ public class AccountBill {
 	public AccountBillVO poToVO(AccountBillPO po) {
 		String ID = po.getID();
 		String clientID = po.getClientID();
-		String userID = po.getUserID();
+		String clientName = po.getClientName();
+		String username = po.getUsername();
 		ArrayList<AccountBillItemVO> bills = toItemVOList(po.getBills());
 		BillState state = po.getState();
 		BillType type = po.getType();
-		AccountBillVO vo = new AccountBillVO(ID, clientID, userID, bills, state, type);
+		AccountBillVO vo = new AccountBillVO(ID, clientID, clientName, username, bills, state, type);
 		return vo;
 	}
 
@@ -176,10 +184,10 @@ public class AccountBill {
 	public ArrayList<AccountBillItemVO> toItemVOList(ArrayList<AccountBillItemPO> itemPOList) {
 		ArrayList<AccountBillItemVO> itemVOList = new ArrayList<AccountBillItemVO>();
 		for(AccountBillItemPO po : itemPOList) {
-			String accountID = po.getAccountID();
+			String accountName = po.getAccountName();
 			double money = po.getMoney();
 			String remark = po.getRemark();
-			AccountBillItemVO vo = new AccountBillItemVO(accountID, money, remark);
+			AccountBillItemVO vo = new AccountBillItemVO(accountName, money, remark);
 			itemVOList.add(vo);
 		}
 		return itemVOList;

@@ -12,7 +12,7 @@ package vo;
  */
 public class AccountBillItemVO {
 
-	/** 银行账户 */
+	/** 银行账户名 */
 	public String accountName;
 	/** 转账金额 */
 	public double money;
