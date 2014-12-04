@@ -5,8 +5,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-import ui.commonui.exitfinish.ExitFinishFrame;
-import ui.commonui.exitfunction.ExitFunctionFrame;
 import ui.commonui.myui.MyButton;
 import ui.commonui.myui.MyWindow;
 

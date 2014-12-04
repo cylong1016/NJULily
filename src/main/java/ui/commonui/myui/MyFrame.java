@@ -8,7 +8,7 @@ import java.awt.event.MouseMotionAdapter;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.UIManager;
+
 
 import ui.commonui.exitprogram.ExitProgramFrame;
 
