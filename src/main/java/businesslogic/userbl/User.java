@@ -28,6 +28,7 @@ public class User {
 		//		} catch (Exception e) {
 		//			e.printStackTrace();
 		//		}
+		// TODO 本地新建
 		this.userData = new UserData();
 	}
 

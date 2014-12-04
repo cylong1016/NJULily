@@ -1,7 +1,6 @@
 package main;
 
 import ui.commonui.login.Frame_Login;
-import ui.differui.inventory.frame.Frame_Inventory;
 
 /**
  * @author NJULily

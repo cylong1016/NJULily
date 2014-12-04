@@ -3,18 +3,19 @@ package businesslogic.inventorybl;
 import java.rmi.Naming;
 import java.util.ArrayList;
 
-import businesslogic.common.ChangeCommodityItems;
-import config.RMI;
+import message.ResultMessage;
 import po.InventoryBillPO;
+import server.data.inventorydata.InventoryData;
 import vo.CommodityItemVO;
 import vo.InventoryBillVO;
 import vo.InventoryCheckVO;
 import vo.InventoryViewVO;
+import businesslogic.common.ChangeCommodityItems;
+import config.RMI;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataservice.DataFactoryService;
 import dataservice.inventorydataservice.InventoryDataService;
-import message.ResultMessage;
 
 public class Inventory extends ChangeCommodityItems {
 	
@@ -34,14 +35,16 @@ public class Inventory extends ChangeCommodityItems {
 	 * @version Dec 2, 2014 6:11:29 PM
 	 */
 	public InventoryDataService getInventoryData(){
-		try {
-			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
-			InventoryDataService inventoryData = (InventoryDataService)factory.getInventoryData();
-			return inventoryData;		
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		} 
+//		try {
+//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
+//			InventoryDataService inventoryData = (InventoryDataService)factory.getInventoryData();
+//			return inventoryData;		
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return null;
+//		}
+		// TODO 本地新建
+		return new InventoryData();
 	}
 	
 	/**

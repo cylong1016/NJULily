@@ -1,17 +1,15 @@
 package businesslogic.cashbillbl;
 
-import java.rmi.Naming;
 import java.util.ArrayList;
 
-import config.RMI;
+import message.ResultMessage;
 import po.CashBillPO;
 import po.CashItemPO;
+import server.data.cashbilldata.CashBillData;
 import vo.CashBillVO;
 import vo.CashItemVO;
-import message.ResultMessage;
 import dataenum.BillState;
 import dataenum.BillType;
-import dataservice.DataFactoryService;
 import dataservice.cashbilldataservice.CashBillDataService;
 /**
  * 制定现金费用单
@@ -35,14 +33,16 @@ public class CashBill {
 	}
 	
 	public CashBillDataService getCashBillData(){
-		try {
-			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
-			CashBillDataService cashBillData = (CashBillDataService)factory.getCashBillData();
-			return cashBillData;		
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		} 
+//		try {
+//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
+//			CashBillDataService cashBillData = (CashBillDataService)factory.getCashBillData();
+//			return cashBillData;		
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return null;
+//		} 
+		// TODO 本地新建
+		return new CashBillData();
 	}
 	
 	public String getID(BillType type) {

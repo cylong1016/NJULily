@@ -1,6 +1,5 @@
 package businesslogic.accountainitbl;
 
-import java.rmi.Naming;
 import java.util.ArrayList;
 
 import message.ResultMessage;
@@ -9,6 +8,7 @@ import po.AccountaInitPO;
 import po.ClientPO;
 import po.CommodityPO;
 import po.CommoditySortPO;
+import server.data.accountinitdata.AccountInitData;
 import vo.AccountVO;
 import vo.AccountaInitVO;
 import vo.ClientVO;
@@ -22,8 +22,6 @@ import businesslogic.accountbl.AccountInfo;
 import businesslogic.clientbl.ClientInfo;
 import businesslogic.commoditybl.CommodityInfo;
 import businesslogic.commoditysortbl.CommoditySortInfo;
-import config.RMI;
-import dataservice.DataFactoryService;
 import dataservice.accountinitdataservice.AccountaInitDataService;
 /**
  * 这个系统是可以支持建多套账的，每套帐在新建的时候都要经过期初建账这一环节，可以理解为一套帐的初始化操作。
@@ -99,13 +97,15 @@ public class Accountainit {
 	 * @version Dec 2, 2014 7:35:59 PM
 	 */
 	private AccountaInitDataService getAccountaInitData() {
-		try {
-			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
-			AccountaInitDataService accountaInitData = factory.getAccountaInitData();
-			return accountaInitData;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+//		try {
+//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
+//			AccountaInitDataService accountaInitData = factory.getAccountaInitData();
+//			return accountaInitData;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return null;
+//		}
+		// TODO 本地新建
+		return new AccountInitData();
 	}
 }

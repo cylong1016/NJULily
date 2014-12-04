@@ -22,6 +22,7 @@ public class Account {
 		//		} catch (Exception e) {
 		//			e.printStackTrace();
 		//		}
+		// TODO 本地新建
 		this.accountData = new AccountData();
 	}
 

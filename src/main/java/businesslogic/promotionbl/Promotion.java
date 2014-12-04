@@ -54,6 +54,7 @@ public class Promotion {
 		//			e.printStackTrace();
 		//			return null;
 		//		}
+		// TODO 本地新建
 		return new PromotionData();
 	}
 

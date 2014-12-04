@@ -27,6 +27,7 @@ public class Client {
 		//		} catch (Exception e) {
 		//			e.printStackTrace();
 		//		}
+		// TODO 本地新建
 		this.clientData = new ClientData();
 	}
 

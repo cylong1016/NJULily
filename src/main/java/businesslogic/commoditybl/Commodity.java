@@ -1,16 +1,15 @@
 package businesslogic.commoditybl;
 
-import java.rmi.Naming;
 import java.util.ArrayList;
 
-import config.RMI;
 import message.ResultMessage;
 import po.CommodityPO;
 import po.CommoditySortPO;
+import server.data.commoditydata.CommodityData;
+import server.data.commoditysortdata.CommoditySortData;
 import vo.CommodityVO;
 import blservice.commodityblservice.CommodityInputInfo;
 import dataenum.FindTypeCommo;
-import dataservice.DataFactoryService;
 import dataservice.commoditydataservice.CommodityDataService;
 import dataservice.commoditysortdataservice.CommoditySortDataService;
 /**
@@ -29,13 +28,16 @@ public class Commodity {
 	private String ID;
 	
 	public Commodity() {
-		try {
-			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
-			commodityData = factory.getCommodityData();
-			commoditySortData = factory.getCommoditySortData();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		try {
+//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
+//			commodityData = factory.getCommodityData();
+//			commoditySortData = factory.getCommoditySortData();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		// TODO 本地新建
+		commodityData = new CommodityData();
+		commoditySortData = new CommoditySortData();
 	}
 	
 	/**

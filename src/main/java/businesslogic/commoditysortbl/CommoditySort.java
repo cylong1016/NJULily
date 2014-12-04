@@ -1,13 +1,11 @@
 package businesslogic.commoditysortbl;
 
-import java.rmi.Naming;
 import java.util.ArrayList;
 
-import config.RMI;
 import message.ResultMessage;
 import po.CommoditySortPO;
+import server.data.commoditysortdata.CommoditySortData;
 import vo.CommoditySortVO;
-import dataservice.DataFactoryService;
 import dataservice.commoditysortdataservice.CommoditySortDataService;
 
 public class CommoditySort {
@@ -19,12 +17,14 @@ public class CommoditySort {
 	private CommoditySortPO po;
 	
 	public CommoditySort() {
-		try {
-			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
-			commoditySortData= (CommoditySortDataService)factory.getCommoditySortData();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
+//		try {
+//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
+//			commoditySortData= (CommoditySortDataService)factory.getCommoditySortData();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		// TODO 本地新建
+		commoditySortData = new CommoditySortData();
 	}
 	
 	public String getID(String fatherID){

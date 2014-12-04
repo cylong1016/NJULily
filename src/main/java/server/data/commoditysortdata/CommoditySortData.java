@@ -36,10 +36,12 @@ public class CommoditySortData extends CommonData<CommoditySortPO> implements Co
 
 	/**
 	 * 名称存在就添加失败
+	 * 有商品就添加失败
 	 * @see server.data.CommonData#insert(po.PersistentObject)
 	 */
 	@Override
 	public ResultMessage insert(CommoditySortPO po) {
+		// TODO 所有商品的父类问题
 		for(CommoditySortPO temp : poList.getInList()) {
 			if (temp.getName().equals(po.getName())) {
 				return ResultMessage.FAILURE;

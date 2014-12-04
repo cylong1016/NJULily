@@ -1,20 +1,18 @@
 package businesslogic.purchasebl;
 
-import java.rmi.Naming;
 import java.util.ArrayList;
 
-import config.RMI;
+import message.ResultMessage;
+import po.PurchasePO;
+import server.data.purchasedata.PurchaseData;
+import vo.CommodityItemVO;
+import vo.PurchaseVO;
 import blservice.purchaseblservice.PurInputInfo;
 import businesslogic.clientbl.ClientInfo;
 import businesslogic.common.ChangeCommodityItems;
-import po.PurchasePO;
-import message.ResultMessage;
-import vo.CommodityItemVO;
-import vo.PurchaseVO;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Storage;
-import dataservice.DataFactoryService;
 import dataservice.purchasedataservice.PurchaseDataService;
 
 public class Purchase extends ChangeCommodityItems {
@@ -32,14 +30,16 @@ public class Purchase extends ChangeCommodityItems {
 	}
 	
 	public PurchaseDataService getPurData(){
-		try {
-			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
-			PurchaseDataService purData = factory.getPurchaseData();
-			return purData;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		} 
+//		try {
+//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
+//			PurchaseDataService purData = factory.getPurchaseData();
+//			return purData;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return null;
+//		}
+		// TODO 本地新建
+		return new PurchaseData();
 	}
 	
 	public ArrayList<PurchaseVO> show(BillType type) {

@@ -1,20 +1,18 @@
 package businesslogic.salebl;
 
-import java.rmi.Naming;
 import java.util.ArrayList;
 
 import message.ResultMessage;
 import po.SalesPO;
+import server.data.saledata.SaleData;
 import vo.CommodityItemVO;
 import vo.SalesVO;
 import blservice.saleblservice.SaleInputInfo;
 import businesslogic.clientbl.ClientInfo;
 import businesslogic.common.ChangeCommodityItems;
-import config.RMI;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Storage;
-import dataservice.DataFactoryService;
 import dataservice.saledataservice.SaleDataService;
 
 /**
@@ -39,14 +37,16 @@ public class Sale extends ChangeCommodityItems {
 	}
 
 	public SaleDataService getSaleData() {
-		try {
-			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
-			SaleDataService saleData = factory.getSaleData();
-			return saleData;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+//		try {
+//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
+//			SaleDataService saleData = factory.getSaleData();
+//			return saleData;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return null;
+//		}
+		// TODO 本地新建
+		return new SaleData();
 	}
 
 	/**
