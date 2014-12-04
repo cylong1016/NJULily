@@ -13,14 +13,14 @@ package vo;
 public class AccountBillItemVO {
 
 	/** 银行账户 */
-	public String accountID;
+	public String accountName;
 	/** 转账金额 */
 	public double money;
 	/** 备注 */
 	public String remark;
 
-	public AccountBillItemVO(String accountID, double money, String remark) {
-		this.accountID = accountID;
+	public AccountBillItemVO(String accountName, double money, String remark) {
+		this.accountName = accountName;
 		this.money = money;
 		this.remark = remark;
 	}

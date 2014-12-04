@@ -16,15 +16,15 @@ public class AccountBillItemPO implements Serializable {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = -4954487055647124897L;
-	/** 银行账户ID */
-	private String accountID;
+	/** 银行账户 */
+	private String accountName;
 	/** 转账金额 */
 	private double money;
 	/** 备注 */
 	private String remark;
 
-	public AccountBillItemPO(String accountID, double money, String remark) {
-		this.accountID = accountID;
+	public AccountBillItemPO(String accountName, double money, String remark) {
+		this.accountName = accountName;
 		this.money = money;
 		this.remark = remark;
 	}
@@ -37,8 +37,8 @@ public class AccountBillItemPO implements Serializable {
 		return remark;
 	}
 
-	public String getAccountID() {
-		return this.accountID;
+	public String getAccountName() {
+		return this.accountName;
 	}
 
 

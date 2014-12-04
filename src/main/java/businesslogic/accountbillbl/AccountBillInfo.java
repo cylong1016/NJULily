@@ -7,8 +7,10 @@ import po.AccountBillItemPO;
 import po.AccountBillPO;
 import vo.AccountBillItemVO;
 import vo.AccountBillVO;
+import businesslogic.accountbl.AccountInfo;
 import businesslogic.approvalbl.info.AccountBill_Approval;
 import businesslogic.approvalbl.info.ValueObject_Approval;
+import businesslogic.clientbl.ClientInfo;
 import businesslogic.common.Info;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
 import dataenum.BillState;
@@ -97,13 +99,40 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 		return POs;
 	}
 
+	/**
+	 * 收款单／付款单通过审批，更改账户信息、客户应收／应付数据
+	 */
 	public void pass(AccountBillVO vo) {
 		AccountBillPO po = accountBill.getAccountBillData().find(vo.ID);
 		// 更改该收款单／付款单的状态
 		po.setState(BillState.SUCCESS);
 		accountBill.getAccountBillData().update(po);
-		
-		
+		// 更改银行账户的数据
+		ArrayList<AccountBillItemPO> billItemPOs = po.getBills();
+		AccountInfo_AccountBill accountInfo = new AccountInfo();
+		for (AccountBillItemPO billItem : billItemPOs) {
+			switch (vo.type) {
+			case PAY:
+				accountInfo.changeMoney(billItem.getAccountName(), billItem.getMoney());
+				break;
+			case EXPENSE:
+				accountInfo.changeMoney(billItem.getAccountName(), -billItem.getMoney());
+				break;
+			default:
+				break;
+			}
+		}
+		ClientInfo_AccountBill clientInfo = new ClientInfo();
+		switch (vo.type) {
+		case PAY:
+			clientInfo.changeReceivable(vo.clientID, vo.sumMoney);
+			break;
+		case EXPENSE:
+			clientInfo.changePayable(vo.clientID, vo.sumMoney);
+			break;
+		default:
+			break;
+		}
 	}
 
 }

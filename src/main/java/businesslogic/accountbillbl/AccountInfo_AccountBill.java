@@ -14,5 +14,14 @@ public interface AccountInfo_AccountBill {
 	 * @version 2014年12月1日 上午1:23:52
 	 */
 	public HashMap<String, String> getAllAccounts();
+
+	/**
+	 * 
+	 * @param accountID
+	 * @param money
+	 * @author Zing
+	 * @version Dec 4, 2014 5:39:57 PM
+	 */
+	public void changeMoney(String accountName, double money);
 	
 }
