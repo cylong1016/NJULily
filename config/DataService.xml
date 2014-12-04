@@ -12,7 +12,7 @@
 		<path>data/UserList.ser</path>
 		<prefix>YH</prefix>
 		<initID>1</initID>
-		<maxID>00009</maxID>
+		<maxID>00014</maxID>
 		<IDMaxBit>5</IDMaxBit>
 	</Data>
 	<Data>

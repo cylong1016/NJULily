@@ -30,7 +30,7 @@ public class MyFrame extends JFrame {
 	public static int openTime;
     
 	public MyFrame(){	
-		
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//setWindowStyle ();
 		
 		Dimension scrSize=Toolkit.getDefaultToolkit().getScreenSize();
