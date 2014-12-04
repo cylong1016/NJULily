@@ -97,11 +97,12 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 		return POs;
 	}
 
-	// TODO
 	public void pass(AccountBillVO vo) {
 		AccountBillPO po = accountBill.getAccountBillData().find(vo.ID);
+		// 更改该收款单／付款单的状态
 		po.setState(BillState.SUCCESS);
 		accountBill.getAccountBillData().update(po);
+		
 		
 	}
 

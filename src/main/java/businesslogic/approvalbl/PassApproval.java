@@ -1,7 +1,6 @@
 package businesslogic.approvalbl;
 
 import businesslogic.accountbillbl.AccountBillInfo;
-import businesslogic.accountbl.AccountInfo;
 import businesslogic.approvalbl.info.AccountBill_Approval;
 import businesslogic.approvalbl.info.CashBillInfo_Approval;
 import businesslogic.approvalbl.info.InventoryInfo_Approval;
@@ -35,7 +34,6 @@ public class PassApproval {
 
 	public void passBill(AccountBillVO vo) {
 		AccountBill_Approval info = new AccountBillInfo();
-		// TODO
 		info.pass(vo);
 	}
 
