@@ -23,6 +23,7 @@ import ui.commonui.myui.MyPasswordField;
 import ui.commonui.myui.MyTextField;
 import ui.commonui.warning.WarningFrame;
 import ui.differui.admin.AdminUI;
+import ui.differui.inventory.frame.Frame_Inventory;
 import ui.differui.salesman.frame.Frame_Salesman;
 
 
@@ -139,13 +140,35 @@ public class Frame_Login extends MyFrame implements ActionListener{
 				WarningFrame wf = new WarningFrame("用户名或密码填写错误！");
 				wf.setVisible(true);
 			}else if(ui.equals(UserIdentity.ADMIN)){
+				
 				AdminUI au = new AdminUI();
 				au.setVisible(true);
+				
 				this.setVisible(false);
+				
+				WarningFrame wf = new WarningFrame("欢迎使用本系统！");
+				wf.setVisible(true);
+				
+			
 			}else if(ui.equals(UserIdentity.PUR_SALE_MANAGER) || ui.equals(UserIdentity.SALE_MANAGER)){
+				
 				Frame_Salesman fs = new Frame_Salesman();
 				fs.setVisible(true);
+				
 				this.setVisible(false);
+				
+				WarningFrame wf = new WarningFrame("欢迎使用本系统！");
+				wf.setVisible(true);
+			}else if(ui.equals(UserIdentity.INVENTORY_MANAGER)){
+				
+				Frame_Inventory fi = new Frame_Inventory();
+				fi.setVisible(true);
+				
+				this.setVisible(false);
+				
+				WarningFrame wf = new WarningFrame("欢迎使用本系统！");
+				wf.setVisible(true);
+				
 			}
 		}
 	}

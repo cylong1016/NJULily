@@ -3,24 +3,33 @@ package ui.differui.inventory.commodity_management.addsort;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JLabel;
+import javax.swing.tree.DefaultMutableTreeNode;
 
+import message.ResultMessage;
+import businesslogic.commoditysortbl.CommoditySortController;
+import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.exitfunction.ExitFunctionFrame;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyPanel;
 import ui.commonui.myui.MyTextField;
+import ui.commonui.warning.WarningFrame;
+import vo.CommoditySortVO;
 
 public class SortAddingPanel extends MyPanel implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	
 	MyJButton button_return, button_confirm;
-	MyTextField tf_name;
+	public static MyTextField tf_name;
+	static DefaultMutableTreeNode father;
 	
-	public SortAddingPanel(){
+	public SortAddingPanel(DefaultMutableTreeNode note){
 		
-		String str = "Plipala";
+		String str = note.toString();
+		father = note;
 		
 		Color foreColor = new Color(158, 213, 220);
 		Color backColor = new Color(53, 84, 94);
@@ -69,5 +78,34 @@ public class SortAddingPanel extends MyPanel implements ActionListener{
 			epf.setVisible(true);
 		}
 		
+		if(events.getSource() == button_confirm){
+			ExitFinishFrame eff = new ExitFinishFrame("adding a sort");
+			eff.setVisible(true);
+		}	
 	}	
+	
+	public static void addingConfirm(){
+		CommoditySortController controller = new CommoditySortController();
+		ResultMessage rs = null;
+		
+		if(father.toString().equals("所有商品分类")){
+			rs = controller.addCommoSort(tf_name.getText(),"father");
+		}else{
+			ArrayList<CommoditySortVO> csvo = controller.show();
+			
+			for(int i = 0; i < csvo.size(); i++){
+				if(csvo.get(i).name.equals(father.toString())){
+					rs = controller.addCommoSort(tf_name.getText(),csvo.get(i).ID);
+				}
+			}
+		}	
+		
+		if(rs.equals(ResultMessage.SUCCESS)){
+			WarningFrame wf = new WarningFrame("商品分类添加成功！");
+			wf.setVisible(true);
+		}else{
+			WarningFrame wf = new WarningFrame("商品分类添加失败！");
+			wf.setVisible(true);
+		}
+	}
 }

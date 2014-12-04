@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 import ui.commonui.myui.MyWindow;
 
@@ -13,9 +14,9 @@ public class SortAddingUI extends MyWindow implements ActionListener{
 
 	public static JButton button_close;
 	
-	public SortAddingUI(){
+	public SortAddingUI(DefaultMutableTreeNode note){
 		
-		SortAddingPanel sap = new SortAddingPanel();
+		SortAddingPanel sap = new SortAddingPanel(note);
 		sap.setOpaque(true);
 		sap.setBounds(340, 250, 600, 185);
 		this.add(sap);

@@ -10,6 +10,8 @@ import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyPanel;
 import ui.differui.admin.AdminAddingUI;
 import ui.differui.admin.AdminModifyUI;
+import ui.differui.inventory.commodity_management.addgood.CommodityAddingUI;
+import ui.differui.inventory.commodity_management.addsort.SortAddingUI;
 import ui.differui.inventory.frame.Frame_Inventory;
 import ui.differui.salesman.client.ClientAddingUI;
 import ui.differui.salesman.client.ClientDetailUI;
@@ -73,6 +75,10 @@ public class ExitFunctionPanel extends MyPanel implements ActionListener{
 			case "AdminAddingUI" : AdminAddingUI.button_close.doClick();break;
 			
 			case "AdminModifyUI" : AdminModifyUI.button_close.doClick();break;
+			
+			case "CommodityAddingUI" : CommodityAddingUI.button_close.doClick();break;
+			
+			case "SortAddingUI" : SortAddingUI.button_close.doClick();break;
 			
 			}
 			ExitFunctionFrame.button_close.doClick();

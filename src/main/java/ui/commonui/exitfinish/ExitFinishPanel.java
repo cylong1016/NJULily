@@ -11,6 +11,7 @@ import ui.commonui.myui.MyPanel;
 import ui.differui.admin.AdminAddingPanel;
 import ui.differui.admin.AdminModifyPanel;
 import ui.differui.admin.AdminUI;
+import ui.differui.inventory.commodity_management.addsort.SortAddingPanel;
 import ui.differui.salesman.client.ClientAddingPanel;
 import ui.differui.salesman.client.ClientDetailPanel;
 import ui.differui.salesman.client.ClientManagementUI;
@@ -81,6 +82,8 @@ public class ExitFinishPanel extends MyPanel implements ActionListener{
 				case "AdminModifyPanel" : AdminModifyPanel.modifyConform.doClick();break;
 				
 				case "modify admin password" : AdminUI.modifyPassword();break;
+				
+				case "adding a sort" : SortAddingPanel.addingConfirm();break;
 
 			}
 			ExitFinishFrame.button_close.doClick();

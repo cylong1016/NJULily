@@ -1,6 +1,7 @@
 package main;
 
 import ui.commonui.login.Frame_Login;
+import ui.differui.inventory.frame.Frame_Inventory;
 
 /**
  * @author NJULily
@@ -17,5 +18,8 @@ public class Main {
 		//UI test
 		Frame_Login fl = new Frame_Login();
 		fl.setVisible(true);
+		
+//		Frame_Inventory fi = new Frame_Inventory();
+//		fi .setVisible(true);
 	}
 }

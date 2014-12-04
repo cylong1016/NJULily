@@ -61,20 +61,21 @@ public class ExitBackPanel extends MyPanel implements ActionListener{
 	
 	public void actionPerformed(ActionEvent events){
 		if(events.getSource() == button_yes){
-			Frame_Login fl = new Frame_Login();
-			fl.setVisible(true);
+			Frame_Login fl2 = new Frame_Login();
+			fl2.setVisible(true);
 			ExitBackFrame.button_close.doClick();
 			
 			switch(flag){
 				case "AdminUI" : AdminUI.bt_vanish.doClick();
 								 AdminUI.rowNum = 0;break;
 				case "Frame_Salesman" : Frame_Salesman.bt_vanish.doClick();break;
-				case "Frame_Inventory" : Frame_Inventory.bt_vanish.doClick();break;
+				case "Frame_Inventory" : Frame_Inventory.bt_vanish.doClick();
+										 Frame_Inventory.flag = 0;break;
 			}
 		}
 		
 		if(events.getSource() == button_no){
-			this.setVisible(false);	
+			ExitBackFrame.button_close.doClick();
 		}
 	}
 }

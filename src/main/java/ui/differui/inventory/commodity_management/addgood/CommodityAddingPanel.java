@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 import ui.commonui.exitfunction.ExitFunctionFrame;
 import ui.commonui.myui.MyJButton;
@@ -24,6 +25,9 @@ public class CommodityAddingPanel extends MyPanel implements ActionListener{
 	MyTextField tf_name, tf_model;
 	
 	public CommodityAddingPanel(){
+		
+		Color foreColor = new Color(158, 213, 220);
+		Color backColor = new Color(46, 52, 101);
 			
 		int y = 10;
 		String sortName = "无";
@@ -32,8 +36,8 @@ public class CommodityAddingPanel extends MyPanel implements ActionListener{
 		JLabel infoBar = new JLabel("新增一件商品",JLabel.CENTER);
 		infoBar.setBounds(0, 0, 600, 20);
 		infoBar.setOpaque(true);
-		infoBar.setForeground(Color.black);
-		infoBar.setBackground(new Color(0, 1, 1, 0.5f));
+		infoBar.setForeground(foreColor);
+		infoBar.setBackground(backColor);
 		this.add(infoBar);
 		
 		//some texts
@@ -76,7 +80,10 @@ public class CommodityAddingPanel extends MyPanel implements ActionListener{
 		
 		
 		//the sort tree
-		MyTree tree = new MyTree();		
+		DefaultMutableTreeNode root = new DefaultMutableTreeNode("所有商品分类"); 
+		root.add(new DefaultMutableTreeNode("日光灯"));
+		
+		MyTree tree = new MyTree(root);		
 		JScrollPane jsp=new JScrollPane(tree);
 		jsp.setBounds(25, 125 + y, 550, 170);
 		jsp.getViewport().setBackground(new Color(0,0,0));
@@ -115,8 +122,7 @@ public class CommodityAddingPanel extends MyPanel implements ActionListener{
 		}
 		
 		if(events.getSource() == button_add){
-			SortAddingUI sau = new SortAddingUI();
-			sau.setVisible(true);
+			
 		}
 	}
 }
