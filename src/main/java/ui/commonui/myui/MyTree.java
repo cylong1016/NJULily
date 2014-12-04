@@ -57,13 +57,18 @@ public class MyTree extends JTree{
 		CommoditySortController controller = new CommoditySortController();	
 		ArrayList<CommoditySortVO> csvo = controller.show();
 		int addCount = 0;
+		String addingPool = "";
+		
 		
 		for(int i = 0; i < csvo.size(); i++){
 			if(csvo.get(i).fatherID.equals("father")){
+					
+				addingPool = addingPool + csvo.get(i).name + ";";
+					
 				root.add(new DefaultMutableTreeNode(csvo.get(i).name));
 				addCount++;
 			}
 		}
-		
+			
 	}
 }
