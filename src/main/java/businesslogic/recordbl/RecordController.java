@@ -2,6 +2,7 @@ package businesslogic.recordbl;
 
 import java.util.ArrayList;
 
+import dataenum.BillType;
 import blservice.recordblservice.RecordBLService;
 import blservice.recordblservice.RecordInputInfo;
 import message.ResultMessage;
@@ -33,12 +34,12 @@ public class RecordController implements RecordBLService{
 		return record.bussinessPro(info);
 	}
 
-	public ResultMessage red(ValueObject valueRecord) {
-		return record.red(valueRecord);
+	public ResultMessage red(ValueObject valueRecord, BillType type) {
+		return record.red(valueRecord, type);
 	}
 
-	public ResultMessage copyRed(ValueObject valueRecord) {
-		return record.copyRed(valueRecord);
+	public ResultMessage copyRed(ValueObject valueRecord, BillType type) {
+		return record.copyRed(valueRecord, type);
 	}
 
 	public BusinessStateVO businessState(String beginDate, String endDate) {

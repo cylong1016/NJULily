@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import dataenum.BillType;
 import blservice.recordblservice.RecordInputInfo;
 import message.ResultMessage;
 import vo.BusinessStateVO;
@@ -57,25 +58,25 @@ public class Record {
 	}
 
 	/**
-	 * 
+	 * 红冲（新建一张相应的单据，只是数据取负，相当于删除）
 	 * @param valueRecord
 	 * @return
 	 * @author Zing
 	 * @version Dec 4, 2014 8:21:06 PM
 	 */
-	public ResultMessage red(ValueObject valueRecord) {
+	public ResultMessage red(ValueObject valueRecord, BillType type) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	/**
-	 * 
+	 * 红冲并复制（新建一张相应的单据，数据取负，但是只是作为草稿，可以进行修改）
 	 * @param valueRecord
 	 * @return
 	 * @author Zing
 	 * @version Dec 4, 2014 8:21:09 PM
 	 */
-	public ResultMessage copyRed(ValueObject valueRecord) {
+	public ResultMessage copyRed(ValueObject valueRecord, BillType type) {
 		// TODO Auto-generated method stub
 		return null;
 	}

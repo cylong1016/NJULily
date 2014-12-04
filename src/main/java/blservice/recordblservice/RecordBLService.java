@@ -2,6 +2,7 @@ package blservice.recordblservice;
 
 import java.util.ArrayList;
 
+import dataenum.BillType;
 import vo.BusinessStateVO;
 import vo.SaleDetailVO;
 import vo.ValueObject;
@@ -42,14 +43,14 @@ public interface RecordBLService {
 	 * @param record
 	 * @return
 	 */
-	public ResultMessage red(ValueObject valueRecord);
+	public ResultMessage red(ValueObject valueRecord, BillType type);
 	
 	/**
 	 * 修改红冲
 	 * @param record
 	 * @return
 	 */
-	public ResultMessage copyRed(ValueObject valueRecord);
+	public ResultMessage copyRed(ValueObject valueRecord, BillType type);
 	
 	/**
 	 * 制定经营情况表
