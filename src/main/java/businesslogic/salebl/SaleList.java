@@ -59,6 +59,9 @@ public class SaleList {
 	 */
 	public double getAfterPrice() {
 		this.afterPrice = beforePrice - allowance - voucher;
+		if (this.afterPrice < 0) {
+			return 0;
+		}
 		return afterPrice;
 	}
 

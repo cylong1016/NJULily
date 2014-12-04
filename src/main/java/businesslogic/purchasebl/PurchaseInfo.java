@@ -166,4 +166,17 @@ public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Re
 			clientInfo.changePayable(po.getClientID(), -po.getBeforePrice());
 		}
 	}
+
+	public double getTotalPrice(String ID) {
+		PurchasePO po = getPurchaseData().find(ID);
+		switch (getPurchaseData().find(ID).getType()) {
+		case PURCHASE:
+			return po.getBeforePrice();
+		case PURCHASEBACK:
+			return -po.getBeforePrice();
+		default:
+			break;
+		}
+		return 0;
+	}
 }

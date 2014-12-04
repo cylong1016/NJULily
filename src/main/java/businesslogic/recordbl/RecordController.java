@@ -41,8 +41,8 @@ public class RecordController implements RecordBLService{
 		return record.copyRed(valueRecord);
 	}
 
-	public BusinessStateVO businessState(RecordInputInfo info) {
-		return record.businessState(info);
+	public BusinessStateVO businessState(String beginDate, String endDate) {
+		return record.businessState(beginDate, endDate);
 	}
 
 

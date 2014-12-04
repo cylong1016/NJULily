@@ -31,7 +31,7 @@ public class Record {
 	/**
 	 * 得到销售明细表
 	 * @param info
-	 * @return
+	 * @return 每一条销售明细列表（商品）
 	 * @author Zing
 	 * @version Nov 30, 2014 2:21:46 PM
 	 */
@@ -42,6 +42,13 @@ public class Record {
 		return saleDetailList.getSaleDetail(getID());
 	}
 
+	/**
+	 * 根据时间区间、单据类型、客户名、业务员名、仓库，查找相应的经营历程表
+	 * @param info
+	 * @return 单据列表
+	 * @author Zing
+	 * @version Dec 4, 2014 8:21:03 PM
+	 */
 	public ArrayList<ValueObject> bussinessPro(RecordInputInfo info) {
 		this.beginDate = info.beginDate;
 		this.endDate = info.endDate;
@@ -49,31 +56,42 @@ public class Record {
 		return bussinessProList.getBusinessPro(getID());
 	}
 
+	/**
+	 * 
+	 * @param valueRecord
+	 * @return
+	 * @author Zing
+	 * @version Dec 4, 2014 8:21:06 PM
+	 */
 	public ResultMessage red(ValueObject valueRecord) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/**
+	 * 
+	 * @param valueRecord
+	 * @return
+	 * @author Zing
+	 * @version Dec 4, 2014 8:21:09 PM
+	 */
 	public ResultMessage copyRed(ValueObject valueRecord) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BusinessStateVO businessState(RecordInputInfo info) {	
-		this.beginDate = info.beginDate;
-		this.endDate = info.endDate;
+	/**
+	 * 根据时间区间查看经营情况表
+	 * @param info
+	 * @return
+	 * @author Zing
+	 * @version Dec 4, 2014 8:21:12 PM
+	 */
+	public BusinessStateVO businessState(String beginDate, String endDate) {	
+		this.beginDate = beginDate;
+		this.endDate = endDate;
 		bussinessStateList = new BusinessStateList(getID());
 		
-		return null;
-	}
-
-	public ResultMessage earning() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public ResultMessage expense() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

@@ -2,6 +2,7 @@ package businesslogic.recordbl;
 
 import java.util.ArrayList;
 
+import dataenum.BillType;
 import vo.BusinessStateVO;
 import businesslogic.inventorybl.InventoryInfo;
 import businesslogic.purchasebl.PurchaseInfo;
@@ -24,30 +25,31 @@ import businesslogic.salebl.SaleInfo;
  * @author Zing
  * @version Nov 30, 2014 4:30:38 PM
  */
+
 public class BusinessStateList {
 	
 	/** 商品类收入（折让后的总收入）*/
-	public double totalIncome;
-	/** 销售收入*/
-	public double saleIncome;
-	/** 商品报溢收入*/
-	public double overflowIncome;
-	/** 成本调价收入*/
-	public double costIncome;
-	/** 代金券与实际收款差额收入*/
-	public double voucherIncome;
-	/** 折让*/
-	public double allowance;
+	private double totalIncome;
+	/** 销售收入 */
+	private double saleIncome;
+	/** 商品报溢收入 */
+	private double overflowIncome;
+	/** 成本调价收入 */
+	private double costIncome;
+	/** 代金券与实际收款差额收入 */
+	private double voucherIncome;
+	/** 折让 */
+	private double allowance;
 	/** （也就是总支出）*/
-	public double totalExpen;
+	private double totalExpen;
 	/** 销售成本*/
-	public double saleCost;
+	private double saleCost;
 	/** 商品报损*/
-	public double lossExpen;
+	private double lossExpen;
 	/** 赠送支出*/
-	public double giftExpen;
+	private double giftExpen;
 	/** 利润 */
-	public double profit;	
+	private double profit;	
 	
 	private ArrayList<String> IDs;
 	
@@ -56,8 +58,14 @@ public class BusinessStateList {
 	PurchaseInfo_Record purchaseInfo;
 	
 	InventoryInfo_Record inventoryInfo;
+	ArrayList<String> saleIDs = new ArrayList<String>();
+	ArrayList<String> purIDs = new ArrayList<String>();
+	ArrayList<String> inventoryIDs = new ArrayList<String>();
 	
-	
+	/**
+	 * 得到时间区间的ID们，形式为yyyyMMdd
+	 * @param IDs
+	 */
 	public BusinessStateList(ArrayList<String> IDs) {
 		this.IDs = IDs;
 		saleInfo = new SaleInfo();
@@ -65,24 +73,92 @@ public class BusinessStateList {
 		inventoryInfo = new InventoryInfo();
 	}
 
+	/**
+	 * 得到最终的经营情况VO
+	 * @return
+	 * @author Zing
+	 * @version Dec 4, 2014 8:23:53 PM
+	 */
 	public BusinessStateVO getBusinessState() {
-		for (int i = 0; i < IDs.size(); i++) {
-			getIncome(IDs.get(i));
-			getExpen(IDs.get(i));
+		
+		for (String ID : IDs) {
+			getSaleIDs(ID);
+			getPurchaseIDs(ID);
+			getInventoryIDs(ID);
 		}
+		for (String ID : saleIDs) {
+			accountSale(ID);
+		}
+		for (String ID : purIDs) {
+			accountPur(ID);
+		}
+		for (String ID : inventoryIDs) {
+			accountInventory(ID);
+		}
+		totalIncome = saleIncome + overflowIncome + costIncome + voucherIncome - allowance;
+		totalExpen = saleCost + lossExpen + giftExpen;
 		profit = totalIncome - totalExpen;
-		return null;
+		BusinessStateVO vo = new BusinessStateVO(saleIncome, totalIncome, overflowIncome, costIncome, voucherIncome, allowance, saleCost, totalExpen, lossExpen, giftExpen, profit);
+		return vo;
 	}
 
+	/* 以下三个方法是为了获得所有存在的销售单、销售退货单、进货单、进货退货单、赠送单、报损单、报溢单、报警单的ID */
+	private void getSaleIDs(String ID) {
+		ArrayList<String> saleID = saleInfo.getID(ID, null, null, null);
+		saleIDs.addAll(saleID);
+	}
+	private void getPurchaseIDs(String ID) {
+		ArrayList<String> purchaseID = purchaseInfo.getID(ID, null, null, null);
+		purIDs.addAll(purchaseID);
+	}
+	private void getInventoryIDs(String ID) {
+		ArrayList<String> inventoryID = inventoryInfo.getID(ID, null, null, null);
+		inventoryIDs.addAll(inventoryID);
+	}
+	/* 以上三个方法*/
 
-	private void getIncome(String ID) {
-		saleIncome += saleInfo.getBeforePrice(ID);
+	private void accountSale(String ID) {
 		allowance += saleInfo.getAllowance(ID);
-	}
-	
-	private void getExpen(String ID) {
-		// TODO Auto-generated method stub
+		double beforePrice = saleInfo.getBeforePrice(ID);
+		saleIncome += beforePrice;
+		double voucher = saleInfo.getVoucher(ID);
+		// TODO 成本调价QvQ
+		if (beforePrice < voucher) {
+			voucherIncome += (voucher - beforePrice);
+		}
 		
 	}
+
+	/**
+	 * 对进货方面的数据进行计算
+	 * @param iD
+	 * @author Zing
+	 * @version Dec 4, 2014 11:37:14 PM
+	 */
+	private void accountPur(String ID) {
+		saleCost += purchaseInfo.getTotalPrice(ID);
+	}
 	
+	/**
+	 * 对库存进行计算
+	 * @param ID
+	 * @author Zing
+	 * @version Dec 4, 2014 11:36:50 PM
+	 */
+	private void accountInventory(String ID) {
+		BillType type = inventoryInfo.getType(ID);
+		switch (type) {
+		case GIFT:
+			giftExpen += inventoryInfo.getTotalPrice(ID);
+			break;
+		case OVERFLOW:
+			overflowIncome += inventoryInfo.getTotalPrice(ID);
+			break;
+		case LOSS:
+			lossExpen += inventoryInfo.getTotalPrice(ID);
+			break;
+		default:
+			break;
+		}
+	}
 }

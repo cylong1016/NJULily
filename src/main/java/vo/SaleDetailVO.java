@@ -11,6 +11,7 @@ package vo;
  * @version 2014年11月2日下午3:43:00
  */
 public class SaleDetailVO {
+	/** 销售日期 */
 	public String date;
 	/** 商品名称 */
 	public String name;
@@ -25,6 +26,7 @@ public class SaleDetailVO {
 	
 	
 	public SaleDetailVO(String date, String name, String type, int number, double price) {
+		this.date = date;
 		this.name = name;
 		this.type = type;
 		this.number = number;

@@ -103,4 +103,23 @@ public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInf
 			info.changeNumber(commodity.getID(), commodity.getNumber(), po.getBillType());
 		}
 	}
+
+	/**
+	 * 根据单据ID，返回单据类型
+	 */
+	public BillType getType(String ID) {
+		return getInventoryData().find(ID).getBillType();
+	}
+
+	/**
+	 * 根据单据ID，返回单据总额数
+	 */
+	public double getTotalPrice(String ID) {
+		InventoryBillPO po = getInventoryData().find(ID);
+		double totalPrice = 0;
+		for (CommodityItemPO commodityPO : po.getCommodities()) {
+			totalPrice += commodityPO.getTotal();
+		}
+		return totalPrice;
+	}
 }

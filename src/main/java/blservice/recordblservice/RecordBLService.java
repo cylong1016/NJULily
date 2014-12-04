@@ -42,7 +42,6 @@ public interface RecordBLService {
 	 * @param record
 	 * @return
 	 */
-	
 	public ResultMessage red(ValueObject valueRecord);
 	
 	/**
@@ -50,8 +49,8 @@ public interface RecordBLService {
 	 * @param record
 	 * @return
 	 */
-	
 	public ResultMessage copyRed(ValueObject valueRecord);
+	
 	/**
 	 * 制定经营情况表
 	 * @param begin
@@ -59,5 +58,5 @@ public interface RecordBLService {
 	 * @param kind
 	 * @return
 	 */
-	public BusinessStateVO businessState(RecordInputInfo info);
+	public BusinessStateVO businessState(String beginDate, String endDate);
 }
