@@ -46,6 +46,8 @@ public class AccountInfo implements AccountInfo_AccountBill, AccountInfo_Init, A
 
 	/**
 	 * 现金费用单通过审批后， 对应的账户的余额减少
+	 * 付款单通过审批后，对应账户的余额减少
+	 * 收款单通过审批后，对应账户的余额增加
 	 */
 	public void changeMoney(String accountName, double money) {
 		ArrayList<AccountPO> POs = account.getAccountData().show();

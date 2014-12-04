@@ -8,18 +8,26 @@ import java.awt.event.MouseMotionAdapter;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.UIManager;
 
+
+
+
+import ui.commonui.exitback.ExitBackFrame;
 import ui.commonui.exitprogram.ExitProgramFrame;
+import ui.commonui.info.Info;
 
 public class MyFrame extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	
 	MyButton button_exit;
+	public static MyButton button_back;
+	Info info, info2;
+	public static String myNameis;
 	
 	boolean isDraging;
-	int xx, yy, X0, Y0, X, Y, openTime = 0;	 
+	int xx, yy, X0, Y0, X, Y;
+	public static int openTime;
     
 	public MyFrame(){	
 		
@@ -46,9 +54,12 @@ public class MyFrame extends JFrame {
 		button_exit.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent arg0) {			
 				button_exit.setIcon(new ImageIcon("ui/image/login/exit2.png"));
+				info2 = new Info(arg0.getXOnScreen() + 10,arg0.getYOnScreen(),50,20,"    关闭");
+				info2.setVisible(true);
 			}
 			public void mouseExited(MouseEvent arg0) {
 				button_exit.setIcon(new ImageIcon("ui/image/login/exit.png"));
+				info2.setVisible(false);
 			}
 			public void mouseClicked(MouseEvent arg0){	
 				ExitProgramFrame epf = new ExitProgramFrame();
@@ -56,6 +67,28 @@ public class MyFrame extends JFrame {
 			}
 			}); 
 		this.add(button_exit);
+		
+		
+		
+		//the button for returning back to the login frame
+		button_back = new MyButton(1188, 10, 80, 30);
+		button_back.setIcon(new ImageIcon("ui/image/login/back.png"));
+		button_back.addMouseListener(new MouseAdapter(){
+			public void mouseEntered(MouseEvent arg0) {			
+				button_back.setIcon(new ImageIcon("ui/image/login/back2.png"));
+				info = new Info(arg0.getXOnScreen() - 5,arg0.getYOnScreen(),50,20,"    注销");
+				info.setVisible(true);
+			}
+			public void mouseExited(MouseEvent arg0) {
+				button_back.setIcon(new ImageIcon("ui/image/login/back.png"));
+				info.setVisible(false);
+			}
+			public void mouseClicked(MouseEvent arg0){	
+				ExitBackFrame ebf = new ExitBackFrame(myNameis);
+				ebf.setVisible(true);
+			}
+			}); 
+		this.add(button_back);
 		
 		//the codes that make the frame mouse-drag-able
 		this.addMouseListener(new MouseAdapter() {

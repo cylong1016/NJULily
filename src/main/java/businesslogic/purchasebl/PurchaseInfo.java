@@ -7,10 +7,13 @@ import po.CommodityItemPO;
 import po.PurchasePO;
 import businesslogic.approvalbl.info.PurchaseInfo_Approval;
 import businesslogic.approvalbl.info.ValueObject_Approval;
+import businesslogic.clientbl.ClientInfo;
+import businesslogic.commoditybl.CommodityInfo;
 import businesslogic.common.Info;
 import businesslogic.inventorybl.info.PurchaseInfo_Inventory;
 import businesslogic.recordbl.info.PurchaseInfo_Record;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
+import businesslogic.salebl.ClientInfo_Sale;
 import vo.PurchaseVO;
 import dataenum.BillState;
 import dataenum.BillType;
@@ -143,5 +146,25 @@ public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Re
 	 */
 	private double getBeforePrice(String ID) {
 		return getPurchaseData().find(ID).getBeforePrice();
+	}
+
+	public void pass(PurchaseVO vo) {
+		PurchasePO po = getPurchaseData().find(vo.ID);
+		// 更新该进货／进货退货单状态
+		po.setState(BillState.SUCCESS);
+		getPurchaseData().update(po);
+		// 更改商品的数据
+		CommodityInfo_Purchase commodityInfo = new CommodityInfo();
+		ArrayList<CommodityItemPO> commodities = po.getCommodities();
+		for (CommodityItemPO commodity : commodities) {
+			commodityInfo.changeCommodityInfo(commodity.getID(), commodity.getNumber(), commodity.getPrice(), po.getType());
+		}
+		// 更改客户的应付金额
+		ClientInfo_Purchase clientInfo = new ClientInfo();
+		if (po.getType() == BillType.PURCHASE) {
+			clientInfo.changePayable(po.getClientID(), po.getBeforePrice());
+		} else {
+			clientInfo.changePayable(po.getClientID(), -po.getBeforePrice());
+		}
 	}
 }

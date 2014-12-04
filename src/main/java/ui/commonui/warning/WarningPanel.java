@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 
-import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyPanel;
 

@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-import ui.commonui.exitfinish.ExitFinishPanel;
 import ui.commonui.myui.MyWindow;
 
 public class WarningFrame extends MyWindow implements ActionListener{

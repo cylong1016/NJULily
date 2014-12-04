@@ -13,19 +13,15 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-import po.ClientPO;
 import message.ResultMessage;
-import dataenum.ClientCategory;
 import dataenum.FindTypeClient;
 import businesslogic.clientbl.ClientController;
 import ui.commonui.exitfinish.ExitFinishFrame;
-import ui.commonui.myui.MyBackground;
 import ui.commonui.myui.MyComboBox;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyTable;
 import ui.commonui.myui.MyTextField;
 import ui.commonui.warning.WarningFrame;
-import ui.differui.salesman.frame.Frame_Salesman;
 import vo.ClientVO;
 
 public class ClientManagementUI extends JLabel implements ActionListener{

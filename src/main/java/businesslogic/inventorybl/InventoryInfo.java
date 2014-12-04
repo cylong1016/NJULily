@@ -13,7 +13,9 @@ import dataservice.inventorydataservice.InventoryDataService;
 import vo.InventoryBillVO;
 import businesslogic.approvalbl.info.InventoryInfo_Approval;
 import businesslogic.approvalbl.info.ValueObject_Approval;
+import businesslogic.commoditybl.CommodityInfo;
 import businesslogic.common.Info;
+import businesslogic.inventorybl.info.CommodityInfo_Inventory;
 import businesslogic.promotionbl.InventoryInfo_Promotion;
 import businesslogic.recordbl.info.InventoryInfo_Record;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
@@ -84,5 +86,21 @@ public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInf
 		ArrayList<CommodityItemPO> commodities = inventory.itemsVOtoPO(vo.commodities);
 		InventoryBillPO po = new InventoryBillPO(ID, billType, commodities, remark);
 		return getInventoryData().update(po);
+	}
+
+	/**
+	 * 通过审批后，更改相应的商品信息
+	 */
+	public void pass(InventoryBillVO vo) {
+		InventoryBillPO po = getInventoryData().find(vo.ID);
+		// 更新单据状态
+		po.setState(BillState.SUCCESS);
+		getInventoryData().update(po);
+		// 更改商品数量
+		ArrayList<CommodityItemPO> commodities = po.getCommodities();
+		CommodityInfo_Inventory info = new CommodityInfo();
+		for(CommodityItemPO commodity : commodities) {
+			info.changeNumber(commodity.getID(), commodity.getNumber(), po.getBillType());
+		}
 	}
 }

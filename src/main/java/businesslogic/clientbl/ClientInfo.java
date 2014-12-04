@@ -59,9 +59,23 @@ public class ClientInfo implements ClientInfo_AccountBill, ClientInfo_Sale, Clie
 		return client.posToVOs(POs);
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see businesslogic.accountbillbl.ClientInfo_AccountBill#changeReceivable(java.lang.String, double)
+	 */
 	public void changeReceivable(String clientID, double afterPrice) {
 		ClientPO po = client.getClientData().find(clientID);
 		po.setReceivable(po.getReceivable() + afterPrice);
+		client.getClientData().update(po);
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see businesslogic.accountbillbl.ClientInfo_AccountBill#changePayable(java.lang.String, double)
+	 */
+	public void changePayable(String clientID, double beforePrice) {
+		ClientPO po = client.getClientData().find(clientID);
+		po.setPayable(po.getPayable() + beforePrice);
 		client.getClientData().update(po);
 	}
 }

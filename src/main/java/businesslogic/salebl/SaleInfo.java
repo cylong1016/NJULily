@@ -239,7 +239,7 @@ public class SaleInfo extends Info<SalesPO> implements SaleInfo_Inventory, SaleI
 		CommodityInfo_Sale commodityInfo = new CommodityInfo();
 		ArrayList<CommodityItemPO> commodities = po.getCommodities();
 		for (CommodityItemPO commodity : commodities) {
-			commodityInfo.changeNumber(commodity.getID(), commodity.getNumber(), commodity.getPrice(), po.getType());
+			commodityInfo.changeCommodityInfo(commodity.getID(), commodity.getNumber(), commodity.getPrice(), po.getType());
 		}
 		// 更改客户的应收金额
 		ClientInfo_Sale clientInfo = new ClientInfo();

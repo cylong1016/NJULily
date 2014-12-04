@@ -2,6 +2,8 @@ package businesslogic.inventorybl.info;
 
 import java.util.ArrayList;
 
+import dataenum.BillType;
+
 public interface CommodityInfo_Inventory {
 	
 	/**
@@ -56,5 +58,15 @@ public interface CommodityInfo_Inventory {
 	 * @version Dec 2, 2014 6:04:57 PM
 	 */
 	public double getPurPrice(String ID);
+
+	/**
+	 * 库存单据通过审批后，更改商品数量
+	 * @param id
+	 * @param number
+	 * @param billType
+	 * @author Zing
+	 * @version Dec 3, 2014 4:58:06 PM
+	 */
+	public void changeNumber(String id, int number, BillType billType);
 
 }

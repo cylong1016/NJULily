@@ -14,14 +14,10 @@ import ui.commonui.myui.MyComboBox;
 import ui.commonui.myui.MyPanel;
 import ui.commonui.myui.MyTextField;
 import ui.commonui.warning.WarningFrame;
-import ui.differui.salesman.client.ClientAddingUI;
-import ui.differui.salesman.client.ClientManagementUI;
-import vo.ClientVO;
+
 import vo.UserVO;
-import businesslogic.clientbl.ClientController;
+
 import businesslogic.userbl.UserController;
-import dataenum.ClientCategory;
-import dataenum.ClientLevel;
 import dataenum.UserIdentity;
 
 public class AdminAddingPanel extends MyPanel implements ActionListener{
@@ -134,8 +130,8 @@ public class AdminAddingPanel extends MyPanel implements ActionListener{
 		
 		addConform = new JButton();
 		addConform.addActionListener(this);
-		this.add(addConform);
-			
+		this.add(addConform);	
+		
 	}
 	
 	public void actionPerformed(ActionEvent events) {
@@ -177,6 +173,8 @@ public class AdminAddingPanel extends MyPanel implements ActionListener{
 				wp.setVisible(true);
 			}			
 		}
+		
+	
 	}
 		
 	private UserIdentity getIden(int i){

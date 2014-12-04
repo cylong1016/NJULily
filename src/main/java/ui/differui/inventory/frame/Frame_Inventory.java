@@ -6,13 +6,17 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 
 
 
 
 
+
+
 import ui.commonui.exitfunction.ExitFunctionFrame;
+import ui.commonui.login.Frame_Login;
 import ui.commonui.myui.MyBackground;
 import ui.commonui.myui.MyButton;
 import ui.commonui.myui.MyFrame;
@@ -32,6 +36,8 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 	
 	public static int flag = 0, destination = 0;
 	
+	public static JButton bt_vanish;
+	
 	static InventoryIndex panel_index;
 	static CommodityManagementUI panel_good;
 	static InventoryReviewUI panel_review;
@@ -40,6 +46,8 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 	static WarningIndex panel_alarm;
 	
 	public Frame_Inventory(){
+		
+		Frame_Login.myNameis = "Frame_Inventory";
 		
 		panel_index = new InventoryIndex();
 		panel_index.setVisible(true);
@@ -171,6 +179,10 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 		
 		MyBackground background = new MyBackground("ui/image/inventory/back.jpg");
 		this.add(background);
+		
+		bt_vanish = new JButton();
+		bt_vanish.addActionListener(this);
+		this.add(bt_vanish);
 	}
 	
 	public static void visibleTrue(int i){
@@ -200,6 +212,10 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent events) {
+		
+		if(events.getSource() == bt_vanish){
+			this.setVisible(false);
+		}
 				
 		if(events.getSource() == bt_index){
 			if(flag != 0){

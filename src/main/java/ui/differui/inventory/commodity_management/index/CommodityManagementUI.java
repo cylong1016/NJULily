@@ -10,8 +10,6 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeSelectionModel;
-import javax.swing.tree.TreeSelectionModel;
 
 import ui.commonui.exitfunction.ExitFunctionFrame;
 import ui.commonui.myui.MyComboBox;
@@ -19,7 +17,6 @@ import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyPanel;
 import ui.commonui.myui.MyTable;
 import ui.commonui.myui.MyTextField;
-import ui.commonui.myui.MyTree;
 import ui.differui.inventory.commodity_management.addgood.CommodityAddingUI;
 import ui.differui.inventory.commodity_management.addsort.SortAddingUI;
 import ui.differui.inventory.commodity_management.detailgood.CommodityDetailUI;
@@ -175,7 +172,4 @@ public class CommodityManagementUI extends MyPanel implements ActionListener{
 		}
 	}
 	
-	private void createNodes(DefaultMutableTreeNode father, DefaultMutableTreeNode son) {  
-	    father.add(son);   
-	}  
 }

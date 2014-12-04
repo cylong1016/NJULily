@@ -9,4 +9,13 @@ public interface ClientInfo_Purchase {
 	
 	public String getName(String ID);
 
+	/**
+	 * 更改客户的应付金额（公司付给客户的）
+	 * @param clientID
+	 * @param beforePrice
+	 * @author Zing
+	 * @version Dec 3, 2014 4:50:54 PM
+	 */
+	public void changePayable(String clientID, double beforePrice);
+
 }
