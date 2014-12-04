@@ -33,55 +33,47 @@ public class DefineList<E> implements Serializable {
 		save();
 		return b;
 	}
-	
+
 	public void add(int index, E element) {
 		inList.add(index, element);
 		save();
 	}
-	
+
 	public E get(int index) {
 		return inList.get(index);
 	}
-	
+
 	public void clear() {
 		inList.clear();
 		save();
 	}
-	
+
 	public E remove(int index) {
 		E e = inList.remove(index);
 		save();
 		return e;
 	}
-	
+
 	public boolean remove(Object o) {
 		boolean b = inList.remove(o);
 		save();
 		return b;
 	}
-	
+
 	public E set(int index, E element) {
-		E e = set(index, element);
+		E e = inList.set(index, element);
 		save();
 		return e;
 	}
-	
+
 	public int size() {
 		return inList.size();
 	}
 
-	public boolean contains(E element) {
-		return inList.contains(element);
-	}
-	
-	public int indexOf(E element) {
-		return inList.indexOf(element);
-	}
-	
 	public boolean isEmpty() {
 		return inList.isEmpty();
 	}
-	
+
 	/**
 	 * @param filePath 保存的文件的路径，统一用相对路径保存在data文件夹下
 	 * @author cylong
@@ -156,5 +148,5 @@ public class DefineList<E> implements Serializable {
 			}
 		}
 	}
-	
+
 }

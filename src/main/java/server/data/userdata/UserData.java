@@ -76,7 +76,7 @@ public class UserData extends CommonData<UserPO> implements UserDataService {
 	 */
 	@Override
 	public ResultMessage updateAdmin(String oldPass, String newPass) {
-		ParseXML parse = new ParseXML("Admin");
+		ParseXML parse = new ParseXML("config/Admin.xml", "Admin");
 		String password = parse.getValue("password");	// 从文件中读取的password
 		if (oldPass.equals(password)) {
 			parse.setValue("password", newPass);

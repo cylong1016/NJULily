@@ -244,15 +244,15 @@ public class AdminUI extends MyFrame implements ActionListener{
 		
 		if(events.getSource() == bt_password){
 						
-			newPassword = new String(pf_oldPassword.getPassword());
-			oldPassword = new String(pf_newPassword.getPassword());
+			oldPassword = new String(pf_oldPassword.getPassword());
+			newPassword = new String(pf_newPassword.getPassword());
 			againPassword = new String(pf_againPassword.getPassword());
 			
 			if(newPassword.isEmpty() || oldPassword.isEmpty() || againPassword.isEmpty() ){
 				
 				WarningFrame wf = new WarningFrame("请检查密码填写是否完整！");
 				wf.setVisible(true);
-			}else if(!oldPassword.equals(againPassword)){
+			}else if(!newPassword.equals(againPassword)){
 				
 				WarningFrame wf = new WarningFrame("请检查两次新密码填写是否一致！");
 				wf.setVisible(true);

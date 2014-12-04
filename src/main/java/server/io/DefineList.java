@@ -61,38 +61,13 @@ public class DefineList<E> implements Serializable {
 	}
 
 	public E set(int index, E element) {
-		E e = set(index, element);
+		E e = inList.set(index, element);
 		save();
 		return e;
 	}
 
 	public int size() {
 		return inList.size();
-	}
-
-	public boolean contains(E element) {
-		return indexOf(element) >= 0;
-	}
-
-	/**
-	 * ArrayList中的indexOf参数是Object，故判断相等是两个变量地址相等
-	 * 我需要的相等是容器中元素自己的equals方法，所以不用ArrayList的indexOf方法
-	 * @param element
-	 * @return
-	 * @author cylong
-	 * @version 2014年12月3日 上午11:45:11
-	 */
-	public int indexOf(E element) {
-		if (element == null) {
-			for(int i = 0; i < size(); i++)
-				if (get(i) == null)
-					return i;
-		} else {
-			for(int i = 0; i < size(); i++)
-				if (element.equals(get(i)))
-					return i;
-		}
-		return -1;
 	}
 
 	public boolean isEmpty() {

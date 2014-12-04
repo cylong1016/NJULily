@@ -82,8 +82,10 @@ public class AccountInitData implements AccountaInitDataService {
 	 */
 	@Override
 	public ResultMessage insert(AccountaInitPO po) {
-		if (initList.contains(po)) {
-			return ResultMessage.FAILURE;
+		for(AccountaInitPO temp : initList.getInList()) {
+			if (temp.getID().equals(po.getID())) {
+				return ResultMessage.FAILURE;
+			}
 		}
 		initList.add(po);
 		addID();
