@@ -264,6 +264,8 @@ public class SaleInfo extends Info<SalesPO> implements SaleInfo_Inventory, SaleI
 			commodities.get(i).number = number;
 		}
 		redVO.commodities = commodities;
+		redVO.allowance = (-redVO.allowance);
+		redVO.voucher = (-redVO.voucher);
 		// 先建立对应的PO
 		SalesPO redPO = new SalesPO(redVO.ID, redVO.clientID, redVO.client, redVO.salesman, redVO.user, redVO.storage, 
 				sale.itemsVOtoPO(redVO.commodities), redVO.beforePrice, redVO.allowance, redVO.voucher, redVO.remark, redVO.afterPrice, redVO.type);

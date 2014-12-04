@@ -96,4 +96,23 @@ public class CashBillInfo extends Info<CashBillPO> implements ValueObjectInfo_Re
 		// 更改对应账户的余额
 		info.changeMoney(po.getAccount(), money);
 	}
+
+	public CashBillVO addRed(CashBillVO vo, boolean isCopy) {
+		CashBillVO redVO = vo;
+		ArrayList<CashItemVO> bills = redVO.bills;
+		for (int i = 0; i < bills.size(); i++) {
+			double money = -bills.get(i).money;
+			bills.get(i).money = money;
+		}
+		redVO.bills = bills;
+		CashBillPO redPO = new CashBillPO(redVO.ID, redVO.user, redVO.account, itemsVOtoPO(redVO.bills), redVO.total);
+		if (!isCopy) {
+			getCashBillData().insert(redPO);
+			pass(redVO);
+		}
+		else {
+			// TODO 保存为草稿
+		}
+		return redVO;
+	}
 }

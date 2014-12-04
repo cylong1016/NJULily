@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import message.ResultMessage;
 import po.CommodityItemPO;
 import po.PurchasePO;
+import vo.CommodityItemVO;
 import vo.PurchaseVO;
 import businesslogic.approvalbl.info.PurchaseInfo_Approval;
 import businesslogic.approvalbl.info.ValueObject_Approval;
@@ -178,5 +179,27 @@ public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Re
 			break;
 		}
 		return 0;
+	}
+
+	public PurchaseVO addRed(PurchaseVO vo, boolean isCopy) {
+		PurchaseVO redVO = vo;
+		// 取负
+		ArrayList<CommodityItemVO> commodities = redVO.commodities;
+		for (int i = 0; i < commodities.size(); i++) {
+			int number = -commodities.get(i).number;
+			commodities.get(i).number = number;
+		}
+		redVO.commodities = commodities;
+		// 先建立对应的PO
+		PurchasePO redPO = new PurchasePO(redVO.ID, redVO.clientID, redVO.client, redVO.user, 
+				redVO.storage, purchase.itemsVOtoPO(redVO.commodities), redVO.beforePrice, redVO.remark, redVO.type);
+		if (!isCopy) {
+			getPurchaseData().insert(redPO);
+			pass(redVO);
+		}
+		else {
+			// TODO 保存为草稿 
+		}
+		return null;
 	}
 }

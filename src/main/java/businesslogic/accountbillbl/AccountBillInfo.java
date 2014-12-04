@@ -135,4 +135,23 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 		}
 	}
 
+	public AccountBillVO addRed(AccountBillVO vo, boolean isCopy) {
+		AccountBillVO redVO = vo;
+		ArrayList<AccountBillItemVO> bills = redVO.bills;
+		for (int i = 0; i < bills.size(); i++) {
+			double money = -bills.get(i).money;
+			bills.get(i).money = money;
+		}
+		redVO.bills = bills;
+		AccountBillPO redPO = new AccountBillPO(redVO.ID, redVO.clientID, redVO.clientName, redVO.username, itemsVOtoPO(redVO.bills), redVO.type);
+		if (!isCopy) {
+			accountBill.getAccountBillData().insert(redPO);
+			pass(redVO);
+		}
+		else {
+			// TODO 保存为草稿
+		}
+		return redVO;
+	}
+
 }

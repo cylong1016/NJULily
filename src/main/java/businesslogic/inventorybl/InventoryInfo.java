@@ -10,6 +10,7 @@ import dataenum.BillType;
 import dataenum.Storage;
 import dataservice.TableInfoService;
 import dataservice.inventorydataservice.InventoryDataService;
+import vo.CommodityItemVO;
 import vo.InventoryBillVO;
 import businesslogic.approvalbl.info.InventoryInfo_Approval;
 import businesslogic.approvalbl.info.ValueObject_Approval;
@@ -121,5 +122,26 @@ public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInf
 			totalPrice += commodityPO.getTotal();
 		}
 		return totalPrice;
+	}
+
+	public InventoryBillVO addRed(InventoryBillVO vo, boolean isCopy) {
+		InventoryBillVO redVO = vo;
+		// 取负
+		ArrayList<CommodityItemVO> commodities = redVO.commodities;
+		for (int i = 0; i < commodities.size(); i++) {
+			int number = -commodities.get(i).number;
+			commodities.get(i).number = number;
+		}
+		redVO.commodities = commodities;
+		// 先建立对应的PO
+		InventoryBillPO redPO = new InventoryBillPO(redVO.ID, redVO.billType, inventory.itemsVOtoPO(redVO.commodities), redVO.remark);
+		if (!isCopy) {
+			getInventoryData().insert(redPO);
+			pass(redVO);
+		}
+		else {
+			// TODO 保存为草稿
+		}
+		return null;
 	}
 }

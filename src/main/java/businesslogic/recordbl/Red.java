@@ -10,7 +10,6 @@ import businesslogic.cashbillbl.CashBillInfo;
 import businesslogic.inventorybl.InventoryInfo;
 import businesslogic.purchasebl.PurchaseInfo;
 import businesslogic.salebl.SaleInfo;
-import message.ResultMessage;
 import vo.AccountBillVO;
 import vo.CashBillVO;
 import vo.InventoryBillVO;
