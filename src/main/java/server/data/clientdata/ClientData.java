@@ -87,14 +87,14 @@ public class ClientData extends CommonData<ClientPO> implements ClientDataServic
 			break;
 		case KIND:
 			for(ClientPO client : poList.getInList()) {
-				if (client.getCategory().toString().toLowerCase().contains(keywords)) {
+				if (client.getCategory().value.toLowerCase().contains(keywords)) {
 					clients.add(client);
 				}
 			}
 			break;
 		case LEVEL:
 			for(ClientPO client : poList.getInList()) {
-				if (client.getLevel().toString().toLowerCase().contains(keywords)) {
+				if (client.getLevel().value.toLowerCase().contains(keywords)) {
 					clients.add(client);
 				}
 			}

@@ -7,9 +7,16 @@ package dataenum;
  * @version Oct 26, 2014  12:29:55 AM
  */
 public enum ClientLevel {
-	LEVEL_1,
-	LEVEL_2,
-	LEVEL_3,
-	LEVEL_4,
-	VIP
+	LEVEL_1("一星级"),
+	LEVEL_2("二星级"),
+	LEVEL_3("三星级"),
+	LEVEL_4("四星级"),
+	VIP("会员");
+	
+	public final String value;
+
+	ClientLevel(String value) {
+		this.value = value;
+	}
+
 }

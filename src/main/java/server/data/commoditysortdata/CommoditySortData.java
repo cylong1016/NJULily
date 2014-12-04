@@ -45,15 +45,18 @@ public class CommoditySortData extends CommonData<CommoditySortPO> implements Co
 	}
 
 	/**
-	 * 名称存在就添加失败
-	 * 有商品就添加失败
 	 * @see server.data.CommonData#insert(po.PersistentObject)
 	 */
 	@Override
 	public ResultMessage insert(CommoditySortPO po) {
-		// TODO 所有商品的父类问题
+		CommoditySortPO father = find(po.getFatherID());
+		if (father.getCommoditiesID() != null) {
+			if (!father.getCommoditiesID().isEmpty()) { // 父分类下有商品就添加失败
+				return ResultMessage.FAILURE;
+			}
+		}
 		for(CommoditySortPO temp : poList.getInList()) {
-			if (temp.getName().equals(po.getName())) {
+			if (temp.getName().equals(po.getName())) { // 名称存在就添加失败
 				return ResultMessage.FAILURE;
 			}
 		}

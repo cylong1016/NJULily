@@ -126,7 +126,7 @@ public class CommodityData extends CommonData<CommodityPO> implements CommodityD
 			break;
 		case TYPE:
 			for(CommodityPO commodity : poList.getInList()) {
-				if (commodity.getType().toString().toLowerCase().contains(keywords)) {
+				if (commodity.getType().toLowerCase().contains(keywords)) {
 					commodities.add(commodity);
 				}
 			}
