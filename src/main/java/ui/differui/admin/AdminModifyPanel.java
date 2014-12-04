@@ -14,24 +14,22 @@ import ui.commonui.myui.MyComboBox;
 import ui.commonui.myui.MyPanel;
 import ui.commonui.myui.MyTextField;
 import ui.commonui.warning.WarningFrame;
-
 import vo.UserVO;
-
 import businesslogic.userbl.UserController;
 import dataenum.UserIdentity;
 
-public class AdminAddingPanel extends MyPanel implements ActionListener{
+public class AdminModifyPanel extends MyPanel implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 
 	MyTextField textField_name, textField_username, textField_password, textField_phone;
 	MyComboBox comboBox_iden;
 	JButton button_add, button_return;
-	public static JButton addConform;
+	public static JButton modifyConform;
 	
 	UserController controller; 
 	
-	public AdminAddingPanel(){
+	public AdminModifyPanel(){
 			
 		int x1 = 120, y1 = 10, x2 = 120, y2 = 75;
 		
@@ -39,7 +37,7 @@ public class AdminAddingPanel extends MyPanel implements ActionListener{
 		Color backColor = new Color(46, 52, 101);
 		
 		//information bar
-		JLabel infoBar = new JLabel("添加新员工",JLabel.CENTER);
+		JLabel infoBar = new JLabel("修改员工信息",JLabel.CENTER);
 		infoBar.setBounds(0, 0, 600, 20);
 		infoBar.setOpaque(true);
 		infoBar.setForeground(foreColor);
@@ -67,6 +65,7 @@ public class AdminAddingPanel extends MyPanel implements ActionListener{
 		this.add(word_name);
 		
 		textField_name = new MyTextField(110 + x1, 50 + y1, 200, 25);
+		textField_name.setText(AdminUI.name);
 		this.add(textField_name);
 		
 		//ui for category
@@ -78,6 +77,7 @@ public class AdminAddingPanel extends MyPanel implements ActionListener{
 		
 		String[] comboBoxStr = {"----------请选择一种职务----------", "总经理", "库存管理人员", "进货销售人员", "销售经理" ,"财务人员"};
 		comboBox_iden = new MyComboBox(110 + x1, 90 + y1, 200, 25,comboBoxStr);
+		comboBox_iden.setSelectedIndex(getIdenIndex(AdminUI.userIden));
 		this.add(comboBox_iden);
 		
 		//ui for level
@@ -88,6 +88,7 @@ public class AdminAddingPanel extends MyPanel implements ActionListener{
 		this.add(word_username);
 		
 		textField_username = new MyTextField(110 + x1, 130 + y1, 200, 25);
+		textField_username.setText(AdminUI.userName);
 		this.add(textField_username);
 		
 		//ui for receivableLimit
@@ -98,6 +99,7 @@ public class AdminAddingPanel extends MyPanel implements ActionListener{
 		this.add(word_password);
 		
 		textField_password = new MyTextField(110 + x1, 170 + y1, 200, 25);
+		textField_password.setText(AdminUI.password);
 		this.add(textField_password);
 				
 		//ui for phone
@@ -108,6 +110,7 @@ public class AdminAddingPanel extends MyPanel implements ActionListener{
 		this.add(word_phone);
 		
 		textField_phone = new MyTextField(110 + x2, 170 + y2, 200, 25);
+		textField_phone.setText(AdminUI.phone);
 		this.add(textField_phone);
 					
 		//the label for button_return
@@ -124,20 +127,20 @@ public class AdminAddingPanel extends MyPanel implements ActionListener{
 		button_add.setBounds(490 , 290, 100, 20);
 		button_add.setForeground(foreColor);
 		button_add.setBackground(backColor);
-		button_add.setText("确认添加");
+		button_add.setText("确认修改");
 		button_add.addActionListener(this);
 		this.add(button_add);
 		
-		addConform = new JButton();
-		addConform.addActionListener(this);
-		this.add(addConform);	
+		modifyConform = new JButton();
+		modifyConform.addActionListener(this);
+		this.add(modifyConform);	
 		
 	}
 	
 	public void actionPerformed(ActionEvent events) {
 		
 		if(events.getSource() == button_return){
-			ExitFunctionFrame epf = new ExitFunctionFrame("AdminAddingUI");
+			ExitFunctionFrame epf = new ExitFunctionFrame("AdminModifyUI");
 			epf.setVisible(true);
 		}
 		
@@ -145,7 +148,7 @@ public class AdminAddingPanel extends MyPanel implements ActionListener{
 			
 			if(!textField_name.getText().isEmpty() && !textField_username.getText().isEmpty() 
 					&& comboBox_iden.getSelectedIndex() != 0 && !textField_password.getText().isEmpty()){
-				ExitFinishFrame eff = new ExitFinishFrame("AdminAddingPanel");
+				ExitFinishFrame eff = new ExitFinishFrame("AdminModifyPanel");
 				eff.setVisible(true);
 			}else{
 				WarningFrame wp = new WarningFrame("*请检查信息填写是否正确！");
@@ -153,23 +156,23 @@ public class AdminAddingPanel extends MyPanel implements ActionListener{
 			}	
 		}	
 		
-		if(events.getSource() == addConform){
+		if(events.getSource() == modifyConform){
 			
 			controller = new UserController();	
 			
-			ResultMessage res = controller.add(new UserVO(controller.getID(), textField_username.getText(),
+			ResultMessage res = controller.update(new UserVO(AdminUI.id, textField_username.getText(),
 					textField_name.getText(), textField_password.getText(), 
 					textField_phone.getText(), getIden(comboBox_iden.getSelectedIndex())));
 			
 			if(res.equals(ResultMessage.SUCCESS)) {
 				
-				WarningFrame wp = new WarningFrame("已成功添加！");
+				WarningFrame wp = new WarningFrame("已成功修改！");
 				wp.setVisible(true);
-				AdminAddingUI.button_close.doClick();
+				AdminModifyUI.button_close.doClick();
 				AdminUI.bt_show.doClick();
 				
 			}else{
-				WarningFrame wp = new WarningFrame("用户名重复！");
+				WarningFrame wp = new WarningFrame("修改失败！");
 				wp.setVisible(true);
 			}			
 		}
@@ -185,6 +188,16 @@ public class AdminAddingPanel extends MyPanel implements ActionListener{
 			case 4: return UserIdentity.SALE_MANAGER;
 			default: return UserIdentity.FINANCE_MANAGER;
 		}		
+	}
+	
+	private int getIdenIndex(String s){
+		switch (s){
+			case "总经理" : return 1;
+			case "库存管理人员" : return 2;
+			case "财务人员" : return 5;
+			case "进货销售人员" : return 3;
+			default : return 4;
+		}
 	}
 	
 	

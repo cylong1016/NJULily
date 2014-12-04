@@ -9,6 +9,8 @@ import javax.swing.JLabel;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyPanel;
 import ui.differui.admin.AdminAddingPanel;
+import ui.differui.admin.AdminModifyPanel;
+import ui.differui.admin.AdminUI;
 import ui.differui.salesman.client.ClientAddingPanel;
 import ui.differui.salesman.client.ClientDetailPanel;
 import ui.differui.salesman.client.ClientManagementUI;
@@ -74,6 +76,12 @@ public class ExitFinishPanel extends MyPanel implements ActionListener{
 				
 				case "AdminAddingPanel" : AdminAddingPanel.addConform.doClick();break;
 				
+				case "Delete a user" : AdminUI.deleteUser();break;
+				
+				case "AdminModifyPanel" : AdminModifyPanel.modifyConform.doClick();break;
+				
+				case "modify admin password" : AdminUI.modifyPassword();break;
+
 			}
 			ExitFinishFrame.button_close.doClick();
 		}

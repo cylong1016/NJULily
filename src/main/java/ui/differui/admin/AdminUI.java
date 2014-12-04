@@ -19,13 +19,16 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import message.ResultMessage;
 import businesslogic.userbl.UserController;
+import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.myui.EmptyTextField;
 import ui.commonui.myui.MyBackground;
 import ui.commonui.myui.MyButton;
 import ui.commonui.myui.MyFrame;
 import ui.commonui.myui.MyPasswordField;
 import ui.commonui.myui.MyTable;
+import ui.commonui.warning.WarningFrame;
 import vo.UserVO;
 
 
@@ -37,13 +40,16 @@ public class AdminUI extends MyFrame implements ActionListener{
 	MyPasswordField pf_oldPassword, pf_newPassword, pf_againPassword;
 	MyButton bt_companyName, bt_password, bt_add, bt_del, bt_modify;
 	MyBackground back_bt1, back_bt2, back_bt3, back_bt4, back_bt5;
-	MyTable table;
+	static MyTable table;
 	
 	public static JButton bt_show;
 	
-	UserController controller;
+	static UserController controller;
 	
-	int rowNum;
+	static int rowNum;
+	
+	static String name, userName, phone, userIden, password
+	, id, oldPassword, newPassword, againPassword;
 	
 	public AdminUI(){
 		
@@ -63,6 +69,7 @@ public class AdminUI extends MyFrame implements ActionListener{
 		
 		//buttons
 		bt_companyName = new MyButton(365, 165, 60, 15);
+		bt_companyName.addActionListener(this);
 		bt_companyName.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent arg0) {
 				back_bt1.setVisible(true);
@@ -74,6 +81,7 @@ public class AdminUI extends MyFrame implements ActionListener{
 		this.add(bt_companyName);
 		
 		bt_password = new MyButton(365, 570, 60, 15);
+		bt_password.addActionListener(this);
 		bt_password.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent arg0) {
 				back_bt2.setVisible(true);
@@ -97,6 +105,7 @@ public class AdminUI extends MyFrame implements ActionListener{
 		this.add(bt_add);
 		
 		bt_del = new MyButton(1000, 570, 90, 15);
+		bt_del.addActionListener(this);
 		bt_del.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent arg0) {
 				back_bt4.setVisible(true);
@@ -108,6 +117,7 @@ public class AdminUI extends MyFrame implements ActionListener{
 		this.add(bt_del);
 		
 		bt_modify = new MyButton(1120, 570, 90, 15);
+		bt_modify.addActionListener(this);
 		bt_modify.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent arg0) {
 				back_bt5.setVisible(true);
@@ -186,9 +196,98 @@ public class AdminUI extends MyFrame implements ActionListener{
 			AdminAddingUI aau = new AdminAddingUI();
 			aau.setVisible(true);
 		}		
+		
+		if(events.getSource() == bt_del){
+			
+			if(table.getSelectedRow() < 0){
+				
+				WarningFrame wf = new WarningFrame("请选择要删除的员工！");
+				wf.setVisible(true);
+			}else{
+				
+				ExitFinishFrame eff = new ExitFinishFrame("Delete a user");
+				eff.setVisible(true);
+			}		
+		}
+		
+		if(events.getSource() == bt_modify){
+			
+			int i = table.getSelectedRow();
+			
+			if(i < 0){
+				
+				WarningFrame wf = new WarningFrame("请选择要修改的员工！");
+				wf.setVisible(true);
+			}else{
+				
+				id = (String)table.getValueAt(i, 0);
+				name = (String)table.getValueAt(i, 1);
+				userIden = (String)table.getValueAt(i, 2);
+				phone = (String)table.getValueAt(i, 3);
+				userName = (String)table.getValueAt(i, 4);
+				password = (String)table.getValueAt(i, 5);
+				
+				AdminModifyUI amu = new AdminModifyUI();
+				amu.setVisible(true);
+			}		
+		}
+		
+		if(events.getSource() == bt_password){
+						
+			newPassword = new String(pf_oldPassword.getPassword());
+			oldPassword = new String(pf_newPassword.getPassword());
+			againPassword = new String(pf_againPassword.getPassword());
+			
+			if(newPassword.isEmpty() || oldPassword.isEmpty() || againPassword.isEmpty() ){
+				
+				WarningFrame wf = new WarningFrame("请检查密码填写是否完整！");
+				wf.setVisible(true);
+			}else if(!oldPassword.equals(againPassword)){
+				
+				WarningFrame wf = new WarningFrame("请检查两次新密码填写是否一致！");
+				wf.setVisible(true);
+			}else{
+				
+				ExitFinishFrame eff = new ExitFinishFrame("modify admin password");
+				eff.setVisible(true);
+			}
+			
+		}
 	}
 	
-	private void showAllUserInfoInTable(){
+	public static void modifyPassword(){
+		
+		ResultMessage res = controller.updateAdmin(oldPassword, newPassword);
+		
+		if(res.equals(ResultMessage.SUCCESS)){
+			
+			WarningFrame wf = new WarningFrame("密码修改成功！");
+			wf.setVisible(true);
+		}else{
+			
+			WarningFrame wf = new WarningFrame("密码修改失败！");
+			wf.setVisible(true);
+		}
+	}
+	
+	public static void deleteUser(){
+		
+		ResultMessage res = controller.delete((String)table.getValueAt(table.getSelectedRow(), 0));
+		
+		if(res.equals(ResultMessage.SUCCESS)){
+			
+			WarningFrame wf = new WarningFrame("删除成功！");
+			wf.setVisible(true);
+			showAllUserInfoInTable();
+		}else{
+			
+			WarningFrame wf = new WarningFrame("删除失败！");
+			wf.setVisible(true);
+		}
+	}
+	
+	private static void showAllUserInfoInTable(){
+		
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		
 		if(rowNum != 0)
@@ -210,7 +309,7 @@ public class AdminUI extends MyFrame implements ActionListener{
 		}		
 	}
 	
-	private String getUserIden(String userID){
+	private static String getUserIden(String userID){
 		switch(userID){
 			case "GENERAL_MANAGER" : return "总经理";
 			case "INVENTORY_MANAGER" : return "库存管理人员";
