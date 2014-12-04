@@ -20,4 +20,12 @@ public interface SaleInfo_Approval {
 	 * @version Dec 3, 2014 2:04:30 PM
 	 */
 	public void pass(SalesVO vo);
+
+	/**
+	 * 添加红冲
+	 * @param vo
+	 * @author Zing
+	 * @version Dec 5, 2014 1:32:53 AM
+	 */
+	public SalesVO addRed(SalesVO vo, boolean isCopy);
 }

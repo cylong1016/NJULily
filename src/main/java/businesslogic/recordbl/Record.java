@@ -9,8 +9,13 @@ import java.util.Date;
 import dataenum.BillType;
 import blservice.recordblservice.RecordInputInfo;
 import message.ResultMessage;
+import vo.AccountBillVO;
 import vo.BusinessStateVO;
+import vo.CashBillVO;
+import vo.InventoryBillVO;
+import vo.PurchaseVO;
 import vo.SaleDetailVO;
+import vo.SalesVO;
 import vo.ValueObject;
 
 public class Record {
@@ -64,9 +69,9 @@ public class Record {
 	 * @author Zing
 	 * @version Dec 4, 2014 8:21:06 PM
 	 */
-	public ResultMessage red(ValueObject valueRecord, BillType type) {
-		// TODO Auto-generated method stub
-		return null;
+	public ValueObject red(ValueObject vo, BillType type) {
+		boolean  isCopy = false;
+		return buildRed(vo, type, isCopy);
 	}
 
 	/**
@@ -76,9 +81,9 @@ public class Record {
 	 * @author Zing
 	 * @version Dec 4, 2014 8:21:09 PM
 	 */
-	public ResultMessage copyRed(ValueObject valueRecord, BillType type) {
-		// TODO Auto-generated method stub
-		return null;
+	public ValueObject copyRed(ValueObject vo, BillType type) {
+		boolean isCopy = true;
+		return buildRed(vo, type, isCopy);
 	}
 
 	/**
@@ -91,8 +96,31 @@ public class Record {
 	public BusinessStateVO businessState(String beginDate, String endDate) {	
 		this.beginDate = beginDate;
 		this.endDate = endDate;
-		bussinessStateList = new BusinessStateList(getID());
-		
+		bussinessStateList = new BusinessStateList(getID());	
+		return bussinessStateList.getBusinessState();
+	}
+	
+	private ValueObject buildRed(ValueObject vo, BillType type, boolean isCopy) {
+		Red red = new Red(isCopy);
+		switch (type) {
+		case SALE:
+		case SALEBACK:
+			return red.addRed((SalesVO)vo);
+		case PURCHASE:
+		case PURCHASEBACK:
+			return red.addRed((PurchaseVO)vo);
+		case GIFT:
+		case OVERFLOW:
+		case LOSS:
+			return red.addRed((InventoryBillVO)vo);
+		case PAY:
+		case EXPENSE:
+			return red.addRed((AccountBillVO)vo);
+		case CASH:
+			return red.addRed((CashBillVO)vo);
+		default:
+			break;
+		}
 		return null;
 	}
 	

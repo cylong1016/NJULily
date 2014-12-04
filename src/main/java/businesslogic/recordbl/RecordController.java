@@ -34,11 +34,11 @@ public class RecordController implements RecordBLService{
 		return record.bussinessPro(info);
 	}
 
-	public ResultMessage red(ValueObject valueRecord, BillType type) {
+	public ValueObject red(ValueObject valueRecord, BillType type) {
 		return record.red(valueRecord, type);
 	}
 
-	public ResultMessage copyRed(ValueObject valueRecord, BillType type) {
+	public ValueObject copyRed(ValueObject valueRecord, BillType type) {
 		return record.copyRed(valueRecord, type);
 	}
 

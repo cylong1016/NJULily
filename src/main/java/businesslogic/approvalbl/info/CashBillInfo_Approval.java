@@ -20,4 +20,6 @@ public interface CashBillInfo_Approval {
 	 * @version Dec 3, 2014 12:19:41 AM
 	 */
 	public void pass(CashBillVO vo);
+
+	public CashBillVO addRed(CashBillVO vo, boolean isCopy);
 }

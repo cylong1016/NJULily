@@ -21,4 +21,6 @@ public interface AccountBill_Approval {
 	 * @version Dec 3, 2014 12:41:08 AM
 	 */
 	public void pass(AccountBillVO vo);
+
+	public AccountBillVO addRed(AccountBillVO vo, boolean isCopy);
 }

@@ -20,4 +20,6 @@ public interface PurchaseInfo_Approval {
 	 * @version Dec 3, 2014 3:47:40 PM
 	 */
 	public void pass(PurchaseVO vo);
+
+	public PurchaseVO addRed(PurchaseVO vo, boolean isCopy);
 }

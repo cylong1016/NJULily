@@ -13,6 +13,7 @@ import businesslogic.recordbl.info.SaleInfo_Record;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
 import po.CommodityItemPO;
 import po.SalesPO;
+import vo.CommodityItemVO;
 import vo.SalesVO;
 import dataenum.BillState;
 import dataenum.BillType;
@@ -249,6 +250,32 @@ public class SaleInfo extends Info<SalesPO> implements SaleInfo_Inventory, SaleI
 		else {
 			clientInfo.changeReceivable(po.getClientID(), -po.getAfterPrice());
 		}
+	}
+
+	/**
+	 * 红冲／红冲并复制
+	 */
+	public SalesVO addRed(SalesVO vo, boolean isCopy) {
+		SalesVO redVO = vo;
+		// 取负
+		ArrayList<CommodityItemVO> commodities = redVO.commodities;
+		for (int i = 0; i < commodities.size(); i++) {
+			int number = -commodities.get(i).number;
+			commodities.get(i).number = number;
+		}
+		redVO.commodities = commodities;
+		// 先建立对应的PO
+		SalesPO redPO = new SalesPO(redVO.ID, redVO.clientID, redVO.client, redVO.salesman, redVO.user, redVO.storage, 
+				sale.itemsVOtoPO(redVO.commodities), redVO.beforePrice, redVO.allowance, redVO.voucher, redVO.remark, redVO.afterPrice, redVO.type);
+		if (!isCopy) {
+			// 入账，更改相应数据
+			getSaleData().insert(redPO);
+			pass(redVO);		
+		}
+		else {
+			// TODO 保存为草稿状态
+		}
+		return redVO;
 	}
 	
 

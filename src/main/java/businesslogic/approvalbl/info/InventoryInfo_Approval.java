@@ -20,4 +20,6 @@ public interface InventoryInfo_Approval {
 	 * @version Dec 3, 2014 4:47:13 PM
 	 */
 	public void pass(InventoryBillVO vo);
+
+	public InventoryBillVO addRed(InventoryBillVO vo, boolean isCopy);
 }

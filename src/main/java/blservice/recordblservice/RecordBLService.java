@@ -43,14 +43,14 @@ public interface RecordBLService {
 	 * @param record
 	 * @return
 	 */
-	public ResultMessage red(ValueObject valueRecord, BillType type);
+	public ValueObject red(ValueObject valueRecord, BillType type);
 	
 	/**
 	 * 修改红冲
 	 * @param record
 	 * @return
 	 */
-	public ResultMessage copyRed(ValueObject valueRecord, BillType type);
+	public ValueObject copyRed(ValueObject valueRecord, BillType type);
 	
 	/**
 	 * 制定经营情况表
