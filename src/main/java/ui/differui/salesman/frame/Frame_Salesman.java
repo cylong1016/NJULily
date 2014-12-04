@@ -7,8 +7,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 
+import ui.commonui.login.Frame_Login;
 import ui.commonui.myui.MyBackground;
 import ui.commonui.myui.MyButton;
 import ui.commonui.myui.MyFrame;
@@ -22,7 +24,15 @@ public class Frame_Salesman extends MyFrame implements ActionListener{
 	MyButton bt_index, bt_in, bt_client, bt_inBack, bt_sale, bt_saleBack;
 	JLabel lb_index, lb_in, lb_client, lb_inBack, lb_sale, lb_saleBack;
 	
+	public static JButton bt_vanish;
+	
 	public Frame_Salesman(){
+		
+		bt_vanish = new JButton();
+		bt_vanish.addActionListener(this);
+		this.add(bt_vanish);
+		
+		Frame_Login.myNameis = "Frame_Salesman";
 		
 		//client management
 		ClientManagementUI cm = new ClientManagementUI();
@@ -157,6 +167,8 @@ public class Frame_Salesman extends MyFrame implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent events){
-		
+		if(events.getSource() == bt_vanish){
+			this.setVisible(false);
+		}
 	}
 }

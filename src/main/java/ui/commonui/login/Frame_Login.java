@@ -21,7 +21,9 @@ import ui.commonui.myui.MyFrame;
 import ui.commonui.myui.MyLabel;
 import ui.commonui.myui.MyPasswordField;
 import ui.commonui.myui.MyTextField;
+import ui.commonui.warning.WarningFrame;
 import ui.differui.admin.AdminUI;
+import ui.differui.salesman.frame.Frame_Salesman;
 
 
 public class Frame_Login extends MyFrame implements ActionListener{
@@ -36,6 +38,8 @@ public class Frame_Login extends MyFrame implements ActionListener{
 	MyBackground loginBackground2;
 	
 	public Frame_Login(){
+		
+		MyFrame.button_back.setVisible(false);
 		
 		//a text field for user name input 
 		userNameField = new MyTextField(850, 200, 240, 48);
@@ -131,14 +135,16 @@ public class Frame_Login extends MyFrame implements ActionListener{
 			UserIdentity ui = controller.login(new LoginInfo(userNameField.getText()
 					, new String(passwordField.getPassword()),flag));
 			
-			
-			System.out.println(ui);
-			
 			if(ui == null){
-				System.out.println("failure");
+				WarningFrame wf = new WarningFrame("用户名或密码填写错误！");
+				wf.setVisible(true);
 			}else if(ui.equals(UserIdentity.ADMIN)){
 				AdminUI au = new AdminUI();
 				au.setVisible(true);
+				this.setVisible(false);
+			}else if(ui.equals(UserIdentity.PUR_SALE_MANAGER) || ui.equals(UserIdentity.SALE_MANAGER)){
+				Frame_Salesman fs = new Frame_Salesman();
+				fs.setVisible(true);
 				this.setVisible(false);
 			}
 		}

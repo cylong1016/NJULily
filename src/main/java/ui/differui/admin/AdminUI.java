@@ -22,6 +22,7 @@ import javax.swing.table.JTableHeader;
 import message.ResultMessage;
 import businesslogic.userbl.UserController;
 import ui.commonui.exitfinish.ExitFinishFrame;
+import ui.commonui.login.Frame_Login;
 import ui.commonui.myui.EmptyTextField;
 import ui.commonui.myui.MyBackground;
 import ui.commonui.myui.MyButton;
@@ -42,16 +43,18 @@ public class AdminUI extends MyFrame implements ActionListener{
 	MyBackground back_bt1, back_bt2, back_bt3, back_bt4, back_bt5;
 	static MyTable table;
 	
-	public static JButton bt_show;
+	public static JButton bt_show, bt_vanish;
 	
 	static UserController controller;
 	
-	static int rowNum;
+	public static int rowNum;
 	
 	static String name, userName, phone, userIden, password
 	, id, oldPassword, newPassword, againPassword;
 	
 	public AdminUI(){
+		
+		Frame_Login.myNameis = "AdminUI";
 		
 		//textFields
 		tf_companyName = new EmptyTextField(188, 122, 190 ,25);
@@ -183,6 +186,10 @@ public class AdminUI extends MyFrame implements ActionListener{
 		bt_show = new JButton();
 		bt_show.addActionListener(this);
 		this.add(bt_show);
+		
+		bt_vanish = new JButton();
+		bt_vanish.addActionListener(this);
+		this.add(bt_vanish);
 	}
 	
 	public void actionPerformed(ActionEvent events) {
@@ -191,6 +198,9 @@ public class AdminUI extends MyFrame implements ActionListener{
 			showAllUserInfoInTable();
 		}
 		
+		if(events.getSource() == bt_vanish){
+			this.setVisible(false);
+		}
 		
 		if(events.getSource() == bt_add){
 			AdminAddingUI aau = new AdminAddingUI();
