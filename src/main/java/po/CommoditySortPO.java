@@ -49,10 +49,16 @@ public class CommoditySortPO extends PersistentObject {
 	}
 
 	public void addChildID(String childID) {
-		this.commoditiesID.add(childID);
+		if (childrenID == null) {
+			childrenID = new ArrayList<String>();
+		}
+		this.childrenID.add(childID);
 	}
 
 	public void addCommodityID(String commodityID) {
+		if (commoditiesID == null) {
+			commoditiesID = new ArrayList<String>();
+		}
 		this.commoditiesID.add(commodityID);
 	}
 

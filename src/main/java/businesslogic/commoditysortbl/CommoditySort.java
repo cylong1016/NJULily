@@ -81,8 +81,10 @@ public class CommoditySort {
 		else {
 			CommoditySortPO father = commoditySortData.find(fatherID);
 			// 如果父类里面有了商品的话，添加失败
-			if (!father.getCommoditiesID().isEmpty()) {
-				return ResultMessage.FAILURE;
+			if(father.getCommoditiesID() != null) {
+				if (!father.getCommoditiesID().isEmpty()) {
+					return ResultMessage.FAILURE;
+				}
 			}
 			po = new CommoditySortPO(ID, sortName, fatherID, null, null);
 			// 当父类存在、并且父类中没有商品时，往父类中添加这个新建的子类

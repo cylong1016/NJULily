@@ -1,9 +1,12 @@
 package server.data.commoditysortdata;
 
+import java.io.File;
+
 import message.ResultMessage;
 import po.CommoditySortPO;
 import server.common.ParseXML;
 import server.data.CommonData;
+import server.io.DefineList;
 import dataservice.commoditysortdataservice.CommoditySortDataService;
 
 /**
@@ -19,6 +22,13 @@ public class CommoditySortData extends CommonData<CommoditySortPO> implements Co
 	@Override
 	public void init() {
 		parsexml = new ParseXML("CommoditySortData");
+		filePath = parsexml.getValue("path");
+		File file = new File(filePath);
+		if (!file.exists() || file.length() == 0) {	// 如果不存在保存商品分类的文件，初始化所有商品的父类分类
+			poList = new DefineList<CommoditySortPO>(filePath);
+			CommoditySortPO po = new CommoditySortPO("00", "所有商品分类", null, null, null);
+			this.insert(po);
+		}
 	}
 
 	/**

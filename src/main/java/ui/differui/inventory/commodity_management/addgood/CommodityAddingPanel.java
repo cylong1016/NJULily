@@ -14,7 +14,6 @@ import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyPanel;
 import ui.commonui.myui.MyTextField;
 import ui.commonui.myui.MyTree;
-import ui.differui.inventory.commodity_management.addsort.SortAddingUI;
 
 
 public class CommodityAddingPanel extends MyPanel implements ActionListener{
