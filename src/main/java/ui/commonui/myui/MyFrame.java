@@ -53,8 +53,9 @@ public class MyFrame extends JFrame {
 		button_exit.setIcon(new ImageIcon("ui/image/login/exit.png"));
 		button_exit.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent arg0) {			
+				GetLocation io = new GetLocation();
 				button_exit.setIcon(new ImageIcon("ui/image/login/exit2.png"));
-				info2 = new Info(arg0.getXOnScreen() + 10,arg0.getYOnScreen(),50,20,"    关闭");
+				info2 = new Info(io.getX() + 1260, io.getY() + 28,50,20,"    关闭");
 				info2.setVisible(true);
 			}
 			public void mouseExited(MouseEvent arg0) {
@@ -74,9 +75,10 @@ public class MyFrame extends JFrame {
 		button_back = new MyButton(1188, 10, 80, 30);
 		button_back.setIcon(new ImageIcon("ui/image/login/back.png"));
 		button_back.addMouseListener(new MouseAdapter(){
-			public void mouseEntered(MouseEvent arg0) {			
+			public void mouseEntered(MouseEvent arg0) {		
+				GetLocation io = new GetLocation();
 				button_back.setIcon(new ImageIcon("ui/image/login/back2.png"));
-				info = new Info(arg0.getXOnScreen() - 5,arg0.getYOnScreen(),50,20,"    注销");
+				info = new Info(io.getX() + 1210, io.getY() + 28,50,20,"    注销");
 				info.setVisible(true);
 			}
 			public void mouseExited(MouseEvent arg0) {
