@@ -52,23 +52,46 @@ public class MyTree extends JTree{
         setModel(new DefaultTreeModel(root, true));
 	}
 	
+	
+	public String findTheIDwithName(String name){
+		CommoditySortController controller = new CommoditySortController();	
+		ArrayList<CommoditySortVO> csvo = controller.show();
+		for(int i = 0; i < csvo.size(); i++){
+			if(csvo.get(i).ID.equals(name)){
+				return csvo.get(i).ID;
+			}
+		}
+		return null;
+	}	
+	
 	public void buildTheTree(DefaultMutableTreeNode root){
 		
 		CommoditySortController controller = new CommoditySortController();	
 		ArrayList<CommoditySortVO> csvo = controller.show();
 		int addCount = 0;
-		String addingPool = "";
 		
+		String addingPool = findTheIDwithName("全部商品分类");
+		String[] strArray = addingPool.split(";");
+		addingPool = "";
 		
-		for(int i = 0; i < csvo.size(); i++){
-			if(csvo.get(i).fatherID.equals("father")){
+		while(addCount != csvo.size()){
+			for(int k = 0; k < strArray.length; k++){
+				for(int i = 0; i < csvo.size(); i++){
 					
-				addingPool = addingPool + csvo.get(i).name + ";";
-					
-				root.add(new DefaultMutableTreeNode(csvo.get(i).name));
-				addCount++;
+					String nodeID = findTheIDwithName(strArray[k]);
+					if(csvo.get(i).fatherID.equals(nodeID)){
+						
+						root = new DefaultMutableTreeNode(strArray[k]);
+								
+						addingPool = addingPool + csvo.get(i).name + ";";
+						
+						root.add(new DefaultMutableTreeNode(csvo.get(i).name));
+						addCount++;
+					}
+				}
 			}
+			strArray = addingPool.split(";");
+			addingPool = "";
 		}
-			
 	}
 }

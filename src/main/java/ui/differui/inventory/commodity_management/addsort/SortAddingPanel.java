@@ -86,11 +86,13 @@ public class SortAddingPanel extends MyPanel implements ActionListener{
 	
 	public static void addingConfirm(){
 		CommoditySortController controller = new CommoditySortController();
+		
+		System.out.println("aaaa");
 		ResultMessage rs = null;
 		
 		if(father.toString().equals("所有商品分类")){
 			// TODO 00为所有商品分类的分类ID，这个需要从数据层获得,我不知道你在哪获得的，就先写成00
-			rs = controller.addCommoSort(tf_name.getText(),null);
+			rs = controller.addCommoSort(tf_name.getText(),"00");
 		}else{
 			ArrayList<CommoditySortVO> csvo = controller.show();
 			
