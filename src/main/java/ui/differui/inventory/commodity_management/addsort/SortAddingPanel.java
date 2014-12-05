@@ -90,7 +90,7 @@ public class SortAddingPanel extends MyPanel implements ActionListener{
 		
 		if(father.toString().equals("所有商品分类")){
 			// TODO 00为所有商品分类的分类ID，这个需要从数据层获得,我不知道你在哪获得的，就先写成00
-			rs = controller.addCommoSort(tf_name.getText(),"00");
+			rs = controller.addCommoSort(tf_name.getText(),null);
 		}else{
 			ArrayList<CommoditySortVO> csvo = controller.show();
 			
