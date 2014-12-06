@@ -23,7 +23,6 @@ public class MyTree extends JTree{
 	private static final long serialVersionUID = 1L;
 	
 	DefaultMutableTreeNode root;
-	DefaultMutableTreeNode fatherNode;
 	
 	public MyTree(DefaultMutableTreeNode _root){
 		
@@ -55,7 +54,7 @@ public class MyTree extends JTree{
         //  expandsSelectedPaths = true;
         updateUI();
               
-        buildTheTree();
+        initTree(root, "00");
         
         setModel(new DefaultTreeModel(root, true));
 	}
@@ -77,42 +76,56 @@ public class MyTree extends JTree{
 		}
 	}
 	
-	public void buildTheTree(){
+	public void initTree(DefaultMutableTreeNode fatherNode, String parentID){
 		controller = new CommoditySortController();
 		ArrayList<CommoditySortVO> list = controller.show();
-		String addingPool = "00";
-		String[] _fatherID;
-		int addedNum = 1;
 		
-		while(addedNum < list.size()){
-					
-			_fatherID = addingPool.split(";");
-			addingPool = "";
-			
-			for(int i = 0; i < _fatherID.length; i++){
-				
-				fatherNode = new DefaultMutableTreeNode(getName(_fatherID[i])); 
-				DefaultMutableTreeNode childNode;
-				
-				for(int j = 1; j < list.size(); j++){
-					
-					if(list.get(j).fatherID.equals(_fatherID[i])){
-						
-						childNode = new DefaultMutableTreeNode(list.get(j).name); 
-						
-						if(_fatherID[i].equals("00")){
-							root.add(childNode);
-						}else{
-							fatherNode.add(childNode);	
-						}						
-						addingPool = addingPool + list.get(j).ID + ";";
-						addedNum++;
-					}
-					
-				}
+		for(int j = 1; j < list.size(); j++){
+			if(list.get(j).fatherID.equals(parentID)){
+				DefaultMutableTreeNode childNode = new DefaultMutableTreeNode(list.get(j).name); 
+				fatherNode.add(childNode);
+				initTree(childNode, list.get(j).ID);
 			}
-		}
+		}		
 	}
+
+//	public void buildTheTree(){
+//		controller = new CommoditySortController();
+//		ArrayList<CommoditySortVO> list = controller.show();
+//		String addingPool = "00";
+//		String[] _fatherID;
+//		int addedNum = 1;
+//		
+//		while(addedNum < list.size()){
+//					
+//			_fatherID = addingPool.split(";");
+//			addingPool = "";
+//			
+//			for(int i = 0; i < _fatherID.length; i++){
+//				
+//				if(_fatherID[i].equals("00")){
+//					fatherNode = root;
+//				}else{
+//					fatherNode = new DefaultMutableTreeNode(getName(_fatherID[i])); 
+//					fatherNode.setParent(root);
+//				}
+//				
+//				for(int j = 1; j < list.size(); j++){
+//					
+//					if(list.get(j).fatherID.equals(_fatherID[i])){
+//						
+//						childNode = new DefaultMutableTreeNode(list.get(j).name); 
+//						
+//						fatherNode.add(childNode);	
+//						
+//						addingPool = addingPool + list.get(j).ID + ";";
+//						addedNum++;
+//					}
+//					
+//				}
+//			}
+//		}
+//	}
 }
 	
 
