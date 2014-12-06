@@ -39,6 +39,7 @@ public class CommodityManagementUI extends MyPanel implements ActionListener{
 	public static JButton button_close;
 	
 	MyTree tree;
+	JScrollPane jsp;
 	
 	public CommodityManagementUI(){
 		
@@ -50,10 +51,9 @@ public class CommodityManagementUI extends MyPanel implements ActionListener{
 		this.setBounds(0, 0, 1280, 720);
 				
 		DefaultMutableTreeNode root = new DefaultMutableTreeNode("所有商品分类"); 
-		
 		tree = new MyTree(root); 
-				
-		JScrollPane jsp=new JScrollPane(tree);
+					
+		jsp = new JScrollPane(tree);
 		jsp.getViewport().add(tree, null);
 		jsp.setBounds(50, 60, 225, 425);
 		jsp.setVisible(true);
@@ -149,8 +149,13 @@ public class CommodityManagementUI extends MyPanel implements ActionListener{
 		this.add(button_close);
 	}
 	
+	public void buildTheTree(){
+		DefaultMutableTreeNode root = new DefaultMutableTreeNode("所有商品分类"); 
+		tree = new MyTree(root); 
+	}
+	
 	public void actionPerformed(ActionEvent events) {
-		
+	
 		if(events.getSource() == button_add){
 			CommodityAddingUI cau = new CommodityAddingUI();
 			cau.setVisible(true);

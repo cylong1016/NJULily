@@ -76,6 +76,7 @@ public class SortAddingPanel extends MyPanel implements ActionListener{
 		if(events.getSource() == button_return){
 			ExitFunctionFrame epf = new ExitFunctionFrame("SortAddingUI");
 			epf.setVisible(true);
+			SortAddingUI.button_close.doClick();
 		}
 		
 		if(events.getSource() == button_confirm){
@@ -87,7 +88,6 @@ public class SortAddingPanel extends MyPanel implements ActionListener{
 	public static void addingConfirm(){
 		CommoditySortController controller = new CommoditySortController();
 		
-		System.out.println("aaaa");
 		ResultMessage rs = null;
 		
 		if(father.toString().equals("所有商品分类")){
@@ -98,7 +98,7 @@ public class SortAddingPanel extends MyPanel implements ActionListener{
 			
 			for(int i = 0; i < csvo.size(); i++){
 				if(csvo.get(i).name.equals(father.toString())){
-					rs = controller.addCommoSort(tf_name.getText(),csvo.get(i).ID);
+					rs = controller.addCommoSort(tf_name.getText(), csvo.get(i).ID);
 				}
 			}
 		}	

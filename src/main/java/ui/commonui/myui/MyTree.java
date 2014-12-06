@@ -1,29 +1,33 @@
 package ui.commonui.myui;
 
 import java.awt.Color;
+
+
+
 import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Stack;
 
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.DefaultTreeSelectionModel;
-import javax.swing.tree.TreeModel;
-import javax.swing.tree.TreeNode;
-import javax.swing.tree.TreePath;
 
 import vo.CommoditySortVO;
 import businesslogic.commoditysortbl.CommoditySortController;
 
+
+
+
 public class MyTree extends JTree{
 
 	private static final long serialVersionUID = 1L;
-	private boolean expandsSelectedPaths;
 	
-	public MyTree(TreeNode root){
-				
+	DefaultMutableTreeNode root;
+	
+	public MyTree(DefaultMutableTreeNode _root){
+		
+		root = _root;
+		
 		Color foreColor = new Color(158, 213, 220);
 		Color backColor = new Color(46, 52, 101);
 		
@@ -47,51 +51,62 @@ public class MyTree extends JTree{
         cellRenderer = null;
         scrollsOnExpand = true;
         setOpaque(true);
-        expandsSelectedPaths = true;
+        //  expandsSelectedPaths = true;
         updateUI();
+              
+        buildTheTree();
+        
         setModel(new DefaultTreeModel(root, true));
 	}
 	
+	CommoditySortController controller;
 	
-	public String findTheIDwithName(String name){
-		CommoditySortController controller = new CommoditySortController();	
-		ArrayList<CommoditySortVO> csvo = controller.show();
-		for(int i = 0; i < csvo.size(); i++){
-			if(csvo.get(i).ID.equals(name)){
-				return csvo.get(i).ID;
-			}
+	public String getName(String ID){
+		if(ID.equals("00")){
+			return "所有商品分类";
+		}else{
+			CommoditySortVO cvo = controller.show(ID);
+			return cvo.name;
 		}
-		return null;
-	}	
+	}
 	
-	public void buildTheTree(DefaultMutableTreeNode root){
+	public void buildTheTree(){
+		controller = new CommoditySortController();
+		ArrayList<CommoditySortVO> list = controller.show();
+		String addingPool = "00";
+		String[] _fatherID;
+		int addedNum = 1;
 		
-		CommoditySortController controller = new CommoditySortController();	
-		ArrayList<CommoditySortVO> csvo = controller.show();
-		int addCount = 0;
-		
-		String addingPool = findTheIDwithName("全部商品分类");
-		String[] strArray = addingPool.split(";");
-		addingPool = "";
-		
-		while(addCount != csvo.size()){
-			for(int k = 0; k < strArray.length; k++){
-				for(int i = 0; i < csvo.size(); i++){
+		while(addedNum != list.size()){
+			
+			_fatherID = addingPool.split(";");
+			addingPool = "";
+			
+			for(int i = 0; i < _fatherID.length; i++){
+				
+				DefaultMutableTreeNode fatherNode = new DefaultMutableTreeNode(getName(_fatherID[i])); 
+				DefaultMutableTreeNode childNode;
+				
+				for(int j = 1;j < list.size(); j++){
 					
-					String nodeID = findTheIDwithName(strArray[k]);
-					if(csvo.get(i).fatherID.equals(nodeID)){
+					System.out.println(list.get(j).ID);
+					
+					if(list.get(j).fatherID.equals(_fatherID[i])){
 						
-						root = new DefaultMutableTreeNode(strArray[k]);
-								
-						addingPool = addingPool + csvo.get(i).name + ";";
+						childNode = new DefaultMutableTreeNode(list.get(j).name); 
 						
-						root.add(new DefaultMutableTreeNode(csvo.get(i).name));
-						addCount++;
+						if(_fatherID[i].equals("00")){
+							root.add(childNode);
+						}else{
+							fatherNode.add(childNode);	
+						}						
+						addingPool = addingPool + list.get(i).ID + ";";
+						addedNum++;
 					}
 				}
 			}
-			strArray = addingPool.split(";");
-			addingPool = "";
 		}
 	}
 }
+	
+

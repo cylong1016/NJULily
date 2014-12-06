@@ -75,6 +75,10 @@ public class CommoditySort {
 	 * @return
 	 */
 	public ResultMessage addCommoSort(String sortName, String fatherID) {
+		
+		//这里加一行就万事大吉了
+		getID(fatherID);
+		
 		if (fatherID == null) {
 			po = new CommoditySortPO(ID, sortName, null, null, null);
 		}
