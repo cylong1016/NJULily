@@ -23,6 +23,7 @@ public class MyTree extends JTree{
 	private static final long serialVersionUID = 1L;
 	
 	DefaultMutableTreeNode root;
+	DefaultMutableTreeNode fatherNode;
 	
 	public MyTree(DefaultMutableTreeNode _root){
 		
@@ -65,8 +66,14 @@ public class MyTree extends JTree{
 		if(ID.equals("00")){
 			return "所有商品分类";
 		}else{
-			CommoditySortVO cvo = controller.show(ID);
-			return cvo.name;
+			controller = new CommoditySortController();
+			ArrayList<CommoditySortVO> list = controller.show();
+			for(int j = 1; j < list.size(); j++){
+				if(list.get(j).ID.equals(ID)){
+					return list.get(j).name;
+				}
+			}
+			return null;
 		}
 	}
 	
@@ -77,19 +84,17 @@ public class MyTree extends JTree{
 		String[] _fatherID;
 		int addedNum = 1;
 		
-		while(addedNum != list.size()){
-			
+		while(addedNum < list.size()){
+					
 			_fatherID = addingPool.split(";");
 			addingPool = "";
 			
 			for(int i = 0; i < _fatherID.length; i++){
 				
-				DefaultMutableTreeNode fatherNode = new DefaultMutableTreeNode(getName(_fatherID[i])); 
+				fatherNode = new DefaultMutableTreeNode(getName(_fatherID[i])); 
 				DefaultMutableTreeNode childNode;
 				
-				for(int j = 1;j < list.size(); j++){
-					
-					System.out.println(list.get(j).ID);
+				for(int j = 1; j < list.size(); j++){
 					
 					if(list.get(j).fatherID.equals(_fatherID[i])){
 						
@@ -100,9 +105,10 @@ public class MyTree extends JTree{
 						}else{
 							fatherNode.add(childNode);	
 						}						
-						addingPool = addingPool + list.get(i).ID + ";";
+						addingPool = addingPool + list.get(j).ID + ";";
 						addedNum++;
 					}
+					
 				}
 			}
 		}
