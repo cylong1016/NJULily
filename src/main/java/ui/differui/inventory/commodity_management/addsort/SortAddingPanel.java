@@ -104,9 +104,6 @@ public class SortAddingPanel extends MyPanel implements ActionListener{
 		}	
 		
 		if(rs.equals(ResultMessage.SUCCESS)){
-			WarningFrame wf = new WarningFrame("商品分类添加成功！");
-			wf.setVisible(true);
-			SortAddingUI.button_close.doClick();
 			CommodityManagementUI.button_buildTree.doClick();
 		}else{
 			WarningFrame wf = new WarningFrame("商品分类添加失败！");

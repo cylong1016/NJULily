@@ -14,7 +14,9 @@ import javax.swing.JTree;
 import javax.swing.table.JTableHeader;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
+import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeCellRenderer;
+import javax.swing.tree.TreeModel;
 
 import ui.commonui.exitfunction.ExitFunctionFrame;
 import ui.commonui.myui.MyComboBox;
@@ -192,14 +194,7 @@ public class CommodityManagementUI extends MyPanel implements ActionListener{
 		}
 		
 		if(events.getSource() == button_buildTree){
-					
-			jsp.remove(tree);
-			
-			DefaultMutableTreeNode root = new DefaultMutableTreeNode("所有商品分类"); 
-			tree = new MyTree(root); 
-			tree.updateUI();
-			jsp.add(tree);
-			jsp.updateUI();
+			Frame_Inventory.bt_restart.doClick();
 		}
 	}
 	

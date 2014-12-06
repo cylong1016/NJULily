@@ -45,8 +45,10 @@ public class MyTree extends JTree{
               
         initTree(root, "00");
         
-        setModel(new DefaultTreeModel(root, true));
-        
+        DefaultTreeModel model = new DefaultTreeModel(root, true);
+        model.reload();
+        setModel(model);
+           
         this.setForeground(foreColor);
 		this.setBackground(backColor);
 		

@@ -15,11 +15,13 @@ import javax.swing.JLabel;
 
 
 
+
 import ui.commonui.exitfunction.ExitFunctionFrame;
 import ui.commonui.login.Frame_Login;
 import ui.commonui.myui.MyBackground;
 import ui.commonui.myui.MyButton;
 import ui.commonui.myui.MyFrame;
+import ui.commonui.warning.WarningFrame;
 import ui.differui.inventory.commodity_management.index.CommodityManagementUI;
 import ui.differui.inventory.gift.GiftUI;
 import ui.differui.inventory.index.InventoryIndex;
@@ -38,7 +40,7 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 	
 	public static int flag = 0, destination = 0;
 	
-	public static JButton bt_vanish;
+	public static JButton bt_vanish, bt_restart;
 	
 	static InventoryIndex panel_index;
 	static CommodityManagementUI panel_good;
@@ -189,6 +191,10 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 		bt_vanish = new JButton();
 		bt_vanish.addActionListener(this);
 		this.add(bt_vanish);
+		
+		bt_restart = new JButton();
+		bt_restart.addActionListener(this);
+		this.add(bt_restart);
 	}
 	
 	public static void visibleTrue(int i){
@@ -303,6 +309,17 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 				ExitFunctionFrame ef = new ExitFunctionFrame("Inventory");
 				ef.setVisible(true);
 			}
+		}
+		
+		if(events.getSource() == bt_restart){
+			this.setVisible(false);
+			flag = 0;
+			Frame_Inventory fi = new Frame_Inventory();
+			fi.setVisible(true);
+			bt_good.doClick();
+			
+			WarningFrame wf = new WarningFrame("商品分类添加成功！");
+			wf.setVisible(true);
 		}
 	}	
 }
