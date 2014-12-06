@@ -3,7 +3,9 @@ package blservice.clientblservice;
 import java.util.ArrayList;
 
 import message.ResultMessage;
-import vo.ClientVO;
+import vo.client.ClientAddVO;
+import vo.client.ClientPartInfoVO;
+import vo.client.ClientVO;
 import dataenum.FindTypeClient;
 
 /**
@@ -31,11 +33,20 @@ public interface ClientBLService {
 	 * @version 2014年11月29日  下午4:43:54
 	 */
 	public String getID();
+	
 	/**
 	 * 显示全部客户
 	 * @return 返回全部客户的ArrayList
 	 */
 	public ArrayList<ClientVO> show();
+	
+	/**
+	 * 显示全部客户的部分信息（给需要添加客户的界面使用)
+	 * @return
+	 * @author Zing
+	 * @version Dec 6, 2014 5:16:09 PM
+	 */
+	public ArrayList<ClientPartInfoVO> showPart();
 
 	/**
 	 * 查找客户（模糊查找）
@@ -62,7 +73,7 @@ public interface ClientBLService {
 	 * @author cylong
 	 * @version 2014年11月29日 下午3:40:03
 	 */
-	public ResultMessage addClient(ClientVO vo);
+	public ResultMessage addClient(ClientAddVO vo);
 
 	/**
 	 * 更新一位客户
@@ -71,7 +82,7 @@ public interface ClientBLService {
 	 * @author cylong
 	 * @version 2014年11月29日 下午3:40:36
 	 */
-	public ResultMessage updClient(ClientVO vo);
+	public ResultMessage updClient(ClientAddVO vo);
 
 	/**
 	 * 以ID删除客户

@@ -22,7 +22,7 @@ import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyTable;
 import ui.commonui.myui.MyTextField;
 import ui.commonui.warning.WarningFrame;
-import vo.ClientVO;
+import vo.client.ClientVO;
 
 public class ClientManagementUI extends JLabel implements ActionListener{
 	

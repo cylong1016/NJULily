@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 
 
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -25,7 +26,7 @@ import ui.commonui.myui.MyPanel;
 import ui.commonui.myui.MyTable;
 import ui.commonui.myui.MyTextField;
 import ui.commonui.warning.WarningFrame;
-import vo.ClientVO;
+import vo.client.ClientVO;
 
 public class ClientDetailPanel extends MyPanel implements ActionListener{
 

@@ -1,8 +1,6 @@
 package ui.differui.salesman.client;
 
 import java.awt.Color;
-
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -19,7 +17,7 @@ import ui.commonui.myui.MyComboBox;
 import ui.commonui.myui.MyPanel;
 import ui.commonui.myui.MyTextField;
 import ui.commonui.warning.WarningFrame;
-import vo.ClientVO;
+import vo.client.ClientVO;
 
 public class ClientAddingPanel extends MyPanel implements ActionListener{
 

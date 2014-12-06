@@ -2,6 +2,8 @@ package vo;
 
 import java.util.ArrayList;
 
+import vo.client.ClientVO;
+
 /**
  * 期初建账值对象
  * @author cylong

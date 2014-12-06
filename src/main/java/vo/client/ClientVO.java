@@ -1,5 +1,6 @@
-package vo;
+package vo.client;
 
+import vo.ValueObject;
 import dataenum.ClientCategory;
 import dataenum.ClientLevel;
 
@@ -33,6 +34,9 @@ public class ClientVO extends ValueObject {
 	/** 默认业务员 */
 	public String salesman;
 
+	/**
+	 * 在查看客户的界面里看所有客户，需要显示客户的所有信息
+	 */
 	public ClientVO(String ID, ClientCategory category, ClientLevel level, String name, String phone, String address, 
 			String post, String email, double receivable, double payable, double receivableLimit, String salesman) {
 		this.ID = ID;
@@ -48,5 +52,6 @@ public class ClientVO extends ValueObject {
 		this.receivableLimit = receivableLimit;
 		this.salesman = salesman;
 	}
+	
 
 }

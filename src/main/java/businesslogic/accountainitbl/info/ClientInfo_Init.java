@@ -3,7 +3,7 @@ package businesslogic.accountainitbl.info;
 import java.util.ArrayList;
 
 import po.ClientPO;
-import vo.ClientVO;
+import vo.client.ClientVO;
 
 public interface ClientInfo_Init {
 	

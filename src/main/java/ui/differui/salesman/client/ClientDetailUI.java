@@ -8,7 +8,7 @@ import javax.swing.JButton;
 import ui.commonui.exitfunction.ExitFunctionFrame;
 import ui.commonui.myui.MyButton;
 import ui.commonui.myui.MyWindow;
-import vo.ClientVO;
+import vo.client.ClientVO;
 
 public class ClientDetailUI extends MyWindow implements ActionListener{
 	

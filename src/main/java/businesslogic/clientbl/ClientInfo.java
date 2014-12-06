@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import po.ClientPO;
-import vo.ClientVO;
+import vo.client.ClientVO;
 import businesslogic.accountainitbl.info.ClientInfo_Init;
 import businesslogic.accountbillbl.ClientInfo_AccountBill;
 import businesslogic.purchasebl.ClientInfo_Purchase;
@@ -56,7 +56,8 @@ public class ClientInfo implements ClientInfo_AccountBill, ClientInfo_Sale, Clie
 		return client.getClientData().show();
 	}
 	public ArrayList<ClientVO> getClientVOs(ArrayList<ClientPO> POs) {
-		return client.posToVOs(POs);
+		ClientTrans transPOVO = new ClientTrans();
+		return transPOVO.posToVOs(POs);
 	}
 	
 	/*
