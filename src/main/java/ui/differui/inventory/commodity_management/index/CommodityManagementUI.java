@@ -36,10 +36,10 @@ public class CommodityManagementUI extends MyPanel implements ActionListener{
 	
 	MyJButton button_return, button_add, button_cam, button_add2, button_cam2;
 	
-	public static JButton button_close;
+	public static JButton button_close, button_buildTree;
 	
-	MyTree tree;
 	JScrollPane jsp;
+	MyTree tree;
 	
 	public CommodityManagementUI(){
 		
@@ -147,13 +147,12 @@ public class CommodityManagementUI extends MyPanel implements ActionListener{
 		button_close = new JButton();
 		button_close.addActionListener(this);
 		this.add(button_close);
+		
+		button_buildTree = new JButton();
+		button_buildTree.addActionListener(this);
+		this.add(button_buildTree);
 	}
-	
-	public void buildTheTree(){
-		DefaultMutableTreeNode root = new DefaultMutableTreeNode("所有商品分类"); 
-		tree = new MyTree(root); 
-	}
-	
+		
 	public void actionPerformed(ActionEvent events) {
 	
 		if(events.getSource() == button_add){
@@ -190,6 +189,17 @@ public class CommodityManagementUI extends MyPanel implements ActionListener{
 		
 		if(events.getSource() == button_close){
 			this.setVisible(false);
+		}
+		
+		if(events.getSource() == button_buildTree){
+					
+			jsp.remove(tree);
+			
+			DefaultMutableTreeNode root = new DefaultMutableTreeNode("所有商品分类"); 
+			tree = new MyTree(root); 
+			tree.updateUI();
+			jsp.add(tree);
+			jsp.updateUI();
 		}
 	}
 	

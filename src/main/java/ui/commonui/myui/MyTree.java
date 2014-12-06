@@ -31,17 +31,6 @@ public class MyTree extends JTree{
 		Color foreColor = new Color(158, 213, 220);
 		Color backColor = new Color(46, 52, 101);
 		
-		this.setForeground(foreColor);
-		this.setBackground(backColor);
-		
-		DefaultTreeCellRenderer cellRender = new DefaultTreeCellRenderer();
-		cellRender.setBackgroundNonSelectionColor(foreColor);
-		cellRender.setBackgroundSelectionColor(Color.BLACK);
-		cellRender.setBorderSelectionColor(backColor);
-		cellRender.setTextSelectionColor(Color.WHITE);
-				
-		this.setCellRenderer(cellRender);
-		
 		toggleClickCount = 2;     
         setLayout(null);
         rowHeight = 16;
@@ -57,6 +46,18 @@ public class MyTree extends JTree{
         initTree(root, "00");
         
         setModel(new DefaultTreeModel(root, true));
+        
+        this.setForeground(foreColor);
+		this.setBackground(backColor);
+		
+		DefaultTreeCellRenderer cellRender = new DefaultTreeCellRenderer();
+		cellRender.setBackgroundNonSelectionColor(backColor);
+		cellRender.setBackgroundSelectionColor(Color.BLACK);
+		cellRender.setBorderSelectionColor(Color.WHITE);
+		cellRender.setTextSelectionColor(Color.WHITE);
+		cellRender.setTextNonSelectionColor(Color.WHITE);
+				
+		this.setCellRenderer(cellRender);
 	}
 	
 	CommoditySortController controller;

@@ -16,6 +16,7 @@ import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyPanel;
 import ui.commonui.myui.MyTextField;
 import ui.commonui.warning.WarningFrame;
+import ui.differui.inventory.commodity_management.index.CommodityManagementUI;
 import vo.CommoditySortVO;
 
 public class SortAddingPanel extends MyPanel implements ActionListener{
@@ -32,7 +33,7 @@ public class SortAddingPanel extends MyPanel implements ActionListener{
 		father = note;
 		
 		Color foreColor = new Color(158, 213, 220);
-		Color backColor = new Color(53, 84, 94);
+		Color backColor = new Color(46, 52, 101);
 		
 		//information bar
 		JLabel infoBar = new JLabel("新增商品分类",JLabel.CENTER);
@@ -49,10 +50,10 @@ public class SortAddingPanel extends MyPanel implements ActionListener{
 		word_tip1.setBounds(165, 40 , 85, 25);
 		this.add(word_tip1);
 		
-		JLabel word_tip2 = new JLabel("商品分类属于:         "+ str);
+		JLabel word_tip2 = new JLabel("商品分类属于:  "+ str);
 		word_tip2.setForeground(Color.white);
 		word_tip2.setBackground(new Color(0, 0, 0, 0));
-		word_tip2.setBounds(165, 90 , 200, 25);
+		word_tip2.setBounds(165, 90 , 300, 25);
 		this.add(word_tip2);
 		
 		//TextField
@@ -76,7 +77,6 @@ public class SortAddingPanel extends MyPanel implements ActionListener{
 		if(events.getSource() == button_return){
 			ExitFunctionFrame epf = new ExitFunctionFrame("SortAddingUI");
 			epf.setVisible(true);
-			SortAddingUI.button_close.doClick();
 		}
 		
 		if(events.getSource() == button_confirm){
@@ -106,6 +106,8 @@ public class SortAddingPanel extends MyPanel implements ActionListener{
 		if(rs.equals(ResultMessage.SUCCESS)){
 			WarningFrame wf = new WarningFrame("商品分类添加成功！");
 			wf.setVisible(true);
+			SortAddingUI.button_close.doClick();
+			CommodityManagementUI.button_buildTree.doClick();
 		}else{
 			WarningFrame wf = new WarningFrame("商品分类添加失败！");
 			wf.setVisible(true);

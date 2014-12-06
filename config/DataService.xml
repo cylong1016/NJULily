@@ -42,7 +42,7 @@
 	<Data>
 		<name>CommoditySortData</name>
 		<path>data/CommoditySortList.ser</path>
-		<maxID>04</maxID>
+		<maxID>20</maxID>
 		<IDMaxBit>2</IDMaxBit>
 	</Data>
 	<Data>
