@@ -20,7 +20,7 @@ import dataservice.saledataservice.SaleDataService;
  * @author Zing
  * @version Nov 15, 2014 10:07:38 AM
  */
-public class Sale extends ChangeCommodityItems {
+public class Sale {
 
 	/** 销售单 */
 	private SaleList list;
@@ -31,9 +31,12 @@ public class Sale extends ChangeCommodityItems {
 	private BillType type;
 	/** 单据的ID */
 	private String ID;
+	
+	public ChangeCommodityItems changeItems;
 
 	public Sale() {
 		this.list = new SaleList();
+		changeItems = new ChangeCommodityItems();
 	}
 
 	public SaleDataService getSaleData() {
@@ -138,7 +141,7 @@ public class Sale extends ChangeCommodityItems {
 		double afterPrice = po.getAfterPrice();
 		BillType type = po.getType();
 		BillState state = po.getState();
-		ArrayList<CommodityItemVO> commodities = itemPOToVO(po.getCommodities());
+		ArrayList<CommodityItemVO> commodities = changeItems.itemPOToVO(po.getCommodities());
 		SalesVO vo = new SalesVO(ID, clientID, client, storage, user, salesman, commodities, remark, beforePrice, allowance, voucher, afterPrice, type, state);
 		return vo;
 	}

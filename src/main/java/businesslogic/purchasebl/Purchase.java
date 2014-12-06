@@ -15,7 +15,7 @@ import dataenum.BillType;
 import dataenum.Storage;
 import dataservice.purchasedataservice.PurchaseDataService;
 
-public class Purchase extends ChangeCommodityItems {
+public class Purchase {
 	
 	private PurchaseList list;
 	
@@ -25,8 +25,11 @@ public class Purchase extends ChangeCommodityItems {
 	
 	private BillType type;
 	
+	ChangeCommodityItems changeItems;
+	
 	public Purchase(){
 		this.list = new PurchaseList();
+		changeItems = new ChangeCommodityItems();
 	}
 	
 	public PurchaseDataService getPurData(){
@@ -98,7 +101,7 @@ public class Purchase extends ChangeCommodityItems {
 		String client = po.getClient();
 		String user = po.getUser();
 		Storage storage = po.getStorage();
-		ArrayList<CommodityItemVO> commodities = itemPOToVO(po.getCommodities());
+		ArrayList<CommodityItemVO> commodities = changeItems.itemPOToVO(po.getCommodities());
 		double sumPrice = po.getBeforePrice();
 		BillType type = po.getType();
 		BillState state = po.getState();

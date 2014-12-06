@@ -17,7 +17,7 @@ import dataenum.BillType;
 import dataservice.DataFactoryService;
 import dataservice.inventorydataservice.InventoryDataService;
 
-public class Inventory extends ChangeCommodityItems {
+public class Inventory {
 	
 	private BillList list;
 		
@@ -25,8 +25,10 @@ public class Inventory extends ChangeCommodityItems {
 	
 	private String ID;
 	
+	ChangeCommodityItems changeItems;
+	
 	public Inventory() {
-		
+		changeItems = new ChangeCommodityItems();
 	}
 	/**
 	 * 得到库存数据
@@ -165,7 +167,7 @@ public class Inventory extends ChangeCommodityItems {
 	public InventoryBillVO poToVo(InventoryBillPO po) {
 		String ID = po.getID();
 		BillType billType = po.getBillType();
-		ArrayList<CommodityItemVO> commodities = itemPOToVO(po.getCommodities());
+		ArrayList<CommodityItemVO> commodities = changeItems.itemPOToVO(po.getCommodities());
 		String remark = po.getRemark();
 		BillState state = po.getState();
 		InventoryBillVO vo = new InventoryBillVO(ID, billType, commodities, remark, state);

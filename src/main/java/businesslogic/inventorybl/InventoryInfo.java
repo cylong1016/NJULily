@@ -84,7 +84,7 @@ public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInf
 		String ID = vo.ID;
 		BillType billType = vo.billType;
 		String remark = vo.remark;
-		ArrayList<CommodityItemPO> commodities = inventory.itemsVOtoPO(vo.commodities);
+		ArrayList<CommodityItemPO> commodities = inventory.changeItems.itemsVOtoPO(vo.commodities);
 		InventoryBillPO po = new InventoryBillPO(ID, billType, commodities, remark);
 		return getInventoryData().update(po);
 	}
@@ -134,7 +134,7 @@ public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInf
 		}
 		redVO.commodities = commodities;
 		// 先建立对应的PO
-		InventoryBillPO redPO = new InventoryBillPO(redVO.ID, redVO.billType, inventory.itemsVOtoPO(redVO.commodities), redVO.remark);
+		InventoryBillPO redPO = new InventoryBillPO(redVO.ID, redVO.billType, inventory.changeItems.itemsVOtoPO(redVO.commodities), redVO.remark);
 		if (!isCopy) {
 			getInventoryData().insert(redPO);
 			pass(redVO);

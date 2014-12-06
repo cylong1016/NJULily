@@ -177,7 +177,7 @@ public class SaleInfo extends Info<SalesPO> implements SaleInfo_Inventory, SaleI
 		String remark = vo.remark;
 		double afterPrice = vo.afterPrice;
 		BillType type = vo.type;
-		ArrayList<CommodityItemPO> commodities = sale.itemsVOtoPO(vo.commodities);
+		ArrayList<CommodityItemPO> commodities = sale.changeItems.itemsVOtoPO(vo.commodities);
 		SalesPO po = new SalesPO(ID, clientID, client, salesman, user, storage, commodities, beforePrice, allowance, voucher, remark, afterPrice, type);
 		return getSaleData().update(po);
 	}
@@ -268,7 +268,7 @@ public class SaleInfo extends Info<SalesPO> implements SaleInfo_Inventory, SaleI
 		redVO.voucher = (-redVO.voucher);
 		// 先建立对应的PO
 		SalesPO redPO = new SalesPO(redVO.ID, redVO.clientID, redVO.client, redVO.salesman, redVO.user, redVO.storage, 
-				sale.itemsVOtoPO(redVO.commodities), redVO.beforePrice, redVO.allowance, redVO.voucher, redVO.remark, redVO.afterPrice, redVO.type);
+				sale.changeItems.itemsVOtoPO(redVO.commodities), redVO.beforePrice, redVO.allowance, redVO.voucher, redVO.remark, redVO.afterPrice, redVO.type);
 		if (!isCopy) {
 			// 入账，更改相应数据
 			getSaleData().insert(redPO);

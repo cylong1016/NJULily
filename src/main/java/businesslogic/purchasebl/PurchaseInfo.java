@@ -88,7 +88,7 @@ public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Re
 		String remark = vo.remark;
 		double beforePrice = vo.beforePrice;
 		BillType type = vo.type;
-		ArrayList<CommodityItemPO> commodities = purchase.itemsVOtoPO(vo.commodities);
+		ArrayList<CommodityItemPO> commodities = purchase.changeItems.itemsVOtoPO(vo.commodities);
 		PurchasePO po = new PurchasePO(ID, clientID, client, user, storage, commodities, beforePrice, remark, type);
 		return getPurchaseData().update(po);
 	}
@@ -192,7 +192,7 @@ public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Re
 		redVO.commodities = commodities;
 		// 先建立对应的PO
 		PurchasePO redPO = new PurchasePO(redVO.ID, redVO.clientID, redVO.client, redVO.user, 
-				redVO.storage, purchase.itemsVOtoPO(redVO.commodities), redVO.beforePrice, redVO.remark, redVO.type);
+				redVO.storage, purchase.changeItems.itemsVOtoPO(redVO.commodities), redVO.beforePrice, redVO.remark, redVO.type);
 		if (!isCopy) {
 			getPurchaseData().insert(redPO);
 			pass(redVO);
