@@ -10,6 +10,7 @@ import vo.SalesVO;
 import blservice.saleblservice.SaleInputInfo;
 import businesslogic.clientbl.ClientInfo;
 import businesslogic.common.ChangeCommodityItems;
+import businesslogic.salebl.info.ClientInfo_Sale;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Storage;

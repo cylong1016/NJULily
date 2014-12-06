@@ -9,7 +9,7 @@ import businesslogic.approvalbl.info.SaleInfo_Approval;
 import businesslogic.cashbillbl.CashBillInfo;
 import businesslogic.inventorybl.InventoryInfo;
 import businesslogic.purchasebl.PurchaseInfo;
-import businesslogic.salebl.SaleInfo;
+import businesslogic.salebl.SaleOperate;
 import vo.AccountBillVO;
 import vo.CashBillVO;
 import vo.InventoryBillVO;
@@ -25,7 +25,7 @@ public class Red {
 	}
 
 	public SalesVO addRed(SalesVO vo) {
-		SaleInfo_Approval info = new SaleInfo();
+		SaleInfo_Approval info = new SaleOperate();
 		return info.addRed(vo, isCopy);
 	}
 

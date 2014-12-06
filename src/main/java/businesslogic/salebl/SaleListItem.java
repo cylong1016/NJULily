@@ -1,6 +1,7 @@
 package businesslogic.salebl;
 
 import businesslogic.commoditybl.CommodityInfo;
+import businesslogic.salebl.info.CommodityInfo_Sale;
 
 /**
  * 出货商品清单中要显示

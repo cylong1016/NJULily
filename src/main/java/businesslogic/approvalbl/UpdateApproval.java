@@ -15,12 +15,16 @@ import businesslogic.approvalbl.info.SaleInfo_Approval;
 import businesslogic.cashbillbl.CashBillInfo;
 import businesslogic.inventorybl.InventoryInfo;
 import businesslogic.purchasebl.PurchaseInfo;
-import businesslogic.salebl.SaleInfo;
-
+import businesslogic.salebl.SaleOperate;
+/**
+ * 更新各种单子
+ * @author Zing
+ * @version Dec 6, 2014 4:49:50 PM
+ */
 public class UpdateApproval {
 	
 	public ResultMessage updateBill(SalesVO vo) {
-		SaleInfo_Approval info = new SaleInfo();
+		SaleInfo_Approval info = new SaleOperate();
 		return info.update(vo);
 	}
 	

@@ -1,4 +1,4 @@
-package businesslogic.salebl;
+package businesslogic.salebl.info;
 
 /**
  * 由Client实现，获得Client信息

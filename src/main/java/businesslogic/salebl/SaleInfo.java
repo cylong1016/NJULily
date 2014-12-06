@@ -11,6 +11,8 @@ import businesslogic.common.Info;
 import businesslogic.inventorybl.info.SaleInfo_Inventory;
 import businesslogic.recordbl.info.SaleInfo_Record;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
+import businesslogic.salebl.info.ClientInfo_Sale;
+import businesslogic.salebl.info.CommodityInfo_Sale;
 import po.CommodityItemPO;
 import po.SalesPO;
 import vo.CommodityItemVO;
@@ -21,7 +23,7 @@ import dataenum.Storage;
 import dataservice.TableInfoService;
 import dataservice.saledataservice.SaleDataService;
 
-public class SaleInfo extends Info<SalesPO> implements SaleInfo_Inventory, SaleInfo_Record, ValueObjectInfo_Record<SalesVO>, ValueObject_Approval<SalesVO>, SaleInfo_Approval{
+public class SaleInfo extends Info<SalesPO> implements SaleInfo_Inventory, SaleInfo_Record, ValueObjectInfo_Record<SalesVO>, ValueObject_Approval<SalesVO>{
 	
 	private Sale sale;
 	
@@ -160,28 +162,7 @@ public class SaleInfo extends Info<SalesPO> implements SaleInfo_Inventory, SaleI
 		}
 		return VOs;
 	}
-
-	/**
-	 * 更新销售单
-	 */
-	public ResultMessage update(SalesVO vo) {
-		String ID = vo.ID;
-		String clientID = vo.clientID;
-		String client = vo.client;
-		String salesman = vo.salesman;
-		String user = vo.user;
-		Storage storage = vo.storage;
-		double beforePrice = vo.beforePrice;
-		double allowance = vo.allowance;
-		double voucher = vo.voucher;
-		String remark = vo.remark;
-		double afterPrice = vo.afterPrice;
-		BillType type = vo.type;
-		ArrayList<CommodityItemPO> commodities = sale.changeItems.itemsVOtoPO(vo.commodities);
-		SalesPO po = new SalesPO(ID, clientID, client, salesman, user, storage, commodities, beforePrice, allowance, voucher, remark, afterPrice, type);
-		return getSaleData().update(po);
-	}
-
+	
 	public double getMoney() {
 		if (saleIDs.isEmpty() && backIDs.isEmpty()) {
 			return 0;
@@ -224,60 +205,6 @@ public class SaleInfo extends Info<SalesPO> implements SaleInfo_Inventory, SaleI
 			number += po.getNumber();
 		}
 		return number;
-	}
-
-	/**
-	 * 通过销售单／销售退货单
-	 * 销售单：减少商品库存数量，增加客户应收金额
-	 * 销售退货单：增加商品库存数量，减少客户应收金额
-	 */
-	public void pass(SalesVO vo) {
-		SalesPO po = getSaleData().find(ID);
-		// 更新该单子的状态
-		po.setState(BillState.SUCCESS);
-		getSaleData().update(po);
-		// 更改商品库存数量、最近售价
-		CommodityInfo_Sale commodityInfo = new CommodityInfo();
-		ArrayList<CommodityItemPO> commodities = po.getCommodities();
-		for (CommodityItemPO commodity : commodities) {
-			commodityInfo.changeCommodityInfo(commodity.getID(), commodity.getNumber(), commodity.getPrice(), po.getType());
-		}
-		// 更改客户的应收金额
-		ClientInfo_Sale clientInfo = new ClientInfo();
-		if (po.getType() == BillType.SALE) {
-			clientInfo.changeReceivable(po.getClientID(), po.getAfterPrice());
-		}
-		else {
-			clientInfo.changeReceivable(po.getClientID(), -po.getAfterPrice());
-		}
-	}
-
-	/**
-	 * 红冲／红冲并复制
-	 */
-	public SalesVO addRed(SalesVO vo, boolean isCopy) {
-		SalesVO redVO = vo;
-		// 取负
-		ArrayList<CommodityItemVO> commodities = redVO.commodities;
-		for (int i = 0; i < commodities.size(); i++) {
-			int number = -commodities.get(i).number;
-			commodities.get(i).number = number;
-		}
-		redVO.commodities = commodities;
-		redVO.allowance = (-redVO.allowance);
-		redVO.voucher = (-redVO.voucher);
-		// 先建立对应的PO
-		SalesPO redPO = new SalesPO(redVO.ID, redVO.clientID, redVO.client, redVO.salesman, redVO.user, redVO.storage, 
-				sale.changeItems.itemsVOtoPO(redVO.commodities), redVO.beforePrice, redVO.allowance, redVO.voucher, redVO.remark, redVO.afterPrice, redVO.type);
-		if (!isCopy) {
-			// 入账，更改相应数据
-			getSaleData().insert(redPO);
-			pass(redVO);		
-		}
-		else {
-			// TODO 保存为草稿状态
-		}
-		return redVO;
 	}
 	
 

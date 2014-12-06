@@ -14,7 +14,7 @@ import businesslogic.approvalbl.info.SaleInfo_Approval;
 import businesslogic.cashbillbl.CashBillInfo;
 import businesslogic.inventorybl.InventoryInfo;
 import businesslogic.purchasebl.PurchaseInfo;
-import businesslogic.salebl.SaleInfo;
+import businesslogic.salebl.SaleOperate;
 
 public class PassApproval {
 	
@@ -28,7 +28,7 @@ public class PassApproval {
 	}
 
 	public void passBill(SalesVO vo) {
-		 SaleInfo_Approval info = new SaleInfo();
+		 SaleInfo_Approval info = new SaleOperate();
 		 info.pass(vo);
 	}
 

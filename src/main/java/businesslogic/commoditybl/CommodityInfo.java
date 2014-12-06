@@ -9,7 +9,7 @@ import dataservice.commoditydataservice.CommodityDataService;
 import businesslogic.accountainitbl.info.CommodityInfo_Init;
 import businesslogic.inventorybl.info.CommodityInfo_Inventory;
 import businesslogic.promotionbl.CommodityInfo_Promotion;
-import businesslogic.salebl.CommodityInfo_Sale;
+import businesslogic.salebl.info.CommodityInfo_Sale;
 
 public class CommodityInfo implements CommodityInfo_Sale, businesslogic.purchasebl.CommodityInfo_Purchase, CommodityInfo_Inventory, CommodityInfo_Promotion, CommodityInfo_Init{
 	

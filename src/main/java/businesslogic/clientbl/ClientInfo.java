@@ -8,7 +8,7 @@ import vo.ClientVO;
 import businesslogic.accountainitbl.info.ClientInfo_Init;
 import businesslogic.accountbillbl.ClientInfo_AccountBill;
 import businesslogic.purchasebl.ClientInfo_Purchase;
-import businesslogic.salebl.ClientInfo_Sale;
+import businesslogic.salebl.info.ClientInfo_Sale;
 
 /**
  * 共外部获得Client信息

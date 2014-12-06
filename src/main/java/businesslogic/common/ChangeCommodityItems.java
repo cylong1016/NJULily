@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import po.CommodityItemPO;
 import vo.CommodityItemVO;
 import businesslogic.commoditybl.CommodityInfo;
-import businesslogic.salebl.CommodityInfo_Sale;
+import businesslogic.salebl.info.CommodityInfo_Sale;
 
 public class ChangeCommodityItems {
 

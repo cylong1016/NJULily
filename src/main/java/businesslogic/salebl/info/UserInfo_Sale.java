@@ -1,4 +1,4 @@
-package businesslogic.salebl;
+package businesslogic.salebl.info;
 
 public interface UserInfo_Sale {
 	
