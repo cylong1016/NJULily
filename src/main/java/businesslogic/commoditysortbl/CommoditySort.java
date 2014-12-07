@@ -2,13 +2,14 @@ package businesslogic.commoditysortbl;
 
 import java.util.ArrayList;
 
+import blservice.commoditysortblservice.CommoditySortBLService;
 import message.ResultMessage;
 import po.CommoditySortPO;
 import server.data.commoditysortdata.CommoditySortData;
 import vo.commodity.CommoditySortVO;
 import dataservice.commoditysortdataservice.CommoditySortDataService;
 
-public class CommoditySort {
+public class CommoditySort implements CommoditySortBLService{
 	
 	private CommoditySortDataService commoditySortData;
 	
@@ -77,6 +78,7 @@ public class CommoditySort {
 	public ResultMessage addCommoSort(String sortName, String fatherID) {
 		
 		//这里加一行就万事大吉了
+		//不对啊，是你那边要获得好吗！是你直接调用好吗！
 		getID(fatherID);
 		
 		if (fatherID == null) {
@@ -109,8 +111,10 @@ public class CommoditySort {
 	 */
 	public ResultMessage deleteCommoSort(String ID) {
 		po = commoditySortData.find(ID);
-		if (!po.getCommoditiesID().isEmpty()) {
-			return ResultMessage.FAILURE;
+		if (po.getCommoditiesID() != null) {
+			if (!po.getCommoditiesID().isEmpty()) {
+				return ResultMessage.FAILURE;
+			}
 		}	
 		return commoditySortData.delete(ID);
 	}
