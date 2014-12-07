@@ -15,7 +15,7 @@ import ui.commonui.myui.MyPanel;
 import ui.commonui.warning.WarningFrame;
 import ui.differui.inventory.commodity_management.index.CommodityManagementUI;
 import vo.commodity.CommoditySortVO;
-import businesslogic.commoditysortbl.CommoditySortController;
+import businesslogic.commoditysortbl.CommoditySort;
 
 public class SortDelPanel extends MyPanel implements ActionListener{
 
@@ -79,7 +79,7 @@ public class SortDelPanel extends MyPanel implements ActionListener{
 	}	
 	
 	public static void deleteSort(){
-		CommoditySortController controller = new CommoditySortController();
+		CommoditySort controller = new CommoditySort();
 		
 		ArrayList<CommoditySortVO> csvo = controller.show();
 		
@@ -94,6 +94,7 @@ public class SortDelPanel extends MyPanel implements ActionListener{
 		ResultMessage rs = controller.deleteCommoSort(ID);
 		
 		if(rs.equals(ResultMessage.SUCCESS)){
+			SortDelUI.button_close.doClick();
 			CommodityManagementUI.button_buildTree.doClick();
 		}else{
 			WarningFrame wf = new WarningFrame("商品分类无法删除！");

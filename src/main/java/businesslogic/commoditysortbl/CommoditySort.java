@@ -79,6 +79,8 @@ public class CommoditySort implements CommoditySortBLService{
 		
 		//这里加一行就万事大吉了
 		//不对啊，是你那边要获得好吗！是你直接调用好吗！
+		//不对啊！写到一起肯定好！呗呗儿的好儿
+		
 		getID(fatherID);
 		
 		if (fatherID == null) {
