@@ -2,21 +2,14 @@ package businesslogic.salebl;
 
 import java.util.ArrayList;
 
-import message.ResultMessage;
-import businesslogic.approvalbl.info.SaleInfo_Approval;
 import businesslogic.approvalbl.info.ValueObject_Approval;
-import businesslogic.clientbl.ClientInfo;
-import businesslogic.commoditybl.CommodityInfo;
 import businesslogic.common.Info;
 import businesslogic.inventorybl.info.SaleInfo_Inventory;
 import businesslogic.recordbl.info.SaleInfo_Record;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
-import businesslogic.salebl.info.ClientInfo_Sale;
-import businesslogic.salebl.info.CommodityInfo_Sale;
 import po.CommodityItemPO;
 import po.SalesPO;
-import vo.CommodityItemVO;
-import vo.SalesVO;
+import vo.sale.SalesVO;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Storage;
@@ -72,7 +65,8 @@ public class SaleInfo extends Info<SalesPO> implements SaleInfo_Inventory, SaleI
 	}
 	
 	public SalesVO find(String ID) {
-		SalesVO vo = sale.poToVo(getSaleData().find(ID));
+		SaleTrans transPOVO = new SaleTrans();
+		SalesVO vo = transPOVO.poToVo(getSaleData().find(ID));
 		return vo;
 	}
 
@@ -148,6 +142,7 @@ public class SaleInfo extends Info<SalesPO> implements SaleInfo_Inventory, SaleI
 	 * 查找需要审批的单子
 	 */
 	public ArrayList<SalesVO> findApproval() {
+		SaleTrans transPOVO = new SaleTrans();
 		ArrayList<SalesPO> POs = getSaleData().show();
 		ArrayList<SalesPO> approvalPO = new ArrayList<SalesPO>();
 		for (SalesPO po : POs) {
@@ -157,7 +152,7 @@ public class SaleInfo extends Info<SalesPO> implements SaleInfo_Inventory, SaleI
 		}
 		ArrayList<SalesVO> VOs = new ArrayList<SalesVO>();
 		for (SalesPO po : approvalPO) {
-			SalesVO vo = sale.poToVo(po);
+			SalesVO vo = transPOVO.poToVo(po);
 			VOs.add(vo);
 		}
 		return VOs;

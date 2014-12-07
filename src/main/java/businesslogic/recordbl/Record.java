@@ -15,8 +15,8 @@ import vo.CashBillVO;
 import vo.InventoryBillVO;
 import vo.PurchaseVO;
 import vo.SaleDetailVO;
-import vo.SalesVO;
 import vo.ValueObject;
+import vo.sale.SalesVO;
 
 public class Record {
 	

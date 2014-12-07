@@ -2,6 +2,8 @@ package vo;
 
 import java.util.ArrayList;
 
+import vo.commodity.CheckCommodityItemVO;
+
 /**
  * 库存盘点
  * 盘点的是当天的库存快照，包括当天的各种商品的名称，型号，库存数量，库存均价，批次，批号， 并且显示行号。

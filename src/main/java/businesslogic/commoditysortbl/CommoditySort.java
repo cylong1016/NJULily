@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import message.ResultMessage;
 import po.CommoditySortPO;
 import server.data.commoditysortdata.CommoditySortData;
-import vo.CommoditySortVO;
+import vo.commodity.CommoditySortVO;
 import dataservice.commoditysortdataservice.CommoditySortDataService;
 
 public class CommoditySort {

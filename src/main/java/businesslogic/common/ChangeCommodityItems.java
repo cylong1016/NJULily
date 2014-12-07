@@ -3,7 +3,7 @@ package businesslogic.common;
 import java.util.ArrayList;
 
 import po.CommodityItemPO;
-import vo.CommodityItemVO;
+import vo.commodity.CommodityItemVO;
 import businesslogic.commoditybl.CommodityInfo;
 import businesslogic.salebl.info.CommodityInfo_Sale;
 

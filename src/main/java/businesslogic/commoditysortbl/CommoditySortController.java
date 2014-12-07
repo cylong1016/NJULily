@@ -3,7 +3,7 @@ package businesslogic.commoditysortbl;
 import java.util.ArrayList;
 
 import message.ResultMessage;
-import vo.CommoditySortVO;
+import vo.commodity.CommoditySortVO;
 import blservice.commoditysortblservice.CommoditySortBLService;
 
 /**

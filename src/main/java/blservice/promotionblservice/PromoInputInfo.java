@@ -3,7 +3,7 @@ package blservice.promotionblservice;
 
 import java.util.ArrayList;
 
-import vo.CommodityItemVO;
+import vo.commodity.CommodityItemVO;
 import dataenum.ClientLevel;
 
 /**

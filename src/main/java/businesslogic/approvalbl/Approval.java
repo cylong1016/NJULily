@@ -19,8 +19,8 @@ import vo.ApprovalVO;
 import vo.CashBillVO;
 import vo.InventoryBillVO;
 import vo.PurchaseVO;
-import vo.SalesVO;
 import vo.ValueObject;
+import vo.sale.SalesVO;
 
 /**
  * 审批

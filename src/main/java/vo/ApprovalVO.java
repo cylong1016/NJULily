@@ -2,6 +2,8 @@ package vo;
 
 import java.util.ArrayList;
 
+import vo.sale.SalesVO;
+
 public class ApprovalVO {
 	
 	public ValueObject vo;

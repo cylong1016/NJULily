@@ -17,7 +17,7 @@ import ui.commonui.myui.MyPanel;
 import ui.commonui.myui.MyTextField;
 import ui.commonui.warning.WarningFrame;
 import ui.differui.inventory.commodity_management.index.CommodityManagementUI;
-import vo.CommoditySortVO;
+import vo.commodity.CommoditySortVO;
 
 public class SortAddingPanel extends MyPanel implements ActionListener{
 

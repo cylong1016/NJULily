@@ -1,4 +1,6 @@
-package vo;
+package vo.commodity;
+
+import vo.ValueObject;
 
 /**
  * 商品条目值对象

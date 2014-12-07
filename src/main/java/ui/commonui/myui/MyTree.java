@@ -12,7 +12,7 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.DefaultTreeSelectionModel;
 
-import vo.CommoditySortVO;
+import vo.commodity.CommoditySortVO;
 import businesslogic.commoditysortbl.CommoditySortController;
 
 

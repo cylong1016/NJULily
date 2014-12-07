@@ -14,7 +14,7 @@ import vo.AccountBillVO;
 import vo.CashBillVO;
 import vo.InventoryBillVO;
 import vo.PurchaseVO;
-import vo.SalesVO;
+import vo.sale.SalesVO;
 
 public class Red {
 	

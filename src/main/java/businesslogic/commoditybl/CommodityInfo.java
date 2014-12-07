@@ -3,7 +3,7 @@ package businesslogic.commoditybl;
 import java.util.ArrayList;
 
 import po.CommodityPO;
-import vo.CommodityVO;
+import vo.commodity.CommodityVO;
 import dataenum.BillType;
 import dataservice.commoditydataservice.CommodityDataService;
 import businesslogic.accountainitbl.info.CommodityInfo_Init;

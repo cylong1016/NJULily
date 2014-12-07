@@ -1,6 +1,8 @@
-package vo;
+package vo.commodity;
 
 import java.util.ArrayList;
+
+import vo.ValueObject;
 
 /**
  * 商品分类值对象

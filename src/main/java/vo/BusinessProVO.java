@@ -2,6 +2,8 @@ package vo;
 
 import java.util.ArrayList;
 
+import vo.sale.SalesVO;
+
 /**
  * 经营历程表
  * 查看一段时间里的所有单据，单据分为：

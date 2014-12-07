@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import vo.CheckCommodityItemVO;
+import vo.commodity.CheckCommodityItemVO;
 import businesslogic.commoditybl.CommodityInfo;
 import businesslogic.inventorybl.info.CommodityInfo_Inventory;
 

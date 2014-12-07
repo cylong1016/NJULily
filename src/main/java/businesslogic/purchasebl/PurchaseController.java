@@ -3,8 +3,8 @@ package businesslogic.purchasebl;
 import java.util.ArrayList;
 
 import message.ResultMessage;
-import vo.CommodityItemVO;
 import vo.PurchaseVO;
+import vo.commodity.CommodityItemVO;
 import dataenum.BillType;
 import blservice.purchaseblservice.PurInputInfo;
 import blservice.purchaseblservice.PurchaseBLService;

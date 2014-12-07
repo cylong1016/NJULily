@@ -1,4 +1,4 @@
-package vo;
+package vo.commodity;
 
 /**
  * 库存盘点的商品条目

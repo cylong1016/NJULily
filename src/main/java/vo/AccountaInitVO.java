@@ -3,6 +3,8 @@ package vo;
 import java.util.ArrayList;
 
 import vo.client.ClientVO;
+import vo.commodity.CommoditySortVO;
+import vo.commodity.CommodityVO;
 
 /**
  * 期初建账值对象

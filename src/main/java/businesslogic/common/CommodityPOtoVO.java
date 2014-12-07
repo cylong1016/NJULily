@@ -3,7 +3,7 @@ package businesslogic.common;
 import java.util.ArrayList;
 
 import po.CommodityPO;
-import vo.CommodityVO;
+import vo.commodity.CommodityVO;
 
 public class CommodityPOtoVO {
 	public ArrayList<CommodityVO> itemPOToVO(ArrayList<CommodityPO> itemsPO) {

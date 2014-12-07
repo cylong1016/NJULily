@@ -1,6 +1,8 @@
 package vo;
 
 import java.util.ArrayList;
+
+import vo.commodity.CommodityItemVO;
 import dataenum.ClientLevel;
 import dataenum.PromotionType;
 

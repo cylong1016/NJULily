@@ -3,7 +3,7 @@ package businesslogic.accountainitbl.info;
 import java.util.ArrayList;
 
 import po.CommodityPO;
-import vo.CommodityVO;
+import vo.commodity.CommodityVO;
 
 public interface CommodityInfo_Init {
 	

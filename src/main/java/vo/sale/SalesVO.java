@@ -1,7 +1,9 @@
-package vo;
+package vo.sale;
 
 import java.util.ArrayList;
 
+import vo.ValueObject;
+import vo.commodity.CommodityItemVO;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Storage;

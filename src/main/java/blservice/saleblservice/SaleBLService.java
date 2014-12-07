@@ -3,8 +3,9 @@ package blservice.saleblservice;
 import java.util.ArrayList;
 
 import message.ResultMessage;
-import vo.CommodityItemVO;
-import vo.SalesVO;
+import vo.commodity.CommodityItemVO;
+import vo.sale.SalesVO;
+import vo.sale.saleAddVO;
 import dataenum.BillType;
 
 /**
@@ -55,7 +56,7 @@ public interface SaleBLService {
 	 * @author cylong
 	 * @version 2014年11月28日 下午7:40:43
 	 */
-	public ResultMessage submit(SaleInputInfo inputInfo);
+	public ResultMessage submit(saleAddVO inputInfo);
 
 	/**
 	 * 创建销售（销售退货）单时需要的除商品以外的数据（变成草稿状态）
@@ -65,6 +66,6 @@ public interface SaleBLService {
 	 * @author cylong
 	 * @version 2014年11月28日 下午7:40:24
 	 */
-	public ResultMessage save(SaleInputInfo inputInfo);
+	public ResultMessage save(saleAddVO inputInfo);
 
 }

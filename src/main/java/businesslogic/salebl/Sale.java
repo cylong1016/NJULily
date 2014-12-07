@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import message.ResultMessage;
 import po.SalesPO;
 import server.data.saledata.SaleData;
-import vo.CommodityItemVO;
-import vo.SalesVO;
+import vo.commodity.CommodityItemVO;
+import vo.sale.SalesVO;
+import vo.sale.saleAddVO;
+import blservice.saleblservice.SaleBLService;
 import blservice.saleblservice.SaleInputInfo;
 import businesslogic.clientbl.ClientInfo;
 import businesslogic.common.ChangeCommodityItems;
@@ -21,7 +23,7 @@ import dataservice.saledataservice.SaleDataService;
  * @author Zing
  * @version Nov 15, 2014 10:07:38 AM
  */
-public class Sale {
+public class Sale implements SaleBLService{
 
 	/** 销售单 */
 	private SaleList list;
@@ -32,6 +34,8 @@ public class Sale {
 	private BillType type;
 	/** 单据的ID */
 	private String ID;
+	
+	SaleTrans transPOVO;
 	
 	public ChangeCommodityItems changeItems;
 
@@ -85,12 +89,12 @@ public class Sale {
 	 * @version 2014年11月28日 下午8:36:47
 	 */
 	public ArrayList<SalesVO> show(BillType type) {
+		transPOVO = new SaleTrans();
 		ArrayList<SalesVO> billsVO = new ArrayList<SalesVO>();
 		SaleDataService saleData = getSaleData();
 		ArrayList<SalesPO> billsPO = saleData.show();
-		for(int i = 0; i < billsPO.size(); i++) {
-			SalesPO po = billsPO.get(i);
-			SalesVO vo = poToVo(po);
+		for(SalesPO po : billsPO) {
+			SalesVO vo = transPOVO.poToVo(po);
 			billsVO.add(vo);
 		}
 		return billsVO;
@@ -102,7 +106,7 @@ public class Sale {
 	 * @author Zing
 	 * @version 2014年11月28日  下午9:13:52
 	 */
-	public ResultMessage submit(SaleInputInfo inputInfo) {
+	public ResultMessage submit(saleAddVO inputInfo) {
 		setInputInfo(inputInfo);
 		SalesPO po = buildSales();
 		return getSaleData().insert(po);
@@ -114,38 +118,13 @@ public class Sale {
 	 * @author cylong
 	 * @version 2014年11月28日  下午9:14:47
 	 */
-	public ResultMessage save(SaleInputInfo inputInfo) {
+	public ResultMessage save(saleAddVO inputInfo) {
 		setInputInfo(inputInfo);
 		// SalesPO po = buildSales();
 		// TODO 保存在本地
 		return ResultMessage.SUCCESS;
 	}
 
-	/**
-	 * 将销售（销售退货）单的PO转化成VO
-	 * @param po
-	 * @return SalesVO
-	 * @author cylong
-	 * @version 2014年11月28日  下午9:12:11
-	 */
-	public SalesVO poToVo(SalesPO po) {
-		String ID = po.getID();
-		String clientID = po.getClientID();
-		String client = po.getClient();
-		Storage storage = po.getStorage();
-		String salesman = po.getSalesman();
-		String user = po.getUser();
-		String remark = po.getRemark();
-		double beforePrice = po.getBeforePrice();
-		double allowance = po.getAllowance();
-		double voucher = po.getVoucher();
-		double afterPrice = po.getAfterPrice();
-		BillType type = po.getType();
-		BillState state = po.getState();
-		ArrayList<CommodityItemVO> commodities = changeItems.itemPOToVO(po.getCommodities());
-		SalesVO vo = new SalesVO(ID, clientID, client, storage, user, salesman, commodities, remark, beforePrice, allowance, voucher, afterPrice, type, state);
-		return vo;
-	}
 	
 	/**
 	 * 建立销售单
@@ -169,7 +148,7 @@ public class Sale {
 	 * @author Zing
 	 * @version Dec 3, 2014 2:42:17 PM
 	 */
-	private void setInputInfo(SaleInputInfo inputInfo) {
+	private void setInputInfo(saleAddVO inputInfo) {
 		list.setClientID(inputInfo.clientID);
 		list.setStorage(inputInfo.storage);
 		list.setAllowance(inputInfo.allowance);

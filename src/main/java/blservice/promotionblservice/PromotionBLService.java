@@ -1,11 +1,12 @@
 package blservice.promotionblservice;
 
 import java.util.ArrayList;
+
 import message.ResultMessage;
 import dataenum.PromotionType;
-import vo.CommodityItemVO;
 import vo.InventoryBillVO;
 import vo.PromotionVO;
+import vo.commodity.CommodityItemVO;
 
 /**
  * 负责实现销售策略界面所需要的服务

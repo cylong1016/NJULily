@@ -1,8 +1,10 @@
 package blservice.commodityblservice;
 
 import java.util.ArrayList;
+
 import dataenum.FindTypeCommo;
-import vo.CommodityVO;
+import vo.commodity.CommodityAddVO;
+import vo.commodity.CommodityVO;
 import message.ResultMessage;
 
 /**
@@ -53,7 +55,7 @@ public interface CommodityBLService {
 	 * @author Zing
 	 * @version Nov 30, 2014 10:37:08 AM
 	 */
-	public ResultMessage addCommo(CommodityInputInfo info);
+	public ResultMessage addCommo(CommodityAddVO addVO);
 
 	/**
 	 * 删除商品
@@ -65,13 +67,12 @@ public interface CommodityBLService {
 	/**
 	 * 更改商品信息
 	 * @param sortID
-	 * @param ID
 	 * @param info
 	 * @return
 	 * @author Zing
 	 * @version Nov 30, 2014 10:37:46 AM
 	 */
-	public ResultMessage updCommo(String ID, CommodityInputInfo info);
+	public ResultMessage updCommo(CommodityAddVO updateVO);
 
 	/**
 	 * 查找商品

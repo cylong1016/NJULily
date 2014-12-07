@@ -1,10 +1,11 @@
 package businesslogic.promotionbl;
 
 import java.util.ArrayList;
+
 import message.ResultMessage;
-import vo.CommodityItemVO;
 import vo.InventoryBillVO;
 import vo.PromotionVO;
+import vo.commodity.CommodityItemVO;
 import dataenum.PromotionType;
 import blservice.promotionblservice.PromoInputInfo;
 import blservice.promotionblservice.PromotionBLService;

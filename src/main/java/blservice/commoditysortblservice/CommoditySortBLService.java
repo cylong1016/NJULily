@@ -3,7 +3,7 @@ package blservice.commoditysortblservice;
 import java.util.ArrayList;
 
 import message.ResultMessage;
-import vo.CommoditySortVO;
+import vo.commodity.CommoditySortVO;
 
 public interface CommoditySortBLService {
 	

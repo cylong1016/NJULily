@@ -5,7 +5,7 @@ import vo.AccountBillVO;
 import vo.CashBillVO;
 import vo.InventoryBillVO;
 import vo.PurchaseVO;
-import vo.SalesVO;
+import vo.sale.SalesVO;
 import businesslogic.accountbillbl.AccountBillInfo;
 import businesslogic.approvalbl.info.AccountBill_Approval;
 import businesslogic.approvalbl.info.CashBillInfo_Approval;

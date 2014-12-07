@@ -1,6 +1,6 @@
 package businesslogic.approvalbl.info;
 
-import vo.SalesVO;
+import vo.sale.SalesVO;
 import message.ResultMessage;
 
 public interface SaleInfo_Approval {
