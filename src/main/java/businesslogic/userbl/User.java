@@ -8,11 +8,12 @@ import server.data.userdata.UserData;
 import server.io.DefineList;
 import vo.UserVO;
 import blservice.userblservice.LoginInfo;
+import blservice.userblservice.UserBLService;
 import dataenum.UserIdentity;
 import dataservice.userdataservice.AdminInfo;
 import dataservice.userdataservice.UserDataService;
 
-public class User {
+public class User implements UserBLService{
 
 	private UserDataService userData;
 	private DefineList<UserPO> currentUser;	// 保存用户名

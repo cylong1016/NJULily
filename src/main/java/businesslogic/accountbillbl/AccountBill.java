@@ -9,6 +9,7 @@ import po.AccountBillPO;
 import server.data.accountbilldata.AccountBillData;
 import vo.AccountBillItemVO;
 import vo.AccountBillVO;
+import blservice.accountbillblservice.AccountBillBLService;
 import businesslogic.accountbl.AccountInfo;
 import businesslogic.clientbl.ClientInfo;
 import businesslogic.userbl.UserInfo;
@@ -16,7 +17,7 @@ import dataenum.BillState;
 import dataenum.BillType;
 import dataservice.accountbilldataservice.AccountBillDataService;
 
-public class AccountBill {
+public class AccountBill implements AccountBillBLService{
 
 	/** 编号 */
 	private String ID;

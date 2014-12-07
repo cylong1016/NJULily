@@ -10,6 +10,7 @@ import vo.InventoryBillVO;
 import vo.PromotionVO;
 import vo.commodity.CommodityItemVO;
 import blservice.promotionblservice.PromoInputInfo;
+import blservice.promotionblservice.PromotionBLService;
 import businesslogic.inventorybl.InventoryInfo;
 import dataenum.PromotionType;
 import dataservice.promotiondataservice.PromotionDataService;
@@ -22,7 +23,7 @@ import dataservice.promotiondataservice.PromotionDataService;
  * @author Zing
  * @version Nov 30, 2014 12:53:47 AM
  */
-public class Promotion {
+public class Promotion implements PromotionBLService{
 
 	/** 策略条目 */
 	private PromotionList list;

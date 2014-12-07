@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import dataenum.BillType;
+import blservice.recordblservice.RecordBLService;
 import blservice.recordblservice.RecordInputInfo;
 import message.ResultMessage;
 import vo.AccountBillVO;
@@ -18,7 +19,7 @@ import vo.SaleDetailVO;
 import vo.ValueObject;
 import vo.sale.SalesVO;
 
-public class Record {
+public class Record implements RecordBLService{
 	
 	/** 起始时间 */
 	public String beginDate;

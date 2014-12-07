@@ -10,6 +10,7 @@ import vo.InventoryBillVO;
 import vo.InventoryCheckVO;
 import vo.InventoryViewVO;
 import vo.commodity.CommodityItemVO;
+import blservice.inventoryblservice.InventoryBLService;
 import businesslogic.common.ChangeCommodityItems;
 import config.RMI;
 import dataenum.BillState;
@@ -17,7 +18,7 @@ import dataenum.BillType;
 import dataservice.DataFactoryService;
 import dataservice.inventorydataservice.InventoryDataService;
 
-public class Inventory {
+public class Inventory implements InventoryBLService{
 	
 	private BillList list;
 		

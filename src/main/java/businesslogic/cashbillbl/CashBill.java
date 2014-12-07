@@ -2,6 +2,7 @@ package businesslogic.cashbillbl;
 
 import java.util.ArrayList;
 
+import blservice.cashbillblservice.CashBillBLService;
 import message.ResultMessage;
 import po.CashBillPO;
 import po.CashItemPO;
@@ -20,7 +21,7 @@ import dataservice.cashbilldataservice.CashBillDataService;
  * @author Zing
  * @version Nov 27, 201411:13:32 PM
  */
-public class CashBill {
+public class CashBill implements CashBillBLService{
 	
 	private String ID;
 	

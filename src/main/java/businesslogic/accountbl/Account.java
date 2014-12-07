@@ -2,6 +2,7 @@ package businesslogic.accountbl;
 
 import java.util.ArrayList;
 
+import blservice.accountblservice.AccountBLService;
 import message.ResultMessage;
 import po.AccountPO;
 import server.data.accountdata.AccountData;
@@ -9,7 +10,7 @@ import vo.AccountVO;
 import dataenum.FindTypeAccount;
 import dataservice.accountdataservice.AccountDataService;
 
-public class Account {
+public class Account implements AccountBLService{
 
 	private AccountDataService accountData;
 

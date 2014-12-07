@@ -8,6 +8,7 @@ import server.data.purchasedata.PurchaseData;
 import vo.PurchaseVO;
 import vo.commodity.CommodityItemVO;
 import blservice.purchaseblservice.PurInputInfo;
+import blservice.purchaseblservice.PurchaseBLService;
 import businesslogic.clientbl.ClientInfo;
 import businesslogic.common.ChangeCommodityItems;
 import dataenum.BillState;
@@ -15,7 +16,7 @@ import dataenum.BillType;
 import dataenum.Storage;
 import dataservice.purchasedataservice.PurchaseDataService;
 
-public class Purchase {
+public class Purchase implements PurchaseBLService{
 	
 	private PurchaseList list;
 	

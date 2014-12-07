@@ -7,6 +7,7 @@ import config.RMI;
 import dataenum.BillType;
 import dataservice.DataFactoryService;
 import dataservice.approvaldataservice.ApprovalDataService;
+import blservice.approvalblservice.ApprovalBLService;
 import businesslogic.accountbillbl.AccountBillInfo;
 import businesslogic.approvalbl.info.ValueObject_Approval;
 import businesslogic.cashbillbl.CashBillInfo;
@@ -27,7 +28,7 @@ import vo.sale.SalesVO;
  * @author Zing
  * @version Dec 2, 2014 11:48:42 PM
  */
-public class Approval {
+public class Approval implements ApprovalBLService{
 
 	private ApprovalDataService approvalData;
 

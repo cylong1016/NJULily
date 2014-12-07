@@ -14,6 +14,7 @@ import vo.AccountaInitVO;
 import vo.client.ClientVO;
 import vo.commodity.CommoditySortVO;
 import vo.commodity.CommodityVO;
+import blservice.accountainitblservice.AccountainitBLService;
 import businesslogic.accountainitbl.info.AccountInfo_Init;
 import businesslogic.accountainitbl.info.ClientInfo_Init;
 import businesslogic.accountainitbl.info.CommodityInfo_Init;
@@ -34,7 +35,7 @@ import dataservice.accountinitdataservice.AccountaInitDataService;
  * @author Zing
  * @version Dec 2, 2014 7:09:40 PM
  */
-public class Accountainit {
+public class Accountainit implements AccountainitBLService{
 	
 	private AccountaInitDataService accountaInitData;
 	
