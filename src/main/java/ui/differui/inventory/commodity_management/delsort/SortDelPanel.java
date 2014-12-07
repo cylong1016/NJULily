@@ -1,4 +1,4 @@
-package ui.differui.inventory.commodity_management.addsort;
+package ui.differui.inventory.commodity_management.delsort;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -9,34 +9,32 @@ import javax.swing.JLabel;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import message.ResultMessage;
-import businesslogic.commoditysortbl.CommoditySortController;
-import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.exitfunction.ExitFunctionFrame;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyPanel;
-import ui.commonui.myui.MyTextField;
 import ui.commonui.warning.WarningFrame;
 import ui.differui.inventory.commodity_management.index.CommodityManagementUI;
 import vo.commodity.CommoditySortVO;
+import businesslogic.commoditysortbl.CommoditySortController;
 
-public class SortAddingPanel extends MyPanel implements ActionListener{
+public class SortDelPanel extends MyPanel implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	
 	MyJButton button_return, button_confirm;
-	public static MyTextField tf_name;
-	static DefaultMutableTreeNode father;
+	static DefaultMutableTreeNode delNode;
+	static String str;
 	
-	public SortAddingPanel(DefaultMutableTreeNode note){
+	public SortDelPanel(DefaultMutableTreeNode note){
 		
-		String str = note.toString();
-		father = note;
+		str = note.toString();
+		delNode = note;
 		
 		Color foreColor = new Color(158, 213, 220);
 		Color backColor = new Color(46, 52, 101);
 		
 		//information bar
-		JLabel infoBar = new JLabel("新增商品分类",JLabel.CENTER);
+		JLabel infoBar = new JLabel("删除商品分类",JLabel.CENTER);
 		infoBar.setBounds(0, 0 , 600, 20);
 		infoBar.setOpaque(true);
 		infoBar.setForeground(foreColor);
@@ -44,29 +42,25 @@ public class SortAddingPanel extends MyPanel implements ActionListener{
 		this.add(infoBar);
 		
 		//texts
-		JLabel word_tip1 = new JLabel("商品分类名称:");
+		JLabel word_tip1 = new JLabel("商品分类名称:  " + str);
 		word_tip1.setForeground(Color.white);
 		word_tip1.setBackground(new Color(0, 0, 0, 0));
-		word_tip1.setBounds(165, 40 , 85, 25);
+		word_tip1.setBounds(165, 40 , 300, 25);
 		this.add(word_tip1);
 		
-		JLabel word_tip2 = new JLabel("商品分类属于:    "+ str);
+		JLabel word_tip2 = new JLabel("*警告！一旦删除将无法恢复");
 		word_tip2.setForeground(Color.white);
 		word_tip2.setBackground(new Color(0, 0, 0, 0));
 		word_tip2.setBounds(165, 90 , 300, 25);
 		this.add(word_tip2);
-		
-		//TextField
-		tf_name = new MyTextField(260, 42, 140, 20);
-		this.add(tf_name);
-		
+				
 		//buttons
 		button_return = new MyJButton("取消");
 		button_return.setBounds(475, 145, 100, 20);
 		button_return.addActionListener(this);
 		this.add(button_return);
 
-		button_confirm = new MyJButton("确认添加");
+		button_confirm = new MyJButton("确认删除");
 		button_confirm.setBounds(475, 115, 100, 20);
 		button_confirm.addActionListener(this);
 		this.add(button_confirm);
@@ -75,38 +69,34 @@ public class SortAddingPanel extends MyPanel implements ActionListener{
 	public void actionPerformed(ActionEvent events) {
 		
 		if(events.getSource() == button_return){
-			ExitFunctionFrame epf = new ExitFunctionFrame("SortAddingUI");
+			ExitFunctionFrame epf = new ExitFunctionFrame("SortDelUI");
 			epf.setVisible(true);
 		}
 		
 		if(events.getSource() == button_confirm){
-			ExitFinishFrame eff = new ExitFinishFrame("adding a sort");
-			eff.setVisible(true);
+			deleteSort();
 		}	
 	}	
 	
-	public static void addingConfirm(){
+	public static void deleteSort(){
 		CommoditySortController controller = new CommoditySortController();
 		
-		ResultMessage rs = null;
+		ArrayList<CommoditySortVO> csvo = controller.show();
 		
-		if(father.toString().equals("所有商品分类")){
-			// TODO 00为所有商品分类的分类ID，这个需要从数据层获得,我不知道你在哪获得的，就先写成00
-			rs = controller.addCommoSort(tf_name.getText(),"00");
-		}else{
-			ArrayList<CommoditySortVO> csvo = controller.show();
-			
-			for(int i = 0; i < csvo.size(); i++){
-				if(csvo.get(i).name.equals(father.toString())){
-					rs = controller.addCommoSort(tf_name.getText(), csvo.get(i).ID);
-				}
+		String ID = "";
+		
+		for(int i = 1; i < csvo.size(); i++){
+			if(csvo.get(i).name.equals(str)){
+				ID = csvo.get(i).ID;
 			}
-		}	
+		}
+		
+		ResultMessage rs = controller.deleteCommoSort(ID);
 		
 		if(rs.equals(ResultMessage.SUCCESS)){
 			CommodityManagementUI.button_buildTree.doClick();
 		}else{
-			WarningFrame wf = new WarningFrame("商品分类添加失败！");
+			WarningFrame wf = new WarningFrame("商品分类无法删除！");
 			wf.setVisible(true);
 		}
 	}

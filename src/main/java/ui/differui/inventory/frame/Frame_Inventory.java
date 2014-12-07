@@ -318,7 +318,7 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 			fi.setVisible(true);
 			bt_good.doClick();
 			
-			WarningFrame wf = new WarningFrame("商品分类添加成功！");
+			WarningFrame wf = new WarningFrame("商品分类已经更改！");
 			wf.setVisible(true);
 		}
 	}	

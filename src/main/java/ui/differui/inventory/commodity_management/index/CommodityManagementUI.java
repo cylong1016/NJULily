@@ -28,6 +28,7 @@ import ui.commonui.myui.MyTree;
 import ui.commonui.warning.WarningFrame;
 import ui.differui.inventory.commodity_management.addgood.CommodityAddingUI;
 import ui.differui.inventory.commodity_management.addsort.SortAddingUI;
+import ui.differui.inventory.commodity_management.delsort.SortDelUI;
 import ui.differui.inventory.commodity_management.detailgood.CommodityDetailUI;
 import ui.differui.inventory.commodity_management.detailsort.SortDetailUI;
 import ui.differui.inventory.frame.Frame_Inventory;
@@ -37,6 +38,7 @@ public class CommodityManagementUI extends MyPanel implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	
 	MyJButton button_return, button_add, button_cam, button_add2, button_cam2;
+	MyJButton button_del2;
 	
 	public static JButton button_close, button_buildTree;
 	
@@ -129,7 +131,7 @@ public class CommodityManagementUI extends MyPanel implements ActionListener{
 		this.add(button_add2);	
 		
 		//add a button for deleting a selected good sort
-		MyJButton button_del2 = new MyJButton("删除所选商品分类");
+		button_del2 = new MyJButton("删除所选商品分类");
 		button_del2.setBounds(50, 595 - 80 + 25, 225, 25);
 		button_del2.addActionListener(this);
 		this.add(button_del2);	
@@ -195,6 +197,18 @@ public class CommodityManagementUI extends MyPanel implements ActionListener{
 		
 		if(events.getSource() == button_buildTree){
 			Frame_Inventory.bt_restart.doClick();
+		}
+		
+		if(events.getSource() == button_del2){
+			DefaultMutableTreeNode note = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+			
+			if(tree.getSelectionCount() != 1){
+				WarningFrame wf = new WarningFrame("请选择要删除的商品分类！");
+				wf.setVisible(true);
+			}else{
+				SortDelUI sdu = new SortDelUI(note);
+				sdu.setVisible(true);
+			}		
 		}
 	}
 	
