@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import dataenum.FindTypeCommo;
 import vo.commodity.CommodityAddVO;
+import vo.commodity.CommodityUpdateVO;
 import vo.commodity.CommodityVO;
 import message.ResultMessage;
 
@@ -72,7 +73,7 @@ public interface CommodityBLService {
 	 * @author Zing
 	 * @version Nov 30, 2014 10:37:46 AM
 	 */
-	public ResultMessage updCommo(CommodityAddVO updateVO);
+	public ResultMessage updCommo(String ID, CommodityUpdateVO updateVO);
 
 	/**
 	 * 查找商品

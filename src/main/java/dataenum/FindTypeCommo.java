@@ -8,7 +8,8 @@ package dataenum;
 public enum FindTypeCommo {
 	ID("商品ID"),
 	NAME("商品名称"),
-	TYPE("商品型号"),
+	TYPE("商品型号"),	
+	SORT("商品分类"),
 	NUMBER("商品数量"),
 	PURCHASE("进价"),
 	SALE("售价"),

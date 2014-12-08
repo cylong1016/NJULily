@@ -6,6 +6,7 @@ import message.ResultMessage;
 import po.CommodityPO;
 import server.data.commoditydata.CommodityData;
 import vo.commodity.CommodityAddVO;
+import vo.commodity.CommodityUpdateVO;
 import vo.commodity.CommodityVO;
 import blservice.commodityblservice.CommodityBLService;
 import businesslogic.commoditysortbl.CommoditySortInfo;
@@ -124,9 +125,9 @@ public class Commodity implements CommodityBLService{
 	 * @author Zing
 	 * @version Dec 1, 2014 9:32:00 PM
 	 */
-	public ResultMessage updCommo(CommodityAddVO info){
-		CommodityPO oldPO = commodityData.find(info.ID);
-		po = new CommodityPO(info.ID, info.name, info.sortID, info.type, info.purPrice, info.salePrice, oldPO.getAlarmNumber());	
+	public ResultMessage updCommo(String ID, CommodityUpdateVO info){
+		CommodityPO oldPO = commodityData.find(ID);
+		po = new CommodityPO(ID, info.name, oldPO.getSortID(), info.type, info.purPrice, info.salePrice, oldPO.getAlarmNumber());	
 		return commodityData.update(po);
 	}
 	
