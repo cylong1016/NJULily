@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 import ui.commonui.myui.MyWindow;
 
@@ -14,9 +15,9 @@ public class SortDetailUI extends MyWindow implements ActionListener{
 
 	public static JButton button_close;
 	
-	public SortDetailUI(){
+	public SortDetailUI(DefaultMutableTreeNode note){
 		
-		SortDetailPanel sap = new SortDetailPanel();
+		SortDetailPanel sap = new SortDetailPanel(note);
 		sap.setOpaque(true);
 		sap.setBackground(new Color(0, 0, 0));
 		sap.setBounds(340, 250, 600, 185);

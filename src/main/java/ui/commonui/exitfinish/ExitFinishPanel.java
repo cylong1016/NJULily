@@ -11,8 +11,12 @@ import ui.commonui.myui.MyPanel;
 import ui.differui.admin.AdminAddingPanel;
 import ui.differui.admin.AdminModifyPanel;
 import ui.differui.admin.AdminUI;
+import ui.differui.inventory.commodity_management.addgood.CommodityAddingPanel;
+import ui.differui.inventory.commodity_management.addgood.CommodityAddingUI;
 import ui.differui.inventory.commodity_management.addsort.SortAddingPanel;
 import ui.differui.inventory.commodity_management.addsort.SortAddingUI;
+import ui.differui.inventory.commodity_management.detailsort.SortDetailPanel;
+import ui.differui.inventory.commodity_management.detailsort.SortDetailUI;
 import ui.differui.salesman.client.ClientAddingPanel;
 import ui.differui.salesman.client.ClientDetailPanel;
 import ui.differui.salesman.client.ClientManagementUI;
@@ -85,6 +89,10 @@ public class ExitFinishPanel extends MyPanel implements ActionListener{
 				case "modify admin password" : AdminUI.modifyPassword();break;
 				
 				case "adding a sort" : SortAddingPanel.addingConfirm();SortAddingUI.button_close.doClick();break;
+				
+				case "Change sort's name" : SortDetailPanel.changeName();SortDetailUI.button_close.doClick();break;
+				
+				case "add a good" : CommodityAddingPanel.addGood.doClick();CommodityAddingUI.button_close.doClick();break;
 
 			}
 			ExitFinishFrame.button_close.doClick();

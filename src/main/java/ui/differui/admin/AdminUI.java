@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 import message.ResultMessage;
-import businesslogic.userbl.UserController;
+import businesslogic.userbl.User;
 import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.login.Frame_Login;
 import ui.commonui.myui.EmptyTextField;
@@ -45,7 +45,7 @@ public class AdminUI extends MyFrame implements ActionListener{
 	
 	public static JButton bt_show, bt_vanish;
 	
-	static UserController controller;
+	static User controller;
 	
 	public static int rowNum;
 	
@@ -306,7 +306,7 @@ public class AdminUI extends MyFrame implements ActionListener{
 		
 		rowNum = 0;
 		
-		controller = new UserController();
+		controller = new User();
 		
 		rowNum = controller.show().size();
 		

@@ -3,48 +3,52 @@ package ui.differui.inventory.commodity_management.detailsort;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JLabel;
+import javax.swing.tree.DefaultMutableTreeNode;
 
+import message.ResultMessage;
+import businesslogic.commoditysortbl.CommoditySort;
+import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.exitfunction.ExitFunctionFrame;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyPanel;
 import ui.commonui.myui.MyTextField;
+import ui.commonui.warning.WarningFrame;
+import ui.differui.inventory.commodity_management.index.CommodityManagementUI;
+import vo.commodity.CommoditySortVO;
 
 public class SortDetailPanel extends MyPanel implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	
-	MyJButton button_return, button_confirm;
-	MyTextField tf_name;
+	MyJButton button_return, button_confirm, button_show;
+	static MyTextField tf_name;
+	static String str = "";
 	
-	public SortDetailPanel(){
+	public SortDetailPanel(DefaultMutableTreeNode note){
 		
-		String str = "Plipala";
+		str = note.toString();
 		
 		//information bar
-		JLabel infoBar = new JLabel("修改商品分类名称",JLabel.CENTER);
+		JLabel infoBar = new JLabel("修改或查看所选商品分类",JLabel.CENTER);
 		infoBar.setBounds(0, 0 , 600, 20);
 		infoBar.setOpaque(true);
-		infoBar.setForeground(Color.black);
-		infoBar.setBackground(new Color(0, 1, 1, 0.5f));
+		infoBar.setForeground(new Color(158, 213, 220));
+		infoBar.setBackground(new Color(46, 52, 101));
 		this.add(infoBar);
 		
 		//texts
 		JLabel word_tip1 = new JLabel("商品分类名称:");
 		word_tip1.setForeground(Color.white);
 		word_tip1.setBackground(new Color(0, 0, 0, 0));
-		word_tip1.setBounds(165, 40 , 85, 25);
+		word_tip1.setBounds(165, 40 + 20, 85, 25);
 		this.add(word_tip1);
-		
-		JLabel word_tip2 = new JLabel("商品分类属于:         "+ str);
-		word_tip2.setForeground(Color.white);
-		word_tip2.setBackground(new Color(0, 0, 0, 0));
-		word_tip2.setBounds(165, 90 , 200, 25);
-		this.add(word_tip2);
-		
+				
 		//TextField
-		tf_name = new MyTextField(260, 42, 140, 20);
+		tf_name = new MyTextField(260, 42 + 20, 140, 20);
+		tf_name.setText(str);
 		this.add(tf_name);
 		
 		//buttons
@@ -57,13 +61,44 @@ public class SortDetailPanel extends MyPanel implements ActionListener{
 		button_confirm.setBounds(475, 115, 100, 20);
 		button_confirm.addActionListener(this);
 		this.add(button_confirm);
+		
+		button_show = new MyJButton("显示此分类下所含的所有商品");
+		button_show.setBounds(165, 115, 235, 20);
+		button_show.addActionListener(this);
+		this.add(button_show);
 	}
+	
+	public static void changeName(){
+		CommoditySort controller = new CommoditySort();
+		ArrayList<CommoditySortVO> list = controller.show();
+		String ID = "";
+		
+		for(int i = 1; i < list.size(); i++){
+			if(str.equals(list.get(i).name)){
+				ID = list.get(i).ID;
+			}
+		}
+		ResultMessage rm = controller.updCommoSort(ID, tf_name.getText());
+		
+		if(rm.equals(ResultMessage.SUCCESS)){
+			CommodityManagementUI.button_buildTree.doClick();
+		}else{
+			WarningFrame wf = new WarningFrame("商品分类修改失败！");
+			wf.setVisible(true);	
+		}
+		
+	} 
 	
 	public void actionPerformed(ActionEvent events) {
 		
 		if(events.getSource() == button_return){
 			ExitFunctionFrame epf = new ExitFunctionFrame("SortDetailUI");
 			epf.setVisible(true);
+		}
+		
+		if(events.getSource() == button_confirm){
+			ExitFinishFrame eff = new ExitFinishFrame("Change sort's name");
+			eff.setVisible(true);
 		}
 		
 	}	

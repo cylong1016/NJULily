@@ -14,7 +14,7 @@ import javax.swing.ImageIcon;
 
 import dataenum.UserIdentity;
 import blservice.userblservice.LoginInfo;
-import businesslogic.userbl.UserController;
+import businesslogic.userbl.User;
 import ui.commonui.myui.MyBackground;
 import ui.commonui.myui.MyButton;
 import ui.commonui.myui.MyFrame;
@@ -132,7 +132,7 @@ public class Frame_Login extends MyFrame implements ActionListener{
 	
 	public void actionPerformed(ActionEvent events) {
 		if(events.getSource() == button_Enter){
-			UserController controller = new UserController();
+			User controller = new User();
 			UserIdentity ui = controller.login(new LoginInfo(userNameField.getText()
 					, new String(passwordField.getPassword()),flag));
 			

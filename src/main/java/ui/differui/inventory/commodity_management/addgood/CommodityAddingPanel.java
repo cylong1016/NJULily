@@ -4,24 +4,38 @@ package ui.differui.inventory.commodity_management.addgood;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import message.ResultMessage;
+import businesslogic.commoditybl.Commodity;
+import businesslogic.commoditysortbl.CommoditySort;
+import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.exitfunction.ExitFunctionFrame;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyPanel;
 import ui.commonui.myui.MyTextField;
 import ui.commonui.myui.MyTree;
-
+import ui.commonui.warning.WarningFrame;
+import vo.commodity.CommodityAddVO;
+import vo.commodity.CommoditySortVO;
 
 public class CommodityAddingPanel extends MyPanel implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	
-	MyJButton button_return, button_finish, button_add, button_confirm;
+	MyJButton button_return, button_finish, button_confirm;
 	MyTextField tf_name, tf_model;
+	MyTree tree;
+	JLabel word_sort;
+	DefaultMutableTreeNode note;
+	String sortName = "无";
+	Boolean haveChoose = false;
+	public static JButton addGood;
 	
 	public CommodityAddingPanel(){
 		
@@ -29,7 +43,7 @@ public class CommodityAddingPanel extends MyPanel implements ActionListener{
 		Color backColor = new Color(46, 52, 101);
 			
 		int y = 10;
-		String sortName = "无";
+		sortName = "无";
 		
 		//information bar
 		JLabel infoBar = new JLabel("新增一件商品",JLabel.CENTER);
@@ -64,7 +78,7 @@ public class CommodityAddingPanel extends MyPanel implements ActionListener{
 		word_tip2.setBounds(25, 90 + y, 120, 25);
 		this.add(word_tip2);
 		
-		JLabel word_sort = new JLabel("所选商品分类:     "+sortName);
+		word_sort = new JLabel("所选商品分类:     "+sortName);
 		word_sort.setForeground(Color.WHITE);
 		word_sort.setBackground(new Color(0, 0, 0, 0));
 		word_sort.setBounds(60, 360, 200, 25);
@@ -80,9 +94,8 @@ public class CommodityAddingPanel extends MyPanel implements ActionListener{
 		
 		//the sort tree
 		DefaultMutableTreeNode root = new DefaultMutableTreeNode("所有商品分类"); 
-		root.add(new DefaultMutableTreeNode("日光灯"));
 		
-		MyTree tree = new MyTree(root);		
+		tree = new MyTree(root);		
 		JScrollPane jsp=new JScrollPane(tree);
 		jsp.setBounds(25, 125 + y, 550, 170);
 		jsp.getViewport().setBackground(new Color(0,0,0));
@@ -101,16 +114,28 @@ public class CommodityAddingPanel extends MyPanel implements ActionListener{
 		button_finish.addActionListener(this);
 		this.add(button_finish);
 		
-		button_add = new MyJButton("添加商品分类");
-		button_add.setBounds(285, 315, 140, 20);
-		button_add.addActionListener(this);
-		this.add(button_add);	
-		
 		button_confirm = new MyJButton("选择所选商品分类");
 		button_confirm.setBounds(435, 315, 140, 20);
 		button_confirm.addActionListener(this);
 		this.add(button_confirm);	
 		
+		addGood = new JButton();
+		addGood.addActionListener(this);
+		this.add(addGood);
+		
+	}
+	
+	public String getSortID(DefaultMutableTreeNode note){
+		CommoditySort controller = new CommoditySort();
+		ArrayList<CommoditySortVO> list = controller.show();
+		
+		for(int i = 1; i < list.size(); i++){
+			if(list.get(i).name.equals(note.toString())){
+				return list.get(i).ID;
+			}
+		}
+		
+		return null;
 	}
 	
 	public void actionPerformed(ActionEvent events) {
@@ -120,8 +145,48 @@ public class CommodityAddingPanel extends MyPanel implements ActionListener{
 			epf.setVisible(true);
 		}
 		
-		if(events.getSource() == button_add){
+		if(events.getSource() == button_confirm){
+			note = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
 			
+			if(tree.getSelectionCount() != 1){
+				WarningFrame wf = new WarningFrame("请选择一个商品分类！");
+				wf.setVisible(true);
+			}else{
+				sortName = note.toString();
+				word_sort.setText("所选商品分类:     " + sortName);
+				haveChoose = true;
+			}
+		}
+		
+		if(events.getSource() == button_finish){
+			
+			if(haveChoose == false){		
+				WarningFrame wf = new WarningFrame("请选择商品所属的商品分类！");
+				wf.setVisible(true);
+			}else{
+				
+				if(tf_name.getText().isEmpty() || tf_model.getText().isEmpty()){
+					WarningFrame wf = new WarningFrame("请检查信息填写是否完整！");
+					wf.setVisible(true);
+				}else{
+					ExitFinishFrame eff = new ExitFinishFrame("add a good");
+					eff.setVisible(true);
+				}
+			}
+		}
+		
+		if(events.getSource() == addGood){
+			Commodity controller = new Commodity();
+			ResultMessage rm = controller.addCommo(new CommodityAddVO(controller.getID(getSortID(note)), 
+					tf_name.getText(), tf_model.getText(), getSortID(note), 0, 0, 0));
+			
+			if(rm.equals(ResultMessage.SUCCESS)){
+				WarningFrame wf = new WarningFrame("商品添加成功！");
+				wf.setVisible(true);
+			}else{
+				WarningFrame wf = new WarningFrame("商品无法添加！");
+				wf.setVisible(true);
+			}
 		}
 	}
 }

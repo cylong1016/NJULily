@@ -17,7 +17,7 @@ import message.ResultMessage;
 import dataenum.ClientCategory;
 import dataenum.ClientLevel;
 import dataenum.FindTypeClient;
-import businesslogic.clientbl.ClientController;
+import businesslogic.clientbl.Client;
 import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.myui.MyButton;
 import ui.commonui.myui.MyComboBox;
@@ -300,7 +300,7 @@ public class ClientDetailPanel extends MyPanel implements ActionListener{
 		
 		if(events.getSource() == bt_modify){
 					
-			ClientController controller = new ClientController();
+			Client controller = new Client();
 			
 			ResultMessage rm = controller.updClient(new ClientVO(textField_id.getText(), getCategory(comboBox_category.getSelectedIndex()),
 					getLevel(comboBox_level.getSelectedIndex()), textField_name.getText(), textField_phone.getText(),

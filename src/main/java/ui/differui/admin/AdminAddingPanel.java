@@ -17,7 +17,7 @@ import ui.commonui.warning.WarningFrame;
 
 import vo.UserVO;
 
-import businesslogic.userbl.UserController;
+import businesslogic.userbl.User;
 import dataenum.UserIdentity;
 
 public class AdminAddingPanel extends MyPanel implements ActionListener{
@@ -29,7 +29,7 @@ public class AdminAddingPanel extends MyPanel implements ActionListener{
 	JButton button_add, button_return;
 	public static JButton addConform;
 	
-	UserController controller; 
+	User controller; 
 	
 	public AdminAddingPanel(){
 			
@@ -155,7 +155,7 @@ public class AdminAddingPanel extends MyPanel implements ActionListener{
 		
 		if(events.getSource() == addConform){
 			
-			controller = new UserController();	
+			controller = new User();	
 			
 			ResultMessage res = controller.add(new UserVO(controller.getID(), textField_username.getText(),
 					textField_name.getText(), textField_password.getText(), 

@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import message.ResultMessage;
 import dataenum.ClientCategory;
 import dataenum.ClientLevel;
-import businesslogic.clientbl.ClientController;
+import businesslogic.clientbl.Client;
 import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.exitfunction.ExitFunctionFrame;
 import ui.commonui.myui.MyComboBox;
@@ -28,7 +28,7 @@ public class ClientAddingPanel extends MyPanel implements ActionListener{
 	JButton button_add, button_return;
 	public static JButton addConform;
 	
-	ClientController controller; 
+	Client controller; 
 	
 	public ClientAddingPanel(){
 			
@@ -191,7 +191,7 @@ public class ClientAddingPanel extends MyPanel implements ActionListener{
 		
 		if(events.getSource() == addConform){
 			
-			controller = new ClientController();	
+			controller = new Client();	
 			
 			ResultMessage res = controller.addClient(new ClientVO(
 				controller.getID(), getCategory(comboBox_category.getSelectedIndex())

@@ -15,7 +15,7 @@ import ui.commonui.myui.MyPanel;
 import ui.commonui.myui.MyTextField;
 import ui.commonui.warning.WarningFrame;
 import vo.UserVO;
-import businesslogic.userbl.UserController;
+import businesslogic.userbl.User;
 import dataenum.UserIdentity;
 
 public class AdminModifyPanel extends MyPanel implements ActionListener{
@@ -27,7 +27,7 @@ public class AdminModifyPanel extends MyPanel implements ActionListener{
 	JButton button_add, button_return;
 	public static JButton modifyConform;
 	
-	UserController controller; 
+	User controller; 
 	
 	public AdminModifyPanel(){
 			
@@ -158,7 +158,7 @@ public class AdminModifyPanel extends MyPanel implements ActionListener{
 		
 		if(events.getSource() == modifyConform){
 			
-			controller = new UserController();	
+			controller = new User();	
 			
 			ResultMessage res = controller.update(new UserVO(AdminUI.id, textField_username.getText(),
 					textField_name.getText(), textField_password.getText(), 
