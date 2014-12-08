@@ -15,8 +15,10 @@ import ui.differui.inventory.commodity_management.addgood.CommodityAddingPanel;
 import ui.differui.inventory.commodity_management.addgood.CommodityAddingUI;
 import ui.differui.inventory.commodity_management.addsort.SortAddingPanel;
 import ui.differui.inventory.commodity_management.addsort.SortAddingUI;
+import ui.differui.inventory.commodity_management.detailgood.CommodityDetailPanel;
 import ui.differui.inventory.commodity_management.detailsort.SortDetailPanel;
 import ui.differui.inventory.commodity_management.detailsort.SortDetailUI;
+import ui.differui.inventory.commodity_management.index.CommodityManagementUI;
 import ui.differui.salesman.client.ClientAddingPanel;
 import ui.differui.salesman.client.ClientDetailPanel;
 import ui.differui.salesman.client.ClientManagementUI;
@@ -74,8 +76,7 @@ public class ExitFinishPanel extends MyPanel implements ActionListener{
 			
 			switch(flag){
 				case "ClientAddingPanel":	ClientAddingPanel.addConform.doClick();break;
-											
-										
+																				
 				case "Delete a Client": ClientManagementUI.button_delete.doClick();break;
 				
 				case "Modify a client" : ClientDetailPanel.bt_modify.doClick();break;
@@ -93,6 +94,10 @@ public class ExitFinishPanel extends MyPanel implements ActionListener{
 				case "Change sort's name" : SortDetailPanel.changeName();SortDetailUI.button_close.doClick();break;
 				
 				case "add a good" : CommodityAddingPanel.addGood.doClick();CommodityAddingUI.button_close.doClick();break;
+				
+				case "Delete Good" : CommodityManagementUI.delGood.doClick();break;
+				
+				case "modify good" : CommodityDetailPanel.modify.doClick();break;
 
 			}
 			ExitFinishFrame.button_close.doClick();

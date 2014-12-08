@@ -36,7 +36,7 @@
 		<name>CommodityData</name>
 		<path>data/CommodityList.ser</path>
 		<prefix>SP</prefix>
-		<maxID>00002</maxID>
+		<maxID>00003</maxID>
 		<IDMaxBit>5</IDMaxBit>
 	</Data>
 	<Data>

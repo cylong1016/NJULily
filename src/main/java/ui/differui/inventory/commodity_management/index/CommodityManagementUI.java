@@ -1,30 +1,22 @@
 package ui.differui.inventory.commodity_management.index;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.ColorModel;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JRootPane;
 import javax.swing.JScrollPane;
-import javax.swing.JTree;
+
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeCellRenderer;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeCellRenderer;
-import javax.swing.tree.TreeModel;
 
-import dataenum.FindTypeClient;
+import message.ResultMessage;
 import dataenum.FindTypeCommo;
-import businesslogic.clientbl.Client;
 import businesslogic.commoditybl.Commodity;
 import businesslogic.commoditysortbl.CommoditySort;
+import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.exitfunction.ExitFunctionFrame;
 import ui.commonui.myui.MyComboBox;
 import ui.commonui.myui.MyJButton;
@@ -39,7 +31,6 @@ import ui.differui.inventory.commodity_management.delsort.SortDelUI;
 import ui.differui.inventory.commodity_management.detailgood.CommodityDetailUI;
 import ui.differui.inventory.commodity_management.detailsort.SortDetailUI;
 import ui.differui.inventory.frame.Frame_Inventory;
-import vo.client.ClientVO;
 import vo.commodity.CommoditySortVO;
 import vo.commodity.CommodityVO;
 
@@ -47,10 +38,16 @@ public class CommodityManagementUI extends MyPanel implements ActionListener{
 	
 	private static final long serialVersionUID = 1L;
 	
-	MyJButton button_return, button_add, button_cam, button_add2, button_cam2;
-	MyJButton button_del2, button_showAll, button_search;
+	MyJButton button_return, button_add, button_add2, button_cam2;
+	MyJButton button_del2;
+
+	static MyJButton button_showAll;
+
+	MyJButton button_search;
+
+	MyJButton button_del;
 	
-	public static JButton button_close, button_buildTree;
+	public static JButton button_close, button_cam, button_buildTree, delGood;
 	
 	JScrollPane jsp;
 	MyTree tree;
@@ -59,8 +56,9 @@ public class CommodityManagementUI extends MyPanel implements ActionListener{
 	MyTextField textField;
 	
 	static int rowNum;
+	static String deleteID;
 	
-	public CommodityManagementUI(){
+ 	public CommodityManagementUI(){
 		
 		rowNum = 0;
 		
@@ -128,7 +126,7 @@ public class CommodityManagementUI extends MyPanel implements ActionListener{
 		this.add(button_add);	
 		
 		//add a button for deleting a selected good
-		MyJButton button_del = new MyJButton("删除所选商品");
+		button_del = new MyJButton("删除所选商品");
 		button_del.setBounds(165 + 420 + 150, 580, 130, 25);
 		button_del.addActionListener(this);
 		this.add(button_del);	
@@ -172,6 +170,11 @@ public class CommodityManagementUI extends MyPanel implements ActionListener{
 		button_buildTree = new JButton();
 		button_buildTree.addActionListener(this);
 		this.add(button_buildTree);
+		
+
+		delGood = new JButton();
+		delGood.addActionListener(this);
+		this.add(delGood);
 	}
 		
 	public void actionPerformed(ActionEvent events) {
@@ -193,8 +196,13 @@ public class CommodityManagementUI extends MyPanel implements ActionListener{
 		}
 		
 		if(events.getSource() == button_cam){
-			CommodityDetailUI cdu = new CommodityDetailUI();
-			cdu.setVisible(true);
+			if(table.getSelectedRow() < 0){
+				WarningFrame wf = new WarningFrame("请选择要进行修改或查看的商品！");
+				wf.setVisible(true);
+			}else{
+				CommodityDetailUI cdu = new CommodityDetailUI((String) table.getValueAt(table.getSelectedRow(), 0));
+				cdu.setVisible(true);
+			}
 		}
 		
 		if(events.getSource() == button_cam2){
@@ -300,7 +308,32 @@ public class CommodityManagementUI extends MyPanel implements ActionListener{
 			}
 		}
 		
+		if(events.getSource() == button_del){
+			
+			if(table.getSelectedRow() < 0){
+				WarningFrame wf = new WarningFrame("请选择要进行删除的商品！");
+				wf.setVisible(true);
+			}else{
+				deleteID = (String) table.getValueAt(table.getSelectedRow(), 0);
+				ExitFinishFrame ef = new ExitFinishFrame("Delete Good");
+				ef.setVisible(true);
+			}
+		}
 		
+		if(events.getSource() == delGood){
+			Commodity controller = new Commodity();
+			
+			ResultMessage rm = controller.deletCommo(deleteID);
+			
+			if(rm.equals(ResultMessage.SUCCESS)){
+				WarningFrame wp = new WarningFrame("已成功删除该商品！");
+				wp.setVisible(true);
+				CommodityManagementUI.button_showAll.doClick();
+			}else{
+				WarningFrame wp = new WarningFrame("无法删除该商品！");
+				wp.setVisible(true);
+			}
+		}
 		
 	}
 	

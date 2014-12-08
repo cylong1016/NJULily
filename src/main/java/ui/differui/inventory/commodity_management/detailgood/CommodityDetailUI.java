@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.tree.DefaultMutableTreeNode;
 
 import ui.commonui.myui.MyWindow;
 
@@ -15,12 +14,12 @@ public class CommodityDetailUI extends MyWindow implements ActionListener{
 	
 	public static JButton button_close;
 	
-	public CommodityDetailUI(){
+	public CommodityDetailUI(String ID){
 				
-		CommodityDetailPanel cdp = new CommodityDetailPanel();
+		CommodityDetailPanel cdp = new CommodityDetailPanel(ID);
 		cdp.setOpaque(true);
-		cdp.setBackground(new Color(0, 0, 0));
-		cdp.setBounds(240, 90, 800, 560);
+		cdp.setBackground(new Color(0, 0, 0, 0.35f));
+		cdp.setBounds(240, 65, 800, 610);
 		this.add(cdp);
 		
 		button_close = new JButton();

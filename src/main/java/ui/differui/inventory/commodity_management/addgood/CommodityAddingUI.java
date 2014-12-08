@@ -19,7 +19,7 @@ public class CommodityAddingUI extends MyWindow implements ActionListener{
 		CommodityAddingPanel cap = new CommodityAddingPanel();
 		cap.setOpaque(true);
 		cap.setBackground(new Color(0, 0, 0, 0.3f));
-		cap.setBounds(340, 135, 600, 450);
+		cap.setBounds(340, 115, 600, 500);
 		this.add(cap);
 				
 		button_close = new JButton();

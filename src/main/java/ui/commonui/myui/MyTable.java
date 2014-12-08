@@ -14,6 +14,10 @@ public class MyTable extends JTable{
 			
 		Object[][] cellData = null;
 		
+		Color foreColor = new Color(158, 213, 220);
+		Color backColor = new Color(46, 52, 101);
+		
+		
 		DefaultTableModel model = new DefaultTableModel(cellData, headers) {
 			private static final long serialVersionUID = 1L;
 			public boolean isCellEditable(int row, int column) { //这里让表不可修改
@@ -23,8 +27,9 @@ public class MyTable extends JTable{
 		
 		this.setModel(model);
 		this.setRowSelectionAllowed(true);	
-	    JTableHeader tableH = this.getTableHeader();	 //获得表头 
-	    tableH.setBackground(new Color(0, 1, 1, 0.65f));  //设置表头的背景色
+	    JTableHeader tableH = this.getTableHeader();	 
+	    tableH.setBackground(backColor);  
+	    tableH.setForeground(foreColor);
 	    tableH.setReorderingAllowed(false); 
 	}
 }
