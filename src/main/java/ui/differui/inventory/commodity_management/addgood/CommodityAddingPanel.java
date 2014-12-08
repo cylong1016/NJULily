@@ -215,9 +215,10 @@ public class CommodityAddingPanel extends MyPanel implements ActionListener{
 			if(rm.equals(ResultMessage.SUCCESS)){
 				WarningFrame wf = new WarningFrame("商品添加成功！");
 				wf.setVisible(true);
+				CommodityAddingUI.button_close.doClick();
 				CommodityManagementUI.showAll.doClick();
 			}else{
-				WarningFrame wf = new WarningFrame("商品无法添加！");
+				WarningFrame wf = new WarningFrame("商品只能在分类叶节点添加！");
 				wf.setVisible(true);
 			}
 		}

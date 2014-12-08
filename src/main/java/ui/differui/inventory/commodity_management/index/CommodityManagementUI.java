@@ -57,6 +57,7 @@ public class CommodityManagementUI extends MyPanel implements ActionListener{
 	
 	static int rowNum;
 	static String deleteID;
+	int clickTime = 0;
 	
  	public CommodityManagementUI(){
 		
@@ -249,6 +250,9 @@ public class CommodityManagementUI extends MyPanel implements ActionListener{
 		}
 		
 		if(events.getSource() == button_showAll){
+			
+			clickTime++;
+			
 			DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 			
 			if(rowNum != 0)
@@ -268,6 +272,11 @@ public class CommodityManagementUI extends MyPanel implements ActionListener{
 				String[] str = {cvo.ID, getSortName(cvo.sortID), cvo.name, cvo.type, String.valueOf(cvo.inventoryNum)};
 				tableModel.addRow(str);
 			}		
+			
+			if(rowNum == 0 && clickTime != 1){
+				WarningFrame wf = new WarningFrame("现在暂时没有商品");
+				wf.setVisible(true);
+			}
 		}
 		
 		if(events.getSource() == button_search){

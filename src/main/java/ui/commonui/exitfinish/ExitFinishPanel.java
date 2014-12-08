@@ -93,7 +93,7 @@ public class ExitFinishPanel extends MyPanel implements ActionListener{
 				
 				case "Change sort's name" : SortDetailPanel.changeName();SortDetailUI.button_close.doClick();break;
 				
-				case "add a good" : CommodityAddingPanel.addGood.doClick();CommodityAddingUI.button_close.doClick();break;
+				case "add a good" : CommodityAddingPanel.addGood.doClick();break;
 				
 				case "Delete Good" : CommodityManagementUI.delGood.doClick();break;
 				
