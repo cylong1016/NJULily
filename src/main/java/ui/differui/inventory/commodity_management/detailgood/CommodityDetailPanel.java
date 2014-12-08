@@ -21,8 +21,8 @@ import ui.commonui.myui.MyTable;
 import ui.commonui.myui.MyTextField;
 import ui.commonui.warning.WarningFrame;
 import ui.differui.inventory.commodity_management.index.CommodityManagementUI;
-import vo.commodity.CommodityAddVO;
 import vo.commodity.CommoditySortVO;
+import vo.commodity.CommodityUpdateVO;
 import vo.commodity.CommodityVO;
 
 public class CommodityDetailPanel extends MyPanel implements ActionListener{
@@ -249,10 +249,9 @@ public class CommodityDetailPanel extends MyPanel implements ActionListener{
 		
 		if(events.getSource() == modify){
 			Commodity controller = new Commodity();
-			ResultMessage rm = controller.updCommo(new CommodityAddVO(textField_id.getText(), 
-					textField_name.getText(), textField_model.getText(), textField_sort.getText(), 
-					Integer.parseInt(textField_num.getText()), Double.parseDouble(textField_purPrice.getText())
-					, Double.parseDouble(textField_price.getText())));
+			ResultMessage rm = controller.updCommo(textField_id.getText(),
+					new CommodityUpdateVO(textField_name.getText(), textField_model.getText(), 
+					Double.parseDouble(textField_purPrice.getText()), Double.parseDouble(textField_price.getText())));
 			
 			ArrayList<String> iDs = new ArrayList<String>();
 			iDs.add(textField_id.getText());

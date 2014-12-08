@@ -371,7 +371,7 @@ public class CommodityManagementUI extends MyPanel implements ActionListener{
 		switch(i){
 			case 1: return null;
 			case 2: return FindTypeCommo.ID;
-//			case 3: return FindTypeCommo.;
+			case 3: return FindTypeCommo.SORT;
 			default: return FindTypeCommo.NAME;
 		}
 	}
