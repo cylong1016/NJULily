@@ -93,10 +93,7 @@ public class Commodity implements CommodityBLService{
 			return ResultMessage.FAILURE;
 		}
 		// 如果添加成功，更新商品分类的信息
-		
-//		String sortID = commodityData.find(ID).getSortID();
-		sort.addCommodity(info.sortID, ID);	
-		
+		sort.addCommodity(info.sortID, ID);
 		return commodityData.insert(po);
 	}
 	
