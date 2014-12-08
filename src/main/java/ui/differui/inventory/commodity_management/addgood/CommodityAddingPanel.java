@@ -21,6 +21,7 @@ import ui.commonui.myui.MyPanel;
 import ui.commonui.myui.MyTextField;
 import ui.commonui.myui.MyTree;
 import ui.commonui.warning.WarningFrame;
+import ui.differui.inventory.commodity_management.index.CommodityManagementUI;
 import vo.commodity.CommodityAddVO;
 import vo.commodity.CommoditySortVO;
 
@@ -214,6 +215,7 @@ public class CommodityAddingPanel extends MyPanel implements ActionListener{
 			if(rm.equals(ResultMessage.SUCCESS)){
 				WarningFrame wf = new WarningFrame("商品添加成功！");
 				wf.setVisible(true);
+				CommodityManagementUI.showAll.doClick();
 			}else{
 				WarningFrame wf = new WarningFrame("商品无法添加！");
 				wf.setVisible(true);

@@ -47,7 +47,7 @@ public class CommodityManagementUI extends MyPanel implements ActionListener{
 
 	MyJButton button_del;
 	
-	public static JButton button_close, button_cam, button_buildTree, delGood;
+	public static JButton button_close, button_cam, button_buildTree, delGood, showAll;
 	
 	JScrollPane jsp;
 	MyTree tree;
@@ -171,10 +171,15 @@ public class CommodityManagementUI extends MyPanel implements ActionListener{
 		button_buildTree.addActionListener(this);
 		this.add(button_buildTree);
 		
-
 		delGood = new JButton();
 		delGood.addActionListener(this);
 		this.add(delGood);
+		
+		showAll = new JButton();
+		showAll.addActionListener(this);
+		this.add(showAll);
+		
+		showAll.doClick();
 	}
 		
 	public void actionPerformed(ActionEvent events) {
@@ -333,6 +338,10 @@ public class CommodityManagementUI extends MyPanel implements ActionListener{
 				WarningFrame wp = new WarningFrame("无法删除该商品！");
 				wp.setVisible(true);
 			}
+		}
+		
+		if(events.getSource() == showAll){
+			button_showAll.doClick();
 		}
 		
 	}

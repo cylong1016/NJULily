@@ -260,10 +260,12 @@ public class CommodityDetailPanel extends MyPanel implements ActionListener{
 			ResultMessage rm2 = controller.setAlarm(iDs, Integer.parseInt(textField_alarm.getText()));
 			
 			if(rm.equals(ResultMessage.SUCCESS) && rm2.equals(ResultMessage.SUCCESS)){
-				WarningFrame wf = new WarningFrame("商品信息已成功更新！");
-				wf.setVisible(true);
+				
 				CommodityDetailUI.button_close.doClick();
 				CommodityManagementUI.button_cam.doClick();
+				
+				WarningFrame wf = new WarningFrame("商品信息已成功更新！");
+				wf.setVisible(true);
 			}else{
 				WarningFrame wf = new WarningFrame("商品信息无法修改！");
 				wf.setVisible(true);
