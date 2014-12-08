@@ -77,7 +77,6 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 		panel_alarm.setVisible(false);
 		this.add(panel_alarm);
 		
-
 		lb_good2 = new JLabel(new ImageIcon("ui/image/inventory/good.png"));
 		lb_good2.setBounds(0, 0, 1280, 630);
 		lb_good2.setVisible(false);

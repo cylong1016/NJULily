@@ -12,7 +12,6 @@ import ui.differui.admin.AdminAddingPanel;
 import ui.differui.admin.AdminModifyPanel;
 import ui.differui.admin.AdminUI;
 import ui.differui.inventory.commodity_management.addgood.CommodityAddingPanel;
-import ui.differui.inventory.commodity_management.addgood.CommodityAddingUI;
 import ui.differui.inventory.commodity_management.addsort.SortAddingPanel;
 import ui.differui.inventory.commodity_management.addsort.SortAddingUI;
 import ui.differui.inventory.commodity_management.detailgood.CommodityDetailPanel;

@@ -41,6 +41,8 @@ public class Frame_Salesman extends MyFrame implements ActionListener{
 	static SaleUI panel_su;
 	static SaleBackUI panel_sbu;
 	
+	static JLabel in_back;
+	
 	public Frame_Salesman(){
 		
 		bt_vanish = new JButton();
@@ -73,6 +75,11 @@ public class Frame_Salesman extends MyFrame implements ActionListener{
 		panel_sbu = new SaleBackUI();
 		panel_sbu.setVisible(false);
 		this.add(panel_sbu);
+		
+		in_back = new JLabel(new ImageIcon("ui/image/salesman/in.png"));
+		in_back.setBounds(0, 0, 1280, 630);
+		in_back.setVisible(false);
+		this.add(in_back);
 			
 		/////////////////////////////index///////////////////////////////
 		
@@ -208,7 +215,8 @@ public class Frame_Salesman extends MyFrame implements ActionListener{
 		switch(i){
 			case 0: panel_si.setVisible(true);break;
 			case 1: panel_cm.setVisible(true);break;
-			case 2: panel_iu.setVisible(true);break;
+			case 2: panel_iu.setVisible(true);
+					in_back.setVisible(true);break;
 			case 3: panel_ibu.setVisible(true);break;
 			case 4: panel_su.setVisible(true);break;
 			case 5: panel_sbu.setVisible(true);break;
@@ -220,7 +228,8 @@ public class Frame_Salesman extends MyFrame implements ActionListener{
 		switch(i){
 			case 0: panel_si.setVisible(false);break;
 			case 1: panel_cm.setVisible(false);break;
-			case 2: panel_iu.setVisible(false);break;
+			case 2: panel_iu.setVisible(false);
+					in_back.setVisible(false);break;
 			case 3: panel_ibu.setVisible(false);break;
 			case 4: panel_su.setVisible(false);break;
 			case 5: panel_sbu.setVisible(false);break;
@@ -257,6 +266,7 @@ public class Frame_Salesman extends MyFrame implements ActionListener{
 		if(events.getSource() == bt_in){
 			if(flag == 0){			
 				panel_iu.setVisible(true);
+				in_back.setVisible(true);
 				panel_si.setVisible(false);
 				flag = 2;
 			}else if(flag == 2){
