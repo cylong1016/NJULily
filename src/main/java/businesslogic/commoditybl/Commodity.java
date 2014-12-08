@@ -106,8 +106,8 @@ public class Commodity implements CommodityBLService{
 	 * @version Dec 1, 2014 8:57:57 PM
 	 */
 	public ResultMessage deletCommo(String ID) {
-		double purPrice = commodityData.find(ID).getPurPrice();
-		if (purPrice != 0) {
+		double recentPurPrice = commodityData.find(ID).getRecentPurPrice();
+		if (recentPurPrice != 0) {
 			return ResultMessage.FAILURE;
 		}
 		// 如果可以删除该商品，就顺便删除分类中的该商品
