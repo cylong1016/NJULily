@@ -23,6 +23,7 @@ import ui.commonui.myui.MyPasswordField;
 import ui.commonui.myui.MyTextField;
 import ui.commonui.warning.WarningFrame;
 import ui.differui.admin.AdminUI;
+import ui.differui.finace.frame.Frame_Finace;
 import ui.differui.inventory.frame.Frame_Inventory;
 import ui.differui.salesman.frame.Frame_Salesman;
 
@@ -181,6 +182,14 @@ public class Frame_Login extends MyFrame implements ActionListener{
 				WarningFrame wf = new WarningFrame("欢迎使用本系统！");
 				wf.setVisible(true);
 				
+			}else if(ui.equals(UserIdentity.FINANCE_MANAGER)){
+				Frame_Finace ff = new Frame_Finace();
+				ff.setVisible(true);
+				
+				this.setVisible(false);
+				
+				WarningFrame wf = new WarningFrame("欢迎使用本系统！");
+				wf.setVisible(true);
 			}
 		}
 	}

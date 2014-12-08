@@ -10,6 +10,7 @@ import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyPanel;
 import ui.differui.admin.AdminAddingUI;
 import ui.differui.admin.AdminModifyUI;
+import ui.differui.finace.frame.Frame_Finace;
 import ui.differui.inventory.commodity_management.addgood.CommodityAddingUI;
 import ui.differui.inventory.commodity_management.addsort.SortAddingUI;
 import ui.differui.inventory.commodity_management.delsort.SortDelUI;
@@ -80,6 +81,11 @@ public class ExitFunctionPanel extends MyPanel implements ActionListener{
 						  Frame_Salesman.visibleTrue(Frame_Salesman.destination);
 						  Frame_Salesman.flag = Frame_Salesman.destination;
 						  break;
+						  
+			case "finace" : Frame_Finace.visibleFalse(Frame_Finace.flag);
+							Frame_Finace.visibleTrue(Frame_Finace.destination);
+							Frame_Finace.flag = Frame_Finace.destination;
+							break;
 								
 			case "AdminAddingUI" : AdminAddingUI.button_close.doClick();break;
 			

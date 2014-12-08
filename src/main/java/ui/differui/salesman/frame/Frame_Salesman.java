@@ -55,7 +55,7 @@ public class Frame_Salesman extends MyFrame implements ActionListener{
 		this.add(panel_cm);
 		
 		panel_si = new SaleIndex();
-		panel_si.setVisible(false);
+		panel_si.setVisible(true);
 		this.add(panel_si);
 		
 		panel_iu = new InUI();
@@ -82,7 +82,7 @@ public class Frame_Salesman extends MyFrame implements ActionListener{
 		this.add(lb_index);
 		lb_index.setVisible(false);
 		
-		bt_index = new MyButton(275, 666, 55, 25);
+		bt_index = new MyButton(275, 666, 55, 30);
 		bt_index.addActionListener(this);
 		bt_index.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent arg0) {
@@ -102,7 +102,7 @@ public class Frame_Salesman extends MyFrame implements ActionListener{
 		this.add(lb_client);
 		lb_client.setVisible(false);
 		
-		bt_client = new MyButton(415, 666, 68, 25);
+		bt_client = new MyButton(415, 666, 68, 30);
 		bt_client.addActionListener(this);
 		bt_client.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent arg0) {
@@ -122,7 +122,7 @@ public class Frame_Salesman extends MyFrame implements ActionListener{
 		this.add(lb_in);
 		lb_in.setVisible(false);
 		
-		bt_in = new MyButton(560, 652, 80, 25);
+		bt_in = new MyButton(560, 652, 80, 30);
 		bt_in.addActionListener(this);
 		bt_in.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent arg0) {
@@ -142,7 +142,7 @@ public class Frame_Salesman extends MyFrame implements ActionListener{
 		this.add(lb_inBack);
 		lb_inBack.setVisible(false);
 		
-		bt_inBack = new MyButton(730, 652, 115, 25);
+		bt_inBack = new MyButton(730, 652, 115, 30);
 		bt_inBack.addActionListener(this);
 		bt_inBack.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent arg0) {
@@ -162,7 +162,7 @@ public class Frame_Salesman extends MyFrame implements ActionListener{
 		this.add(lb_sale);
 		lb_sale.setVisible(false);
 		
-		bt_sale = new MyButton(935, 652, 80, 25);
+		bt_sale = new MyButton(935, 652, 80, 30);
 		bt_sale.addActionListener(this);
 		bt_sale.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent arg0) {
@@ -182,7 +182,7 @@ public class Frame_Salesman extends MyFrame implements ActionListener{
 		this.add(lb_saleBack);
 		lb_saleBack.setVisible(false);
 		
-		bt_saleBack = new MyButton(1095, 652, 120, 25);
+		bt_saleBack = new MyButton(1095, 652, 120, 30);
 		bt_saleBack.addActionListener(this);
 		bt_saleBack.addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent arg0) {
