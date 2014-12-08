@@ -36,5 +36,17 @@ public class CommoditySortInfo implements CommoditySortInfo_Init, CommoditySort_
 		sortPO.addCommodityID(ID);
 		sortData.update(sortPO);
 	}
+	public boolean hasLeaf(String sortID) {
+		CommoditySortPO sortPO = sortData.find(sortID);
+		if (sortPO.getChildrenID() == null) {
+			return false;
+		}
+		else {
+			if (sortPO.getChildrenID().isEmpty()) {
+				return false;
+			}
+		}
+		return true;
+	}
 
 }

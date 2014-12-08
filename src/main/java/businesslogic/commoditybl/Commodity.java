@@ -88,15 +88,14 @@ public class Commodity implements CommodityBLService{
 	 */
 	public ResultMessage addCommo(CommodityAddVO info) {
 		po = new CommodityPO(ID, info.name, info.sortID, info.type, info.purPrice, info.salePrice, 0);
-		ResultMessage result = commodityData.insert(po);
-		if (result != ResultMessage.SUCCESS) {
-			return result;
+		CommoditySort_Commodity sort = new CommoditySortInfo();
+		if (sort.hasLeaf(info.sortID)) {
+			return ResultMessage.FAILURE;
 		}
 		// 如果添加成功，更新商品分类的信息
-		CommoditySort_Commodity sort = new CommoditySortInfo();
 		String sortID = commodityData.find(ID).getSortID();
 		sort.addCommodity(sortID, ID);
-		return result;
+		return commodityData.insert(po);
 	}
 	
 	/**

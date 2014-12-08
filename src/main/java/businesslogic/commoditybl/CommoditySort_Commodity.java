@@ -20,4 +20,13 @@ public interface CommoditySort_Commodity {
 	 */
 	public void addCommodity(String sortID, String iD);
 
+	/**
+	 * 判断该商品分类是否已经有子类
+	 * @param sortID
+	 * @return
+	 * @author Zing
+	 * @version Dec 8, 2014 4:29:25 PM
+	 */
+	public boolean hasLeaf(String sortID);
+
 }
