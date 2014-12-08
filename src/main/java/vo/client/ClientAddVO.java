@@ -1,4 +1,4 @@
-package vo.client;
+ package vo.client;
 
 import vo.ValueObject;
 import dataenum.ClientCategory;

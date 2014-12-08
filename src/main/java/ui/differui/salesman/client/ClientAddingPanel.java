@@ -13,11 +13,12 @@ import dataenum.ClientLevel;
 import businesslogic.clientbl.Client;
 import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.exitfunction.ExitFunctionFrame;
+import ui.commonui.login.Frame_Login;
 import ui.commonui.myui.MyComboBox;
 import ui.commonui.myui.MyPanel;
 import ui.commonui.myui.MyTextField;
 import ui.commonui.warning.WarningFrame;
-import vo.client.ClientVO;
+import vo.client.ClientAddVO;
 
 public class ClientAddingPanel extends MyPanel implements ActionListener{
 
@@ -193,12 +194,12 @@ public class ClientAddingPanel extends MyPanel implements ActionListener{
 			
 			controller = new Client();	
 			
-			ResultMessage res = controller.addClient(new ClientVO(
+			ResultMessage res = controller.addClient(new ClientAddVO(
 				controller.getID(), getCategory(comboBox_category.getSelectedIndex())
 				, getLevel(comboBox_level.getSelectedIndex()), textField_name.getText()
 				, textField_phone.getText(), textField_address.getText(), 
 				textField_post.getText(), textField_email.getText(),
-				0, 0, Double.parseDouble(textField_limit.getText()), ""));
+				Double.parseDouble(textField_limit.getText()), Frame_Login.userName));
 			
 			if(res.equals(ResultMessage.SUCCESS)) {
 				

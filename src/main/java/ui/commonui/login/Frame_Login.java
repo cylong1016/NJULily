@@ -38,6 +38,9 @@ public class Frame_Login extends MyFrame implements ActionListener{
 	MyButton button_Enter, button_checkbox;
 	MyBackground loginBackground2;
 	
+	public static String userName;
+	public static UserIdentity userIden;
+	
 	public Frame_Login(){
 		
 		MyFrame.button_back.setVisible(false);
@@ -133,6 +136,15 @@ public class Frame_Login extends MyFrame implements ActionListener{
 	public void actionPerformed(ActionEvent events) {
 		if(events.getSource() == button_Enter){
 			User controller = new User();
+			
+			userName = userNameField.getText();
+			for(int i = 0; i < controller.show().size(); i++){
+				if(controller.show().get(i).username.equals(userName)){
+					userName = controller.show().get(i).name;
+					userIden = controller.show().get(i).iden;
+				}
+			}
+			
 			UserIdentity ui = controller.login(new LoginInfo(userNameField.getText()
 					, new String(passwordField.getPassword()),flag));
 			

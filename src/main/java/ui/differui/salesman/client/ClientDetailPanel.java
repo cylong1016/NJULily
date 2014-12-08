@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 
 
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -26,6 +27,7 @@ import ui.commonui.myui.MyPanel;
 import ui.commonui.myui.MyTable;
 import ui.commonui.myui.MyTextField;
 import ui.commonui.warning.WarningFrame;
+import vo.client.ClientAddVO;
 import vo.client.ClientVO;
 
 public class ClientDetailPanel extends MyPanel implements ActionListener{
@@ -302,9 +304,10 @@ public class ClientDetailPanel extends MyPanel implements ActionListener{
 					
 			Client controller = new Client();
 			
-			ResultMessage rm = controller.updClient(new ClientVO(textField_id.getText(), getCategory(comboBox_category.getSelectedIndex()),
-					getLevel(comboBox_level.getSelectedIndex()), textField_name.getText(), textField_phone.getText(),
-					textField_address.getText(), textField_post.getText(), textField_email.getText(),receivable, payable
+			ResultMessage rm = controller.updClient(new ClientAddVO(textField_id.getText()
+					, getCategory(comboBox_category.getSelectedIndex()),getLevel(comboBox_level.getSelectedIndex()),
+					textField_name.getText(), textField_phone.getText(),
+					textField_address.getText(), textField_post.getText(), textField_email.getText()
 					, Double.valueOf(textField_limit.getText()), textField_salesman.getText()));	
 			
 			if(rm.equals(ResultMessage.SUCCESS)){

@@ -4,7 +4,7 @@
 		<name>ClientData</name>
 		<path>data/ClientList.ser</path>
 		<prefix>KH</prefix>
-		<maxID>00001</maxID>
+		<maxID>00002</maxID>
 		<IDMaxBit>5</IDMaxBit>
 	</Data>
 	<Data>

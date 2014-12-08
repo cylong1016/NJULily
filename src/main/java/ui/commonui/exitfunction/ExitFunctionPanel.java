@@ -18,6 +18,7 @@ import ui.differui.inventory.commodity_management.detailsort.SortDetailUI;
 import ui.differui.inventory.frame.Frame_Inventory;
 import ui.differui.salesman.client.ClientAddingUI;
 import ui.differui.salesman.client.ClientDetailUI;
+import ui.differui.salesman.frame.Frame_Salesman;
 
 public class ExitFunctionPanel extends MyPanel implements ActionListener{
 
@@ -74,6 +75,11 @@ public class ExitFunctionPanel extends MyPanel implements ActionListener{
 								Frame_Inventory.visibleTrue(Frame_Inventory.destination);
 								Frame_Inventory.flag = Frame_Inventory.destination;
 								break;
+								
+			case "Sale" : Frame_Salesman.visibleFalse(Frame_Salesman.flag);
+						  Frame_Salesman.visibleTrue(Frame_Salesman.destination);
+						  Frame_Salesman.flag = Frame_Salesman.destination;
+						  break;
 								
 			case "AdminAddingUI" : AdminAddingUI.button_close.doClick();break;
 			

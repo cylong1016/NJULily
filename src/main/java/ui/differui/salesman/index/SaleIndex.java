@@ -1,4 +1,4 @@
-package ui.differui.inventory.index;
+package ui.differui.salesman.index;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -7,11 +7,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 
-public class InventoryIndex extends JLabel implements ActionListener{
+public class SaleIndex extends JLabel implements ActionListener{
 	
 	private static final long serialVersionUID = 1L;
 	
-	public InventoryIndex(){
+	public SaleIndex(){
 		this.setLayout(null);
 		this.setBounds(0, 0, 1280, 720);
 		this.setOpaque(false);

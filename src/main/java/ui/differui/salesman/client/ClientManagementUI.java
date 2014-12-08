@@ -42,6 +42,7 @@ public class ClientManagementUI extends JLabel implements ActionListener{
 	
 	public ClientManagementUI(){
 		this.setLayout(null);
+		this.setBounds(0, 0, 1280, 720);
 		
 		controller = new Client();
 		
