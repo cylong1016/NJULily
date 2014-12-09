@@ -200,7 +200,13 @@ public class InFinal extends JLabel implements ActionListener{
 			
 			for(int i = 0; i < 9; i++)
 				text = text + blank4;
-			text = text + "商品备注：" + list.get(k).remark + "\n"+"\n";
+			String remark;
+			if(list.get(k).remark == null){
+				remark = "无";
+			}else{
+				remark = list.get(k).remark;
+			}
+			text = text + "商品备注：" + remark + "\n"+"\n";
 			
 			total = total + list.get(k).price * list.get(k).number;		
 		}
@@ -223,7 +229,7 @@ public class InFinal extends JLabel implements ActionListener{
 			text = text + line;
 		text = text + "\n";
 		
-		for(int i = 0; i < 9; i++)
+		for(int i = 0; i < 7; i++)
 			text = text + blank4;
 		text = text + "货单备注:" + "\n";
 		

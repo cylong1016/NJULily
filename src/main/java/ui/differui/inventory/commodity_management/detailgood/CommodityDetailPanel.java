@@ -265,6 +265,8 @@ public class CommodityDetailPanel extends MyPanel implements ActionListener{
 				
 				WarningFrame wf = new WarningFrame("商品信息已成功更新！");
 				wf.setVisible(true);
+				
+				CommodityManagementUI.showAll.doClick();
 			}else{
 				WarningFrame wf = new WarningFrame("商品信息无法修改！");
 				wf.setVisible(true);
