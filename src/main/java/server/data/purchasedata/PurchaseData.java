@@ -62,4 +62,22 @@ public class PurchaseData extends CommonData<PurchasePO> implements PurchaseData
 		return new PurchaseInfo();
 	}
 
+	/**
+	 * @see dataservice.purchasedataservice.PurchaseDataService#getPurchaseID()
+	 */
+	@Override
+	public String getPurchaseID() {
+		String ID = getBillID();
+		return purchaseID + "-" + currentDate + "-" + ID;
+	}
+
+	/**
+	 * @see dataservice.purchasedataservice.PurchaseDataService#getPurchaseBackID()
+	 */
+	@Override
+	public String getPurchaseBackID() {
+		String ID = getBillID();
+		return purchasebackID + "-" + currentDate + "-" + ID;
+	}
+
 }

@@ -62,4 +62,22 @@ public class SaleData extends CommonData<SalesPO> implements SaleDataService {
 		return new SaleInfo();
 	}
 
+	/**
+	 * @see dataservice.saledataservice.SaleDataService#getSaleID()
+	 */
+	@Override
+	public String getSaleID() {
+		String ID = getBillID();
+		return saleID + "-" + currentDate + "-" + ID;
+	}
+
+	/**
+	 * @see dataservice.saledataservice.SaleDataService#getSaleBackID()
+	 */
+	@Override
+	public String getSaleBackID() {
+		String ID = getBillID();
+		return salebackID + "-" + currentDate + "-" + ID;
+	}
+
 }

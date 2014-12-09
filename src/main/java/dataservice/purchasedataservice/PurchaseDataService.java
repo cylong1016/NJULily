@@ -14,12 +14,27 @@ public interface PurchaseDataService extends CommonDataService<PurchasePO> {
 
 	/**
 	 * 按照是进货单还是进货退货单返回可用ID
+	 * @deprecated 每次都要判断type影响效率，分成getPurchaseID和getPurchaseBackID两个方法
 	 * @param type
 	 * @return 进货单或者进货退货单可用ID
 	 * @author cylong
 	 * @version 2014年11月28日 下午12:11:03
 	 */
 	public String getID(BillType type);
+
+	/**
+	 * @return 新的进货单的ID
+	 * @author cylong
+	 * @version 2014年12月9日 下午6:44:29
+	 */
+	public String getPurchaseID();
+
+	/**
+	 * @return 新的进货退货单的ID
+	 * @author cylong
+	 * @version 2014年12月9日 下午6:44:31
+	 */
+	public String getPurchaseBackID();
 
 	/**
 	 * @return PurchaseInfoService 的实例

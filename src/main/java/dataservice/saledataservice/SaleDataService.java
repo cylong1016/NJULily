@@ -14,12 +14,28 @@ public interface SaleDataService extends CommonDataService<SalesPO> {
 
 	/**
 	 * 按照是销售单还是销售退货单返回ID
+	 * @deprecated 每次都需要判断type影响效率，分成getSaleID和getSaleBackID两个方法
 	 * @param type
 	 * @return 销售单或者销售退货单ID
 	 * @author cylong
 	 * @version 2014年11月28日 下午12:11:03
 	 */
 	public String getID(BillType type);
+
+	/**
+	 * 生成新的销售单的ID
+	 * @return 新的销售单的ID
+	 * @author cylong
+	 * @version 2014年12月9日 下午6:42:24
+	 */
+	public String getSaleID();
+
+	/**
+	 * @return 新的销售退货单的ID
+	 * @author cylong
+	 * @version 2014年12月9日 下午6:42:53
+	 */
+	public String getSaleBackID();
 
 	/**
 	 * @return SaleInfoService 的实例

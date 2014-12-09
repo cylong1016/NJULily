@@ -2,11 +2,10 @@ package blservice.recordblservice;
 
 import java.util.ArrayList;
 
-import dataenum.BillType;
 import vo.BusinessStateVO;
 import vo.SaleDetailVO;
 import vo.ValueObject;
-import message.ResultMessage;
+import dataenum.BillType;
 
 /**
  * 负责实现查看表单界面所需要的服务

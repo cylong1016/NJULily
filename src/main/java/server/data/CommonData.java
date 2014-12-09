@@ -93,6 +93,7 @@ public abstract class CommonData<PO extends PersistentObject> implements CommonD
 
 	/**
 	 * 按照单子类型返回ID的前缀，由子类实现
+	 * @deprecated 不需要判断单据的类型
 	 * @param type
 	 * @return
 	 * @author cylong
@@ -100,6 +101,26 @@ public abstract class CommonData<PO extends PersistentObject> implements CommonD
 	 */
 	protected String getPreID(BillType type) {
 		return null;
+	}
+
+	/**
+	 * 由getID(type)变形得到，不需要判断单据的类型
+	 * @return
+	 * @author cylong
+	 * @version 2014年12月9日 下午6:54:46
+	 */
+	protected String getBillID() {
+		if (currentDate.equals(dateRecord)) {
+			maxID = Integer.parseInt(parsexml.getValue("maxID"));
+		} else {	// 过了一天
+			parsexml.setValue("dateRecord", currentDate);
+			maxID = 0;	// 初始化最大ID
+		}
+		String ID = getID();
+		if (ID.length() > IDMaxBit) {	// 超过一天单据的最大数量
+			return null;
+		}
+		return ID;
 	}
 
 	/**
