@@ -7,6 +7,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 
+import vo.ApprovalVO;
+import businesslogic.approvalbl.Approval;
+
 public class ApproveManagementUI extends JLabel implements ActionListener{
 	
 	private static final long serialVersionUID = 1L;
@@ -23,7 +26,14 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 		infoBar.setOpaque(false);
 		this.add(infoBar);
 			
+		show();
 	}
+	
+	public void show(){
+		Approval approval = new Approval();
+		ApprovalVO vo = approval.show();
+		System.out.println(vo.purchaseVOs.size());
+	} 
 	
 	public void actionPerformed(ActionEvent events) {
 		
