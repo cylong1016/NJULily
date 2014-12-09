@@ -2,7 +2,6 @@ package ui.differui.salesman.in;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -11,20 +10,16 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-import message.ResultMessage;
-import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.myui.MyComboBox;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyTable;
 import ui.commonui.myui.MyTextField;
 import ui.commonui.warning.WarningFrame;
-import ui.differui.salesman.client.ClientAddingUI;
-import ui.differui.salesman.client.ClientDetailUI;
-import ui.differui.salesman.client.ClientManagementUI;
 import ui.differui.salesman.frame.Frame_Salesman;
 import vo.client.ClientVO;
 import businesslogic.clientbl.Client;
@@ -39,10 +34,12 @@ public class InClient extends JLabel implements ActionListener{
 	public static MyJButton button_showAll;
 	public static JButton button_delete;
 	MyComboBox comboBox;
-	MyTextField textField, tf_client;
+	MyTextField textField, tf_client, tf_inven;
+	JTextArea ta;
 	
 	String deleteID = "";
 	static int rowNum;
+	public static String ClientName, ClientID, storeName ,note;
 	
 	Client controller;
 	
@@ -106,7 +103,7 @@ public class InClient extends JLabel implements ActionListener{
 		JTableHeader head = table.getTableHeader();
 		head.setBackground(backColor);
 		head.setForeground(foreColor);
-		jsp.setBounds(75, 120 - 10, 1125, 450);
+		jsp.setBounds(75, 120 - 10, 1125, 450 - 235);
 		jsp.getViewport().setBackground(new Color(0,0,0,0.3f));
 		jsp.setOpaque(false);
 		jsp.setBorder(BorderFactory.createEmptyBorder());
@@ -122,24 +119,48 @@ public class InClient extends JLabel implements ActionListener{
 		this.add(button_add);	
 		
 		JLabel word = new JLabel("本货单的客户为：");
-		word.setBounds(230, 600 - 26, 120, 25);
+		word.setBounds(230 + 360, 600 - 26 - 235, 120, 25);
 		word.setBackground(null);
 		word.setForeground(Color.WHITE);
 		word.setVisible(true);
 		this.add(word);
 		
-		tf_client = new MyTextField(360, 600 - 26, 140, 25);
+		tf_client = new MyTextField(360 + 360, 600 - 26 - 235, 140, 25);
 		tf_client.setText("无");
 		tf_client.setEditable(false);
 		tf_client.setVisible(true);
-		tf_client.setForeground(foreColor);
-		tf_client.setBackground(backColor);
 		tf_client.setHorizontalAlignment(JTextField.CENTER);
 		this.add(tf_client);
+		
+		JLabel word2 = new JLabel("仓库名称：");
+		word2.setBounds(230, 600 - 26 - 235, 120, 25);
+		word2.setBackground(null);
+		word2.setForeground(Color.WHITE);
+		word2.setVisible(true);
+		this.add(word2);
+		
+		tf_inven = new MyTextField(360, 600 - 26 - 235, 140, 25);
+		tf_inven.setVisible(true);
+		tf_inven.setForeground(backColor);
+		tf_inven.setHorizontalAlignment(JTextField.CENTER);
+		this.add(tf_inven);
+		
+		JLabel word3 = new JLabel("货单备注：");
+		word3.setBounds(230, 600 - 26 - 235 + 50, 120, 25);
+		word3.setBackground(null);
+		word3.setForeground(Color.WHITE);
+		word3.setVisible(true);
+		this.add(word3);
+		
+		ta = new JTextArea();
+			
+		JScrollPane jsp2 = new JScrollPane(ta);
+		jsp2.setBounds(360, 600 - 26 - 235 + 50, 500, 160);
+		this.add(jsp2);
 			
 		//add a button for checking and modifying the information of a selected client
 		button_cam = new MyJButton("选择选中客户");
-		button_cam.setBounds(305 + 420 + 125, 610 - 26 - 10, 210, 25);
+		button_cam.setBounds(525 + 450 + 15, 610 - 26 - 10 - 235, 210, 25);
 		button_cam.addActionListener(this);
 		button_cam.setBackground(backColor);
 		button_cam.setForeground(foreColor);
@@ -184,10 +205,12 @@ public class InClient extends JLabel implements ActionListener{
 			for(int i = 0; i < controller.show().size(); i++){
 				ClientVO cvo = controller.show().get(i);
 				
-				String[] str = {cvo.ID, getCategory(cvo.category.toString()), getLevel(cvo.level.toString())
-						, cvo.name,cvo.salesman,String.valueOf(cvo.receivable - cvo.payable)
-						,String.valueOf(cvo.receivable), String.valueOf(cvo.payable),String.valueOf(cvo.receivableLimit)};
-				tableModel.addRow(str);
+				if(!cvo.category.toString().equals("SALES_PERSON")){
+					String[] str = {cvo.ID, getCategory(cvo.category.toString()), getLevel(cvo.level.toString())
+							, cvo.name,cvo.salesman,String.valueOf(cvo.receivable - cvo.payable)
+							,String.valueOf(cvo.receivable), String.valueOf(cvo.payable),String.valueOf(cvo.receivableLimit)};
+					tableModel.addRow(str);
+				}
 			}		
 		}
 		
@@ -200,6 +223,8 @@ public class InClient extends JLabel implements ActionListener{
 				wf.setVisible(true);
 			}else{
 				tf_client.setText((String)table.getValueAt(table.getSelectedRow(), 3));
+				ClientName = (String)table.getValueAt(table.getSelectedRow(), 3);
+				ClientID = (String)table.getValueAt(table.getSelectedRow(), 0);
 			}
 		}
 		
@@ -209,6 +234,17 @@ public class InClient extends JLabel implements ActionListener{
 				wf.setVisible(true);
 			}else{
 				
+				if(tf_inven.getText().isEmpty()){
+					WarningFrame wf = new WarningFrame("请输入仓库名称！");
+					wf.setVisible(true);
+				}else{
+					Frame_Salesman.visibleTrue(7);
+					this.setVisible(false);
+					storeName = tf_inven.getText();
+					note = ta.getText();
+					
+					InFinal.showText.doClick();
+				}
 			}
 		}
 		

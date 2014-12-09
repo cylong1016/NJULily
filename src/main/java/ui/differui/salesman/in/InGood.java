@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
-import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -131,7 +130,7 @@ public class InGood extends MyPanel implements ActionListener{
 		jsp2.setVisible(true);
 		this.add(jsp2);
 		
-		String[] headers2 = {"商品编号","商品名称","商品型号","商品数量","商品价格"};
+		String[] headers2 = {"商品编号","商品名称","商品型号","商品数量","商品价格","商品备注"};
 		table2 = new MyTable(headers2, true);
 		
 		JTableHeader head2 = table.getTableHeader();
@@ -280,7 +279,7 @@ public class InGood extends MyPanel implements ActionListener{
 				}
 				
 				if(flag == true){
-			
+					
 					Commodity controller = new Commodity();
 					ArrayList<CommodityVO> commoList = controller.show();
 					
@@ -298,18 +297,21 @@ public class InGood extends MyPanel implements ActionListener{
 		}
 		
 		if(events.getSource() == button_del){
-			
-			String commoID = (String)table2.getValueAt(table2.getSelectedRow(), 0);
-
-			for(int i = 0; i < addCommoID.size(); i++){					
-				if(addCommoID.get(i).equals(commoID)){	
-					addCommoID.remove(i);
+			if(table.getSelectedRow() < 0){
+				WarningFrame wf = new WarningFrame("请选择一个欲除去的商品！");
+				wf.setVisible(true);
+			}else{
+				String commoID = (String)table2.getValueAt(table2.getSelectedRow(), 0);
+	
+				for(int i = 0; i < addCommoID.size(); i++){					
+					if(addCommoID.get(i).equals(commoID)){	
+						addCommoID.remove(i);
+					}
 				}
+				
+				DefaultTableModel model = (DefaultTableModel)table2.getModel();
+				model.removeRow(table2.getSelectedRow());
 			}
-			
-			DefaultTableModel model = (DefaultTableModel)table2.getModel();
-			model.removeRow(table2.getSelectedRow());
-			
 		}
 			
 		if(events.getSource() == showAll){
@@ -350,7 +352,8 @@ public class InGood extends MyPanel implements ActionListener{
 								commoList.add(new CommodityItemVO((String)table2.getValueAt(j, 0)
 										,Integer.parseInt((String) table2.getValueAt(j, 3)
 												),Double.parseDouble((String) table2.getValueAt(j, 4)),
-										null,(String)table2.getValueAt(j, 1),(String)table2.getValueAt(j, 2)));
+												(String)table2.getValueAt(j, 5),(String)table2.getValueAt(j, 1)
+												,(String)table2.getValueAt(j, 2)));
 							}
 						}
 					}					
