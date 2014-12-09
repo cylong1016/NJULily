@@ -17,7 +17,7 @@ import businesslogic.approvalbl.info.ValueObject_Approval;
 import businesslogic.commoditybl.CommodityInfo;
 import businesslogic.common.Info;
 import businesslogic.inventorybl.info.CommodityInfo_Inventory;
-import businesslogic.promotionbl.InventoryInfo_Promotion;
+import businesslogic.promotionbl.info.InventoryInfo_Promotion;
 import businesslogic.recordbl.info.InventoryInfo_Record;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
 

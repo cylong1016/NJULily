@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 import message.ResultMessage;
 import vo.commodity.CommodityItemVO;
+import vo.promotion.PromotionClientVO;
+import vo.promotion.PromotionCommodityVO;
+import vo.promotion.PromotionTotalVO;
+import vo.promotion.PromotionVO;
 import vo.sale.SalesVO;
 import vo.sale.saleAddVO;
 import dataenum.BillType;
@@ -47,7 +51,27 @@ public interface SaleBLService {
 	 * @version 2014年11月28日 下午7:13:07
 	 */
 	public void addCommodities(CommodityItemVO item);
+	
+	/**
+	 * 因为需要判断客户等级查看是否有对应促销策略，所以客户也要单独添加
+	 * @param clientID
+	 * @author Zing
+	 * @version Dec 9, 2014 5:40:58 PM
+	 */
+	public void addClient(String clientID);
+	
+	/**
+	 * 查看是否有合适的销售策略
+	 * @return
+	 * @author Zing
+	 * @version Dec 9, 2014 5:41:34 PM
+	 */
+	public ArrayList<PromotionCommodityVO> findFitPromotionCommodity();
 
+	public ArrayList<PromotionClientVO> findFitPromotionClient();
+	
+	public ArrayList<PromotionTotalVO> findFitPromotionTotal();
+	
 	/**
 	 * 创建销售（销售退货）单时需要的除商品以外的数据（变成审批状态）
 	 * @param inputInfo

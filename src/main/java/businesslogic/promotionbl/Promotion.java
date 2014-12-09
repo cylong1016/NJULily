@@ -2,16 +2,10 @@ package businesslogic.promotionbl;
 
 import java.util.ArrayList;
 
-import message.ResultMessage;
-import po.CommodityItemPO;
-import po.PromotionPO;
 import server.data.promotiondata.PromotionData;
 import vo.InventoryBillVO;
-import vo.PromotionVO;
-import vo.commodity.CommodityItemVO;
-import blservice.promotionblservice.PromoInputInfo;
-import blservice.promotionblservice.PromotionBLService;
 import businesslogic.inventorybl.InventoryInfo;
+import businesslogic.promotionbl.info.InventoryInfo_Promotion;
 import dataenum.PromotionType;
 import dataservice.promotiondataservice.PromotionDataService;
 
@@ -23,21 +17,24 @@ import dataservice.promotiondataservice.PromotionDataService;
  * @author Zing
  * @version Nov 30, 2014 12:53:47 AM
  */
-public class Promotion implements PromotionBLService{
+public class Promotion {
 
-	/** 策略条目 */
-	private PromotionList list;
 	/** 策略编号 */
-	private String ID;
+	protected String ID;
 	/** 促销起始时间 */
-	private String beginDate;
+	protected String beginDate;
 	/** 促销结束时间 */
-	private String endDate;
+	protected String endDate;
 	/** 策略类型 */
-	private PromotionType type;
+	protected PromotionType type;
+	// 数据
+	protected PromotionDataService promotionData;
+	/** 策略条目 */
+	protected PromotionList list;
 
 	public Promotion() {
 		list = new PromotionList();
+		promotionData = getPromotionData();
 	}
 
 	/**
@@ -46,7 +43,7 @@ public class Promotion implements PromotionBLService{
 	 * @author Zing
 	 * @version Nov 30, 2014 9:52:22 AM
 	 */
-	public PromotionDataService getPromotionData() {
+	protected PromotionDataService getPromotionData() {
 		//		try {
 		//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
 		//			PromotionDataService promotionData = factory.getPromotionData();
@@ -57,18 +54,6 @@ public class Promotion implements PromotionBLService{
 		//		}
 		// TODO 本地新建
 		return new PromotionData();
-	}
-
-	/**
-	 * 查看不同类型的销售策略
-	 * @param type
-	 * @return
-	 * @author Zing
-	 * @version Nov 30, 2014 9:52:28 AM
-	 */
-	public ArrayList<PromotionVO> show(PromotionType type) {
-		getPromotionData().show(type); // TODO 需要po转vo
-		return null;
 	}
 
 	/**
@@ -89,86 +74,8 @@ public class Promotion implements PromotionBLService{
 	 * @author Zing
 	 * @version Nov 30, 2014 9:52:35 AM
 	 */
-	public String getID(PromotionType type) {
-		this.type = type;
+	public String getID() {
 		this.ID = getPromotionData().getID();
 		return ID;
-	}
-
-	/**
-	 * 添加特价包商品／购买商品
-	 * @param vo
-	 * @author Zing
-	 * @version Nov 30, 2014 9:52:38 AM
-	 */
-	public void addBargain(CommodityItemVO vo) {
-		PromotionListItem item = new PromotionListItem(vo.ID, vo.number);
-		list.addBargain(item);
-	}
-
-	/**
-	 * 添加赠送的商品
-	 * @param vo
-	 * @author Zing
-	 * @version Nov 30, 2014 9:52:43 AM
-	 */
-	public void addGifts(CommodityItemVO vo) {
-		PromotionListItem item = new PromotionListItem(vo.ID, vo.number, vo.price);
-		list.addGift(item);
-	}
-
-	/**
-	 * 提价单据
-	 * @param info
-	 * @return
-	 * @author Zing
-	 * @version Nov 30, 2014 9:52:46 AM
-	 */
-	public ResultMessage submit(PromoInputInfo info) {
-		setInputInfo(info);
-		PromotionPO po = buildPromotion();
-		return getPromotionData().insert(po);
-	}
-
-	/**
-	 * @param info
-	 * @author Zing
-	 * @version Nov 30, 2014 9:52:49 AM
-	 */
-	private void setInputInfo(PromoInputInfo info) {
-		this.beginDate = info.beginDate;
-		this.endDate = info.endDate;
-		list.setAllowance(info.allowance);
-		list.setVoucher(info.voucher);
-		list.setLevel(info.level);
-		list.setTotal(info.total);
-	}
-
-	/**
-	 * @return
-	 * @author Zing
-	 * @version Nov 30, 2014 9:52:54 AM
-	 */
-	private PromotionPO buildPromotion() {
-		PromotionPO po = null;
-		ArrayList<CommodityItemPO> gifts = list.getGifts();
-		double allowance = list.getAllowance();
-		int voucher = list.getVoucher();
-		switch(type) {
-		case CLIENT:
-			po = new PromotionPO(ID, beginDate, endDate, list.getLevel(), gifts, allowance, voucher);
-			break;
-		case COMMODITY:
-			po = new PromotionPO(ID, beginDate, endDate, list.getBargains(), gifts, allowance, voucher);
-			break;
-		case TOTAL:
-			po = new PromotionPO(ID, beginDate, endDate, list.getTotal(), gifts, allowance, voucher);
-			break;
-		case BARGAINS:
-			po = new PromotionPO(ID, beginDate, endDate, list.getBargains(), list.getTotal());
-		default:
-			break;
-		}
-		return po;
 	}
 }

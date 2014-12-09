@@ -1,6 +1,7 @@
 package businesslogic.promotionbl;
 
 import businesslogic.commoditybl.CommodityInfo;
+import businesslogic.promotionbl.info.CommodityInfo_Promotion;
 
 public class PromotionListItem {
 	/** 商品编号 */

@@ -6,16 +6,18 @@ import message.ResultMessage;
 import po.SalesPO;
 import server.data.saledata.SaleData;
 import vo.commodity.CommodityItemVO;
+import vo.promotion.PromotionClientVO;
+import vo.promotion.PromotionCommodityVO;
+import vo.promotion.PromotionTotalVO;
 import vo.sale.SalesVO;
 import vo.sale.saleAddVO;
 import blservice.saleblservice.SaleBLService;
-import blservice.saleblservice.SaleInputInfo;
 import businesslogic.clientbl.ClientInfo;
 import businesslogic.common.ChangeCommodityItems;
+import businesslogic.promotionbl.PromotionInfo;
 import businesslogic.salebl.info.ClientInfo_Sale;
-import dataenum.BillState;
+import businesslogic.salebl.info.PromotionInfo_Sale;
 import dataenum.BillType;
-import dataenum.Storage;
 import dataservice.saledataservice.SaleDataService;
 
 /**
@@ -34,14 +36,17 @@ public class Sale implements SaleBLService{
 	private BillType type;
 	/** 单据的ID */
 	private String ID;
-	
+	/** 进行转换的POVO */
 	SaleTrans transPOVO;
-	
-	public ChangeCommodityItems changeItems;
+	/** 查看促销信息 */
+	PromotionInfo_Sale promotionInfo;
+	/** 添加的商品的ID集合 */
+	ArrayList<String> commodityIDs;
 
 	public Sale() {
 		this.list = new SaleList();
-		changeItems = new ChangeCommodityItems();
+		promotionInfo = new PromotionInfo();
+		commodityIDs = new ArrayList<String>();
 	}
 
 	public SaleDataService getSaleData() {
@@ -80,8 +85,13 @@ public class Sale implements SaleBLService{
 	public void addCommodities(CommodityItemVO itemVO) {
 		SaleListItem item = new SaleListItem(itemVO.ID, itemVO.number, itemVO.price, itemVO.remark);
 		list.add(item);
+		commodityIDs.add(itemVO.ID);
 	}
-
+	
+	public void addClient(String clientID) {
+		list.setClientID(clientID);
+	}
+	
 	/**
 	 * 界面显示全部的销售（销售退货）单
 	 * @return 销售（销售退货）单的ArrayList
@@ -124,7 +134,6 @@ public class Sale implements SaleBLService{
 		// TODO 保存在本地
 		return ResultMessage.SUCCESS;
 	}
-
 	
 	/**
 	 * 建立销售单
@@ -149,11 +158,25 @@ public class Sale implements SaleBLService{
 	 * @version Dec 3, 2014 2:42:17 PM
 	 */
 	private void setInputInfo(saleAddVO inputInfo) {
-		list.setClientID(inputInfo.clientID);
 		list.setStorage(inputInfo.storage);
 		list.setAllowance(inputInfo.allowance);
 		list.setVoucher(inputInfo.voucher);
 		list.setRemark(inputInfo.remark);
+	}
+
+	public ArrayList<PromotionCommodityVO> findFitPromotionCommodity() {
+		promotionInfo.findFitPromotionCommodity(ID, commodityIDs);
+		return null;
+	}
+
+	public ArrayList<PromotionClientVO> findFitPromotionClient() {
+		promotionInfo.findFitPromotionClient(ID, list.getClientID());
+		return null;
+	}
+
+	public ArrayList<PromotionTotalVO> findFitPromotionTotal() {
+		promotionInfo.findFitPromotionTotal(ID, list.getBeforePrice());
+		return null;
 	}
 	
 

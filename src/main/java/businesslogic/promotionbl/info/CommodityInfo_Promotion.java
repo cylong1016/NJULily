@@ -1,4 +1,4 @@
-package businesslogic.promotionbl;
+package businesslogic.promotionbl.info;
 
 public interface CommodityInfo_Promotion {
 	public String getName(String ID);
