@@ -16,12 +16,41 @@ import dataservice.TableInfoService;
 public interface InventoryDataService extends CommonDataService<InventoryBillPO> {
 
 	/**
+	 * @deprecated 分成4个子方法
 	 * @param type （赠送单、报溢单、报损单、报警单）
 	 * @return 相应单据的ID
 	 * @author cylong
 	 * @version 2014年12月2日 下午5:53:27
 	 */
 	public String getID(BillType type);
+
+	/**
+	 * @return 新的报溢单的ID
+	 * @author cylong
+	 * @version 2014年12月9日 下午7:03:43
+	 */
+	public String getOverflowID();
+
+	/**
+	 * @return 新的报损单的ID
+	 * @author cylong
+	 * @version 2014年12月9日 下午7:03:55
+	 */
+	public String getLossID();
+
+	/**
+	 * @return 新的报警单的ID
+	 * @author cylong
+	 * @version 2014年12月9日 下午7:04:04
+	 */
+	public String getAlarmID();
+
+	/**
+	 * @return 新的赠送单的ID
+	 * @author cylong
+	 * @version 2014年12月9日 下午7:04:13
+	 */
+	public String getGiftID();
 
 	/**
 	 * @return 返回一个盘点的批号

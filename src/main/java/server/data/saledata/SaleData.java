@@ -38,6 +38,7 @@ public class SaleData extends CommonData<SalesPO> implements SaleDataService {
 
 	/**
 	 * 根据单据类型获得编号前缀
+	 * @deprecated 不需要判断type， 已经分成多个方法
 	 * @param type 单据类型
 	 * @return ID前缀
 	 * @author cylong

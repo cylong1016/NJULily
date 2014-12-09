@@ -68,6 +68,7 @@ public abstract class CommonData<PO extends PersistentObject> implements CommonD
 
 	/**
 	 * 以单据类型返回单据ID
+	 * @deprecated 每次都要判断type影响效率
 	 * @param type 单据类型
 	 * @return 单据ID
 	 * @author cylong

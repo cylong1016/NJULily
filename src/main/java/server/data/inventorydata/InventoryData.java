@@ -93,4 +93,40 @@ public class InventoryData extends CommonData<InventoryBillPO> implements Invent
 		return new InventoryInfo();
 	}
 
+	/**
+	 * @see dataservice.inventorydataservice.InventoryDataService#getOverflowID()
+	 */
+	@Override
+	public String getOverflowID() {
+		String ID = super.getID();
+		return overflowID + "-" + currentDate + "-" + ID;
+	}
+
+	/**
+	 * @see dataservice.inventorydataservice.InventoryDataService#getLossID()
+	 */
+	@Override
+	public String getLossID() {
+		String ID = super.getID();
+		return lossID + "-" + currentDate + "-" + ID;
+	}
+
+	/**
+	 * @see dataservice.inventorydataservice.InventoryDataService#getAlarmID()
+	 */
+	@Override
+	public String getAlarmID() {
+		String ID = super.getID();
+		return alarmID + "-" + currentDate + "-" + ID;
+	}
+
+	/**
+	 * @see dataservice.inventorydataservice.InventoryDataService#getGiftID()
+	 */
+	@Override
+	public String getGiftID() {
+		String ID = super.getID();
+		return giftID + "-" + currentDate + "-" + ID;
+	}
+
 }
