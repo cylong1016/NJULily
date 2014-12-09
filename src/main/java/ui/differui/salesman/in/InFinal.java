@@ -96,7 +96,6 @@ public class InFinal extends JLabel implements ActionListener{
 			Purchase purController = new Purchase();
 			ArrayList<CommodityItemVO> list = InGood.commoList;
 			
-			
 			//ADD COMMODITIES
 			for(int i = 0; i < list.size(); i++)
 				purController.addCommodities(list.get(i));
