@@ -16,7 +16,8 @@ import ui.commonui.myui.MyBackground;
 import ui.commonui.myui.MyButton;
 import ui.commonui.myui.MyFrame;
 import ui.differui.salesman.client.ClientManagementUI;
-import ui.differui.salesman.in.InUI;
+import ui.differui.salesman.in.InClient;
+import ui.differui.salesman.in.InGood;
 import ui.differui.salesman.inback.InBackUI;
 import ui.differui.salesman.index.SaleIndex;
 import ui.differui.salesman.sale.SaleUI;
@@ -36,10 +37,13 @@ public class Frame_Salesman extends MyFrame implements ActionListener{
 	
 	static ClientManagementUI panel_cm;
 	static SaleIndex panel_si;
-	static InUI panel_iu;
+	static InClient panel_inClient;
+	static InGood panel_iu;
 	static InBackUI panel_ibu;
 	static SaleUI panel_su;
 	static SaleBackUI panel_sbu;
+	
+	
 	
 	static JLabel in_back;
 	
@@ -60,7 +64,11 @@ public class Frame_Salesman extends MyFrame implements ActionListener{
 		panel_si.setVisible(true);
 		this.add(panel_si);
 		
-		panel_iu = new InUI();
+		panel_inClient = new InClient();
+		panel_inClient.setVisible(false);
+		this.add(panel_inClient);
+		
+		panel_iu = new InGood();
 		panel_iu.setVisible(false);
 		this.add(panel_iu);
 		
@@ -220,6 +228,10 @@ public class Frame_Salesman extends MyFrame implements ActionListener{
 			case 3: panel_ibu.setVisible(true);break;
 			case 4: panel_su.setVisible(true);break;
 			case 5: panel_sbu.setVisible(true);break;
+			
+			//进货时的第二步 -添加客户
+			case 6: panel_inClient.setVisible(true);
+					flag = 2;break;
 		}
 	}
 	
@@ -229,10 +241,15 @@ public class Frame_Salesman extends MyFrame implements ActionListener{
 			case 0: panel_si.setVisible(false);break;
 			case 1: panel_cm.setVisible(false);break;
 			case 2: panel_iu.setVisible(false);
+					panel_inClient.setVisible(false);
 					in_back.setVisible(false);break;
 			case 3: panel_ibu.setVisible(false);break;
 			case 4: panel_su.setVisible(false);break;
 			case 5: panel_sbu.setVisible(false);break;
+			
+			//进货时的第二步 -添加客户
+			case 6: in_back.setVisible(false);
+					flag = 2;break;
 		}
 	}
 	

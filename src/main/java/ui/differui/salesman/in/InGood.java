@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -20,13 +21,15 @@ import ui.commonui.myui.MyTable;
 import ui.commonui.myui.MyTextField;
 import ui.commonui.myui.MyTree;
 import ui.commonui.warning.WarningFrame;
+import ui.differui.salesman.frame.Frame_Salesman;
+import vo.commodity.CommodityItemVO;
 import vo.commodity.CommoditySortVO;
 import vo.commodity.CommodityVO;
 import businesslogic.commoditybl.Commodity;
 import businesslogic.commoditysortbl.CommoditySort;
 import dataenum.FindTypeCommo;
 
-public class InUI extends MyPanel implements ActionListener{
+public class InGood extends MyPanel implements ActionListener{
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -51,11 +54,18 @@ public class InUI extends MyPanel implements ActionListener{
 	static String deleteID;
 	int clickTime = 0;
 	
- 	public InUI(){
+	ArrayList<String> addCommoID;
+	public static ArrayList<CommodityItemVO> commoList;
+	
+ 	public InGood(){
 		
 		rowNum = 0;
 		
 		int y = 10;
+		
+		addCommoID = new ArrayList<String>();
+		commoList = new ArrayList<CommodityItemVO>();
+		commoList.clear();
 		
 		Color foreColor = new Color(158, 213, 220);
 		Color backColor = new Color(46, 52, 101);
@@ -64,7 +74,7 @@ public class InUI extends MyPanel implements ActionListener{
 		this.setBounds(0, 0, 1280, 720);
 		this.setOpaque(false);
 
-		JLabel infoBar = new JLabel("创建进货单");
+		JLabel infoBar = new JLabel("创建进货单 - 选择商品");
 		infoBar.setFont(new Font("华文细黑", Font.BOLD, 18));
 		infoBar.setBounds(80, 14, 1100, 20);
 		infoBar.setForeground(Color.GRAY);
@@ -102,7 +112,7 @@ public class InUI extends MyPanel implements ActionListener{
 		this.add(button_search);		
 		
 		//add a button for showing all the client to the table
-		button_finish = new MyJButton("确定生成货单");
+		button_finish = new MyJButton("下一步");
 		button_finish.setBounds(944 + 150 - 30, 563 + y, 130, 25);
 		button_finish.addActionListener(this);
 		this.add(button_finish);	
@@ -122,7 +132,8 @@ public class InUI extends MyPanel implements ActionListener{
 		this.add(jsp2);
 		
 		String[] headers2 = {"商品编号","商品名称","商品型号","商品数量","商品价格"};
-		table2 = new MyTable(headers2);
+		table2 = new MyTable(headers2, true);
+		
 		JTableHeader head2 = table.getTableHeader();
 		head2.setForeground(foreColor);
 		head2.setBackground(backColor);
@@ -249,8 +260,55 @@ public class InUI extends MyPanel implements ActionListener{
 			}
 		}
 		
+		if(events.getSource() == button_add){
+			
+			if(table.getSelectedRow() < 0){
+				WarningFrame wf = new WarningFrame("请选择一个欲添加的商品！");
+				wf.setVisible(true);
+			}else{
+				
+				String commoID = (String)table.getValueAt(table.getSelectedRow(), 0);
+				Boolean flag = true;
+				
+				for(int i = 0; i < addCommoID.size(); i++){
+					if(addCommoID.get(i).equals(commoID)){
+						WarningFrame wf = new WarningFrame("已经添加了此商品！");
+						wf.setVisible(true);
+						i = 1000;
+						flag = false;
+					}
+				}
+				
+				if(flag == true){
+			
+					Commodity controller = new Commodity();
+					ArrayList<CommodityVO> commoList = controller.show();
+					
+					for(int i = 0; i < commoList.size(); i++){
+						if(commoList.get(i).ID.equals(commoID)){
+							DefaultTableModel model = (DefaultTableModel)table2.getModel();
+							String[] rowData = {commoList.get(i).ID, commoList.get(i).name, 
+									commoList.get(i).type,"0",String.valueOf(commoList.get(i).purPrice)};
+							model.addRow(rowData);
+							addCommoID.add(commoID);
+						}
+					}
+				}
+			}
+		}
+		
 		if(events.getSource() == button_del){
 			
+			String commoID = (String)table2.getValueAt(table2.getSelectedRow(), 0);
+
+			for(int i = 0; i < addCommoID.size(); i++){					
+				if(addCommoID.get(i).equals(commoID)){	
+					addCommoID.remove(i);
+				}
+			}
+			
+			DefaultTableModel model = (DefaultTableModel)table2.getModel();
+			model.removeRow(table2.getSelectedRow());
 			
 		}
 			
@@ -258,6 +316,47 @@ public class InUI extends MyPanel implements ActionListener{
 			button_showAll.doClick();
 		}
 		
+		if(events.getSource() == button_finish){
+			
+			commoList.clear();
+
+			if(table2.isEditing())
+				table2.getCellEditor().stopCellEditing();
+			
+			Boolean flag = true;
+			
+			if(addCommoID.size() == 0){
+				WarningFrame wf = new WarningFrame("请选择需要添加的商品!");
+				wf.setVisible(true);
+			}else{
+				
+				for(int j = 0; j < addCommoID.size(); j++){
+					if(Integer.parseInt((String) table2.getValueAt(j, 3))<= 0){
+						flag = false;
+					}
+				}
+				
+				if(flag == false){
+					WarningFrame wf = new WarningFrame("商品数量不能为0!");
+					wf.setVisible(true);
+				}else{
+					this.setVisible(false);
+					Frame_Salesman.visibleFalse(6);
+					Frame_Salesman.visibleTrue(6);
+						
+					for(int i = 0; i < addCommoID.size(); i++){
+						for(int j = 0; j < addCommoID.size(); j++){
+							if(addCommoID.get(i).equals(table2.getValueAt(j, 0))){
+								commoList.add(new CommodityItemVO((String)table2.getValueAt(j, 0)
+										,Integer.parseInt((String) table2.getValueAt(j, 3)
+												),Double.parseDouble((String) table2.getValueAt(j, 4)),
+										null,(String)table2.getValueAt(j, 1),(String)table2.getValueAt(j, 2)));
+							}
+						}
+					}					
+				}
+			}
+		}	
 	}
 	
 	public String getSortName(String ID){

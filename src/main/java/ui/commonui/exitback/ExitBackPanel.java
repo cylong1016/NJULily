@@ -10,7 +10,9 @@ import ui.commonui.login.Frame_Login;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyPanel;
 import ui.differui.admin.AdminUI;
+import ui.differui.finace.frame.Frame_Finace;
 import ui.differui.inventory.frame.Frame_Inventory;
+import ui.differui.manager.frame.Frame_Manager;
 import ui.differui.salesman.frame.Frame_Salesman;
 
 public class ExitBackPanel extends MyPanel implements ActionListener{
@@ -68,9 +70,15 @@ public class ExitBackPanel extends MyPanel implements ActionListener{
 			switch(flag){
 				case "AdminUI" : AdminUI.bt_vanish.doClick();
 								 AdminUI.rowNum = 0;break;
-				case "Frame_Salesman" : Frame_Salesman.bt_vanish.doClick();break;
+				case "Frame_Salesman" : Frame_Salesman.bt_vanish.doClick();
+										Frame_Salesman.flag = 0;break;
 				case "Frame_Inventory" : Frame_Inventory.bt_vanish.doClick();
 										 Frame_Inventory.flag = 0;break;
+				case "Frame_Finace" : Frame_Finace.bt_vanish.doClick();
+									  Frame_Finace.flag = 0;break;
+				case "Frame_Manager" : Frame_Manager.bt_vanish.doClick();
+								       Frame_Manager.flag = 0;break;
+									
 			}
 		}
 		

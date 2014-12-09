@@ -46,7 +46,7 @@ public class Frame_Manager extends MyFrame implements ActionListener{
 		bt_vanish.addActionListener(this);
 		this.add(bt_vanish);
 		
-		Frame_Login.myNameis = "Frame_Finace";
+		Frame_Login.myNameis = "Frame_Manager";
 		
 		panel_index = new ManagerIndex();
 		panel_index.setVisible(true);
