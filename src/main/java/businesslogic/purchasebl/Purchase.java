@@ -16,24 +16,24 @@ import dataenum.BillType;
 import dataenum.Storage;
 import dataservice.purchasedataservice.PurchaseDataService;
 
-public class Purchase implements PurchaseBLService{
-	
+public class Purchase implements PurchaseBLService {
+
 	private PurchaseList list;
-	
+
 	private PurchasePO po;
-	
+
 	private String ID;
-	
+
 	private BillType type;
-	
+
 	ChangeCommodityItems changeItems;
-	
-	public Purchase(){
+
+	public Purchase() {
 		this.list = new PurchaseList();
 		changeItems = new ChangeCommodityItems();
 	}
-	
-	public PurchaseDataService getPurData(){
+
+	public PurchaseDataService getPurData() {
 //		try {
 //			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
 //			PurchaseDataService purData = factory.getPurchaseData();
@@ -42,14 +42,13 @@ public class Purchase implements PurchaseBLService{
 //			e.printStackTrace();
 //			return null;
 //		}
-		// TODO 本地新建
 		return new PurchaseData();
 	}
-	
+
 	public ArrayList<PurchaseVO> show(BillType type) {
 		ArrayList<PurchaseVO> VOs = new ArrayList<PurchaseVO>();
 		ArrayList<PurchasePO> POs = getPurData().show();
-		for (int i = 0; i < POs.size(); i++) {
+		for(int i = 0; i < POs.size(); i++) {
 			PurchaseVO vo = poToVO(POs.get(i));
 			VOs.add(vo);
 		}
@@ -61,7 +60,7 @@ public class Purchase implements PurchaseBLService{
 		PurchaseDataService purData = getPurData();
 		this.ID = purData.getID();
 		return ID;
-		
+
 	}
 
 	public void addCommodities(CommodityItemVO itemVO) {
@@ -86,17 +85,18 @@ public class Purchase implements PurchaseBLService{
 		businesslogic.purchasebl.ClientInfo_Purchase info = new ClientInfo();
 		String clientName = info.getName(list.getClientID());
 		Storage storage = list.getStorage();
-		po = new PurchasePO(ID, list.getClientID(), clientName, "user", storage, list.getCommodities(), sumPrice, list.getRemark(), type);	
+		po =
+				new PurchasePO(ID, list.getClientID(), clientName, "user", storage, list.getCommodities(), sumPrice, list.getRemark(), type);
 		return po;
 	}
-	
-	private void setInputInfo(PurInputInfo info){
+
+	private void setInputInfo(PurInputInfo info) {
 		list.setClientID(info.clientID);
 		list.setStorage(info.storage);
 		list.setRemark(info.remark);
 	}
 
-	public PurchaseVO poToVO(PurchasePO po){
+	public PurchaseVO poToVO(PurchasePO po) {
 		String ID = po.getID();
 		String clientID = po.getClientID();
 		String client = po.getClient();
@@ -108,7 +108,7 @@ public class Purchase implements PurchaseBLService{
 		BillState state = po.getState();
 		PurchaseVO vo = new PurchaseVO(type, ID, clientID, client, user, storage, commodities, sumPrice, state);
 		return vo;
-		
+
 	}
 
 }

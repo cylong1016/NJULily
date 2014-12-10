@@ -2,16 +2,17 @@ package businesslogic.cashbillbl;
 
 import java.util.ArrayList;
 
-import blservice.cashbillblservice.CashBillBLService;
 import message.ResultMessage;
 import po.CashBillPO;
 import po.CashItemPO;
 import server.data.cashbilldata.CashBillData;
 import vo.CashBillVO;
 import vo.CashItemVO;
+import blservice.cashbillblservice.CashBillBLService;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataservice.cashbilldataservice.CashBillDataService;
+
 /**
  * 制定现金费用单
  * (管理报销等现金操作，单据中包含：
@@ -21,31 +22,30 @@ import dataservice.cashbilldataservice.CashBillDataService;
  * @author Zing
  * @version Nov 27, 201411:13:32 PM
  */
-public class CashBill implements CashBillBLService{
-	
+public class CashBill implements CashBillBLService {
+
 	private String ID;
-	
+
 	private ArrayList<CashBillItem> items;
-	
+
 	private CashBillPO po;
-	
+
 	public CashBill() {
 		items = new ArrayList<CashBillItem>();
 	}
-	
-	public CashBillDataService getCashBillData(){
+
+	public CashBillDataService getCashBillData() {
 //		try {
 //			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
 //			CashBillDataService cashBillData = (CashBillDataService)factory.getCashBillData();
-//			return cashBillData;		
+//			return cashBillData;
 //		} catch (Exception e) {
 //			e.printStackTrace();
 //			return null;
-//		} 
-		// TODO 本地新建
+//		}
 		return new CashBillData();
 	}
-	
+
 	public String getID(BillType type) {
 		CashBillDataService cashBillData = getCashBillData();
 		this.ID = cashBillData.getID();
@@ -56,10 +56,10 @@ public class CashBill implements CashBillBLService{
 		CashBillItem item = new CashBillItem(name, money, remark);
 		items.add(item);
 	}
-	
-	public ArrayList<CashItemPO> getCashItemPO(){
+
+	public ArrayList<CashItemPO> getCashItemPO() {
 		ArrayList<CashItemPO> pos = new ArrayList<CashItemPO>();
-		for (int i = 0; i < items.size(); i++) {
+		for(int i = 0; i < items.size(); i++) {
 			CashBillItem item = items.get(i);
 			CashItemPO po = new CashItemPO(item.getName(), item.getMoney(), item.getRemark());
 			pos.add(po);
@@ -69,7 +69,7 @@ public class CashBill implements CashBillBLService{
 
 	public double getSumMoney() {
 		double sum = 0;
-		for (int i = 0; i < items.size(); i++) {
+		for(int i = 0; i < items.size(); i++) {
 			sum += items.get(i).getMoney();
 		}
 		return sum;
@@ -85,12 +85,12 @@ public class CashBill implements CashBillBLService{
 		getCashBillData().insert(po);
 		return ResultMessage.SUCCESS;
 	}
-	
+
 	public ResultMessage save(String account) {
 		// TODO 存在本地
 		return null;
 	}
-	
+
 	/**
 	 * 返回所有的现金费用单
 	 * @param billType
@@ -101,7 +101,7 @@ public class CashBill implements CashBillBLService{
 	public ArrayList<CashBillVO> show(BillType billType) {
 		ArrayList<CashBillVO> VOs = new ArrayList<CashBillVO>();
 		ArrayList<CashBillPO> POs = getCashBillData().show();
-		for (int i = 0; i < POs.size(); i++) {
+		for(int i = 0; i < POs.size(); i++) {
 			CashBillVO vo = POToVO(POs.get(i));
 			VOs.add(vo);
 		}
@@ -121,7 +121,7 @@ public class CashBill implements CashBillBLService{
 
 	private ArrayList<CashItemVO> itemsPOToVO(ArrayList<CashItemPO> bills) {
 		ArrayList<CashItemVO> VOs = new ArrayList<CashItemVO>();
-		for (int i = 0; i < bills.size(); i++) {
+		for(int i = 0; i < bills.size(); i++) {
 			CashItemPO po = bills.get(i);
 			CashItemVO vo = new CashItemVO(po.getName(), po.getMoney(), po.getRemark());
 			VOs.add(vo);

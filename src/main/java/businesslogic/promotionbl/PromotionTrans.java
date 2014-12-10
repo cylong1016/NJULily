@@ -2,7 +2,6 @@ package businesslogic.promotionbl;
 
 import java.util.ArrayList;
 
-import dataenum.ClientLevel;
 import po.PromotionPO;
 import vo.commodity.CommodityItemVO;
 import vo.promotion.PromotionBargainVO;
@@ -10,7 +9,7 @@ import vo.promotion.PromotionClientVO;
 import vo.promotion.PromotionCommodityVO;
 import vo.promotion.PromotionTotalVO;
 import businesslogic.common.ChangeCommodityItems;
-import businesslogic.promotionbl.type.PromotionTotal;
+import dataenum.ClientLevel;
 
 public class PromotionTrans {
 	

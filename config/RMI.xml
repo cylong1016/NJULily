@@ -2,6 +2,6 @@
 <Config>
 	<Data>
 		<name>RMI</name>
-		<url>rmi://127.0.0.1:8888/factory</url>
+		<url>rmi://127.0.0.1:1994/DataFactory</url>
 	</Data>
 </Config>

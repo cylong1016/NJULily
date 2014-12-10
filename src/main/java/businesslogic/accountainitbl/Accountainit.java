@@ -24,6 +24,7 @@ import businesslogic.clientbl.ClientInfo;
 import businesslogic.commoditybl.CommodityInfo;
 import businesslogic.commoditysortbl.CommoditySortInfo;
 import dataservice.accountinitdataservice.AccountaInitDataService;
+
 /**
  * 这个系统是可以支持建多套账的，每套帐在新建的时候都要经过期初建账这一环节，可以理解为一套帐的初始化操作。
  * 包括：
@@ -35,14 +36,14 @@ import dataservice.accountinitdataservice.AccountaInitDataService;
  * @author Zing
  * @version Dec 2, 2014 7:09:40 PM
  */
-public class Accountainit implements AccountainitBLService{
-	
+public class Accountainit implements AccountainitBLService {
+
 	private AccountaInitDataService accountaInitData;
-	
+
 	public Accountainit() {
 		this.accountaInitData = getAccountaInitData();
 	}
-	
+
 	/**
 	 * 期初建账
 	 * @return
@@ -51,46 +52,47 @@ public class Accountainit implements AccountainitBLService{
 	 */
 	public ResultMessage buildAccount() {
 		BuildInit buildInit = new BuildInit(getID());
-		AccountaInitPO po = new AccountaInitPO(buildInit.getID(), buildInit.getDate(), buildInit.getCommoditySorts(), 
-				buildInit.getCommodities(), buildInit.getClients(), buildInit.getAccounts());
+		AccountaInitPO po =
+							new AccountaInitPO(buildInit.getID(), buildInit.getDate(), buildInit.getCommoditySorts(), buildInit.getCommodities(), buildInit.getClients(), buildInit.getAccounts());
 		return accountaInitData.insert(po);
 	}
 
 	public ArrayList<AccountaInitVO> show() {
 		ArrayList<AccountaInitPO> POs = accountaInitData.show();
 		ArrayList<AccountaInitVO> VOs = new ArrayList<AccountaInitVO>();
-		for (AccountaInitPO po : POs) {
-			AccountaInitVO vo = new AccountaInitVO(po.getID(), po.getDate(), getSortVOs(po.getCommoditySorts()), 
-					getCommodityVOs(po.getCommodities()), getClientVOs(po.getClients()), getAccountVOs(po.getAccounts()));
+		for(AccountaInitPO po : POs) {
+			AccountaInitVO vo =
+								new AccountaInitVO(po.getID(), po.getDate(), getSortVOs(po.getCommoditySorts()), getCommodityVOs(po.getCommodities()), getClientVOs(po.getClients()), getAccountVOs(po.getAccounts()));
 			VOs.add(vo);
 		}
 		return VOs;
 	}
-	
+
 	/** 以下的方法是为了转换每一个PO，变成VO展示 */
-	private ArrayList<CommoditySortVO> getSortVOs(ArrayList<CommoditySortPO> POs){
+	private ArrayList<CommoditySortVO> getSortVOs(ArrayList<CommoditySortPO> POs) {
 		CommoditySortInfo_Init info = new CommoditySortInfo();
 		return info.getSortVOs(POs);
 	}
-	
-	private ArrayList<CommodityVO> getCommodityVOs(ArrayList<CommodityPO> POs){
+
+	private ArrayList<CommodityVO> getCommodityVOs(ArrayList<CommodityPO> POs) {
 		CommodityInfo_Init info = new CommodityInfo();
 		return info.getCommodityVOs(POs);
 	}
-	
-	private ArrayList<ClientVO> getClientVOs(ArrayList<ClientPO> POs){
+
+	private ArrayList<ClientVO> getClientVOs(ArrayList<ClientPO> POs) {
 		ClientInfo_Init info = new ClientInfo();
 		return info.getClientVOs(POs);
 	}
-	
-	private ArrayList<AccountVO> getAccountVOs(ArrayList<AccountPO> POs){
+
+	private ArrayList<AccountVO> getAccountVOs(ArrayList<AccountPO> POs) {
 		AccountInfo_Init info = new AccountInfo();
 		return info.getAccountVOs(POs);
 	}
-	
-	private String getID(){
+
+	private String getID() {
 		return accountaInitData.getID();
 	}
+
 	/**
 	 * 得到期初建账的数据
 	 * @return
@@ -106,7 +108,6 @@ public class Accountainit implements AccountainitBLService{
 //			e.printStackTrace();
 //			return null;
 //		}
-		// TODO 本地新建
 		return new AccountInitData();
 	}
 }

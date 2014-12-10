@@ -1,6 +1,5 @@
 package businesslogic.inventorybl;
 
-import java.rmi.Naming;
 import java.util.ArrayList;
 
 import message.ResultMessage;
@@ -12,44 +11,42 @@ import vo.InventoryViewVO;
 import vo.commodity.CommodityItemVO;
 import blservice.inventoryblservice.InventoryBLService;
 import businesslogic.common.ChangeCommodityItems;
-import config.RMI;
 import dataenum.BillState;
 import dataenum.BillType;
-import dataservice.DataFactoryService;
 import dataservice.inventorydataservice.InventoryDataService;
 
-public class Inventory implements InventoryBLService{
-	
+public class Inventory implements InventoryBLService {
+
 	private BillList list;
-		
+
 	private BillType type;
-	
+
 	private String ID;
-	
+
 	ChangeCommodityItems changeItems;
-	
+
 	public Inventory() {
 		changeItems = new ChangeCommodityItems();
 	}
+
 	/**
 	 * 得到库存数据
 	 * @return
 	 * @author Zing
 	 * @version Dec 2, 2014 6:11:29 PM
 	 */
-	public InventoryDataService getInventoryData(){
+	public InventoryDataService getInventoryData() {
 //		try {
 //			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
-//			InventoryDataService inventoryData = (InventoryDataService)factory.getInventoryData();
-//			return inventoryData;		
+//			InventoryDataService inventoryData = factory.getInventoryData();
+//			return inventoryData;
 //		} catch (Exception e) {
 //			e.printStackTrace();
 //			return null;
 //		}
-		// TODO 本地新建
 		return new InventoryData();
 	}
-	
+
 	/**
 	 * 用时间区间来查看这段时间内的销售／进货数量
 	 * @param beginDate
@@ -60,10 +57,11 @@ public class Inventory implements InventoryBLService{
 	 */
 	public InventoryViewVO viewInventory(String beginDate, String endDate) {
 		ViewList viewList = new ViewList(beginDate, endDate);
-		InventoryViewVO vo = new InventoryViewVO(viewList.getSaleNumber(), viewList.getPurNumber(), viewList.getSaleMoney(), viewList.getPurMoney());
+		InventoryViewVO vo =
+								new InventoryViewVO(viewList.getSaleNumber(), viewList.getPurNumber(), viewList.getSaleMoney(), viewList.getPurMoney());
 		return vo;
 	}
-	
+
 	/**
 	 * 库存盘点，返回库存盘点的单子
 	 * @return
@@ -74,10 +72,11 @@ public class Inventory implements InventoryBLService{
 		InventoryDataService inventoryData = getInventoryData();
 		// 得到批号
 		CheckList checkList = new CheckList(inventoryData.returnNumber());
-		InventoryCheckVO vo = new InventoryCheckVO(checkList.getItemsVO(), checkList.getAvePrice(), checkList.getToday(), checkList.getLot());
+		InventoryCheckVO vo =
+								new InventoryCheckVO(checkList.getItemsVO(), checkList.getAvePrice(), checkList.getToday(), checkList.getLot());
 		return vo;
 	}
-	
+
 	/**
 	 * 最开始要创建单据时，确定单据类型，返回单据ID
 	 * @param type
@@ -91,7 +90,7 @@ public class Inventory implements InventoryBLService{
 		this.ID = getInventoryData().getID(type);
 		return ID;
 	}
-	
+
 	/**
 	 * 显示单子
 	 * @param type
@@ -102,7 +101,7 @@ public class Inventory implements InventoryBLService{
 	public ArrayList<InventoryBillVO> show(BillType type) {
 		ArrayList<InventoryBillVO> VOs = new ArrayList<InventoryBillVO>();
 		ArrayList<InventoryBillPO> POs = getInventoryData().show(type);
-		for (int i = 0; i < POs.size(); i++) {
+		for(int i = 0; i < POs.size(); i++) {
 			InventoryBillPO po = POs.get(i);
 			InventoryBillVO vo = poToVo(po);
 			VOs.add(vo);
@@ -121,7 +120,7 @@ public class Inventory implements InventoryBLService{
 		BillListItem item = new BillListItem(ID, number);
 		list.addItem(item);
 	}
-	
+
 	/**
 	 * 提交单子
 	 * @param remark
@@ -129,11 +128,11 @@ public class Inventory implements InventoryBLService{
 	 * @author Zing
 	 * @version Dec 2, 2014 6:11:58 PM
 	 */
-	public ResultMessage submit(String remark){
+	public ResultMessage submit(String remark) {
 		list.setRemark(remark);
-		return 	getInventoryData().insert(getInventoryBill());
+		return getInventoryData().insert(getInventoryBill());
 	}
-	
+
 	/**
 	 * 保存为草稿
 	 * @param remark
@@ -146,18 +145,18 @@ public class Inventory implements InventoryBLService{
 		// 保存为草稿
 		return null;
 	}
-	
+
 	/**
 	 * 建立起一个库存单据（赠送单、报警单、报溢单、报损单）
 	 * @return
 	 * @author Zing
 	 * @version Dec 2, 2014 5:34:33 PM
 	 */
-	private InventoryBillPO getInventoryBill(){
+	private InventoryBillPO getInventoryBill() {
 		InventoryBillPO po = new InventoryBillPO(ID, type, list.getCommodityPOs(), list.getRemark());
 		return po;
 	}
-	
+
 	/**
 	 * 单子的po到vo的转换
 	 * @param po
@@ -174,5 +173,5 @@ public class Inventory implements InventoryBLService{
 		InventoryBillVO vo = new InventoryBillVO(ID, billType, commodities, remark, state);
 		return vo;
 	}
-	
+
 }

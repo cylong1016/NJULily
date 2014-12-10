@@ -1,10 +1,10 @@
 package businesslogic.userbl;
 
+import io.DefineList;
 import po.UserPO;
-import server.io.DefineList;
-import dataenum.UserIdentity;
 import businesslogic.accountbillbl.UserInfo_AccountBill;
 import businesslogic.clientbl.UserInfo_Client;
+import dataenum.UserIdentity;
 
 /**
  * 给外部提供user信息

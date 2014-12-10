@@ -44,15 +44,14 @@ public class Promotion {
 	 * @version Nov 30, 2014 9:52:22 AM
 	 */
 	protected PromotionDataService getPromotionData() {
-		//		try {
-		//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
-		//			PromotionDataService promotionData = factory.getPromotionData();
-		//			return promotionData;
-		//		} catch (Exception e) {
-		//			e.printStackTrace();
-		//			return null;
-		//		}
-		// TODO 本地新建
+//		try {
+//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
+//			PromotionDataService promotionData = factory.getPromotionData();
+//			return promotionData;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return null;
+//		}
 		return new PromotionData();
 	}
 
