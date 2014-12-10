@@ -13,7 +13,6 @@ import vo.sale.SalesVO;
 import vo.sale.saleAddVO;
 import blservice.saleblservice.SaleBLService;
 import businesslogic.clientbl.ClientInfo;
-import businesslogic.common.ChangeCommodityItems;
 import businesslogic.promotionbl.PromotionInfo;
 import businesslogic.salebl.info.ClientInfo_Sale;
 import businesslogic.salebl.info.PromotionInfo_Sale;
@@ -69,10 +68,17 @@ public class Sale implements SaleBLService{
 	 * @param type
 	 * @return ID（界面显示）
 	 */
-	public String getID(BillType type) {
-		this.type = type;
+	public String getSaleID() {
+		this.type = BillType.SALE;
 		SaleDataService saleData = getSaleData();
-		this.ID = saleData.getID(type);
+		this.ID = saleData.getSaleID();
+		return ID;
+	}
+	
+	public String getSaleBackID() {
+		this.type = BillType.SALEBACK;
+		SaleDataService saleData = getSaleData();
+		this.ID = saleData.getSaleBackID();
 		return ID;
 	}
 

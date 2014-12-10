@@ -48,7 +48,8 @@ public class SaleOperate implements SaleInfo_Approval{
 		String remark = vo.remark;
 		double afterPrice = vo.afterPrice;
 		BillType type = vo.type;
-		ArrayList<CommodityItemPO> commodities = sale.changeItems.itemsVOtoPO(vo.commodities);
+		SaleTrans transPOVO = new SaleTrans();
+		ArrayList<CommodityItemPO> commodities = transPOVO.changeItems.itemsVOtoPO(vo.commodities);
 		SalesPO po = new SalesPO(ID, clientID, client, salesman, user, storage, commodities, beforePrice, allowance, voucher, remark, afterPrice, type);
 		return saleData.update(po);
 	}
@@ -90,12 +91,14 @@ public class SaleOperate implements SaleInfo_Approval{
 			int number = -commodities.get(i).number;
 			commodities.get(i).number = number;
 		}
+		
 		redVO.commodities = commodities;
 		redVO.allowance = (-redVO.allowance);
 		redVO.voucher = (-redVO.voucher);
 		// 先建立对应的PO
+		SaleTrans transPOVO = new SaleTrans();
 		SalesPO redPO = new SalesPO(redVO.ID, redVO.clientID, redVO.client, redVO.salesman, redVO.user, redVO.storage, 
-				sale.changeItems.itemsVOtoPO(redVO.commodities), redVO.beforePrice, redVO.allowance, redVO.voucher, redVO.remark, redVO.afterPrice, redVO.type);
+				transPOVO.changeItems.itemsVOtoPO(redVO.commodities), redVO.beforePrice, redVO.allowance, redVO.voucher, redVO.remark, redVO.afterPrice, redVO.type);
 		if (!isCopy) {
 			// 入账，更改相应数据
 			saleData.insert(redPO);

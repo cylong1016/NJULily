@@ -7,7 +7,6 @@ import vo.commodity.CommodityItemVO;
 import vo.promotion.PromotionClientVO;
 import vo.promotion.PromotionCommodityVO;
 import vo.promotion.PromotionTotalVO;
-import vo.promotion.PromotionVO;
 import vo.sale.SalesVO;
 import vo.sale.saleAddVO;
 import dataenum.BillType;
@@ -42,7 +41,8 @@ public interface SaleBLService {
 	 * @author cylong
 	 * @version 2014年11月28日 下午4:15:09
 	 */
-	public String getID(BillType type);
+	public String getSaleID();
+	public String getSaleBackID();
 
 	/**
 	 * 销售时候添加一条商品条目
