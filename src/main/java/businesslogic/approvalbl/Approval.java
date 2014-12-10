@@ -1,19 +1,7 @@
 package businesslogic.approvalbl;
 
-import java.rmi.Naming;
 import java.util.ArrayList;
 
-import config.RMI;
-import dataenum.BillType;
-import dataservice.DataFactoryService;
-import dataservice.approvaldataservice.ApprovalDataService;
-import blservice.approvalblservice.ApprovalBLService;
-import businesslogic.accountbillbl.AccountBillInfo;
-import businesslogic.approvalbl.info.ValueObject_Approval;
-import businesslogic.cashbillbl.CashBillInfo;
-import businesslogic.inventorybl.InventoryInfo;
-import businesslogic.purchasebl.PurchaseInfo;
-import businesslogic.salebl.SaleInfo;
 import message.ResultMessage;
 import vo.AccountBillVO;
 import vo.ApprovalVO;
@@ -22,6 +10,14 @@ import vo.InventoryBillVO;
 import vo.PurchaseVO;
 import vo.ValueObject;
 import vo.sale.SalesVO;
+import blservice.approvalblservice.ApprovalBLService;
+import businesslogic.accountbillbl.AccountBillInfo;
+import businesslogic.approvalbl.info.ValueObject_Approval;
+import businesslogic.cashbillbl.CashBillInfo;
+import businesslogic.inventorybl.InventoryInfo;
+import businesslogic.purchasebl.PurchaseInfo;
+import businesslogic.salebl.SaleInfo;
+import dataenum.BillType;
 
 /**
  * 审批
@@ -29,12 +25,6 @@ import vo.sale.SalesVO;
  * @version Dec 2, 2014 11:48:42 PM
  */
 public class Approval implements ApprovalBLService{
-
-	private ApprovalDataService approvalData;
-
-	public Approval() {
-		this.approvalData = getApprovalData();
-	}
 
 	/**
 	 * 返回所有需要审批的单子QvQ，分成了五类： 1. 销售类单据（销售出货单，销售退货单） 2. 进货类单据（进货单，进货退货单） 3.
@@ -131,16 +121,4 @@ public class Approval implements ApprovalBLService{
 		return ResultMessage.SUCCESS;
 	}
 	
-
-	private ApprovalDataService getApprovalData() {
-		try {
-			DataFactoryService factory = (DataFactoryService) Naming
-					.lookup(RMI.URL);
-			ApprovalDataService approvalData = factory.getApprovalData();
-			return approvalData;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
 }

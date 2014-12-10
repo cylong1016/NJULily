@@ -6,7 +6,6 @@ import java.rmi.RemoteException;
 import dataservice.accountbilldataservice.AccountBillDataService;
 import dataservice.accountdataservice.AccountDataService;
 import dataservice.accountinitdataservice.AccountaInitDataService;
-import dataservice.approvaldataservice.ApprovalDataService;
 import dataservice.cashbilldataservice.CashBillDataService;
 import dataservice.clientdataservice.ClientDataService;
 import dataservice.commoditydataservice.CommodityDataService;
@@ -29,8 +28,6 @@ public interface DataFactoryService extends Remote {
 
 	public AccountDataService getAccountData() throws RemoteException;
 
-	public ApprovalDataService getApprovalData() throws RemoteException;
-
 	public ClientDataService getClientData() throws RemoteException;
 
 	public CommodityDataService getCommodityData() throws RemoteException;
@@ -38,7 +35,7 @@ public interface DataFactoryService extends Remote {
 	public CommoditySortDataService getCommoditySortData() throws RemoteException;
 
 	public AccountBillDataService getAccountBillData() throws RemoteException;
-	
+
 	public InventoryDataService getInventoryData() throws RemoteException;
 
 	public PromotionDataService getPromotionData() throws RemoteException;
@@ -50,6 +47,6 @@ public interface DataFactoryService extends Remote {
 	public SaleDataService getSaleData() throws RemoteException;
 
 	public UserDataService getUserData() throws RemoteException;
-	
+
 	public CashBillDataService getCashBillData() throws RemoteException;
 }

@@ -7,7 +7,6 @@ import dataservice.DataFactoryService;
 import dataservice.accountbilldataservice.AccountBillDataService;
 import dataservice.accountdataservice.AccountDataService;
 import dataservice.accountinitdataservice.AccountaInitDataService;
-import dataservice.approvaldataservice.ApprovalDataService;
 import dataservice.cashbilldataservice.CashBillDataService;
 import dataservice.clientdataservice.ClientDataService;
 import dataservice.commoditydataservice.CommodityDataService;
@@ -51,14 +50,6 @@ public class DataFactory extends UnicastRemoteObject implements DataFactoryServi
 	 */
 	@Override
 	public AccountDataService getAccountData() throws RemoteException {
-		return null;
-	}
-
-	/**
-	 * @see dataservice.DataFactoryService#getApprovalData()
-	 */
-	@Override
-	public ApprovalDataService getApprovalData() throws RemoteException {
 		return null;
 	}
 

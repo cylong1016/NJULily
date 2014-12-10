@@ -11,6 +11,7 @@ import po.SalesPO;
 
 /**
  * 提供需要审批的单据的集体载入、保存、查看修改操作
+ * @deprecated 逻辑层在审批的时候修改单据类型直接从其他逻辑层调用数据
  * @author cylong
  * @version Oct 26, 2014 3:51:31 PM
  */
