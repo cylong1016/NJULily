@@ -3,6 +3,18 @@ package server.data;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
+import server.data.accountbilldata.AccountBillData;
+import server.data.accountdata.AccountData;
+import server.data.accountinitdata.AccountInitData;
+import server.data.cashbilldata.CashBillData;
+import server.data.clientdata.ClientData;
+import server.data.commoditydata.CommodityData;
+import server.data.commoditysortdata.CommoditySortData;
+import server.data.inventorydata.InventoryData;
+import server.data.promotiondata.PromotionData;
+import server.data.purchasedata.PurchaseData;
+import server.data.saledata.SaleData;
+import server.data.userdata.UserData;
 import dataservice.DataFactoryService;
 import dataservice.accountbilldataservice.AccountBillDataService;
 import dataservice.accountdataservice.AccountDataService;
@@ -14,7 +26,6 @@ import dataservice.commoditysortdataservice.CommoditySortDataService;
 import dataservice.inventorydataservice.InventoryDataService;
 import dataservice.promotiondataservice.PromotionDataService;
 import dataservice.purchasedataservice.PurchaseDataService;
-import dataservice.recorddataservice.RecordDataService;
 import dataservice.saledataservice.SaleDataService;
 import dataservice.userdataservice.UserDataService;
 
@@ -42,7 +53,7 @@ public class DataFactory extends UnicastRemoteObject implements DataFactoryServi
 	 */
 	@Override
 	public AccountaInitDataService getAccountaInitData() throws RemoteException {
-		return null;
+		return new AccountInitData();
 	}
 
 	/**
@@ -50,7 +61,7 @@ public class DataFactory extends UnicastRemoteObject implements DataFactoryServi
 	 */
 	@Override
 	public AccountDataService getAccountData() throws RemoteException {
-		return null;
+		return new AccountData();
 	}
 
 	/**
@@ -58,7 +69,7 @@ public class DataFactory extends UnicastRemoteObject implements DataFactoryServi
 	 */
 	@Override
 	public ClientDataService getClientData() throws RemoteException {
-		return null;
+		return new ClientData();
 	}
 
 	/**
@@ -66,7 +77,7 @@ public class DataFactory extends UnicastRemoteObject implements DataFactoryServi
 	 */
 	@Override
 	public CommodityDataService getCommodityData() throws RemoteException {
-		return null;
+		return new CommodityData();
 	}
 
 	/**
@@ -74,7 +85,7 @@ public class DataFactory extends UnicastRemoteObject implements DataFactoryServi
 	 */
 	@Override
 	public CommoditySortDataService getCommoditySortData() throws RemoteException {
-		return null;
+		return new CommoditySortData();
 	}
 
 	/**
@@ -82,7 +93,7 @@ public class DataFactory extends UnicastRemoteObject implements DataFactoryServi
 	 */
 	@Override
 	public AccountBillDataService getAccountBillData() throws RemoteException {
-		return null;
+		return new AccountBillData();
 	}
 
 	/**
@@ -90,7 +101,7 @@ public class DataFactory extends UnicastRemoteObject implements DataFactoryServi
 	 */
 	@Override
 	public InventoryDataService getInventoryData() throws RemoteException {
-		return null;
+		return new InventoryData();
 	}
 
 	/**
@@ -98,7 +109,7 @@ public class DataFactory extends UnicastRemoteObject implements DataFactoryServi
 	 */
 	@Override
 	public PromotionDataService getPromotionData() throws RemoteException {
-		return null;
+		return new PromotionData();
 	}
 
 	/**
@@ -106,15 +117,7 @@ public class DataFactory extends UnicastRemoteObject implements DataFactoryServi
 	 */
 	@Override
 	public PurchaseDataService getPurchaseData() throws RemoteException {
-		return null;
-	}
-
-	/**
-	 * @see dataservice.DataFactoryService#getRecordData()
-	 */
-	@Override
-	public RecordDataService getRecordData() throws RemoteException {
-		return null;
+		return new PurchaseData();
 	}
 
 	/**
@@ -122,7 +125,7 @@ public class DataFactory extends UnicastRemoteObject implements DataFactoryServi
 	 */
 	@Override
 	public SaleDataService getSaleData() throws RemoteException {
-		return null;
+		return new SaleData();
 	}
 
 	/**
@@ -130,7 +133,7 @@ public class DataFactory extends UnicastRemoteObject implements DataFactoryServi
 	 */
 	@Override
 	public UserDataService getUserData() throws RemoteException {
-		return null;
+		return new UserData();
 	}
 
 	/**
@@ -138,7 +141,7 @@ public class DataFactory extends UnicastRemoteObject implements DataFactoryServi
 	 */
 	@Override
 	public CashBillDataService getCashBillData() throws RemoteException {
-		return null;
+		return new CashBillData();
 	}
 
 }

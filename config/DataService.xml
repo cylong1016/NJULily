@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<DataService>
+<Config>
 	<Data>
 		<name>ClientData</name>
 		<path>data/ClientList.ser</path>
@@ -100,4 +100,4 @@
 		<maxID>0</maxID>
 		<IDMaxBit>5</IDMaxBit>
 	</Data>
-</DataService>
+</Config>

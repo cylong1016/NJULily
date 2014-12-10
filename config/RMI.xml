@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Config>
 	<Data>
-		<name>Admin</name>
-		<username>admin</username>
-		<password>admin</password>
+		<name>RMI</name>
+		<url>rmi://127.0.0.1:8888/factory</url>
 	</Data>
 </Config>

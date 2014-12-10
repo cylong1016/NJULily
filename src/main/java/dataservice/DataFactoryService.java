@@ -13,7 +13,6 @@ import dataservice.commoditysortdataservice.CommoditySortDataService;
 import dataservice.inventorydataservice.InventoryDataService;
 import dataservice.promotiondataservice.PromotionDataService;
 import dataservice.purchasedataservice.PurchaseDataService;
-import dataservice.recorddataservice.RecordDataService;
 import dataservice.saledataservice.SaleDataService;
 import dataservice.userdataservice.UserDataService;
 
@@ -41,8 +40,6 @@ public interface DataFactoryService extends Remote {
 	public PromotionDataService getPromotionData() throws RemoteException;
 
 	public PurchaseDataService getPurchaseData() throws RemoteException;
-
-	public RecordDataService getRecordData() throws RemoteException;
 
 	public SaleDataService getSaleData() throws RemoteException;
 
