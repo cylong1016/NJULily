@@ -1,11 +1,12 @@
 package businesslogic.userbl;
 
+import io.DefineList;
+
 import java.util.ArrayList;
 
 import message.ResultMessage;
 import po.UserPO;
 import server.data.userdata.UserData;
-import server.io.DefineList;
 import vo.UserVO;
 import blservice.userblservice.LoginInfo;
 import blservice.userblservice.UserBLService;
@@ -13,7 +14,7 @@ import dataenum.UserIdentity;
 import dataservice.userdataservice.AdminInfo;
 import dataservice.userdataservice.UserDataService;
 
-public class User implements UserBLService{
+public class User implements UserBLService {
 
 	private UserDataService userData;
 	private DefineList<UserPO> currentUser;	// 保存用户名
@@ -23,13 +24,12 @@ public class User implements UserBLService{
 	public User() {
 		currentUser = new DefineList<UserPO>("data/loginInfo.ser");
 		currentUserTemp = new DefineList<UserPO>("data/loginInfoTemp.ser");
-		//		try {
-		//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
-		//			this.userData = factory.getUserData();
-		//		} catch (Exception e) {
-		//			e.printStackTrace();
-		//		}
-		// TODO 本地新建
+//		try {
+//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
+//			this.userData = factory.getUserData();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 		this.userData = new UserData();
 	}
 

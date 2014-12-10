@@ -24,7 +24,7 @@ import dataservice.saledataservice.SaleDataService;
  * @author Zing
  * @version Nov 15, 2014 10:07:38 AM
  */
-public class Sale implements SaleBLService{
+public class Sale implements SaleBLService {
 
 	/** 销售单 */
 	private SaleList list;
@@ -57,7 +57,6 @@ public class Sale implements SaleBLService{
 //			e.printStackTrace();
 //			return null;
 //		}
-		// TODO 本地新建
 		return new SaleData();
 	}
 
@@ -74,7 +73,7 @@ public class Sale implements SaleBLService{
 		this.ID = saleData.getSaleID();
 		return ID;
 	}
-	
+
 	public String getSaleBackID() {
 		this.type = BillType.SALEBACK;
 		SaleDataService saleData = getSaleData();
@@ -84,7 +83,7 @@ public class Sale implements SaleBLService{
 
 	/**
 	 * 添加一条商品信息
-	 * @param itemVO 
+	 * @param itemVO
 	 * @author Zing
 	 * @version 2014年11月28日 下午8:02:29
 	 */
@@ -93,11 +92,11 @@ public class Sale implements SaleBLService{
 		list.add(item);
 		commodityIDs.add(itemVO.ID);
 	}
-	
+
 	public void addClient(String clientID) {
 		list.setClientID(clientID);
 	}
-	
+
 	/**
 	 * 界面显示全部的销售（销售退货）单
 	 * @return 销售（销售退货）单的ArrayList
@@ -115,12 +114,12 @@ public class Sale implements SaleBLService{
 		}
 		return billsVO;
 	}
-	
+
 	/**
 	 * 提交销售（销售退货）单，等待审批
 	 * @param inputInfo
 	 * @author Zing
-	 * @version 2014年11月28日  下午9:13:52
+	 * @version 2014年11月28日 下午9:13:52
 	 */
 	public ResultMessage submit(saleAddVO inputInfo) {
 		setInputInfo(inputInfo);
@@ -132,7 +131,7 @@ public class Sale implements SaleBLService{
 	 * 将销售（销售退货）单保存成草稿状态
 	 * @param inputInfo
 	 * @author cylong
-	 * @version 2014年11月28日  下午9:14:47
+	 * @version 2014年11月28日 下午9:14:47
 	 */
 	public ResultMessage save(saleAddVO inputInfo) {
 		setInputInfo(inputInfo);
@@ -140,7 +139,7 @@ public class Sale implements SaleBLService{
 		// TODO 保存在本地
 		return ResultMessage.SUCCESS;
 	}
-	
+
 	/**
 	 * 建立销售单
 	 * @return SalePO
@@ -153,7 +152,8 @@ public class Sale implements SaleBLService{
 		String clientID = list.getClientID();
 		String salesman = info.getSalesman(list.getClientID());
 		// TODO user从文件中读取当前登陆的用户
-		po = new SalesPO(ID, clientID, clientName, salesman, "user", list.getStorage(), list.getCommodities(), beforePrice, list.getAllowance(), list.getVoucher(), list.getRemark(), afterPrice, type);
+		po =
+				new SalesPO(ID, clientID, clientName, salesman, "user", list.getStorage(), list.getCommodities(), beforePrice, list.getAllowance(), list.getVoucher(), list.getRemark(), afterPrice, type);
 		return po;
 	}
 
@@ -184,6 +184,5 @@ public class Sale implements SaleBLService{
 		promotionInfo.findFitPromotionTotal(ID, list.getBeforePrice());
 		return null;
 	}
-	
 
 }

@@ -13,10 +13,10 @@ import businesslogic.userbl.UserInfo;
 import dataenum.FindTypeClient;
 import dataservice.clientdataservice.ClientDataService;
 
-public class Client implements ClientBLService{
+public class Client implements ClientBLService {
 
 	private ClientDataService clientData;
-	
+
 	private ClientTrans transPOVO;
 
 	/**
@@ -24,14 +24,13 @@ public class Client implements ClientBLService{
 	 * @version 2014年11月29日 下午3:26:27
 	 */
 	public Client() {
-		//		try {
-		//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
-		//			this.clientData = factory.getClientData();
-		//		} catch (Exception e) {
-		//			e.printStackTrace();
-		//		}
-		// TODO 本地新建
-		this.clientData = new ClientData();
+//		try {
+//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
+//			this.clientData = factory.getClientData();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		clientData = new ClientData();
 	}
 
 	/**
@@ -42,7 +41,7 @@ public class Client implements ClientBLService{
 	public String getID() {
 		return clientData.getID();
 	}
-	
+
 	/**
 	 * 返回全部的客户
 	 * @author cylong
@@ -54,7 +53,7 @@ public class Client implements ClientBLService{
 		ArrayList<ClientVO> clientsVO = transPOVO.posToVOs(clientsPO);
 		return clientsVO;
 	}
-	
+
 	/**
 	 * 显示全部客户的部分信息（给需要添加客户的界面使用)
 	 */

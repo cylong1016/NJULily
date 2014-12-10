@@ -12,21 +12,22 @@ import blservice.commodityblservice.CommodityBLService;
 import businesslogic.commoditysortbl.CommoditySortInfo;
 import dataenum.FindTypeCommo;
 import dataservice.commoditydataservice.CommodityDataService;
+
 /**
  * 商品管理
  * @author Zing
  * @version 2014年11月9日下午2:53:19
  */
-public class Commodity implements CommodityBLService{
-	
+public class Commodity implements CommodityBLService {
+
 	private CommodityDataService commodityData;
-	
+
 	private CommodityPO po;
-	
+
 	private String ID;
-	
+
 	private CommodityTrans transPOVO;
-	
+
 	public Commodity() {
 //		try {
 //			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
@@ -34,22 +35,20 @@ public class Commodity implements CommodityBLService{
 //		} catch (Exception e) {
 //			e.printStackTrace();
 //		}
-		// TODO 本地新建
 		commodityData = new CommodityData();
 	}
-	
+
 	/**
-	 * 
 	 * @param sortID
 	 * @return
 	 * @author Zing
 	 * @version Dec 1, 2014 9:16:41 PM
 	 */
-	public String getID(String sortID){
+	public String getID(String sortID) {
 		ID = commodityData.getID(sortID);
 		return ID;
 	}
-	
+
 	/**
 	 * 返回所有的商品
 	 * @return
@@ -59,13 +58,13 @@ public class Commodity implements CommodityBLService{
 	public ArrayList<CommodityVO> show() {
 		ArrayList<CommodityVO> VOs = new ArrayList<CommodityVO>();
 		ArrayList<String> IDs = commodityData.getAllID();
-		for (String ID : IDs) {
+		for(String ID : IDs) {
 			CommodityVO vo = show(ID);
 			VOs.add(vo);
 		}
 		return VOs;
 	}
-	
+
 	/**
 	 * 根据ID返回商品VO
 	 * @param ID
@@ -79,7 +78,7 @@ public class Commodity implements CommodityBLService{
 		CommodityVO vo = transPOVO.POtoVO(po);
 		return vo;
 	}
-	
+
 	/**
 	 * 添加商品
 	 * @param info
@@ -97,7 +96,7 @@ public class Commodity implements CommodityBLService{
 		sort.addCommodity(info.sortID, ID);
 		return commodityData.insert(po);
 	}
-	
+
 	/**
 	 * 删除商品（只有没有被操作过才可以）
 	 * @param id
@@ -120,7 +119,7 @@ public class Commodity implements CommodityBLService{
 		info.deleteCommodity(sortID, ID);
 		return commodityData.delete(ID);
 	}
-	
+
 	/**
 	 * 更新商品信息
 	 * @param ID
@@ -129,12 +128,13 @@ public class Commodity implements CommodityBLService{
 	 * @author Zing
 	 * @version Dec 1, 2014 9:32:00 PM
 	 */
-	public ResultMessage updCommo(String ID, CommodityUpdateVO info){
+	public ResultMessage updCommo(String ID, CommodityUpdateVO info) {
 		CommodityPO oldPO = commodityData.find(ID);
-		po = new CommodityPO(ID, info.name, oldPO.getSortID(), info.type, info.purPrice, info.salePrice, oldPO.getAlarmNumber());	
+		po =
+				new CommodityPO(ID, info.name, oldPO.getSortID(), info.type, info.purPrice, info.salePrice, oldPO.getAlarmNumber());
 		return commodityData.update(po);
 	}
-	
+
 	/**
 	 * 返回符合查找条件的商品VO集合
 	 * @param info
@@ -147,13 +147,13 @@ public class Commodity implements CommodityBLService{
 		transPOVO = new CommodityTrans();
 		ArrayList<CommodityVO> VOs = new ArrayList<CommodityVO>();
 		ArrayList<CommodityPO> POs = commodityData.find(info, type);
-		for (CommodityPO po : POs) {
+		for(CommodityPO po : POs) {
 			CommodityVO vo = transPOVO.POtoVO(po);
 			VOs.add(vo);
 		}
 		return VOs;
 	}
-	
+
 	/**
 	 * 设置某些商品的警戒数量
 	 * @param IDs 那些商品的ID
@@ -164,20 +164,20 @@ public class Commodity implements CommodityBLService{
 	 */
 	public ResultMessage setAlarm(ArrayList<String> IDs, int alarmNumber) {
 		// 如果选择更改的商品现在数量少于设置的警戒数量，返回false
-		for (String ID : IDs) {
+		for(String ID : IDs) {
 			CommodityPO po = commodityData.find(ID);
 			if (po.getInventoryNum() < alarmNumber) {
 				return ResultMessage.FAILURE;
 			}
 		}
-		for (String ID : IDs) {
+		for(String ID : IDs) {
 			CommodityPO po = commodityData.find(ID);
 			po.setAlarmNumber(alarmNumber);
 			commodityData.update(po);
 		}
 		return ResultMessage.SUCCESS;
 	}
-	
+
 	public CommodityDataService getCommodityData() {
 		return this.commodityData;
 	}

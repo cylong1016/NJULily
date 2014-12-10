@@ -2,20 +2,20 @@ package businesslogic.promotionbl.type;
 
 import java.util.ArrayList;
 
+import message.ResultMessage;
 import po.CommodityItemPO;
 import po.PromotionPO;
-import message.ResultMessage;
 import vo.InventoryBillVO;
+
 import vo.commodity.CommodityItemVO;
 import vo.promotion.PromotionClientVO;
-import dataenum.ClientLevel;
-import dataenum.PromotionType;
 import blservice.promotionblservice.PromoInputInfo;
-import blservice.promotionblservice.PromotionBargainBLService;
 import blservice.promotionblservice.PromotionClientBLService;
 import businesslogic.promotionbl.Promotion;
 import businesslogic.promotionbl.PromotionListItem;
 import businesslogic.promotionbl.PromotionTrans;
+import dataenum.ClientLevel;
+import dataenum.PromotionType;
 
 public class PromotionClient extends Promotion implements PromotionClientBLService{
 	

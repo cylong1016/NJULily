@@ -2,29 +2,28 @@ package businesslogic.accountbl;
 
 import java.util.ArrayList;
 
-import blservice.accountblservice.AccountBLService;
 import message.ResultMessage;
 import po.AccountPO;
 import server.data.accountdata.AccountData;
 import vo.AccountVO;
+import blservice.accountblservice.AccountBLService;
 import dataenum.FindTypeAccount;
 import dataservice.accountdataservice.AccountDataService;
 
-public class Account implements AccountBLService{
+public class Account implements AccountBLService {
 
 	private AccountDataService accountData;
 
 	private AccountPO po;
 
 	public Account() {
-		//		try {
-		//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
-		//			accountData = factory.getAccountData();
-		//		} catch (Exception e) {
-		//			e.printStackTrace();
-		//		}
-		// TODO 本地新建
-		this.accountData = new AccountData();
+//		try {
+//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
+//			accountData = factory.getAccountData();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		accountData = new AccountData();
 	}
 
 	/**
@@ -96,7 +95,7 @@ public class Account implements AccountBLService{
 	public ArrayList<AccountVO> show() {
 		return POstoVOs(accountData.show());
 	}
-	
+
 	/**
 	 * 把PO集合转换成VO集合
 	 * @param POs
@@ -112,7 +111,7 @@ public class Account implements AccountBLService{
 		}
 		return VOs;
 	}
- 
+
 	/**
 	 * AccountPO转化成AccountVO
 	 * @param po AccountPO
@@ -152,7 +151,5 @@ public class Account implements AccountBLService{
 	public AccountDataService getAccountData() {
 		return accountData;
 	}
-	
-	
 
 }

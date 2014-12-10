@@ -17,7 +17,7 @@ import dataenum.BillState;
 import dataenum.BillType;
 import dataservice.accountbilldataservice.AccountBillDataService;
 
-public class AccountBill implements AccountBillBLService{
+public class AccountBill implements AccountBillBLService {
 
 	/** 编号 */
 	private String ID;
@@ -40,8 +40,7 @@ public class AccountBill implements AccountBillBLService{
 		//		} catch (Exception e) {
 		//			e.printStackTrace();
 		//		}
-		// TODO 本地新建
-		this.accountBillData = new AccountBillData();
+		accountBillData = new AccountBillData();
 	}
 
 	/**
