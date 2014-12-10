@@ -6,9 +6,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import dataenum.ClientLevel;
+import vo.commodity.CommodityItemVO;
 import vo.promotion.PromotionClientVO;
 import vo.promotion.PromotionCommodityVO;
 import vo.promotion.PromotionTotalVO;
+import businesslogic.clientbl.ClientInfo;
+import businesslogic.promotionbl.info.ClientInfo_Promotion;
 import businesslogic.promotionbl.type.PromotionClient;
 import businesslogic.promotionbl.type.PromotionCommodity;
 import businesslogic.promotionbl.type.PromotionTotal;
@@ -21,7 +25,7 @@ public class PromotionInfo implements PromotionInfo_Sale{
 		promotion = new Promotion();
 	}
 	
-	public void findFitPromotionCommodity(String ID,ArrayList<String> commodityIDs) {
+	public ArrayList<PromotionCommodityVO> findFitPromotionCommodity(String ID,ArrayList<String> commodityIDs) {
 		PromotionCommodity commodityPromotion = new PromotionCommodity();
 		ArrayList<PromotionCommodityVO> tempVOs = new ArrayList<PromotionCommodityVO>();
 		for (PromotionCommodityVO vo : commodityPromotion.show()) {
@@ -30,31 +34,61 @@ public class PromotionInfo implements PromotionInfo_Sale{
 			}
 		}
 		for (int i = 0; i < tempVOs.size(); i++) {
-			
+			for (CommodityItemVO commodity : tempVOs.get(i).commodities) {
+				for (String commodityID : commodityIDs) {
+					if (commodity.ID.endsWith(commodityID)) {
+						// TODO
+					}
+				}
+			}
 		}
-		
+		return null;
 	}
 
-	public void findFitPromotionClient(String ID, String clientID) {
+	/**
+	 * 返回合适等级的促销策略
+	 */
+	public ArrayList<PromotionClientVO> findFitPromotionClient(String ID, String clientID) {
 		PromotionClient clientPromotion = new PromotionClient();
-		ArrayList<PromotionClientVO> tempVOs = new ArrayList<PromotionClientVO>();
+		ArrayList<PromotionClientVO> clientVOs = new ArrayList<PromotionClientVO>();
 		for (PromotionClientVO vo : clientPromotion.show()) {
 			if (hasPromotion(ID, getID(vo.beginDate, vo.endDate))) {
-				tempVOs.add(vo);
+				clientVOs.add(vo);
 			}
 		}
-		
+		ClientInfo_Promotion info = new ClientInfo();
+		ClientLevel clientLevel= info.getLevel(clientID);
+		for (int i = 0; i < clientVOs.size(); ) {
+			if (clientVOs.get(i).level != clientLevel) {
+				clientVOs.remove(i);
+			}
+			else {
+				i++;
+			}
+		}
+		return clientVOs;
 	}
 
-	public void findFitPromotionTotal(String ID, double beforePrice) {
+	/**
+	 * 查看是否有符合总价的促销策略
+	 */
+	public ArrayList<PromotionTotalVO> findFitPromotionTotal(String ID, double beforePrice) {
 		PromotionTotal totalPromotion = new PromotionTotal();
-		ArrayList<PromotionTotalVO> tempVOs = new ArrayList<PromotionTotalVO>();
+		ArrayList<PromotionTotalVO> totalVOs = new ArrayList<PromotionTotalVO>();
 		for (PromotionTotalVO vo : totalPromotion.show()) {
 			if (hasPromotion(ID, getID(vo.beginDate, vo.endDate))) {
-				tempVOs.add(vo);
+				totalVOs.add(vo);
 			}
 		}
-		
+		for (int i = 0; i < totalVOs.size();) {
+			if (totalVOs.get(i).total >= beforePrice) {
+				totalVOs.remove(i);
+			}
+			else {
+				i++;
+			}
+		}
+		return totalVOs;
 	}
 	
 	/**

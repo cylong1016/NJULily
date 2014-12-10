@@ -2,6 +2,10 @@ package businesslogic.salebl.info;
 
 import java.util.ArrayList;
 
+import vo.promotion.PromotionClientVO;
+import vo.promotion.PromotionCommodityVO;
+import vo.promotion.PromotionTotalVO;
+
 public interface PromotionInfo_Sale {
 
 	/**
@@ -11,7 +15,7 @@ public interface PromotionInfo_Sale {
 	 * @author Zing
 	 * @version Dec 9, 2014 6:01:53 PM
 	 */
-	void findFitPromotionCommodity(String iD, ArrayList<String> commodityIDs);
+	public ArrayList<PromotionCommodityVO> findFitPromotionCommodity(String iD, ArrayList<String> commodityIDs);
 
 	/**
 	 * 查看是否有合适的客户等级的促销
@@ -20,7 +24,7 @@ public interface PromotionInfo_Sale {
 	 * @author Zing
 	 * @version Dec 9, 2014 6:02:12 PM
 	 */
-	void findFitPromotionClient(String iD, String clientID);
+	public ArrayList<PromotionClientVO> findFitPromotionClient(String iD, String clientID);
 
 	/**
 	 * 查看是否有合适的总价的促销
@@ -29,6 +33,6 @@ public interface PromotionInfo_Sale {
 	 * @author Zing
 	 * @version Dec 9, 2014 6:02:35 PM
 	 */
-	void findFitPromotionTotal(String iD, double beforePrice);
+	public ArrayList<PromotionTotalVO> findFitPromotionTotal(String iD, double beforePrice);
 	
 }

@@ -3,10 +3,12 @@ package businesslogic.clientbl;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import dataenum.ClientLevel;
 import po.ClientPO;
 import vo.client.ClientVO;
 import businesslogic.accountainitbl.info.ClientInfo_Init;
 import businesslogic.accountbillbl.ClientInfo_AccountBill;
+import businesslogic.promotionbl.info.ClientInfo_Promotion;
 import businesslogic.purchasebl.ClientInfo_Purchase;
 import businesslogic.salebl.info.ClientInfo_Sale;
 
@@ -15,7 +17,7 @@ import businesslogic.salebl.info.ClientInfo_Sale;
  * @author cylong
  * @version 2014年12月1日 下午2:49:21
  */
-public class ClientInfo implements ClientInfo_AccountBill, ClientInfo_Sale, ClientInfo_Purchase, ClientInfo_Init {
+public class ClientInfo implements ClientInfo_AccountBill, ClientInfo_Sale, ClientInfo_Purchase, ClientInfo_Init, ClientInfo_Promotion {
 
 	private Client client;
 	
@@ -78,5 +80,8 @@ public class ClientInfo implements ClientInfo_AccountBill, ClientInfo_Sale, Clie
 		ClientPO po = client.getClientData().find(clientID);
 		po.setPayable(po.getPayable() + beforePrice);
 		client.getClientData().update(po);
+	}
+	public ClientLevel getLevel(String clientID) {
+		return client.getClientData().find(clientID).getLevel();
 	}
 }
