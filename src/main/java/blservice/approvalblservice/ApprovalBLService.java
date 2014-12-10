@@ -43,5 +43,15 @@ public interface ApprovalBLService {
 	 * @return
 	 */
 	public ResultMessage passBill(ArrayList<ValueObject> VOs, ArrayList<BillType> billTypes);
+	
+	/**
+	 * 不通过
+	 * @param VOs
+	 * @param billTypes
+	 * @return
+	 * @author Zing
+	 * @version Dec 10, 2014 9:48:41 AM
+	 */
+	public ResultMessage noPassBill(ArrayList<ValueObject> VOs, ArrayList<BillType> billTypes);
 
 }

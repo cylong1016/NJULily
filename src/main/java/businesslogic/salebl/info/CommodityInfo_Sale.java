@@ -34,4 +34,12 @@ public interface CommodityInfo_Sale {
 	 * @version Dec 3, 2014 2:24:59 PM
 	 */
 	public void changeCommodityInfo(String ID, int number, double price, BillType billType);
+
+	/**
+	 * 将商品设置成是否可以删除
+	 * @param iD
+	 * @author Zing
+	 * @version Dec 10, 2014 9:39:56 AM
+	 */
+	public void setDelete(String iD, boolean canDelete);
 }

@@ -38,6 +38,7 @@ public class PurchaseListItem {
 		info = new CommodityInfo();
 		this.name = info.getName(ID);
 		this.type = info.getType(ID);
+		info.setDelete(ID, false);
 		this.price = price;
 		this.total = number * price;
 		this.remark = remark;

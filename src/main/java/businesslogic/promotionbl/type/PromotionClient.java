@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import po.CommodityItemPO;
 import po.PromotionPO;
 import message.ResultMessage;
+import vo.InventoryBillVO;
 import vo.commodity.CommodityItemVO;
 import vo.promotion.PromotionClientVO;
 import dataenum.ClientLevel;
@@ -45,6 +46,12 @@ public class PromotionClient extends Promotion implements PromotionClientBLServi
 	 */
 	public void setClient(ClientLevel level){
 		list.setLevel(level);
+	}
+	
+	
+	public void addGiftBill(InventoryBillVO giftBill) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	public ResultMessage submit(PromoInputInfo info) {

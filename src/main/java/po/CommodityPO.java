@@ -36,6 +36,8 @@ public class CommodityPO extends PersistentObject {
 	private int saleNumber;
 	
 	private int purNumber;
+	/** 能否被删除*/
+	private boolean canDelete;
 
 	/**
 	 * @param ID 商品ID
@@ -54,6 +56,7 @@ public class CommodityPO extends PersistentObject {
 		this.purPrice = purPrice;
 		this.salePrice = salePrice;
 		this.alarmNumber = alarmNumber;
+		this.canDelete = true;
 	}
 	
 	/**
@@ -191,6 +194,14 @@ public class CommodityPO extends PersistentObject {
 
 	public void setInventoryNum(int inventoryNum) {
 		this.inventoryNum = inventoryNum;
+	}
+
+	public boolean isCanDelete() {
+		return canDelete;
+	}
+
+	public void setCanDelete(boolean canDelete) {
+		this.canDelete = canDelete;
 	}
 	
 	

@@ -120,5 +120,11 @@ public class Approval implements ApprovalBLService{
 		}
 		return ResultMessage.SUCCESS;
 	}
+
+	public ResultMessage noPassBill(ArrayList<ValueObject> VOs,
+			ArrayList<BillType> billTypes) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

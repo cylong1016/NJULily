@@ -43,6 +43,14 @@ public interface PromotionClientBLService {
 	public void addGifts(CommodityItemVO vo);
 	
 	/**
+	 * 添加已存在的赠送单作为赠品
+	 * @param giftBill
+	 * @author Zing
+	 * @version Dec 10, 2014 11:39:44 PM
+	 */
+	public void addGiftBill(InventoryBillVO giftBill);
+	
+	/**
 	 * 设置促销的客户等级
 	 * @param level
 	 * @author Zing

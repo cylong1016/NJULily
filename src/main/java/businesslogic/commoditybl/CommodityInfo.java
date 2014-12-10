@@ -171,4 +171,13 @@ public class CommodityInfo implements CommodityInfo_Sale, businesslogic.purchase
 		commodityData.update(po);
 	}
 
+	/**
+	 * 更新商品信息
+	 */
+	public void setDelete(String ID, boolean canDelete) {
+		CommodityPO po = commodityData.find(ID);
+		po.setCanDelete(canDelete);
+		commodityData.update(po);
+	}
+
 }

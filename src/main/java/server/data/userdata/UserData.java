@@ -17,7 +17,6 @@ public class UserData extends CommonData<UserPO> implements UserDataService {
 	/**
 	 * @see dataservice.DataService#init()
 	 */
-	@Override
 	public void init() {
 		parsexml = new ParseXML("UserData");
 		prefix = parsexml.getValue("prefix");
@@ -49,7 +48,6 @@ public class UserData extends CommonData<UserPO> implements UserDataService {
 	/**
 	 * @see dataservice.userdataservice.UserDataService#checkAdmin(dataservice.userdataservice.AdminInfo)
 	 */
-	@Override
 	public boolean checkAdmin(AdminInfo admin) {
 		AdminInfo adminInfo = loadAdminInfo();	// 从文件中读取的AdminInfo
 		if (adminInfo.equals(admin)) {
@@ -74,7 +72,6 @@ public class UserData extends CommonData<UserPO> implements UserDataService {
 	/**
 	 * @see dataservice.userdataservice.UserDataService#updateAdmin(java.lang.String, java.lang.String)
 	 */
-	@Override
 	public ResultMessage updateAdmin(String oldPass, String newPass) {
 		ParseXML parse = new ParseXML("config/Admin.xml", "Admin");
 		String password = parse.getValue("password");	// 从文件中读取的password
