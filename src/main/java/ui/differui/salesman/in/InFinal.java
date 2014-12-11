@@ -15,15 +15,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.filechooser.FileSystemView;
 
-import dataenum.BillType;
-import dataenum.Storage;
-import blservice.purchaseblservice.PurInputInfo;
-import businesslogic.purchasebl.Purchase;
 import ui.commonui.login.Frame_Login;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.warning.WarningFrame;
 import ui.differui.salesman.frame.Frame_Salesman;
 import vo.commodity.CommodityItemVO;
+import blservice.purchaseblservice.PurInputInfo;
+import businesslogic.purchasebl.Purchase;
+import dataenum.Storage;
 
 public class InFinal extends JLabel implements ActionListener{
 
