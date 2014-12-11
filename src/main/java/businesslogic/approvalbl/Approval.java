@@ -46,6 +46,18 @@ public class Approval implements ApprovalBLService{
 				inventoryBillVOs.findApproval(), cashBillVOs.findApproval());
 		return vo;
 	}
+	
+//	public ApprovalVO showPass() {
+//		ValueObject_Approval<SalesVO> salesVOs = new SaleInfo();
+//		ValueObject_Approval<PurchaseVO> purchaseVOs = new PurchaseInfo();
+//		ValueObject_Approval<AccountBillVO> accountBillVOs = new AccountBillInfo();
+//		ValueObject_Approval<InventoryBillVO> inventoryBillVOs = new InventoryInfo();
+//		ValueObject_Approval<CashBillVO> cashBillVOs = new CashBillInfo();
+//		ApprovalVO vo = new ApprovalVO(salesVOs.findPass(), purchaseVOs.findPass(), accountBillVOs.findPass(),
+//				inventoryBillVOs.findPass(), cashBillVOs.findPass());
+//		
+//		return null;
+//	}
 
 	/**
 	 * 更新特定单据的数据 直接传递一个数据vo过来，还要有数据的类型

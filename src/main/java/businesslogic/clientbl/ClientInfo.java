@@ -7,7 +7,7 @@ import dataenum.ClientLevel;
 import po.ClientPO;
 import vo.client.ClientVO;
 import businesslogic.accountainitbl.info.ClientInfo_Init;
-import businesslogic.accountbillbl.ClientInfo_AccountBill;
+import businesslogic.accountbillbl.info.ClientInfo_AccountBill;
 import businesslogic.promotionbl.info.ClientInfo_Promotion;
 import businesslogic.purchasebl.ClientInfo_Purchase;
 import businesslogic.salebl.info.ClientInfo_Sale;
@@ -25,7 +25,7 @@ public class ClientInfo implements ClientInfo_AccountBill, ClientInfo_Sale, Clie
 		client = new Client();
 	}
 	/**
-	 * @see businesslogic.accountbillbl.ClientInfo_AccountBill#getAllClients()
+	 * @see businesslogic.accountbillbl.info.ClientInfo_AccountBill#getAllClients()
 	 */
 	@Override
 	public HashMap<String, String> getAllClients() {

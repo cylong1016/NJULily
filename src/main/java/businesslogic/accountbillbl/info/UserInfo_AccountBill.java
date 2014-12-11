@@ -1,4 +1,4 @@
-package businesslogic.accountbillbl;
+package businesslogic.accountbillbl.info;
 
 /**
  * @author cylong

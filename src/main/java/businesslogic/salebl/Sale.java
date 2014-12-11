@@ -2,7 +2,6 @@ package businesslogic.salebl;
 
 import java.util.ArrayList;
 
-import message.ResultMessage;
 import po.SalesPO;
 import server.data.saledata.SaleData;
 import vo.commodity.CommodityItemVO;
@@ -97,23 +96,23 @@ public class Sale implements SaleBLService {
 		list.setClientID(clientID);
 	}
 
-	/**
-	 * 界面显示全部的销售（销售退货）单
-	 * @return 销售（销售退货）单的ArrayList
-	 * @author cylong
-	 * @version 2014年11月28日 下午8:36:47
-	 */
-	public ArrayList<SalesVO> show(BillType type) {
-		transPOVO = new SaleTrans();
-		ArrayList<SalesVO> billsVO = new ArrayList<SalesVO>();
-		SaleDataService saleData = getSaleData();
-		ArrayList<SalesPO> billsPO = saleData.show();
-		for(SalesPO po : billsPO) {
-			SalesVO vo = transPOVO.poToVo(po);
-			billsVO.add(vo);
-		}
-		return billsVO;
-	}
+//	/**
+//	 * 界面显示全部的销售（销售退货）单
+//	 * @return 销售（销售退货）单的ArrayList
+//	 * @author cylong
+//	 * @version 2014年11月28日 下午8:36:47
+//	 */
+//	public ArrayList<SalesVO> show(BillType type) {
+//		transPOVO = new SaleTrans();
+//		ArrayList<SalesVO> billsVO = new ArrayList<SalesVO>();
+//		SaleDataService saleData = getSaleData();
+//		ArrayList<SalesPO> billsPO = saleData.show();
+//		for(SalesPO po : billsPO) {
+//			SalesVO vo = transPOVO.poToVo(po);
+//			billsVO.add(vo);
+//		}
+//		return billsVO;
+//	}
 
 	/**
 	 * 提交销售（销售退货）单，等待审批
@@ -121,10 +120,12 @@ public class Sale implements SaleBLService {
 	 * @author Zing
 	 * @version 2014年11月28日 下午9:13:52
 	 */
-	public ResultMessage submit(saleAddVO inputInfo) {
+	public SalesVO submit(saleAddVO inputInfo) {
 		setInputInfo(inputInfo);
 		SalesPO po = buildSales();
-		return getSaleData().insert(po);
+		getSaleData().insert(po);
+		transPOVO = new SaleTrans();
+		return transPOVO.poToVo(po);
 	}
 
 	/**
@@ -133,11 +134,12 @@ public class Sale implements SaleBLService {
 	 * @author cylong
 	 * @version 2014年11月28日 下午9:14:47
 	 */
-	public ResultMessage save(saleAddVO inputInfo) {
+	public SalesVO save(saleAddVO inputInfo) {
 		setInputInfo(inputInfo);
-		// SalesPO po = buildSales();
+		 SalesPO po = buildSales();
 		// TODO 保存在本地
-		return ResultMessage.SUCCESS;
+		 transPOVO = new SaleTrans();
+		return transPOVO.poToVo(po);
 	}
 
 	/**
@@ -152,8 +154,7 @@ public class Sale implements SaleBLService {
 		String clientID = list.getClientID();
 		String salesman = info.getSalesman(list.getClientID());
 		// TODO user从文件中读取当前登陆的用户
-		po =
-				new SalesPO(ID, clientID, clientName, salesman, "user", list.getStorage(), list.getCommodities(), beforePrice, list.getAllowance(), list.getVoucher(), list.getRemark(), afterPrice, type);
+		po = new SalesPO(ID, clientID, clientName, salesman, "user", list.getStorage(), list.getCommodities(), beforePrice, list.getAllowance(), list.getVoucher(), list.getRemark(), afterPrice, type);
 		return po;
 	}
 

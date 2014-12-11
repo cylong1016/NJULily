@@ -23,7 +23,7 @@ public class MockAccount extends Account {
 	}
 
 	/**
-	 * @see businesslogic.accountbillbl.AccountInfo_AccountBill#getAllAccounts()
+	 * @see businesslogic.accountbillbl.info.AccountInfo_AccountBill#getAllAccounts()
 	 */
 	public HashMap<String, String> getAllAccountName() {
 		return null;

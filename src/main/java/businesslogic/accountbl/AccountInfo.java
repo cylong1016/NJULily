@@ -6,7 +6,7 @@ import java.util.HashMap;
 import po.AccountPO;
 import vo.AccountVO;
 import businesslogic.accountainitbl.info.AccountInfo_Init;
-import businesslogic.accountbillbl.AccountInfo_AccountBill;
+import businesslogic.accountbillbl.info.AccountInfo_AccountBill;
 import businesslogic.cashbillbl.AccountInfo_CashBill;
 
 /**
@@ -23,7 +23,7 @@ public class AccountInfo implements AccountInfo_AccountBill, AccountInfo_Init, A
 	}
 
 	/**
-	 * @see businesslogic.accountbillbl.AccountInfo_AccountBill#getAllAccounts()
+	 * @see businesslogic.accountbillbl.info.AccountInfo_AccountBill#getAllAccounts()
 	 */
 	@Override
 	public HashMap<String, String> getAllAccounts() {

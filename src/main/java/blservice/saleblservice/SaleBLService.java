@@ -2,14 +2,12 @@ package blservice.saleblservice;
 
 import java.util.ArrayList;
 
-import message.ResultMessage;
 import vo.commodity.CommodityItemVO;
 import vo.promotion.PromotionClientVO;
 import vo.promotion.PromotionCommodityVO;
 import vo.promotion.PromotionTotalVO;
 import vo.sale.SalesVO;
 import vo.sale.saleAddVO;
-import dataenum.BillType;
 
 /**
  * 负责实现销售界面所需要的服务
@@ -26,14 +24,7 @@ import dataenum.BillType;
  */
 public interface SaleBLService {
 
-	/**
-	 * 返回给界面层显示全部的销售（销售退货）单
-	 * @return 全部的销售（销售退货）单的ArrayList
-	 * @author cylong
-	 * @version 2014年11月28日 下午4:14:35
-	 */
-	public ArrayList<SalesVO> show(BillType type);
-
+	
 	/**
 	 * 新建销售（销售退货）单的时候返回给界面显示单据的ID
 	 * @param type 单据的类型（销售单，销售退货单）
@@ -80,7 +71,7 @@ public interface SaleBLService {
 	 * @author cylong
 	 * @version 2014年11月28日 下午7:40:43
 	 */
-	public ResultMessage submit(saleAddVO inputInfo);
+	public SalesVO submit(saleAddVO inputInfo);
 
 	/**
 	 * 创建销售（销售退货）单时需要的除商品以外的数据（变成草稿状态）
@@ -90,6 +81,6 @@ public interface SaleBLService {
 	 * @author cylong
 	 * @version 2014年11月28日 下午7:40:24
 	 */
-	public ResultMessage save(saleAddVO inputInfo);
+	public SalesVO save(saleAddVO inputInfo);
 
 }

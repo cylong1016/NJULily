@@ -2,7 +2,6 @@ package businesslogic.purchasebl;
 
 import java.util.ArrayList;
 
-import message.ResultMessage;
 import po.PurchasePO;
 import server.data.purchasedata.PurchaseData;
 import vo.PurchaseVO;
@@ -45,15 +44,6 @@ public class Purchase implements PurchaseBLService {
 		return new PurchaseData();
 	}
 
-	public ArrayList<PurchaseVO> show(BillType type) {
-		ArrayList<PurchaseVO> VOs = new ArrayList<PurchaseVO>();
-		ArrayList<PurchasePO> POs = getPurData().show();
-		for(int i = 0; i < POs.size(); i++) {
-			PurchaseVO vo = poToVO(POs.get(i));
-			VOs.add(vo);
-		}
-		return VOs;
-	}
 
 	public String getPurchaseID() {
 		this.type = BillType.PURCHASE;
@@ -74,16 +64,18 @@ public class Purchase implements PurchaseBLService {
 		list.add(item);
 	}
 
-	public ResultMessage submit(PurInputInfo info) {
+	public PurchaseVO submit(PurInputInfo info) {
 		setInputInfo(info);
 		po = buildPur();
-		return getPurData().insert(po);
+		getPurData().insert(po);
+		return poToVO(po);
 	}
 
-	public ResultMessage save(PurInputInfo info) {
+	public PurchaseVO save(PurInputInfo info) {
 		setInputInfo(info);
+		po = buildPur();
 		// TODO 保存为草稿
-		return null;
+		return poToVO(po);
 	}
 
 	private PurchasePO buildPur() {

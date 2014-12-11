@@ -16,6 +16,8 @@ public class StrategyManagementUI extends JPanel implements ActionListener{
 	
 	private static final long serialVersionUID = 1L;
 	
+	private AddBargainPane addBargainPane;
+	
 	public StrategyManagementUI(){
 		this.setLayout(null);
 		this.setBounds(0, 0, 1280, 720);
@@ -56,6 +58,18 @@ public class StrategyManagementUI extends JPanel implements ActionListener{
 	}
 
 	private void addButtons() {
+		int gap = 150;
+		int y = 570, buttonH = 20, buttonW = 120;
+		addBargainPane = new AddBargainPane();
+		MyButton addBargainButton = new MyButton("制定特价包", 630, y, buttonW, buttonH);
+		addBargainButton.setPanel(this, addBargainPane);
+		add(addBargainButton);
+		MyButton addClientButton = new MyButton("制定客户促销", 630+gap, y, buttonW, buttonH);
+		add(addClientButton);
+		MyButton addCommoButton = new MyButton("制定商品促销", 630+2*gap, y, buttonW, buttonH);
+		add(addCommoButton);
+		MyButton addTotalButton = new MyButton("制定总价促销", 630+3*gap, y, buttonW, buttonH);
+		add(addTotalButton);
 		
 		
 	}

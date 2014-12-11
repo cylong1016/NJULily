@@ -2,7 +2,7 @@ package businesslogic.userbl;
 
 import io.DefineList;
 import po.UserPO;
-import businesslogic.accountbillbl.UserInfo_AccountBill;
+import businesslogic.accountbillbl.info.UserInfo_AccountBill;
 import businesslogic.clientbl.UserInfo_Client;
 import dataenum.UserIdentity;
 
@@ -22,7 +22,7 @@ public class UserInfo implements UserInfo_Client, UserInfo_AccountBill {
 	}
 
 	/**
-	 * @see businesslogic.accountbillbl.UserInfo_AccountBill#getUserName()
+	 * @see businesslogic.accountbillbl.info.UserInfo_AccountBill#getUserName()
 	 */
 	@Override
 	public String getUserName() {

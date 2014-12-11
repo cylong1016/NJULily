@@ -1,15 +1,22 @@
 package ui.differui.manager.strategy;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
-public class MyButton extends JButton{
+public class MyButton extends JButton implements ActionListener{
 	
 	private static final long serialVersionUID = 1L;
+	
+	private JPanel inPanel;
+	
+	private JPanel nextPanel;
 
 	public MyButton(String text, int x, int y, int width, int height){
 		this.setBounds(x, y, width, height);
@@ -20,6 +27,13 @@ public class MyButton extends JButton{
 		this.setBackground(new Color(0,0,0,0));
 		this.addMouseListener(new MouseHandler());
 		this.setVisible(true);
+	}
+	
+	public void setPanel(JPanel inPanel, JPanel nextPanel) {
+		this.inPanel = inPanel;
+		this.addActionListener((ActionListener) inPanel);
+		System.out.println("test");
+		this.nextPanel = nextPanel;
 	}
 	
 	class MouseHandler implements MouseListener {
@@ -40,13 +54,21 @@ public class MyButton extends JButton{
 		}
 
 		@Override
-		public void mouseEntered(MouseEvent e) {			
+		public void mouseEntered(MouseEvent e) {	
+			setForeground(Color.WHITE);
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
-			
+			setForeground(Color.BLACK);
 		}
 		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource().equals(this.getText())) {
+			System.out.println("点击了");
+		}
 	}
 }

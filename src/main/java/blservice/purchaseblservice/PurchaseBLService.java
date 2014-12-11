@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import dataenum.BillType;
 import vo.PurchaseVO;
 import vo.commodity.CommodityItemVO;
-import message.ResultMessage;
 
 /**
  * 负责实现进货界面所需要的服务
@@ -18,13 +17,6 @@ import message.ResultMessage;
  * @version 2014年10月31日下午4:36:47
  */
 public interface PurchaseBLService {
-	/**
-	 * 返回所有的进货（进货退货）单
-	 * @return
-	 * @author Zing
-	 * @version Nov 29, 2014 2:59:02 PM
-	 */
-	public ArrayList<PurchaseVO> show(BillType billType);
 	
 	/**
 	 *  新建进货（进货退货）单的时候返回给界面显示单据的ID
@@ -51,7 +43,7 @@ public interface PurchaseBLService {
 	 * @author Zing
 	 * @version Nov 29, 2014 3:09:49 PM
 	 */
-	public ResultMessage submit(PurInputInfo info);
+	public PurchaseVO submit(PurInputInfo info);
 	
 	/**
 	 * 创建进货（进货退货）单时，变成草稿状态
@@ -60,6 +52,6 @@ public interface PurchaseBLService {
 	 * @author Zing
 	 * @version Nov 29, 2014 3:09:52 PM
 	 */
-	public ResultMessage save(PurInputInfo info);
+	public PurchaseVO save(PurInputInfo info);
 	
 }

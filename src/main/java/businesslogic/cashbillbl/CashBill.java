@@ -2,7 +2,6 @@ package businesslogic.cashbillbl;
 
 import java.util.ArrayList;
 
-import message.ResultMessage;
 import po.CashBillPO;
 import po.CashItemPO;
 import server.data.cashbilldata.CashBillData;
@@ -80,15 +79,16 @@ public class CashBill implements CashBillBLService {
 		return po;
 	}
 
-	public ResultMessage submit(String account) {
+	public CashBillVO submit(String account) {
 		addCashBill(account);
 		getCashBillData().insert(po);
-		return ResultMessage.SUCCESS;
+		return POToVO(po);
 	}
 
-	public ResultMessage save(String account) {
+	public CashBillVO save(String account) {
+		addCashBill(account);
 		// TODO 存在本地
-		return null;
+		return POToVO(po);
 	}
 
 	/**

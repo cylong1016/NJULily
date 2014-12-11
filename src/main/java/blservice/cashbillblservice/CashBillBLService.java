@@ -1,6 +1,6 @@
 package blservice.cashbillblservice;
 
-import message.ResultMessage;
+import vo.CashBillVO;
 import dataenum.BillType;
 
 /**
@@ -34,11 +34,11 @@ public interface CashBillBLService {
 	 * 提交单据
 	 * @return
 	 */
-	public ResultMessage submit(String account);
+	public CashBillVO submit(String account);
 	
 	/**
 	 * 保存单据
 	 * @return
 	 */
-	public ResultMessage save(String account);
+	public CashBillVO save(String account);
 }

@@ -3,13 +3,15 @@ package businesslogic.accountbillbl;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import message.ResultMessage;
 import po.AccountBillItemPO;
 import po.AccountBillPO;
 import server.data.accountbilldata.AccountBillData;
 import vo.AccountBillItemVO;
 import vo.AccountBillVO;
 import blservice.accountbillblservice.AccountBillBLService;
+import businesslogic.accountbillbl.info.AccountInfo_AccountBill;
+import businesslogic.accountbillbl.info.ClientInfo_AccountBill;
+import businesslogic.accountbillbl.info.UserInfo_AccountBill;
 import businesslogic.accountbl.AccountInfo;
 import businesslogic.clientbl.ClientInfo;
 import businesslogic.userbl.UserInfo;
@@ -57,7 +59,7 @@ public class AccountBill implements AccountBillBLService {
 	}
 
 	/**
-	 * @see businesslogic.accountbillbl.ClientInfo_AccountBill
+	 * @see businesslogic.accountbillbl.info.ClientInfo_AccountBill
 	 * @author cylong
 	 * @version 2014年12月1日 上午1:33:04
 	 */
@@ -67,7 +69,7 @@ public class AccountBill implements AccountBillBLService {
 	}
 
 	/**
-	 * @see businesslogic.accountbillbl.AccountInfo_AccountBill
+	 * @see businesslogic.accountbillbl.info.AccountInfo_AccountBill
 	 * @author cylong
 	 * @version 2014年12月1日 上午1:36:29
 	 */
@@ -118,37 +120,13 @@ public class AccountBill implements AccountBillBLService {
 	}
 
 	/**
-	 * @return 全部的收款单和付款单
-	 * @author cylong
-	 * @version 2014年12月1日 下午3:21:44
-	 */
-	public ArrayList<AccountBillVO> show() {
-		ArrayList<AccountBillPO> billsPO = accountBillData.show();
-		ArrayList<AccountBillVO> billsVO = billsPOToBillsVO(billsPO);
-		return billsVO;
-	}
-
-	/**
-	 * 根据单据类型返回单子（收款单，付款单）
-	 * @param type 单据类型
-	 * @return ArrayList<AccountBillVO>
-	 * @author cylong
-	 * @version 2014年12月1日 下午3:22:01
-	 */
-	public ArrayList<AccountBillVO> show(BillType type) {
-		ArrayList<AccountBillPO> billsPO = accountBillData.show(type);
-		ArrayList<AccountBillVO> billsVO = billsPOToBillsVO(billsPO);
-		return billsVO;
-	}
-
-	/**
 	 * 将收款单（付款单）的PO集合转化成VO集合
 	 * @param billsPO
 	 * @return ArrayList<AccountBillVO>
 	 * @author cylong
 	 * @version 2014年12月1日 下午3:45:32
 	 */
-	private ArrayList<AccountBillVO> billsPOToBillsVO(ArrayList<AccountBillPO> billsPO) {
+	public ArrayList<AccountBillVO> billsPOToBillsVO(ArrayList<AccountBillPO> billsPO) {
 		ArrayList<AccountBillVO> billsVO = new ArrayList<AccountBillVO>();
 		for(AccountBillPO po : billsPO) {
 			AccountBillVO vo = poToVO(po);
@@ -200,8 +178,9 @@ public class AccountBill implements AccountBillBLService {
 	 * @author cylong
 	 * @version 2014年12月1日 上午1:56:06
 	 */
-	public ResultMessage submit() {
-		return accountBillData.insert(po);
+	public AccountBillVO submit() {
+		accountBillData.insert(po);
+		return poToVO(po);
 	}
 
 	/**
@@ -210,7 +189,7 @@ public class AccountBill implements AccountBillBLService {
 	 * @author cylong
 	 * @version 2014年11月30日 下午10:43:20
 	 */
-	public ResultMessage save() {
+	public AccountBillVO save() {
 		// TODO AccountBill保存成草稿状态
 		return null;
 	}

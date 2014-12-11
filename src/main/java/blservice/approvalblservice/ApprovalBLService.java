@@ -33,6 +33,14 @@ public interface ApprovalBLService {
 	public ApprovalVO show();
 	
 	/**
+	 * 查看通过审批的单据
+	 * @return
+	 * @author Zing
+	 * @version Dec 12, 2014 12:59:53 AM
+	 */
+//	public ApprovalVO showPass();
+	
+	/**
 	 * 修改单据内容
 	 * @return
 	 */

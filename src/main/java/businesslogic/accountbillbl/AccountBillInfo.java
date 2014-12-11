@@ -7,6 +7,8 @@ import po.AccountBillItemPO;
 import po.AccountBillPO;
 import vo.AccountBillItemVO;
 import vo.AccountBillVO;
+import businesslogic.accountbillbl.info.AccountInfo_AccountBill;
+import businesslogic.accountbillbl.info.ClientInfo_AccountBill;
 import businesslogic.accountbl.AccountInfo;
 import businesslogic.approvalbl.info.AccountBill_Approval;
 import businesslogic.approvalbl.info.ValueObject_Approval;
