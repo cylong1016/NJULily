@@ -15,7 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.filechooser.FileSystemView;
 
-import dataenum.BillType;
+import message.ResultMessage;
 import dataenum.Storage;
 import blservice.purchaseblservice.PurInputInfo;
 import businesslogic.purchasebl.Purchase;
@@ -96,12 +96,23 @@ public class InFinal extends JLabel implements ActionListener{
 			Purchase purController = new Purchase();
 			ArrayList<CommodityItemVO> list = InGood.commoList;
 			
+			purController.getPurchaseID();
+			
 			//ADD COMMODITIES
 			for(int i = 0; i < list.size(); i++)
 				purController.addCommodities(list.get(i));
 			
 			//SUBMIT
-			purController.submit(new PurInputInfo(InClient.ClientID, Storage.STORAGE_ONE, InClient.note));
+			ResultMessage rm = purController.submit(new PurInputInfo(InClient.ClientID, Storage.STORAGE_ONE, InClient.note));
+			if(rm.equals(ResultMessage.SUCCESS)){
+				WarningFrame wf = new WarningFrame("进货单添加成功！");
+				wf.setVisible(true);
+				Frame_Salesman.visibleTrue(0);
+				this.setVisible(false);
+			}else{
+				WarningFrame wf = new WarningFrame("进货单添加成功！");
+				wf.setVisible(true);
+			}
 		}
 		
 		if(events.getSource() == button_back){

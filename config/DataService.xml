@@ -69,10 +69,10 @@
 		<path>data/PurchaseList.ser</path>
 		<purchaseID>JHD</purchaseID>
 		<purchasebackID>JHTHD</purchasebackID>
-		<maxID>00002</maxID>
+		<maxID>00009</maxID>
 		<IDMaxBit>5</IDMaxBit>
 		<dateFormat>yyyyMMdd</dateFormat>
-		<dateRecord>20141111</dateRecord>
+		<dateRecord>20141211</dateRecord>
 	</Data>
 	<Data>
 		<name>InventoryData</name>
