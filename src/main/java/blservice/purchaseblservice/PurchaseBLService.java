@@ -33,7 +33,8 @@ public interface PurchaseBLService {
 	 * @author Zing
 	 * @version Nov 29, 2014 2:59:37 PM
 	 */
-	public String getID(BillType type);
+	public String getPurchaseID();
+	public String getPurBackID();
 	
 	/**
 	 * 添加商品到进货（进货退货）单中

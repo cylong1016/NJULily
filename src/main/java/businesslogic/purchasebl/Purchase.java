@@ -55,12 +55,18 @@ public class Purchase implements PurchaseBLService {
 		return VOs;
 	}
 
-	public String getID(BillType type) {
-		this.type = type;
+	public String getPurchaseID() {
+		this.type = BillType.PURCHASE;
 		PurchaseDataService purData = getPurData();
-		this.ID = purData.getID();
+		this.ID = purData.getPurchaseID();
 		return ID;
-
+	}
+	
+	public String  getPurBackID() {
+		this.type = BillType.PURCHASEBACK;
+		PurchaseDataService purData = getPurData();
+		this.ID = purData.getPurchaseBackID();
+		return ID;
 	}
 
 	public void addCommodities(CommodityItemVO itemVO) {

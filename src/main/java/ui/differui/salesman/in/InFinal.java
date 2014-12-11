@@ -128,7 +128,7 @@ public class InFinal extends JLabel implements ActionListener{
 		Purchase purController = new Purchase();
 		ArrayList<CommodityItemVO> list = InGood.commoList;
 		double total = 0;
-		ID = purController.getID(BillType.PURCHASE);
+		ID = purController.getPurchaseID();
 		
 		String text = "";
 		String blank4 = "    ";
