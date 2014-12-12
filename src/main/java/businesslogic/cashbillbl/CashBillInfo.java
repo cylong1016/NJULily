@@ -44,22 +44,6 @@ public class CashBillInfo extends Info<CashBillPO> implements ValueObjectInfo_Re
 		return cashBill.POToVO(getCashBillData().find(ID));
 	}
 
-	public ArrayList<CashBillVO> findApproval() {
-		ArrayList<CashBillPO> POs = getCashBillData().show();
-		ArrayList<CashBillPO> approvalPO = new ArrayList<CashBillPO>();
-		for (CashBillPO po : POs) {
-			if (po.getState() == BillState.APPROVALING) {
-				approvalPO.add(po);
-			}
-		}
-		ArrayList<CashBillVO> VOs = new ArrayList<CashBillVO>();
-		for (CashBillPO po : approvalPO) {
-			CashBillVO vo = cashBill.POToVO(po);
-			VOs.add(vo);
-		}
-		return VOs;
-	}
-
 	public ResultMessage update(CashBillVO vo) {
 		String ID = vo.ID;
 		String user = vo.user;
@@ -114,5 +98,22 @@ public class CashBillInfo extends Info<CashBillPO> implements ValueObjectInfo_Re
 			// TODO 保存为草稿
 		}
 		return redVO;
+	}
+	
+	public ArrayList<CashBillVO> findApproval() {
+		CashBillShow show = new CashBillShow();
+		return show.showApproving();
+	}
+
+	@Override
+	public ArrayList<CashBillVO> showPass() {
+		CashBillShow show = new CashBillShow();
+		return show.showPass();
+	}
+
+	@Override
+	public ArrayList<CashBillVO> showFailure() {
+		CashBillShow show = new CashBillShow();
+		return show.showFailure();
 	}
 }

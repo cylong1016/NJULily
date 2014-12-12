@@ -59,25 +59,6 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 		return IDs;
 	}
 
-	/**
-	 * 返回需要进行审核的单子（包括付款单x和收款单）
-	 */
-	public ArrayList<AccountBillVO> findApproval() {
-		ArrayList<AccountBillPO> POs = getData().show();
-		ArrayList<AccountBillPO> approvalPO = new ArrayList<AccountBillPO>();
-		for(AccountBillPO po : POs) {
-			if (po.getState() == BillState.APPROVALING) {
-				approvalPO.add(po);
-			}
-		}
-		ArrayList<AccountBillVO> VOs = new ArrayList<AccountBillVO>();
-		for(AccountBillPO po : approvalPO) {
-			AccountBillVO vo = accountBill.poToVO(po);
-			VOs.add(vo);
-		}
-		return VOs;
-	}
-
 	public ResultMessage update(AccountBillVO vo) {
 		String ID = vo.ID;
 		String clientID = vo.clientID;
@@ -154,6 +135,32 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 			// TODO 保存为草稿
 		}
 		return redVO;
+	}
+	
+	/**
+	 * 返回需要进行审核的单子（包括付款单x和收款单）
+	 */
+	public ArrayList<AccountBillVO> findApproval() {
+		AccountBillShow show = new AccountBillShow();
+		ArrayList<AccountBillVO> VOs = show.showPayApproving();
+		VOs.addAll(show.showExpenseApproving());
+		return VOs;
+	}
+
+	@Override
+	public ArrayList<AccountBillVO> showPass() {
+		AccountBillShow show = new AccountBillShow();
+		ArrayList<AccountBillVO> VOs = show.showPayPass();
+		VOs.addAll(show.showExpensePass());
+		return VOs;
+	}
+
+	@Override
+	public ArrayList<AccountBillVO> showFailure() {
+		AccountBillShow show = new AccountBillShow();
+		ArrayList<AccountBillVO> VOs = show.showPayFailure();
+		VOs.addAll(show.showExpenseFailure());
+		return VOs;
 	}
 
 }

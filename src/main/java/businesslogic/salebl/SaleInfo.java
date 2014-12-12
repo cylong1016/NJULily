@@ -10,7 +10,6 @@ import businesslogic.recordbl.info.ValueObjectInfo_Record;
 import po.CommodityItemPO;
 import po.SalesPO;
 import vo.sale.SalesVO;
-import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Storage;
 import dataservice.TableInfoService;
@@ -138,25 +137,6 @@ public class SaleInfo extends Info<SalesPO> implements SaleInfo_Inventory, SaleI
 		return getSaleData().find(ID).getVoucher();
 	}
 
-	/**
-	 * 查找需要审批的单子
-	 */
-	public ArrayList<SalesVO> findApproval() {
-		SaleTrans transPOVO = new SaleTrans();
-		ArrayList<SalesPO> POs = getSaleData().show();
-		ArrayList<SalesPO> approvalPO = new ArrayList<SalesPO>();
-		for (SalesPO po : POs) {
-			if (po.getState() == BillState.APPROVALING) {
-				approvalPO.add(po);
-			}
-		}
-		ArrayList<SalesVO> VOs = new ArrayList<SalesVO>();
-		for (SalesPO po : approvalPO) {
-			SalesVO vo = transPOVO.poToVo(po);
-			VOs.add(vo);
-		}
-		return VOs;
-	}
 	
 	public double getMoney() {
 		if (saleIDs.isEmpty() && backIDs.isEmpty()) {
@@ -200,6 +180,32 @@ public class SaleInfo extends Info<SalesPO> implements SaleInfo_Inventory, SaleI
 			number += po.getNumber();
 		}
 		return number;
+	}
+	
+	/**
+	 * 查找需要审批的单子
+	 */
+	public ArrayList<SalesVO> findApproval() {
+		SaleShow saleShow = new SaleShow();
+		ArrayList<SalesVO> vo = saleShow.showSaleApproving();
+		vo.addAll(saleShow.showSaleBackApproving());
+		return vo;
+	}
+
+	@Override
+	public ArrayList<SalesVO> showPass() {
+		SaleShow saleShow = new SaleShow();
+		ArrayList<SalesVO> vo = saleShow.showSalePass();
+		vo.addAll(saleShow.showSaleBackPass());
+		return vo;
+	}
+
+	@Override
+	public ArrayList<SalesVO> showFailure() {
+		SaleShow saleShow = new SaleShow();
+		ArrayList<SalesVO> vo = saleShow.showSaleFailure();
+		vo.addAll(saleShow.showSaleBackFailure());
+		return vo;
 	}
 	
 

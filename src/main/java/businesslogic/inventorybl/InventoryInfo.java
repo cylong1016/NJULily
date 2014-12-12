@@ -62,25 +62,6 @@ public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInf
 		return vo;
 	}
 
-	/**
-	 * 返回需要审批的VO
-	 */
-	public ArrayList<InventoryBillVO> findApproval() {
-		ArrayList<InventoryBillPO> POs = getInventoryData().show();
-		ArrayList<InventoryBillPO> approvalPO = new ArrayList<InventoryBillPO>();
-		for (InventoryBillPO po : POs) {
-			if (po.getState() == BillState.APPROVALING) {
-				approvalPO.add(po);
-			}
-		}
-		ArrayList<InventoryBillVO> VOs = new ArrayList<InventoryBillVO>();
-		for (InventoryBillPO po : approvalPO) {
-			InventoryBillVO vo = inventory.poToVo(po);
-			VOs.add(vo);
-		}
-		return VOs;
-	}
-
 	public ResultMessage update(InventoryBillVO vo) {
 		String ID = vo.ID;
 		BillType billType = vo.billType;
@@ -144,5 +125,37 @@ public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInf
 			// TODO 保存为草稿
 		}
 		return null;
+	}
+	
+	/**
+	 * 返回需要审批的VO
+	 */
+	public ArrayList<InventoryBillVO> findApproval() {
+		InventoryShow show = new InventoryShow();
+		ArrayList<InventoryBillVO> VOs = show.showGiftsApproving();
+		VOs.addAll(show.showOverFlowApproving());
+		VOs.addAll(show.showLossApproving());
+		VOs.addAll(show.showAlarmApproving());
+		return VOs;
+	}
+
+	@Override
+	public ArrayList<InventoryBillVO> showPass() {
+		InventoryShow show = new InventoryShow();
+		ArrayList<InventoryBillVO> VOs = show.showGiftsPass();
+		VOs.addAll(show.showOverFlowPass());
+		VOs.addAll(show.showLossPass());
+		VOs.addAll(show.showAlarmPass());
+		return VOs;
+	}
+
+	@Override
+	public ArrayList<InventoryBillVO> showFailure() {
+		InventoryShow show = new InventoryShow();
+		ArrayList<InventoryBillVO> VOs = show.showGiftsFailure();
+		VOs.addAll(show.showOverFlowFailure());
+		VOs.addAll(show.showLossFailure());
+		VOs.addAll(show.showAlarmFailure());
+		return VOs;
 	}
 }

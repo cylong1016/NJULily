@@ -1,7 +1,6 @@
 package blservice.cashbillblservice;
 
 import vo.CashBillVO;
-import dataenum.BillType;
 
 /**
  * 建立现金费用单
@@ -19,7 +18,7 @@ public interface CashBillBLService {
 	 * 得到收款单的ID
 	 * @return
 	 */
-	public String getID(BillType type);
+	public String getID();
 	
 	/**
 	 * 添加条目清单

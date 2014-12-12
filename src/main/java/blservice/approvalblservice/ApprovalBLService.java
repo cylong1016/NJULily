@@ -3,7 +3,6 @@ package blservice.approvalblservice;
 import java.util.ArrayList;
 
 import dataenum.BillType;
-import vo.ApprovalVO;
 import vo.ValueObject;
 import message.ResultMessage;
 
@@ -24,21 +23,7 @@ import message.ResultMessage;
  * @version Dec 1, 2014 11:02:26 PM
  */
 public interface ApprovalBLService {
-		
-	/**
-	 * 查看单据内容
-	 * @param record
-	 * @return
-	 */
-	public ApprovalVO show();
 	
-	/**
-	 * 查看通过审批的单据
-	 * @return
-	 * @author Zing
-	 * @version Dec 12, 2014 12:59:53 AM
-	 */
-//	public ApprovalVO showPass();
 	
 	/**
 	 * 修改单据内容

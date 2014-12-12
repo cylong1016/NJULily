@@ -62,23 +62,6 @@ public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Re
 		return purchase.poToVO(getPurchaseData().find(ID));
 	}
 
-	
-	public ArrayList<PurchaseVO> findApproval() {
-		ArrayList<PurchasePO> POs = getPurchaseData().show();
-		ArrayList<PurchasePO> approvalPO = new ArrayList<PurchasePO>();
-		for (PurchasePO po : POs) {
-			if (po.getState() == BillState.APPROVALING) {
-				approvalPO.add(po);
-			}
-		}
-		ArrayList<PurchaseVO> VOs = new ArrayList<PurchaseVO>();
-		for (PurchasePO po : approvalPO) {
-			PurchaseVO vo = purchase.poToVO(po);
-			VOs.add(vo);
-		}
-		return VOs;
-	}
-
 	public ResultMessage update(PurchaseVO vo) {
 		String ID = vo.ID;
 		String clientID = vo.clientID;
@@ -201,5 +184,28 @@ public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Re
 			// TODO 保存为草稿 
 		}
 		return null;
+	}
+	
+	public ArrayList<PurchaseVO> findApproval() {
+		PurchaseShow show = new PurchaseShow();
+		ArrayList<PurchaseVO> VOs = show.showPurchaseApproving();
+		VOs.addAll(show.showPurchaseBackApproving());
+		return VOs;
+	}
+
+	@Override
+	public ArrayList<PurchaseVO> showPass() {
+		PurchaseShow show = new PurchaseShow();
+		ArrayList<PurchaseVO> VOs = show.showPurchasePass();
+		VOs.addAll(show.showPurchaseBackPass());
+		return VOs;
+	}
+
+	@Override
+	public ArrayList<PurchaseVO> showFailure() {
+		PurchaseShow show = new PurchaseShow();
+		ArrayList<PurchaseVO> VOs = show.showPurchaseFailure();
+		VOs.addAll(show.showPurchaseBackFailure());
+		return VOs;
 	}
 }

@@ -45,7 +45,7 @@ public class CashBill implements CashBillBLService {
 		return new CashBillData();
 	}
 
-	public String getID(BillType type) {
+	public String getID() {
 		CashBillDataService cashBillData = getCashBillData();
 		this.ID = cashBillData.getID();
 		return ID;
@@ -89,23 +89,6 @@ public class CashBill implements CashBillBLService {
 		addCashBill(account);
 		// TODO 存在本地
 		return POToVO(po);
-	}
-
-	/**
-	 * 返回所有的现金费用单
-	 * @param billType
-	 * @return
-	 * @author Zing
-	 * @version Dec 2, 2014 1:56:03 PM
-	 */
-	public ArrayList<CashBillVO> show(BillType billType) {
-		ArrayList<CashBillVO> VOs = new ArrayList<CashBillVO>();
-		ArrayList<CashBillPO> POs = getCashBillData().show();
-		for(int i = 0; i < POs.size(); i++) {
-			CashBillVO vo = POToVO(POs.get(i));
-			VOs.add(vo);
-		}
-		return VOs;
 	}
 
 	public CashBillVO POToVO(CashBillPO po) {
