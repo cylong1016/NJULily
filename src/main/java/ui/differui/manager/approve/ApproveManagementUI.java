@@ -22,7 +22,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
+import blservice.approvalblservice.ApprovalShowBLService;
 import businesslogic.approvalbl.Approval;
+import businesslogic.approvalbl.ApprovalShow;
 import ui.commonui.myui.MyComboBox;
 import vo.AccountBillVO;
 import vo.CashBillVO;
@@ -64,12 +66,11 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 		cbb_sort = new MyComboBox(85 + 135, 56, 130, 25, comboBoxStr);
 		this.add(cbb_sort);
 		
-		String[] comboBoxStr2 = {"全部状态", "通过审批", "未通过审批"};
+		String[] comboBoxStr2 = {"全部状态", "待审批", "通过审批", "未通过审批"};
 		cbb_isApproval = new MyComboBox(85, 56, 130, 25, comboBoxStr2);
 		this.add(cbb_isApproval);
 		
 		initTable();
-		getData(0);
 		initButtons();
 		
 		ta = new JTextArea();
@@ -149,31 +150,134 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 			
 			rowNum = 0;
 			
-			if(cbb_isApproval.getSelectedIndex() == 2){
-				getData(cbb_sort.getSelectedIndex());
-			}else if(cbb_isApproval.getSelectedIndex() == 1){
-				
+			if(cbb_isApproval.getSelectedIndex() == 1){
+				getApprovalData(cbb_sort.getSelectedIndex());
+			}else if(cbb_isApproval.getSelectedIndex() == 2){
+				getPassData(cbb_sort.getSelectedIndex());
+			}else if(cbb_isApproval.getSelectedIndex() == 3){
+				getFailureData(cbb_sort.getSelectedIndex());
 			}else{
-				
+				getApprovalData(cbb_sort.getSelectedIndex());
+				getPassData(cbb_sort.getSelectedIndex());
+				getFailureData(cbb_sort.getSelectedIndex());
 			}
 		}
 		
 	}
 	
-	private void getData(int index){
-		Approval controller = new Approval();
-		
-		ArrayList<PurchaseVO> approval_pur = controller.show().purchaseVOs;
-		ArrayList<SalesVO> approval_sale = controller.show().salesVOs;
-		ArrayList<AccountBillVO> approval_account = controller.show().accountBillVOs;
-		ArrayList<InventoryBillVO> approval_inventory = controller.show().inventoryBillVOs;
-		ArrayList<CashBillVO> approval_cashBill = controller.show().cashBillVOs;
+	private void getApprovalData(int index){
+		ApprovalShow controller = new ApprovalShow();
+		ArrayList<PurchaseVO> approval_pur = controller.ShowApproving().purchaseVOs;
+		ArrayList<SalesVO> approval_sale = controller.ShowApproving().salesVOs;
+		ArrayList<AccountBillVO> approval_account = controller.ShowApproving().accountBillVOs;
+		ArrayList<InventoryBillVO> approval_inventory = controller.ShowApproving().inventoryBillVOs;
+		ArrayList<CashBillVO> approval_cashBill = controller.ShowApproving().cashBillVOs;
 		
 		model = (DefaultTableModel) table.getModel();
 		
 		if(index == 0)
 			for(int i = 1; i <= 5; i++)
-				getData(i);
+				getApprovalData(i);
+		
+		if(index == 1)
+			for(int i = 0; i < approval_pur.size(); i++){
+				Object[] rowData = {new Boolean(false), "进货类单据", approval_pur.get(i).ID, "未通过"};
+				model.addRow(rowData);
+				rowNum++;
+			}
+		
+		if(index == 2)
+			for(int i = 0; i < approval_sale.size(); i++){
+				Object[] rowData = {new Boolean(false), "销售类单据", approval_sale.get(i).ID, "未通过"};
+				model.addRow(rowData);
+				rowNum++;
+			}
+		
+		if(index == 3)
+			for(int i = 0; i < approval_account.size(); i++){
+				Object[] rowData = {new Boolean(false), "财务类单据", approval_account.get(i).ID, "未通过"};
+				model.addRow(rowData);
+				rowNum++;
+			}
+		
+		if(index == 4)
+			for(int i = 0; i < approval_inventory.size(); i++){
+				Object[] rowData = {new Boolean(false), "库存类单据", approval_inventory.get(i).ID, "未通过"};
+				model.addRow(rowData);
+				rowNum++;
+			}
+		
+		if(index == 5)
+			for(int i = 0; i < approval_cashBill.size(); i++){
+				Object[] rowData = {new Boolean(false), "现金类单据", approval_cashBill.get(i).ID, "未通过"};
+				model.addRow(rowData);
+				rowNum++;
+			}
+	}
+	
+	private void getPassData(int index){
+		ApprovalShow controller = new ApprovalShow();
+		ArrayList<PurchaseVO> approval_pur = controller.showPass().purchaseVOs;
+		ArrayList<SalesVO> approval_sale = controller.showPass().salesVOs;
+		ArrayList<AccountBillVO> approval_account = controller.showPass().accountBillVOs;
+		ArrayList<InventoryBillVO> approval_inventory = controller.showPass().inventoryBillVOs;
+		ArrayList<CashBillVO> approval_cashBill = controller.showPass().cashBillVOs;
+		
+		model = (DefaultTableModel) table.getModel();
+		
+		if(index == 0)
+			for(int i = 1; i <= 5; i++)
+				getPassData(i);
+		
+		if(index == 1)
+			for(int i = 0; i < approval_pur.size(); i++){
+				Object[] rowData = {new Boolean(false), "进货类单据", approval_pur.get(i).ID, "未通过"};
+				model.addRow(rowData);
+				rowNum++;
+			}
+		
+		if(index == 2)
+			for(int i = 0; i < approval_sale.size(); i++){
+				Object[] rowData = {new Boolean(false), "销售类单据", approval_sale.get(i).ID, "未通过"};
+				model.addRow(rowData);
+				rowNum++;
+			}
+		
+		if(index == 3)
+			for(int i = 0; i < approval_account.size(); i++){
+				Object[] rowData = {new Boolean(false), "财务类单据", approval_account.get(i).ID, "未通过"};
+				model.addRow(rowData);
+				rowNum++;
+			}
+		
+		if(index == 4)
+			for(int i = 0; i < approval_inventory.size(); i++){
+				Object[] rowData = {new Boolean(false), "库存类单据", approval_inventory.get(i).ID, "未通过"};
+				model.addRow(rowData);
+				rowNum++;
+			}
+		
+		if(index == 5)
+			for(int i = 0; i < approval_cashBill.size(); i++){
+				Object[] rowData = {new Boolean(false), "现金类单据", approval_cashBill.get(i).ID, "未通过"};
+				model.addRow(rowData);
+				rowNum++;
+			}
+	}
+	
+	private void getFailureData(int index){
+		ApprovalShow controller = new ApprovalShow();
+		ArrayList<PurchaseVO> approval_pur = controller.showFailure().purchaseVOs;
+		ArrayList<SalesVO> approval_sale = controller.showFailure().salesVOs;
+		ArrayList<AccountBillVO> approval_account = controller.showFailure().accountBillVOs;
+		ArrayList<InventoryBillVO> approval_inventory = controller.showFailure().inventoryBillVOs;
+		ArrayList<CashBillVO> approval_cashBill = controller.showFailure().cashBillVOs;
+		
+		model = (DefaultTableModel) table.getModel();
+		
+		if(index == 0)
+			for(int i = 1; i <= 5; i++)
+				getFailureData(i);
 		
 		if(index == 1)
 			for(int i = 0; i < approval_pur.size(); i++){
