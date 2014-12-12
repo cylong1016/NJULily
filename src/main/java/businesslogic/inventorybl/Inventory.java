@@ -18,15 +18,14 @@ import dataservice.inventorydataservice.InventoryDataService;
 public class Inventory implements InventoryBLService {
 
 	private BillList list;
-
 	private BillType type;
-
 	private String ID;
-
 	ChangeCommodityItems changeItems;
+	private InventoryDataService inventoryData;
 
 	public Inventory() {
 		changeItems = new ChangeCommodityItems();
+		inventoryData = getInventoryData();
 	}
 
 	/**
@@ -57,8 +56,7 @@ public class Inventory implements InventoryBLService {
 	 */
 	public InventoryViewVO viewInventory(String beginDate, String endDate) {
 		ViewList viewList = new ViewList(beginDate, endDate);
-		InventoryViewVO vo =
-								new InventoryViewVO(viewList.getSaleNumber(), viewList.getPurNumber(), viewList.getSaleMoney(), viewList.getPurMoney());
+		InventoryViewVO vo = new InventoryViewVO(viewList.getSaleNumber(), viewList.getPurNumber(), viewList.getSaleMoney(), viewList.getPurMoney());
 		return vo;
 	}
 
@@ -72,8 +70,7 @@ public class Inventory implements InventoryBLService {
 		InventoryDataService inventoryData = getInventoryData();
 		// 得到批号
 		CheckList checkList = new CheckList(inventoryData.returnNumber());
-		InventoryCheckVO vo =
-								new InventoryCheckVO(checkList.getItemsVO(), checkList.getAvePrice(), checkList.getToday(), checkList.getLot());
+		InventoryCheckVO vo = new InventoryCheckVO(checkList.getItemsVO(), checkList.getAvePrice(), checkList.getToday(), checkList.getLot());
 		return vo;
 	}
 
@@ -84,29 +81,37 @@ public class Inventory implements InventoryBLService {
 	 * @author Zing
 	 * @version Dec 2, 2014 7:17:13 PM
 	 */
-	public String getID(BillType type) {
+	private void setTpye(BillType type) {
 		this.type = type;
 		list = new BillList();
-		this.ID = getInventoryData().getID(type);
+	}
+	
+	@Override
+	public String getGiftID() {
+		setTpye(BillType.GIFT);
+		this.ID = inventoryData.getGiftID();
 		return ID;
 	}
 
-	/**
-	 * 显示单子
-	 * @param type
-	 * @return
-	 * @author Zing
-	 * @version Dec 2, 2014 6:11:48 PM
-	 */
-	public ArrayList<InventoryBillVO> show(BillType type) {
-		ArrayList<InventoryBillVO> VOs = new ArrayList<InventoryBillVO>();
-		ArrayList<InventoryBillPO> POs = getInventoryData().show(type);
-		for(int i = 0; i < POs.size(); i++) {
-			InventoryBillPO po = POs.get(i);
-			InventoryBillVO vo = poToVo(po);
-			VOs.add(vo);
-		}
-		return VOs;
+	@Override
+	public String getOverFlowID() {
+		setTpye(BillType.OVERFLOW);
+		this.ID = inventoryData.getOverflowID();
+		return ID;
+	}
+
+	@Override
+	public String getLossID() {
+		setTpye(BillType.LOSS);
+		this.ID = inventoryData.getLossID();
+		return ID;
+	}
+
+	@Override
+	public String getAlarmID() {
+		setTpye(BillType.ALARM);
+		this.ID = inventoryData.getAlarmID();
+		return ID;
 	}
 
 	/**

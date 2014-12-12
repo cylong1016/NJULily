@@ -1,9 +1,7 @@
 package blservice.inventoryblservice;
 
-import java.util.ArrayList;
 
 import dataenum.BillType;
-import vo.InventoryBillVO;
 import vo.InventoryCheckVO;
 import vo.InventoryViewVO;
 import message.ResultMessage;
@@ -34,14 +32,6 @@ public interface InventoryBLService {
 	 */
 	public InventoryCheckVO checkRecord();
 	
-	/**
-	 * 查看某种库存单据（赠送单、报警单、报损单、报溢单）
-	 * @param type
-	 * @return
-	 * @author Zing
-	 * @version Dec 2, 2014 5:57:18 PM
-	 */
-	public ArrayList<InventoryBillVO> show(BillType type);
 		
 	/**
 	 * 建立库存报警单、报损单、报溢单、赠送单之前需要调用，确定建立的单据类型，得到ID
@@ -49,7 +39,10 @@ public interface InventoryBLService {
 	 * @author Zing
 	 * @version Nov 30, 2014 3:41:46 PM
 	 */
-	public String getID(BillType type);
+	public String getGiftID();
+	public String getOverFlowID();
+	public String getLossID();
+	public String getAlarmID();
 	
 	
 	/**
