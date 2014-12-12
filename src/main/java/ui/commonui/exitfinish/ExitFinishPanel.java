@@ -18,6 +18,7 @@ import ui.differui.inventory.commodity_management.detailgood.CommodityDetailPane
 import ui.differui.inventory.commodity_management.detailsort.SortDetailPanel;
 import ui.differui.inventory.commodity_management.detailsort.SortDetailUI;
 import ui.differui.inventory.commodity_management.index.CommodityManagementUI;
+import ui.differui.manager.approve.ApproveManagementUI;
 import ui.differui.salesman.client.ClientAddingPanel;
 import ui.differui.salesman.client.ClientDetailPanel;
 import ui.differui.salesman.client.ClientManagementUI;
@@ -97,6 +98,8 @@ public class ExitFinishPanel extends MyPanel implements ActionListener{
 				case "Delete Good" : CommodityManagementUI.delGood.doClick();break;
 				
 				case "modify good" : CommodityDetailPanel.modify.doClick();break;
+				
+				case "passBill" : ApproveManagementUI.passBill.doClick();break;
 
 			}
 			ExitFinishFrame.button_close.doClick();
