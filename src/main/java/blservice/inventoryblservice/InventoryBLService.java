@@ -1,11 +1,9 @@
 package blservice.inventoryblservice;
 
 
-import dataenum.BillType;
+import vo.InventoryBillVO;
 import vo.InventoryCheckVO;
 import vo.InventoryViewVO;
-import message.ResultMessage;
-
 /**
  * 负责实现仓库管理界面所需要的服务
  * @author cylong
@@ -59,7 +57,7 @@ public interface InventoryBLService {
 	 * @author Zing
 	 * @version Nov 30, 2014 4:03:43 PM
 	 */
-	public ResultMessage submit(String remark);
+	public InventoryBillVO submit(String remark);
 	
 	/**
 	 * 
@@ -68,6 +66,6 @@ public interface InventoryBLService {
 	 * @author Zing
 	 * @version Nov 30, 2014 4:03:51 PM
 	 */
-	public ResultMessage save(String remark);
+	public InventoryBillVO save(String remark);
 
 }

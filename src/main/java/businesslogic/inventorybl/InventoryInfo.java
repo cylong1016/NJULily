@@ -38,7 +38,8 @@ public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInf
 	}
 	
 	public ArrayList<InventoryBillVO> getGifts() {
-		return inventory.show(BillType.GIFT);
+		InventoryShow inventoryShow = new InventoryShow();
+		return inventoryShow.showGiftsPass();
 	}
 
 	/**

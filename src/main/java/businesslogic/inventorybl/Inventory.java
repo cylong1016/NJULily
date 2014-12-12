@@ -2,7 +2,6 @@ package businesslogic.inventorybl;
 
 import java.util.ArrayList;
 
-import message.ResultMessage;
 import po.InventoryBillPO;
 import server.data.inventorydata.InventoryData;
 import vo.InventoryBillVO;
@@ -133,9 +132,11 @@ public class Inventory implements InventoryBLService {
 	 * @author Zing
 	 * @version Dec 2, 2014 6:11:58 PM
 	 */
-	public ResultMessage submit(String remark) {
+	public InventoryBillVO submit(String remark) {
 		list.setRemark(remark);
-		return getInventoryData().insert(getInventoryBill());
+		InventoryBillPO po = getInventoryBill();
+		getInventoryData().insert(po);
+		return poToVo(po);
 	}
 
 	/**
@@ -145,7 +146,7 @@ public class Inventory implements InventoryBLService {
 	 * @author Zing
 	 * @version Dec 2, 2014 6:12:02 PM
 	 */
-	public ResultMessage save(String remark) {
+	public InventoryBillVO save(String remark) {
 		list.setRemark(remark);
 		// 保存为草稿
 		return null;
