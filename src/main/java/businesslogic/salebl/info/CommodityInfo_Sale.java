@@ -42,4 +42,14 @@ public interface CommodityInfo_Sale {
 	 * @version Dec 10, 2014 9:39:56 AM
 	 */
 	public void setDelete(String iD, boolean canDelete);
+
+	/**
+	 * 审批的时候，检查现在商品的数量是否够
+	 * @param id
+	 * @param i
+	 * @return
+	 * @author Zing
+	 * @version Dec 12, 2014 5:48:41 PM
+	 */
+	public boolean checkNumber(String ID, int i);
 }

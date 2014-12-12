@@ -9,6 +9,7 @@ import businesslogic.salebl.info.ClientInfo_Sale;
 import businesslogic.salebl.info.CommodityInfo_Sale;
 import message.ResultMessage;
 import po.CommodityItemPO;
+import po.CommodityPO;
 import po.SalesPO;
 import vo.commodity.CommodityItemVO;
 import vo.sale.SalesVO;
@@ -59,14 +60,19 @@ public class SaleOperate implements SaleInfo_Approval{
 	 * 销售单：减少商品库存数量，增加客户应收金额
 	 * 销售退货单：增加商品库存数量，减少客户应收金额
 	 */
-	public void pass(SalesVO vo) {
+	public ResultMessage pass(SalesVO vo) {
 		SalesPO po = saleData.find(vo.ID);
-		// 更新该单子的状态
-		po.setState(BillState.SUCCESS);
-		saleData.update(po);
 		// 更改商品库存数量、最近售价
 		CommodityInfo_Sale commodityInfo = new CommodityInfo();
 		ArrayList<CommodityItemPO> commodities = po.getCommodities();
+		// 检查现在的商品数量是否够，如果不够，就直接返回商品不足，并将这个单子的状态设为审批失败
+		for (CommodityItemPO commodity : commodities) {
+			if (!commodityInfo.checkNumber(commodity.getID(), commodity.getNumber())) {
+				po.setState(BillState.FAILURE);
+				saleData.update(po);
+				return ResultMessage.COMMODITY_LACK;
+			}
+		}
 		for (CommodityItemPO commodity : commodities) {
 			commodityInfo.changeCommodityInfo(commodity.getID(), commodity.getNumber(), commodity.getPrice(), po.getType());
 		}
@@ -78,6 +84,10 @@ public class SaleOperate implements SaleInfo_Approval{
 		else {
 			clientInfo.changeReceivable(po.getClientID(), -po.getAfterPrice());
 		}
+		// 更新该单子的状态
+		po.setState(BillState.SUCCESS);
+		saleData.update(po);
+		return ResultMessage.SUCCESS;
 	}
 
 	/**

@@ -9,4 +9,6 @@ package message;
 public enum ResultMessage {
 	SUCCESS,
 	FAILURE,
+	COMMODITY_LACK,
+	
 }

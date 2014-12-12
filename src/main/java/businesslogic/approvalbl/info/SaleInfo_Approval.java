@@ -19,7 +19,7 @@ public interface SaleInfo_Approval {
 	 * @author Zing
 	 * @version Dec 3, 2014 2:04:30 PM
 	 */
-	public void pass(SalesVO vo);
+	public ResultMessage pass(SalesVO vo);
 
 	/**
 	 * 添加红冲

@@ -180,4 +180,13 @@ public class CommodityInfo implements CommodityInfo_Sale, businesslogic.purchase
 		commodityData.update(po);
 	}
 
+	@Override
+	public boolean checkNumber(String ID, int number) {
+		CommodityPO po = commodityData.find(ID);
+		if (po.getInventoryNum() < number) {
+			return false;
+		}
+		return true;
+	}
+
 }
