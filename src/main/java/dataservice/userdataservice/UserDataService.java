@@ -1,5 +1,7 @@
 package dataservice.userdataservice;
 
+import java.rmi.RemoteException;
+
 import message.ResultMessage;
 import po.UserPO;
 import dataservice.CommonDataService;
@@ -18,7 +20,7 @@ public interface UserDataService extends CommonDataService<UserPO> {
 	 * @author cylong
 	 * @version 2014年12月3日 上午10:21:07
 	 */
-	public boolean checkAdmin(AdminInfo admin);
+	public boolean checkAdmin(AdminInfo admin) throws RemoteException;
 
 	/**
 	 * 更改管理员密码
@@ -28,5 +30,5 @@ public interface UserDataService extends CommonDataService<UserPO> {
 	 * @author cylong
 	 * @version 2014年12月3日 上午10:23:06
 	 */
-	public ResultMessage updateAdmin(String oldPass, String newPass);
+	public ResultMessage updateAdmin(String oldPass, String newPass) throws RemoteException;
 }

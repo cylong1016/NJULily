@@ -2,35 +2,38 @@ package businesslogic.userbl;
 
 import io.DefineList;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import message.ResultMessage;
 import po.UserPO;
-import server.data.userdata.UserData;
 import vo.UserVO;
 import blservice.userblservice.LoginInfo;
-import blservice.userblservice.UserBLService;
 import dataenum.UserIdentity;
 import dataservice.userdataservice.AdminInfo;
 import dataservice.userdataservice.UserDataService;
 
-public class User implements UserBLService {
+public class User {
 
 	private UserDataService userData;
 	private DefineList<UserPO> currentUser;	// 保存用户名
 	private DefineList<UserPO> currentUserTemp;	// 用户的登录信息
 	private UserPO current;	// 当前登录的用户
 
-	public User() {
+	/**
+	 * @throws MalformedURLException
+	 * @throws RemoteException
+	 * @throws NotBoundException
+	 * @author cylong
+	 * @version 2014年12月14日 上午5:18:22
+	 */
+	public User() throws MalformedURLException, RemoteException, NotBoundException {
 		currentUser = new DefineList<UserPO>("data/loginInfo.ser");
 		currentUserTemp = new DefineList<UserPO>("data/loginInfoTemp.ser");
-//		try {
-//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
-//			this.userData = factory.getUserData();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-		this.userData = new UserData();
+		userData = (UserDataService)Naming.lookup("rmi://127.0.0.1:1994/UserData");
 	}
 
 	/**
@@ -38,8 +41,9 @@ public class User implements UserBLService {
 	 * @return 新的ID
 	 * @author cylong
 	 * @version 2014年11月29日 下午6:54:10
+	 * @throws RemoteException
 	 */
-	public String getID() {
+	public String getID() throws RemoteException {
 		return userData.getID();
 	}
 
@@ -49,8 +53,9 @@ public class User implements UserBLService {
 	 * @return 登录结果
 	 * @author cylong
 	 * @version 2014年11月29日 下午9:24:17
+	 * @throws RemoteException
 	 */
-	public UserIdentity login(LoginInfo loginInfo) {
+	public UserIdentity login(LoginInfo loginInfo) throws RemoteException {
 		// 验证管理员登录
 		AdminInfo admin = new AdminInfo(loginInfo.username, loginInfo.password);
 		if (userData.checkAdmin(admin)) {
@@ -89,7 +94,7 @@ public class User implements UserBLService {
 		if (currentUser.isEmpty()) {
 			return null;
 		}
-		return currentUser.get(0).getID();
+		return currentUser.get(0).getUsername();
 	}
 
 	/**
@@ -98,8 +103,9 @@ public class User implements UserBLService {
 	 * @return 添加结果
 	 * @author cylong
 	 * @version 2014年11月29日 下午9:29:55
+	 * @throws RemoteException
 	 */
-	public ResultMessage add(UserVO vo) {
+	public ResultMessage add(UserVO vo) throws RemoteException {
 		UserPO po = voToPO(vo);
 		return userData.insert(po);
 	}
@@ -110,16 +116,18 @@ public class User implements UserBLService {
 	 * @return 删除结果
 	 * @author cylong
 	 * @version 2014年11月29日 下午9:30:23
+	 * @throws RemoteException
 	 */
-	public ResultMessage delete(String ID) {
+	public ResultMessage delete(String ID) throws RemoteException {
 		return userData.delete(ID);
 	}
 
 	/**
 	 * 更新用户信息
 	 * 如果该用户没有权限更改的，ui上禁止更改
+	 * @throws RemoteException
 	 */
-	public ResultMessage update(UserVO vo) {
+	public ResultMessage update(UserVO vo) throws RemoteException {
 		UserPO po = voToPO(vo);
 		return userData.update(po);
 	}
@@ -129,8 +137,9 @@ public class User implements UserBLService {
 	 * @return 全部的用户的ArrayList
 	 * @author cylong
 	 * @version 2014年11月29日 下午9:42:27
+	 * @throws RemoteException
 	 */
-	public ArrayList<UserVO> show() {
+	public ArrayList<UserVO> show() throws RemoteException {
 		ArrayList<UserVO> usersVO = new ArrayList<UserVO>();
 		ArrayList<UserPO> usersPO = userData.show();
 		for(UserPO po : usersPO) {
@@ -183,8 +192,9 @@ public class User implements UserBLService {
 	 * @return 成功、失败
 	 * @author cylong
 	 * @version 2014年12月3日 上午10:43:22
+	 * @throws RemoteException
 	 */
-	public ResultMessage updateAdmin(String oldPass, String newPass) {
+	public ResultMessage updateAdmin(String oldPass, String newPass) throws RemoteException {
 		return userData.updateAdmin(oldPass, newPass);
 	}
 

@@ -1,15 +1,22 @@
 package dataservice.userdataservice;
 
+import java.io.Serializable;
+
 import dataenum.UserIdentity;
 
 /**
  * @author cylong
  * @version 2014年12月3日 上午10:09:34
  */
-public class AdminInfo {
+public class AdminInfo implements Serializable {
 
+	/** serialVersionUID */
+	private static final long serialVersionUID = 519072109825061284L;
+	/** 用户名 */
 	public String username;
+	/** 密码 */
 	public String password;
+	/** 身份（管理员） */
 	public UserIdentity iden;
 
 	public AdminInfo(String username, String password) {

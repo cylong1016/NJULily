@@ -5,9 +5,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -20,7 +17,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 import message.ResultMessage;
-import businesslogic.userbl.User;
 import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.login.Frame_Login;
 import ui.commonui.myui.EmptyTextField;
@@ -31,6 +27,8 @@ import ui.commonui.myui.MyPasswordField;
 import ui.commonui.myui.MyTable;
 import ui.commonui.warning.WarningFrame;
 import vo.UserVO;
+import blservice.userblservice.UserBLService;
+import businesslogic.userbl.UserController;
 
 
 public class AdminUI extends MyFrame implements ActionListener{
@@ -45,7 +43,7 @@ public class AdminUI extends MyFrame implements ActionListener{
 	
 	public static JButton bt_show, bt_vanish;
 	
-	static User controller;
+	static UserBLService controller;
 	
 	public static int rowNum;
 	
@@ -306,7 +304,7 @@ public class AdminUI extends MyFrame implements ActionListener{
 		
 		rowNum = 0;
 		
-		controller = new User();
+		controller = new UserController();
 		
 		rowNum = controller.show().size();
 		

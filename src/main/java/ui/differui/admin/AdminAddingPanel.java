@@ -14,10 +14,9 @@ import ui.commonui.myui.MyComboBox;
 import ui.commonui.myui.MyPanel;
 import ui.commonui.myui.MyTextField;
 import ui.commonui.warning.WarningFrame;
-
 import vo.UserVO;
-
-import businesslogic.userbl.User;
+import blservice.userblservice.UserBLService;
+import businesslogic.userbl.UserController;
 import dataenum.UserIdentity;
 
 public class AdminAddingPanel extends MyPanel implements ActionListener{
@@ -29,7 +28,7 @@ public class AdminAddingPanel extends MyPanel implements ActionListener{
 	JButton button_add, button_return;
 	public static JButton addConform;
 	
-	User controller; 
+	UserBLService controller; 
 	
 	public AdminAddingPanel(){
 			
@@ -155,7 +154,7 @@ public class AdminAddingPanel extends MyPanel implements ActionListener{
 		
 		if(events.getSource() == addConform){
 			
-			controller = new User();	
+			controller = new UserController();	
 			
 			ResultMessage res = controller.add(new UserVO(controller.getID(), textField_username.getText(),
 					textField_name.getText(), textField_password.getText(), 

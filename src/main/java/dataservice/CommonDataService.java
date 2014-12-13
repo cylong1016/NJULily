@@ -1,5 +1,6 @@
 package dataservice;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import message.ResultMessage;
@@ -17,28 +18,28 @@ public interface CommonDataService<PO extends PersistentObject> extends DataServ
 	 * @param po
 	 * @return 处理结果
 	 */
-	public ResultMessage insert(PO po);
+	public ResultMessage insert(PO po) throws RemoteException;
 
 	/**
 	 * 根据ID查找po
 	 * @param ID
 	 * @return 持久化数据，如果返回 null则不存在
 	 */
-	public PO find(String ID);
+	public PO find(String ID) throws RemoteException;
 
 	/**
 	 * 根据ID删除
 	 * @param ID
 	 * @return 处理结果
 	 */
-	public ResultMessage delete(String ID);
+	public ResultMessage delete(String ID) throws RemoteException;
 
 	/**
 	 * 更新po
 	 * @param po
 	 * @return 处理结果
 	 */
-	public ResultMessage update(PO po);
+	public ResultMessage update(PO po) throws RemoteException;
 
 	/**
 	 * 显示全部po
@@ -46,5 +47,5 @@ public interface CommonDataService<PO extends PersistentObject> extends DataServ
 	 * @author cylong
 	 * @version Nov 8, 2014 9:35:06 PM
 	 */
-	public ArrayList<PO> show();
+	public ArrayList<PO> show() throws RemoteException;
 }

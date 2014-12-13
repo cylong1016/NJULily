@@ -43,7 +43,7 @@ public interface UserBLService {
 	 * @author cylong
 	 * @version 2014年11月29日 下午6:39:53
 	 */
-	public UserIdentity login(LoginInfo loaginInfo);
+	public UserIdentity login(LoginInfo loginInfo);
 
 	/**
 	 * 返回用户保存的username

@@ -14,11 +14,14 @@ public class Main {
 
 	public static void main(String[] args) {
 
+		System.setProperty("awt.useSystemAAFontSettings", "on");
+		System.setProperty("swing.aatext", "true");
 		//UI test
 		Frame_Login fl = new Frame_Login();
 		fl.setVisible(true);
 		
 //		Frame_Inventory fi = new Frame_Inventory();
 //		fi .setVisible(true);
+		
 	}
 }

@@ -12,9 +12,6 @@ import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 
-import dataenum.UserIdentity;
-import blservice.userblservice.LoginInfo;
-import businesslogic.userbl.User;
 import ui.commonui.myui.MyBackground;
 import ui.commonui.myui.MyButton;
 import ui.commonui.myui.MyFrame;
@@ -27,6 +24,10 @@ import ui.differui.finace.frame.Frame_Finace;
 import ui.differui.inventory.frame.Frame_Inventory;
 import ui.differui.manager.frame.Frame_Manager;
 import ui.differui.salesman.frame.Frame_Salesman;
+import blservice.userblservice.LoginInfo;
+import blservice.userblservice.UserBLService;
+import businesslogic.userbl.UserController;
+import dataenum.UserIdentity;
 
 
 public class Frame_Login extends MyFrame implements ActionListener{
@@ -137,7 +138,7 @@ public class Frame_Login extends MyFrame implements ActionListener{
 	
 	public void actionPerformed(ActionEvent events) {
 		if(events.getSource() == button_Enter){
-			User controller = new User();
+			UserBLService controller = new UserController();
 			
 			userName = userNameField.getText();
 			for(int i = 0; i < controller.show().size(); i++){
