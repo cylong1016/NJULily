@@ -1,4 +1,4 @@
-package ui.differui.salesman.in;
+package ui.differui.salesman.inback;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -15,33 +15,32 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.filechooser.FileSystemView;
 
-import dataenum.Storage;
-import blservice.purchaseblservice.PurInputInfo;
-import businesslogic.purchasebl.Purchase;
 import ui.commonui.login.Frame_Login;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.warning.WarningFrame;
 import ui.differui.salesman.frame.Frame_Salesman;
 import vo.commodity.CommodityItemVO;
+import blservice.purchaseblservice.PurInputInfo;
+import businesslogic.purchasebl.Purchase;
+import dataenum.Storage;
 
-public class InFinal extends JLabel implements ActionListener{
+public class InBackFinal extends JLabel implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
-	
 	MyJButton button_back, button_finish, button_save, button_output;
 	JTextArea ta;
 	static JButton showText;
 	
 	String ID;
 	
-	public InFinal(){
+	public InBackFinal(){
 		this.setLayout(null);
 		this.setBounds(0, 0, 1280, 720);
 		
 		Color foreColor = new Color(158, 213, 220);
 		Color backColor = new Color(46, 52, 101);
 		
-		JLabel infoBar = new JLabel("制定进货单 - 确认生成");
+		JLabel infoBar = new JLabel("制定进货退货单 - 确认生成");
 		infoBar.setFont(new Font("华文细黑", Font.BOLD, 18));
 		infoBar.setBounds(80, 14, 1100, 20);
 		infoBar.setForeground(Color.GRAY);
@@ -93,18 +92,18 @@ public class InFinal extends JLabel implements ActionListener{
 		
 		if(events.getSource() == button_finish){
 			Purchase purController = new Purchase();
-			ArrayList<CommodityItemVO> list = InGood.commoList;
+			ArrayList<CommodityItemVO> list = InBackFirst.commoList;
 			
-			purController.getPurchaseID();
+			purController.getPurBackID();
 			
 			//ADD COMMODITIES
 			for(int i = 0; i < list.size(); i++)
 				purController.addCommodities(list.get(i));
 			
 			//SUBMIT
-			purController.submit(new PurInputInfo(InClient.ClientID, Storage.STORAGE_ONE, InClient.note));
+			purController.submit(new PurInputInfo(InBackFirst.ClientID, Storage.STORAGE_ONE, InBackFirst.note));
 					
-			WarningFrame wf = new WarningFrame("进货单添加成功！");
+			WarningFrame wf = new WarningFrame("进货退货单添加成功！");
 			wf.setVisible(true);
 			Frame_Salesman.visibleTrue(0);
 			this.setVisible(false);
@@ -113,12 +112,12 @@ public class InFinal extends JLabel implements ActionListener{
 		
 		if(events.getSource() == button_back){
 			this.setVisible(false);
-			Frame_Salesman.visibleTrue(6);
+			Frame_Salesman.visibleTrue(3);
 		}
 		
 		if(events.getSource() == button_output){
 			FileSystemView fsv = FileSystemView.getFileSystemView();
-			String file=String.valueOf(fsv.getHomeDirectory())+"/进货单"+ID+".txt";		
+			String file=String.valueOf(fsv.getHomeDirectory())+"/进货退货单"+ID+".txt";		
 			writeto(ta.getText().replaceAll("\n", "\r\n"),file);
 			
 			WarningFrame wf = new WarningFrame("已成功导出至桌面！ ");
@@ -133,17 +132,17 @@ public class InFinal extends JLabel implements ActionListener{
 	public String showText(){
 		
 		Purchase purController = new Purchase();
-		ArrayList<CommodityItemVO> list = InGood.commoList;
+		ArrayList<CommodityItemVO> list = InBackFirst.commoList;
 		double total = 0;
-		ID = purController.getPurchaseID();
+		ID = purController.getPurBackID();
 		
 		String text = "";
 		String blank4 = "    ";
 		String blank = "";
 		String line = "----";
-		for(int i = 0; i < 25; i++)
+		for(int i = 0; i < 24; i++)
 			blank = blank + blank4;
-		text = text + blank + "进货单" + "\n";
+		text = text + blank + "进货退货单" + "\n";
 		
 		for(int i = 0; i < 5; i++)
 			text = text + blank4;
@@ -158,15 +157,11 @@ public class InFinal extends JLabel implements ActionListener{
 		
 		for(int i = 0; i < 35; i++)
 			text = text + blank4;
-		text = text + "客户名称：" + InClient.ClientName + "\n";
+		text = text + "客户名称：" + InBackFirst.ClientName + "\n";
 		
 		for(int i = 0; i < 35; i++)
 			text = text + blank4;
 		text = text + "操作人员：" + Frame_Login.userName + "\n";
-		
-		for(int i = 0; i < 35; i++)
-			text = text + blank4;
-		text = text + "仓库名称：" + InClient.storeName + "\n";
 		
 		for(int i = 0; i < 5; i++)
 			text = text + blank4;
@@ -242,7 +237,7 @@ public class InFinal extends JLabel implements ActionListener{
 		
 		for(int i = 0; i < 9; i++)
 			text = text + blank4;
-		text = text + InClient.note + "\n" + "\n";
+		text = text + InBackFirst.note + "\n" + "\n";
 	
 		return text;
 	}
@@ -262,3 +257,4 @@ public class InFinal extends JLabel implements ActionListener{
 		}
 	}
 }
+

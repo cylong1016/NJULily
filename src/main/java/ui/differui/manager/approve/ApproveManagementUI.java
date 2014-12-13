@@ -166,7 +166,8 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 				if(table.getValueAt(i, 0).equals(Boolean.TRUE)){
 					count++;
 				}
-				if(!table.getValueAt(i, 3).equals("未审批")){
+				if(table.getValueAt(i, 0).equals(Boolean.TRUE) && 
+						!table.getValueAt(i, 3).equals("未审批")){
 					flag = false;
 				}
 			}
@@ -201,9 +202,12 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 				WarningFrame wf = new WarningFrame("批量审批失败！");
 				wf.setVisible(true);
 			}else{
+				
+				bt_search.doClick();
+					
 				WarningFrame wf = new WarningFrame("批量审批成功！");
 				wf.setVisible(true);
-				bt_search.doClick();
+				
 			}
 		}
 		

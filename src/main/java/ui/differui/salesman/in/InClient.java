@@ -52,7 +52,7 @@ public class InClient extends JLabel implements ActionListener{
 		Color foreColor = new Color(158, 213, 220);
 		Color backColor = new Color(46, 52, 101);
 		
-		JLabel infoBar = new JLabel("创建进货单 - 完善信息");
+		JLabel infoBar = new JLabel("制定进货单 - 完善信息");
 		infoBar.setFont(new Font("华文细黑", Font.BOLD, 18));
 		infoBar.setBounds(80, 14, 1100, 20);
 		infoBar.setForeground(Color.GRAY);
