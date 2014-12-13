@@ -9,7 +9,6 @@ import businesslogic.salebl.info.ClientInfo_Sale;
 import businesslogic.salebl.info.CommodityInfo_Sale;
 import message.ResultMessage;
 import po.CommodityItemPO;
-import po.CommodityPO;
 import po.SalesPO;
 import vo.commodity.CommodityItemVO;
 import vo.sale.SalesVO;
@@ -66,13 +65,16 @@ public class SaleOperate implements SaleInfo_Approval{
 		CommodityInfo_Sale commodityInfo = new CommodityInfo();
 		ArrayList<CommodityItemPO> commodities = po.getCommodities();
 		// 检查现在的商品数量是否够，如果不够，就直接返回商品不足，并将这个单子的状态设为审批失败
-		for (CommodityItemPO commodity : commodities) {
-			if (!commodityInfo.checkNumber(commodity.getID(), commodity.getNumber())) {
-				po.setState(BillState.FAILURE);
-				saleData.update(po);
-				return ResultMessage.COMMODITY_LACK;
+		if (vo.type == BillType.SALE) {
+			for (CommodityItemPO commodity : commodities) {
+				if (!commodityInfo.checkNumber(commodity.getID(), commodity.getNumber())) {
+					po.setState(BillState.FAILURE);
+					saleData.update(po);
+					return ResultMessage.COMMODITY_LACK;
+				}
 			}
 		}
+		
 		for (CommodityItemPO commodity : commodities) {
 			commodityInfo.changeCommodityInfo(commodity.getID(), commodity.getNumber(), commodity.getPrice(), po.getType());
 		}

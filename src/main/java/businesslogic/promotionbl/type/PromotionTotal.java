@@ -6,6 +6,7 @@ import dataenum.PromotionType;
 import po.CommodityItemPO;
 import po.PromotionPO;
 import message.ResultMessage;
+import vo.InventoryBillVO;
 import vo.commodity.CommodityItemVO;
 import vo.promotion.PromotionTotalVO;
 import blservice.promotionblservice.PromoInputInfo;
@@ -41,6 +42,13 @@ public class PromotionTotal extends Promotion implements PromotionTotalBLService
 	public void addGifts(CommodityItemVO vo) {
 		PromotionListItem item = new PromotionListItem(vo.ID, vo.number);
 		list.addGift(item);
+	}
+	
+	public void addGiftBill(InventoryBillVO giftBill) {
+		ArrayList<CommodityItemVO> commodityItems = giftBill.commodities;
+		for (CommodityItemVO vo : commodityItems) {
+			addGifts(vo);
+		}		
 	}
 
 	public ResultMessage submit(PromoInputInfo info) {

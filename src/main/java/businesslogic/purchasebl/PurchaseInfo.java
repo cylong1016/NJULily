@@ -131,14 +131,21 @@ public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Re
 		return getPurchaseData().find(ID).getBeforePrice();
 	}
 
-	public void pass(PurchaseVO vo) {
+	public ResultMessage pass(PurchaseVO vo) {
 		PurchasePO po = getPurchaseData().find(vo.ID);
-		// 更新该进货／进货退货单状态
-		po.setState(BillState.SUCCESS);
-		getPurchaseData().update(po);
 		// 更改商品的数据
 		CommodityInfo_Purchase commodityInfo = new CommodityInfo();
 		ArrayList<CommodityItemPO> commodities = po.getCommodities();
+		// 如果商品总数不够的话 
+		if (po.getType() == BillType.PURCHASEBACK) {
+			for (CommodityItemPO commodity : commodities) {
+				if (!commodityInfo.checkNumber(commodity.getID(), commodity.getNumber())) {
+					po.setState(BillState.FAILURE);
+					getPurchaseData().update(po);
+					return ResultMessage.COMMODITY_LACK;
+				}
+			}
+		}
 		for (CommodityItemPO commodity : commodities) {
 			commodityInfo.changeCommodityInfo(commodity.getID(), commodity.getNumber(), commodity.getPrice(), po.getType());
 		}
@@ -149,6 +156,10 @@ public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Re
 		} else {
 			clientInfo.changePayable(po.getClientID(), -po.getBeforePrice());
 		}
+		// 更新该进货／进货退货单状态
+		po.setState(BillState.SUCCESS);
+		getPurchaseData().update(po);
+		return ResultMessage.SUCCESS;
 	}
 
 	public double getTotalPrice(String ID) {

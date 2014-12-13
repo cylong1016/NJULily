@@ -41,5 +41,15 @@ public interface CommodityInfo_Purchase {
 	 * @author Zing
 	 * @version Dec 10, 2014 9:44:35 AM
 	 */
-	public void setDelete(String ID, boolean b);	
+	public void setDelete(String ID, boolean b);
+
+	/**
+	 * 判断商品数量是否小于进货退货数量
+	 * @param ID
+	 * @param number
+	 * @return
+	 * @author Zing
+	 * @version Dec 13, 2014 10:44:03 AM
+	 */
+	public boolean checkNumber(String ID, int number);	
 }

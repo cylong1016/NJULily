@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import message.ResultMessage;
 import po.CommodityItemPO;
 import po.PromotionPO;
+import vo.InventoryBillVO;
 import vo.commodity.CommodityItemVO;
 import vo.promotion.PromotionCommodityVO;
 import blservice.promotionblservice.PromoInputInfo;
@@ -35,6 +36,13 @@ public class PromotionCommodity extends Promotion implements PromotionCommodityB
 		list.addGift(item);
 	}
 
+	public void addGiftBill(InventoryBillVO giftBill) {
+		ArrayList<CommodityItemVO> commodityItems = giftBill.commodities;
+		for (CommodityItemVO vo : commodityItems) {
+			addGifts(vo);
+		}		
+	}
+	
 	public ResultMessage submit(PromoInputInfo info) {
 		setInputInfo(info);
 		PromotionPO po = buildPromotion();

@@ -51,6 +51,14 @@ public interface PromotionTotalBLService {
 	public void addGifts(CommodityItemVO vo);
 	
 	/**
+	 * 添加已存在的赠送单作为赠品
+	 * @param giftBill
+	 * @author Zing
+	 * @version Dec 10, 2014 11:39:44 PM
+	 */
+	public void addGiftBill(InventoryBillVO giftBill);
+	
+	/**
 	 * 提交策略
 	 * @param info 其他信息
 	 * @return 成功与否

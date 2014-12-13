@@ -47,11 +47,12 @@ public class PromotionClient extends Promotion implements PromotionClientBLServi
 	public void setClient(ClientLevel level){
 		list.setLevel(level);
 	}
-	
-	
-	public void addGiftBill(InventoryBillVO giftBill) {
-		// TODO Auto-generated method stub
 		
+	public void addGiftBill(InventoryBillVO giftBill) {
+		ArrayList<CommodityItemVO> commodityItems = giftBill.commodities;
+		for (CommodityItemVO vo : commodityItems) {
+			addGifts(vo);
+		}		
 	}
 	
 	public ResultMessage submit(PromoInputInfo info) {

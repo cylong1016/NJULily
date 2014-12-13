@@ -19,7 +19,7 @@ public interface PurchaseInfo_Approval {
 	 * @author Zing
 	 * @version Dec 3, 2014 3:47:40 PM
 	 */
-	public void pass(PurchaseVO vo);
+	public ResultMessage pass(PurchaseVO vo);
 
 	public PurchaseVO addRed(PurchaseVO vo, boolean isCopy);
 }

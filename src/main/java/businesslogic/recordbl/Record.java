@@ -26,9 +26,7 @@ public class Record implements RecordBLService{
 	public String endDate;
 	
 	SaleDetailList saleDetailList;
-	
 	BusinessProList bussinessProList;
-	
 	BusinessStateList bussinessStateList;
 	
 	public Record() {
