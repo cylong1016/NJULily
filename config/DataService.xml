@@ -81,7 +81,7 @@
 		<lossID>BSD</lossID>
 		<alarmID>BJD</alarmID>
 		<giftID>ZSD</giftID>
-		<maxID>0</maxID>
+		<maxID>00001</maxID>
 		<IDMaxBit>5</IDMaxBit>
 		<dateFormat>yyyyMMdd</dateFormat>
 		<dateRecord>20141111</dateRecord>
