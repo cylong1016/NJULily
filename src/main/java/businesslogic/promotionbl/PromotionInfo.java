@@ -1,5 +1,6 @@
 package businesslogic.promotionbl;
 
+import java.rmi.RemoteException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class PromotionInfo implements PromotionInfo_Sale{
 		promotion = new Promotion();
 	}
 	
-	public ArrayList<PromotionCommodityVO> findFitPromotionCommodity(String ID,ArrayList<String> commodityIDs) {
+	public ArrayList<PromotionCommodityVO> findFitPromotionCommodity(String ID,ArrayList<String> commodityIDs) throws RemoteException {
 		PromotionCommodity commodityPromotion = new PromotionCommodity();
 		ArrayList<PromotionCommodityVO> tempVOs = new ArrayList<PromotionCommodityVO>();
 		for (PromotionCommodityVO vo : commodityPromotion.show()) {
@@ -47,8 +48,9 @@ public class PromotionInfo implements PromotionInfo_Sale{
 
 	/**
 	 * 返回合适等级的促销策略
+	 * @throws RemoteException 
 	 */
-	public ArrayList<PromotionClientVO> findFitPromotionClient(String ID, String clientID) {
+	public ArrayList<PromotionClientVO> findFitPromotionClient(String ID, String clientID) throws RemoteException {
 		PromotionClient clientPromotion = new PromotionClient();
 		ArrayList<PromotionClientVO> clientVOs = new ArrayList<PromotionClientVO>();
 		for (PromotionClientVO vo : clientPromotion.show()) {
@@ -71,8 +73,9 @@ public class PromotionInfo implements PromotionInfo_Sale{
 
 	/**
 	 * 查看是否有符合总价的促销策略
+	 * @throws RemoteException 
 	 */
-	public ArrayList<PromotionTotalVO> findFitPromotionTotal(String ID, double beforePrice) {
+	public ArrayList<PromotionTotalVO> findFitPromotionTotal(String ID, double beforePrice) throws RemoteException {
 		PromotionTotal totalPromotion = new PromotionTotal();
 		ArrayList<PromotionTotalVO> totalVOs = new ArrayList<PromotionTotalVO>();
 		for (PromotionTotalVO vo : totalPromotion.show()) {

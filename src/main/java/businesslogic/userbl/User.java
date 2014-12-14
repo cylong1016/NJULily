@@ -31,10 +31,18 @@ public class User {
 	 * @author cylong
 	 * @version 2014年12月14日 上午5:18:22
 	 */
-	public User() throws MalformedURLException, RemoteException, NotBoundException {
+	public User() {
 		currentUser = new DefineList<UserPO>("data/loginInfo.ser");
 		currentUserTemp = new DefineList<UserPO>("data/loginInfoTemp.ser");
-		userData = (UserDataService)Naming.lookup(RMIConfig.PREFIX + UserDataService.NAME);
+		try {
+			userData = (UserDataService)Naming.lookup(RMIConfig.PREFIX + UserDataService.NAME);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

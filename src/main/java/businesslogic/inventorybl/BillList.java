@@ -12,20 +12,21 @@ import po.CommodityItemPO;
  * @version Nov 28, 20142:49:20 PM
  */
 public class BillList {
+
 	private ArrayList<BillListItem> items;
 	private String remark;
-	
+
 	public BillList() {
 		items = new ArrayList<BillListItem>();
 	}
-	
-	public void addItem(BillListItem item){
+
+	public void addItem(BillListItem item) {
 		items.add(item);
 	}
-	
-	public ArrayList<CommodityItemPO> getCommodityPOs(){
+
+	public ArrayList<CommodityItemPO> getCommodityPOs() {
 		ArrayList<CommodityItemPO> POs = new ArrayList<CommodityItemPO>();
-		for (int i = 0; i < items.size(); i++) {
+		for(int i = 0; i < items.size(); i++) {
 			BillListItem item = items.get(i);
 			CommodityItemPO po = new CommodityItemPO(item.getID(), item.getNumber(), item.getPurPrice());
 			POs.add(po);
@@ -36,8 +37,8 @@ public class BillList {
 	public String getRemark() {
 		return remark;
 	}
-	
-	public void setRemark(String remark){
+
+	public void setRemark(String remark) {
 		this.remark = remark;
 	}
 

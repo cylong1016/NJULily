@@ -1,5 +1,7 @@
 package businesslogic.approvalbl;
 
+import java.rmi.RemoteException;
+
 import vo.AccountBillVO;
 import vo.CashBillVO;
 import vo.InventoryBillVO;
@@ -22,27 +24,27 @@ public class PassApproval {
 	public PassApproval() {
 	}
 
-	public void passBill(PurchaseVO vo) {
+	public void passBill(PurchaseVO vo) throws RemoteException {
 		PurchaseInfo_Approval info = new PurchaseInfo();
 		info.pass(vo);
 	}
 
-	public void passBill(SalesVO vo) {
+	public void passBill(SalesVO vo) throws RemoteException {
 		 SaleInfo_Approval info = new SaleOperate();
 		 info.pass(vo);
 	}
 
-	public void passBill(AccountBillVO vo) {
+	public void passBill(AccountBillVO vo) throws RemoteException {
 		AccountBill_Approval info = new AccountBillInfo();
 		info.pass(vo);
 	}
 
-	public void passBill(InventoryBillVO vo) {
+	public void passBill(InventoryBillVO vo) throws RemoteException {
 		InventoryInfo_Approval info = new InventoryInfo();
 		info.pass(vo);
 	}
 
-	public void passBill(CashBillVO vo) {
+	public void passBill(CashBillVO vo) throws RemoteException {
 		CashBillInfo_Approval info = new CashBillInfo();
 		info.pass(vo);
 	}

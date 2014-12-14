@@ -1,5 +1,6 @@
 package businesslogic.common;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.CommodityItemPO;
@@ -9,7 +10,7 @@ import businesslogic.salebl.info.CommodityInfo_Sale;
 
 public class ChangeCommodityItems {
 
-	public ArrayList<CommodityItemVO> itemPOToVO(ArrayList<CommodityItemPO> itemsPO) {
+	public ArrayList<CommodityItemVO> itemPOToVO(ArrayList<CommodityItemPO> itemsPO) throws RemoteException {
 		ArrayList<CommodityItemVO> itemsVO = new ArrayList<CommodityItemVO>();
 		for(CommodityItemPO po : itemsPO) {
 			String ID = po.getID();

@@ -36,13 +36,17 @@ public class AccountBill {
 	private AccountBillPO po;
 
 	private AccountBillDataService accountBillData;
-	private ClientInfo_AccountBill clientInfo;
-	private AccountInfo_AccountBill accountInfo;
 
-	public AccountBill() throws MalformedURLException, RemoteException, NotBoundException {
-		accountBillData = (AccountBillDataService)Naming.lookup(RMIConfig.PREFIX + AccountBillDataService.NAME);
-		clientInfo = new ClientInfo();
-		accountInfo = new AccountInfo();
+	public AccountBill() {
+		try {
+			accountBillData = (AccountBillDataService)Naming.lookup(RMIConfig.PREFIX + AccountBillDataService.NAME);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -66,6 +70,7 @@ public class AccountBill {
 	 * @throws RemoteException
 	 */
 	public HashMap<String, String> getAllClients() throws RemoteException {
+		ClientInfo_AccountBill clientInfo = new ClientInfo();
 		return clientInfo.getAllClients();
 	}
 
@@ -73,8 +78,10 @@ public class AccountBill {
 	 * @see businesslogic.accountbillbl.info.AccountInfo_AccountBill
 	 * @author cylong
 	 * @version 2014年12月1日 上午1:36:29
+	 * @throws RemoteException
 	 */
-	public HashMap<String, String> getAllAccounts() {
+	public HashMap<String, String> getAllAccounts() throws RemoteException {
+		AccountInfo_AccountBill accountInfo = new AccountInfo();
 		return accountInfo.getAllAccounts();
 	}
 

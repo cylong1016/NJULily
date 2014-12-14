@@ -1,7 +1,5 @@
 package businesslogic.commoditysortbl;
 
-import java.net.MalformedURLException;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -23,15 +21,7 @@ public class CommoditySortController implements CommoditySortBLService {
 	 * @version 2014年12月14日 下午1:00:53
 	 */
 	public CommoditySortController() {
-		try {
-			commoditySort = new CommoditySort();
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		} catch (NotBoundException e) {
-			e.printStackTrace();
-		}
+		commoditySort = new CommoditySort();
 	}
 
 	/**

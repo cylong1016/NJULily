@@ -1,5 +1,6 @@
 package businesslogic.inventorybl;
 
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,36 +18,37 @@ import businesslogic.inventorybl.info.CommodityInfo_Inventory;
  * @version Nov 28, 201410:51:02 AM
  */
 public class CheckList {
+
 	/** 库存均价 */
 	private double avePrice;
 	/** 批号 */
 	private String today;
 	/** 批次 */
 	private String lot;
-	
+
 	private ArrayList<CheckListItem> items;
 	/** 库存总数 */
 	public int totalNumber;
 	public double totalPrice;
-	
-	public CheckList(String lot) {
+
+	public CheckList(String lot) throws RemoteException {
 		this.lot = lot;
 		today = addToday();
 		items = addItems();
 	}
-		
-	public String addToday(){
-		String today = null;   
-	    Date dt = new Date();   
-	    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-	    today = sdf.format(dt);   
-	    return today;
+
+	public String addToday() {
+		String today = null;
+		Date dt = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		today = sdf.format(dt);
+		return today;
 	}
-	
-	public ArrayList<CheckListItem> addItems(){
+
+	public ArrayList<CheckListItem> addItems() throws RemoteException {
 		CommodityInfo_Inventory info = new CommodityInfo();
 		ArrayList<String> IDs = info.getAllID();
-		for (String ID : IDs) {
+		for(String ID : IDs) {
 			CheckListItem item = new CheckListItem(ID);
 			items.add(item);
 		}
@@ -60,22 +62,21 @@ public class CheckList {
 	public String getLot() {
 		return lot;
 	}
-	
+
 	public ArrayList<CheckCommodityItemVO> getItemsVO() {
 		ArrayList<CheckCommodityItemVO> vos = new ArrayList<CheckCommodityItemVO>();
-		for (CheckListItem item : items) {
+		for(CheckListItem item : items) {
 			CheckCommodityItemVO vo = new CheckCommodityItemVO(item.getName(), item.getType(), item.getNumber(), item.getPrice());
 			totalNumber += item.getNumber();
 			totalPrice += item.getPrice();
 			vos.add(vo);
-		}	
+		}
 		return vos;
 	}
 
 	public double getAvePrice() {
-		avePrice = totalPrice/totalNumber;
+		avePrice = totalPrice / totalNumber;
 		return avePrice;
 	}
 
-	
 }

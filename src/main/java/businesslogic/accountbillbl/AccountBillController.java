@@ -1,14 +1,12 @@
 package businesslogic.accountbillbl;
 
-import java.net.MalformedURLException;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.HashMap;
 
 import vo.AccountBillItemVO;
 import vo.AccountBillVO;
-import dataenum.BillType;
 import blservice.accountbillblservice.AccountBillBLService;
+import dataenum.BillType;
 
 /**
  * @see blservice.accountbillblservice.AccountBillBLService
@@ -20,15 +18,7 @@ public class AccountBillController implements AccountBillBLService {
 	private AccountBill accountBill;
 
 	public AccountBillController() {
-		try {
-			accountBill = new AccountBill();
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		} catch (NotBoundException e) {
-			e.printStackTrace();
-		}
+		accountBill = new AccountBill();
 	}
 
 	/**
@@ -71,11 +61,17 @@ public class AccountBillController implements AccountBillBLService {
 	}
 
 	/**
+	 * @throws RemoteException
 	 * @see blservice.accountbillblservice.AccountBillBLService#getAllAccounts()
 	 */
 	@Override
 	public HashMap<String, String> getAllAccounts() {
-		return accountBill.getAllAccounts();
+		try {
+			return accountBill.getAllAccounts();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	/**

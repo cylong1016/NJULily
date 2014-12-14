@@ -1,5 +1,7 @@
 package businesslogic.inventorybl;
 
+import java.rmi.RemoteException;
+
 import businesslogic.commoditybl.CommodityInfo;
 import businesslogic.inventorybl.info.CommodityInfo_Inventory;
 
@@ -10,6 +12,7 @@ import businesslogic.inventorybl.info.CommodityInfo_Inventory;
  * @version Nov 28, 201410:53:51 AM
  */
 public class CheckListItem {
+
 	/** 商品名 */
 	private String name;
 	/** 类型 */
@@ -18,10 +21,10 @@ public class CheckListItem {
 	private int number;
 	/** 商品价格 */
 	private double price;
-	
+
 	private String commodityID;
-	
-	public CheckListItem(String ID) {
+
+	public CheckListItem(String ID) throws RemoteException {
 		this.commodityID = ID;
 		CommodityInfo_Inventory info = new CommodityInfo();
 		this.name = info.getName(ID);
@@ -50,5 +53,4 @@ public class CheckListItem {
 		return commodityID;
 	}
 
-	
 }

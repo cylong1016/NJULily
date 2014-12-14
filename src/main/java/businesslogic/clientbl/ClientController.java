@@ -1,7 +1,5 @@
 package businesslogic.clientbl;
 
-import java.net.MalformedURLException;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -9,8 +7,8 @@ import message.ResultMessage;
 import vo.client.ClientAddVO;
 import vo.client.ClientPartInfoVO;
 import vo.client.ClientVO;
-import dataenum.FindTypeClient;
 import blservice.clientblservice.ClientBLService;
+import dataenum.FindTypeClient;
 
 /**
  * @see blservice.clientblservice.ClientBLService
@@ -22,15 +20,7 @@ public class ClientController implements ClientBLService {
 	private Client client;
 
 	public ClientController() {
-		try {
-			client = new Client();
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		} catch (NotBoundException e) {
-			e.printStackTrace();
-		}
+		client = new Client();
 	}
 
 	/**

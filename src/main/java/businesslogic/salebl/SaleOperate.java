@@ -1,5 +1,6 @@
 package businesslogic.salebl;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import businesslogic.approvalbl.info.SaleInfo_Approval;
@@ -34,8 +35,9 @@ public class SaleOperate implements SaleInfo_Approval{
 
 	/**
 	 * 更新销售单
+	 * @throws RemoteException 
 	 */
-	public ResultMessage update(SalesVO vo) {
+	public ResultMessage update(SalesVO vo) throws RemoteException {
 		String ID = vo.ID;
 		String clientID = vo.clientID;
 		String client = vo.client;
@@ -58,8 +60,9 @@ public class SaleOperate implements SaleInfo_Approval{
 	 * 通过销售单／销售退货单
 	 * 销售单：减少商品库存数量，增加客户应收金额
 	 * 销售退货单：增加商品库存数量，减少客户应收金额
+	 * @throws RemoteException 
 	 */
-	public ResultMessage pass(SalesVO vo) {
+	public ResultMessage pass(SalesVO vo) throws RemoteException {
 		SalesPO po = saleData.find(vo.ID);
 		// 更改商品库存数量、最近售价
 		CommodityInfo_Sale commodityInfo = new CommodityInfo();
@@ -94,8 +97,9 @@ public class SaleOperate implements SaleInfo_Approval{
 
 	/**
 	 * 红冲／红冲并复制
+	 * @throws RemoteException 
 	 */
-	public SalesVO addRed(SalesVO vo, boolean isCopy) {
+	public SalesVO addRed(SalesVO vo, boolean isCopy) throws RemoteException {
 		SalesVO redVO = vo;
 		// 取负
 		ArrayList<CommodityItemVO> commodities = redVO.commodities;

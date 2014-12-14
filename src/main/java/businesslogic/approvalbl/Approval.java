@@ -1,5 +1,6 @@
 package businesslogic.approvalbl;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import message.ResultMessage;
@@ -9,7 +10,6 @@ import vo.InventoryBillVO;
 import vo.PurchaseVO;
 import vo.ValueObject;
 import vo.sale.SalesVO;
-import blservice.approvalblservice.ApprovalBLService;
 import dataenum.BillType;
 
 /**
@@ -17,7 +17,7 @@ import dataenum.BillType;
  * @author Zing
  * @version Dec 2, 2014 11:48:42 PM
  */
-public class Approval implements ApprovalBLService{
+public class Approval {
 
 	/**
 	 * 更新特定单据的数据 直接传递一个数据vo过来，还要有数据的类型
@@ -26,9 +26,10 @@ public class Approval implements ApprovalBLService{
 	 * @return
 	 * @author Zing
 	 * @version Dec 2, 2014 2:11:54 PM
+	 * @throws RemoteException 
 	 */
 	
-	public ResultMessage updateBill(ValueObject vo, BillType billType) {
+	public ResultMessage updateBill(ValueObject vo, BillType billType) throws RemoteException {
 		UpdateApproval update = new UpdateApproval();
 		switch (billType) {
 		case SALE:
@@ -59,8 +60,9 @@ public class Approval implements ApprovalBLService{
 	 * @return
 	 * @author Zing
 	 * @version Dec 2, 2014 9:22:47 PM
+	 * @throws RemoteException 
 	 */
-	public ResultMessage passBill(ArrayList<ValueObject> VOs, ArrayList<BillType> billTypes) {
+	public ResultMessage passBill(ArrayList<ValueObject> VOs, ArrayList<BillType> billTypes) throws RemoteException {
 		PassApproval pass = new PassApproval();
 		for (int i=0; i < VOs.size(); i++) {
 			BillType billType = billTypes.get(i);

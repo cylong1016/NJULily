@@ -33,22 +33,26 @@ import dataservice.accountbilldataservice.AccountBillInfoService;
 public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectInfo_Record<AccountBillVO>, ValueObject_Approval<AccountBillVO>, AccountBill_Approval {
 
 	private AccountBill accountBill;
-	private ClientInfo_AccountBill clientInfo;
 
-	public AccountBillInfo() throws MalformedURLException, RemoteException, NotBoundException {
+	public AccountBillInfo() {
 		accountBill = new AccountBill();
-		clientInfo = new ClientInfo();
 	}
 
 	/**
-	 * @throws NotBoundException
-	 * @throws RemoteException
-	 * @throws MalformedURLException
 	 * @see businesslogic.common.Info#getData()
 	 */
 	@Override
-	protected TableInfoService<AccountBillPO> getData() throws MalformedURLException, RemoteException, NotBoundException {
-		return (AccountBillInfoService)Naming.lookup(RMIConfig.PREFIX + AccountBillInfoService.NAME);
+	protected TableInfoService<AccountBillPO> getData() {
+		try {
+			return (AccountBillInfoService)Naming.lookup(RMIConfig.PREFIX + AccountBillInfoService.NAME);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	/**
@@ -60,13 +64,11 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 	}
 
 	/**
-	 * @throws NotBoundException
-	 * @throws MalformedURLException
 	 * @throws RemoteException
 	 * @see businesslogic.recordbl.info.ValueObjectInfo_Record#getID(java.lang.String, java.lang.String,
 	 *      java.lang.String, dataenum.Storage)
 	 */
-	public ArrayList<String> getID(String ID, String clientName, String salesman, Storage storage) throws RemoteException, MalformedURLException, NotBoundException {
+	public ArrayList<String> getID(String ID, String clientName, String salesman, Storage storage) throws RemoteException {
 		ArrayList<String> IDs = new ArrayList<String>();
 		IDs = getID(ID, clientName, salesman, storage, BillType.PAY);
 		IDs.addAll(getID(ID, clientName, salesman, storage, BillType.EXPENSE));
@@ -120,6 +122,7 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 				break;
 			}
 		}
+		ClientInfo_AccountBill clientInfo = new ClientInfo();
 		switch(vo.type) {
 		case PAY:
 			clientInfo.changeReceivable(vo.clientID, vo.sumMoney);
@@ -153,11 +156,9 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 
 	/**
 	 * 返回需要进行审核的单子（包括付款单x和收款单）
-	 * @throws NotBoundException
 	 * @throws RemoteException
-	 * @throws MalformedURLException
 	 */
-	public ArrayList<AccountBillVO> findApproval() throws MalformedURLException, RemoteException, NotBoundException {
+	public ArrayList<AccountBillVO> findApproval() throws RemoteException {
 		AccountBillShow show = new AccountBillShow();
 		ArrayList<AccountBillVO> VOs = show.showPayApproving();
 		VOs.addAll(show.showExpenseApproving());
@@ -165,7 +166,7 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 	}
 
 	@Override
-	public ArrayList<AccountBillVO> showPass() throws MalformedURLException, RemoteException, NotBoundException {
+	public ArrayList<AccountBillVO> showPass() throws RemoteException {
 		AccountBillShow show = new AccountBillShow();
 		ArrayList<AccountBillVO> VOs = show.showPayPass();
 		VOs.addAll(show.showExpensePass());
@@ -173,7 +174,7 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 	}
 
 	@Override
-	public ArrayList<AccountBillVO> showFailure() throws MalformedURLException, RemoteException, NotBoundException {
+	public ArrayList<AccountBillVO> showFailure() throws RemoteException {
 		AccountBillShow show = new AccountBillShow();
 		ArrayList<AccountBillVO> VOs = show.showPayFailure();
 		VOs.addAll(show.showExpenseFailure());

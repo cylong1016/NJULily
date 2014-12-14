@@ -1,5 +1,6 @@
 package businesslogic.recordbl;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import dataenum.Storage;
@@ -56,8 +57,9 @@ public class SaleDetailList {
 	 * @return
 	 * @author Zing
 	 * @version Dec 4, 2014 8:20:07 PM
+	 * @throws RemoteException 
 	 */
-	public ArrayList<SaleDetailVO> getSaleDetail(ArrayList<String> IDs) {
+	public ArrayList<SaleDetailVO> getSaleDetail(ArrayList<String> IDs) throws RemoteException {
 		info = new SaleInfo();
 		if (IDs.isEmpty()) {
 			addVOs(null);
@@ -71,7 +73,7 @@ public class SaleDetailList {
 		return VOs;
 	}
 	
-	private void addVOs(String id) {
+	private void addVOs(String id) throws RemoteException {
 		ArrayList<String> saleIDs = info.getID(id, clientName, salesman, storage);
 		for (String saleID : saleIDs) {
 			item = new SaleDetailListItem(saleID, commodityName);

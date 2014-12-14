@@ -1,15 +1,13 @@
 package businesslogic.userbl;
 
-import java.net.MalformedURLException;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import message.ResultMessage;
 import vo.UserVO;
-import dataenum.UserIdentity;
 import blservice.userblservice.LoginInfo;
 import blservice.userblservice.UserBLService;
+import dataenum.UserIdentity;
 
 /**
  * 主要用于捕获User类抛出的异常
@@ -21,15 +19,7 @@ public class UserController implements UserBLService {
 	private User user;
 
 	public UserController() {
-		try {
-			user = new User();
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		} catch (NotBoundException e) {
-			e.printStackTrace();
-		}
+		user = new User();
 	}
 
 	/**

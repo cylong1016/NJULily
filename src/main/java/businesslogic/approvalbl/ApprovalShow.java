@@ -1,12 +1,13 @@
 package businesslogic.approvalbl;
 
+import java.rmi.RemoteException;
+
 import vo.AccountBillVO;
 import vo.ApprovalVO;
 import vo.CashBillVO;
 import vo.InventoryBillVO;
 import vo.PurchaseVO;
 import vo.sale.SalesVO;
-import blservice.approvalblservice.ApprovalShowBLService;
 import businesslogic.accountbillbl.AccountBillInfo;
 import businesslogic.approvalbl.info.ValueObject_Approval;
 import businesslogic.cashbillbl.CashBillInfo;
@@ -23,7 +24,7 @@ import businesslogic.salebl.SaleInfo;
  * @author Zing
  * @version Dec 2, 2014 2:09:48 PM
  */
-public class ApprovalShow implements ApprovalShowBLService{
+public class ApprovalShow {
 	
 	
 	private ValueObject_Approval<SalesVO> salesVOs;
@@ -40,23 +41,20 @@ public class ApprovalShow implements ApprovalShowBLService{
 		cashBillVOs = new CashBillInfo();
 	}
 
-	@Override
-	public ApprovalVO ShowApproving() {
+	public ApprovalVO ShowApproving() throws RemoteException {
 		ApprovalVO vo = new ApprovalVO(salesVOs.findApproval(),
 				purchaseVOs.findApproval(), accountBillVOs.findApproval(),
 				inventoryBillVOs.findApproval(), cashBillVOs.findApproval());
 		return vo;
 	}
 
-	@Override
-	public ApprovalVO showPass() {
+	public ApprovalVO showPass() throws RemoteException {
 		ApprovalVO vo = new ApprovalVO(salesVOs.showPass(), purchaseVOs.showPass(), accountBillVOs.showPass(), 
 				inventoryBillVOs.showPass(), cashBillVOs.showPass());
 		return vo;
 	}
 
-	@Override
-	public ApprovalVO showFailure() {
+	public ApprovalVO showFailure() throws RemoteException {
 		ApprovalVO vo = new ApprovalVO(salesVOs.showFailure(), purchaseVOs.showFailure(), accountBillVOs.showFailure(), 
 				inventoryBillVOs.showFailure(), cashBillVOs.showFailure());
 		return vo;

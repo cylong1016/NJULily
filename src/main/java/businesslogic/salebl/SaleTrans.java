@@ -1,5 +1,6 @@
 package businesslogic.salebl;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.SalesPO;
@@ -20,8 +21,9 @@ public class SaleTrans {
 	 * @return SalesVO
 	 * @author cylong
 	 * @version 2014年11月28日  下午9:12:11
+	 * @throws RemoteException 
 	 */
-	public SalesVO poToVo(SalesPO po) {
+	public SalesVO poToVo(SalesPO po) throws RemoteException {
 		String ID = po.getID();
 		String clientID = po.getClientID();
 		String client = po.getClient();

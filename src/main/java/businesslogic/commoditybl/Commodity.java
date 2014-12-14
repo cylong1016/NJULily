@@ -24,8 +24,6 @@ import dataservice.commoditydataservice.CommodityDataService;
 public class Commodity {
 
 	private CommodityDataService commodityData;
-	private CommoditySort_Commodity sort;
-	private CommoditySort_Commodity info;
 
 	private CommodityPO po;
 
@@ -33,10 +31,16 @@ public class Commodity {
 
 	private CommodityTrans transPOVO;
 
-	public Commodity() throws MalformedURLException, RemoteException, NotBoundException {
-		commodityData = (CommodityDataService)Naming.lookup(RMIConfig.PREFIX + CommodityDataService.NAME);
-		sort = new CommoditySortInfo();
-		info = new CommoditySortInfo();
+	public Commodity() {
+		try {
+			commodityData = (CommodityDataService)Naming.lookup(RMIConfig.PREFIX + CommodityDataService.NAME);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -92,6 +96,7 @@ public class Commodity {
 	 * @throws RemoteException
 	 */
 	public ResultMessage addCommo(CommodityAddVO info) throws RemoteException {
+		CommoditySort_Commodity sort = new CommoditySortInfo();
 		po = new CommodityPO(ID, info.name, info.sortID, info.type, info.purPrice, info.salePrice, 0);
 		if (sort.hasLeaf(info.sortID)) {
 			return ResultMessage.FAILURE;
@@ -120,6 +125,7 @@ public class Commodity {
 		}
 		// 如果可以删除该商品，就顺便删除分类中的该商品
 		String sortID = commodityData.find(ID).getSortID();
+		CommoditySort_Commodity info = new CommoditySortInfo();
 		info.deleteCommodity(sortID, ID);
 		return commodityData.delete(ID);
 	}

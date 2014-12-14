@@ -1,5 +1,6 @@
 package businesslogic.recordbl;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import businesslogic.accountbillbl.AccountBillInfo;
@@ -47,7 +48,8 @@ public class BusinessProList {
 	}
 	
 	// TODO 这里是不是可以用抽象工厂？
-	public ArrayList<ValueObject> getBusinessPro(ArrayList<String> IDs){
+	// 这样就行了
+	public ArrayList<ValueObject> getBusinessPro(ArrayList<String> IDs) throws RemoteException{
 		switch (billType) {
 		case SALE:
 		case SALEBACK:
@@ -84,7 +86,7 @@ public class BusinessProList {
 		return VOs;
 	}
 	
-	private void addVOs(String id) {
+	private void addVOs(String id) throws RemoteException {
 		ArrayList<String> billIDs = info.getID(id, clientName, salesman, storage);
 		for (String billID : billIDs) {
 			VOs.add(info.find(billID));

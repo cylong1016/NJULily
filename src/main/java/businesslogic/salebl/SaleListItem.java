@@ -1,5 +1,7 @@
 package businesslogic.salebl;
 
+import java.rmi.RemoteException;
+
 import businesslogic.commoditybl.CommodityInfo;
 import businesslogic.salebl.info.CommodityInfo_Sale;
 
@@ -37,7 +39,7 @@ public class SaleListItem {
 		
 	}
 	
-	public SaleListItem(String ID, int number, double price, String remark) {
+	public SaleListItem(String ID, int number, double price, String remark) throws RemoteException {
 		this.ID = ID;
 		this.number = number;
 		info = new CommodityInfo();

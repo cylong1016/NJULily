@@ -1,5 +1,6 @@
 package businesslogic.recordbl;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import dataenum.BillType;
@@ -78,8 +79,9 @@ public class BusinessStateList {
 	 * @return
 	 * @author Zing
 	 * @version Dec 4, 2014 8:23:53 PM
+	 * @throws RemoteException 
 	 */
-	public BusinessStateVO getBusinessState() {
+	public BusinessStateVO getBusinessState() throws RemoteException {
 		
 		for (String ID : IDs) {
 			getSaleIDs(ID);
@@ -103,21 +105,23 @@ public class BusinessStateList {
 	}
 
 	/* 以下三个方法是为了获得所有存在的销售单、销售退货单、进货单、进货退货单、赠送单、报损单、报溢单、报警单的ID */
-	private void getSaleIDs(String ID) {
+	private void getSaleIDs(String ID) throws RemoteException {
 		ArrayList<String> saleID = saleInfo.getID(ID, null, null, null);
 		saleIDs.addAll(saleID);
 	}
-	private void getPurchaseIDs(String ID) {
+	
+	private void getPurchaseIDs(String ID) throws RemoteException {
 		ArrayList<String> purchaseID = purchaseInfo.getID(ID, null, null, null);
 		purIDs.addAll(purchaseID);
 	}
-	private void getInventoryIDs(String ID) {
+	
+	private void getInventoryIDs(String ID) throws RemoteException {
 		ArrayList<String> inventoryID = inventoryInfo.getID(ID, null, null, null);
 		inventoryIDs.addAll(inventoryID);
 	}
 	/* 以上三个方法*/
 
-	private void accountSale(String ID) {
+	private void accountSale(String ID) throws RemoteException {
 		allowance += saleInfo.getAllowance(ID);
 		double beforePrice = saleInfo.getBeforePrice(ID);
 		saleIncome += beforePrice;
@@ -134,8 +138,9 @@ public class BusinessStateList {
 	 * @param iD
 	 * @author Zing
 	 * @version Dec 4, 2014 11:37:14 PM
+	 * @throws RemoteException 
 	 */
-	private void accountPur(String ID) {
+	private void accountPur(String ID) throws RemoteException {
 		saleCost += purchaseInfo.getTotalPrice(ID);
 	}
 	
@@ -144,8 +149,9 @@ public class BusinessStateList {
 	 * @param ID
 	 * @author Zing
 	 * @version Dec 4, 2014 11:36:50 PM
+	 * @throws RemoteException 
 	 */
-	private void accountInventory(String ID) {
+	private void accountInventory(String ID) throws RemoteException {
 		BillType type = inventoryInfo.getType(ID);
 		switch (type) {
 		case GIFT:

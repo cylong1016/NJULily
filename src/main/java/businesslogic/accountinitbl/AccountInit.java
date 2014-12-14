@@ -1,5 +1,9 @@
-package businesslogic.accountainitbl;
+package businesslogic.accountinitbl;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import message.ResultMessage;
@@ -8,22 +12,21 @@ import po.AccountaInitPO;
 import po.ClientPO;
 import po.CommodityPO;
 import po.CommoditySortPO;
-import server.data.accountinitdata.AccountInitData;
 import vo.AccountVO;
 import vo.AccountaInitVO;
 import vo.client.ClientVO;
 import vo.commodity.CommoditySortVO;
 import vo.commodity.CommodityVO;
-import blservice.accountainitblservice.AccountainitBLService;
-import businesslogic.accountainitbl.info.AccountInfo_Init;
-import businesslogic.accountainitbl.info.ClientInfo_Init;
-import businesslogic.accountainitbl.info.CommodityInfo_Init;
-import businesslogic.accountainitbl.info.CommoditySortInfo_Init;
 import businesslogic.accountbl.AccountInfo;
+import businesslogic.accountinitbl.info.AccountInfo_Init;
+import businesslogic.accountinitbl.info.ClientInfo_Init;
+import businesslogic.accountinitbl.info.CommodityInfo_Init;
+import businesslogic.accountinitbl.info.CommoditySortInfo_Init;
 import businesslogic.clientbl.ClientInfo;
 import businesslogic.commoditybl.CommodityInfo;
 import businesslogic.commoditysortbl.CommoditySortInfo;
-import dataservice.accountinitdataservice.AccountaInitDataService;
+import config.RMIConfig;
+import dataservice.accountinitdataservice.AccountInitDataService;
 
 /**
  * 这个系统是可以支持建多套账的，每套帐在新建的时候都要经过期初建账这一环节，可以理解为一套帐的初始化操作。
@@ -36,11 +39,11 @@ import dataservice.accountinitdataservice.AccountaInitDataService;
  * @author Zing
  * @version Dec 2, 2014 7:09:40 PM
  */
-public class Accountainit implements AccountainitBLService {
+public class AccountInit {
 
 	private AccountInitDataService accountInitData;
 
-	public Accountainit() {
+	public AccountInit() {
 		this.accountInitData = getAccountInitData();
 	}
 
@@ -49,15 +52,15 @@ public class Accountainit implements AccountainitBLService {
 	 * @return
 	 * @author Zing
 	 * @version Dec 2, 2014 8:15:55 PM
+	 * @throws RemoteException 
 	 */
-	public ResultMessage buildAccount() {
+	public ResultMessage buildAccount() throws RemoteException {
 		BuildInit buildInit = new BuildInit(getID());
-		AccountaInitPO po =
-							new AccountaInitPO(buildInit.getID(), buildInit.getDate(), buildInit.getCommoditySorts(), buildInit.getCommodities(), buildInit.getClients(), buildInit.getAccounts());
+		AccountaInitPO po = new AccountaInitPO(buildInit.getID(), buildInit.getDate(), buildInit.getCommoditySorts(), buildInit.getCommodities(), buildInit.getClients(), buildInit.getAccounts());
 		return accountInitData.insert(po);
 	}
 
-	public ArrayList<AccountaInitVO> show() {
+	public ArrayList<AccountaInitVO> show() throws RemoteException {
 		ArrayList<AccountaInitPO> POs = accountInitData.show();
 		ArrayList<AccountaInitVO> VOs = new ArrayList<AccountaInitVO>();
 		for(AccountaInitPO po : POs) {
@@ -74,7 +77,7 @@ public class Accountainit implements AccountainitBLService {
 		return info.getSortVOs(POs);
 	}
 
-	private ArrayList<CommodityVO> getCommodityVOs(ArrayList<CommodityPO> POs) {
+	private ArrayList<CommodityVO> getCommodityVOs(ArrayList<CommodityPO> POs) throws RemoteException {
 		CommodityInfo_Init info = new CommodityInfo();
 		return info.getCommodityVOs(POs);
 	}
@@ -89,7 +92,7 @@ public class Accountainit implements AccountainitBLService {
 		return info.getAccountVOs(POs);
 	}
 
-	private String getID() {
+	private String getID() throws RemoteException {
 		return accountInitData.getID();
 	}
 
@@ -101,12 +104,14 @@ public class Accountainit implements AccountainitBLService {
 	 */
 	private AccountInitDataService getAccountInitData() {
 		try {
-			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMIConfig.URL);
-			AccountaInitDataService accountaInitData = factory.getAccountaInitData();
-			return accountaInitData;
-		} catch (Exception e) {
+			return (AccountInitDataService)Naming.lookup(RMIConfig.PREFIX + AccountInitDataService.NAME);
+		} catch (MalformedURLException e) {
 			e.printStackTrace();
-			return null;
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			e.printStackTrace();
 		}
+		return null;
 	}
 }

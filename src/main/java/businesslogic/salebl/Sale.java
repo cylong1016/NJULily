@@ -1,20 +1,23 @@
 package businesslogic.salebl;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.SalesPO;
-import server.data.saledata.SaleData;
 import vo.commodity.CommodityItemVO;
 import vo.promotion.PromotionClientVO;
 import vo.promotion.PromotionCommodityVO;
 import vo.promotion.PromotionTotalVO;
 import vo.sale.SalesVO;
 import vo.sale.saleAddVO;
-import blservice.saleblservice.SaleBLService;
 import businesslogic.clientbl.ClientInfo;
 import businesslogic.promotionbl.PromotionInfo;
 import businesslogic.salebl.info.ClientInfo_Sale;
 import businesslogic.salebl.info.PromotionInfo_Sale;
+import config.RMIConfig;
 import dataenum.BillType;
 import dataservice.saledataservice.SaleDataService;
 
@@ -23,7 +26,7 @@ import dataservice.saledataservice.SaleDataService;
  * @author Zing
  * @version Nov 15, 2014 10:07:38 AM
  */
-public class Sale implements SaleBLService {
+public class Sale {
 
 	/** 销售单 */
 	private SaleList list;
@@ -48,15 +51,16 @@ public class Sale implements SaleBLService {
 	}
 
 	public SaleDataService getSaleData() {
-//		try {
-//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
-//			SaleDataService saleData = factory.getSaleData();
-//			return saleData;
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return null;
-//		}
-		return new SaleData();
+		try {
+			return (SaleDataService)Naming.lookup(RMIConfig.PREFIX + SaleDataService.NAME);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	/**
@@ -65,15 +69,16 @@ public class Sale implements SaleBLService {
 	 * @author Zing
 	 * @param type
 	 * @return ID（界面显示）
+	 * @throws RemoteException 
 	 */
-	public String getSaleID() {
+	public String getSaleID() throws RemoteException {
 		this.type = BillType.SALE;
 		SaleDataService saleData = getSaleData();
 		this.ID = saleData.getSaleID();
 		return ID;
 	}
 
-	public String getSaleBackID() {
+	public String getSaleBackID() throws RemoteException {
 		this.type = BillType.SALEBACK;
 		SaleDataService saleData = getSaleData();
 		this.ID = saleData.getSaleBackID();
@@ -85,8 +90,9 @@ public class Sale implements SaleBLService {
 	 * @param itemVO
 	 * @author Zing
 	 * @version 2014年11月28日 下午8:02:29
+	 * @throws RemoteException 
 	 */
-	public void addCommodities(CommodityItemVO itemVO) {
+	public void addCommodities(CommodityItemVO itemVO) throws RemoteException {
 		SaleListItem item = new SaleListItem(itemVO.ID, itemVO.number, itemVO.price, itemVO.remark);
 		list.add(item);
 		commodityIDs.add(itemVO.ID);
@@ -119,8 +125,9 @@ public class Sale implements SaleBLService {
 	 * @param inputInfo
 	 * @author Zing
 	 * @version 2014年11月28日 下午9:13:52
+	 * @throws RemoteException 
 	 */
-	public SalesVO submit(saleAddVO inputInfo) {
+	public SalesVO submit(saleAddVO inputInfo) throws RemoteException {
 		setInputInfo(inputInfo);
 		SalesPO po = buildSales();
 		getSaleData().insert(po);
@@ -133,8 +140,9 @@ public class Sale implements SaleBLService {
 	 * @param inputInfo
 	 * @author cylong
 	 * @version 2014年11月28日 下午9:14:47
+	 * @throws RemoteException 
 	 */
-	public SalesVO save(saleAddVO inputInfo) {
+	public SalesVO save(saleAddVO inputInfo) throws RemoteException {
 		setInputInfo(inputInfo);
 		 SalesPO po = buildSales();
 		// TODO 保存在本地
@@ -145,8 +153,9 @@ public class Sale implements SaleBLService {
 	/**
 	 * 建立销售单
 	 * @return SalePO
+	 * @throws RemoteException 
 	 */
-	private SalesPO buildSales() {
+	private SalesPO buildSales() throws RemoteException {
 		double beforePrice = list.getBeforePrice();
 		double afterPrice = list.getAfterPrice();
 		ClientInfo_Sale info = new ClientInfo();
@@ -171,17 +180,17 @@ public class Sale implements SaleBLService {
 		list.setRemark(inputInfo.remark);
 	}
 
-	public ArrayList<PromotionCommodityVO> findFitPromotionCommodity() {
+	public ArrayList<PromotionCommodityVO> findFitPromotionCommodity() throws RemoteException {
 		promotionInfo.findFitPromotionCommodity(ID, commodityIDs);
 		return null;
 	}
 
-	public ArrayList<PromotionClientVO> findFitPromotionClient() {
+	public ArrayList<PromotionClientVO> findFitPromotionClient() throws RemoteException {
 		promotionInfo.findFitPromotionClient(ID, list.getClientID());
 		return null;
 	}
 
-	public ArrayList<PromotionTotalVO> findFitPromotionTotal() {
+	public ArrayList<PromotionTotalVO> findFitPromotionTotal() throws RemoteException {
 		promotionInfo.findFitPromotionTotal(ID, list.getBeforePrice());
 		return null;
 	}

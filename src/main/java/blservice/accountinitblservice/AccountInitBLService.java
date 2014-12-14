@@ -1,4 +1,4 @@
-package blservice.accountainitblservice;
+package blservice.accountinitblservice;
 
 import java.util.ArrayList;
 
@@ -21,7 +21,7 @@ import message.ResultMessage;
  * @author Zing
  * @version 2014年10月28日下午5:36:24
  */
-public interface AccountainitBLService {
+public interface AccountInitBLService {
 	
 	/**
 	 * 建账

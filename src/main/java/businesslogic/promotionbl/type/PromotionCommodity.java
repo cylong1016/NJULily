@@ -1,5 +1,6 @@
 package businesslogic.promotionbl.type;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import message.ResultMessage;
@@ -9,41 +10,40 @@ import vo.InventoryBillVO;
 import vo.commodity.CommodityItemVO;
 import vo.promotion.PromotionCommodityVO;
 import blservice.promotionblservice.PromoInputInfo;
-import blservice.promotionblservice.PromotionCommodityBLService;
 import businesslogic.promotionbl.Promotion;
 import businesslogic.promotionbl.PromotionListItem;
 import businesslogic.promotionbl.PromotionTrans;
 import dataenum.PromotionType;
 
-public class PromotionCommodity extends Promotion implements PromotionCommodityBLService{
+public class PromotionCommodity extends Promotion {
 
 	public PromotionCommodity() {
 		super();
 	}
 	
-	public ArrayList<PromotionCommodityVO> show() {
+	public ArrayList<PromotionCommodityVO> show() throws RemoteException {
 		PromotionTrans transPOVO = new PromotionTrans();
 		return transPOVO.commodityPOtoVO(promotionData.show(PromotionType.COMMODITY));
 	}
 
-	public void addCommodity(CommodityItemVO vo) {
+	public void addCommodity(CommodityItemVO vo) throws RemoteException {
 		PromotionListItem item = new PromotionListItem(vo.ID, vo.number);
 		list.addBargain(item);
 	}
 
-	public void addGifts(CommodityItemVO vo) {
+	public void addGifts(CommodityItemVO vo) throws RemoteException {
 		PromotionListItem item = new PromotionListItem(vo.ID, vo.number);
 		list.addGift(item);
 	}
 
-	public void addGiftBill(InventoryBillVO giftBill) {
+	public void addGiftBill(InventoryBillVO giftBill) throws RemoteException {
 		ArrayList<CommodityItemVO> commodityItems = giftBill.commodities;
 		for (CommodityItemVO vo : commodityItems) {
 			addGifts(vo);
 		}		
 	}
 	
-	public ResultMessage submit(PromoInputInfo info) {
+	public ResultMessage submit(PromoInputInfo info) throws RemoteException {
 		setInputInfo(info);
 		PromotionPO po = buildPromotion();
 		return promotionData.insert(po);

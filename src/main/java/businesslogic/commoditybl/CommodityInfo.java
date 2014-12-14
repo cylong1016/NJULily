@@ -1,13 +1,11 @@
 package businesslogic.commoditybl;
 
-import java.net.MalformedURLException;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.CommodityPO;
 import vo.commodity.CommodityVO;
-import businesslogic.accountainitbl.info.CommodityInfo_Init;
+import businesslogic.accountinitbl.info.CommodityInfo_Init;
 import businesslogic.inventorybl.info.CommodityInfo_Inventory;
 import businesslogic.promotionbl.info.CommodityInfo_Promotion;
 import businesslogic.purchasebl.info.CommodityInfo_Purchase;
@@ -23,7 +21,7 @@ public class CommodityInfo implements CommodityInfo_Sale, CommodityInfo_Purchase
 
 	private CommodityPO po;
 
-	public CommodityInfo() throws MalformedURLException, RemoteException, NotBoundException {
+	public CommodityInfo() {
 		commodity = new Commodity();
 		this.commodityData = commodity.getCommodityData();
 	}

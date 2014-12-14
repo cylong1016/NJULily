@@ -29,8 +29,16 @@ public class Client {
 	 * @throws RemoteException
 	 * @throws MalformedURLException
 	 */
-	public Client() throws MalformedURLException, RemoteException, NotBoundException {
-		clientData = (ClientDataService)Naming.lookup(RMIConfig.PREFIX + ClientDataService.NAME);
+	public Client() {
+		try {
+			clientData = (ClientDataService)Naming.lookup(RMIConfig.PREFIX + ClientDataService.NAME);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

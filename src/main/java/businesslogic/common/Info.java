@@ -1,7 +1,5 @@
 package businesslogic.common;
 
-import java.net.MalformedURLException;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -18,9 +16,9 @@ import dataservice.TableInfoService;
  */
 public abstract class Info<PO extends PersistentObject> {
 
-	protected abstract TableInfoService<PO> getData() throws MalformedURLException, RemoteException, NotBoundException;
+	protected abstract TableInfoService<PO> getData();
 
-	protected ArrayList<String> getID(String ID, String clientName, String salesman, Storage storage, BillType type) throws RemoteException, MalformedURLException, NotBoundException {
+	protected ArrayList<String> getID(String ID, String clientName, String salesman, Storage storage, BillType type) throws RemoteException {
 		ArrayList<String> IDs = new ArrayList<String>();
 		TableInfoService<PO> data = getData();
 		if (ID != null) {

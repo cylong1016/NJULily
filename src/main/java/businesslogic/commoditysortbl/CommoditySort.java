@@ -20,8 +20,17 @@ public class CommoditySort {
 
 	private CommoditySortPO po;
 
-	public CommoditySort() throws MalformedURLException, RemoteException, NotBoundException {
-		commoditySortData = (CommoditySortDataService)Naming.lookup(RMIConfig.PREFIX + CommoditySortDataService.NAME);
+	public CommoditySort() {
+		try {
+			commoditySortData = (CommoditySortDataService)Naming.lookup(RMIConfig.PREFIX
+																		+ CommoditySortDataService.NAME);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public String getID(String fatherID) throws RemoteException {

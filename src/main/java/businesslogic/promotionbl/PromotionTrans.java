@@ -1,5 +1,6 @@
 package businesslogic.promotionbl;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.PromotionPO;
@@ -12,23 +13,24 @@ import businesslogic.common.ChangeCommodityItems;
 import dataenum.ClientLevel;
 
 public class PromotionTrans {
-	
+
 	private ChangeCommodityItems transPOVO;
-	
+
 	public PromotionTrans() {
 		transPOVO = new ChangeCommodityItems();
 	}
-	
+
 	/**
 	 * 特价包PO到VO的转换
 	 * @param POs
 	 * @return
 	 * @author Zing
 	 * @version Dec 9, 2014 4:43:31 PM
+	 * @throws RemoteException
 	 */
-	public ArrayList<PromotionBargainVO> bargainsPOtoVO(ArrayList<PromotionPO> POs) {
+	public ArrayList<PromotionBargainVO> bargainsPOtoVO(ArrayList<PromotionPO> POs) throws RemoteException {
 		ArrayList<PromotionBargainVO> VOs = new ArrayList<PromotionBargainVO>();
-		for (PromotionPO po : POs) {
+		for(PromotionPO po : POs) {
 			String ID = po.getID();
 			String beginDate = po.getBeginDate();
 			String endDate = po.getEndDate();
@@ -39,17 +41,18 @@ public class PromotionTrans {
 		}
 		return VOs;
 	}
-	
+
 	/**
 	 * 客户等级促销包的
 	 * @param POs
 	 * @return
 	 * @author Zing
 	 * @version Dec 9, 2014 4:58:14 PM
+	 * @throws RemoteException
 	 */
-	public ArrayList<PromotionClientVO> clientPOtoVO(ArrayList<PromotionPO> POs) {
+	public ArrayList<PromotionClientVO> clientPOtoVO(ArrayList<PromotionPO> POs) throws RemoteException {
 		ArrayList<PromotionClientVO> VOs = new ArrayList<PromotionClientVO>();
-		for (PromotionPO po : POs) {
+		for(PromotionPO po : POs) {
 			String ID = po.getID();
 			String beginDate = po.getBeginDate();
 			String endDate = po.getEndDate();
@@ -69,10 +72,11 @@ public class PromotionTrans {
 	 * @return
 	 * @author Zing
 	 * @version Dec 9, 2014 5:20:57 PM
+	 * @throws RemoteException
 	 */
-	public ArrayList<PromotionCommodityVO> commodityPOtoVO(ArrayList<PromotionPO> POs) {
+	public ArrayList<PromotionCommodityVO> commodityPOtoVO(ArrayList<PromotionPO> POs) throws RemoteException {
 		ArrayList<PromotionCommodityVO> VOs = new ArrayList<PromotionCommodityVO>();
-		for (PromotionPO po : POs) {
+		for(PromotionPO po : POs) {
 			String ID = po.getID();
 			String beginDate = po.getBeginDate();
 			String endDate = po.getEndDate();
@@ -85,17 +89,18 @@ public class PromotionTrans {
 		}
 		return VOs;
 	}
-	
+
 	/**
 	 * 根据总价的促销的PO到VO
 	 * @param POs
 	 * @return
 	 * @author Zing
 	 * @version Dec 9, 2014 5:23:46 PM
+	 * @throws RemoteException
 	 */
-	public ArrayList<PromotionTotalVO> totalPOtoVO(ArrayList<PromotionPO> POs) {
+	public ArrayList<PromotionTotalVO> totalPOtoVO(ArrayList<PromotionPO> POs) throws RemoteException {
 		ArrayList<PromotionTotalVO> VOs = new ArrayList<PromotionTotalVO>();
-		for (PromotionPO po : POs) {
+		for(PromotionPO po : POs) {
 			String ID = po.getID();
 			String beginDate = po.getBeginDate();
 			String endDate = po.getEndDate();

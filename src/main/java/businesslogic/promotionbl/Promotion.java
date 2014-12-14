@@ -1,11 +1,15 @@
 package businesslogic.promotionbl;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import server.data.promotiondata.PromotionData;
 import vo.InventoryBillVO;
 import businesslogic.inventorybl.InventoryInfo;
 import businesslogic.promotionbl.info.InventoryInfo_Promotion;
+import config.RMIConfig;
 import dataenum.PromotionType;
 import dataservice.promotiondataservice.PromotionDataService;
 
@@ -44,15 +48,16 @@ public class Promotion {
 	 * @version Nov 30, 2014 9:52:22 AM
 	 */
 	protected PromotionDataService getPromotionData() {
-//		try {
-//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
-//			PromotionDataService promotionData = factory.getPromotionData();
-//			return promotionData;
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return null;
-//		}
-		return new PromotionData();
+		try {
+			return (PromotionDataService)Naming.lookup(RMIConfig.PREFIX + PromotionDataService.NAME);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	/**
@@ -60,8 +65,9 @@ public class Promotion {
 	 * @return
 	 * @author Zing
 	 * @version Nov 30, 2014 9:52:32 AM
+	 * @throws RemoteException 
 	 */
-	public ArrayList<InventoryBillVO> showGifts() {
+	public ArrayList<InventoryBillVO> showGifts() throws RemoteException {
 		InventoryInfo_Promotion info = new InventoryInfo();
 		return info.getGifts();
 	}
@@ -72,8 +78,9 @@ public class Promotion {
 	 * @return
 	 * @author Zing
 	 * @version Nov 30, 2014 9:52:35 AM
+	 * @throws RemoteException 
 	 */
-	public String getID() {
+	public String getID() throws RemoteException {
 		this.ID = getPromotionData().getID();
 		return ID;
 	}

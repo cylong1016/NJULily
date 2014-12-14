@@ -1,9 +1,12 @@
 package businesslogic.inventorybl;
 
+import java.rmi.RemoteException;
+
 import businesslogic.commoditybl.CommodityInfo;
 import businesslogic.inventorybl.info.CommodityInfo_Inventory;
 
 public class BillListItem {
+
 	private String ID;
 	/** 商品名称 */
 	private String name;
@@ -15,13 +18,13 @@ public class BillListItem {
 	private double purPrice;
 	/** 商品总价 */
 	private double total;
-	
+
 	private CommodityInfo_Inventory info;
-	
+
 	public BillListItem() {
 	}
-	
-	public BillListItem(String ID, int number) {
+
+	public BillListItem(String ID, int number) throws RemoteException {
 		info = new CommodityInfo();
 		this.number = number;
 		this.ID = ID;
@@ -59,5 +62,4 @@ public class BillListItem {
 		return total;
 	}
 
-	
 }

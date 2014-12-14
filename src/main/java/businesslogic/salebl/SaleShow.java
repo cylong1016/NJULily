@@ -1,15 +1,15 @@
 package businesslogic.salebl;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.SalesPO;
+import vo.sale.SalesVO;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataservice.saledataservice.SaleDataService;
-import vo.sale.SalesVO;
-import blservice.saleblservice.SaleShowBLService;
 
-public class SaleShow implements SaleShowBLService{
+public class SaleShow {
 	
 	private SaleTrans transPOVO;
 	
@@ -20,43 +20,35 @@ public class SaleShow implements SaleShowBLService{
 		this.saleData = sale.getSaleData();
 	}
 
-	@Override
-	public ArrayList<SalesVO> showSale() {
+	public ArrayList<SalesVO> showSale() throws RemoteException {
 		return showChoose(BillType.SALE);
 	}
 
-	@Override
-	public ArrayList<SalesVO> showSaleBack() {
+	public ArrayList<SalesVO> showSaleBack() throws RemoteException {
 		return showChoose(BillType.SALEBACK);
 	}
 
-	@Override
-	public ArrayList<SalesVO> showSaleApproving() {
+	public ArrayList<SalesVO> showSaleApproving() throws RemoteException {
 		return showChoose(BillType.SALE, BillState.APPROVALING);
 	}
 
-	@Override
-	public ArrayList<SalesVO> showSaleBackApproving() {
+	public ArrayList<SalesVO> showSaleBackApproving() throws RemoteException {
 		return showChoose(BillType.SALEBACK, BillState.APPROVALING);
 	}
 
-	@Override
-	public ArrayList<SalesVO> showSalePass() {
+	public ArrayList<SalesVO> showSalePass() throws RemoteException {
 		return showChoose(BillType.SALE, BillState.SUCCESS);
 	}
 
-	@Override
-	public ArrayList<SalesVO> showSaleBackPass() {
+	public ArrayList<SalesVO> showSaleBackPass() throws RemoteException {
 		return showChoose(BillType.SALEBACK, BillState.SUCCESS);
 	}
 
-	@Override
-	public ArrayList<SalesVO> showSaleFailure() {
+	public ArrayList<SalesVO> showSaleFailure() throws RemoteException {
 		return showChoose(BillType.SALE, BillState.FAILURE);
 	}
 
-	@Override
-	public ArrayList<SalesVO> showSaleBackFailure() {
+	public ArrayList<SalesVO> showSaleBackFailure() throws RemoteException {
 		return showChoose(BillType.SALEBACK, BillState.FAILURE);
 	}
 
@@ -66,8 +58,9 @@ public class SaleShow implements SaleShowBLService{
 	 * @return 销售（销售退货）单的ArrayList
 	 * @author cylong
 	 * @version 2014年11月28日 下午8:36:47
+	 * @throws RemoteException 
 	 */
-	private ArrayList<SalesVO> show() {
+	private ArrayList<SalesVO> show() throws RemoteException {
 		transPOVO = new SaleTrans();
 		ArrayList<SalesVO> billsVO = new ArrayList<SalesVO>();
 		ArrayList<SalesPO> billsPO = saleData.show();
@@ -84,8 +77,9 @@ public class SaleShow implements SaleShowBLService{
 	 * @return
 	 * @author Zing
 	 * @version Dec 12, 2014 2:17:03 AM
+	 * @throws RemoteException 
 	 */
-	private ArrayList<SalesVO> showChoose(BillType type) {
+	private ArrayList<SalesVO> showChoose(BillType type) throws RemoteException {
 		ArrayList<SalesVO> choose = new ArrayList<SalesVO>();
 		for (SalesVO vo : show()) {
 			if (vo.type == type) {
@@ -102,8 +96,9 @@ public class SaleShow implements SaleShowBLService{
 	 * @return
 	 * @author Zing
 	 * @version Dec 12, 2014 2:17:17 AM
+	 * @throws RemoteException 
 	 */
-	private ArrayList<SalesVO> showChoose(BillType type, BillState state) {
+	private ArrayList<SalesVO> showChoose(BillType type, BillState state) throws RemoteException {
 		ArrayList<SalesVO> choose = new ArrayList<SalesVO>();
 		for (SalesVO vo : show()) {
 			if (vo.type == type && vo.state == state) {

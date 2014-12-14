@@ -1,22 +1,20 @@
 package businesslogic.commoditysortbl;
 
-import java.net.MalformedURLException;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import dataservice.commoditysortdataservice.CommoditySortDataService;
 import po.CommoditySortPO;
 import vo.commodity.CommoditySortVO;
-import businesslogic.accountainitbl.info.CommoditySortInfo_Init;
+import businesslogic.accountinitbl.info.CommoditySortInfo_Init;
 import businesslogic.commoditybl.CommoditySort_Commodity;
+import dataservice.commoditysortdataservice.CommoditySortDataService;
 
 public class CommoditySortInfo implements CommoditySortInfo_Init, CommoditySort_Commodity {
 
 	CommoditySort sort;
 	CommoditySortDataService sortData;
 
-	public CommoditySortInfo() throws MalformedURLException, RemoteException, NotBoundException {
+	public CommoditySortInfo() {
 		sort = new CommoditySort();
 		sortData = sort.getCommoditySortData();
 	}

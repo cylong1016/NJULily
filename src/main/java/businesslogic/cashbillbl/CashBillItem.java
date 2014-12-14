@@ -6,15 +6,16 @@ package businesslogic.cashbillbl;
  * @version Nov 27, 201411:09:11 PM
  */
 public class CashBillItem {
+
 	private String name;
-	
+
 	private double money;
-	
+
 	private String remark;
-	
+
 	public CashBillItem() {
 	}
-	
+
 	public CashBillItem(String name, double money, String remark) {
 		this.name = name;
 		this.money = money;
@@ -32,7 +33,5 @@ public class CashBillItem {
 	public String getRemark() {
 		return remark;
 	}
-	
-	
 
 }

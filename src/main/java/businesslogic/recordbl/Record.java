@@ -1,14 +1,12 @@
 package businesslogic.recordbl;
 
+import java.rmi.RemoteException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import dataenum.BillType;
-import blservice.recordblservice.RecordBLService;
-import blservice.recordblservice.RecordInputInfo;
 import vo.AccountBillVO;
 import vo.BusinessStateVO;
 import vo.CashBillVO;
@@ -17,8 +15,10 @@ import vo.PurchaseVO;
 import vo.SaleDetailVO;
 import vo.ValueObject;
 import vo.sale.SalesVO;
+import blservice.recordblservice.RecordInputInfo;
+import dataenum.BillType;
 
-public class Record implements RecordBLService{
+public class Record {
 	
 	/** 起始时间 */
 	public String beginDate;
@@ -38,8 +38,9 @@ public class Record implements RecordBLService{
 	 * @return 每一条销售明细列表（商品）
 	 * @author Zing
 	 * @version Nov 30, 2014 2:21:46 PM
+	 * @throws RemoteException 
 	 */
-	public ArrayList<SaleDetailVO> saleDetail(RecordInputInfo info) {
+	public ArrayList<SaleDetailVO> saleDetail(RecordInputInfo info) throws RemoteException {
 		this.beginDate = info.beginDate;
 		this.endDate = info.endDate;
 		saleDetailList = new SaleDetailList(info.commodityName, info.clientName, info.salesman, info.storage);
@@ -52,8 +53,9 @@ public class Record implements RecordBLService{
 	 * @return 单据列表
 	 * @author Zing
 	 * @version Dec 4, 2014 8:21:03 PM
+	 * @throws RemoteException 
 	 */
-	public ArrayList<ValueObject> bussinessPro(RecordInputInfo info) {
+	public ArrayList<ValueObject> bussinessPro(RecordInputInfo info) throws RemoteException {
 		this.beginDate = info.beginDate;
 		this.endDate = info.endDate;
 		bussinessProList = new BusinessProList(info.billType, info.clientName, info.salesman, info.storage);
@@ -66,8 +68,9 @@ public class Record implements RecordBLService{
 	 * @return
 	 * @author Zing
 	 * @version Dec 4, 2014 8:21:06 PM
+	 * @throws RemoteException 
 	 */
-	public ValueObject red(ValueObject vo, BillType type) {
+	public ValueObject red(ValueObject vo, BillType type) throws RemoteException {
 		boolean  isCopy = false;
 		return buildRed(vo, type, isCopy);
 	}
@@ -78,8 +81,9 @@ public class Record implements RecordBLService{
 	 * @return
 	 * @author Zing
 	 * @version Dec 4, 2014 8:21:09 PM
+	 * @throws RemoteException 
 	 */
-	public ValueObject copyRed(ValueObject vo, BillType type) {
+	public ValueObject copyRed(ValueObject vo, BillType type) throws RemoteException {
 		boolean isCopy = true;
 		return buildRed(vo, type, isCopy);
 	}
@@ -90,15 +94,16 @@ public class Record implements RecordBLService{
 	 * @return
 	 * @author Zing
 	 * @version Dec 4, 2014 8:21:12 PM
+	 * @throws RemoteException 
 	 */
-	public BusinessStateVO businessState(String beginDate, String endDate) {	
+	public BusinessStateVO businessState(String beginDate, String endDate) throws RemoteException {	
 		this.beginDate = beginDate;
 		this.endDate = endDate;
 		bussinessStateList = new BusinessStateList(getID());	
 		return bussinessStateList.getBusinessState();
 	}
 	
-	private ValueObject buildRed(ValueObject vo, BillType type, boolean isCopy) {
+	private ValueObject buildRed(ValueObject vo, BillType type, boolean isCopy) throws RemoteException {
 		Red red = new Red(isCopy);
 		switch (type) {
 		case SALE:

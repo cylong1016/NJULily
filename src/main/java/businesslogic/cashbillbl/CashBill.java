@@ -1,15 +1,17 @@
 package businesslogic.cashbillbl;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.CashBillPO;
 import po.CashItemPO;
-import server.data.cashbilldata.CashBillData;
 import vo.CashBillVO;
 import vo.CashItemVO;
-import blservice.cashbillblservice.CashBillBLService;
+import config.RMIConfig;
 import dataenum.BillState;
-import dataenum.BillType;
 import dataservice.cashbilldataservice.CashBillDataService;
 
 /**
@@ -21,7 +23,7 @@ import dataservice.cashbilldataservice.CashBillDataService;
  * @author Zing
  * @version Nov 27, 201411:13:32 PM
  */
-public class CashBill implements CashBillBLService {
+public class CashBill {
 
 	private String ID;
 
@@ -34,18 +36,19 @@ public class CashBill implements CashBillBLService {
 	}
 
 	public CashBillDataService getCashBillData() {
-//		try {
-//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
-//			CashBillDataService cashBillData = (CashBillDataService)factory.getCashBillData();
-//			return cashBillData;
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return null;
-//		}
-		return new CashBillData();
+		try {
+			return (CashBillDataService)Naming.lookup(RMIConfig.PREFIX + CashBillDataService.NAME);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
-	public String getID() {
+	public String getID() throws RemoteException {
 		CashBillDataService cashBillData = getCashBillData();
 		this.ID = cashBillData.getID();
 		return ID;
@@ -79,7 +82,7 @@ public class CashBill implements CashBillBLService {
 		return po;
 	}
 
-	public CashBillVO submit(String account) {
+	public CashBillVO submit(String account) throws RemoteException {
 		addCashBill(account);
 		getCashBillData().insert(po);
 		return POToVO(po);

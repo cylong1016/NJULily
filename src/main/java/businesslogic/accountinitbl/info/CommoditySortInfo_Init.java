@@ -1,4 +1,4 @@
-package businesslogic.accountainitbl.info;
+package businesslogic.accountinitbl.info;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;

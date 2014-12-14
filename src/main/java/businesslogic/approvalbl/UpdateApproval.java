@@ -1,5 +1,7 @@
 package businesslogic.approvalbl;
 
+import java.rmi.RemoteException;
+
 import message.ResultMessage;
 import vo.AccountBillVO;
 import vo.CashBillVO;
@@ -23,27 +25,27 @@ import businesslogic.salebl.SaleOperate;
  */
 public class UpdateApproval {
 	
-	public ResultMessage updateBill(SalesVO vo) {
+	public ResultMessage updateBill(SalesVO vo) throws RemoteException {
 		SaleInfo_Approval info = new SaleOperate();
 		return info.update(vo);
 	}
 	
-	public ResultMessage updateBill(PurchaseVO vo) {
+	public ResultMessage updateBill(PurchaseVO vo) throws RemoteException {
 		PurchaseInfo_Approval info = new PurchaseInfo();
 		return info.update(vo);
 	}
 	
-	public ResultMessage updateBill(InventoryBillVO vo) {
+	public ResultMessage updateBill(InventoryBillVO vo) throws RemoteException {
 		InventoryInfo_Approval info = new InventoryInfo();
 		return info.update(vo);
 	}
 	
-	public ResultMessage updateBill(CashBillVO vo) {
+	public ResultMessage updateBill(CashBillVO vo) throws RemoteException {
 		CashBillInfo_Approval info = new CashBillInfo();
 		return info.update(vo);
 	}
 	
-	public ResultMessage updateBill(AccountBillVO vo) {
+	public ResultMessage updateBill(AccountBillVO vo) throws RemoteException {
 		AccountBill_Approval info = new AccountBillInfo();
 		return info.update(vo);
 	}

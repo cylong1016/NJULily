@@ -1,5 +1,6 @@
 package businesslogic.accountbillbl.info;
 
+import java.rmi.RemoteException;
 import java.util.HashMap;
 
 /**
@@ -13,15 +14,14 @@ public interface AccountInfo_AccountBill {
 	 * @author cylong
 	 * @version 2014年12月1日 上午1:23:52
 	 */
-	public HashMap<String, String> getAllAccounts();
+	public HashMap<String, String> getAllAccounts() throws RemoteException;
 
 	/**
-	 * 
 	 * @param accountID
 	 * @param money
 	 * @author Zing
 	 * @version Dec 4, 2014 5:39:57 PM
 	 */
-	public void changeMoney(String accountName, double money);
-	
+	public void changeMoney(String accountName, double money) throws RemoteException;
+
 }

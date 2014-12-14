@@ -1,20 +1,23 @@
 package businesslogic.inventorybl;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.InventoryBillPO;
-import server.data.inventorydata.InventoryData;
 import vo.InventoryBillVO;
 import vo.InventoryCheckVO;
 import vo.InventoryViewVO;
 import vo.commodity.CommodityItemVO;
-import blservice.inventoryblservice.InventoryBLService;
 import businesslogic.common.ChangeCommodityItems;
+import config.RMIConfig;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataservice.inventorydataservice.InventoryDataService;
 
-public class Inventory implements InventoryBLService {
+public class Inventory {
 
 	private BillList list;
 	private BillType type;
@@ -34,15 +37,16 @@ public class Inventory implements InventoryBLService {
 	 * @version Dec 2, 2014 6:11:29 PM
 	 */
 	public InventoryDataService getInventoryData() {
-//		try {
-//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
-//			InventoryDataService inventoryData = factory.getInventoryData();
-//			return inventoryData;
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return null;
-//		}
-		return new InventoryData();
+		try {
+			return (InventoryDataService)Naming.lookup(RMIConfig.PREFIX + InventoryDataService.NAME);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	/**
@@ -52,8 +56,9 @@ public class Inventory implements InventoryBLService {
 	 * @return
 	 * @author Zing
 	 * @version Dec 2, 2014 6:11:42 PM
+	 * @throws RemoteException 
 	 */
-	public InventoryViewVO viewInventory(String beginDate, String endDate) {
+	public InventoryViewVO viewInventory(String beginDate, String endDate) throws RemoteException {
 		ViewList viewList = new ViewList(beginDate, endDate);
 		InventoryViewVO vo = new InventoryViewVO(viewList.getSaleNumber(), viewList.getPurNumber(), viewList.getSaleMoney(), viewList.getPurMoney());
 		return vo;
@@ -64,8 +69,9 @@ public class Inventory implements InventoryBLService {
 	 * @return
 	 * @author Zing
 	 * @version Dec 2, 2014 6:00:48 PM
+	 * @throws RemoteException
 	 */
-	public InventoryCheckVO checkRecord() {
+	public InventoryCheckVO checkRecord() throws RemoteException {
 		InventoryDataService inventoryData = getInventoryData();
 		// 得到批号
 		CheckList checkList = new CheckList(inventoryData.returnNumber());
@@ -84,30 +90,26 @@ public class Inventory implements InventoryBLService {
 		this.type = type;
 		list = new BillList();
 	}
-	
-	@Override
-	public String getGiftID() {
+
+	public String getGiftID() throws RemoteException {
 		setTpye(BillType.GIFT);
 		this.ID = inventoryData.getGiftID();
 		return ID;
 	}
 
-	@Override
-	public String getOverFlowID() {
+	public String getOverFlowID() throws RemoteException {
 		setTpye(BillType.OVERFLOW);
 		this.ID = inventoryData.getOverflowID();
 		return ID;
 	}
 
-	@Override
-	public String getLossID() {
+	public String getLossID() throws RemoteException {
 		setTpye(BillType.LOSS);
 		this.ID = inventoryData.getLossID();
 		return ID;
 	}
 
-	@Override
-	public String getAlarmID() {
+	public String getAlarmID() throws RemoteException {
 		setTpye(BillType.ALARM);
 		this.ID = inventoryData.getAlarmID();
 		return ID;
@@ -119,8 +121,9 @@ public class Inventory implements InventoryBLService {
 	 * @param number
 	 * @author Zing
 	 * @version Dec 2, 2014 6:11:55 PM
+	 * @throws RemoteException 
 	 */
-	public void addCommodity(String ID, int number) {
+	public void addCommodity(String ID, int number) throws RemoteException {
 		BillListItem item = new BillListItem(ID, number);
 		list.addItem(item);
 	}
@@ -131,8 +134,9 @@ public class Inventory implements InventoryBLService {
 	 * @return
 	 * @author Zing
 	 * @version Dec 2, 2014 6:11:58 PM
+	 * @throws RemoteException
 	 */
-	public InventoryBillVO submit(String remark) {
+	public InventoryBillVO submit(String remark) throws RemoteException {
 		list.setRemark(remark);
 		InventoryBillPO po = getInventoryBill();
 		getInventoryData().insert(po);
@@ -169,8 +173,9 @@ public class Inventory implements InventoryBLService {
 	 * @return
 	 * @author Zing
 	 * @version Dec 2, 2014 6:11:52 PM
+	 * @throws RemoteException 
 	 */
-	public InventoryBillVO poToVo(InventoryBillPO po) {
+	public InventoryBillVO poToVo(InventoryBillPO po) throws RemoteException {
 		String ID = po.getID();
 		BillType billType = po.getBillType();
 		ArrayList<CommodityItemVO> commodities = changeItems.itemPOToVO(po.getCommodities());

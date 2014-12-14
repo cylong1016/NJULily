@@ -1,7 +1,5 @@
 package businesslogic.commoditybl;
 
-import java.net.MalformedURLException;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -9,8 +7,8 @@ import message.ResultMessage;
 import vo.commodity.CommodityAddVO;
 import vo.commodity.CommodityUpdateVO;
 import vo.commodity.CommodityVO;
-import dataenum.FindTypeCommo;
 import blservice.commodityblservice.CommodityBLService;
+import dataenum.FindTypeCommo;
 
 /**
  * @see blservice.commodityblservice.CommodityBLService
@@ -26,15 +24,7 @@ public class CommodityController implements CommodityBLService {
 	 * @version 2014年12月14日 下午1:10:23
 	 */
 	public CommodityController() {
-		try {
-			commodity = new Commodity();
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		} catch (NotBoundException e) {
-			e.printStackTrace();
-		}
+		commodity = new Commodity();
 	}
 
 	/**

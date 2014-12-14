@@ -1,29 +1,34 @@
 package businesslogic.accountbl;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import message.ResultMessage;
 import po.AccountPO;
-import server.data.accountdata.AccountData;
 import vo.AccountVO;
-import blservice.accountblservice.AccountBLService;
+import config.RMIConfig;
 import dataenum.FindTypeAccount;
 import dataservice.accountdataservice.AccountDataService;
 
-public class Account implements AccountBLService {
+public class Account {
 
 	private AccountDataService accountData;
 
 	private AccountPO po;
 
 	public Account() {
-//		try {
-//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
-//			accountData = factory.getAccountData();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-		accountData = new AccountData();
+		try {
+			accountData = (AccountDataService)Naming.lookup(RMIConfig.PREFIX + AccountDataService.NAME);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -33,8 +38,9 @@ public class Account implements AccountBLService {
 	 * @return 返回满足条件的全部账户
 	 * @author cylong
 	 * @version 2014年12月1日 上午2:22:44
+	 * @throws RemoteException
 	 */
-	public ArrayList<AccountVO> find(String keywords, FindTypeAccount type) {
+	public ArrayList<AccountVO> find(String keywords, FindTypeAccount type) throws RemoteException {
 		ArrayList<AccountPO> AccountsPO = accountData.find(keywords, type);
 		ArrayList<AccountVO> AccountsVO = new ArrayList<AccountVO>();
 		for(AccountPO po : AccountsPO) {
@@ -50,8 +56,9 @@ public class Account implements AccountBLService {
 	 * @return 处理信息
 	 * @author cylong
 	 * @version 2014年12月1日 上午2:23:30
+	 * @throws RemoteException
 	 */
-	public ResultMessage add(AccountVO vo) {
+	public ResultMessage add(AccountVO vo) throws RemoteException {
 		po = new AccountPO(vo.ID, vo.name, vo.money);
 		return accountData.insert(po);
 	}
@@ -62,8 +69,9 @@ public class Account implements AccountBLService {
 	 * @return 处理结果
 	 * @author cylong
 	 * @version 2014年11月30日 上午2:40:10
+	 * @throws RemoteException
 	 */
-	public ResultMessage delete(String ID) {
+	public ResultMessage delete(String ID) throws RemoteException {
 		po = accountData.find(ID);
 		if (po == null) {
 			return ResultMessage.FAILURE;
@@ -77,8 +85,9 @@ public class Account implements AccountBLService {
 	 * @return 处理结果
 	 * @author cylong
 	 * @version 2014年11月30日 上午2:38:52
+	 * @throws RemoteException
 	 */
-	public ResultMessage update(AccountVO vo) {
+	public ResultMessage update(AccountVO vo) throws RemoteException {
 		po = accountData.find(vo.name);
 		if (po == null) {
 			return ResultMessage.FAILURE;
@@ -91,8 +100,9 @@ public class Account implements AccountBLService {
 	 * @return 全部的AccountVO
 	 * @author cylong
 	 * @version 2014年11月30日 上午2:23:57
+	 * @throws RemoteException
 	 */
-	public ArrayList<AccountVO> show() {
+	public ArrayList<AccountVO> show() throws RemoteException {
 		return POstoVOs(accountData.show());
 	}
 
@@ -131,8 +141,9 @@ public class Account implements AccountBLService {
 	 * @return 新建账户时候可用的ID
 	 * @author cylong
 	 * @version 2014年11月30日 下午1:15:58
+	 * @throws RemoteException
 	 */
-	public String getID() {
+	public String getID() throws RemoteException {
 		return accountData.getID();
 	}
 
@@ -142,8 +153,9 @@ public class Account implements AccountBLService {
 	 * @return AccountVO
 	 * @author cylong
 	 * @version 2014年12月1日 下午5:02:16
+	 * @throws RemoteException
 	 */
-	public AccountVO find(String ID) {
+	public AccountVO find(String ID) throws RemoteException {
 		AccountPO po = accountData.find(ID);
 		return poToVO(po);
 	}

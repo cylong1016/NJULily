@@ -1,7 +1,5 @@
 package businesslogic.accountbillbl;
 
-import java.net.MalformedURLException;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -22,15 +20,7 @@ public class AccountBillShowController implements AccountBillShowBLService {
 	 * @version 2014年12月14日 上午9:12:24
 	 */
 	public AccountBillShowController() {
-		try {
-			accountBillShow = new AccountBillShow();
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		} catch (NotBoundException e) {
-			e.printStackTrace();
-		}
+		accountBillShow = new AccountBillShow();
 	}
 
 	/**

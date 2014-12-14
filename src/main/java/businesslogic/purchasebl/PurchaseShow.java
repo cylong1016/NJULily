@@ -1,15 +1,15 @@
 package businesslogic.purchasebl;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.PurchasePO;
+import vo.PurchaseVO;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataservice.purchasedataservice.PurchaseDataService;
-import vo.PurchaseVO;
-import blservice.purchaseblservice.PurchaseShowBLService;
 
-public class PurchaseShow implements PurchaseShowBLService{
+public class PurchaseShow {
 	
 	private PurchaseDataService purchaseData;
 	private Purchase purchase;
@@ -18,43 +18,35 @@ public class PurchaseShow implements PurchaseShowBLService{
 		purchaseData = purchase.getPurData();
 	}
 
-	@Override
-	public ArrayList<PurchaseVO> showPurchase() {
+	public ArrayList<PurchaseVO> showPurchase() throws RemoteException {
 		return showChoose(BillType.PURCHASE);
 	}
 
-	@Override
-	public ArrayList<PurchaseVO> showPurchaseBack() {
+	public ArrayList<PurchaseVO> showPurchaseBack() throws RemoteException {
 		return showChoose(BillType.PURCHASEBACK);
 	}
 
-	@Override
-	public ArrayList<PurchaseVO> showPurchaseApproving() {
+	public ArrayList<PurchaseVO> showPurchaseApproving() throws RemoteException {
 		return showChoose(BillType.PURCHASE, BillState.APPROVALING);
 	}
 
-	@Override
-	public ArrayList<PurchaseVO> showPurchaseBackApproving() {
+	public ArrayList<PurchaseVO> showPurchaseBackApproving() throws RemoteException {
 		return showChoose(BillType.PURCHASEBACK, BillState.APPROVALING);
 	}
 
-	@Override
-	public ArrayList<PurchaseVO> showPurchasePass() {
+	public ArrayList<PurchaseVO> showPurchasePass() throws RemoteException {
 		return showChoose(BillType.PURCHASE, BillState.SUCCESS);
 	}
 
-	@Override
-	public ArrayList<PurchaseVO> showPurchaseBackPass() {
+	public ArrayList<PurchaseVO> showPurchaseBackPass() throws RemoteException {
 		return showChoose(BillType.PURCHASEBACK, BillState.SUCCESS);
 	}
 
-	@Override
-	public ArrayList<PurchaseVO> showPurchaseFailure() {
+	public ArrayList<PurchaseVO> showPurchaseFailure() throws RemoteException {
 		return showChoose(BillType.PURCHASE, BillState.FAILURE);
 	}
 
-	@Override
-	public ArrayList<PurchaseVO> showPurchaseBackFailure() {
+	public ArrayList<PurchaseVO> showPurchaseBackFailure() throws RemoteException {
 		return showChoose(BillType.PURCHASEBACK, BillState.FAILURE);
 	}
 
@@ -64,8 +56,9 @@ public class PurchaseShow implements PurchaseShowBLService{
 	 * @return
 	 * @author Zing
 	 * @version Dec 12, 2014 2:29:35 AM
+	 * @throws RemoteException 
 	 */
-	private ArrayList<PurchaseVO> show() {	
+	private ArrayList<PurchaseVO> show() throws RemoteException {	
 		ArrayList<PurchaseVO> VOs = new ArrayList<PurchaseVO>();
 		ArrayList<PurchasePO> POs = purchaseData.show();
 		for(PurchasePO po : POs) {
@@ -81,8 +74,9 @@ public class PurchaseShow implements PurchaseShowBLService{
 	 * @return
 	 * @author Zing
 	 * @version Dec 12, 2014 2:17:03 AM
+	 * @throws RemoteException 
 	 */
-	private ArrayList<PurchaseVO> showChoose(BillType type) {
+	private ArrayList<PurchaseVO> showChoose(BillType type) throws RemoteException {
 		ArrayList<PurchaseVO> choose = new ArrayList<PurchaseVO>();
 		for (PurchaseVO vo : show()) {
 			if (vo.type == type) {
@@ -99,8 +93,9 @@ public class PurchaseShow implements PurchaseShowBLService{
 	 * @return
 	 * @author Zing
 	 * @version Dec 12, 2014 2:17:17 AM
+	 * @throws RemoteException 
 	 */
-	private ArrayList<PurchaseVO> showChoose(BillType type, BillState state) {
+	private ArrayList<PurchaseVO> showChoose(BillType type, BillState state) throws RemoteException {
 		ArrayList<PurchaseVO> choose = new ArrayList<PurchaseVO>();
 		for (PurchaseVO vo : show()) {
 			if (vo.type == type && vo.state == state) {

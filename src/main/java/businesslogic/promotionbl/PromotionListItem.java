@@ -1,5 +1,7 @@
 package businesslogic.promotionbl;
 
+import java.rmi.RemoteException;
+
 import businesslogic.commoditybl.CommodityInfo;
 import businesslogic.promotionbl.info.CommodityInfo_Promotion;
 
@@ -23,8 +25,9 @@ public class PromotionListItem {
 	 * 策略1中的特价包内商品，不用计算总价
 	 * @param ID
 	 * @param number
+	 * @throws RemoteException 
 	 */
-	public PromotionListItem(String ID, int number) {
+	public PromotionListItem(String ID, int number) throws RemoteException {
 		this.ID = ID;
 		info = new CommodityInfo();
 		this.name = info.getName(ID);
@@ -38,8 +41,9 @@ public class PromotionListItem {
 	 * @param ID
 	 * @param number
 	 * @param price
+	 * @throws RemoteException 
 	 */
-	public PromotionListItem(String ID, int number, double price) {
+	public PromotionListItem(String ID, int number, double price) throws RemoteException {
 		this.ID = ID;
 		info = new CommodityInfo();
 		this.name = info.getName(ID);

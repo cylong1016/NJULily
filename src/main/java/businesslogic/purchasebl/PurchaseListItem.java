@@ -1,5 +1,7 @@
 package businesslogic.purchasebl;
 
+import java.rmi.RemoteException;
+
 import businesslogic.commoditybl.CommodityInfo;
 import businesslogic.purchasebl.info.CommodityInfo_Purchase;
 
@@ -32,7 +34,7 @@ public class PurchaseListItem {
 	public PurchaseListItem(){
 	}
 	
-	public PurchaseListItem(String ID, int number, double price, String remark){
+	public PurchaseListItem(String ID, int number, double price, String remark) throws RemoteException{
 		this.number = number;
 		this.ID = ID;
 		info = new CommodityInfo();

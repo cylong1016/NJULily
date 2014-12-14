@@ -1,5 +1,7 @@
 package businesslogic.recordbl;
 
+import java.rmi.RemoteException;
+
 import businesslogic.accountbillbl.AccountBillInfo;
 import businesslogic.approvalbl.info.AccountBill_Approval;
 import businesslogic.approvalbl.info.CashBillInfo_Approval;
@@ -24,27 +26,27 @@ public class Red {
 		this.isCopy = isCopy;
 	}
 
-	public SalesVO addRed(SalesVO vo) {
+	public SalesVO addRed(SalesVO vo) throws RemoteException {
 		SaleInfo_Approval info = new SaleOperate();
 		return info.addRed(vo, isCopy);
 	}
 
-	public PurchaseVO addRed(PurchaseVO vo) {
+	public PurchaseVO addRed(PurchaseVO vo) throws RemoteException {
 		PurchaseInfo_Approval info = new PurchaseInfo();
 		return info.addRed(vo, isCopy);
 	}
 
-	public InventoryBillVO addRed(InventoryBillVO vo) {
+	public InventoryBillVO addRed(InventoryBillVO vo) throws RemoteException {
 		InventoryInfo_Approval info = new InventoryInfo();
 		return info.addRed(vo, isCopy);
 	}
 
-	public AccountBillVO addRed(AccountBillVO vo) {
+	public AccountBillVO addRed(AccountBillVO vo) throws RemoteException {
 		AccountBill_Approval info = new AccountBillInfo();
 		return info.addRed(vo, isCopy);
 	}
 
-	public CashBillVO addRed(CashBillVO vo) {
+	public CashBillVO addRed(CashBillVO vo) throws RemoteException {
 		CashBillInfo_Approval info = new CashBillInfo();
 		return info.addRed(vo, isCopy);
 	}

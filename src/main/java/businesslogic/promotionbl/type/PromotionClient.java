@@ -1,28 +1,27 @@
 package businesslogic.promotionbl.type;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import message.ResultMessage;
 import po.CommodityItemPO;
 import po.PromotionPO;
 import vo.InventoryBillVO;
-
 import vo.commodity.CommodityItemVO;
 import vo.promotion.PromotionClientVO;
 import blservice.promotionblservice.PromoInputInfo;
-import blservice.promotionblservice.PromotionClientBLService;
 import businesslogic.promotionbl.Promotion;
 import businesslogic.promotionbl.PromotionListItem;
 import businesslogic.promotionbl.PromotionTrans;
 import dataenum.ClientLevel;
 import dataenum.PromotionType;
 
-public class PromotionClient extends Promotion implements PromotionClientBLService{
+public class PromotionClient extends Promotion {
 	
 	public PromotionClient() {
 		super();
 	}
-	public ArrayList<PromotionClientVO> show() {
+	public ArrayList<PromotionClientVO> show() throws RemoteException {
 		PromotionTrans transPOVO = new PromotionTrans();
 		return transPOVO.clientPOtoVO(promotionData.show(PromotionType.CLIENT));
 	}
@@ -32,8 +31,9 @@ public class PromotionClient extends Promotion implements PromotionClientBLServi
 	 * @param vo
 	 * @author Zing
 	 * @version Dec 9, 2014 5:07:30 PM
+	 * @throws RemoteException 
 	 */
-	public void addGifts(CommodityItemVO vo) {
+	public void addGifts(CommodityItemVO vo) throws RemoteException {
 		PromotionListItem item = new PromotionListItem(vo.ID, vo.number);
 		list.addGift(item);
 	}
@@ -48,14 +48,14 @@ public class PromotionClient extends Promotion implements PromotionClientBLServi
 		list.setLevel(level);
 	}
 		
-	public void addGiftBill(InventoryBillVO giftBill) {
+	public void addGiftBill(InventoryBillVO giftBill) throws RemoteException {
 		ArrayList<CommodityItemVO> commodityItems = giftBill.commodities;
 		for (CommodityItemVO vo : commodityItems) {
 			addGifts(vo);
 		}		
 	}
 	
-	public ResultMessage submit(PromoInputInfo info) {
+	public ResultMessage submit(PromoInputInfo info) throws RemoteException {
 		setInputInfo(info);
 		PromotionPO po = buildPromotion();
 		return promotionData.insert(po);

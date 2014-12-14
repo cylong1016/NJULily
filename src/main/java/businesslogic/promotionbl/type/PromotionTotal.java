@@ -1,31 +1,31 @@
 package businesslogic.promotionbl.type;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import dataenum.PromotionType;
+import message.ResultMessage;
 import po.CommodityItemPO;
 import po.PromotionPO;
-import message.ResultMessage;
 import vo.InventoryBillVO;
 import vo.commodity.CommodityItemVO;
 import vo.promotion.PromotionTotalVO;
 import blservice.promotionblservice.PromoInputInfo;
-import blservice.promotionblservice.PromotionTotalBLService;
 import businesslogic.promotionbl.Promotion;
 import businesslogic.promotionbl.PromotionListItem;
 import businesslogic.promotionbl.PromotionTrans;
+import dataenum.PromotionType;
 
 /**
  * 计算总价的促销策略
  * @author Zing
  * @version Dec 9, 2014 5:35:05 PM
  */
-public class PromotionTotal extends Promotion implements PromotionTotalBLService{
+public class PromotionTotal extends Promotion {
 
 	public PromotionTotal() {
 		super();
 	}
-	public ArrayList<PromotionTotalVO> show() {
+	public ArrayList<PromotionTotalVO> show() throws RemoteException {
 		PromotionTrans transPOVO = new PromotionTrans();
 		return transPOVO.totalPOtoVO(promotionData.show(PromotionType.TOTAL));
 	}
@@ -39,19 +39,19 @@ public class PromotionTotal extends Promotion implements PromotionTotalBLService
 		list.setTotal(total);
 	}
 
-	public void addGifts(CommodityItemVO vo) {
+	public void addGifts(CommodityItemVO vo) throws RemoteException {
 		PromotionListItem item = new PromotionListItem(vo.ID, vo.number);
 		list.addGift(item);
 	}
 	
-	public void addGiftBill(InventoryBillVO giftBill) {
+	public void addGiftBill(InventoryBillVO giftBill) throws RemoteException {
 		ArrayList<CommodityItemVO> commodityItems = giftBill.commodities;
 		for (CommodityItemVO vo : commodityItems) {
 			addGifts(vo);
 		}		
 	}
 
-	public ResultMessage submit(PromoInputInfo info) {
+	public ResultMessage submit(PromoInputInfo info) throws RemoteException {
 		setInputInfo(info);
 		PromotionPO po = buildPromotion();
  		return promotionData.insert(po);

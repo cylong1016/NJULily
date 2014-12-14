@@ -1,135 +1,117 @@
 package businesslogic.inventorybl;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.InventoryBillPO;
+import vo.InventoryBillVO;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataservice.inventorydataservice.InventoryDataService;
-import vo.InventoryBillVO;
-import blservice.inventoryblservice.InventoryShowBLService;
 
-public class InventoryShow implements InventoryShowBLService{
+public class InventoryShow {
+
 	private Inventory inventory;
 	private InventoryDataService inventoryData;
-	
+
 	public InventoryShow() {
 		this.inventory = new Inventory();
 		this.inventoryData = inventory.getInventoryData();
 	}
 
-	@Override
-	public ArrayList<InventoryBillVO> showGifts() {
+	public ArrayList<InventoryBillVO> showGifts() throws RemoteException {
 		return showChoose(BillType.GIFT);
 	}
 
-	@Override
-	public ArrayList<InventoryBillVO> showOverFlow() {
+	public ArrayList<InventoryBillVO> showOverFlow() throws RemoteException {
 		return showChoose(BillType.OVERFLOW);
 	}
 
-	@Override
-	public ArrayList<InventoryBillVO> showLoss() {
+	public ArrayList<InventoryBillVO> showLoss() throws RemoteException {
 		return showChoose(BillType.LOSS);
 	}
 
-	@Override
-	public ArrayList<InventoryBillVO> showAlarm() {
+	public ArrayList<InventoryBillVO> showAlarm() throws RemoteException {
 		return showChoose(BillType.ALARM);
 	}
 
-	@Override
-	public ArrayList<InventoryBillVO> showGiftsApproving() {
+	public ArrayList<InventoryBillVO> showGiftsApproving() throws RemoteException {
 		return showChoose(BillType.GIFT, BillState.APPROVALING);
 	}
 
-	@Override
-	public ArrayList<InventoryBillVO> showOverFlowApproving() {
+	public ArrayList<InventoryBillVO> showOverFlowApproving() throws RemoteException {
 		return showChoose(BillType.OVERFLOW, BillState.APPROVALING);
 	}
 
-	@Override
-	public ArrayList<InventoryBillVO> showLossApproving() {
+	public ArrayList<InventoryBillVO> showLossApproving() throws RemoteException {
 		return showChoose(BillType.LOSS, BillState.APPROVALING);
 	}
 
-	@Override
-	public ArrayList<InventoryBillVO> showAlarmApproving() {
+	public ArrayList<InventoryBillVO> showAlarmApproving() throws RemoteException {
 		return showChoose(BillType.ALARM, BillState.APPROVALING);
 	}
 
-	@Override
-	public ArrayList<InventoryBillVO> showGiftsPass() {
+	public ArrayList<InventoryBillVO> showGiftsPass() throws RemoteException {
 		return showChoose(BillType.GIFT, BillState.SUCCESS);
 	}
 
-	@Override
-	public ArrayList<InventoryBillVO> showOverFlowPass() {
+	public ArrayList<InventoryBillVO> showOverFlowPass() throws RemoteException {
 		return showChoose(BillType.OVERFLOW, BillState.SUCCESS);
 	}
 
-	@Override
-	public ArrayList<InventoryBillVO> showLossPass() {
+	public ArrayList<InventoryBillVO> showLossPass() throws RemoteException {
 		return showChoose(BillType.LOSS, BillState.SUCCESS);
 	}
 
-	@Override
-	public ArrayList<InventoryBillVO> showAlarmPass() {
+	public ArrayList<InventoryBillVO> showAlarmPass() throws RemoteException {
 		return showChoose(BillType.ALARM, BillState.SUCCESS);
 	}
 
-	@Override
-	public ArrayList<InventoryBillVO> showGiftsFailure() {
+	public ArrayList<InventoryBillVO> showGiftsFailure() throws RemoteException {
 		return showChoose(BillType.GIFT, BillState.FAILURE);
 	}
 
-	@Override
-	public ArrayList<InventoryBillVO> showOverFlowFailure() {
+	public ArrayList<InventoryBillVO> showOverFlowFailure() throws RemoteException {
 		return showChoose(BillType.OVERFLOW, BillState.FAILURE);
 	}
 
-	@Override
-	public ArrayList<InventoryBillVO> showLossFailure() {
+	public ArrayList<InventoryBillVO> showLossFailure() throws RemoteException {
 		return showChoose(BillType.LOSS, BillState.FAILURE);
 	}
 
-	@Override
-	public ArrayList<InventoryBillVO> showAlarmFailure() {
+	public ArrayList<InventoryBillVO> showAlarmFailure() throws RemoteException {
 		return showChoose(BillType.ALARM, BillState.FAILURE);
 	}
 
-	@Override
-	public ArrayList<InventoryBillVO> showGiftsDraft() {
+	public ArrayList<InventoryBillVO> showGiftsDraft() throws RemoteException {
 		// TODO 
 		return showChoose(BillType.GIFT);
 	}
 
-	@Override
-	public ArrayList<InventoryBillVO> showOverFlowDraft() {
+	public ArrayList<InventoryBillVO> showOverFlowDraft() throws RemoteException {
 		// TODO 
 		return showChoose(BillType.OVERFLOW);
 	}
 
-	@Override
-	public ArrayList<InventoryBillVO> showLossDraft() {
+	public ArrayList<InventoryBillVO> showLossDraft() throws RemoteException {
 		// TODO
 		return showChoose(BillType.LOSS);
 	}
 
-	@Override
-	public ArrayList<InventoryBillVO> showAlarmDraft() {
+	public ArrayList<InventoryBillVO> showAlarmDraft() throws RemoteException {
 		// TODO
 		return showChoose(BillType.ALARM);
 	}
-	
+
 	/**
 	 * 显示单子
 	 * @param type
 	 * @return
 	 * @author Zing
 	 * @version Dec 2, 2014 6:11:48 PM
+	 * @throws RemoteException
 	 */
-	private ArrayList<InventoryBillVO> show() {
+	private ArrayList<InventoryBillVO> show() throws RemoteException {
 		ArrayList<InventoryBillVO> VOs = new ArrayList<InventoryBillVO>();
 		ArrayList<InventoryBillPO> POs = inventoryData.show();
 		for(int i = 0; i < POs.size(); i++) {
@@ -139,24 +121,24 @@ public class InventoryShow implements InventoryShowBLService{
 		}
 		return VOs;
 	}
-	
-	private ArrayList<InventoryBillVO> showChoose(BillType type) {
+
+	private ArrayList<InventoryBillVO> showChoose(BillType type) throws RemoteException {
 		ArrayList<InventoryBillVO> VOs = new ArrayList<InventoryBillVO>();
- 		for (InventoryBillVO vo : show()) {
+		for(InventoryBillVO vo : show()) {
 			if (vo.billType == type) {
 				VOs.add(vo);
 			}
 		}
- 		return VOs;
+		return VOs;
 	}
-	
-	private ArrayList<InventoryBillVO> showChoose(BillType type, BillState state) {
+
+	private ArrayList<InventoryBillVO> showChoose(BillType type, BillState state) throws RemoteException {
 		ArrayList<InventoryBillVO> VOs = new ArrayList<InventoryBillVO>();
- 		for (InventoryBillVO vo : show()) {
+		for(InventoryBillVO vo : show()) {
 			if (vo.billType == type && vo.state == state) {
 				VOs.add(vo);
 			}
 		}
- 		return VOs;
+		return VOs;
 	}
 }

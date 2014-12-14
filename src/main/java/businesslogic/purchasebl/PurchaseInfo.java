@@ -1,5 +1,9 @@
 package businesslogic.purchasebl;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import message.ResultMessage;
@@ -17,11 +21,13 @@ import businesslogic.purchasebl.info.ClientInfo_Purchase;
 import businesslogic.purchasebl.info.CommodityInfo_Purchase;
 import businesslogic.recordbl.info.PurchaseInfo_Record;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
+import config.RMIConfig;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Storage;
 import dataservice.TableInfoService;
 import dataservice.purchasedataservice.PurchaseDataService;
+import dataservice.purchasedataservice.PurchaseInfoService;
 
 public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Record<PurchaseVO>, PurchaseInfo_Record, ValueObject_Approval<PurchaseVO>, PurchaseInfo_Inventory, PurchaseInfo_Approval{
 	
@@ -34,7 +40,7 @@ public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Re
 		purchase = new Purchase();
 	}
 	
-	public PurchaseInfo(ArrayList<String> IDs) {
+	public PurchaseInfo(ArrayList<String> IDs) throws RemoteException {
 		purchase = new Purchase();
 		this.purIDs = new ArrayList<String>();
 		this.backIDs = new ArrayList<String>();
@@ -45,26 +51,34 @@ public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Re
 	}
 	
 	public TableInfoService<PurchasePO> getData() {
-		return purchase.getPurData().getInfo();
+		try {
+			return (PurchaseInfoService)Naming.lookup(RMIConfig.PREFIX + PurchaseInfoService.NAME);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	private PurchaseDataService getPurchaseData() {
 		return purchase.getPurData();
 	}
 	
-	
-	public ArrayList<String> getID(String ID, String clientName, String salesman, Storage storage) {
+	public ArrayList<String> getID(String ID, String clientName, String salesman, Storage storage) throws RemoteException {
 		ArrayList<String> IDs = new ArrayList<String>();
 		IDs = getID(ID, clientName, salesman, storage, BillType.PURCHASE);
 		IDs.addAll(getID(ID, clientName, salesman, storage, BillType.PURCHASEBACK));
 		return IDs;
 	}
 
-	public PurchaseVO find(String ID) {
+	public PurchaseVO find(String ID) throws RemoteException {
 		return purchase.poToVO(getPurchaseData().find(ID));
 	}
 
-	public ResultMessage update(PurchaseVO vo) {
+	public ResultMessage update(PurchaseVO vo) throws RemoteException {
 		String ID = vo.ID;
 		String clientID = vo.clientID;
 		String client = vo.client;
@@ -79,7 +93,7 @@ public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Re
 	}
 
 	
-	public double getMoney() {
+	public double getMoney() throws RemoteException {
 		if (purIDs.isEmpty() && backIDs.isEmpty()) {
 			return 0;
 		}
@@ -93,7 +107,7 @@ public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Re
 		return purMoney;
 	}
 
-	public int getNumber() {
+	public int getNumber() throws RemoteException {
 		if (purIDs.isEmpty() && backIDs.isEmpty()) {
 			return 0;
 		}
@@ -113,8 +127,9 @@ public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Re
 	 * @return
 	 * @author Zing
 	 * @version Dec 2, 2014 5:15:27 PM
+	 * @throws RemoteException 
 	 */
-	private int getAllCommoditiesNumber(String ID) {
+	private int getAllCommoditiesNumber(String ID) throws RemoteException {
 		ArrayList<CommodityItemPO> POs = getPurchaseData().find(ID).getCommodities();
 		int number = 0;
 		for (CommodityItemPO po : POs) {
@@ -128,12 +143,13 @@ public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Re
 	 * @return
 	 * @author Zing
 	 * @version Dec 2, 2014 5:17:15 PM
+	 * @throws RemoteException 
 	 */
-	private double getBeforePrice(String ID) {
+	private double getBeforePrice(String ID) throws RemoteException {
 		return getPurchaseData().find(ID).getBeforePrice();
 	}
 
-	public ResultMessage pass(PurchaseVO vo) {
+	public ResultMessage pass(PurchaseVO vo) throws RemoteException {
 		PurchasePO po = getPurchaseData().find(vo.ID);
 		// 更改商品的数据
 		CommodityInfo_Purchase commodityInfo = new CommodityInfo();
@@ -164,7 +180,7 @@ public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Re
 		return ResultMessage.SUCCESS;
 	}
 
-	public double getTotalPrice(String ID) {
+	public double getTotalPrice(String ID) throws RemoteException {
 		PurchasePO po = getPurchaseData().find(ID);
 		switch (getPurchaseData().find(ID).getType()) {
 		case PURCHASE:
@@ -177,7 +193,7 @@ public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Re
 		return 0;
 	}
 
-	public PurchaseVO addRed(PurchaseVO vo, boolean isCopy) {
+	public PurchaseVO addRed(PurchaseVO vo, boolean isCopy) throws RemoteException {
 		PurchaseVO redVO = vo;
 		// 取负
 		ArrayList<CommodityItemVO> commodities = redVO.commodities;
@@ -199,7 +215,7 @@ public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Re
 		return null;
 	}
 	
-	public ArrayList<PurchaseVO> findApproval() {
+	public ArrayList<PurchaseVO> findApproval() throws RemoteException {
 		PurchaseShow show = new PurchaseShow();
 		ArrayList<PurchaseVO> VOs = show.showPurchaseApproving();
 		VOs.addAll(show.showPurchaseBackApproving());
@@ -207,7 +223,7 @@ public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Re
 	}
 
 	@Override
-	public ArrayList<PurchaseVO> showPass() {
+	public ArrayList<PurchaseVO> showPass() throws RemoteException {
 		PurchaseShow show = new PurchaseShow();
 		ArrayList<PurchaseVO> VOs = show.showPurchasePass();
 		VOs.addAll(show.showPurchaseBackPass());
@@ -215,7 +231,7 @@ public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Re
 	}
 
 	@Override
-	public ArrayList<PurchaseVO> showFailure() {
+	public ArrayList<PurchaseVO> showFailure() throws RemoteException {
 		PurchaseShow show = new PurchaseShow();
 		ArrayList<PurchaseVO> VOs = show.showPurchaseFailure();
 		VOs.addAll(show.showPurchaseBackFailure());

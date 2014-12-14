@@ -1,5 +1,7 @@
 package businesslogic.recordbl;
 
+import java.rmi.RemoteException;
+
 import businesslogic.recordbl.info.SaleInfo_Record;
 import businesslogic.salebl.SaleInfo;
 
@@ -18,7 +20,7 @@ public class SaleDetailListItem {
 	
 	public SaleInfo_Record info;
 	
-	public SaleDetailListItem(String ID, String commodityName) {
+	public SaleDetailListItem(String ID, String commodityName) throws RemoteException {
 		info = new SaleInfo();
 		this.ID = info.getCommodityID(ID, commodityName);
 		if (this.ID != null) {

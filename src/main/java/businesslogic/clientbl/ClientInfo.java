@@ -1,19 +1,17 @@
 package businesslogic.clientbl;
 
-import java.net.MalformedURLException;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import dataenum.ClientLevel;
 import po.ClientPO;
 import vo.client.ClientVO;
-import businesslogic.accountainitbl.info.ClientInfo_Init;
 import businesslogic.accountbillbl.info.ClientInfo_AccountBill;
+import businesslogic.accountinitbl.info.ClientInfo_Init;
 import businesslogic.promotionbl.info.ClientInfo_Promotion;
 import businesslogic.purchasebl.info.ClientInfo_Purchase;
 import businesslogic.salebl.info.ClientInfo_Sale;
+import dataenum.ClientLevel;
 
 /**
  * 共外部获得Client信息
@@ -24,7 +22,7 @@ public class ClientInfo implements ClientInfo_AccountBill, ClientInfo_Sale, Clie
 
 	private Client client;
 
-	public ClientInfo() throws MalformedURLException, RemoteException, NotBoundException {
+	public ClientInfo() {
 		client = new Client();
 	}
 
