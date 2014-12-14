@@ -11,6 +11,7 @@ import ui.commonui.myui.MyPanel;
 import ui.differui.admin.AdminAddingPanel;
 import ui.differui.admin.AdminModifyPanel;
 import ui.differui.admin.AdminUI;
+import ui.differui.finace.account.AccountManagementUI;
 import ui.differui.inventory.commodity_management.addgood.CommodityAddingPanel;
 import ui.differui.inventory.commodity_management.addsort.SortAddingPanel;
 import ui.differui.inventory.commodity_management.addsort.SortAddingUI;
@@ -100,6 +101,10 @@ public class ExitFinishPanel extends MyPanel implements ActionListener{
 				case "modify good" : CommodityDetailPanel.modify.doClick();break;
 				
 				case "passBill" : ApproveManagementUI.passBill.doClick();break;
+				
+				case "delete a account" : AccountManagementUI.deleteAccount.doClick();break;
+				
+				case "modify a account" : AccountManagementUI.modifyAccount.doClick();break;
 
 			}
 			ExitFinishFrame.button_close.doClick();
