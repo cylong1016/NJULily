@@ -1,5 +1,7 @@
 package businesslogic.purchasebl.info;
 
+import java.rmi.RemoteException;
+
 import dataenum.BillType;
 
 public interface CommodityInfo_Purchase {
@@ -11,7 +13,7 @@ public interface CommodityInfo_Purchase {
 	 * @author Zing
 	 * @version Dec 10, 2014 9:45:06 AM
 	 */
-	public String getType(String ID);
+	public String getType(String ID) throws RemoteException;
 	
 	/**
 	 * 
@@ -20,7 +22,7 @@ public interface CommodityInfo_Purchase {
 	 * @author Zing
 	 * @version Dec 10, 2014 9:45:03 AM
 	 */
-	public String getName(String ID);
+	public String getName(String ID) throws RemoteException;
 
 	/**
 	 * 
@@ -31,7 +33,7 @@ public interface CommodityInfo_Purchase {
 	 * @author Zing
 	 * @version Dec 10, 2014 9:45:01 AM
 	 */
-	public void changeCommodityInfo(String id, int number, double price, BillType type);
+	public void changeCommodityInfo(String id, int number, double price, BillType type) throws RemoteException;
 
 	/**
 	 * 是否可以删除
@@ -41,7 +43,7 @@ public interface CommodityInfo_Purchase {
 	 * @author Zing
 	 * @version Dec 10, 2014 9:44:35 AM
 	 */
-	public void setDelete(String ID, boolean b);
+	public void setDelete(String ID, boolean b) throws RemoteException;
 
 	/**
 	 * 判断商品数量是否小于进货退货数量
@@ -51,5 +53,5 @@ public interface CommodityInfo_Purchase {
 	 * @author Zing
 	 * @version Dec 13, 2014 10:44:03 AM
 	 */
-	public boolean checkNumber(String ID, int number);	
+	public boolean checkNumber(String ID, int number) throws RemoteException;	
 }

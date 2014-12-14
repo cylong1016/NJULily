@@ -1,15 +1,18 @@
 package businesslogic.commoditysortbl;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import message.ResultMessage;
 import po.CommoditySortPO;
-import server.data.commoditysortdata.CommoditySortData;
 import vo.commodity.CommoditySortVO;
-import blservice.commoditysortblservice.CommoditySortBLService;
+import config.RMIConfig;
 import dataservice.commoditysortdataservice.CommoditySortDataService;
 
-public class CommoditySort implements CommoditySortBLService {
+public class CommoditySort {
 
 	private CommoditySortDataService commoditySortData;
 
@@ -17,17 +20,11 @@ public class CommoditySort implements CommoditySortBLService {
 
 	private CommoditySortPO po;
 
-	public CommoditySort() {
-//		try {
-//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
-//			commoditySortData = factory.getCommoditySortData();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-		commoditySortData = new CommoditySortData();
+	public CommoditySort() throws MalformedURLException, RemoteException, NotBoundException {
+		commoditySortData = (CommoditySortDataService)Naming.lookup(RMIConfig.PREFIX + CommoditySortDataService.NAME);
 	}
 
-	public String getID(String fatherID) {
+	public String getID(String fatherID) throws RemoteException {
 		this.ID = commoditySortData.getID(fatherID);
 		return ID;
 	}
@@ -37,8 +34,9 @@ public class CommoditySort implements CommoditySortBLService {
 	 * @return
 	 * @author Zing
 	 * @version Dec 1, 2014 7:37:48 PM
+	 * @throws RemoteException
 	 */
-	public ArrayList<CommoditySortVO> show() {
+	public ArrayList<CommoditySortVO> show() throws RemoteException {
 		return allPOtoVO(commoditySortData.show());
 	}
 
@@ -63,8 +61,9 @@ public class CommoditySort implements CommoditySortBLService {
 	 * @return
 	 * @author Zing
 	 * @version Dec 1, 2014 7:45:05 PM
+	 * @throws RemoteException
 	 */
-	public CommoditySortVO show(String ID) {
+	public CommoditySortVO show(String ID) throws RemoteException {
 		CommoditySortPO po = commoditySortData.find(ID);
 		return POtoVO(po);
 	}
@@ -74,8 +73,9 @@ public class CommoditySort implements CommoditySortBLService {
 	 * @param sortName
 	 * @param parentSort
 	 * @return
+	 * @throws RemoteException
 	 */
-	public ResultMessage addCommoSort(String sortName, String fatherID) {
+	public ResultMessage addCommoSort(String sortName, String fatherID) throws RemoteException {
 
 		//这里加一行就万事大吉了
 		//不对啊，是你那边要获得好吗！是你直接调用好吗！
@@ -108,8 +108,9 @@ public class CommoditySort implements CommoditySortBLService {
 	 * @return
 	 * @author Zing
 	 * @version Dec 1, 2014 7:36:16 PM
+	 * @throws RemoteException
 	 */
-	public ResultMessage deleteCommoSort(String ID) {
+	public ResultMessage deleteCommoSort(String ID) throws RemoteException {
 		po = commoditySortData.find(ID);
 		if (po.getCommoditiesID() != null) {
 			if (!po.getCommoditiesID().isEmpty()) {
@@ -126,8 +127,9 @@ public class CommoditySort implements CommoditySortBLService {
 	 * @return
 	 * @author Zing
 	 * @version Dec 1, 2014 7:33:34 PM
+	 * @throws RemoteException
 	 */
-	public ResultMessage updCommoSort(String ID, String name) {
+	public ResultMessage updCommoSort(String ID, String name) throws RemoteException {
 		CommoditySortPO beforePO = commoditySortData.find(ID);
 		String fatherID = beforePO.getFatherID();
 		ArrayList<String> childrenID = beforePO.getChildrenID();

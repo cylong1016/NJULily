@@ -1,15 +1,18 @@
 package businesslogic.commoditybl;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import message.ResultMessage;
 import po.CommodityPO;
-import server.data.commoditydata.CommodityData;
 import vo.commodity.CommodityAddVO;
 import vo.commodity.CommodityUpdateVO;
 import vo.commodity.CommodityVO;
-import blservice.commodityblservice.CommodityBLService;
 import businesslogic.commoditysortbl.CommoditySortInfo;
+import config.RMIConfig;
 import dataenum.FindTypeCommo;
 import dataservice.commoditydataservice.CommodityDataService;
 
@@ -18,9 +21,11 @@ import dataservice.commoditydataservice.CommodityDataService;
  * @author Zing
  * @version 2014年11月9日下午2:53:19
  */
-public class Commodity implements CommodityBLService {
+public class Commodity {
 
 	private CommodityDataService commodityData;
+	private CommoditySort_Commodity sort;
+	private CommoditySort_Commodity info;
 
 	private CommodityPO po;
 
@@ -28,14 +33,10 @@ public class Commodity implements CommodityBLService {
 
 	private CommodityTrans transPOVO;
 
-	public Commodity() {
-//		try {
-//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
-//			commodityData = factory.getCommodityData();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-		commodityData = new CommodityData();
+	public Commodity() throws MalformedURLException, RemoteException, NotBoundException {
+		commodityData = (CommodityDataService)Naming.lookup(RMIConfig.PREFIX + CommodityDataService.NAME);
+		sort = new CommoditySortInfo();
+		info = new CommoditySortInfo();
 	}
 
 	/**
@@ -43,8 +44,9 @@ public class Commodity implements CommodityBLService {
 	 * @return
 	 * @author Zing
 	 * @version Dec 1, 2014 9:16:41 PM
+	 * @throws RemoteException
 	 */
-	public String getID(String sortID) {
+	public String getID(String sortID) throws RemoteException {
 		ID = commodityData.getID(sortID);
 		return ID;
 	}
@@ -54,8 +56,9 @@ public class Commodity implements CommodityBLService {
 	 * @return
 	 * @author Zing
 	 * @version Dec 1, 2014 9:16:44 PM
+	 * @throws RemoteException
 	 */
-	public ArrayList<CommodityVO> show() {
+	public ArrayList<CommodityVO> show() throws RemoteException {
 		ArrayList<CommodityVO> VOs = new ArrayList<CommodityVO>();
 		ArrayList<String> IDs = commodityData.getAllID();
 		for(String ID : IDs) {
@@ -71,8 +74,9 @@ public class Commodity implements CommodityBLService {
 	 * @return
 	 * @author Zing
 	 * @version Dec 1, 2014 9:16:47 PM
+	 * @throws RemoteException
 	 */
-	public CommodityVO show(String ID) {
+	public CommodityVO show(String ID) throws RemoteException {
 		transPOVO = new CommodityTrans();
 		CommodityPO po = commodityData.find(ID);
 		CommodityVO vo = transPOVO.POtoVO(po);
@@ -85,10 +89,10 @@ public class Commodity implements CommodityBLService {
 	 * @return
 	 * @author Zing
 	 * @version Dec 1, 2014 8:57:15 PM
+	 * @throws RemoteException
 	 */
-	public ResultMessage addCommo(CommodityAddVO info) {
+	public ResultMessage addCommo(CommodityAddVO info) throws RemoteException {
 		po = new CommodityPO(ID, info.name, info.sortID, info.type, info.purPrice, info.salePrice, 0);
-		CommoditySort_Commodity sort = new CommoditySortInfo();
 		if (sort.hasLeaf(info.sortID)) {
 			return ResultMessage.FAILURE;
 		}
@@ -103,8 +107,9 @@ public class Commodity implements CommodityBLService {
 	 * @return
 	 * @author Zing
 	 * @version Dec 1, 2014 8:57:57 PM
+	 * @throws RemoteException
 	 */
-	public ResultMessage deletCommo(String ID) {
+	public ResultMessage deletCommo(String ID) throws RemoteException {
 		double recentPurPrice = commodityData.find(ID).getRecentPurPrice();
 		boolean canDelete = commodityData.find(ID).isCanDelete();
 		if (recentPurPrice != 0) {
@@ -114,7 +119,6 @@ public class Commodity implements CommodityBLService {
 			return ResultMessage.FAILURE;
 		}
 		// 如果可以删除该商品，就顺便删除分类中的该商品
-		CommoditySort_Commodity info = new CommoditySortInfo();
 		String sortID = commodityData.find(ID).getSortID();
 		info.deleteCommodity(sortID, ID);
 		return commodityData.delete(ID);
@@ -127,11 +131,11 @@ public class Commodity implements CommodityBLService {
 	 * @return
 	 * @author Zing
 	 * @version Dec 1, 2014 9:32:00 PM
+	 * @throws RemoteException
 	 */
-	public ResultMessage updCommo(String ID, CommodityUpdateVO info) {
+	public ResultMessage updCommo(String ID, CommodityUpdateVO info) throws RemoteException {
 		CommodityPO oldPO = commodityData.find(ID);
-		po =
-				new CommodityPO(ID, info.name, oldPO.getSortID(), info.type, info.purPrice, info.salePrice, oldPO.getAlarmNumber());
+		po = new CommodityPO(ID, info.name, oldPO.getSortID(), info.type, info.purPrice, info.salePrice, oldPO.getAlarmNumber());
 		return commodityData.update(po);
 	}
 
@@ -142,8 +146,9 @@ public class Commodity implements CommodityBLService {
 	 * @return
 	 * @author Zing
 	 * @version Dec 1, 2014 9:30:58 PM
+	 * @throws RemoteException
 	 */
-	public ArrayList<CommodityVO> findCommo(String info, FindTypeCommo type) {
+	public ArrayList<CommodityVO> findCommo(String info, FindTypeCommo type) throws RemoteException {
 		transPOVO = new CommodityTrans();
 		ArrayList<CommodityVO> VOs = new ArrayList<CommodityVO>();
 		ArrayList<CommodityPO> POs = commodityData.find(info, type);
@@ -161,8 +166,9 @@ public class Commodity implements CommodityBLService {
 	 * @return
 	 * @author Zing
 	 * @version Dec 2, 2014 5:37:06 PM
+	 * @throws RemoteException
 	 */
-	public ResultMessage setAlarm(ArrayList<String> IDs, int alarmNumber) {
+	public ResultMessage setAlarm(ArrayList<String> IDs, int alarmNumber) throws RemoteException {
 		// 如果选择更改的商品现在数量少于设置的警戒数量，返回false
 		for(String ID : IDs) {
 			CommodityPO po = commodityData.find(ID);

@@ -1,5 +1,6 @@
 package businesslogic.accountainitbl.info;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.CommoditySortPO;
@@ -12,8 +13,9 @@ public interface CommoditySortInfo_Init {
 	 * @return
 	 * @author Zing
 	 * @version Dec 2, 2014 7:38:51 PM
+	 * @throws RemoteException 
 	 */
-	public ArrayList<CommoditySortPO> getSortPOs();
+	public ArrayList<CommoditySortPO> getSortPOs() throws RemoteException;
 	
 	/**
 	 * 得到所有的商品分类VO
