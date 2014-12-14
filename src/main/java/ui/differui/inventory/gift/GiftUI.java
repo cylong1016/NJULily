@@ -184,7 +184,7 @@ public class GiftUI extends MyPanel implements ActionListener{
 		
 		showAll.doClick();
 		
-		JLabel word3 = new JLabel("货单备注：");
+		JLabel word3 = new JLabel("单据备注：");
 		word3.setBounds(335, 563 + y, 120, 25);
 		word3.setBackground(null);
 		word3.setForeground(Color.WHITE);

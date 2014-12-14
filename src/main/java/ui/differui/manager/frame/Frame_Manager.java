@@ -42,6 +42,8 @@ public class Frame_Manager extends MyFrame implements ActionListener{
 	
 	public Frame_Manager(){
 		
+		System.out.println("asdqwdqw");
+		
 		bt_vanish = new JButton();
 		bt_vanish.addActionListener(this);
 		this.add(bt_vanish);

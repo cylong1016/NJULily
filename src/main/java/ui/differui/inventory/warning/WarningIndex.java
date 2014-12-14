@@ -1,33 +1,413 @@
 package ui.differui.inventory.warning;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-import javax.swing.JLabel;
 
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.tree.DefaultMutableTreeNode;
+
+import blservice.commodityblservice.CommodityBLService;
+import blservice.commoditysortblservice.CommoditySortBLService;
+import businesslogic.commoditybl.CommodityController;
+import businesslogic.commoditysortbl.CommoditySortController;
+import businesslogic.inventorybl.BillListItem;
+import dataenum.FindTypeCommo;
+import ui.commonui.myui.MyComboBox;
+import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyPanel;
+import ui.commonui.myui.MyTable;
+import ui.commonui.myui.MyTextField;
+import ui.commonui.myui.MyTree;
+import ui.commonui.warning.WarningFrame;
+import ui.differui.inventory.frame.Frame_Inventory;
+import vo.commodity.CommoditySortVO;
+import vo.commodity.CommodityVO;
 
 
 public class WarningIndex extends MyPanel implements ActionListener{
 	
 	private static final long serialVersionUID = 1L;
 	
-	public WarningIndex(){
+	MyJButton button_sort;
+	MyJButton button_del2;
+
+	static MyJButton button_showAll;
+
+	MyJButton button_search;
+
+	MyJButton button_del, button_add, button_finish;
+	
+	public static JButton button_close, showAll;
+	
+	JScrollPane jsp;
+	MyTree tree;
+	MyTable table, table2;
+	MyComboBox comboBox, comboBox_sort;
+	MyTextField textField;
+	JTextField tf;
+	
+	static int rowNum;
+	static String deleteID;
+	int clickTime = 0;
+	static String note;
+	
+	ArrayList<String> addCommoID;
+	public static ArrayList<BillListItem> commoList;
+	
+ 	public WarningIndex(){
 		
-		//information bar
-		JLabel infoBar = new JLabel("                     警报类单据");
-		infoBar.setBounds(0, 0, 1100, 20);
-		infoBar.setOpaque(true);
-		infoBar.setForeground(new Color(1, 1, 1, 0.55f));
-		infoBar.setBackground(new Color(1, 1, 1, 0.05f));
+		rowNum = 0;
+		
+		int y = 10;
+		
+		addCommoID = new ArrayList<String>();
+		commoList = new ArrayList<BillListItem>();
+		commoList.clear();
+		
+		Color foreColor = new Color(158, 213, 220);
+		Color backColor = new Color(46, 52, 101);
+		
+		this.setLayout(null);
+		this.setBounds(0, 0, 1280, 720);
+		this.setOpaque(false);
+
+		JLabel infoBar = new JLabel("创建警报类单据 - 选择商品");
+		infoBar.setFont(new Font("华文细黑", Font.BOLD, 18));
+		infoBar.setBounds(80, 14, 1100, 20);
+		infoBar.setForeground(Color.GRAY);
+		infoBar.setOpaque(false);
 		this.add(infoBar);
 		
+		String[] comboBoxStr2 = {"请选择警报类单据类别", "报溢单", "报损单", "报警单"};
+		comboBox_sort = new MyComboBox(83, 60 + y, 225, 25,comboBoxStr2);
+		comboBox_sort.setForeground(foreColor);
+		comboBox_sort.setBackground(backColor);
+		this.add(comboBox_sort);
+		
+		DefaultMutableTreeNode root = new DefaultMutableTreeNode("所有商品分类"); 
+		tree = new MyTree(root); 
+					
+		jsp = new JScrollPane(tree);
+		jsp.getViewport().add(tree, null);
+		jsp.setBounds(50 + 33, 95 + y, 225, 425 + 31);
+		jsp.setVisible(true);
+		this.add(jsp);
+			
+		//add a combo box (for choosing the selected way)
+		String[] comboBoxStr = {"-------请选择一种搜索方式-------", "模糊查找"
+				, "商品编号(ID)",  "商品分类", "商品名称"};
+		comboBox = new MyComboBox(25 + 190 + 120, 60 + y, 200, 25,comboBoxStr);
+		comboBox.setForeground(foreColor);
+		comboBox.setBackground(backColor);
+		this.add(comboBox);
+		
+		//add a text field (for typing the selected way)
+		textField = new MyTextField(235 + 190 + 120, 60 + y, 200, 25);
+		textField.setText("在此输入搜索关键字");
+		textField.setBackground(backColor);
+		textField.setForeground(foreColor);
+		this.add(textField);
+		
+		//add a button for starting the searching process
+		button_search = new MyJButton("搜索");
+		button_search.setBounds(445 + 190 + 120, 60 + y, 130, 25);
+		button_search.addActionListener(this);
+		this.add(button_search);		
+		
+		//add a button for showing all the client to the table
+		button_finish = new MyJButton("下一步");
+		button_finish.setBounds(944 + 150 - 30, 563 + y, 130, 25);
+		button_finish.addActionListener(this);
+		this.add(button_finish);	
+		
+		//add a table for showing the information of the goods(the table is contained in a scroll pane)
+		String[] headers = {"商品编号","商品分类","商品名称","商品型号","库存数量"};
+		table = new MyTable(headers);
+		JTableHeader head = table.getTableHeader();
+		head.setForeground(foreColor);
+		head.setBackground(backColor);
+		
+		JScrollPane jsp2 = new JScrollPane(table);
+		jsp2.setBounds(335, 95 + y, 860, 200);
+		jsp2.getViewport().setBackground(new Color(0,0,0,0.3f));
+		jsp2.setOpaque(false);
+		jsp2.setVisible(true);
+		this.add(jsp2);
+		
+		String[] headers2 = {"商品编号","商品名称","商品型号","实际商品数量"};
+		table2 = new MyTable(headers2, true);
+		
+		JTableHeader head2 = table.getTableHeader();
+		head2.setForeground(foreColor);
+		head2.setBackground(backColor);
+		
+		JScrollPane jsp3 = new JScrollPane(table2);
+		jsp3.setBounds(335, 345 + y, 860, 200);
+		jsp3.getViewport().setBackground(new Color(0,0,0,0.3f));
+		jsp3.setOpaque(false);
+		jsp3.setVisible(true);
+		this.add(jsp3);
+		
+		//add a button for deleting a selected good
+		button_del = new MyJButton("将所选商品从待处理区删除");
+		button_del.setBounds(610 - 243, 310 + y, 210, 25);
+		button_del.addActionListener(this);
+		this.add(button_del);	
+		
+		//add a button for modifying the information of a selected good
+		button_add = new MyJButton("将所选商品添加至待处理区");
+		button_add.setBounds(960, 310 + y, 210, 25);
+		button_add.addActionListener(this);
+		this.add(button_add);	
+		
+		///////////////////////////////////////////////////////////////////////////////
+		
+		//add a button for  modifying the information of a selected good sort
+		button_sort = new MyJButton("查看所选分类下的商品");
+		button_sort.setBounds(50 + 33, 563 + y, 225, 25);
+		button_sort.addActionListener(this);
+		this.add(button_sort);	
+		
+		button_showAll = new MyJButton("显示全部商品");
+		button_showAll.setBounds(944 + 150 - 30, 60 + y, 130, 25);
+		button_showAll.addActionListener(this);
+		this.add(button_showAll);
+			
+		button_close = new JButton();
+		button_close.addActionListener(this);
+		this.add(button_close);
+						
+		showAll = new JButton();
+		showAll.addActionListener(this);
+		this.add(showAll);
+		
+		showAll.doClick();
+		
+		JLabel word3 = new JLabel("单据备注：");
+		word3.setBounds(335, 563 + y, 120, 25);
+		word3.setBackground(null);
+		word3.setForeground(Color.WHITE);
+		word3.setVisible(true);
+		this.add(word3);
+		
+		tf = new JTextField();
+		tf.setBounds(470, 563 + y, 400, 25);
+		tf.setVisible(true);
+		this.add(tf);
+	}
+		
+	public void actionPerformed(ActionEvent events) {
+		
+		if(events.getSource() == button_close){
+			this.setVisible(false);
+		}
+						
+		if(events.getSource() == button_showAll){
+			
+			clickTime++;
+			
+			DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+			
+			if(rowNum != 0)
+				for(int k = 0; k < rowNum; k++)
+					tableModel.removeRow(0);
+			
+			rowNum = 0;
+			
+			CommodityBLService controller = new CommodityController();
+			
+			rowNum = controller.show().size();
+			
+			for(int i = 0; i < controller.show().size(); i++){
+				CommodityVO cvo = controller.show().get(i);
+				
+				//"商品编号","商品分类","商品名称","商品型号","库存数量"
+				String[] str = {cvo.ID, getSortName(cvo.sortID), cvo.name, cvo.type, String.valueOf(cvo.inventoryNum)};
+				tableModel.addRow(str);
+			}		
+			
+			if(rowNum == 0 && clickTime != 1){
+				WarningFrame wf = new WarningFrame("现在暂时没有商品");
+				wf.setVisible(true);
+			}
+		}
+		
+		if(events.getSource() == button_search){
+			
+			if(comboBox.getSelectedIndex() == 0){
+				
+				WarningFrame wf = new WarningFrame("请选择一种搜索方式");
+				wf.setVisible(true);
+				
+			}else{
+				
+				CommodityBLService controller = new CommodityController();
+				ArrayList<CommodityVO> list = controller.findCommo(textField.getText()
+						, getType(comboBox.getSelectedIndex()));
+				
+				if(list.size() == 0){
+					WarningFrame wf = new WarningFrame("没有符合条件的商品！");
+					wf.setVisible(true);
+				}else{
+					
+					DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+					
+					if(rowNum != 0)
+						for(int k = 0; k < rowNum; k++)
+							tableModel.removeRow(0);
+					
+					rowNum = 0;
+														
+					for(int i = 0; i < list.size(); i++){
+										
+						CommodityVO cvo = list.get(i);
+						
+						rowNum = list.size();
+						
+						String[] str = {cvo.ID, getSortName(cvo.sortID), cvo.name, cvo.type, String.valueOf(cvo.inventoryNum)};
+						tableModel.addRow(str);
+						
+					}	
+								
+					WarningFrame wf = new WarningFrame("共有  " + list.size() + "  件商品符合条件！");
+					wf.setVisible(true);
+				}
+			}
+		}
+		
+		if(events.getSource() == button_add){
+			
+			if(table.getSelectedRow() < 0){
+				WarningFrame wf = new WarningFrame("请选择一个欲添加的商品！");
+				wf.setVisible(true);
+			}else{
+				
+				String commoID = (String)table.getValueAt(table.getSelectedRow(), 0);
+				Boolean flag = true;
+				
+				for(int i = 0; i < addCommoID.size(); i++){
+					if(addCommoID.get(i).equals(commoID)){
+						WarningFrame wf = new WarningFrame("已经添加了此商品！");
+						wf.setVisible(true);
+						i = 1000;
+						flag = false;
+					}
+				}
+				
+				if(flag == true){
+					
+					CommodityBLService controller = new CommodityController();
+					ArrayList<CommodityVO> commoList = controller.show();
+					
+					for(int i = 0; i < commoList.size(); i++){
+						if(commoList.get(i).ID.equals(commoID)){
+							DefaultTableModel model = (DefaultTableModel)table2.getModel();
+							String[] rowData = {commoList.get(i).ID, commoList.get(i).name, 
+									commoList.get(i).type,"0",String.valueOf(commoList.get(i).purPrice)};
+							model.addRow(rowData);
+							addCommoID.add(commoID);
+						}
+					}
+				}
+			}
+		}
+		
+		if(events.getSource() == button_del){
+			if(table.getSelectedRowCount() == 0){
+				WarningFrame wf = new WarningFrame("请选择一个欲除去的商品！");
+				wf.setVisible(true);
+			}else{
+				String commoID = (String)table2.getValueAt(table2.getSelectedRow(), 0);
+	
+				for(int i = 0; i < addCommoID.size(); i++){					
+					if(addCommoID.get(i).equals(commoID)){	
+						addCommoID.remove(i);
+					}
+				}
+				
+				DefaultTableModel model = (DefaultTableModel)table2.getModel();
+				model.removeRow(table2.getSelectedRow());
+			}
+		}
+			
+		if(events.getSource() == showAll){
+			button_showAll.doClick();
+		}
+		
+		if(events.getSource() == button_finish){
+			
+			commoList.clear();
+
+			if(table2.isEditing())
+				table2.getCellEditor().stopCellEditing();
+			
+			if(addCommoID.size() == 0){
+				WarningFrame wf = new WarningFrame("请选择需要添加的商品!");
+				wf.setVisible(true);
+			}else if(comboBox_sort.getSelectedIndex() == 0 && addCommoID.size() != 0){
+				WarningFrame wf = new WarningFrame("请选择一种警报类单据类型!");
+				wf.setVisible(true);
+			}else{
+	
+				this.setVisible(false);
+				Frame_Inventory.visibleFalse(7);
+				Frame_Inventory.visibleTrue(7);
+						
+				for(int i = 0; i < addCommoID.size(); i++){
+					for(int j = 0; j < addCommoID.size(); j++){
+						if(addCommoID.get(i).equals(table2.getValueAt(j, 0))){
+							commoList.add(new BillListItem((String)table2.getValueAt(j, 0)
+									,Integer.parseInt((String) table2.getValueAt(j, 3))));
+						}
+					}
+					
+					note = tf.getText();
+					if(note == null){
+						note = "无";
+					}
+					
+					WarningFinish.alarmType = comboBox_sort.getSelectedIndex();
+					
+					WarningFinish.showText.doClick();
+				}
+			}
+		}	
 	}
 	
-	public void actionPerformed(ActionEvent events) {
-				
+	public String getSortName(String ID){
+		CommoditySortBLService controller = new CommoditySortController();
+		ArrayList<CommoditySortVO> list = controller.show();
+		
+		for(int i = 1; i < list.size(); i++){
+			if(list.get(i).ID.equals(ID)){
+				return list.get(i).name;
+			}
+		}
+		return null;
 	}
-
+		
+	private FindTypeCommo getType(int i){
+		switch(i){
+			case 1: return null;
+			case 2: return FindTypeCommo.ID;
+			case 3: return FindTypeCommo.SORT;
+			default: return FindTypeCommo.NAME;
+		}
+	}
+	
+	public static void ClearAll(){
+		commoList.clear();
+	}
+	
 }

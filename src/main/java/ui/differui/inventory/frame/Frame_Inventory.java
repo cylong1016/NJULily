@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 
 
 
+
 import ui.commonui.exitfunction.ExitFunctionFrame;
 import ui.commonui.login.Frame_Login;
 import ui.commonui.myui.MyBackground;
@@ -29,6 +30,7 @@ import ui.differui.inventory.gift.GiftUI;
 import ui.differui.inventory.index.InventoryIndex;
 import ui.differui.inventory.inventory_checking.InventoryCheckingUI;
 import ui.differui.inventory.inventory_review.InventoryReviewUI;
+import ui.differui.inventory.warning.WarningFinish;
 import ui.differui.inventory.warning.WarningIndex;
 
 public class Frame_Inventory extends MyFrame implements ActionListener{
@@ -51,6 +53,7 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 	static GiftUI panel_gift;
 	static WarningIndex panel_alarm;
 	static GiftFinish panel_giftFinish;
+	static WarningFinish panel_warningFinish;
 	
 	static JLabel in_back;
 	
@@ -81,6 +84,10 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 		panel_giftFinish = new GiftFinish();
 		panel_giftFinish.setVisible(false);
 		this.add(panel_giftFinish);
+		
+		panel_warningFinish = new WarningFinish();
+		panel_warningFinish.setVisible(false);
+		this.add(panel_warningFinish);
 		
 		panel_alarm = new WarningIndex();
 		panel_alarm.setVisible(false);
@@ -216,14 +223,24 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 		
 		switch(i){
 			case 0: panel_index.setVisible(true);break;
+			
 			case 1: panel_good.setVisible(true);
 					lb_good2.setVisible(true);break;
+					
 			case 2: panel_review.setVisible(true);break;
+			
 			case 3: panel_checking.setVisible(true);break;
-			case 4: panel_gift.setVisible(true);in_back.setVisible(true);break;
+			
+			case 4: panel_gift.setVisible(true);
+					in_back.setVisible(true);break;
+					
 			case 5: panel_alarm.setVisible(true);break;
 			
-			case 6: panel_giftFinish.setVisible(true);flag = 4;break;
+			case 6: panel_giftFinish.setVisible(true);
+					in_back.setVisible(true);
+					flag = 4;break;
+					
+			case 7: panel_warningFinish.setVisible(true);flag = 5;break;
 		}
 	}
 	
@@ -231,17 +248,25 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 		
 		switch(i){
 			case 0: panel_index.setVisible(false);break;
+			
 			case 1: panel_good.setVisible(false);
 					lb_good2.setVisible(false);break;
+					
 			case 2: panel_review.setVisible(false);break;
+			
 			case 3: panel_checking.setVisible(false);break;
+			
 			case 4: panel_gift.setVisible(false);
 					panel_giftFinish.setVisible(false);
 					in_back.setVisible(false);break;
+					
 			case 5: panel_alarm.setVisible(false);break;
 			
 			case 6: in_back.setVisible(false);
-					flag = 2;break;
+					flag = 4;break;
+					
+			case 7: in_back.setVisible(false);
+					flag = 5;break;
 		}
 	}
 	
@@ -321,6 +346,7 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 		if(events.getSource() == bt_alarm){
 			if(flag == 0){			
 				panel_alarm.setVisible(true);
+				in_back.setVisible(true);
 				panel_index.setVisible(false);	
 				flag = 5;
 			}else if(flag == 5){

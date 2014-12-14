@@ -30,9 +30,9 @@ public class StrategyManagementUI extends JPanel implements ActionListener{
 		infoBar.setOpaque(false);
 		this.add(infoBar);
 		
-		addPromotionTable();
-		
-		addButtons();
+//		addPromotionTable();
+//		
+//		addButtons();
 		
 		
 	}

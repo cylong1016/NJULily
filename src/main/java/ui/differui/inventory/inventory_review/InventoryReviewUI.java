@@ -101,7 +101,7 @@ public class InventoryReviewUI extends MyPanel implements ActionListener{
 		JLabel word_4 = new JLabel("选择查看时间段:    ");
 		word_4.setForeground(Color.WHITE);
 		word_4.setBackground(new Color(0, 0, 0, 0));
-		word_4.setBounds(27 + y, 40, 120, 25);
+		word_4.setBounds(27 + y, 50, 120, 25);
 		this.add(word_4);
 		
 		//text fields
