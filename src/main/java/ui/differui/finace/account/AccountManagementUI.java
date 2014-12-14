@@ -4,16 +4,28 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 
+import dataenum.FindTypeAccount;
+import message.ResultMessage;
+import blservice.accountblservice.AccountBLService;
+import businesslogic.accountbl.AccountController;
+import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.myui.MyComboBox;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyTable;
 import ui.commonui.myui.MyTextField;
+import ui.commonui.warning.WarningFrame;
+import vo.AccountVO;
 
 public class AccountManagementUI extends JLabel implements ActionListener{
 	
@@ -27,8 +39,19 @@ public class AccountManagementUI extends JLabel implements ActionListener{
 	
 	MyTable table;
 	
+	static ArrayList<AccountVO> accountPool;
+	
+	public static JButton deleteAccount, modifyAccount;
+	
+	static int rowNum = 0;
+	
+	static String accountID = "";
+	
+	JLabel word_6;
+	
 	public AccountManagementUI(){
-		String accountID = "";
+		
+		accountPool = new ArrayList<AccountVO>();
 		
 		this.setLayout(null);
 		this.setBounds(0, 0, 1280, 720);
@@ -73,6 +96,20 @@ public class AccountManagementUI extends JLabel implements ActionListener{
 		
 		String[] headers = {"账户编号", "账户名称", "账户余额"};
 		table = new MyTable(headers);
+		
+		TableColumn firsetColumn = table.getColumnModel().getColumn(0);
+		firsetColumn.setPreferredWidth(80);
+		firsetColumn.setMaxWidth(80);
+		firsetColumn.setMinWidth(80);
+		
+		TableColumn secondColumn = table.getColumnModel().getColumn(1);
+		secondColumn.setPreferredWidth(250);
+		secondColumn.setMaxWidth(250);
+		secondColumn.setMinWidth(250);
+		
+		DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();// 设置table内容居中
+		tcr.setHorizontalAlignment(JLabel.CENTER);
+		table.setDefaultRenderer(Object.class, tcr);
 		
 		JScrollPane jsp=new JScrollPane(table);
 		JTableHeader head = table.getTableHeader();
@@ -143,10 +180,10 @@ public class AccountManagementUI extends JLabel implements ActionListener{
 		word_5.setBounds(550, 335, 120, 25);
 		this.add(word_5);
 		
-		JLabel word_6 = new JLabel("账户ID为 :" + accountID);
+		word_6 = new JLabel("账户ID为 :    " + accountID);
 		word_6.setForeground(Color.WHITE);
 		word_6.setBackground(new Color(0, 0, 0, 0));
-		word_6.setBounds(610, 370, 60, 25);
+		word_6.setBounds(610, 370, 300, 25);
 		this.add(word_6);
 		
 		JLabel word_7 = new JLabel("账户名称 :");
@@ -155,10 +192,10 @@ public class AccountManagementUI extends JLabel implements ActionListener{
 		word_7.setBounds(610, 405, 60, 25);
 		this.add(word_7);
 		
-		textField_name = new MyTextField(680, 405, 180, 25);
-		textField_name.setBackground(backColor);
-		textField_name.setForeground(foreColor);
-		this.add(textField_name);
+		textField_name2 = new MyTextField(680, 405, 180, 25);
+		textField_name2.setBackground(backColor);
+		textField_name2.setForeground(foreColor);
+		this.add(textField_name2);
 		
 		JLabel word_8 = new JLabel("账户余额 :");
 		word_8.setForeground(Color.WHITE);
@@ -166,10 +203,10 @@ public class AccountManagementUI extends JLabel implements ActionListener{
 		word_8.setBounds(890, 405, 60, 25);
 		this.add(word_8);
 		
-		textField_money = new MyTextField(960, 405, 180, 25);
-		textField_money.setBackground(backColor);
-		textField_money.setForeground(foreColor);
-		this.add(textField_money);
+		textField_money2 = new MyTextField(960, 405, 180, 25);
+		textField_money2.setBackground(backColor);
+		textField_money2.setForeground(foreColor);
+		this.add(textField_money2);
 		
 		button_finish = new MyJButton("修改账户");
 		button_finish.setBounds(1105, 450, 100, 25);
@@ -177,9 +214,174 @@ public class AccountManagementUI extends JLabel implements ActionListener{
 		button_finish.setBackground(backColor);
 		button_finish.setForeground(foreColor);
 		this.add(button_finish);
+		
+		showAll();
+		
+		deleteAccount = new JButton();
+		deleteAccount.addActionListener(this);
+		this.add(deleteAccount);
+		
+		modifyAccount =  new JButton();
+		modifyAccount.addActionListener(this);
+		this.add(modifyAccount);
+		
 	}
 	
 	public void actionPerformed(ActionEvent events) {
 		
+		if(events.getSource() == button_add){
+			if(textField_name.getText().isEmpty() || textField_money.getText().isEmpty()){
+				WarningFrame wf = new WarningFrame("请检查信息填写是否完整");
+				wf.setVisible(true);
+			}else{
+				AccountBLService controller = new AccountController();
+				ResultMessage rm = controller.add(new AccountVO(controller.getID(), 
+						textField_name.getText(), Double.parseDouble(textField_money.getText())));
+				
+				if(rm.equals(ResultMessage.SUCCESS)){
+					showAll();
+					WarningFrame wf = new WarningFrame("账户添加成功！");
+					wf.setVisible(true);
+				}else{
+					WarningFrame wf = new WarningFrame("账户添加失败！");
+					wf.setVisible(true);
+				}
+			}
+		}
+		
+		if(events.getSource() == button_del){
+			if(table.getSelectedRowCount() == 0){
+				WarningFrame wf = new WarningFrame("请选择要删除的账户！");
+				wf.setVisible(true);
+			}else{
+				ExitFinishFrame wff = new ExitFinishFrame("delete a account");
+				wff.setVisible(true);
+			}
+		}
+		
+		if(events.getSource() == deleteAccount){
+			deleteAccount();
+		}
+		
+		if(events.getSource() == modifyAccount){
+			modifyAccount();
+		}
+		
+		if(events.getSource() == button_modify){
+			if(table.getSelectedRowCount() == 0){
+				WarningFrame wf = new WarningFrame("请先选择要修改的账户！");
+				wf.setVisible(true);
+			}else{
+				accountID = accountPool.get(table.getSelectedRow()).ID;
+				word_6.setText("账户ID为 :     " + accountID);
+				textField_name2.setText(accountPool.get(table.getSelectedRow()).name);
+				textField_money2.setText(String.valueOf(accountPool.get(table.getSelectedRow()).money));
+			}
+		}
+		
+		if(events.getSource() == button_finish){
+			if(accountID.equals("")){
+				WarningFrame wf = new WarningFrame("请先选择要修改的账户！");
+				wf.setVisible(true);
+			}else{
+				if(textField_name2.getText().isEmpty() || textField_money2.getText().isEmpty()){
+					WarningFrame wf = new WarningFrame("请检查信息填写是否完整");
+					wf.setVisible(true);
+				}else{
+					ExitFinishFrame wff = new ExitFinishFrame("modify a account");
+					wff.setVisible(true);
+				}
+			}
+		}
+		
+		if(events.getSource() == button_search){
+			
+			DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+			
+			for(int i = 0; i < rowNum; i++){
+				tableModel.removeRow(0);
+			}
+			
+			accountPool.clear();
+			accountID = "";
+			
+			rowNum = 0;
+			
+			//"模糊查找", "账户编号(ID)", "账户名称", "账户余额"
+			AccountBLService controller = new AccountController();
+			ArrayList<AccountVO> accountVO;
+			
+			switch(comboBox.getSelectedIndex()){
+				case 0 : accountVO = controller.find(textField.getText(), null);break;
+				case 1 : accountVO = controller.find(textField.getText(), FindTypeAccount.ID);break;
+				case 2 : accountVO = controller.find(textField.getText(), FindTypeAccount.NAME);break;
+				default : accountVO = controller.find(textField.getText(), FindTypeAccount.MONEY);break;
+			}
+			
+			for(int i = 0; i < accountVO.size(); i++){
+				String[] rowData = {accountVO.get(i).ID, 
+						accountVO.get(i).name, String.valueOf(accountVO.get(i).money)+"元"};
+				tableModel.addRow(rowData);
+				rowNum++;
+				accountPool.add(accountVO.get(i));
+			}
+			
+			WarningFrame wf = new WarningFrame("共有 " + rowNum + " 个账户符合条件！");
+			wf.setVisible(true);
+		}
+	}
+	
+	public void showAll(){
+		
+		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+		
+		for(int i = 0; i < rowNum; i++){
+			tableModel.removeRow(0);
+		}
+		
+		accountPool.clear();
+		accountID = "";
+		
+		rowNum = 0;
+		
+		AccountBLService controller = new AccountController();
+		ArrayList<AccountVO> accountVO = controller.show();
+		
+		for(int i = 0; i < accountVO.size(); i++){
+			String[] rowData = {accountVO.get(i).ID, 
+					accountVO.get(i).name, String.valueOf(accountVO.get(i).money)+"元"};
+			tableModel.addRow(rowData);
+			rowNum++;
+			accountPool.add(accountVO.get(i));
+		}
+	}
+	
+	public void deleteAccount(){
+		AccountBLService controller = new AccountController();
+		ResultMessage rm = controller.delete(accountPool.get(table.getSelectedRow()).ID);
+		
+		if(rm.equals(ResultMessage.SUCCESS)){
+			showAll();
+			WarningFrame wf = new WarningFrame("账户删除成功！");
+			wf.setVisible(true);
+		}else{
+			WarningFrame wf = new WarningFrame("账户删除失败！");
+			wf.setVisible(true);
+		}
+	}
+	
+	public void modifyAccount(){
+		AccountBLService controller = new AccountController();
+		ResultMessage rm = controller.update(new AccountVO(accountID, 
+			textField_name2.getText(), Double.parseDouble(textField_money2.getText())));
+		
+		if(rm.equals(ResultMessage.SUCCESS)){
+			showAll();
+			WarningFrame wf = new WarningFrame("账户修改成功！");
+			wf.setVisible(true);
+		}else{
+			WarningFrame wf = new WarningFrame("账户修改失败！");
+			wf.setVisible(true);
+		}
 	}
 }
