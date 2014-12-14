@@ -1,6 +1,7 @@
 package ui.differui.inventory.inventory_checking;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -26,12 +27,18 @@ public class InventoryCheckingUI extends MyPanel implements ActionListener{
 		String no = "ICL0001";
 		String date = "2014/11/28";
 		
-		//the information bar
-		JLabel infoBar = new JLabel("                     创建库存盘点单");
-		infoBar.setBounds(0, 0, 1100, 20);
-		infoBar.setOpaque(true);
-		infoBar.setForeground(new Color(1, 1, 1, 0.55f));
-		infoBar.setBackground(new Color(1, 1, 1, 0.05f));
+//		Color foreColor = new Color(158, 213, 220);
+//		Color backColor = new Color(46, 52, 101);
+		
+		this.setLayout(null);
+		this.setBounds(0, 0, 1280, 720);
+		this.setOpaque(false);
+
+		JLabel infoBar = new JLabel("制定赠送单 - 选择商品");
+		infoBar.setFont(new Font("华文细黑", Font.BOLD, 18));
+		infoBar.setBounds(80, 14, 1100, 20);
+		infoBar.setForeground(Color.GRAY);
+		infoBar.setOpaque(false);
 		this.add(infoBar);
 		
 		//adding the table 
@@ -40,7 +47,7 @@ public class InventoryCheckingUI extends MyPanel implements ActionListener{
 		MyTable table = new MyTable(headers);
 		
 		JScrollPane jsp=new JScrollPane(table);
-		jsp.setBounds(25, 50 + 20, 1050, 550);
+		jsp.setBounds(25 + 55, 50 + 20 + 14, 1120, 470);
 		jsp.getViewport().setBackground(new Color(0,0,0,0.3f));
 		jsp.setOpaque(false);
 		jsp.setVisible(true);
@@ -50,31 +57,31 @@ public class InventoryCheckingUI extends MyPanel implements ActionListener{
 		JLabel word_no = new JLabel("盘点单号:    " + no);
 		word_no.setForeground(Color.WHITE);
 		word_no.setBackground(new Color(0, 0, 0, 0));
-		word_no.setBounds(27, 35, 120, 25);
+		word_no.setBounds(27 + 55, 35 + 15, 120, 25);
 		this.add(word_no);
 		
 		JLabel word_date = new JLabel("上次盘点日期:    " + date);
 		word_date.setForeground(Color.WHITE);
 		word_date.setBackground(new Color(0, 0, 0, 0));
-		word_date.setBounds(165, 35, 200, 25);
+		word_date.setBounds(165 + 55, 35 + 15, 200, 25);
 		this.add(word_date);
 		
 		//button to check the information of the selected item
 		button_check = new MyJButton("查看选中商品详细信息");
-		button_check.setBounds(200 + 435, 610 + 20, 190, 25);
+		button_check.setBounds(200 + 435 + 110 + 125, 610 + 20 - 55 - 5, 190, 25);
 		button_check.addActionListener(this);
 		this.add(button_check);
 			
 		//button to finish checking
 		button_finish = new MyJButton("导出至EXCEL");
-		button_finish.setBounds(390 + 450, 610 + 20, 110, 25);
+		button_finish.setBounds(390 + 450 + 110 + 125, 610 + 20 - 55 - 5, 110, 25);
 		button_finish.addActionListener(this);
 		this.add(button_finish);	
 		
 		
 		//add a button for returning to the last UI
-		button_return = new MyJButton("返回");
-		button_return.setBounds(515 + 450, 610 + 20, 110, 25);
+		button_return = new MyJButton("刷新");
+		button_return.setBounds(515 + 450 + 110, 610 + 20 - 55 - 525, 110, 25);
 		button_return.addActionListener(this);
 		this.add(button_return);	
 				

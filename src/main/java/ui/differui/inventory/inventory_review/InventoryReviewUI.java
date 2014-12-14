@@ -1,6 +1,7 @@
 package ui.differui.inventory.inventory_review;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -26,21 +27,25 @@ public class InventoryReviewUI extends MyPanel implements ActionListener{
 	
 	public InventoryReviewUI(){
 		
-			
-		//the information bar
-		JLabel infoBar = new JLabel("                     库存查看");
-		infoBar.setBounds(0, 0, 1100, 20);
-		infoBar.setOpaque(true);
-		infoBar.setForeground(new Color(1, 1, 1, 0.55f));
-		infoBar.setBackground(new Color(1, 1, 1, 0.05f));
+		int y = 90;
+		
+		this.setLayout(null);
+		this.setBounds(0, 0, 1280, 720);
+		this.setOpaque(false);
+		
+		JLabel infoBar = new JLabel("库存查看");
+		infoBar.setFont(new Font("华文细黑", Font.BOLD, 18));
+		infoBar.setBounds(80, 14, 1100, 20);
+		infoBar.setForeground(Color.GRAY);
+		infoBar.setOpaque(false);
 		this.add(infoBar);
 		
 		//adding the table 
 		String[] headers = {"出库数量","入库数量","出库金额","入库金额","合计数量","合计金额"};
 		MyTable table = new MyTable(headers);
 		
-		JScrollPane jsp=new JScrollPane(table);
-		jsp.setBounds(25, 150, 1050, 40);
+		JScrollPane jsp = new JScrollPane(table);
+		jsp.setBounds(25 + y, 150, 1050, 40);
 		jsp.getViewport().setBackground(new Color(0,0,0,0.3f));
 		jsp.setOpaque(false);
 		jsp.setVisible(true);
@@ -54,7 +59,7 @@ public class InventoryReviewUI extends MyPanel implements ActionListener{
 		MyTable table2 = new MyTable(headers2);
 		
 		JScrollPane jsp2=new JScrollPane(table2);
-		jsp2.setBounds(25, 270, 1050, 40);
+		jsp2.setBounds(25 + y, 270, 1050, 40);
 		jsp2.getViewport().setBackground(new Color(0,0,0,0.3f));
 		jsp2.setOpaque(false);
 		jsp2.setVisible(true);
@@ -68,7 +73,7 @@ public class InventoryReviewUI extends MyPanel implements ActionListener{
 		MyTable table3 = new MyTable(headers3);
 		
 		JScrollPane jsp3=new JScrollPane(table3);
-		jsp3.setBounds(25, 390, 1050, 200);
+		jsp3.setBounds(25 + y, 390, 1050, 140);
 		jsp3.getViewport().setBackground(new Color(0,0,0,0.3f));
 		jsp3.setOpaque(false);
 		jsp3.setVisible(true);
@@ -78,56 +83,56 @@ public class InventoryReviewUI extends MyPanel implements ActionListener{
 		JLabel word_1 = new JLabel("出入库信息:    ");
 		word_1.setForeground(Color.WHITE);
 		word_1.setBackground(new Color(0, 0, 0, 0));
-		word_1.setBounds(27, 115, 120, 25);
+		word_1.setBounds(27 + y, 115, 120, 25);
 		this.add(word_1);
 		
 		JLabel word_2 = new JLabel("销售进货信息:    ");
 		word_2.setForeground(Color.WHITE);
 		word_2.setBackground(new Color(0, 0, 0, 0));
-		word_2.setBounds(27, 235, 120, 25);
+		word_2.setBounds(27 + y, 235, 120, 25);
 		this.add(word_2);
 		
 		JLabel word_3 = new JLabel("库存相关货单信息:    ");
 		word_3.setForeground(Color.WHITE);
 		word_3.setBackground(new Color(0, 0, 0, 0));
-		word_3.setBounds(27, 355, 120, 25);
+		word_3.setBounds(27 + y, 355, 120, 25);
 		this.add(word_3);
 		
 		JLabel word_4 = new JLabel("选择查看时间段:    ");
 		word_4.setForeground(Color.WHITE);
 		word_4.setBackground(new Color(0, 0, 0, 0));
-		word_4.setBounds(27, 40, 120, 25);
+		word_4.setBounds(27 + y, 40, 120, 25);
 		this.add(word_4);
 		
 		//text fields
-		tf_year1 = new MyTextField(27 + 176, 80, 50, 15);
+		tf_year1 = new MyTextField(27 + 176 + y, 80, 50, 15);
 		this.add(tf_year1);
 		
 		JLabel word_year1 = new JLabel("年");
 		word_year1.setForeground(Color.WHITE);
 		word_year1.setBackground(new Color(0, 0, 0, 0));
-		word_year1.setBounds(87 + 176, 80, 20, 15);
+		word_year1.setBounds(87 + 176 + y, 80, 20, 15);
 		this.add(word_year1);
 		
-		tf_month1 = new MyTextField(110 + 176, 80, 30, 15);
+		tf_month1 = new MyTextField(110 + 176 + y, 80, 30, 15);
 		this.add(tf_month1);
 		
 		JLabel word_month1 = new JLabel("月");
 		word_month1.setForeground(Color.WHITE);
 		word_month1.setBackground(new Color(0, 0, 0, 0));
-		word_month1.setBounds(150 + 176, 80, 20, 15);
+		word_month1.setBounds(150 + 176 + y, 80, 20, 15);
 		this.add(word_month1);
 		
-		tf_day1 = new MyTextField(170 + 176, 80, 30, 15);
+		tf_day1 = new MyTextField(170 + 176 + y, 80, 30, 15);
 		this.add(tf_day1);
 		
 		JLabel word_day1 = new JLabel("日     ~     ");
 		word_day1.setForeground(Color.WHITE);
 		word_day1.setBackground(new Color(0, 0, 0, 0));
-		word_day1.setBounds(210 + 176, 80, 70, 15);
+		word_day1.setBounds(210 + 176 + y, 80, 70, 15);
 		this.add(word_day1);
 		
-		int x = 235 + 176;
+		int x = 235 + 176 + y;
 		
 		tf_year2 = new MyTextField(27 + x, 80, 50, 15);
 		this.add(tf_year2);
@@ -163,12 +168,12 @@ public class InventoryReviewUI extends MyPanel implements ActionListener{
 				
 		//add a button for returning to the last UI
 		button_return = new MyJButton("返回");
-		button_return.setBounds(515 + 450, 610 + 20, 110, 25);
+		button_return.setBounds(515 + 450 + y, 610 + 20 - 60, 110, 25);
 		button_return.addActionListener(this);
 		this.add(button_return);	
 		
 		button_list = new MyJButton("查看所选货单信息");
-		button_list.setBounds(400 + 400, 610 + 20, 150, 25);
+		button_list.setBounds(400 + 400 + y, 610 + 20 - 60, 150, 25);
 		button_list.addActionListener(this);
 		this.add(button_list);	
 				
