@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 
 
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -23,7 +24,8 @@ import javax.swing.table.TableColumn;
 
 import message.ResultMessage;
 import dataenum.BillType;
-import businesslogic.approvalbl.Approval;
+import blservice.approvalblservice.ApprovalBLService;
+import businesslogic.approvalbl.ApprovalController;
 import businesslogic.approvalbl.ApprovalShow;
 import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.myui.MyComboBox;
@@ -187,7 +189,7 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 		}
 		
 		if(events.getSource() == passBill){
-			Approval controller = new Approval();
+			ApprovalBLService controller = new ApprovalController();
 					
 			for(int i = 0; i < rowNum; i++){
 				if(table.getValueAt(i, 0).equals(Boolean.TRUE)){
@@ -226,15 +228,45 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 			rowNum = 0;
 			
 			if(cbb_isApproval.getSelectedIndex() == 1){
-				getApprovalData(cbb_sort.getSelectedIndex());
+				try {
+					getApprovalData(cbb_sort.getSelectedIndex());
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}else if(cbb_isApproval.getSelectedIndex() == 2){
-				getPassData(cbb_sort.getSelectedIndex());
+				try {
+					getPassData(cbb_sort.getSelectedIndex());
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}else if(cbb_isApproval.getSelectedIndex() == 3){
-				getFailureData(cbb_sort.getSelectedIndex());
+				try {
+					getFailureData(cbb_sort.getSelectedIndex());
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}else{
-				getApprovalData(cbb_sort.getSelectedIndex());
-				getPassData(cbb_sort.getSelectedIndex());
-				getFailureData(cbb_sort.getSelectedIndex());
+				try {
+					getApprovalData(cbb_sort.getSelectedIndex());
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				try {
+					getPassData(cbb_sort.getSelectedIndex());
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				try {
+					getFailureData(cbb_sort.getSelectedIndex());
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			
 			if(rowNum == 0){
@@ -248,7 +280,7 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 		
 	}
 	
-	private void getApprovalData(int index){
+	private void getApprovalData(int index) throws RemoteException{
 		
 		ApprovalShow controller = new ApprovalShow();
 		ArrayList<PurchaseVO> approval_pur = controller.ShowApproving().purchaseVOs;
@@ -309,7 +341,7 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 			}
 	}
 	
-	private void getPassData(int index){
+	private void getPassData(int index) throws RemoteException{
 		ApprovalShow controller = new ApprovalShow();
 		ArrayList<PurchaseVO> approval_pur = controller.showPass().purchaseVOs;
 		ArrayList<SalesVO> approval_sale = controller.showPass().salesVOs;
@@ -359,7 +391,7 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 			}
 	}
 	
-	private void getFailureData(int index){
+	private void getFailureData(int index) throws RemoteException{
 		ApprovalShow controller = new ApprovalShow();
 		ArrayList<PurchaseVO> approval_pur = controller.showFailure().purchaseVOs;
 		ArrayList<SalesVO> approval_sale = controller.showFailure().salesVOs;

@@ -21,7 +21,8 @@ import ui.commonui.warning.WarningFrame;
 import ui.differui.salesman.frame.Frame_Salesman;
 import vo.commodity.CommodityItemVO;
 import blservice.purchaseblservice.PurInputInfo;
-import businesslogic.purchasebl.Purchase;
+import blservice.purchaseblservice.PurchaseBLService;
+import businesslogic.purchasebl.PurchaseController;
 import dataenum.Storage;
 
 public class InBackFinal extends JLabel implements ActionListener{
@@ -91,7 +92,7 @@ public class InBackFinal extends JLabel implements ActionListener{
 	public void actionPerformed(ActionEvent events){
 		
 		if(events.getSource() == button_finish){
-			Purchase purController = new Purchase();
+			PurchaseBLService purController = new PurchaseController();
 			ArrayList<CommodityItemVO> list = InBackFirst.commoList;
 			
 			purController.getPurBackID();
@@ -131,7 +132,7 @@ public class InBackFinal extends JLabel implements ActionListener{
 	
 	public String showText(){
 		
-		Purchase purController = new Purchase();
+		PurchaseBLService purController = new PurchaseController();
 		ArrayList<CommodityItemVO> list = InBackFirst.commoList;
 		double total = 0;
 		ID = purController.getPurBackID();

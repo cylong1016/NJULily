@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -366,8 +367,14 @@ public class GiftUI extends MyPanel implements ActionListener{
 					for(int i = 0; i < addCommoID.size(); i++){
 						for(int j = 0; j < addCommoID.size(); j++){
 							if(addCommoID.get(i).equals(table2.getValueAt(j, 0))){
-								commoList.add(new BillListItem((String)table2.getValueAt(j, 0)
-										,Integer.parseInt((String) table2.getValueAt(j, 3))));
+								try {
+									commoList.add(new BillListItem((String)table2.getValueAt(j, 0)
+											,Integer.parseInt((String) table2.getValueAt(j, 3))));
+								} catch (NumberFormatException
+										| RemoteException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
 							}
 						}
 					}

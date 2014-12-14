@@ -24,7 +24,7 @@ import blservice.commodityblservice.CommodityBLService;
 import blservice.inventoryblservice.InventoryBLService;
 import businesslogic.commoditybl.CommodityController;
 import businesslogic.inventorybl.BillListItem;
-import businesslogic.inventorybl.Inventory;
+import businesslogic.inventorybl.InventoryController;
 
 public class WarningFinish extends JLabel implements ActionListener{
 
@@ -98,7 +98,7 @@ public class WarningFinish extends JLabel implements ActionListener{
 		if(events.getSource() == button_finish){
 			if(alarmType == 1){
 				
-				InventoryBLService controller = new Inventory();
+				InventoryBLService controller = new InventoryController();
 				ArrayList<BillListItem> list = WarningIndex.commoList;
 				
 				controller.getOverFlowID();
@@ -116,7 +116,7 @@ public class WarningFinish extends JLabel implements ActionListener{
 				this.setVisible(false);
 			}else if(alarmType == 2){
 				
-				InventoryBLService controller = new Inventory();
+				InventoryBLService controller = new InventoryController();
 				ArrayList<BillListItem> list = WarningIndex.commoList;
 				
 				controller.getLossID();
@@ -133,7 +133,7 @@ public class WarningFinish extends JLabel implements ActionListener{
 				Frame_Inventory.visibleTrue(0);
 				this.setVisible(false);
 			}else{
-				InventoryBLService controller = new Inventory();
+				InventoryBLService controller = new InventoryController();
 				ArrayList<BillListItem> list = WarningIndex.commoList;
 				
 				controller.getAlarmID();
@@ -299,7 +299,7 @@ public class WarningFinish extends JLabel implements ActionListener{
 	
 	public String billID(){
 		
-		InventoryBLService controller = new Inventory();
+		InventoryBLService controller = new InventoryController();
 		
 		switch(alarmType){
 		case 1: return controller.getOverFlowID();

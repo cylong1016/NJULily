@@ -8,9 +8,9 @@ import vo.promotion.PromotionTotalVO;
 import blservice.promotionblservice.PromotionClientBLService;
 import blservice.promotionblservice.PromotionCommodityBLService;
 import blservice.promotionblservice.PromotionTotalBLService;
-import businesslogic.promotionbl.type.PromotionClient;
-import businesslogic.promotionbl.type.PromotionCommodity;
-import businesslogic.promotionbl.type.PromotionTotal;
+import businesslogic.promotionbl.type.PromotionClientController;
+import businesslogic.promotionbl.type.PromotionCommodityController;
+import businesslogic.promotionbl.type.PromotionTotalController;
 
 public class PromotionData {
 	
@@ -23,7 +23,7 @@ public class PromotionData {
 	 * @version Dec 11, 2014 1:29:48 AM
 	 */
 	public Object[][] getClientPromotion() {
-		PromotionClientBLService promotionBL = new PromotionClient();
+		PromotionClientBLService promotionBL = new PromotionClientController();
 		ArrayList<PromotionClientVO> clientProVO = promotionBL.show();
 		int i = 0;
 		Object[][] cellData = new Object[clientProVO.size()][CELL];
@@ -42,7 +42,7 @@ public class PromotionData {
 	 * @version Dec 11, 2014 1:30:11 AM
 	 */
 	public Object[][] getCommodityPromotion() {
-		PromotionCommodityBLService promotionBL = new PromotionCommodity();
+		PromotionCommodityBLService promotionBL = new PromotionCommodityController();
 		ArrayList<PromotionCommodityVO> commodityVOs = promotionBL.show();
 		Object[][] cellData = new Object[commodityVOs.size()][CELL];
 		int i = 0;
@@ -61,7 +61,7 @@ public class PromotionData {
 	 * @version Dec 11, 2014 1:30:40 AM
 	 */
 	public Object[][] getTotalPromotion() {
-		PromotionTotalBLService promotionBL = new PromotionTotal();
+		PromotionTotalBLService promotionBL = new PromotionTotalController();
 		ArrayList<PromotionTotalVO> totalVOs = promotionBL.show();
 		Object[][] cellData = new Object[totalVOs.size()][CELL];
 		int i = 0;

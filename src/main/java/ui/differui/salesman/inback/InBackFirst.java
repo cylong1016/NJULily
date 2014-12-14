@@ -26,10 +26,11 @@ import vo.client.ClientVO;
 import vo.commodity.CommodityItemVO;
 import vo.commodity.CommoditySortVO;
 import vo.commodity.CommodityVO;
+import blservice.approvalblservice.ApprovalShowBLService;
 import blservice.clientblservice.ClientBLService;
 import blservice.commodityblservice.CommodityBLService;
 import blservice.commoditysortblservice.CommoditySortBLService;
-import businesslogic.approvalbl.ApprovalShow;
+import businesslogic.approvalbl.ApprovalShowController;
 import businesslogic.clientbl.ClientController;
 import businesslogic.commoditybl.CommodityController;
 import businesslogic.commoditysortbl.CommoditySortController;
@@ -246,7 +247,7 @@ public class InBackFirst extends MyPanel implements ActionListener{
 				wf.setVisible(true);
 			}else{
 				
-				ApprovalShow appController = new ApprovalShow();
+				ApprovalShowBLService appController = new ApprovalShowController();
 				ArrayList<PurchaseVO> list = appController.showPass().purchaseVOs;
 					
 				DefaultTableModel model = (DefaultTableModel) table3.getModel();

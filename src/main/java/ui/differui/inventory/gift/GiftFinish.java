@@ -21,9 +21,10 @@ import ui.commonui.warning.WarningFrame;
 import ui.differui.inventory.frame.Frame_Inventory;
 import vo.commodity.CommodityVO;
 import blservice.commodityblservice.CommodityBLService;
+import blservice.inventoryblservice.InventoryBLService;
 import businesslogic.commoditybl.CommodityController;
 import businesslogic.inventorybl.BillListItem;
-import businesslogic.inventorybl.Inventory;
+import businesslogic.inventorybl.InventoryController;
 
 
 public class GiftFinish extends JLabel implements ActionListener{
@@ -94,7 +95,7 @@ public class GiftFinish extends JLabel implements ActionListener{
 	public void actionPerformed(ActionEvent events){
 		
 		if(events.getSource() == button_finish){
-			Inventory controller = new Inventory();
+			InventoryBLService controller = new InventoryController();
 			ArrayList<BillListItem> list = GiftUI.commoList;
 			
 			controller.getGiftID();
@@ -134,7 +135,7 @@ public class GiftFinish extends JLabel implements ActionListener{
 	
 	public String showText(){
 		
-		Inventory controller = new Inventory();
+		InventoryBLService controller = new InventoryController();
 		ArrayList<BillListItem> list = GiftUI.commoList;
 		
 		ID = controller.getGiftID();

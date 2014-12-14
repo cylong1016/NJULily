@@ -17,7 +17,8 @@ import javax.swing.filechooser.FileSystemView;
 
 import dataenum.Storage;
 import blservice.purchaseblservice.PurInputInfo;
-import businesslogic.purchasebl.Purchase;
+import blservice.purchaseblservice.PurchaseBLService;
+import businesslogic.purchasebl.PurchaseController;
 import ui.commonui.login.Frame_Login;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.warning.WarningFrame;
@@ -92,7 +93,7 @@ public class InFinal extends JLabel implements ActionListener{
 	public void actionPerformed(ActionEvent events){
 		
 		if(events.getSource() == button_finish){
-			Purchase purController = new Purchase();
+			PurchaseBLService purController = new PurchaseController();
 			ArrayList<CommodityItemVO> list = InGood.commoList;
 			
 			purController.getPurchaseID();
@@ -132,7 +133,7 @@ public class InFinal extends JLabel implements ActionListener{
 	
 	public String showText(){
 		
-		Purchase purController = new Purchase();
+		PurchaseBLService purController = new PurchaseController();
 		ArrayList<CommodityItemVO> list = InGood.commoList;
 		double total = 0;
 		ID = purController.getPurchaseID();
