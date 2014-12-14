@@ -26,10 +26,13 @@ import vo.client.ClientVO;
 import vo.commodity.CommodityItemVO;
 import vo.commodity.CommoditySortVO;
 import vo.commodity.CommodityVO;
+import blservice.clientblservice.ClientBLService;
+import blservice.commodityblservice.CommodityBLService;
+import blservice.commoditysortblservice.CommoditySortBLService;
 import businesslogic.approvalbl.ApprovalShow;
-import businesslogic.clientbl.Client;
-import businesslogic.commoditybl.Commodity;
-import businesslogic.commoditysortbl.CommoditySort;
+import businesslogic.clientbl.ClientController;
+import businesslogic.commoditybl.CommodityController;
+import businesslogic.commoditysortbl.CommoditySortController;
 import dataenum.ClientCategory;
 
 public class InBackFirst extends MyPanel implements ActionListener{
@@ -224,7 +227,7 @@ public class InBackFirst extends MyPanel implements ActionListener{
 				
 			rowNum2 = 0;
 				
-			Client clientController = new Client();
+			ClientBLService clientController = new ClientController();
 			ArrayList<ClientVO> clientList = clientController.show();
 			Boolean flag = false;
 			String ID = "";
@@ -286,7 +289,7 @@ public class InBackFirst extends MyPanel implements ActionListener{
 				
 				ArrayList<CommodityItemVO> commoArray = billList.get(table3.getSelectedRow()).commodities;
 				
-				Commodity commoController = new Commodity();
+				CommodityBLService commoController = new CommodityController();
 				for(int j = 0; j < commoArray.size(); j++){
 					for(int i = 0; i < commoController.show().size(); i++){
 						if(commoController.show().get(i).ID.equals(commoArray.get(j).ID)){
@@ -316,7 +319,7 @@ public class InBackFirst extends MyPanel implements ActionListener{
 				
 				rowNum = 0;
 				
-				Commodity commoController = new Commodity();
+				CommodityBLService commoController = new CommodityController();
 				for(int j = 0; j < clientCommoList.size(); j++){
 					for(int i = 0; i < commoController.show().size(); i++){
 						if(commoController.show().get(i).ID.equals(clientCommoList.get(j).ID)){
@@ -355,7 +358,7 @@ public class InBackFirst extends MyPanel implements ActionListener{
 				
 				if(flag == true){
 					
-					Commodity controller = new Commodity();
+					CommodityBLService controller = new CommodityController();
 					ArrayList<CommodityVO> commoList = controller.show();
 					
 					for(int i = 0; i < commoList.size(); i++){
@@ -443,7 +446,7 @@ public class InBackFirst extends MyPanel implements ActionListener{
 	}
 	
 	public String getSortName(String ID){
-		CommoditySort controller = new CommoditySort();
+		CommoditySortBLService controller = new CommoditySortController();
 		ArrayList<CommoditySortVO> list = controller.show();
 		
 		for(int i = 1; i < list.size(); i++){
@@ -474,7 +477,7 @@ public class InBackFirst extends MyPanel implements ActionListener{
 			
 	private String getClient(){
 		String str = "";
-		Client controller = new Client();
+		ClientBLService controller = new ClientController();
 		for(int i = 0; i < controller.show().size(); i++){
 			if(!controller.show().get(i).category.equals(ClientCategory.SALES_PERSON))
 				str = str + controller.show().get(i).name + ";";

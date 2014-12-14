@@ -15,7 +15,8 @@ import javax.swing.table.JTableHeader;
 
 import message.ResultMessage;
 import dataenum.FindTypeClient;
-import businesslogic.clientbl.Client;
+import blservice.clientblservice.ClientBLService;
+import businesslogic.clientbl.ClientController;
 import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.myui.MyComboBox;
 import ui.commonui.myui.MyJButton;
@@ -38,13 +39,13 @@ public class ClientManagementUI extends JLabel implements ActionListener{
 	String deleteID = "";
 	static int rowNum;
 	
-	Client controller;
+	ClientBLService controller;
 	
 	public ClientManagementUI(){
 		this.setLayout(null);
 		this.setBounds(0, 0, 1280, 720);
 		
-		controller = new Client();
+		controller = new ClientController();
 		
 		Color foreColor = new Color(158, 213, 220);
 		Color backColor = new Color(46, 52, 101);
@@ -163,7 +164,7 @@ public class ClientManagementUI extends JLabel implements ActionListener{
 			
 			rowNum = 0;
 			
-			controller = new Client();
+			controller = new ClientController();
 			
 			rowNum = controller.show().size();
 			
@@ -193,7 +194,7 @@ public class ClientManagementUI extends JLabel implements ActionListener{
 		
 		if(events.getSource() == button_delete){
 			
-			controller = new Client();
+			controller = new ClientController();
 			
 			ResultMessage rm = controller.deletClient(deleteID);
 			
@@ -211,7 +212,7 @@ public class ClientManagementUI extends JLabel implements ActionListener{
 
 		if(events.getSource() == button_cam){
 			
-			controller = new Client();
+			controller = new ClientController();
 			
 			if(table.getSelectedRow() < 0){
 				WarningFrame wf = new WarningFrame("请选择要进行查看或修改的客户！");
@@ -234,7 +235,7 @@ public class ClientManagementUI extends JLabel implements ActionListener{
 				
 			}else{
 				
-				controller = new Client();
+				controller = new ClientController();
 				ArrayList<ClientVO> list = controller.findClient(textField.getText(), getType(comboBox.getSelectedIndex()));
 				
 				if(list.size() == 0){

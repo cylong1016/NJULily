@@ -10,7 +10,8 @@ import javax.swing.JLabel;
 import message.ResultMessage;
 import dataenum.ClientCategory;
 import dataenum.ClientLevel;
-import businesslogic.clientbl.Client;
+import blservice.clientblservice.ClientBLService;
+import businesslogic.clientbl.ClientController;
 import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.exitfunction.ExitFunctionFrame;
 import ui.commonui.login.Frame_Login;
@@ -29,7 +30,7 @@ public class ClientAddingPanel extends MyPanel implements ActionListener{
 	JButton button_add, button_return;
 	public static JButton addConform;
 	
-	Client controller; 
+	ClientBLService controller; 
 	
 	public ClientAddingPanel(){
 			
@@ -192,7 +193,7 @@ public class ClientAddingPanel extends MyPanel implements ActionListener{
 		
 		if(events.getSource() == addConform){
 			
-			controller = new Client();	
+			controller = new ClientController();	
 			
 			ResultMessage res = controller.addClient(new ClientAddVO(
 				controller.getID(), getCategory(comboBox_category.getSelectedIndex())

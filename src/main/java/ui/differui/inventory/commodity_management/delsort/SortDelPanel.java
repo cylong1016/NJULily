@@ -15,7 +15,8 @@ import ui.commonui.myui.MyPanel;
 import ui.commonui.warning.WarningFrame;
 import ui.differui.inventory.commodity_management.index.CommodityManagementUI;
 import vo.commodity.CommoditySortVO;
-import businesslogic.commoditysortbl.CommoditySort;
+import blservice.commoditysortblservice.CommoditySortBLService;
+import businesslogic.commoditysortbl.CommoditySortController;
 
 public class SortDelPanel extends MyPanel implements ActionListener{
 
@@ -79,7 +80,7 @@ public class SortDelPanel extends MyPanel implements ActionListener{
 	}	
 	
 	public static void deleteSort(){
-		CommoditySort controller = new CommoditySort();
+		CommoditySortBLService controller = new CommoditySortController();
 		
 		ArrayList<CommoditySortVO> csvo = controller.show();
 		

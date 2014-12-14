@@ -13,8 +13,8 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.DefaultTreeSelectionModel;
 
 import vo.commodity.CommoditySortVO;
-import businesslogic.commoditysortbl.CommoditySort;
-
+import blservice.commoditysortblservice.CommoditySortBLService;
+import businesslogic.commoditysortbl.CommoditySortController;
 
 
 public class MyTree extends JTree{
@@ -61,13 +61,13 @@ public class MyTree extends JTree{
 		this.setCellRenderer(cellRender);
 	}
 	
-	CommoditySort controller;
+	CommoditySortBLService controller;
 	
 	public String getName(String ID){
 		if(ID.equals("00")){
 			return "所有商品分类";
 		}else{
-			controller = new CommoditySort();
+			controller = new CommoditySortController();
 			ArrayList<CommoditySortVO> list = controller.show();
 			for(int j = 1; j < list.size(); j++){
 				if(list.get(j).ID.equals(ID)){
@@ -79,7 +79,7 @@ public class MyTree extends JTree{
 	}
 	
 	public void initTree(DefaultMutableTreeNode fatherNode, String parentID){
-		controller = new CommoditySort();
+		controller = new CommoditySortController();
 		ArrayList<CommoditySortVO> list = controller.show();
 		
 		for(int j = 1; j < list.size(); j++){

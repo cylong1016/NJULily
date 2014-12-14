@@ -7,15 +7,16 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
-
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import message.ResultMessage;
 import dataenum.FindTypeCommo;
-import businesslogic.commoditybl.Commodity;
-import businesslogic.commoditysortbl.CommoditySort;
+import blservice.commodityblservice.CommodityBLService;
+import blservice.commoditysortblservice.CommoditySortBLService;
+import businesslogic.commoditybl.CommodityController;
+import businesslogic.commoditysortbl.CommoditySortController;
 import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.exitfunction.ExitFunctionFrame;
 import ui.commonui.myui.MyComboBox;
@@ -261,7 +262,7 @@ public class CommodityManagementUI extends MyPanel implements ActionListener{
 			
 			rowNum = 0;
 			
-			Commodity controller = new Commodity();
+			CommodityBLService controller = new CommodityController();
 			
 			rowNum = controller.show().size();
 			
@@ -288,7 +289,7 @@ public class CommodityManagementUI extends MyPanel implements ActionListener{
 				
 			}else{
 				
-				Commodity controller = new Commodity();
+				CommodityBLService controller = new CommodityController();
 				ArrayList<CommodityVO> list = controller.findCommo(textField.getText()
 						, getType(comboBox.getSelectedIndex()));
 				
@@ -335,7 +336,7 @@ public class CommodityManagementUI extends MyPanel implements ActionListener{
 		}
 		
 		if(events.getSource() == delGood){
-			Commodity controller = new Commodity();
+			CommodityBLService controller = new CommodityController();
 			
 			ResultMessage rm = controller.deletCommo(deleteID);
 			
@@ -356,7 +357,7 @@ public class CommodityManagementUI extends MyPanel implements ActionListener{
 	}
 	
 	public String getSortName(String ID){
-		CommoditySort controller = new CommoditySort();
+		CommoditySortBLService controller = new CommoditySortController();
 		ArrayList<CommoditySortVO> list = controller.show();
 		
 		for(int i = 1; i < list.size(); i++){

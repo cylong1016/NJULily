@@ -9,7 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import message.ResultMessage;
-import businesslogic.commoditysortbl.CommoditySort;
+import blservice.commoditysortblservice.CommoditySortBLService;
+import businesslogic.commoditysortbl.CommoditySortController;
 import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.exitfunction.ExitFunctionFrame;
 import ui.commonui.myui.MyJButton;
@@ -69,7 +70,7 @@ public class SortDetailPanel extends MyPanel implements ActionListener{
 	}
 	
 	public static void changeName(){
-		CommoditySort controller = new CommoditySort();
+		CommoditySortBLService controller = new CommoditySortController();
 		ArrayList<CommoditySortVO> list = controller.show();
 		String ID = "";
 		

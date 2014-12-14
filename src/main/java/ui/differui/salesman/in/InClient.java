@@ -22,7 +22,8 @@ import ui.commonui.myui.MyTextField;
 import ui.commonui.warning.WarningFrame;
 import ui.differui.salesman.frame.Frame_Salesman;
 import vo.client.ClientVO;
-import businesslogic.clientbl.Client;
+import blservice.clientblservice.ClientBLService;
+import businesslogic.clientbl.ClientController;
 import dataenum.FindTypeClient;
 
 public class InClient extends JLabel implements ActionListener{
@@ -41,13 +42,13 @@ public class InClient extends JLabel implements ActionListener{
 	static int rowNum;
 	public static String ClientName, ClientID, storeName ,note;
 	
-	Client controller;
+	ClientBLService controller;
 	
 	public InClient(){
 		this.setLayout(null);
 		this.setBounds(0, 0, 1280, 720);
 		
-		controller = new Client();
+		controller = new ClientController();
 		
 		Color foreColor = new Color(158, 213, 220);
 		Color backColor = new Color(46, 52, 101);
@@ -198,7 +199,7 @@ public class InClient extends JLabel implements ActionListener{
 			
 			rowNum = 0;
 			
-			controller = new Client();
+			controller = new ClientController();
 			
 			rowNum = controller.show().size();
 			
@@ -257,7 +258,7 @@ public class InClient extends JLabel implements ActionListener{
 				
 			}else{
 				
-				controller = new Client();
+				controller = new ClientController();
 				ArrayList<ClientVO> list = controller.findClient(textField.getText(), getType(comboBox.getSelectedIndex()));
 				
 				if(list.size() == 0){

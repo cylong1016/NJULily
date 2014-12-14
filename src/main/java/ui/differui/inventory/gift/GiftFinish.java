@@ -19,10 +19,9 @@ import ui.commonui.login.Frame_Login;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.warning.WarningFrame;
 import ui.differui.inventory.frame.Frame_Inventory;
-
 import vo.commodity.CommodityVO;
-
-import businesslogic.commoditybl.Commodity;
+import blservice.commodityblservice.CommodityBLService;
+import businesslogic.commoditybl.CommodityController;
 import businesslogic.inventorybl.BillListItem;
 import businesslogic.inventorybl.Inventory;
 
@@ -172,7 +171,7 @@ public class GiftFinish extends JLabel implements ActionListener{
 		
 		for(int k = 0; k < list.size(); k++){
 			
-			Commodity commo = new Commodity();
+			CommodityBLService commo = new CommodityController();
 			ArrayList<CommodityVO> cmList = commo.show();
 			CommodityVO cvo = null ;
 			

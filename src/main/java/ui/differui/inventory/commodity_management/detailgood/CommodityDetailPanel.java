@@ -11,8 +11,10 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
 import message.ResultMessage;
-import businesslogic.commoditybl.Commodity;
-import businesslogic.commoditysortbl.CommoditySort;
+import blservice.commodityblservice.CommodityBLService;
+import blservice.commoditysortblservice.CommoditySortBLService;
+import businesslogic.commoditybl.CommodityController;
+import businesslogic.commoditysortbl.CommoditySortController;
 import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.exitfunction.ExitFunctionFrame;
 import ui.commonui.myui.MyJButton;
@@ -36,7 +38,7 @@ public class CommodityDetailPanel extends MyPanel implements ActionListener{
 	
 	public CommodityDetailPanel(String ID){
 		
-		Commodity controller = new Commodity();
+		CommodityBLService controller = new CommodityController();
 		CommodityVO cvo = controller.show(ID);
 		
 			
@@ -248,7 +250,7 @@ public class CommodityDetailPanel extends MyPanel implements ActionListener{
 		}
 		
 		if(events.getSource() == modify){
-			Commodity controller = new Commodity();
+			CommodityBLService controller = new CommodityController();
 			ResultMessage rm = controller.updCommo(textField_id.getText(),
 					new CommodityUpdateVO(textField_name.getText(), textField_model.getText(), 
 					Double.parseDouble(textField_purPrice.getText()), Double.parseDouble(textField_price.getText())));
@@ -275,7 +277,7 @@ public class CommodityDetailPanel extends MyPanel implements ActionListener{
 	}
 	
 	public String getSortName(String ID){
-		CommoditySort controller = new CommoditySort();
+		CommoditySortBLService controller = new CommoditySortController();
 		ArrayList<CommoditySortVO> list = controller.show();
 		
 		for(int i = 1; i < list.size(); i++){

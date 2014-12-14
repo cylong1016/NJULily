@@ -14,8 +14,10 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-import businesslogic.commoditybl.Commodity;
-import businesslogic.commoditysortbl.CommoditySort;
+import blservice.commodityblservice.CommodityBLService;
+import blservice.commoditysortblservice.CommoditySortBLService;
+import businesslogic.commoditybl.CommodityController;
+import businesslogic.commoditysortbl.CommoditySortController;
 import businesslogic.inventorybl.BillListItem;
 import dataenum.FindTypeCommo;
 import ui.commonui.myui.MyComboBox;
@@ -213,7 +215,7 @@ public class GiftUI extends MyPanel implements ActionListener{
 			
 			rowNum = 0;
 			
-			Commodity controller = new Commodity();
+			CommodityBLService controller = new CommodityController();
 			
 			rowNum = controller.show().size();
 			
@@ -240,7 +242,7 @@ public class GiftUI extends MyPanel implements ActionListener{
 				
 			}else{
 				
-				Commodity controller = new Commodity();
+				CommodityBLService controller = new CommodityController();
 				ArrayList<CommodityVO> list = controller.findCommo(textField.getText()
 						, getType(comboBox.getSelectedIndex()));
 				
@@ -295,7 +297,7 @@ public class GiftUI extends MyPanel implements ActionListener{
 				
 				if(flag == true){
 					
-					Commodity controller = new Commodity();
+					CommodityBLService controller = new CommodityController();
 					ArrayList<CommodityVO> commoList = controller.show();
 					
 					for(int i = 0; i < commoList.size(); i++){
@@ -381,7 +383,7 @@ public class GiftUI extends MyPanel implements ActionListener{
 	}
 	
 	public String getSortName(String ID){
-		CommoditySort controller = new CommoditySort();
+		CommoditySortBLService controller = new CommoditySortController();
 		ArrayList<CommoditySortVO> list = controller.show();
 		
 		for(int i = 1; i < list.size(); i++){

@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-import businesslogic.commoditysortbl.CommoditySort;
+import blservice.commoditysortblservice.CommoditySortBLService;
+import businesslogic.commoditysortbl.CommoditySortController;
 import message.ResultMessage;
 import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.exitfunction.ExitFunctionFrame;
@@ -86,7 +87,7 @@ public class SortAddingPanel extends MyPanel implements ActionListener{
 	}	
 	
 	public static void addingConfirm(){
-		CommoditySort controller = new CommoditySort();
+		CommoditySortBLService controller = new CommoditySortController();
 		
 		ResultMessage rs = null;
 		

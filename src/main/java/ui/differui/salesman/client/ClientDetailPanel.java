@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 
 
 
+
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -18,7 +20,8 @@ import message.ResultMessage;
 import dataenum.ClientCategory;
 import dataenum.ClientLevel;
 import dataenum.FindTypeClient;
-import businesslogic.clientbl.Client;
+import blservice.clientblservice.ClientBLService;
+import businesslogic.clientbl.ClientController;
 import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.myui.MyButton;
 import ui.commonui.myui.MyComboBox;
@@ -302,7 +305,7 @@ public class ClientDetailPanel extends MyPanel implements ActionListener{
 		
 		if(events.getSource() == bt_modify){
 					
-			Client controller = new Client();
+			ClientBLService controller = new ClientController();
 			
 			ResultMessage rm = controller.updClient(new ClientAddVO(textField_id.getText()
 					, getCategory(comboBox_category.getSelectedIndex()),getLevel(comboBox_level.getSelectedIndex()),

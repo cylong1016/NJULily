@@ -12,8 +12,10 @@ import javax.swing.JScrollPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import message.ResultMessage;
-import businesslogic.commoditybl.Commodity;
-import businesslogic.commoditysortbl.CommoditySort;
+import blservice.commodityblservice.CommodityBLService;
+import blservice.commoditysortblservice.CommoditySortBLService;
+import businesslogic.commoditybl.CommodityController;
+import businesslogic.commoditysortbl.CommoditySortController;
 import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.exitfunction.ExitFunctionFrame;
 import ui.commonui.myui.MyJButton;
@@ -156,7 +158,7 @@ public class CommodityAddingPanel extends MyPanel implements ActionListener{
 	}
 	
 	public String getSortID(DefaultMutableTreeNode note){
-		CommoditySort controller = new CommoditySort();
+		CommoditySortBLService controller = new CommoditySortController();
 		ArrayList<CommoditySortVO> list = controller.show();
 		
 		for(int i = 1; i < list.size(); i++){
@@ -207,7 +209,7 @@ public class CommodityAddingPanel extends MyPanel implements ActionListener{
 		}
 		
 		if(events.getSource() == addGood){
-			Commodity controller = new Commodity();
+			CommodityBLService controller = new CommodityController();
 			ResultMessage rm = controller.addCommo(new CommodityAddVO(controller.getID(getSortID(note)), 
 					tf_name.getText(), tf_model.getText(), getSortID(note), 
 					0, Double.parseDouble(tf_purPrice.getText()), Double.parseDouble(tf_salePrice.getText())));
