@@ -1,8 +1,5 @@
 package blservice.purchaseblservice;
 
-import java.util.ArrayList;
-
-import dataenum.BillType;
 import vo.PurchaseVO;
 import vo.commodity.CommodityItemVO;
 
@@ -12,22 +9,22 @@ import vo.commodity.CommodityItemVO;
  * @version Oct 26, 2014 3:11:13 PM
  */
 /**
- * 
  * @author Zing
  * @version 2014年10月31日下午4:36:47
  */
 public interface PurchaseBLService {
-	
+
 	/**
-	 *  新建进货（进货退货）单的时候返回给界面显示单据的ID
+	 * 新建进货（进货退货）单的时候返回给界面显示单据的ID
 	 * @param type 单据的类型：进货单／进货退货单
 	 * @return 单据的ID
 	 * @author Zing
 	 * @version Nov 29, 2014 2:59:37 PM
 	 */
 	public String getPurchaseID();
+
 	public String getPurBackID();
-	
+
 	/**
 	 * 添加商品到进货（进货退货）单中
 	 * @param item
@@ -35,7 +32,7 @@ public interface PurchaseBLService {
 	 * @version Nov 29, 2014 3:02:01 PM
 	 */
 	public void addCommodities(CommodityItemVO item);
-	
+
 	/**
 	 * 创建进货（进货退货）单时，变成审批状态
 	 * @param info
@@ -44,7 +41,7 @@ public interface PurchaseBLService {
 	 * @version Nov 29, 2014 3:09:49 PM
 	 */
 	public PurchaseVO submit(PurInputInfo info);
-	
+
 	/**
 	 * 创建进货（进货退货）单时，变成草稿状态
 	 * @param info
@@ -53,5 +50,5 @@ public interface PurchaseBLService {
 	 * @version Nov 29, 2014 3:09:52 PM
 	 */
 	public PurchaseVO save(PurInputInfo info);
-	
+
 }

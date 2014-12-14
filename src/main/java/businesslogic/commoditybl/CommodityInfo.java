@@ -11,7 +11,7 @@ import businesslogic.inventorybl.info.CommodityInfo_Inventory;
 import businesslogic.promotionbl.info.CommodityInfo_Promotion;
 import businesslogic.salebl.info.CommodityInfo_Sale;
 
-public class CommodityInfo implements CommodityInfo_Sale, businesslogic.purchasebl.CommodityInfo_Purchase, CommodityInfo_Inventory, CommodityInfo_Promotion, CommodityInfo_Init{
+public class CommodityInfo implements CommodityInfo_Sale, businesslogic.purchasebl.info.CommodityInfo_Purchase, CommodityInfo_Inventory, CommodityInfo_Promotion, CommodityInfo_Init{
 	
 	private Commodity commodity;
 	

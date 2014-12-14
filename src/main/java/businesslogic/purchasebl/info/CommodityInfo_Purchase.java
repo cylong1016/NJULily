@@ -1,4 +1,4 @@
-package businesslogic.purchasebl;
+package businesslogic.purchasebl.info;
 
 import dataenum.BillType;
 

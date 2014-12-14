@@ -8,6 +8,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import config.RMIConfig;
 import message.ResultMessage;
 import po.UserPO;
 import vo.UserVO;
@@ -33,7 +34,7 @@ public class User {
 	public User() throws MalformedURLException, RemoteException, NotBoundException {
 		currentUser = new DefineList<UserPO>("data/loginInfo.ser");
 		currentUserTemp = new DefineList<UserPO>("data/loginInfoTemp.ser");
-		userData = (UserDataService)Naming.lookup("rmi://127.0.0.1:1994/UserData");
+		userData = (UserDataService)Naming.lookup(RMIConfig.PREFIX + UserDataService.NAME);
 	}
 
 	/**

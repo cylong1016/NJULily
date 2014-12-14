@@ -1,5 +1,7 @@
 package businesslogic.promotionbl.info;
 
+import java.rmi.RemoteException;
+
 import dataenum.ClientLevel;
 
 public interface ClientInfo_Promotion {
@@ -10,6 +12,7 @@ public interface ClientInfo_Promotion {
 	 * @return
 	 * @author Zing
 	 * @version Dec 10, 2014 8:50:12 AM
+	 * @throws RemoteException 
 	 */
-	public ClientLevel getLevel(String clientID);
+	public ClientLevel getLevel(String clientID) throws RemoteException;
 }

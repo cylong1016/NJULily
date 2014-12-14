@@ -13,6 +13,8 @@ import businesslogic.clientbl.ClientInfo;
 import businesslogic.commoditybl.CommodityInfo;
 import businesslogic.common.Info;
 import businesslogic.inventorybl.info.PurchaseInfo_Inventory;
+import businesslogic.purchasebl.info.ClientInfo_Purchase;
+import businesslogic.purchasebl.info.CommodityInfo_Purchase;
 import businesslogic.recordbl.info.PurchaseInfo_Record;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
 import dataenum.BillState;

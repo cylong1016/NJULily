@@ -1,5 +1,6 @@
 package businesslogic.accountainitbl.info;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.ClientPO;
@@ -9,5 +10,5 @@ public interface ClientInfo_Init {
 	
 	public ArrayList<ClientVO> getClientVOs(ArrayList<ClientPO> POs);
 	
-	public ArrayList<ClientPO> getClientPOs();
+	public ArrayList<ClientPO> getClientPOs() throws RemoteException;
 }

@@ -35,11 +35,4 @@ public interface DataService<PO extends PersistentObject> extends Remote {
 	 */
 	public PO find(String ID) throws RemoteException;
 
-	/**
-	 * @return 远程服务的名字
-	 * @throws RemoteException
-	 * @author cylong
-	 * @version 2014年12月14日 上午4:39:10
-	 */
-	public String getServiceName() throws RemoteException;
 }

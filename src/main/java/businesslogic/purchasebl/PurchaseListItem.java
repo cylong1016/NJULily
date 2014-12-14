@@ -1,7 +1,7 @@
 package businesslogic.purchasebl;
 
 import businesslogic.commoditybl.CommodityInfo;
-import businesslogic.purchasebl.CommodityInfo_Purchase;
+import businesslogic.purchasebl.info.CommodityInfo_Purchase;
 
 /**
  * 其中入库商品列表包含的信息有：

@@ -1,5 +1,6 @@
 package dataservice.promotiondataservice;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.PromotionPO;
@@ -13,6 +14,9 @@ import dataservice.CommonDataService;
  */
 public interface PromotionDataService extends CommonDataService<PromotionPO> {
 
+	/** 接口的名称，RMI绑定时候的名称 */
+	public static final String NAME = "PromotionData";
+
 	/**
 	 * 查看不同类型的促销策略
 	 * @param type 促销类型
@@ -20,5 +24,6 @@ public interface PromotionDataService extends CommonDataService<PromotionPO> {
 	 * @author cylong
 	 * @version 2014年12月4日 下午7:52:43
 	 */
-	public ArrayList<PromotionPO> show(PromotionType type);
+	public ArrayList<PromotionPO> show(PromotionType type) throws RemoteException;
+
 }

@@ -1,5 +1,8 @@
 package businesslogic.clientbl;
 
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -9,7 +12,7 @@ import vo.client.ClientVO;
 import businesslogic.accountainitbl.info.ClientInfo_Init;
 import businesslogic.accountbillbl.info.ClientInfo_AccountBill;
 import businesslogic.promotionbl.info.ClientInfo_Promotion;
-import businesslogic.purchasebl.ClientInfo_Purchase;
+import businesslogic.purchasebl.info.ClientInfo_Purchase;
 import businesslogic.salebl.info.ClientInfo_Sale;
 
 /**
@@ -20,15 +23,17 @@ import businesslogic.salebl.info.ClientInfo_Sale;
 public class ClientInfo implements ClientInfo_AccountBill, ClientInfo_Sale, ClientInfo_Purchase, ClientInfo_Init, ClientInfo_Promotion {
 
 	private Client client;
-	
-	public ClientInfo() {
+
+	public ClientInfo() throws MalformedURLException, RemoteException, NotBoundException {
 		client = new Client();
 	}
+
 	/**
+	 * @throws RemoteException
 	 * @see businesslogic.accountbillbl.info.ClientInfo_AccountBill#getAllClients()
 	 */
 	@Override
-	public HashMap<String, String> getAllClients() {
+	public HashMap<String, String> getAllClients() throws RemoteException {
 		ArrayList<ClientVO> clientsVO = client.show();
 		HashMap<String, String> clients = new HashMap<String, String>();
 		for(int i = 0; i < clientsVO.size(); i++) {
@@ -39,49 +44,56 @@ public class ClientInfo implements ClientInfo_AccountBill, ClientInfo_Sale, Clie
 	}
 
 	/**
-	 * @see businesslogic.salebl.ClientInfo_Purchase#getSalesman(java.lang.String)
+	 * @throws RemoteException
+	 * @see businesslogic.salebl.info.ClientInfo_Sale#getSalesman(java.lang.String)
 	 */
-	public String getSalesman(String ID) {
+	@Override
+	public String getSalesman(String ID) throws RemoteException {
 		ClientVO vo = client.findClient(ID);
 		return vo.salesman;
 	}
 
 	/**
-	 * @see businesslogic.salebl.ClientInfo_Purchase#getCommodityName(java.lang.String)
+	 * @see businesslogic.salebl.info.ClientInfo_Sale#getName(java.lang.String)
+	 * @see businesslogic.purchasebl.info.ClientInfo_Purchase#getName(java.lang.String)
 	 */
-	public String getName(String ID) {
+	public String getName(String ID) throws RemoteException {
 		ClientVO vo = client.findClient(ID);
 		return vo.name;
 	}
-	
-	public ArrayList<ClientPO> getClientPOs() {
+
+	public ArrayList<ClientPO> getClientPOs() throws RemoteException {
 		return client.getClientData().show();
 	}
+
 	public ArrayList<ClientVO> getClientVOs(ArrayList<ClientPO> POs) {
 		ClientTrans transPOVO = new ClientTrans();
 		return transPOVO.posToVOs(POs);
 	}
-	
-	/*
-	 * (non-Javadoc)
-	 * @see businesslogic.accountbillbl.ClientInfo_AccountBill#changeReceivable(java.lang.String, double)
+
+	/**
+	 * @see businesslogic.salebl.info.ClientInfo_Sale#changeReceivable(java.lang.String, double)
 	 */
-	public void changeReceivable(String clientID, double afterPrice) {
+	public void changeReceivable(String clientID, double afterPrice) throws RemoteException {
 		ClientPO po = client.getClientData().find(clientID);
 		po.setReceivable(po.getReceivable() + afterPrice);
 		client.getClientData().update(po);
 	}
-	
-	/*
-	 * (non-Javadoc)
-	 * @see businesslogic.accountbillbl.ClientInfo_AccountBill#changePayable(java.lang.String, double)
+
+	/**
+	 * @see businesslogic.accountbillbl.info.ClientInfo_AccountBill#changePayable(java.lang.String, double)
+	 * @see businesslogic.purchasebl.info.ClientInfo_Purchase#changePayable(java.lang.String, double)
 	 */
-	public void changePayable(String clientID, double beforePrice) {
+	public void changePayable(String clientID, double beforePrice) throws RemoteException {
 		ClientPO po = client.getClientData().find(clientID);
 		po.setPayable(po.getPayable() + beforePrice);
 		client.getClientData().update(po);
 	}
-	public ClientLevel getLevel(String clientID) {
+
+	/**
+	 * @see businesslogic.promotionbl.info.ClientInfo_Promotion#getLevel(java.lang.String)
+	 */
+	public ClientLevel getLevel(String clientID) throws RemoteException {
 		return client.getClientData().find(clientID).getLevel();
 	}
 }

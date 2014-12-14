@@ -1,5 +1,8 @@
 package businesslogic.recordbl.info;
 
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import dataenum.Storage;
@@ -13,8 +16,9 @@ public interface ValueObjectInfo_Record<VO extends ValueObject> {
 	 * @return
 	 * @author Zing
 	 * @version Dec 1, 2014 2:32:24 PM
+	 * @throws RemoteException 
 	 */
-	public VO find(String ID);
+	public VO find(String ID) throws RemoteException;
 	
 	/**
 	 * 
@@ -25,6 +29,9 @@ public interface ValueObjectInfo_Record<VO extends ValueObject> {
 	 * @return 符合条件的单据的ID（一个）
 	 * @author Zing
 	 * @version Dec 1, 2014 2:17:52 PM
+	 * @throws NotBoundException 
+	 * @throws MalformedURLException 
+	 * @throws RemoteException 
 	 */
-	public ArrayList<String> getID(String ID, String clientName, String salesman, Storage storage);
+	public ArrayList<String> getID(String ID, String clientName, String salesman, Storage storage) throws RemoteException, MalformedURLException, NotBoundException;
 }

@@ -80,7 +80,7 @@ public class Purchase implements PurchaseBLService {
 
 	private PurchasePO buildPur() {
 		double sumPrice = list.getBeforePrice();
-		businesslogic.purchasebl.ClientInfo_Purchase info = new ClientInfo();
+		businesslogic.purchasebl.info.ClientInfo_Purchase info = new ClientInfo();
 		String clientName = info.getName(list.getClientID());
 		Storage storage = list.getStorage();
 		po = new PurchasePO(ID, list.getClientID(), clientName, "user", storage, list.getCommodities(), sumPrice, list.getRemark(), type);

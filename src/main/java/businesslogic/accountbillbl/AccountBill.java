@@ -1,25 +1,28 @@
 package businesslogic.accountbillbl;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import po.AccountBillItemPO;
 import po.AccountBillPO;
-import server.data.accountbilldata.AccountBillData;
 import vo.AccountBillItemVO;
 import vo.AccountBillVO;
-import blservice.accountbillblservice.AccountBillBLService;
 import businesslogic.accountbillbl.info.AccountInfo_AccountBill;
 import businesslogic.accountbillbl.info.ClientInfo_AccountBill;
 import businesslogic.accountbillbl.info.UserInfo_AccountBill;
 import businesslogic.accountbl.AccountInfo;
 import businesslogic.clientbl.ClientInfo;
 import businesslogic.userbl.UserInfo;
+import config.RMIConfig;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataservice.accountbilldataservice.AccountBillDataService;
 
-public class AccountBill implements AccountBillBLService {
+public class AccountBill {
 
 	/** 编号 */
 	private String ID;
@@ -29,20 +32,17 @@ public class AccountBill implements AccountBillBLService {
 	private AccountBillList bills = new AccountBillList();
 	/** 汇款总额 */
 	private double sumMoney;
-
 	/** 收款单（付款单） */
 	private AccountBillPO po;
 
 	private AccountBillDataService accountBillData;
+	private ClientInfo_AccountBill clientInfo;
+	private AccountInfo_AccountBill accountInfo;
 
-	public AccountBill() {
-		//		try {
-		//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
-		//			accountBillData = factory.getAccountBillData();
-		//		} catch (Exception e) {
-		//			e.printStackTrace();
-		//		}
-		accountBillData = new AccountBillData();
+	public AccountBill() throws MalformedURLException, RemoteException, NotBoundException {
+		accountBillData = (AccountBillDataService)Naming.lookup(RMIConfig.PREFIX + AccountBillDataService.NAME);
+		clientInfo = new ClientInfo();
+		accountInfo = new AccountInfo();
 	}
 
 	/**
@@ -51,8 +51,9 @@ public class AccountBill implements AccountBillBLService {
 	 * @return 新的ID
 	 * @author cylong
 	 * @version 2014年12月1日 上午1:32:18
+	 * @throws RemoteException
 	 */
-	public String getID(BillType type) {
+	public String getID(BillType type) throws RemoteException {
 		this.type = type;
 		this.ID = accountBillData.getID(type);
 		return ID;
@@ -62,9 +63,9 @@ public class AccountBill implements AccountBillBLService {
 	 * @see businesslogic.accountbillbl.info.ClientInfo_AccountBill
 	 * @author cylong
 	 * @version 2014年12月1日 上午1:33:04
+	 * @throws RemoteException
 	 */
-	public HashMap<String, String> getAllClients() {
-		ClientInfo_AccountBill clientInfo = new ClientInfo();
+	public HashMap<String, String> getAllClients() throws RemoteException {
 		return clientInfo.getAllClients();
 	}
 
@@ -74,7 +75,6 @@ public class AccountBill implements AccountBillBLService {
 	 * @version 2014年12月1日 上午1:36:29
 	 */
 	public HashMap<String, String> getAllAccounts() {
-		AccountInfo_AccountBill accountInfo = new AccountInfo();
 		return accountInfo.getAllAccounts();
 	}
 
@@ -177,8 +177,9 @@ public class AccountBill implements AccountBillBLService {
 	 * @return 处理结果
 	 * @author cylong
 	 * @version 2014年12月1日 上午1:56:06
+	 * @throws RemoteException
 	 */
-	public AccountBillVO submit() {
+	public AccountBillVO submit() throws RemoteException {
 		accountBillData.insert(po);
 		return poToVO(po);
 	}
@@ -200,8 +201,9 @@ public class AccountBill implements AccountBillBLService {
 	 * @return AccountBillVO
 	 * @author cylong
 	 * @version 2014年12月1日 下午5:07:56
+	 * @throws RemoteException
 	 */
-	public AccountBillVO find(String ID) {
+	public AccountBillVO find(String ID) throws RemoteException {
 		AccountBillPO po = accountBillData.find(ID);
 		return poToVO(po);
 	}

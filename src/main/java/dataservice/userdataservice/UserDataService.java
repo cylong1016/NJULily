@@ -13,6 +13,9 @@ import dataservice.CommonDataService;
  */
 public interface UserDataService extends CommonDataService<UserPO> {
 
+	/** 接口的名称，RMI绑定时候的名称 */
+	public static final String NAME = "UserData";
+
 	/**
 	 * 验证管理员
 	 * @param adminInfo
@@ -31,4 +34,5 @@ public interface UserDataService extends CommonDataService<UserPO> {
 	 * @version 2014年12月3日 上午10:23:06
 	 */
 	public ResultMessage updateAdmin(String oldPass, String newPass) throws RemoteException;
+
 }

@@ -2,6 +2,7 @@
 <Config>
 	<Data>
 		<name>RMI</name>
-		<url>rmi://127.0.0.1:1994/DataFactory</url>
+		<host>127.0.0.1</host>
+		<port>1994</port>
 	</Data>
 </Config>

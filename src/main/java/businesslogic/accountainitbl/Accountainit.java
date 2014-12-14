@@ -38,10 +38,10 @@ import dataservice.accountinitdataservice.AccountaInitDataService;
  */
 public class Accountainit implements AccountainitBLService {
 
-	private AccountaInitDataService accountaInitData;
+	private AccountInitDataService accountInitData;
 
 	public Accountainit() {
-		this.accountaInitData = getAccountaInitData();
+		this.accountInitData = getAccountInitData();
 	}
 
 	/**
@@ -54,11 +54,11 @@ public class Accountainit implements AccountainitBLService {
 		BuildInit buildInit = new BuildInit(getID());
 		AccountaInitPO po =
 							new AccountaInitPO(buildInit.getID(), buildInit.getDate(), buildInit.getCommoditySorts(), buildInit.getCommodities(), buildInit.getClients(), buildInit.getAccounts());
-		return accountaInitData.insert(po);
+		return accountInitData.insert(po);
 	}
 
 	public ArrayList<AccountaInitVO> show() {
-		ArrayList<AccountaInitPO> POs = accountaInitData.show();
+		ArrayList<AccountaInitPO> POs = accountInitData.show();
 		ArrayList<AccountaInitVO> VOs = new ArrayList<AccountaInitVO>();
 		for(AccountaInitPO po : POs) {
 			AccountaInitVO vo =
@@ -90,7 +90,7 @@ public class Accountainit implements AccountainitBLService {
 	}
 
 	private String getID() {
-		return accountaInitData.getID();
+		return accountInitData.getID();
 	}
 
 	/**
@@ -99,15 +99,14 @@ public class Accountainit implements AccountainitBLService {
 	 * @author Zing
 	 * @version Dec 2, 2014 7:35:59 PM
 	 */
-	private AccountaInitDataService getAccountaInitData() {
-//		try {
-//			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMI.URL);
-//			AccountaInitDataService accountaInitData = factory.getAccountaInitData();
-//			return accountaInitData;
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return null;
-//		}
-		return new AccountInitData();
+	private AccountInitDataService getAccountInitData() {
+		try {
+			DataFactoryService factory = (DataFactoryService)Naming.lookup(RMIConfig.URL);
+			AccountaInitDataService accountaInitData = factory.getAccountaInitData();
+			return accountaInitData;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }
