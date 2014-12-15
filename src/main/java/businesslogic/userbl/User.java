@@ -72,9 +72,11 @@ public class User {
 				break;
 			}
 		}
-		if (loginInfo.isRemembered) {	// 保存当前登录的用户的帐户名
-			currentUser.set(0, current);
-			currentUserTemp.set(0, current);	// 记录当前登录的用户的信息
+		if (loginInfo.isRemembered) {
+			currentUser.clear();
+			currentUser.add(current);	// 保存当前登录的用户的帐户名
+			currentUserTemp.clear();
+			currentUserTemp.add(current);	// 记录当前登录的用户的信息
 		} else {	// 删除记住的账号
 			currentUser.clear();
 		}
