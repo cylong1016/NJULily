@@ -13,7 +13,7 @@ public class PromotionCommodityVO extends PromotionVO{
 	/** 促销结束时间*/
 	public String endDate;
 	/** 购买的商品 */
-	public ArrayList<CommodityItemVO> commodities;
+	public ArrayList<PromotionGoodsVO> goods;
 	/** 赠品单 */
 	public ArrayList<CommodityItemVO> gifts;
 	/** 折扣 */
@@ -32,11 +32,11 @@ public class PromotionCommodityVO extends PromotionVO{
 	 * @param allowance
 	 * @param voucher
 	 */
-	public PromotionCommodityVO(String ID, String beginDate, String endDate, ArrayList<CommodityItemVO> commodities, ArrayList<CommodityItemVO> gifts, double allowance, int voucher){
+	public PromotionCommodityVO(String ID, String beginDate, String endDate, ArrayList<PromotionGoodsVO> goods, ArrayList<CommodityItemVO> gifts, double allowance, int voucher){
 		this.ID = ID;
 		this.beginDate = beginDate;
 		this.endDate = endDate;
-		this.commodities = commodities;
+		this.goods = goods;
 		this.gifts = gifts;
 		this.voucher = voucher;
 	}

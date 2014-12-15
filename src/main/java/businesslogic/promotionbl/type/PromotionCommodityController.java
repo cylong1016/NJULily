@@ -15,7 +15,7 @@ import blservice.promotionblservice.PromotionCommodityBLService;
  * @author cylong
  * @version 2014年12月14日 下午5:10:48
  */
-public class PromotionCommodityController implements PromotionCommodityBLService {
+public class PromotionCommodityController {
 
 	private PromotionCommodity promotionCommodity;
 
@@ -26,7 +26,6 @@ public class PromotionCommodityController implements PromotionCommodityBLService
 	/**
 	 * @see blservice.promotionblservice.PromotionCommodityBLService#show()
 	 */
-	@Override
 	public ArrayList<PromotionCommodityVO> show() {
 		try {
 			return promotionCommodity.show();
@@ -39,7 +38,6 @@ public class PromotionCommodityController implements PromotionCommodityBLService
 	/**
 	 * @see blservice.promotionblservice.PromotionCommodityBLService#showGifts()
 	 */
-	@Override
 	public ArrayList<InventoryBillVO> showGifts() {
 		try {
 			return promotionCommodity.showGifts();
@@ -52,7 +50,6 @@ public class PromotionCommodityController implements PromotionCommodityBLService
 	/**
 	 * @see blservice.promotionblservice.PromotionCommodityBLService#getID()
 	 */
-	@Override
 	public String getID() {
 		try {
 			return promotionCommodity.getID();
@@ -65,10 +62,9 @@ public class PromotionCommodityController implements PromotionCommodityBLService
 	/**
 	 * @see blservice.promotionblservice.PromotionCommodityBLService#addCommodity(vo.commodity.CommodityItemVO)
 	 */
-	@Override
-	public void addCommodity(CommodityItemVO vo) {
+	public void addCommodity(String ID, int number) {
 		try {
-			promotionCommodity.addCommodity(vo);
+			promotionCommodity.addCommodity(ID, number);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -77,7 +73,6 @@ public class PromotionCommodityController implements PromotionCommodityBLService
 	/**
 	 * @see blservice.promotionblservice.PromotionCommodityBLService#addGifts(vo.commodity.CommodityItemVO)
 	 */
-	@Override
 	public void addGifts(CommodityItemVO vo) {
 		try {
 			promotionCommodity.addGifts(vo);
@@ -89,7 +84,6 @@ public class PromotionCommodityController implements PromotionCommodityBLService
 	/**
 	 * @see blservice.promotionblservice.PromotionCommodityBLService#addGiftBill(vo.InventoryBillVO)
 	 */
-	@Override
 	public void addGiftBill(InventoryBillVO giftBill) {
 		try {
 			promotionCommodity.addGiftBill(giftBill);
@@ -101,7 +95,6 @@ public class PromotionCommodityController implements PromotionCommodityBLService
 	/**
 	 * @see blservice.promotionblservice.PromotionCommodityBLService#submit(blservice.promotionblservice.PromoInputInfo)
 	 */
-	@Override
 	public ResultMessage submit(PromoInputInfo info) {
 		try {
 			return promotionCommodity.submit(info);

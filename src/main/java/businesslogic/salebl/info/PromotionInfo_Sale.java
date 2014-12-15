@@ -3,6 +3,7 @@ package businesslogic.salebl.info;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import vo.promotion.PromotionBargainVO;
 import vo.promotion.PromotionClientVO;
 import vo.promotion.PromotionCommodityVO;
 import vo.promotion.PromotionTotalVO;
@@ -15,9 +16,10 @@ public interface PromotionInfo_Sale {
 	 * @param commodityIDs
 	 * @author Zing
 	 * @version Dec 9, 2014 6:01:53 PM
+	 * @param commodityNumber 
 	 * @throws RemoteException 
 	 */
-	public ArrayList<PromotionCommodityVO> findFitPromotionCommodity(String iD, ArrayList<String> commodityIDs) throws RemoteException;
+	public ArrayList<PromotionCommodityVO> findFitPromotionCommodity(String iD, ArrayList<String> commodityIDs, ArrayList<Integer> commodityNumber) throws RemoteException;
 
 	/**
 	 * 查看是否有合适的客户等级的促销
@@ -38,5 +40,7 @@ public interface PromotionInfo_Sale {
 	 * @throws RemoteException 
 	 */
 	public ArrayList<PromotionTotalVO> findFitPromotionTotal(String iD, double beforePrice) throws RemoteException;
+
+	public ArrayList<PromotionBargainVO> showBargains() throws RemoteException;
 	
 }

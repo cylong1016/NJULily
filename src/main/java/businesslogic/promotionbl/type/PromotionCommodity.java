@@ -26,8 +26,8 @@ public class PromotionCommodity extends Promotion {
 		return transPOVO.commodityPOtoVO(promotionData.show(PromotionType.COMMODITY));
 	}
 
-	public void addCommodity(CommodityItemVO vo) throws RemoteException {
-		PromotionListItem item = new PromotionListItem(vo.ID, vo.number);
+	public void addCommodity(String ID, int number) throws RemoteException {
+		PromotionListItem item = new PromotionListItem(ID, number);
 		list.addBargain(item);
 	}
 
@@ -54,7 +54,7 @@ public class PromotionCommodity extends Promotion {
 		ArrayList<CommodityItemPO> gifts = list.getGifts();
 		double allowance = list.getAllowance();
 		int voucher = list.getVoucher();
-		PromotionPO po = new PromotionPO(ID, beginDate, endDate, null, 0, null, commodities, 0, gifts, allowance, voucher);
+		PromotionPO po = new PromotionPO(ID, beginDate, endDate, null, 0, 0, null, commodities, 0, gifts, allowance, voucher);
 		return po;
 	}
 

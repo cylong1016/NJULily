@@ -39,7 +39,7 @@ public interface PromotionCommodityBLService {
 	 * @author Zing
 	 * @version Dec 9, 2014 6:58:00 PM
 	 */
-	public void addCommodity(CommodityItemVO vo);
+	public void addCommodity(String ID, int number);
 	
 	/**
 	 * 添加设置成赠送品的商品
@@ -65,4 +65,5 @@ public interface PromotionCommodityBLService {
 	 * @version Nov 29, 2014 7:00:42 PM
 	 */
 	public ResultMessage submit(PromoInputInfo info);
+
 }

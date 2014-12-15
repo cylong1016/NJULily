@@ -37,7 +37,7 @@ public class PromotionListItem {
 	}
 	
 	/**
-	 * 策略234中的商品、赠品，需要单价，需要进行总价的计算
+	 * 策略234中的赠品，需要单价，需要进行总价的计算
 	 * @param ID
 	 * @param number
 	 * @param price

@@ -1,5 +1,7 @@
 package Inventory;
 
+import java.rmi.RemoteException;
+
 import org.junit.Test;
 
 public class testInventory {
@@ -24,7 +26,13 @@ public class testInventory {
 		mi.add(new MockCommodity("asdaw", "S12q"));
 		mi.add(new MockCommodity("a1", "SQQ"));
 
-		MockCheckList mcl = new MockCheckList("0123");
+		MockCheckList mcl = null;
+		try {
+			mcl = new MockCheckList("0123");
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		MockViewListItem mvli = new MockViewListItem();
 		mvli.add(mal1);

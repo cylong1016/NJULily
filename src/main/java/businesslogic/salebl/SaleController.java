@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import vo.commodity.CommodityItemVO;
+import vo.promotion.PromotionBargainVO;
 import vo.promotion.PromotionClientVO;
 import vo.promotion.PromotionCommodityVO;
 import vo.promotion.PromotionTotalVO;
@@ -53,6 +54,16 @@ public class SaleController implements SaleBLService {
 			return null;
 		}
 	}
+	
+	@Override
+	public ArrayList<PromotionBargainVO> showBargains() {
+		try {
+			return sale.showBargains();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	/**
 	 * @see blservice.saleblservice.SaleBLService#addCommodities(vo.commodity.CommodityItemVO)
@@ -73,6 +84,7 @@ public class SaleController implements SaleBLService {
 	public void addClient(String clientID) {
 		sale.addClient(clientID);
 	}
+	
 
 	/**
 	 * @see blservice.saleblservice.SaleBLService#findFitPromotionCommodity()
@@ -138,5 +150,4 @@ public class SaleController implements SaleBLService {
 			return null;
 		}
 	}
-
 }

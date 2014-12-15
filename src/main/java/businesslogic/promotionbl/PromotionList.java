@@ -8,6 +8,7 @@ import dataenum.ClientLevel;
 public class PromotionList {
 	/** 特价包 */
 	private ArrayList<PromotionListItem> commodities;
+	private double beforeTotal;
 	/** 特价包的总价 */
 	private double total;
 	/** 客户等级 */
@@ -26,6 +27,7 @@ public class PromotionList {
 
 	public void addBargain(PromotionListItem item) {
 		commodities.add(item);
+		
 	}
 	
 	public void addGift(PromotionListItem item) {
@@ -38,6 +40,13 @@ public class PromotionList {
 	
 	public ArrayList<CommodityItemPO> getGifts(){
 		return null;
+	}
+	
+	public double getBeforeTotal() {
+		for (PromotionListItem commodity : commodities) {
+			beforeTotal += commodity.getTotal();
+		}
+		return beforeTotal;
 	}
 
 	public double getTotal() {

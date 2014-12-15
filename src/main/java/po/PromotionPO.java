@@ -16,6 +16,7 @@ public class PromotionPO extends PersistentObject {
 	private String endDate;
 	/** 特价包 */
 	private ArrayList<CommodityItemPO> bargains;
+	private double beforeTotal;
 	/** 特价包的总价/总价 */
 	private double bargainTotal;
 	/** 客户等级 */
@@ -33,12 +34,13 @@ public class PromotionPO extends PersistentObject {
 	/** 促销策略类型 */
 	private PromotionType type;
 	
-	public PromotionPO(String ID, String beginDate, String endDate, ArrayList<CommodityItemPO> bargains, double bargainTotal,
+	public PromotionPO(String ID, String beginDate, String endDate, ArrayList<CommodityItemPO> bargains, double beforeTotal, double bargainTotal,
 			ClientLevel level, ArrayList<CommodityItemPO> commodities, double total,ArrayList<CommodityItemPO> gifts, double allowance, int voucher) {
 		super(ID);
 		this.beginDate = beginDate;
 		this.endDate = endDate;
 		this.bargains = bargains;
+		this.beforeTotal = beforeTotal;
 		this.bargainTotal = bargainTotal;
 		this.level = level;
 		this.commodities = commodities;
@@ -94,5 +96,9 @@ public class PromotionPO extends PersistentObject {
 
 	public double getBargainTotal() {
 		return bargainTotal;
+	}
+
+	public double getBeforeTotal() {
+		return beforeTotal;
 	}
 }

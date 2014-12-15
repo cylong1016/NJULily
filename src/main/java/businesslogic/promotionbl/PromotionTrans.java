@@ -3,11 +3,13 @@ package businesslogic.promotionbl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import po.CommodityItemPO;
 import po.PromotionPO;
 import vo.commodity.CommodityItemVO;
 import vo.promotion.PromotionBargainVO;
 import vo.promotion.PromotionClientVO;
 import vo.promotion.PromotionCommodityVO;
+import vo.promotion.PromotionGoodsVO;
 import vo.promotion.PromotionTotalVO;
 import businesslogic.common.ChangeCommodityItems;
 import dataenum.ClientLevel;
@@ -35,8 +37,9 @@ public class PromotionTrans {
 			String beginDate = po.getBeginDate();
 			String endDate = po.getEndDate();
 			ArrayList<CommodityItemVO> bargains = transPOVO.itemPOToVO(po.getBargains());
+			double beforeTotal = po.getBeforeTotal();
 			double bargainTotal = po.getBargainTotal();
-			PromotionBargainVO vo = new PromotionBargainVO(ID, beginDate, endDate, bargains, bargainTotal);
+			PromotionBargainVO vo = new PromotionBargainVO(ID, beginDate, endDate, bargains, beforeTotal, bargainTotal);
 			VOs.add(vo);
 		}
 		return VOs;
@@ -80,11 +83,11 @@ public class PromotionTrans {
 			String ID = po.getID();
 			String beginDate = po.getBeginDate();
 			String endDate = po.getEndDate();
-			ArrayList<CommodityItemVO> commodities = transPOVO.itemPOToVO(po.getCommodities());
+			ArrayList<PromotionGoodsVO> goods = getGoods(po.getCommodities());
 			ArrayList<CommodityItemVO> gifts = transPOVO.itemPOToVO(po.getGifts());
 			double allowance = po.getAllowance();
 			int voucher = po.getVoucher();
-			PromotionCommodityVO vo = new PromotionCommodityVO(ID, beginDate, endDate, commodities, gifts, allowance, voucher);
+			PromotionCommodityVO vo = new PromotionCommodityVO(ID, beginDate, endDate, goods, gifts, allowance, voucher);
 			VOs.add(vo);
 		}
 		return VOs;
@@ -109,6 +112,15 @@ public class PromotionTrans {
 			double allowance = po.getAllowance();
 			int voucher = po.getVoucher();
 			PromotionTotalVO vo = new PromotionTotalVO(ID, beginDate, endDate, total, gifts, allowance, voucher);
+			VOs.add(vo);
+		}
+		return VOs;
+	}
+	
+	private ArrayList<PromotionGoodsVO> getGoods(ArrayList<CommodityItemPO> commodityItems) {
+		ArrayList<PromotionGoodsVO> VOs = new ArrayList<PromotionGoodsVO>();
+		for (CommodityItemPO item : commodityItems) {
+			PromotionGoodsVO vo = new PromotionGoodsVO(item.getID(), item.getName(), item.getNumber());
 			VOs.add(vo);
 		}
 		return VOs;

@@ -3,6 +3,7 @@ package blservice.saleblservice;
 import java.util.ArrayList;
 
 import vo.commodity.CommodityItemVO;
+import vo.promotion.PromotionBargainVO;
 import vo.promotion.PromotionClientVO;
 import vo.promotion.PromotionCommodityVO;
 import vo.promotion.PromotionTotalVO;
@@ -34,6 +35,14 @@ public interface SaleBLService {
 	 */
 	public String getSaleID();
 	public String getSaleBackID();
+	
+	/**
+	 * 查看已有的特价包
+	 * @return
+	 * @author Zing
+	 * @version Dec 15, 2014 3:57:53 PM
+	 */
+	public ArrayList<PromotionBargainVO> showBargains();
 
 	/**
 	 * 销售时候添加一条商品条目

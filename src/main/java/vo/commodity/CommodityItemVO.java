@@ -31,4 +31,5 @@ public class CommodityItemVO extends ValueObject {
 		this.price = price;
 		this.remark = remark;
 	}
+	
 }

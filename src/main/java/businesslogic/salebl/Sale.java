@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import po.SalesPO;
 import vo.commodity.CommodityItemVO;
+import vo.promotion.PromotionBargainVO;
 import vo.promotion.PromotionClientVO;
 import vo.promotion.PromotionCommodityVO;
 import vo.promotion.PromotionTotalVO;
@@ -43,11 +44,13 @@ public class Sale {
 	PromotionInfo_Sale promotionInfo;
 	/** 添加的商品的ID集合 */
 	ArrayList<String> commodityIDs;
+	ArrayList<Integer> commodityNumber;
 
 	public Sale() {
 		this.list = new SaleList();
 		promotionInfo = new PromotionInfo();
 		commodityIDs = new ArrayList<String>();
+		commodityNumber = new ArrayList<Integer>();
 	}
 
 	public SaleDataService getSaleData() {
@@ -85,6 +88,10 @@ public class Sale {
 		return ID;
 	}
 
+	public ArrayList<PromotionBargainVO> showBargains() throws RemoteException {
+		return promotionInfo.showBargains();
+	}
+	
 	/**
 	 * 添加一条商品信息
 	 * @param itemVO
@@ -96,29 +103,26 @@ public class Sale {
 		SaleListItem item = new SaleListItem(itemVO.ID, itemVO.number, itemVO.price, itemVO.remark);
 		list.add(item);
 		commodityIDs.add(itemVO.ID);
+		commodityNumber.add(itemVO.number);
 	}
 
 	public void addClient(String clientID) {
 		list.setClientID(clientID);
 	}
+	
 
-//	/**
-//	 * 界面显示全部的销售（销售退货）单
-//	 * @return 销售（销售退货）单的ArrayList
-//	 * @author cylong
-//	 * @version 2014年11月28日 下午8:36:47
-//	 */
-//	public ArrayList<SalesVO> show(BillType type) {
-//		transPOVO = new SaleTrans();
-//		ArrayList<SalesVO> billsVO = new ArrayList<SalesVO>();
-//		SaleDataService saleData = getSaleData();
-//		ArrayList<SalesPO> billsPO = saleData.show();
-//		for(SalesPO po : billsPO) {
-//			SalesVO vo = transPOVO.poToVo(po);
-//			billsVO.add(vo);
-//		}
-//		return billsVO;
-//	}
+	public ArrayList<PromotionCommodityVO> findFitPromotionCommodity() throws RemoteException {
+		promotionInfo.findFitPromotionCommodity(ID, commodityIDs, commodityNumber);
+		return null;
+	}
+
+	public ArrayList<PromotionClientVO> findFitPromotionClient() throws RemoteException {
+		return promotionInfo.findFitPromotionClient(ID, list.getClientID());
+	}
+
+	public ArrayList<PromotionTotalVO> findFitPromotionTotal() throws RemoteException {
+		return promotionInfo.findFitPromotionTotal(ID, list.getBeforePrice());
+	}
 
 	/**
 	 * 提交销售（销售退货）单，等待审批
@@ -178,21 +182,6 @@ public class Sale {
 		list.setAllowance(inputInfo.allowance);
 		list.setVoucher(inputInfo.voucher);
 		list.setRemark(inputInfo.remark);
-	}
-
-	public ArrayList<PromotionCommodityVO> findFitPromotionCommodity() throws RemoteException {
-		promotionInfo.findFitPromotionCommodity(ID, commodityIDs);
-		return null;
-	}
-
-	public ArrayList<PromotionClientVO> findFitPromotionClient() throws RemoteException {
-		promotionInfo.findFitPromotionClient(ID, list.getClientID());
-		return null;
-	}
-
-	public ArrayList<PromotionTotalVO> findFitPromotionTotal() throws RemoteException {
-		promotionInfo.findFitPromotionTotal(ID, list.getBeforePrice());
-		return null;
 	}
 
 }
