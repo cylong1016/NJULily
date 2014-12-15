@@ -5,9 +5,9 @@ import java.util.ArrayList;
 
 import message.ResultMessage;
 import vo.UserVO;
-import blservice.userblservice.LoginInfo;
 import blservice.userblservice.UserBLService;
 import dataenum.UserIdentity;
+import dataservice.userdataservice.LoginInfo;
 
 /**
  * 主要用于捕获User类抛出的异常
@@ -49,7 +49,7 @@ public class UserController implements UserBLService {
 	}
 
 	/**
-	 * @see blservice.userblservice.UserBLService#login(blservice.userblservice.LoginInfo)
+	 * @see blservice.userblservice.UserBLService#login(dataservice.userdataservice.LoginInfo)
 	 */
 	@Override
 	public UserIdentity login(LoginInfo loginInfo) {

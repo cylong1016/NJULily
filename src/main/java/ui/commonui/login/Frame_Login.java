@@ -24,10 +24,10 @@ import ui.differui.finace.frame.Frame_Finace;
 import ui.differui.inventory.frame.Frame_Inventory;
 import ui.differui.manager.frame.Frame_Manager;
 import ui.differui.salesman.frame.Frame_Salesman;
-import blservice.userblservice.LoginInfo;
 import blservice.userblservice.UserBLService;
 import businesslogic.userbl.UserController;
 import dataenum.UserIdentity;
+import dataservice.userdataservice.LoginInfo;
 
 
 public class Frame_Login extends MyFrame implements ActionListener{

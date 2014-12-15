@@ -41,17 +41,23 @@ public class UserPO extends PersistentObject {
 	}
 
 	/**
+	 * 验证用户登录时候使用
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
+		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		UserPO other = (UserPO)obj;
+		if (this.password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!this.password.equals(other.password))
+			return false;
 		if (this.username == null) {
 			if (other.username != null)
 				return false;

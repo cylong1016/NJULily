@@ -3,6 +3,7 @@ package blservice.userblservice;
 import java.util.ArrayList;
 
 import dataenum.UserIdentity;
+import dataservice.userdataservice.LoginInfo;
 import message.ResultMessage;
 import vo.UserVO;
 

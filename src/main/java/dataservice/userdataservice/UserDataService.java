@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 
 import message.ResultMessage;
 import po.UserPO;
+import dataenum.UserIdentity;
 import dataservice.CommonDataService;
 
 /**
@@ -17,13 +18,14 @@ public interface UserDataService extends CommonDataService<UserPO> {
 	public static final String NAME = "UserData";
 
 	/**
-	 * 验证管理员
-	 * @param adminInfo
-	 * @return 验证结果
+	 * 验证用户登录
+	 * @param loaginInfo
+	 * @return 返回登录用户的身份 null为登录失败
 	 * @author cylong
-	 * @version 2014年12月3日 上午10:21:07
+	 * @version 2014年12月15日 下午6:51:57
+	 * @throws RemoteException
 	 */
-	public boolean checkAdmin(AdminInfo admin) throws RemoteException;
+	public UserIdentity login(LoginInfo loginInfo) throws RemoteException;
 
 	/**
 	 * 更改管理员密码

@@ -8,13 +8,12 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import config.RMIConfig;
 import message.ResultMessage;
 import po.UserPO;
 import vo.UserVO;
-import blservice.userblservice.LoginInfo;
+import config.RMIConfig;
 import dataenum.UserIdentity;
-import dataservice.userdataservice.AdminInfo;
+import dataservice.userdataservice.LoginInfo;
 import dataservice.userdataservice.UserDataService;
 
 public class User {
@@ -65,13 +64,7 @@ public class User {
 	 * @throws RemoteException
 	 */
 	public UserIdentity login(LoginInfo loginInfo) throws RemoteException {
-		// 验证管理员登录
-		AdminInfo admin = new AdminInfo(loginInfo.username, loginInfo.password);
-		if (userData.checkAdmin(admin)) {
-			return admin.iden;
-		}
 
-		// 验证普通用户登录
 		ArrayList<UserPO> pos = userData.show();
 		for(UserPO po : pos) {
 			if (po.getUsername().equals(loginInfo.username)) {
@@ -79,18 +72,14 @@ public class User {
 				break;
 			}
 		}
-		if (current == null) {
-			return null;
-		} else if (!loginInfo.password.equals(current.getPassword())) {
-			return null;
-		}
 		if (loginInfo.isRemembered) {	// 保存当前登录的用户的帐户名
 			currentUser.set(0, current);
 			currentUserTemp.set(0, current);	// 记录当前登录的用户的信息
 		} else {	// 删除记住的账号
 			currentUser.clear();
 		}
-		return current.getIden();
+
+		return userData.login(loginInfo);
 	}
 
 	/**

@@ -1,12 +1,17 @@
-package blservice.userblservice;
+package dataservice.userdataservice;
+
+import java.io.Serializable;
 
 /**
  * 用户登录的信息
  * @author cylong
  * @version 2014年11月29日 下午6:37:47
  */
-public class LoginInfo {
+public class LoginInfo implements Serializable {
 
+	/** serialVersionUID */
+	private static final long serialVersionUID = -4873849122405059189L;
+	
 	/** 登陆用户名 */
 	public String username;
 	/** 密码 */
