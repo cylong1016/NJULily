@@ -1,22 +1,24 @@
 package ui.differui.inventory.frame;
 
+import java.awt.FileDialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import java.io.File;
+
+import java.io.FileOutputStream;
+
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-
-
-
-
-
-
-
-
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import ui.commonui.exitfunction.ExitFunctionFrame;
 import ui.commonui.login.Frame_Login;
@@ -44,7 +46,7 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 	
 	public static int flag = 0, destination = 0;
 	
-	public static JButton bt_vanish, bt_restart;
+	public static JButton bt_vanish, bt_restart, output;
 	
 	static InventoryIndex panel_index;
 	static CommodityManagementUI panel_good;
@@ -57,9 +59,13 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 	
 	static JLabel in_back;
 	
+	static JTable outputTable;
+	
 	public Frame_Inventory(){
 		
 		Frame_Login.myNameis = "Frame_Inventory";
+		
+		outputTable = new JTable();
 		
 		panel_index = new InventoryIndex();
 		panel_index.setVisible(true);
@@ -215,6 +221,10 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 		bt_restart = new JButton();
 		bt_restart.addActionListener(this);
 		this.add(bt_restart);
+		
+		output = new JButton();
+		output.addActionListener(this);
+		this.add(output);
 	}
 	
 	public static void visibleTrue(int i){
@@ -368,5 +378,63 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 			WarningFrame wf = new WarningFrame("商品分类已经更改！");
 			wf.setVisible(true);
 		}
+		
+		if(events.getSource() == output){
+			outputExcel();
+		}
 	}	
+	/////////////////////////////////////////////EXCEL/////////////////////////////////////////////////
+	public void exportTable(JTable table, File file) throws IOException {
+	       DefaultTableModel model = (DefaultTableModel) table.getModel();
+	       
+	       //"ANSI");
+	       OutputStreamWriter bWriter=new OutputStreamWriter((new FileOutputStream(file)),"GB2312");
+	       //BufferedWriter bWriter = new BufferedWriter(new FileWriter(file));  
+	       for(int i=0; i < model.getColumnCount(); i++) {
+	           bWriter.write(model.getColumnName(i));
+	           bWriter.write("\t");
+	       	}
+	       	bWriter.write("\n");
+	       	for(int i = 0; i< model.getRowCount(); i++) {
+	    	   	for(int j = 0; j < model.getColumnCount(); j++) {
+	    	   		
+	    	   		String str;
+	    	   		
+	    	   		if(table.getValueAt(i, j) == null){
+	    	   			str = " ";
+	    	   		}else{
+	    	   			str = table.getValueAt(i, j).toString();
+	    	   		}
+	    	   		
+	        	   	bWriter.write(str);
+	        	   	
+	               	bWriter.write("\t");
+	           	}
+	    		bWriter.write("\n");
+	       	}
+	       	bWriter.close();
+	       	
+	       	WarningFrame wf = new WarningFrame("已成功导出！");
+	       	wf.setVisible(true);
+	   }
+	   
+	public void outputExcel(){
+	    	
+		FileDialog fd = new FileDialog(this, "导出库存盘点单至Excel", FileDialog.SAVE);
+	    fd.setLocation(this.getX(), this.getY());
+	    fd.setVisible(true);  
+	    String stringfile = fd.getDirectory()+fd.getFile()+".xls";  
+	    try {   	
+	    	exportTable(outputTable, new File(stringfile));
+	    } catch (IOException ex) {
+	    	System.out.println(ex.getMessage());
+	    	ex.printStackTrace();
+	    }
+	}
+	
+	public static void setTable(JTable _table){
+		outputTable = _table;
+		output.doClick();
+	}
+	
 }

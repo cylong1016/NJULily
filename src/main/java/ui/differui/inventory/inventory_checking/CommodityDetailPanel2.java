@@ -1,4 +1,4 @@
-package ui.differui.inventory.commodity_management.detailgood;
+package ui.differui.inventory.inventory_checking;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -10,24 +10,22 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
-import message.ResultMessage;
-import blservice.commodityblservice.CommodityBLService;
-import blservice.commoditysortblservice.CommoditySortBLService;
-import businesslogic.commoditybl.CommodityController;
-import businesslogic.commoditysortbl.CommoditySortController;
-import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.exitfunction.ExitFunctionFrame;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyPanel;
 import ui.commonui.myui.MyTable;
 import ui.commonui.myui.MyTextField;
 import ui.commonui.warning.WarningFrame;
-import ui.differui.inventory.commodity_management.index.CommodityManagementUI;
-import vo.commodity.CommoditySortVO;
-import vo.commodity.CommodityUpdateVO;
-import vo.commodity.CommodityVO;
 
-public class CommodityDetailPanel extends MyPanel implements ActionListener{
+import vo.commodity.CommoditySortVO;
+
+import vo.commodity.CommodityVO;
+import blservice.commodityblservice.CommodityBLService;
+import blservice.commoditysortblservice.CommoditySortBLService;
+import businesslogic.commoditybl.CommodityController;
+import businesslogic.commoditysortbl.CommoditySortController;
+
+public class CommodityDetailPanel2 extends MyPanel implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 
@@ -36,7 +34,7 @@ public class CommodityDetailPanel extends MyPanel implements ActionListener{
 	MyJButton button_return,button_modify, button_check;
 	public static JButton modify;
 	
-	public CommodityDetailPanel(String ID){
+	public CommodityDetailPanel2(String ID){
 		
 		CommodityBLService controller = new CommodityController();
 		CommodityVO cvo = controller.show(ID);
@@ -48,7 +46,7 @@ public class CommodityDetailPanel extends MyPanel implements ActionListener{
 		int x1 = 80, y1 = 55, x2 = 390, y2 = -66;
 		
 		//information bar
-		JLabel infoBar = new JLabel("修改或查看所选商品详细信息",JLabel.CENTER);
+		JLabel infoBar = new JLabel("查看所选商品详细信息",JLabel.CENTER);
 		infoBar.setBounds(0, 0, 800, 20);
 		infoBar.setOpaque(true);
 		infoBar.setForeground(foreColor);
@@ -95,6 +93,7 @@ public class CommodityDetailPanel extends MyPanel implements ActionListener{
 		
 		textField_name = new MyTextField(110 + x2, 130 + y2, 200, 25);
 		textField_name.setText(cvo.name);
+		textField_name.setEditable(false);
 		this.add(textField_name);
 		
 		//ui for model
@@ -106,6 +105,7 @@ public class CommodityDetailPanel extends MyPanel implements ActionListener{
 		
 		textField_model = new MyTextField(110 + x1, 50 + y1, 200, 25);
 		textField_model.setText(cvo.type);
+		textField_model.setEditable(false);
 		this.add(textField_model);
 		
 		//ui for num
@@ -129,6 +129,7 @@ public class CommodityDetailPanel extends MyPanel implements ActionListener{
 		
 		textField_alarm = new MyTextField(110 + x1, 90 + y1 + 40, 200, 25);
 		textField_alarm.setText(String.valueOf(cvo.alarmNumber));
+		textField_alarm.setEditable(false);
 		this.add(textField_alarm);
 	
 		//ui for sort
@@ -158,6 +159,7 @@ public class CommodityDetailPanel extends MyPanel implements ActionListener{
 		
 		textField_price = new MyTextField(110 + x2, 210 + y2, 175, 25);
 		textField_price.setText(String.valueOf(cvo.salePrice));
+		textField_price.setEditable(false);
 		this.add(textField_price);
 		
 		JLabel word_purPrice = new JLabel("商品进价:",JLabel.CENTER);
@@ -174,6 +176,7 @@ public class CommodityDetailPanel extends MyPanel implements ActionListener{
 		
 		textField_purPrice = new MyTextField(110 + x2, 210 + y2 + 40, 175, 25);
 		textField_purPrice.setText(String.valueOf(cvo.purPrice));
+		textField_purPrice.setEditable(false);
 		this.add(textField_purPrice);
 		
 		//table for receivable and payable information
@@ -209,66 +212,17 @@ public class CommodityDetailPanel extends MyPanel implements ActionListener{
 		button_return.addActionListener(this);
 		this.add(button_return);
 		
-		button_modify = new MyJButton("确认修改");
-		button_modify.setBounds(630, 240, 130, 20);
-		button_modify.addActionListener(this);
-		this.add(button_modify);
-		
 		button_check = new MyJButton("查看所选货单");
 		button_check.setBounds(630, 580 - 90 + 50, 130, 20);
 		button_check.addActionListener(this);
-		this.add(button_check);			
-		
-		modify = new JButton();
-		modify.addActionListener(this);
-		this.add(modify);
-		
+		this.add(button_check);					
 	}
 	
 	public void actionPerformed(ActionEvent events) {
-		
-		if(events.getSource() == button_modify){
-			if(textField_name.getText().isEmpty() || textField_sort.getText().isEmpty() 
-					|| textField_price.getText().isEmpty() || textField_model.getText().isEmpty() 
-					|| textField_alarm.getText().isEmpty() || textField_purPrice.getText().isEmpty()){
-				
-				WarningFrame wf = new WarningFrame("请检查信息填写是否完整！");
-				wf.setVisible(true);
-			}else{
-				ExitFinishFrame eff = new ExitFinishFrame("modify good");
-				eff.setVisible(true);
-			}
-		}
-		
+			
 		if(events.getSource() == button_return){
-			ExitFunctionFrame epf = new ExitFunctionFrame("CommodityDetailUI");
+			ExitFunctionFrame epf = new ExitFunctionFrame("CommodityDetailUI2");
 			epf.setVisible(true);
-		}
-		
-		if(events.getSource() == modify){
-			CommodityBLService controller = new CommodityController();
-			ResultMessage rm = controller.updCommo(textField_id.getText(),
-					new CommodityUpdateVO(textField_name.getText(), textField_model.getText(), 
-					Double.parseDouble(textField_purPrice.getText()), Double.parseDouble(textField_price.getText())));
-			
-			ArrayList<String> iDs = new ArrayList<String>();
-			iDs.add(textField_id.getText());
-		
-			ResultMessage rm2 = controller.setAlarm(iDs, Integer.parseInt(textField_alarm.getText()));
-			
-			if(rm.equals(ResultMessage.SUCCESS) && rm2.equals(ResultMessage.SUCCESS)){
-				
-				CommodityDetailUI.button_close.doClick();
-				CommodityManagementUI.button_cam.doClick();
-				
-				WarningFrame wf = new WarningFrame("商品信息已成功更新！");
-				wf.setVisible(true);
-				
-				CommodityManagementUI.showAll.doClick();
-			}else{
-				WarningFrame wf = new WarningFrame("商品信息无法修改！");
-				wf.setVisible(true);
-			}
 		}
 		
 		if(events.getSource() == button_check){
@@ -290,3 +244,4 @@ public class CommodityDetailPanel extends MyPanel implements ActionListener{
 	}
 
 }
+

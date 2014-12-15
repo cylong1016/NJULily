@@ -17,6 +17,7 @@ import ui.differui.inventory.commodity_management.delsort.SortDelUI;
 import ui.differui.inventory.commodity_management.detailgood.CommodityDetailUI;
 import ui.differui.inventory.commodity_management.detailsort.SortDetailUI;
 import ui.differui.inventory.frame.Frame_Inventory;
+import ui.differui.inventory.inventory_checking.CommodityDetailUI2;
 import ui.differui.manager.frame.Frame_Manager;
 import ui.differui.salesman.client.ClientAddingUI;
 import ui.differui.salesman.client.ClientDetailUI;
@@ -105,6 +106,8 @@ public class ExitFunctionPanel extends MyPanel implements ActionListener{
 			case "SortDetailUI" : SortDetailUI.button_close.doClick();break;
 			
 			case "CommodityDetailUI" : CommodityDetailUI.button_close.doClick();break;
+			
+			case "CommodityDetailUI2" : CommodityDetailUI2.button_close.doClick();break;
 			
 			}
 			ExitFunctionFrame.button_close.doClick();
