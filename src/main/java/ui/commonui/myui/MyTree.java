@@ -14,6 +14,7 @@ import javax.swing.tree.DefaultTreeSelectionModel;
 
 import vo.commodity.CommoditySortVO;
 import blservice.commoditysortblservice.CommoditySortBLService;
+import businesslogic.commoditybl.CommodityController;
 import businesslogic.commoditysortbl.CommoditySortController;
 
 
@@ -22,6 +23,8 @@ public class MyTree extends JTree{
 	private static final long serialVersionUID = 1L;
 	
 	DefaultMutableTreeNode root;
+	
+	CommoditySortBLService controller;
 	
 	public MyTree(DefaultMutableTreeNode _root){
 		
@@ -41,8 +44,10 @@ public class MyTree extends JTree{
         setOpaque(true);
         //  expandsSelectedPaths = true;
         updateUI();
-              
-        initTree(root, "00");
+        
+        controller = new CommoditySortController();
+
+        initTree(root, controller.show().get(0).ID);
         
         DefaultTreeModel model = new DefaultTreeModel(root, true);
         model.reload();
@@ -61,10 +66,11 @@ public class MyTree extends JTree{
 		this.setCellRenderer(cellRender);
 	}
 	
-	CommoditySortBLService controller;
-	
 	public String getName(String ID){
-		if(ID.equals("00")){
+		
+		controller = new CommoditySortController();
+		
+		if(ID.equals(controller.show().get(0).ID)){
 			return "所有商品分类";
 		}else{
 			controller = new CommoditySortController();

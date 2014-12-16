@@ -255,6 +255,21 @@ public class TradeManagementUI extends JLabel implements ActionListener{
 	
 	public void actionPerformed(ActionEvent events) {
 		
+		///////////////////TRADE///////////////////////
+		
+		if(events.getSource() == button_set){
+			if(comboBox_sort.getSelectedIndex() != 1 || comboBox_sort.getSelectedIndex() != 2){
+				WarningFrame wf = new WarningFrame("只有收款单以及付款单需要设定此项金额！");
+				wf.setVisible(true);
+			}else{
+				
+			}
+		}
+		
+		//////////////////CASH/////////////////////////
+		
+		//////////////////ELSE/////////////////////////
+		
 		if(events.getSource() == button_search){
 			
 			if(comboBox.getSelectedIndex() == 0){

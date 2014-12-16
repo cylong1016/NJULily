@@ -283,6 +283,7 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 	public void actionPerformed(ActionEvent events) {
 		
 		if(events.getSource() == bt_vanish){
+			InventoryCheckingUI.rowNum = 0;
 			this.setVisible(false);
 		}
 				
@@ -371,6 +372,7 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 		if(events.getSource() == bt_restart){
 			this.setVisible(false);
 			flag = 0;
+			InventoryCheckingUI.rowNum = 0;
 			Frame_Inventory fi = new Frame_Inventory();
 			fi.setVisible(true);
 			bt_good.doClick();

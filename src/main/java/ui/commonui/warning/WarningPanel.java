@@ -36,7 +36,7 @@ public class WarningPanel extends MyPanel implements ActionListener{
 		JLabel warn = new JLabel(name,JLabel.CENTER);
 		warn.setForeground(Color.RED);
 		warn.setBackground(new Color(0, 0, 0, 0));
-		warn.setBounds(100, 40, 200, 25);
+		warn.setBounds(0, 40, 400, 25);
 		this.add(warn);
 		
 		//button to choose to close the program

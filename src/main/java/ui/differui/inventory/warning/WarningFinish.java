@@ -154,8 +154,9 @@ public class WarningFinish extends JLabel implements ActionListener{
 		}
 		
 		if(events.getSource() == button_back){
+			System.out.println("");
 			this.setVisible(false);
-			Frame_Inventory.visibleTrue(7);
+			Frame_Inventory.visibleTrue(5);
 		}
 		
 		if(events.getSource() == button_output){

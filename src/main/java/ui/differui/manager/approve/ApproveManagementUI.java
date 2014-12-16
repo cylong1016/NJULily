@@ -54,7 +54,7 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 	MyComboBox cbb_isApproval, cbb_sort;
 	JTextArea ta;
 	
-	private static int rowNum = 0;
+	public static int rowNum = 0;
 	
 	static ArrayList<ValueObject> listPool;
 	static ArrayList<BillType> typePool;

@@ -42,7 +42,7 @@ public class InventoryCheckingUI extends MyPanel implements ActionListener{
 	MyTable table;
 	static ArrayList<CommodityVO> list;
 	
-	static int rowNum = 0;
+	public static int rowNum = 0;
 	
 	public InventoryCheckingUI(){
 		
@@ -145,10 +145,11 @@ public class InventoryCheckingUI extends MyPanel implements ActionListener{
 		
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		
-		for(int i = 0; i < rowNum; i++){
-			tableModel.removeRow(0);
-		}
-		
+		if(rowNum != 0)
+			for(int i = 0; i < rowNum; i++){
+				tableModel.removeRow(0);
+			}
+			
 		rowNum = 0;
 		
 		list.clear();
@@ -179,10 +180,10 @@ public class InventoryCheckingUI extends MyPanel implements ActionListener{
 			}			
 		}
 		
-		if(rowNum == 0){
-			WarningFrame wf = new WarningFrame("目前暂时没有需要盘点的商品！");
-			wf.setVisible(true);
-		}
+//		if(rowNum == 0){
+//			WarningFrame wf = new WarningFrame("目前暂时没有需要盘点的商品！");
+//			wf.setVisible(true);
+//		}
 	}
 	
 
