@@ -3,13 +3,10 @@ package ui.differui.manager.strategy;
 import java.util.ArrayList;
 
 import vo.promotion.PromotionClientVO;
-import vo.promotion.PromotionCommodityVO;
 import vo.promotion.PromotionTotalVO;
 import blservice.promotionblservice.PromotionClientBLService;
-import blservice.promotionblservice.PromotionCommodityBLService;
 import blservice.promotionblservice.PromotionTotalBLService;
 import businesslogic.promotionbl.type.PromotionClientController;
-import businesslogic.promotionbl.type.PromotionCommodityController;
 import businesslogic.promotionbl.type.PromotionTotalController;
 
 public class PromotionData {
@@ -42,16 +39,18 @@ public class PromotionData {
 	 * @version Dec 11, 2014 1:30:11 AM
 	 */
 	public Object[][] getCommodityPromotion() {
-		PromotionCommodityBLService promotionBL = new PromotionCommodityController();
-		ArrayList<PromotionCommodityVO> commodityVOs = promotionBL.show();
-		Object[][] cellData = new Object[commodityVOs.size()][CELL];
-		int i = 0;
-		for (PromotionCommodityVO vo : commodityVOs) {
-			Object[] row = {vo.ID, vo.beginDate, vo.endDate, vo.commodities, vo.gifts, vo.allowance,vo.voucher};
-			cellData[i] = row;
-			i++;
-		}
-		return cellData;
+		// TODO Zing说这个不做了
+//		PromotionCommodityBLService promotionBL = new PromotionCommodityController();
+//		ArrayList<PromotionCommodityVO> commodityVOs = promotionBL.show();
+//		Object[][] cellData = new Object[commodityVOs.size()][CELL];
+//		int i = 0;
+//		for (PromotionCommodityVO vo : commodityVOs) {
+//			Object[] row = {vo.ID, vo.beginDate, vo.endDate, vo.commodities, vo.gifts, vo.allowance,vo.voucher};
+//			cellData[i] = row;
+//			i++;
+//		}
+//		return cellData;
+		return null;
 	}
 	
 	/**
