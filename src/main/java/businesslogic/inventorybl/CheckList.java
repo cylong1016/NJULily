@@ -67,8 +67,7 @@ public class CheckList {
 	public ArrayList<CheckCommodityItemVO> getItemsVO() {
 		ArrayList<CheckCommodityItemVO> vos = new ArrayList<CheckCommodityItemVO>();
 		for(CheckListItem item : items) {
-			CheckCommodityItemVO vo =
-										new CheckCommodityItemVO(item.getName(), item.getType(), item.getNumber(), item.getPrice());
+			CheckCommodityItemVO vo = new CheckCommodityItemVO(item.getName(), item.getType(), item.getNumber(), item.getPrice());
 			totalNumber += item.getNumber();
 			totalPrice += item.getPrice();
 			vos.add(vo);

@@ -18,6 +18,8 @@ public class CheckCommodityItemVO {
 	public int number;
 	/** 每个商品价格 */
 	public double price;
+	/** 库存均价 */
+	public double avePrice;
 	
 	public CheckCommodityItemVO(String name, String type, int number, double price) {
 		this.name = name;
