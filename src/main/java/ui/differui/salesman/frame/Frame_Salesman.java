@@ -278,7 +278,7 @@ public class Frame_Salesman extends MyFrame implements ActionListener{
 	
 	public void actionPerformed(ActionEvent events){
 		if(events.getSource() == bt_vanish){
-			this.setVisible(false);
+			this.dispose();
 		}
 		
 		if(events.getSource() == bt_index){

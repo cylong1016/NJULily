@@ -58,7 +58,6 @@ public class WarningIndex extends MyPanel implements ActionListener{
 	MyTextField textField;
 	JTextField tf;
 	
-	static int rowNum;
 	static String deleteID;
 	int clickTime = 0;
 	static String note;
@@ -67,14 +66,11 @@ public class WarningIndex extends MyPanel implements ActionListener{
 	public static ArrayList<BillListItem> commoList;
 	
  	public WarningIndex(){
-		
-		rowNum = 0;
-		
+	
 		int y = 10;
 		
 		addCommoID = new ArrayList<String>();
 		commoList = new ArrayList<BillListItem>();
-		commoList.clear();
 		
 		Color foreColor = new Color(158, 213, 220);
 		Color backColor = new Color(46, 52, 101);
@@ -220,25 +216,22 @@ public class WarningIndex extends MyPanel implements ActionListener{
 			
 			DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 			
-			if(rowNum != 0)
-				for(int k = 0; k < rowNum; k++)
-					tableModel.removeRow(0);
-			
-			rowNum = 0;
-			
+			int rowCount = table.getRowCount();
+			for(int k = 0; k < rowCount; k++)
+				tableModel.removeRow(0);
+				
 			CommodityBLService controller = new CommodityController();
-			
-			rowNum = controller.show().size();
 			
 			for(int i = 0; i < controller.show().size(); i++){
 				CommodityVO cvo = controller.show().get(i);
 				
 				//"商品编号","商品分类","商品名称","商品型号","库存数量"
-				String[] str = {cvo.ID, getSortName(cvo.sortID), cvo.name, cvo.type, String.valueOf(cvo.inventoryNum)};
+				String[] str = {cvo.ID, getSortName(cvo.sortID), cvo.name
+						, cvo.type, String.valueOf(cvo.inventoryNum)};
 				tableModel.addRow(str);
 			}		
 			
-			if(rowNum == 0 && clickTime != 1){
+			if(table.getRowCount() == 0 && clickTime != 1){
 				WarningFrame wf = new WarningFrame("现在暂时没有商品");
 				wf.setVisible(true);
 			}
@@ -263,20 +256,17 @@ public class WarningIndex extends MyPanel implements ActionListener{
 				}else{
 					
 					DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+					int rowCount = table.getRowCount();
 					
-					if(rowNum != 0)
-						for(int k = 0; k < rowNum; k++)
-							tableModel.removeRow(0);
-					
-					rowNum = 0;
+					for(int k = 0; k < rowCount; k++)
+						tableModel.removeRow(0);
 														
 					for(int i = 0; i < list.size(); i++){
 										
 						CommodityVO cvo = list.get(i);
-						
-						rowNum = list.size();
-						
-						String[] str = {cvo.ID, getSortName(cvo.sortID), cvo.name, cvo.type, String.valueOf(cvo.inventoryNum)};
+				
+						String[] str = {cvo.ID, getSortName(cvo.sortID), cvo.name
+								, cvo.type, String.valueOf(cvo.inventoryNum)};
 						tableModel.addRow(str);
 						
 					}	

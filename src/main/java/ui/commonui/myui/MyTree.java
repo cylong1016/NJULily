@@ -14,7 +14,6 @@ import javax.swing.tree.DefaultTreeSelectionModel;
 
 import vo.commodity.CommoditySortVO;
 import blservice.commoditysortblservice.CommoditySortBLService;
-import businesslogic.commoditybl.CommodityController;
 import businesslogic.commoditysortbl.CommoditySortController;
 
 

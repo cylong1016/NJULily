@@ -227,8 +227,7 @@ public class Frame_Manager extends MyFrame implements ActionListener{
 	
 	public void actionPerformed(ActionEvent events){
 		if(events.getSource() == bt_vanish){
-			ApproveManagementUI.rowNum = 0;
-			this.setVisible(false);
+			this.dispose();
 		}
 		
 		if(events.getSource() == bt_index){

@@ -40,10 +40,8 @@ public class InventoryCheckingUI extends MyPanel implements ActionListener{
 	String date = "";
 	
 	MyTable table;
-	static ArrayList<CommodityVO> list;
-	
-	public static int rowNum = 0;
-	
+	ArrayList<CommodityVO> list;
+
 	public InventoryCheckingUI(){
 		
 		list = new ArrayList<CommodityVO>();
@@ -132,7 +130,7 @@ public class InventoryCheckingUI extends MyPanel implements ActionListener{
 		}
 		
 		if(events.getSource() == button_finish){
-			if(rowNum == 0){
+			if(table.getRowCount() == 0){
 				WarningFrame wf = new WarningFrame("暂时没有需要进行盘点的商品");
 				wf.setVisible(true);
 			}else{
@@ -144,14 +142,12 @@ public class InventoryCheckingUI extends MyPanel implements ActionListener{
 	public void showAll(){
 		
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+		int rowCount = table.getRowCount();
 		
-		if(rowNum != 0)
-			for(int i = 0; i < rowNum; i++){
-				tableModel.removeRow(0);
-			}
+		for(int i = 0; i < rowCount; i++){
+			tableModel.removeRow(0);
+		}
 			
-		rowNum = 0;
-		
 		list.clear();
 		
 		InventoryBLService controller = new InventoryController();
@@ -173,20 +169,10 @@ public class InventoryCheckingUI extends MyPanel implements ActionListener{
 							 good.type, String.valueOf(good.avePur), "", "", "", String.valueOf(good.inventoryNum),""}; 
 					
 					tableModel.addRow(str);
-					rowNum++;
 					
 					j = commoVO.size();
 				}
 			}			
 		}
-		
-//		if(rowNum == 0){
-//			WarningFrame wf = new WarningFrame("目前暂时没有需要盘点的商品！");
-//			wf.setVisible(true);
-//		}
-	}
-	
-
-   
-	
+	}	
 }

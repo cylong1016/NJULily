@@ -45,10 +45,6 @@ public class ClientDetailPanel extends MyPanel implements ActionListener{
 	String id, name, phone, address, post, email, limit; 
 	double receivable, payable;
 	
-	public void setInformation(){
-		
-	}
-	
 	public ClientDetailPanel(ClientVO cvo){
 			
 		int x1 = 80, y1 = 55, x2 = 390, y2 = -66;

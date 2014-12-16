@@ -56,7 +56,6 @@ public class InBackFirst extends MyPanel implements ActionListener{
 	MyTable table, table2, table3;
 	MyComboBox comboBox2;
 
-	static int rowNum, rowNum2;
 	static String deleteID;
 	int clickTime = 0;
 	
@@ -74,9 +73,6 @@ public class InBackFirst extends MyPanel implements ActionListener{
 		
  		billList = new ArrayList<PurchaseVO>();
  		
-		rowNum = 0;
-		rowNum2 = 0;
-		
 		int y = 10;
 		
 		addCommoID = new ArrayList<String>();
@@ -222,12 +218,10 @@ public class InBackFirst extends MyPanel implements ActionListener{
 			
 			DefaultTableModel tableModel = (DefaultTableModel) table3.getModel();
 				
-			if(rowNum2 != 0)
-				for(int k = 0; k < rowNum2; k++)
-					tableModel.removeRow(0);
-				
-			rowNum2 = 0;
-				
+			int rowCount = table3.getRowCount();
+			for(int k = 0; k < rowCount; k++)
+				tableModel.removeRow(0);
+		
 			ClientBLService clientController = new ClientController();
 			ArrayList<ClientVO> clientList = clientController.show();
 			Boolean flag = false;
@@ -257,15 +251,14 @@ public class InBackFirst extends MyPanel implements ActionListener{
 						billList.add(list.get(i));
 						String[] str = {list.get(i).ID, String.valueOf(addCommo(list.get(i).commodities))};
 						model.addRow(str);
-						rowNum2++;
 					}
 				}
 					
-				if(rowNum2 == 0){
+				if(table3.getRowCount() == 0){
 					WarningFrame wf = new WarningFrame("暂时没有符合条件的货单！");
 					wf.setVisible(true);
 				}else{
-					WarningFrame wf = new WarningFrame("目前有"+ rowNum2 +"条货单符合条件!");
+					WarningFrame wf = new WarningFrame("目前有"+ table3.getRowCount() +"条货单符合条件!");
 					wf.setVisible(true);
 				}
 				
@@ -282,11 +275,9 @@ public class InBackFirst extends MyPanel implements ActionListener{
 				
 				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 				
-				if(rowNum != 0)
-					for(int k = 0; k < rowNum; k++)
-						tableModel.removeRow(0);
-				
-				rowNum = 0;
+				int rowCount = table.getRowCount();
+				for(int k = 0; k < rowCount; k++)
+					tableModel.removeRow(0);
 				
 				ArrayList<CommodityItemVO> commoArray = billList.get(table3.getSelectedRow()).commodities;
 				
@@ -298,7 +289,6 @@ public class InBackFirst extends MyPanel implements ActionListener{
 									commoController.show().get(i).name, commoController.show().get(i).type, 
 									String.valueOf(commoController.show().get(i).inventoryNum)};
 							tableModel.addRow(str);
-							rowNum++;
 						}
 					}
 				}
@@ -314,11 +304,10 @@ public class InBackFirst extends MyPanel implements ActionListener{
 			
 				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 				
-				if(rowNum != 0)
-					for(int k = 0; k < rowNum; k++)
-						tableModel.removeRow(0);
+				int rowCount = table.getRowCount();
 				
-				rowNum = 0;
+				for(int k = 0; k < rowCount; k++)
+						tableModel.removeRow(0);
 				
 				CommodityBLService commoController = new CommodityController();
 				for(int j = 0; j < clientCommoList.size(); j++){
@@ -328,12 +317,11 @@ public class InBackFirst extends MyPanel implements ActionListener{
 									commoController.show().get(i).name, commoController.show().get(i).type, 
 									String.valueOf(commoController.show().get(i).inventoryNum)};
 							tableModel.addRow(str);
-							rowNum++;
 						}
 					}
 				}
 				
-				WarningFrame wf = new WarningFrame("共有"+ rowNum + "件商品与此客户有关！");
+				WarningFrame wf = new WarningFrame("共有"+ table.getRowCount() + "件商品与此客户有关！");
 				wf.setVisible(true);
 			}
 		}

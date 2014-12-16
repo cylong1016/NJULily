@@ -37,8 +37,7 @@ public class ClientManagementUI extends JLabel implements ActionListener{
 	MyTextField textField;
 	
 	String deleteID = "";
-	static int rowNum;
-	
+		
 	ClientBLService controller;
 	
 	public ClientManagementUI(){
@@ -158,15 +157,14 @@ public class ClientManagementUI extends JLabel implements ActionListener{
 			
 			DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		
-			if(rowNum != 0)
-				for(int i = 0; i < rowNum; i++)
-					tableModel.removeRow(0);
+			int rowCount = table.getRowCount();
 			
-			rowNum = 0;
+			for(int i = 0; i < rowCount; i++)
+				tableModel.removeRow(0);
 			
 			controller = new ClientController();
 			
-			rowNum = controller.show().size();
+			rowCount = controller.show().size();
 			
 			for(int i = 0; i < controller.show().size(); i++){
 				ClientVO cvo = controller.show().get(i);
@@ -245,17 +243,14 @@ public class ClientManagementUI extends JLabel implements ActionListener{
 					
 					DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 					
-					if(rowNum != 0)
-						for(int k = 0; k < rowNum; k++)
-							tableModel.removeRow(0);
+					int rowCount = table.getRowCount();
 					
-					rowNum = 0;
+					for(int k = 0; k < rowCount; k++)
+						tableModel.removeRow(0);
 														
 					for(int i = 0; i < list.size(); i++){
 										
 						ClientVO cvo = list.get(i);
-						
-						rowNum = list.size();
 						
 						String[] str = {cvo.ID, getCategory(cvo.category.toString()), getLevel(cvo.level.toString())
 								, cvo.name,cvo.salesman,String.valueOf(cvo.receivable - cvo.payable)
