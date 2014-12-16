@@ -27,6 +27,22 @@ public interface AccountBillDataService extends CommonDataService<AccountBillPO>
 	public String getID(BillType type) throws RemoteException;
 
 	/**
+	 * @return 获得新的收款单ID
+	 * @throws RemoteException
+	 * @author cylong
+	 * @version 2014年12月16日 上午10:26:56
+	 */
+	public String getExpenseID() throws RemoteException;
+
+	/**
+	 * @return 获得新的付款单ID
+	 * @throws RemoteException
+	 * @author cylong
+	 * @version 2014年12月16日 上午10:27:09
+	 */
+	public String getPayID() throws RemoteException;
+
+	/**
 	 * 按照单据类型返回单据【收款单或者付款单】
 	 * @param type
 	 * @return
