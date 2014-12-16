@@ -6,7 +6,6 @@ import java.util.HashMap;
 import vo.AccountBillItemVO;
 import vo.AccountBillVO;
 import blservice.accountbillblservice.AccountBillBLService;
-import dataenum.BillType;
 
 /**
  * @see blservice.accountbillblservice.AccountBillBLService
@@ -21,17 +20,17 @@ public class AccountBillController implements AccountBillBLService {
 		accountBill = new AccountBill();
 	}
 
-	/**
-	 * @see blservice.accountbillblservice.AccountBillBLService#getID(dataenum.BillType)
-	 */
 	@Override
-	public String getID(BillType type) {
-		try {
-			return accountBill.getID(type);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-			return null;
-		}
+	public String getPayID() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String getExpenseID() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/**

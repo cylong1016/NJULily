@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import vo.AccountBillItemVO;
 import vo.AccountBillVO;
-import dataenum.BillType;
 
 /**
  * 负责实现资金管理界面所需要的服务
@@ -29,11 +28,19 @@ import dataenum.BillType;
 public interface AccountBillBLService {
 
 	/**
-	 * 得到收款单或者付款单的ID，返回给界面显示
-	 * 在创建收款单（付款单）的时候界面调用这个方法先显示单据的ID
-	 * @return 可用的ID
+	 * 得到付款单的ID
+	 * @return
+	 * @author Zing
+	 * @version Dec 16, 2014 7:41:50 PM
 	 */
-	public String getID(BillType type);
+	public String getPayID();
+	/**
+	 * 得到收款单的ID
+	 * @return
+	 * @author Zing
+	 * @version Dec 16, 2014 7:42:04 PM
+	 */
+	public String getExpenseID();
 
 	/**
 	 * 根据ID精确查找账单
