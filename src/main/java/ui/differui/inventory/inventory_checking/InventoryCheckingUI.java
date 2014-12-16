@@ -50,7 +50,13 @@ public class InventoryCheckingUI extends MyPanel implements ActionListener{
 		
 //		Color foreColor = new Color(158, 213, 220);
 //		Color backColor = new Color(46, 52, 101);
-		
+				
+		JLabel word_4 = new JLabel("*表格中商品批号、批次、出厂日期以及实际数量请在导出后根据盘点实际情况进行填写！");
+		word_4.setForeground(Color.RED);
+		word_4.setBackground(new Color(0, 0, 0, 0));
+		word_4.setBounds(76, 50, 600, 25);
+		this.add(word_4);
+			
 		this.setLayout(null);
 		this.setBounds(0, 0, 1280, 720);
 		this.setOpaque(false);
@@ -64,7 +70,7 @@ public class InventoryCheckingUI extends MyPanel implements ActionListener{
 		
 		//adding the table 
 		String[] headers = {"行号","商品编号","商品名称"
-				,"商品型号","库存均价","批次","批号","出厂日期","库存数量","实际盘点数量"};
+				,"商品型号","库存均价","批号","批次","出厂日期","库存数量","实际数量"};
 		table = new MyTable(headers);
 		
 		DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();// 设置table内容居中
@@ -163,8 +169,7 @@ public class InventoryCheckingUI extends MyPanel implements ActionListener{
 					list.add(commoVO.get(j));
 					
 					String[] str = {String.valueOf(i + 1), good.ID, good.name,
-							 good.type, String.valueOf(good.avePur), vo.lot,
-							 vo.today, "", String.valueOf(good.inventoryNum),""}; 
+							 good.type, String.valueOf(good.avePur), "", "", "", String.valueOf(good.inventoryNum),""}; 
 					
 					tableModel.addRow(str);
 					rowNum++;

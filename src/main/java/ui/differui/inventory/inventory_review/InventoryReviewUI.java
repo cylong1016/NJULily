@@ -10,18 +10,22 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
-import ui.commonui.exitfunction.ExitFunctionFrame;
+import blservice.inventoryblservice.InventoryBLService;
+import businesslogic.inventorybl.InventoryController;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyPanel;
 import ui.commonui.myui.MyTable;
 import ui.commonui.myui.MyTextField;
+import ui.commonui.warning.WarningFrame;
+import vo.InventoryViewVO;
 
 public class InventoryReviewUI extends MyPanel implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	
-	MyJButton button_return, button_check, button_list;
+	MyJButton button_check, button_list;
 	MyTextField tf_year1, tf_month1, tf_day1, tf_year2, tf_month2, tf_day2;
+	MyTable table, table2;
 	
 	public static JButton button_close;
 	
@@ -41,8 +45,8 @@ public class InventoryReviewUI extends MyPanel implements ActionListener{
 		this.add(infoBar);
 		
 		//adding the table 
-		String[] headers = {"出库数量","入库数量","出库金额","入库金额","合计数量","合计金额"};
-		MyTable table = new MyTable(headers);
+		String[] headers = {"出库数量","入库数量","出库金额","入库金额","出库总额","入库总额"};
+		table = new MyTable(headers);
 		
 		JScrollPane jsp = new JScrollPane(table);
 		jsp.setBounds(25 + y, 150, 1050, 40);
@@ -51,12 +55,8 @@ public class InventoryReviewUI extends MyPanel implements ActionListener{
 		jsp.setVisible(true);
 		this.add(jsp);
 		
-		String[] str = {"100", "200", "100","100", "0", "100"};
-		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-		tableModel.addRow(str);
-		
-		String[] headers2 = {"销售数量","进货数量","销售金额","进货金额","合计数量","合计金额"};
-		MyTable table2 = new MyTable(headers2);
+		String[] headers2 = {"销售数量","进货数量","销售金额","进货金额","销售总额","进货总额"};
+		table2 = new MyTable(headers2);
 		
 		JScrollPane jsp2=new JScrollPane(table2);
 		jsp2.setBounds(25 + y, 270, 1050, 40);
@@ -64,10 +64,6 @@ public class InventoryReviewUI extends MyPanel implements ActionListener{
 		jsp2.setOpaque(false);
 		jsp2.setVisible(true);
 		this.add(jsp2);
-		
-		String[] str2 = {"100", "200", "100","100", "0", "100"};
-		DefaultTableModel tableModel2 = (DefaultTableModel) table2.getModel();
-		tableModel2.addRow(str2);
 		
 		String[] headers3 = {"货单种类","货单编号","货单日期","应收","应付","应收付差额"};
 		MyTable table3 = new MyTable(headers3);
@@ -165,15 +161,9 @@ public class InventoryReviewUI extends MyPanel implements ActionListener{
 		button_check.setBounds(250 + x, 78, 90, 20);
 		button_check.addActionListener(this);
 		this.add(button_check);
-				
-		//add a button for returning to the last UI
-		button_return = new MyJButton("返回");
-		button_return.setBounds(515 + 450 + y, 610 + 20 - 60, 110, 25);
-		button_return.addActionListener(this);
-		this.add(button_return);	
-		
+							
 		button_list = new MyJButton("查看所选货单信息");
-		button_list.setBounds(400 + 400 + y, 610 + 20 - 60, 150, 25);
+		button_list.setBounds(400 + 525 + y, 610 + 20 - 60, 150, 25);
 		button_list.addActionListener(this);
 		this.add(button_list);	
 				
@@ -184,15 +174,74 @@ public class InventoryReviewUI extends MyPanel implements ActionListener{
 	}
 	
 public void actionPerformed(ActionEvent events) {
-		
-		if(events.getSource() == button_return){
-			ExitFunctionFrame efp = new ExitFunctionFrame("InventoryReviewUI");
-			efp.setVisible(true);
-		}
-		
+			
 		if(events.getSource() == button_close){
 			this.setVisible(false);
 		}
+		
+		if(events.getSource() == button_check){
+			DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+			DefaultTableModel tableModel2 = (DefaultTableModel) table2.getModel();
+			
+			if(tableModel.getRowCount() != 0)
+				tableModel.removeRow(0);
+			
+			if(tableModel2.getRowCount() != 0)
+				tableModel2.removeRow(0);
+			
+			
+			if(tf_year1.getText().isEmpty() || tf_year2.getText().isEmpty() 
+					|| tf_month1.getText().isEmpty() || tf_month2.getText().isEmpty()
+					 || tf_day1.getText().isEmpty() || tf_day2.getText().isEmpty()){
+				
+				WarningFrame wf = new WarningFrame("请检查时间段填写是否正确！");
+				wf.setVisible(true);
+			}else{
+				InventoryBLService controller = new InventoryController();
+				String beginDate = yearAddZero(tf_year1.getText()) + addZero(tf_month1.getText()) + addZero(tf_day1.getText());
+				String endDate = yearAddZero(tf_year2.getText()) + addZero(tf_month2.getText()) + addZero(tf_day2.getText());
+				InventoryViewVO ivvo = controller.viewInventory(beginDate, endDate);
+				
+				String[] str = {String.valueOf(ivvo.saleNumber) + "元", String.valueOf(ivvo.purNumber) + "元"
+						, String.valueOf(ivvo.saleMoney) + "元", String.valueOf(ivvo.purMoney) + "元"
+						, String.valueOf(ivvo.saleNumber * ivvo.saleMoney) + "元"
+						, String.valueOf(ivvo.purNumber * ivvo.purMoney) + "元"};
+			//	String[] str2 = {"100", "200", "100","100", "0", "100"};
+				
+				tableModel.addRow(str);
+				tableModel2.addRow(str);
+				
+				WarningFrame wf = new WarningFrame("已显示此时间段内的信息！");
+				wf.setVisible(true);
+			}
+		}
+		
+		if(events.getSource() == button_list){
+			WarningFrame wf = new WarningFrame("暂不支持此功能!");
+			wf.setVisible(true);
+		}
 	}
-	
+
+	private String addZero(String str){
+		if(Integer.parseInt(str) < 10){
+			return "0" + str;
+		}else{
+			return str;
+		}
+	}
+	private String yearAddZero(String str){
+		if(Integer.parseInt(str) < 10){
+			return "000" + str;
+		}else{
+			if(Integer.parseInt(str) < 100){
+				return "00" + str;
+			}else{
+				if(Integer.parseInt(str) < 1000){
+					return "0" + str;
+				}else{
+					return str;
+				}
+			}
+		}
+	}
 }

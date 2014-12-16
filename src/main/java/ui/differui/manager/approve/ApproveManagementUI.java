@@ -272,9 +272,6 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 			if(rowNum == 0){
 				WarningFrame wf = new WarningFrame("目前没有符合条件的单据!");
 				wf.setVisible(true);
-			}else{
-				WarningFrame wf = new WarningFrame("共有 "+ rowNum + " 条单据符合条件!");
-				wf.setVisible(true);
 			}
 		}
 		
