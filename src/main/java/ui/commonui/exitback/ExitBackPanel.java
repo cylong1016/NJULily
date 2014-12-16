@@ -68,8 +68,7 @@ public class ExitBackPanel extends MyPanel implements ActionListener{
 			ExitBackFrame.button_close.doClick();
 			
 			switch(flag){
-				case "AdminUI" : AdminUI.bt_vanish.doClick();
-								 AdminUI.rowNum = 0;break;
+				case "AdminUI" : AdminUI.bt_vanish.doClick();break;
 				case "Frame_Salesman" : Frame_Salesman.bt_vanish.doClick();
 										Frame_Salesman.flag = 0;break;
 				case "Frame_Inventory" : Frame_Inventory.bt_vanish.doClick();

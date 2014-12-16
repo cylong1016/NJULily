@@ -45,8 +45,6 @@ public class AdminUI extends MyFrame implements ActionListener{
 	
 	static UserBLService controller;
 	
-	public static int rowNum;
-	
 	static String name, userName, phone, userIden, password
 	, id, oldPassword, newPassword, againPassword;
 	
@@ -298,17 +296,15 @@ public class AdminUI extends MyFrame implements ActionListener{
 		
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		
-		if(rowNum != 0)
-			for(int i = 0; i < rowNum; i++)
-				tableModel.removeRow(0);
+		int rowCount = table.getRowCount();
 		
-		rowNum = 0;
+		for(int i = 0; i < rowCount; i++){
+			tableModel.removeRow(0);
+		}
 		
 		controller = new UserController();
 		
-		rowNum = controller.show().size();
-		
-		for(int i = 0; i < rowNum; i++){
+		for(int i = 0; i < controller.show().size(); i++){
 			UserVO uvo = controller.show().get(i);
 			
 			String[] str = {uvo.ID, uvo.name, getUserIden(uvo.iden.name().toString())

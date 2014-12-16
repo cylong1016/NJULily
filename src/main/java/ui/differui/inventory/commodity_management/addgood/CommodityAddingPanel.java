@@ -161,7 +161,7 @@ public class CommodityAddingPanel extends MyPanel implements ActionListener{
 		CommoditySortBLService controller = new CommoditySortController();
 		ArrayList<CommoditySortVO> list = controller.show();
 		
-		for(int i = 1; i < list.size(); i++){
+		for(int i = 0; i < list.size(); i++){
 			if(list.get(i).name.equals(note.toString())){
 				return list.get(i).ID;
 			}

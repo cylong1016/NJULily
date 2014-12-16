@@ -43,8 +43,6 @@ public class AccountManagementUI extends JLabel implements ActionListener{
 	
 	public static JButton deleteAccount, modifyAccount;
 	
-	static int rowNum = 0;
-	
 	static String accountID = "";
 	
 	JLabel word_6;
@@ -298,14 +296,14 @@ public class AccountManagementUI extends JLabel implements ActionListener{
 			
 			DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 			
-			for(int i = 0; i < rowNum; i++){
+			int rowCount = table.getRowCount();
+			
+			for(int i = 0; i < rowCount; i++){
 				tableModel.removeRow(0);
 			}
 			
 			accountPool.clear();
 			accountID = "";
-			
-			rowNum = 0;
 			
 			//"模糊查找", "账户编号(ID)", "账户名称", "账户余额"
 			AccountBLService controller = new AccountController();
@@ -322,11 +320,10 @@ public class AccountManagementUI extends JLabel implements ActionListener{
 				String[] rowData = {accountVO.get(i).ID, 
 						accountVO.get(i).name, String.valueOf(accountVO.get(i).money)+"元"};
 				tableModel.addRow(rowData);
-				rowNum++;
 				accountPool.add(accountVO.get(i));
 			}
 			
-			WarningFrame wf = new WarningFrame("共有 " + rowNum + " 个账户符合条件！");
+			WarningFrame wf = new WarningFrame("共有 " + table.getRowCount() + " 个账户符合条件！");
 			wf.setVisible(true);
 		}
 	}
@@ -335,14 +332,14 @@ public class AccountManagementUI extends JLabel implements ActionListener{
 		
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		
-		for(int i = 0; i < rowNum; i++){
+		int rowCount = table.getRowCount();
+		
+		for(int i = 0; i < rowCount; i++){
 			tableModel.removeRow(0);
 		}
 		
 		accountPool.clear();
 		accountID = "";
-		
-		rowNum = 0;
 		
 		AccountBLService controller = new AccountController();
 		ArrayList<AccountVO> accountVO = controller.show();
@@ -351,7 +348,6 @@ public class AccountManagementUI extends JLabel implements ActionListener{
 			String[] rowData = {accountVO.get(i).ID, 
 					accountVO.get(i).name, String.valueOf(accountVO.get(i).money)+"元"};
 			tableModel.addRow(rowData);
-			rowNum++;
 			accountPool.add(accountVO.get(i));
 		}
 	}

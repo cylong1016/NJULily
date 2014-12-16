@@ -45,7 +45,6 @@ public class TradeManagementUI extends JLabel implements ActionListener{
 	JLabel word_1, word_2;
 		
 	static String accountID = "", accountName = "", clientID = "", clientName = "";
-	static int rowNumAccount = 0, rowNumClient = 0;
 	
 	public TradeManagementUI(){
 		
@@ -183,11 +182,11 @@ public class TradeManagementUI extends JLabel implements ActionListener{
 		word_3.setBounds(365, 385, 100, 25);
 		this.add(word_3);
 		
-		textField = new MyTextField(365 + 100, 385, 150, 25);
-		textField.setBackground(backColor);
-		textField.setForeground(foreColor);
-		textField.setHorizontalAlignment(JLabel.CENTER);
-		this.add(textField);
+		textField_money = new MyTextField(365 + 100, 385, 150, 25);
+		textField_money.setBackground(backColor);
+		textField_money.setForeground(foreColor);
+		textField_money.setHorizontalAlignment(JLabel.CENTER);
+		this.add(textField_money);
 		
 		JLabel word_4 = new JLabel("元");
 		word_4.setForeground(Color.WHITE);
@@ -280,7 +279,8 @@ public class TradeManagementUI extends JLabel implements ActionListener{
 			}else{
 				
 				ClientBLService controller = new ClientController();
-				ArrayList<ClientVO> list = controller.findClient(textField.getText(), getType(comboBox.getSelectedIndex()));
+				ArrayList<ClientVO> list = controller.findClient(textField.getText()
+						, getType(comboBox.getSelectedIndex()));
 				
 				if(list.size() == 0){
 					WarningFrame wf = new WarningFrame("没有符合条件的客户！");
@@ -289,17 +289,13 @@ public class TradeManagementUI extends JLabel implements ActionListener{
 					
 					DefaultTableModel tableModel = (DefaultTableModel) table2.getModel();
 					
-					if(rowNumClient != 0)
-						for(int k = 0; k < rowNumClient; k++)
-							tableModel.removeRow(0);
-					
-					rowNumClient = 0;
+					int rowCount = table2.getRowCount();
+					for(int k = 0; k < rowCount; k++)
+						tableModel.removeRow(0);
 														
 					for(int i = 0; i < list.size(); i++){
 										
 						ClientVO cvo = list.get(i);
-						
-						rowNumClient = list.size();
 						
 						String[] str = {cvo.ID, getCategory(cvo.category.toString()), getLevel(cvo.level.toString())
 								, cvo.name,cvo.salesman,String.valueOf(cvo.receivable - cvo.payable)
@@ -317,16 +313,13 @@ public class TradeManagementUI extends JLabel implements ActionListener{
 		if(events.getSource() == button_showAll){
 			
 			DefaultTableModel tableModel = (DefaultTableModel) table2.getModel();
-		
-			if(rowNumClient != 0)
-				for(int i = 0; i < rowNumClient; i++)
-					tableModel.removeRow(0);
 			
-			rowNumClient = 0;
+			int rowCount = table2.getRowCount();
 			
+			for(int i = 0; i < rowCount; i++)
+				tableModel.removeRow(0);
+				
 			ClientBLService controller = new ClientController();
-			
-			rowNumClient = controller.show().size();
 			
 			for(int i = 0; i < controller.show().size(); i++){
 				ClientVO cvo = controller.show().get(i);
@@ -365,11 +358,11 @@ public class TradeManagementUI extends JLabel implements ActionListener{
 		
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		
-		for(int i = 0; i < rowNumAccount; i++){
+		int rowCount = table.getRowCount();
+		
+		for(int i = 0; i < rowCount; i++){
 			tableModel.removeRow(0);
 		}
-						
-		rowNumAccount = 0;
 		
 		AccountBLService controller = new AccountController();
 		ArrayList<AccountVO> accountVO = controller.show();
@@ -377,8 +370,7 @@ public class TradeManagementUI extends JLabel implements ActionListener{
 		for(int i = 0; i < accountVO.size(); i++){
 			String[] rowData = {accountVO.get(i).ID, 
 					accountVO.get(i).name, String.valueOf(accountVO.get(i).money) + "元"};
-			tableModel.addRow(rowData);
-			rowNumAccount++;		
+			tableModel.addRow(rowData);		
 		}
 	}
 	
