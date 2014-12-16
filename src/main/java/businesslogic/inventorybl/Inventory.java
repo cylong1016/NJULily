@@ -74,7 +74,7 @@ public class Inventory {
 	public InventoryCheckVO checkRecord() throws RemoteException {
 		InventoryDataService inventoryData = getInventoryData();
 		// 得到批号
-		CheckList checkList = new CheckList(inventoryData.returnNumber());
+		CheckList checkList = new CheckList(inventoryData.returnLotNumber());
 		InventoryCheckVO vo = new InventoryCheckVO(checkList.getItemsVO(), checkList.getAvePrice(), checkList.getToday(), checkList.getLot());
 		return vo;
 	}

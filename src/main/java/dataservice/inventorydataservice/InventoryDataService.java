@@ -60,7 +60,7 @@ public interface InventoryDataService extends CommonDataService<InventoryBillPO>
 	 * @author cylong
 	 * @version Nov 8, 2014 6:25:36 PM
 	 */
-	public String returnNumber() throws RemoteException;
+	public String returnLotNumber() throws RemoteException;
 
 	/**
 	 * @param type 单据类型
