@@ -5,14 +5,16 @@ import java.util.ArrayList;
 import businesslogic.recordbl.BusinessStateList;
 
 public class MockBusinessState extends BusinessStateList{
+	
+
 	/**
-	 * @param IDs
+	 * @param beginDate
+	 * @param endDate
 	 * @author cylong
-	 * @version 2014年12月2日  上午4:19:56
+	 * @version 2014年12月18日  上午12:23:50
 	 */
-	public MockBusinessState(ArrayList<String> IDs) {
-		super(IDs);
-		sales = new ArrayList<MockSale>();
+	public MockBusinessState(String beginDate, String endDate) {
+		super(beginDate, endDate);
 	}
 
 	ArrayList<MockSale> sales;

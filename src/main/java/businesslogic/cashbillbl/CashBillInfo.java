@@ -1,8 +1,6 @@
 package businesslogic.cashbillbl;
 
-import java.net.MalformedURLException;
 import java.rmi.Naming;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,7 +24,6 @@ import dataenum.Storage;
 import dataservice.TableInfoService;
 import dataservice.cashbilldataservice.CashBillDataService;
 import dataservice.cashbilldataservice.CashBillInfoService;
-import dataservice.saledataservice.SaleInfoService;
 
 public class CashBillInfo extends Info<CashBillPO> implements ValueObjectInfo_Record<CashBillVO>, ValueObject_Approval<CashBillVO>, CashBillInfo_Approval {
 
