@@ -2,9 +2,11 @@ package businesslogic.recordbl;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import businesslogic.accountbillbl.AccountBillInfo;
 import businesslogic.cashbillbl.CashBillInfo;
+import businesslogic.common.DateOperate;
 import businesslogic.inventorybl.InventoryInfo;
 import businesslogic.purchasebl.PurchaseInfo;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
@@ -27,75 +29,58 @@ import dataenum.Storage;
  */
 public class BusinessProList {
 	
+	private Date begin;
+	private Date end;
+	
 	public BillType billType;
-	
 	public String clientName;
-	
 	public String salesman;
-	
 	public Storage storage;
-	
 	public ValueObjectInfo_Record<?> info;
-	
 	ArrayList<ValueObject> VOs;
-		
-	public BusinessProList(BillType billType, String clientName, String salesman, Storage storage) {
+	
+	public BusinessProList(String beginDate, String endDate) {
+		this.begin = DateOperate.changeBeginDate(beginDate);
+		this.end = DateOperate.changeEndDate(endDate);
+		this.VOs = new ArrayList<ValueObject>();
+	}
+	
+	public void setInfo(BillType billType, String clientName, String salesman, Storage storage) {
 		this.billType = billType;
 		this.clientName = clientName;
 		this.salesman = salesman;
 		this.storage = storage;
-		this.VOs = new ArrayList<ValueObject>();
 	}
-	
-	// TODO 这里是不是可以用抽象工厂？
-	// 这样就行了
-	public ArrayList<ValueObject> getBusinessPro(ArrayList<String> IDs) throws RemoteException{
+
+	public ArrayList<ValueObject> getBusinessPro() throws RemoteException{
 		switch (billType) {
 		case SALE:
 		case SALEBACK:
-			info = new SaleInfo();
+			info = new SaleInfo(begin, end);
 			break;
 		case PURCHASE:
 		case PURCHASEBACK:
-			info = new PurchaseInfo();
+			info = new PurchaseInfo(begin, end);
 			break;
 		case GIFT:
 		case OVERFLOW:
 		case LOSS:
-			info = new InventoryInfo();
+			info = new InventoryInfo(begin, end);
 			break;
 		case PAY:
 		case EXPENSE:
-			info = new AccountBillInfo();
+			info = new AccountBillInfo(begin, end);
 			break;
 		case CASH:
-			info = new CashBillInfo();
+			info = new CashBillInfo(begin, end);
 			break;
 		default:
 			break;
 		}
-		if (IDs.isEmpty()) {
-			addVOs(null);
-		}
-		else {
-			for (String id : IDs) {
-				addVOs(id);
-			}
-		}
-		
-		return VOs;
-	}
-	
-	private void addVOs(String id) throws RemoteException {
-		ArrayList<String> billIDs = info.getID(id, clientName, salesman, storage);
+		ArrayList<String> billIDs = info.getID(clientName, salesman, storage);
 		for (String billID : billIDs) {
 			VOs.add(info.find(billID));
 		}
+		return VOs;
 	}
-
-	
-	
-	
-	
-
 }

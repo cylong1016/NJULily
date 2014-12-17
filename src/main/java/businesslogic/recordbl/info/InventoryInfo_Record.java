@@ -8,7 +8,7 @@ import dataenum.Storage;
 
 public interface InventoryInfo_Record {
 
-	public ArrayList<String> getID(String ID, String clientName, String salesman, Storage storage) throws RemoteException;
+	public ArrayList<String> getID(String clientName, String salesman, Storage storage) throws RemoteException;
 
 	/**
 	 * 得到该库存单据的类型

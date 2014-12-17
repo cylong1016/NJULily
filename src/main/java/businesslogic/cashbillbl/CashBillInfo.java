@@ -5,6 +5,7 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import message.ResultMessage;
 import po.CashBillPO;
@@ -15,6 +16,7 @@ import businesslogic.accountbl.AccountInfo;
 import businesslogic.approvalbl.info.CashBillInfo_Approval;
 import businesslogic.approvalbl.info.ValueObject_Approval;
 import businesslogic.cashbillbl.info.AccountInfo_CashBill;
+import businesslogic.common.DateOperate;
 import businesslogic.common.Info;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
 import config.RMIConfig;
@@ -24,40 +26,54 @@ import dataenum.Storage;
 import dataservice.TableInfoService;
 import dataservice.cashbilldataservice.CashBillDataService;
 import dataservice.cashbilldataservice.CashBillInfoService;
+import dataservice.saledataservice.SaleInfoService;
 
 public class CashBillInfo extends Info<CashBillPO> implements ValueObjectInfo_Record<CashBillVO>, ValueObject_Approval<CashBillVO>, CashBillInfo_Approval {
 
 	private CashBill cashBill;
+	private CashBillDataService cashBillData;
+	private ArrayList<String> cashIDs;
 
 	public CashBillInfo() {
 		cashBill = new CashBill();
+		cashBillData = cashBill.getCashBillData();
 	}
 
+	public CashBillInfo(Date begin, Date end) {
+		cashBill = new CashBill();
+		cashBillData = cashBill.getCashBillData();
+		cashIDs = new ArrayList<String>();
+		setIDsByDate(begin, end);
+	}
+
+	/**
+	 * 找到符合条件的ID
+	 */
+	private void setIDsByDate(Date beginDate, Date endDate){
+		try {
+			ArrayList<String> IDs = getData().getAllID(BillType.CASH);
+			cashIDs = DateOperate.findFitDate(IDs, beginDate, endDate);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	public TableInfoService<CashBillPO> getData() {
 		try {
 			return (CashBillInfoService)Naming.lookup(RMIConfig.PREFIX + CashBillInfoService.NAME);
-		} catch (MalformedURLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		} catch (NotBoundException e) {
-			e.printStackTrace();
-		}
+		} 
 		return null;
 	}
 
-	private CashBillDataService getCashBillData() {
-		return cashBill.getCashBillData();
-	}
-
-	public ArrayList<String> getID(String ID, String clientName, String salesman, Storage storage) throws RemoteException {
+	public ArrayList<String> getID(String clientName, String salesman, Storage storage) throws RemoteException {
 		ArrayList<String> IDs = new ArrayList<String>();
-		IDs = getID(ID, clientName, salesman, storage, BillType.CASH);
+		IDs = getID(cashIDs, clientName, salesman, storage);
 		return IDs;
 	}
 
 	public CashBillVO find(String ID) throws RemoteException {
-		return cashBill.POToVO(getCashBillData().find(ID));
+		return cashBill.POToVO(cashBillData.find(ID));
 	}
 
 	public ResultMessage update(CashBillVO vo) throws RemoteException {
@@ -67,7 +83,7 @@ public class CashBillInfo extends Info<CashBillPO> implements ValueObjectInfo_Re
 		double total = vo.total;
 		ArrayList<CashItemPO> bills = itemsVOtoPO(vo.bills);
 		CashBillPO po = new CashBillPO(ID, user, account, bills, total);
-		return getCashBillData().update(po);
+		return cashBillData.update(po);
 	}
 
 	private ArrayList<CashItemPO> itemsVOtoPO(ArrayList<CashItemVO> VOs) {
@@ -83,10 +99,10 @@ public class CashBillInfo extends Info<CashBillPO> implements ValueObjectInfo_Re
 	}
 
 	public void pass(CashBillVO vo) throws RemoteException {
-		CashBillPO po = getCashBillData().find(vo.ID);
+		CashBillPO po = cashBillData.find(vo.ID);
 		// 更新该现金费用单的状态
 		po.setState(BillState.SUCCESS);
-		getCashBillData().update(po);
+		cashBillData.update(po);
 		AccountInfo_CashBill info = new AccountInfo();
 		ArrayList<CashItemPO> items = po.getBills();
 		double money = 0;
@@ -107,7 +123,7 @@ public class CashBillInfo extends Info<CashBillPO> implements ValueObjectInfo_Re
 		redVO.bills = bills;
 		CashBillPO redPO = new CashBillPO(redVO.ID, redVO.user, redVO.account, itemsVOtoPO(redVO.bills), redVO.total);
 		if (!isCopy) {
-			getCashBillData().insert(redPO);
+			cashBillData.insert(redPO);
 			pass(redVO);
 		} else {
 			// TODO 保存为草稿

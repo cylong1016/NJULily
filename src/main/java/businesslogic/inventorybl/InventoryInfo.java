@@ -5,6 +5,7 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import message.ResultMessage;
 import po.CommodityItemPO;
@@ -14,6 +15,7 @@ import vo.commodity.CommodityItemVO;
 import businesslogic.approvalbl.info.InventoryInfo_Approval;
 import businesslogic.approvalbl.info.ValueObject_Approval;
 import businesslogic.commoditybl.CommodityInfo;
+import businesslogic.common.DateOperate;
 import businesslogic.common.Info;
 import businesslogic.inventorybl.info.CommodityInfo_Inventory;
 import businesslogic.promotionbl.info.InventoryInfo_Promotion;
@@ -30,28 +32,47 @@ import dataservice.inventorydataservice.InventoryInfoService;
 public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInfo_Promotion, ValueObjectInfo_Record<InventoryBillVO>, InventoryInfo_Record, ValueObject_Approval<InventoryBillVO>, InventoryInfo_Approval{
 
 	private Inventory inventory;
+	private InventoryDataService inventoryData;
+	private ArrayList<String> giftIDs;
+	private ArrayList<String> overIDs;
+	private ArrayList<String> lossIDs;
 	
 	public InventoryInfo() {
 		inventory = new Inventory();
+		inventoryData = inventory.getInventoryData();
 	}
 	
+	public InventoryInfo(Date begin, Date end) {
+		inventory = new Inventory();
+		inventoryData = inventory.getInventoryData();
+		setIDsByDate(begin, end);
+	}
+	
+	/**
+	 * 找到符合条件的ID
+	 */
+	private void setIDsByDate(Date beginDate, Date endDate){
+		try {
+			ArrayList<String> gIDs = getData().getAllID(BillType.GIFT);
+			giftIDs.addAll(DateOperate.findFitDate(gIDs, beginDate, endDate));
+			ArrayList<String> oIDs = getData().getAllID(BillType.OVERFLOW);
+			overIDs.addAll(DateOperate.findFitDate(oIDs, beginDate, endDate));
+			ArrayList<String> lIDs = getData().getAllID(BillType.LOSS);
+			lossIDs.addAll(DateOperate.findFitDate(lIDs, beginDate, endDate));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	public TableInfoService<InventoryBillPO> getData() {
 		try {
 			return (InventoryInfoService)Naming.lookup(RMIConfig.PREFIX + InventoryInfoService.NAME);
-		} catch (MalformedURLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		} catch (NotBoundException e) {
-			e.printStackTrace();
-		}
+		} 
 		return null;
 	}
-	
-	private InventoryDataService getInventoryData() {
-		return inventory.getInventoryData();
-	}
-	
+
 	public ArrayList<InventoryBillVO> getGifts() throws RemoteException {
 		InventoryShow inventoryShow = new InventoryShow();
 		return inventoryShow.showGiftsPass();
@@ -65,10 +86,9 @@ public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInf
 	 */
 	public ArrayList<String> getID(String ID, String clientName, String salesman, Storage storage) throws RemoteException {
 		ArrayList<String> IDs = new ArrayList<String>();
-		IDs = getID(ID, clientName, salesman, storage, BillType.GIFT);
-		IDs.addAll(getID(ID, clientName, salesman, storage, BillType.OVERFLOW));
-		IDs.addAll(getID(ID, clientName, salesman, storage, BillType.LOSS));
-		IDs.addAll(getID(ID, clientName, salesman, storage, BillType.ALARM));
+		IDs = getID(giftIDs, clientName, salesman, storage);
+		IDs.addAll(getID(overIDs, clientName, salesman, storage));
+		IDs.addAll(getID(lossIDs, clientName, salesman, storage));
 		return IDs;
 	}
 
@@ -77,7 +97,7 @@ public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInf
 	 * @throws RemoteException 
 	 */
 	public InventoryBillVO find(String ID) throws RemoteException {
-		InventoryBillVO vo = inventory.poToVo(getInventoryData().find(ID));
+		InventoryBillVO vo = inventory.poToVo(inventoryData.find(ID));
 		return vo;
 	}
 
@@ -87,7 +107,7 @@ public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInf
 		String remark = vo.remark;
 		ArrayList<CommodityItemPO> commodities = inventory.changeItems.itemsVOtoPO(vo.commodities);
 		InventoryBillPO po = new InventoryBillPO(ID, billType, commodities, remark);
-		return getInventoryData().update(po);
+		return inventoryData.update(po);
 	}
 
 	/**
@@ -95,10 +115,10 @@ public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInf
 	 * @throws RemoteException 
 	 */
 	public void pass(InventoryBillVO vo) throws RemoteException {
-		InventoryBillPO po = getInventoryData().find(vo.ID);
+		InventoryBillPO po = inventoryData.find(vo.ID);
 		// 更新单据状态
 		po.setState(BillState.SUCCESS);
-		getInventoryData().update(po);
+		inventoryData.update(po);
 		// 更改商品数量
 		ArrayList<CommodityItemPO> commodities = po.getCommodities();
 		CommodityInfo_Inventory info = new CommodityInfo();
@@ -112,7 +132,7 @@ public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInf
 	 * @throws RemoteException 
 	 */
 	public BillType getType(String ID) throws RemoteException {
-		return getInventoryData().find(ID).getBillType();
+		return inventoryData.find(ID).getBillType();
 	}
 
 	/**
@@ -120,7 +140,7 @@ public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInf
 	 * @throws RemoteException 
 	 */
 	public double getTotalPrice(String ID) throws RemoteException {
-		InventoryBillPO po = getInventoryData().find(ID);
+		InventoryBillPO po = inventoryData.find(ID);
 		double totalPrice = 0;
 		for (CommodityItemPO commodityPO : po.getCommodities()) {
 			totalPrice += commodityPO.getTotal();
@@ -140,7 +160,7 @@ public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInf
 		// 先建立对应的PO
 		InventoryBillPO redPO = new InventoryBillPO(redVO.ID, redVO.billType, inventory.changeItems.itemsVOtoPO(redVO.commodities), redVO.remark);
 		if (!isCopy) {
-			getInventoryData().insert(redPO);
+			inventoryData.insert(redPO);
 			pass(redVO);
 		}
 		else {
@@ -180,5 +200,12 @@ public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInf
 		VOs.addAll(show.showLossFailure());
 		VOs.addAll(show.showAlarmFailure());
 		return VOs;
+	}
+
+	@Override
+	public ArrayList<String> getID(String clientName, String salesman,
+			Storage storage) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

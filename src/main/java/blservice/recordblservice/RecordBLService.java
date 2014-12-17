@@ -26,7 +26,7 @@ public interface RecordBLService {
 	 * @author Zing
 	 * @version Nov 30, 2014 10:26:24 AM
 	 */
-	public ArrayList<SaleDetailVO> saleDetail(RecordInputInfo info);
+	public ArrayList<SaleDetailVO> saleDetail(SaleDetailInputInfo info);
 	
 	/**
 	 * 制定经营历程表
@@ -35,7 +35,7 @@ public interface RecordBLService {
 	 * @author Zing
 	 * @version Nov 30, 2014 10:26:12 AM
 	 */
-	public ArrayList<ValueObject> bussinessPro(RecordInputInfo info);
+	public ArrayList<ValueObject> bussinessPro(BusinessStateInputInfo info);
 	
 	/**
 	 * 添加红冲

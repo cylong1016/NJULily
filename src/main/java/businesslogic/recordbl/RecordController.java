@@ -8,7 +8,8 @@ import vo.SaleDetailVO;
 import vo.ValueObject;
 import dataenum.BillType;
 import blservice.recordblservice.RecordBLService;
-import blservice.recordblservice.RecordInputInfo;
+import blservice.recordblservice.BusinessStateInputInfo;
+import blservice.recordblservice.SaleDetailInputInfo;
 
 /**
  * @see blservice.recordblservice.RecordBLService
@@ -28,10 +29,10 @@ public class RecordController implements RecordBLService {
 	}
 
 	/**
-	 * @see blservice.recordblservice.RecordBLService#saleDetail(blservice.recordblservice.RecordInputInfo)
+	 * @see blservice.recordblservice.RecordBLService#saleDetail(blservice.recordblservice.BusinessStateInputInfo)
 	 */
 	@Override
-	public ArrayList<SaleDetailVO> saleDetail(RecordInputInfo info) {
+	public ArrayList<SaleDetailVO> saleDetail(SaleDetailInputInfo info) {
 		try {
 			return record.saleDetail(info);
 		} catch (RemoteException e) {
@@ -41,10 +42,10 @@ public class RecordController implements RecordBLService {
 	}
 
 	/**
-	 * @see blservice.recordblservice.RecordBLService#bussinessPro(blservice.recordblservice.RecordInputInfo)
+	 * @see blservice.recordblservice.RecordBLService#bussinessPro(blservice.recordblservice.BusinessStateInputInfo)
 	 */
 	@Override
-	public ArrayList<ValueObject> bussinessPro(RecordInputInfo info) {
+	public ArrayList<ValueObject> bussinessPro(BusinessStateInputInfo info) {
 		try {
 			return record.bussinessPro(info);
 		} catch (RemoteException e) {

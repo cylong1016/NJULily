@@ -7,7 +7,9 @@ import dataenum.Storage;
 
 public interface SaleInfo_Record {
 	
-	public ArrayList<String> getID(String ID, String clientName, String salesman, Storage storage) throws RemoteException;
+	public ArrayList<String> getSaleIDs(String clientName, String salesman, Storage storage) throws RemoteException;	
+	public ArrayList<String> getSaleBackIDs(String clientName, String salesman, Storage storage) throws RemoteException;
+	public ArrayList<String> getID(String clientName, String salesman, Storage storage) throws RemoteException;
 	
 	/**
 	 * 根据销售单的ID，查找特定的商品ID
@@ -19,6 +21,7 @@ public interface SaleInfo_Record {
 	 * @throws RemoteException 
 	 */
 	public String getCommodityID(String ID, String CommodityName) throws RemoteException;
+	public ArrayList<String> getAllCommodityID(String ID) throws RemoteException;
 
 	public String getCommodityName(String ID) throws RemoteException;
 	

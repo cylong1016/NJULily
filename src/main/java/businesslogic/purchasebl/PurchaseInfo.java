@@ -1,97 +1,79 @@
 package businesslogic.purchasebl;
 
-import java.net.MalformedURLException;
 import java.rmi.Naming;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Date;
 
-import message.ResultMessage;
 import po.CommodityItemPO;
 import po.PurchasePO;
 import vo.PurchaseVO;
-import vo.commodity.CommodityItemVO;
-import businesslogic.approvalbl.info.PurchaseInfo_Approval;
 import businesslogic.approvalbl.info.ValueObject_Approval;
-import businesslogic.clientbl.ClientInfo;
-import businesslogic.commoditybl.CommodityInfo;
+import businesslogic.common.DateOperate;
 import businesslogic.common.Info;
 import businesslogic.inventorybl.info.PurchaseInfo_Inventory;
-import businesslogic.purchasebl.info.ClientInfo_Purchase;
-import businesslogic.purchasebl.info.CommodityInfo_Purchase;
 import businesslogic.recordbl.info.PurchaseInfo_Record;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
 import config.RMIConfig;
-import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Storage;
 import dataservice.TableInfoService;
 import dataservice.purchasedataservice.PurchaseDataService;
 import dataservice.purchasedataservice.PurchaseInfoService;
+import dataservice.saledataservice.SaleInfoService;
 
-public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Record<PurchaseVO>, PurchaseInfo_Record, ValueObject_Approval<PurchaseVO>, PurchaseInfo_Inventory, PurchaseInfo_Approval{
+public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Record<PurchaseVO>, PurchaseInfo_Record, ValueObject_Approval<PurchaseVO>, PurchaseInfo_Inventory{
 	
 	private Purchase purchase;
-	
+	private PurchaseDataService purchaseData;
 	ArrayList<String> purIDs;
 	ArrayList<String> backIDs;
 	
 	public PurchaseInfo() {
 		purchase = new Purchase();
+		this.purchaseData = purchase.getPurData();
 	}
 	
-	public PurchaseInfo(ArrayList<String> IDs) throws RemoteException {
+	public PurchaseInfo(Date begin, Date end) {
 		purchase = new Purchase();
-		this.purIDs = new ArrayList<String>();
-		this.backIDs = new ArrayList<String>();
-		for (String id : IDs) {
-			purIDs.addAll(getID(id, null, null, null, BillType.PURCHASE));
-			backIDs.addAll(getID(id, null, null, null, BillType.PURCHASEBACK));
+		this.purchaseData = purchase.getPurData();
+		purIDs = new ArrayList<String>();
+		backIDs = new ArrayList<String>();
+		setIDsByDate(begin, end);	
+	}
+	
+	private void setIDsByDate(Date beginDate, Date endDate){
+		try {
+			SaleInfoService saleInfo = (SaleInfoService)Naming.lookup(RMIConfig.PREFIX+SaleInfoService.NAME);
+			ArrayList<String> IDs = saleInfo.getAllID(BillType.PURCHASE);
+			purIDs.addAll(DateOperate.findFitDate(IDs, beginDate, endDate));
+			ArrayList<String> bIDs = saleInfo.getAllID(BillType.PURCHASEBACK);
+			backIDs.addAll(DateOperate.findFitDate(bIDs, beginDate, endDate));
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
-	
+
 	public TableInfoService<PurchasePO> getData() {
 		try {
 			return (PurchaseInfoService)Naming.lookup(RMIConfig.PREFIX + PurchaseInfoService.NAME);
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		} catch (NotBoundException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 	
-	private PurchaseDataService getPurchaseData() {
-		return purchase.getPurData();
-	}
-	
-	public ArrayList<String> getID(String ID, String clientName, String salesman, Storage storage) throws RemoteException {
+	@Override
+	public ArrayList<String> getID(String clientName, String salesman, Storage storage) throws RemoteException {
 		ArrayList<String> IDs = new ArrayList<String>();
-		IDs = getID(ID, clientName, salesman, storage, BillType.PURCHASE);
-		IDs.addAll(getID(ID, clientName, salesman, storage, BillType.PURCHASEBACK));
+		IDs = getID(purIDs, clientName, salesman, storage);
+		IDs.addAll(getID(backIDs, clientName, salesman, storage));
 		return IDs;
 	}
 
 	public PurchaseVO find(String ID) throws RemoteException {
-		return purchase.poToVO(getPurchaseData().find(ID));
+		return purchase.poToVO(purchaseData.find(ID));
 	}
-
-	public ResultMessage update(PurchaseVO vo) throws RemoteException {
-		String ID = vo.ID;
-		String clientID = vo.clientID;
-		String client = vo.client;
-		String user = vo.user;
-		Storage storage = vo.storage;
-		String remark = vo.remark;
-		double beforePrice = vo.beforePrice;
-		BillType type = vo.type;
-		ArrayList<CommodityItemPO> commodities = purchase.changeItems.itemsVOtoPO(vo.commodities);
-		PurchasePO po = new PurchasePO(ID, clientID, client, user, storage, commodities, beforePrice, remark, type);
-		return getPurchaseData().update(po);
-	}
-
 	
 	public double getMoney() throws RemoteException {
 		if (purIDs.isEmpty() && backIDs.isEmpty()) {
@@ -130,7 +112,7 @@ public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Re
 	 * @throws RemoteException 
 	 */
 	private int getAllCommoditiesNumber(String ID) throws RemoteException {
-		ArrayList<CommodityItemPO> POs = getPurchaseData().find(ID).getCommodities();
+		ArrayList<CommodityItemPO> POs = purchaseData.find(ID).getCommodities();
 		int number = 0;
 		for (CommodityItemPO po : POs) {
 			number += po.getNumber();
@@ -146,43 +128,13 @@ public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Re
 	 * @throws RemoteException 
 	 */
 	private double getBeforePrice(String ID) throws RemoteException {
-		return getPurchaseData().find(ID).getBeforePrice();
+		return purchaseData.find(ID).getBeforePrice();
 	}
 
-	public ResultMessage pass(PurchaseVO vo) throws RemoteException {
-		PurchasePO po = getPurchaseData().find(vo.ID);
-		// 更改商品的数据
-		CommodityInfo_Purchase commodityInfo = new CommodityInfo();
-		ArrayList<CommodityItemPO> commodities = po.getCommodities();
-		// 如果商品总数不够的话 
-		if (po.getType() == BillType.PURCHASEBACK) {
-			for (CommodityItemPO commodity : commodities) {
-				if (!commodityInfo.checkNumber(commodity.getID(), commodity.getNumber())) {
-					po.setState(BillState.FAILURE);
-					getPurchaseData().update(po);
-					return ResultMessage.COMMODITY_LACK;
-				}
-			}
-		}
-		for (CommodityItemPO commodity : commodities) {
-			commodityInfo.changeCommodityInfo(commodity.getID(), commodity.getNumber(), commodity.getPrice(), po.getType());
-		}
-		// 更改客户的应付金额
-		ClientInfo_Purchase clientInfo = new ClientInfo();
-		if (po.getType() == BillType.PURCHASE) {
-			clientInfo.changePayable(po.getClientID(), po.getBeforePrice());
-		} else {
-			clientInfo.changePayable(po.getClientID(), -po.getBeforePrice());
-		}
-		// 更新该进货／进货退货单状态
-		po.setState(BillState.SUCCESS);
-		getPurchaseData().update(po);
-		return ResultMessage.SUCCESS;
-	}
 
 	public double getTotalPrice(String ID) throws RemoteException {
-		PurchasePO po = getPurchaseData().find(ID);
-		switch (getPurchaseData().find(ID).getType()) {
+		PurchasePO po = purchaseData.find(ID);
+		switch (purchaseData.find(ID).getType()) {
 		case PURCHASE:
 			return po.getBeforePrice();
 		case PURCHASEBACK:
@@ -191,28 +143,6 @@ public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Re
 			break;
 		}
 		return 0;
-	}
-
-	public PurchaseVO addRed(PurchaseVO vo, boolean isCopy) throws RemoteException {
-		PurchaseVO redVO = vo;
-		// 取负
-		ArrayList<CommodityItemVO> commodities = redVO.commodities;
-		for (int i = 0; i < commodities.size(); i++) {
-			int number = -commodities.get(i).number;
-			commodities.get(i).number = number;
-		}
-		redVO.commodities = commodities;
-		// 先建立对应的PO
-		PurchasePO redPO = new PurchasePO(redVO.ID, redVO.clientID, redVO.client, redVO.user, 
-				redVO.storage, purchase.changeItems.itemsVOtoPO(redVO.commodities), redVO.beforePrice, redVO.remark, redVO.type);
-		if (!isCopy) {
-			getPurchaseData().insert(redPO);
-			pass(redVO);
-		}
-		else {
-			// TODO 保存为草稿 
-		}
-		return null;
 	}
 	
 	public ArrayList<PurchaseVO> findApproval() throws RemoteException {

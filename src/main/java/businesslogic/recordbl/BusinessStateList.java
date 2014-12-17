@@ -2,9 +2,11 @@ package businesslogic.recordbl;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import dataenum.BillType;
 import vo.BusinessStateVO;
+import businesslogic.common.DateOperate;
 import businesslogic.inventorybl.InventoryInfo;
 import businesslogic.purchasebl.PurchaseInfo;
 import businesslogic.recordbl.info.InventoryInfo_Record;
@@ -52,8 +54,6 @@ public class BusinessStateList {
 	/** 利润 */
 	private double profit;	
 	
-	private ArrayList<String> IDs;
-	
 	SaleInfo_Record saleInfo;
 	
 	PurchaseInfo_Record purchaseInfo;
@@ -63,15 +63,12 @@ public class BusinessStateList {
 	ArrayList<String> purIDs = new ArrayList<String>();
 	ArrayList<String> inventoryIDs = new ArrayList<String>();
 	
-	/**
-	 * 得到时间区间的ID们，形式为yyyyMMdd
-	 * @param IDs
-	 */
-	public BusinessStateList(ArrayList<String> IDs) {
-		this.IDs = IDs;
-		saleInfo = new SaleInfo();
-		purchaseInfo = new PurchaseInfo();
-		inventoryInfo = new InventoryInfo();
+	public BusinessStateList(String beginDate, String endDate) {
+		Date begin = DateOperate.changeBeginDate(beginDate);
+		Date end = DateOperate.changeEndDate(endDate);
+		saleInfo = new SaleInfo(begin, end);
+		purchaseInfo = new PurchaseInfo(begin, end);
+		inventoryInfo = new InventoryInfo(begin, end);
 	}
 
 	/**
@@ -82,12 +79,7 @@ public class BusinessStateList {
 	 * @throws RemoteException 
 	 */
 	public BusinessStateVO getBusinessState() throws RemoteException {
-		
-		for (String ID : IDs) {
-			getSaleIDs(ID);
-			getPurchaseIDs(ID);
-			getInventoryIDs(ID);
-		}
+			getAllDateIDs();
 		for (String ID : saleIDs) {
 			accountSale(ID);
 		}
@@ -104,22 +96,15 @@ public class BusinessStateList {
 		return vo;
 	}
 
-	/* 以下三个方法是为了获得所有存在的销售单、销售退货单、进货单、进货退货单、赠送单、报损单、报溢单、报警单的ID */
-	private void getSaleIDs(String ID) throws RemoteException {
-		ArrayList<String> saleID = saleInfo.getID(ID, null, null, null);
+	/* 是为了获得所有存在的销售单、销售退货单、进货单、进货退货单、赠送单、报损单、报溢单、报警单的ID */
+	private void getAllDateIDs() throws RemoteException {
+		ArrayList<String> saleID = saleInfo.getID(null, null, null);
 		saleIDs.addAll(saleID);
-	}
-	
-	private void getPurchaseIDs(String ID) throws RemoteException {
-		ArrayList<String> purchaseID = purchaseInfo.getID(ID, null, null, null);
+		ArrayList<String> purchaseID = purchaseInfo.getID(null, null, null);
 		purIDs.addAll(purchaseID);
-	}
-	
-	private void getInventoryIDs(String ID) throws RemoteException {
-		ArrayList<String> inventoryID = inventoryInfo.getID(ID, null, null, null);
+		ArrayList<String> inventoryID = inventoryInfo.getID(null, null, null);
 		inventoryIDs.addAll(inventoryID);
 	}
-	/* 以上三个方法*/
 
 	private void accountSale(String ID) throws RemoteException {
 		allowance += saleInfo.getAllowance(ID);

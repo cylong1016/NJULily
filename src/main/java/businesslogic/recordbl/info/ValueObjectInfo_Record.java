@@ -19,14 +19,10 @@ public interface ValueObjectInfo_Record<VO extends ValueObject> {
 	public VO find(String ID) throws RemoteException;
 
 	/**
-	 * @param ID 格式为：yyyyMMdd，表示查找在这个日期是否生成了单据
-	 * @param clientName 客户名
-	 * @param salesman 业务员
-	 * @param storage 仓库
-	 * @return 符合条件的单据的ID（一个）
+	 * 得到确定的ID
 	 * @author Zing
 	 * @version Dec 1, 2014 2:17:52 PM
 	 * @throws RemoteException
 	 */
-	public ArrayList<String> getID(String ID, String clientName, String salesman, Storage storage) throws RemoteException;
+	public ArrayList<String> getID(String clientName, String salesman, Storage storage) throws RemoteException;
 }

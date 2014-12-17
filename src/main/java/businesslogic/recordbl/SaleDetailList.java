@@ -2,9 +2,11 @@ package businesslogic.recordbl;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import dataenum.Storage;
 import vo.SaleDetailVO;
+import businesslogic.common.DateOperate;
 import businesslogic.recordbl.info.SaleInfo_Record;
 import businesslogic.salebl.SaleInfo;
 
@@ -43,43 +45,51 @@ public class SaleDetailList {
 	 * @param salesman
 	 * @param storage
 	 */
-	public SaleDetailList(String commodityName, String clientName, String salesman, Storage storage) {
+	public SaleDetailList(String beginDate, String endDate) {
+		Date begin = DateOperate.changeBeginDate(beginDate);
+		Date end = DateOperate.changeEndDate(endDate);
+		this.info = new SaleInfo(begin, end);
+	}
+	
+	public void setInfo(String commodityName, String clientName, String salesman, Storage storage) {
 		this.clientName = clientName;
 		this.salesman = salesman;
 		this.storage = storage;
 		this.commodityName = commodityName;
-		VOs = new ArrayList<SaleDetailVO>();
+		VOs = new ArrayList<SaleDetailVO>();	
 	}
-	
 	/**
 	 * 
-	 * @param IDs
-	 * @return
 	 * @author Zing
 	 * @version Dec 4, 2014 8:20:07 PM
 	 * @throws RemoteException 
 	 */
-	public ArrayList<SaleDetailVO> getSaleDetail(ArrayList<String> IDs) throws RemoteException {
-		info = new SaleInfo();
-		if (IDs.isEmpty()) {
-			addVOs(null);
+	public ArrayList<SaleDetailVO> getSaleDetail() throws RemoteException {
+		ArrayList<String> salesIDs = info.getSaleIDs(clientName, salesman, storage);
+		// 如果没有单子的话，就返回null
+		if (salesIDs.isEmpty()) {
+			return null;
 		}
-		else {
-			for (String id : IDs) {
-				addVOs(id);
+		for (String ID : salesIDs) {
+			// 如果筛选条件为空，就查看这个单据所有的ID
+			if (commodityName == null) {
+				for (String commodityID : info.getAllCommodityID(ID)) {
+					SaleDetailVO vo = new SaleDetailVO(ID.split("-")[1], info.getCommodityName(commodityID),
+							info.getCommodityType(commodityID), info.getCommodityNumber(commodityID), info.getCommodityPrice(commodityID));
+					VOs.add(vo);
+				}
+			}
+			else {
+				String commodityID = info.getCommodityID(ID, commodityName);
+				// 如果没有找到这个商品，就继续循环
+				if (commodityID == null) {
+					continue;
+				}
+				SaleDetailVO vo = new SaleDetailVO(ID.split("-")[1], info.getCommodityName(commodityID),
+						info.getCommodityType(commodityID), info.getCommodityNumber(commodityID), info.getCommodityPrice(commodityID));
+				VOs.add(vo);
 			}
 		}
-		
 		return VOs;
 	}
-	
-	private void addVOs(String id) throws RemoteException {
-		ArrayList<String> saleIDs = info.getID(id, clientName, salesman, storage);
-		for (String saleID : saleIDs) {
-			item = new SaleDetailListItem(saleID, commodityName);
-			SaleDetailVO vo = new SaleDetailVO(saleID, item.name, item.type, item.number, item.price);
-			VOs.add(vo);
-			}	
-	}
-	
 }

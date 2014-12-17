@@ -7,7 +7,7 @@ import dataenum.Storage;
 
 public interface PurchaseInfo_Record {
 	
-	public ArrayList<String> getID(String ID, String clientName, String salesman, Storage storage) throws RemoteException;
+	public ArrayList<String> getID(String clientName, String salesman, Storage storage) throws RemoteException;
 
 	/**
 	 * 根据ID得到进货的总额

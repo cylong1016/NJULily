@@ -1,10 +1,9 @@
 package businesslogic.accountbillbl;
 
-import java.net.MalformedURLException;
 import java.rmi.Naming;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import message.ResultMessage;
 import po.AccountBillItemPO;
@@ -17,6 +16,7 @@ import businesslogic.accountbl.AccountInfo;
 import businesslogic.approvalbl.info.AccountBill_Approval;
 import businesslogic.approvalbl.info.ValueObject_Approval;
 import businesslogic.clientbl.ClientInfo;
+import businesslogic.common.DateOperate;
 import businesslogic.common.Info;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
 import config.RMIConfig;
@@ -24,7 +24,9 @@ import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Storage;
 import dataservice.TableInfoService;
+import dataservice.accountbilldataservice.AccountBillDataService;
 import dataservice.accountbilldataservice.AccountBillInfoService;
+import dataservice.saledataservice.SaleInfoService;
 
 /**
  * @author cylong
@@ -33,9 +35,33 @@ import dataservice.accountbilldataservice.AccountBillInfoService;
 public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectInfo_Record<AccountBillVO>, ValueObject_Approval<AccountBillVO>, AccountBill_Approval {
 
 	private AccountBill accountBill;
-
+	private AccountBillDataService accountBillData;
+	private ArrayList<String> payIDs;
+	private ArrayList<String> expenIDs;
+	
 	public AccountBillInfo() {
 		accountBill = new AccountBill();
+		this.accountBillData = accountBill.getAccountBillData();
+	}
+
+	public AccountBillInfo(Date begin, Date end) {
+		accountBill = new AccountBill();
+		this.accountBillData = accountBill.getAccountBillData();
+		payIDs = new ArrayList<String>();
+		expenIDs = new ArrayList<String>();
+		setIDsByDate(begin, end);
+	}
+	
+	private void setIDsByDate(Date beginDate, Date endDate){
+		try {
+			SaleInfoService saleInfo = (SaleInfoService)Naming.lookup(RMIConfig.PREFIX+SaleInfoService.NAME);
+			ArrayList<String> IDs = saleInfo.getAllID(BillType.PAY);
+			payIDs.addAll(DateOperate.findFitDate(IDs, beginDate, endDate));
+			ArrayList<String> bIDs = saleInfo.getAllID(BillType.EXPENSE);
+			expenIDs.addAll(DateOperate.findFitDate(bIDs, beginDate, endDate));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -45,11 +71,7 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 	protected TableInfoService<AccountBillPO> getData() {
 		try {
 			return (AccountBillInfoService)Naming.lookup(RMIConfig.PREFIX + AccountBillInfoService.NAME);
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		} catch (NotBoundException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
@@ -68,10 +90,10 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 	 * @see businesslogic.recordbl.info.ValueObjectInfo_Record#getID(java.lang.String, java.lang.String,
 	 *      java.lang.String, dataenum.Storage)
 	 */
-	public ArrayList<String> getID(String ID, String clientName, String salesman, Storage storage) throws RemoteException {
+	public ArrayList<String> getID(String clientName, String salesman, Storage storage) throws RemoteException {
 		ArrayList<String> IDs = new ArrayList<String>();
-		IDs = getID(ID, clientName, salesman, storage, BillType.PAY);
-		IDs.addAll(getID(ID, clientName, salesman, storage, BillType.EXPENSE));
+		IDs = getID(payIDs, clientName, salesman, storage);
+		IDs.addAll(getID(expenIDs, clientName, salesman, storage));
 		return IDs;
 	}
 
@@ -83,7 +105,7 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 		BillType type = vo.type;
 		ArrayList<AccountBillItemPO> bills = itemsVOtoPO(vo.bills);
 		AccountBillPO po = new AccountBillPO(ID, clientID, clientName, username, bills, type);
-		return accountBill.getAccountBillData().update(po);
+		return accountBillData.update(po);
 	}
 
 	private ArrayList<AccountBillItemPO> itemsVOtoPO(ArrayList<AccountBillItemVO> VOs) {
@@ -103,10 +125,10 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 	 * @throws RemoteException
 	 */
 	public void pass(AccountBillVO vo) throws RemoteException {
-		AccountBillPO po = accountBill.getAccountBillData().find(vo.ID);
+		AccountBillPO po = accountBillData.find(vo.ID);
 		// 更改该收款单／付款单的状态
 		po.setState(BillState.SUCCESS);
-		accountBill.getAccountBillData().update(po);
+		accountBillData.update(po);
 		// 更改银行账户的数据
 		ArrayList<AccountBillItemPO> billItemPOs = po.getBills();
 		AccountInfo_AccountBill accountInfo = new AccountInfo();
@@ -146,7 +168,7 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 		AccountBillPO redPO =
 								new AccountBillPO(redVO.ID, redVO.clientID, redVO.clientName, redVO.username, itemsVOtoPO(redVO.bills), redVO.type);
 		if (!isCopy) {
-			accountBill.getAccountBillData().insert(redPO);
+			accountBillData.insert(redPO);
 			pass(redVO);
 		} else {
 			// TODO 保存为草稿

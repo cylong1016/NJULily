@@ -1,11 +1,7 @@
 package businesslogic.recordbl;
 
 import java.rmi.RemoteException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 import vo.AccountBillVO;
 import vo.BusinessStateVO;
@@ -15,36 +11,29 @@ import vo.PurchaseVO;
 import vo.SaleDetailVO;
 import vo.ValueObject;
 import vo.sale.SalesVO;
-import blservice.recordblservice.RecordInputInfo;
+import blservice.recordblservice.BusinessStateInputInfo;
+import blservice.recordblservice.SaleDetailInputInfo;
 import dataenum.BillType;
 
 public class Record {
 	
-	/** 起始时间 */
-	public String beginDate;
-	/** 结束时间 */
-	public String endDate;
-	
 	SaleDetailList saleDetailList;
-	BusinessProList bussinessProList;
-	BusinessStateList bussinessStateList;
+	BusinessProList businessProList;
+	BusinessStateList businessStateList;
 	
 	public Record() {
 	}
 	
 	/**
 	 * 得到销售明细表
-	 * @param info
-	 * @return 每一条销售明细列表（商品）
 	 * @author Zing
 	 * @version Nov 30, 2014 2:21:46 PM
 	 * @throws RemoteException 
 	 */
-	public ArrayList<SaleDetailVO> saleDetail(RecordInputInfo info) throws RemoteException {
-		this.beginDate = info.beginDate;
-		this.endDate = info.endDate;
-		saleDetailList = new SaleDetailList(info.commodityName, info.clientName, info.salesman, info.storage);
-		return saleDetailList.getSaleDetail(getID());
+	public ArrayList<SaleDetailVO> saleDetail(SaleDetailInputInfo info) throws RemoteException {
+		saleDetailList = new SaleDetailList(info.beginDate, info.endDate);
+		saleDetailList.setInfo(info.commodityName, info.clientName, info.salesman, info.storage);
+		return saleDetailList.getSaleDetail();
 	}
 
 	/**
@@ -55,11 +44,10 @@ public class Record {
 	 * @version Dec 4, 2014 8:21:03 PM
 	 * @throws RemoteException 
 	 */
-	public ArrayList<ValueObject> bussinessPro(RecordInputInfo info) throws RemoteException {
-		this.beginDate = info.beginDate;
-		this.endDate = info.endDate;
-		bussinessProList = new BusinessProList(info.billType, info.clientName, info.salesman, info.storage);
-		return bussinessProList.getBusinessPro(getID());
+	public ArrayList<ValueObject> bussinessPro(BusinessStateInputInfo info) throws RemoteException {
+		businessProList = new BusinessProList(info.beginDate, info.endDate);
+		businessProList.setInfo(info.billType, info.clientName, info.salesman, info.storage);
+		return businessProList.getBusinessPro();
 	}
 
 	/**
@@ -97,10 +85,8 @@ public class Record {
 	 * @throws RemoteException 
 	 */
 	public BusinessStateVO businessState(String beginDate, String endDate) throws RemoteException {	
-		this.beginDate = beginDate;
-		this.endDate = endDate;
-		bussinessStateList = new BusinessStateList(getID());	
-		return bussinessStateList.getBusinessState();
+		businessStateList = new BusinessStateList(beginDate, endDate);
+		return businessStateList.getBusinessState();
 	}
 	
 	private ValueObject buildRed(ValueObject vo, BillType type, boolean isCopy) throws RemoteException {
@@ -126,32 +112,4 @@ public class Record {
 		}
 		return null;
 	}
-	
-	/**
-	 * 得到所有的日期区间内的ID
-	 * @return
-	 * @author Zing
-	 * @version Nov 30, 2014 1:50:47 PM
-	 */
-	private ArrayList<String> getID() {
-		ArrayList<String> IDs = new ArrayList<String>();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		try {
-			Date begin = sdf.parse(beginDate);
-			Date end = sdf.parse(endDate);
-			double between = (end.getTime() - begin.getTime())/1000;
-			double day = between/24/3600;
-			for (int i = 0; i < day; i++) {
-				Calendar cd = Calendar.getInstance();
-				cd.setTime(sdf.parse(beginDate));
-				cd.add(Calendar.DATE, i);
-				String ID = sdf.format(cd.getTime());
-				IDs.add(ID);
-			}		
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return IDs;
-	}
-
 }

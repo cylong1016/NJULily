@@ -10,7 +10,7 @@ import businesslogic.approvalbl.info.PurchaseInfo_Approval;
 import businesslogic.approvalbl.info.SaleInfo_Approval;
 import businesslogic.cashbillbl.CashBillInfo;
 import businesslogic.inventorybl.InventoryInfo;
-import businesslogic.purchasebl.PurchaseInfo;
+import businesslogic.purchasebl.PurchaseOperate;
 import businesslogic.salebl.SaleOperate;
 import vo.AccountBillVO;
 import vo.CashBillVO;
@@ -32,7 +32,7 @@ public class Red {
 	}
 
 	public PurchaseVO addRed(PurchaseVO vo) throws RemoteException {
-		PurchaseInfo_Approval info = new PurchaseInfo();
+		PurchaseInfo_Approval info = new PurchaseOperate();
 		return info.addRed(vo, isCopy);
 	}
 
