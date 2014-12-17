@@ -15,6 +15,7 @@ import vo.commodity.CommodityItemVO;
 import businesslogic.approvalbl.info.InventoryInfo_Approval;
 import businesslogic.approvalbl.info.ValueObject_Approval;
 import businesslogic.commoditybl.CommodityInfo;
+import businesslogic.common.ChangeCommodityItems;
 import businesslogic.common.DateOperate;
 import businesslogic.common.Info;
 import businesslogic.inventorybl.info.CommodityInfo_Inventory;
@@ -105,7 +106,7 @@ public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInf
 		String ID = vo.ID;
 		BillType billType = vo.billType;
 		String remark = vo.remark;
-		ArrayList<CommodityItemPO> commodities = inventory.changeItems.itemsVOtoPO(vo.commodities);
+		ArrayList<CommodityItemPO> commodities = ChangeCommodityItems.itemsVOtoPO(vo.commodities);
 		InventoryBillPO po = new InventoryBillPO(ID, billType, commodities, remark);
 		return inventoryData.update(po);
 	}
@@ -158,7 +159,7 @@ public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInf
 		}
 		redVO.commodities = commodities;
 		// 先建立对应的PO
-		InventoryBillPO redPO = new InventoryBillPO(redVO.ID, redVO.billType, inventory.changeItems.itemsVOtoPO(redVO.commodities), redVO.remark);
+		InventoryBillPO redPO = new InventoryBillPO(redVO.ID, redVO.billType, ChangeCommodityItems.itemsVOtoPO(redVO.commodities), redVO.remark);
 		if (!isCopy) {
 			inventoryData.insert(redPO);
 			pass(redVO);

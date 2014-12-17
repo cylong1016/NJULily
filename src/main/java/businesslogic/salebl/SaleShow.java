@@ -10,11 +10,9 @@ import dataenum.BillType;
 import dataservice.saledataservice.SaleDataService;
 
 public class SaleShow {
-	
-	private SaleTrans transPOVO;
-	
+
 	private SaleDataService saleData;
-	
+
 	public SaleShow() {
 		Sale sale = new Sale();
 		this.saleData = sale.getSaleData();
@@ -52,43 +50,41 @@ public class SaleShow {
 		return showChoose(BillType.SALEBACK, BillState.FAILURE);
 	}
 
-	
 	/**
 	 * 界面显示全部的销售（销售退货）单
 	 * @return 销售（销售退货）单的ArrayList
 	 * @author cylong
 	 * @version 2014年11月28日 下午8:36:47
-	 * @throws RemoteException 
+	 * @throws RemoteException
 	 */
 	private ArrayList<SalesVO> show() throws RemoteException {
-		transPOVO = new SaleTrans();
 		ArrayList<SalesVO> billsVO = new ArrayList<SalesVO>();
 		ArrayList<SalesPO> billsPO = saleData.show();
 		for(SalesPO po : billsPO) {
-			SalesVO vo = transPOVO.poToVo(po);
+			SalesVO vo = SaleTrans.poToVo(po);
 			billsVO.add(vo);
 		}
 		return billsVO;
 	}
-	
+
 	/**
 	 * 根据选择的类型显示
 	 * @param type
 	 * @return
 	 * @author Zing
 	 * @version Dec 12, 2014 2:17:03 AM
-	 * @throws RemoteException 
+	 * @throws RemoteException
 	 */
 	private ArrayList<SalesVO> showChoose(BillType type) throws RemoteException {
 		ArrayList<SalesVO> choose = new ArrayList<SalesVO>();
-		for (SalesVO vo : show()) {
+		for(SalesVO vo : show()) {
 			if (vo.type == type) {
 				choose.add(vo);
 			}
 		}
 		return choose;
 	}
-	
+
 	/**
 	 * 根据选择的类型和状态显示
 	 * @param type
@@ -96,11 +92,11 @@ public class SaleShow {
 	 * @return
 	 * @author Zing
 	 * @version Dec 12, 2014 2:17:17 AM
-	 * @throws RemoteException 
+	 * @throws RemoteException
 	 */
 	private ArrayList<SalesVO> showChoose(BillType type, BillState state) throws RemoteException {
 		ArrayList<SalesVO> choose = new ArrayList<SalesVO>();
-		for (SalesVO vo : show()) {
+		for(SalesVO vo : show()) {
 			if (vo.type == type && vo.state == state) {
 				choose.add(vo);
 			}

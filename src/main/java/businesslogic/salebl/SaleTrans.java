@@ -13,17 +13,15 @@ import businesslogic.common.ChangeCommodityItems;
 
 public class SaleTrans {
 
-	public ChangeCommodityItems changeItems;
-
 	/**
 	 * 将销售（销售退货）单的PO转化成VO
 	 * @param po
 	 * @return SalesVO
 	 * @author cylong
-	 * @version 2014年11月28日  下午9:12:11
-	 * @throws RemoteException 
+	 * @version 2014年11月28日 下午9:12:11
+	 * @throws RemoteException
 	 */
-	public SalesVO poToVo(SalesPO po) throws RemoteException {
+	public static SalesVO poToVo(SalesPO po) throws RemoteException {
 		String ID = po.getID();
 		String clientID = po.getClientID();
 		String client = po.getClient();
@@ -37,7 +35,7 @@ public class SaleTrans {
 		double afterPrice = po.getAfterPrice();
 		BillType type = po.getType();
 		BillState state = po.getState();
-		ArrayList<CommodityItemVO> commodities = changeItems.itemPOToVO(po.getCommodities());
+		ArrayList<CommodityItemVO> commodities = ChangeCommodityItems.itemPOToVO(po.getCommodities());
 		SalesVO vo = new SalesVO(ID, clientID, client, storage, user, salesman, commodities, remark, beforePrice, allowance, voucher, afterPrice, type, state);
 		return vo;
 	}

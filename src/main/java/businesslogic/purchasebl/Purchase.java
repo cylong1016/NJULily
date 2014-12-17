@@ -29,11 +29,8 @@ public class Purchase {
 
 	private BillType type;
 
-	ChangeCommodityItems changeItems;
-
 	public Purchase() {
 		this.list = new PurchaseList();
-		changeItems = new ChangeCommodityItems();
 	}
 
 	public PurchaseDataService getPurData() {
@@ -103,7 +100,7 @@ public class Purchase {
 		String client = po.getClient();
 		String user = po.getUser();
 		Storage storage = po.getStorage();
-		ArrayList<CommodityItemVO> commodities = changeItems.itemPOToVO(po.getCommodities());
+		ArrayList<CommodityItemVO> commodities = ChangeCommodityItems.itemPOToVO(po.getCommodities());
 		double sumPrice = po.getBeforePrice();
 		BillType type = po.getType();
 		BillState state = po.getState();

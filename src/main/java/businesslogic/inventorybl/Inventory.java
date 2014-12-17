@@ -22,11 +22,9 @@ public class Inventory {
 	private BillList list;
 	private BillType type;
 	private String ID;
-	ChangeCommodityItems changeItems;
 	private InventoryDataService inventoryData;
 
 	public Inventory() {
-		changeItems = new ChangeCommodityItems();
 		inventoryData = getInventoryData();
 	}
 
@@ -178,7 +176,7 @@ public class Inventory {
 	public InventoryBillVO poToVo(InventoryBillPO po) throws RemoteException {
 		String ID = po.getID();
 		BillType billType = po.getBillType();
-		ArrayList<CommodityItemVO> commodities = changeItems.itemPOToVO(po.getCommodities());
+		ArrayList<CommodityItemVO> commodities = ChangeCommodityItems.itemPOToVO(po.getCommodities());
 		String remark = po.getRemark();
 		BillState state = po.getState();
 		InventoryBillVO vo = new InventoryBillVO(ID, billType, commodities, remark, state);

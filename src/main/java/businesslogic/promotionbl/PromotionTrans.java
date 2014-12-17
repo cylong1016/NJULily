@@ -16,12 +16,6 @@ import dataenum.ClientLevel;
 
 public class PromotionTrans {
 
-	private ChangeCommodityItems transPOVO;
-
-	public PromotionTrans() {
-		transPOVO = new ChangeCommodityItems();
-	}
-
 	/**
 	 * 特价包PO到VO的转换
 	 * @param POs
@@ -36,7 +30,7 @@ public class PromotionTrans {
 			String ID = po.getID();
 			String beginDate = po.getBeginDate();
 			String endDate = po.getEndDate();
-			ArrayList<CommodityItemVO> bargains = transPOVO.itemPOToVO(po.getBargains());
+			ArrayList<CommodityItemVO> bargains = ChangeCommodityItems.itemPOToVO(po.getBargains());
 			double beforeTotal = po.getBeforeTotal();
 			double bargainTotal = po.getBargainTotal();
 			PromotionBargainVO vo = new PromotionBargainVO(ID, beginDate, endDate, bargains, beforeTotal, bargainTotal);
@@ -60,7 +54,7 @@ public class PromotionTrans {
 			String beginDate = po.getBeginDate();
 			String endDate = po.getEndDate();
 			ClientLevel level = po.getLevel();
-			ArrayList<CommodityItemVO> gifts = transPOVO.itemPOToVO(po.getGifts());
+			ArrayList<CommodityItemVO> gifts = ChangeCommodityItems.itemPOToVO(po.getGifts());
 			double allowance = po.getAllowance();
 			int voucher = po.getVoucher();
 			PromotionClientVO vo = new PromotionClientVO(ID, beginDate, endDate, level, gifts, allowance, voucher);
@@ -84,7 +78,7 @@ public class PromotionTrans {
 			String beginDate = po.getBeginDate();
 			String endDate = po.getEndDate();
 			ArrayList<PromotionGoodsVO> goods = getGoods(po.getCommodities());
-			ArrayList<CommodityItemVO> gifts = transPOVO.itemPOToVO(po.getGifts());
+			ArrayList<CommodityItemVO> gifts = ChangeCommodityItems.itemPOToVO(po.getGifts());
 			double allowance = po.getAllowance();
 			int voucher = po.getVoucher();
 			PromotionCommodityVO vo = new PromotionCommodityVO(ID, beginDate, endDate, goods, gifts, allowance, voucher);
@@ -108,7 +102,7 @@ public class PromotionTrans {
 			String beginDate = po.getBeginDate();
 			String endDate = po.getEndDate();
 			double total = po.getTotal();
-			ArrayList<CommodityItemVO> gifts = transPOVO.itemPOToVO(po.getGifts());
+			ArrayList<CommodityItemVO> gifts = ChangeCommodityItems.itemPOToVO(po.getGifts());
 			double allowance = po.getAllowance();
 			int voucher = po.getVoucher();
 			PromotionTotalVO vo = new PromotionTotalVO(ID, beginDate, endDate, total, gifts, allowance, voucher);

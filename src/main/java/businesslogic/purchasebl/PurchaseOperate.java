@@ -11,6 +11,7 @@ import dataservice.purchasedataservice.PurchaseDataService;
 import businesslogic.approvalbl.info.PurchaseInfo_Approval;
 import businesslogic.clientbl.ClientInfo;
 import businesslogic.commoditybl.CommodityInfo;
+import businesslogic.common.ChangeCommodityItems;
 import businesslogic.purchasebl.info.ClientInfo_Purchase;
 import businesslogic.purchasebl.info.CommodityInfo_Purchase;
 import po.CommodityItemPO;
@@ -37,7 +38,7 @@ public class PurchaseOperate implements PurchaseInfo_Approval{
 		String remark = vo.remark;
 		double beforePrice = vo.beforePrice;
 		BillType type = vo.type;
-		ArrayList<CommodityItemPO> commodities = purchase.changeItems.itemsVOtoPO(vo.commodities);
+		ArrayList<CommodityItemPO> commodities = ChangeCommodityItems.itemsVOtoPO(vo.commodities);
 		PurchasePO po = new PurchasePO(ID, clientID, client, user, storage, commodities, beforePrice, remark, type);
 		return purchaseData.update(po);
 	}
@@ -86,7 +87,7 @@ public class PurchaseOperate implements PurchaseInfo_Approval{
 		redVO.commodities = commodities;
 		// 先建立对应的PO
 		PurchasePO redPO = new PurchasePO(redVO.ID, redVO.clientID, redVO.client, redVO.user, 
-				redVO.storage, purchase.changeItems.itemsVOtoPO(redVO.commodities), redVO.beforePrice, redVO.remark, redVO.type);
+				redVO.storage, ChangeCommodityItems.itemsVOtoPO(redVO.commodities), redVO.beforePrice, redVO.remark, redVO.type);
 		if (!isCopy) {
 			purchaseData.insert(redPO);
 			pass(redVO);

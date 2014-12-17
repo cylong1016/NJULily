@@ -54,7 +54,7 @@ public class SaleController implements SaleBLService {
 			return null;
 		}
 	}
-	
+
 	@Override
 	public ArrayList<PromotionBargainVO> showBargains() {
 		try {
@@ -84,7 +84,6 @@ public class SaleController implements SaleBLService {
 	public void addClient(String clientID) {
 		sale.addClient(clientID);
 	}
-	
 
 	/**
 	 * @see blservice.saleblservice.SaleBLService#findFitPromotionCommodity()

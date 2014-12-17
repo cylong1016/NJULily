@@ -10,7 +10,7 @@ import businesslogic.salebl.info.CommodityInfo_Sale;
 
 public class ChangeCommodityItems {
 
-	public ArrayList<CommodityItemVO> itemPOToVO(ArrayList<CommodityItemPO> itemsPO) throws RemoteException {
+	public static ArrayList<CommodityItemVO> itemPOToVO(ArrayList<CommodityItemPO> itemsPO) throws RemoteException {
 		ArrayList<CommodityItemVO> itemsVO = new ArrayList<CommodityItemVO>();
 		for(CommodityItemPO po : itemsPO) {
 			String ID = po.getID();
@@ -25,8 +25,8 @@ public class ChangeCommodityItems {
 		}
 		return itemsVO;
 	}
-	
-	public ArrayList<CommodityItemPO> itemsVOtoPO(ArrayList<CommodityItemVO> commodities) {
+
+	public static ArrayList<CommodityItemPO> itemsVOtoPO(ArrayList<CommodityItemVO> commodities) {
 		ArrayList<CommodityItemPO> commoditiesPO = new ArrayList<CommodityItemPO>();
 		for(CommodityItemVO c : commodities) {
 			CommodityItemPO po = new CommodityItemPO(c.ID, c.name, c.number, c.price, c.remark);

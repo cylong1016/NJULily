@@ -8,7 +8,6 @@ import vo.InventoryBillVO;
 import vo.commodity.CommodityItemVO;
 import vo.promotion.PromotionCommodityVO;
 import blservice.promotionblservice.PromoInputInfo;
-import blservice.promotionblservice.PromotionCommodityBLService;
 
 /**
  * @see blservice.promotionblservice.PromotionCommodityBLService

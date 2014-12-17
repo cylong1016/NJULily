@@ -38,8 +38,6 @@ public class Sale {
 	private BillType type;
 	/** 单据的ID */
 	private String ID;
-	/** 进行转换的POVO */
-	SaleTrans transPOVO;
 	/** 查看促销信息 */
 	PromotionInfo_Sale promotionInfo;
 	/** 添加的商品的ID集合 */
@@ -72,7 +70,7 @@ public class Sale {
 	 * @author Zing
 	 * @param type
 	 * @return ID（界面显示）
-	 * @throws RemoteException 
+	 * @throws RemoteException
 	 */
 	public String getSaleID() throws RemoteException {
 		this.type = BillType.SALE;
@@ -91,13 +89,13 @@ public class Sale {
 	public ArrayList<PromotionBargainVO> showBargains() throws RemoteException {
 		return promotionInfo.showBargains();
 	}
-	
+
 	/**
 	 * 添加一条商品信息
 	 * @param itemVO
 	 * @author Zing
 	 * @version 2014年11月28日 下午8:02:29
-	 * @throws RemoteException 
+	 * @throws RemoteException
 	 */
 	public void addCommodities(CommodityItemVO itemVO) throws RemoteException {
 		SaleListItem item = new SaleListItem(itemVO.ID, itemVO.number, itemVO.price, itemVO.remark);
@@ -109,7 +107,6 @@ public class Sale {
 	public void addClient(String clientID) {
 		list.setClientID(clientID);
 	}
-	
 
 	public ArrayList<PromotionCommodityVO> findFitPromotionCommodity() throws RemoteException {
 		promotionInfo.findFitPromotionCommodity(ID, commodityIDs, commodityNumber);
@@ -129,14 +126,13 @@ public class Sale {
 	 * @param inputInfo
 	 * @author Zing
 	 * @version 2014年11月28日 下午9:13:52
-	 * @throws RemoteException 
+	 * @throws RemoteException
 	 */
 	public SalesVO submit(saleAddVO inputInfo) throws RemoteException {
 		setInputInfo(inputInfo);
 		SalesPO po = buildSales();
 		getSaleData().insert(po);
-		transPOVO = new SaleTrans();
-		return transPOVO.poToVo(po);
+		return SaleTrans.poToVo(po);
 	}
 
 	/**
@@ -144,20 +140,19 @@ public class Sale {
 	 * @param inputInfo
 	 * @author cylong
 	 * @version 2014年11月28日 下午9:14:47
-	 * @throws RemoteException 
+	 * @throws RemoteException
 	 */
 	public SalesVO save(saleAddVO inputInfo) throws RemoteException {
 		setInputInfo(inputInfo);
-		 SalesPO po = buildSales();
+		SalesPO po = buildSales();
 		// TODO 保存在本地
-		 transPOVO = new SaleTrans();
-		return transPOVO.poToVo(po);
+		return SaleTrans.poToVo(po);
 	}
 
 	/**
 	 * 建立销售单
 	 * @return SalePO
-	 * @throws RemoteException 
+	 * @throws RemoteException
 	 */
 	private SalesPO buildSales() throws RemoteException {
 		double beforePrice = list.getBeforePrice();

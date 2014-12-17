@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import businesslogic.approvalbl.info.SaleInfo_Approval;
 import businesslogic.clientbl.ClientInfo;
 import businesslogic.commoditybl.CommodityInfo;
+import businesslogic.common.ChangeCommodityItems;
 import businesslogic.salebl.info.ClientInfo_Sale;
 import businesslogic.salebl.info.CommodityInfo_Sale;
 import message.ResultMessage;
@@ -23,11 +24,11 @@ import dataservice.saledataservice.SaleDataService;
  * @author Zing
  * @version Dec 6, 2014 4:41:05 PM
  */
-public class SaleOperate implements SaleInfo_Approval{
-	
+public class SaleOperate implements SaleInfo_Approval {
+
 	private Sale sale;
 	private SaleDataService saleData;
-	
+
 	public SaleOperate() {
 		sale = new Sale();
 		saleData = sale.getSaleData();
@@ -35,7 +36,7 @@ public class SaleOperate implements SaleInfo_Approval{
 
 	/**
 	 * 更新销售单
-	 * @throws RemoteException 
+	 * @throws RemoteException
 	 */
 	public ResultMessage update(SalesVO vo) throws RemoteException {
 		String ID = vo.ID;
@@ -50,17 +51,16 @@ public class SaleOperate implements SaleInfo_Approval{
 		String remark = vo.remark;
 		double afterPrice = vo.afterPrice;
 		BillType type = vo.type;
-		SaleTrans transPOVO = new SaleTrans();
-		ArrayList<CommodityItemPO> commodities = transPOVO.changeItems.itemsVOtoPO(vo.commodities);
+		ArrayList<CommodityItemPO> commodities = ChangeCommodityItems.itemsVOtoPO(vo.commodities);
 		SalesPO po = new SalesPO(ID, clientID, client, salesman, user, storage, commodities, beforePrice, allowance, voucher, remark, afterPrice, type);
 		return saleData.update(po);
 	}
-	
+
 	/**
 	 * 通过销售单／销售退货单
 	 * 销售单：减少商品库存数量，增加客户应收金额
 	 * 销售退货单：增加商品库存数量，减少客户应收金额
-	 * @throws RemoteException 
+	 * @throws RemoteException
 	 */
 	public ResultMessage pass(SalesVO vo) throws RemoteException {
 		SalesPO po = saleData.find(vo.ID);
@@ -69,7 +69,7 @@ public class SaleOperate implements SaleInfo_Approval{
 		ArrayList<CommodityItemPO> commodities = po.getCommodities();
 		// 检查现在的商品数量是否够，如果不够，就直接返回商品不足，并将这个单子的状态设为审批失败
 		if (vo.type == BillType.SALE) {
-			for (CommodityItemPO commodity : commodities) {
+			for(CommodityItemPO commodity : commodities) {
 				if (!commodityInfo.checkNumber(commodity.getID(), commodity.getNumber())) {
 					po.setState(BillState.FAILURE);
 					saleData.update(po);
@@ -77,16 +77,15 @@ public class SaleOperate implements SaleInfo_Approval{
 				}
 			}
 		}
-		
-		for (CommodityItemPO commodity : commodities) {
+
+		for(CommodityItemPO commodity : commodities) {
 			commodityInfo.changeCommodityInfo(commodity.getID(), commodity.getNumber(), commodity.getPrice(), po.getType());
 		}
 		// 更改客户的应收金额
 		ClientInfo_Sale clientInfo = new ClientInfo();
 		if (po.getType() == BillType.SALE) {
 			clientInfo.changeReceivable(po.getClientID(), po.getAfterPrice());
-		}
-		else {
+		} else {
 			clientInfo.changeReceivable(po.getClientID(), -po.getAfterPrice());
 		}
 		// 更新该单子的状态
@@ -97,33 +96,30 @@ public class SaleOperate implements SaleInfo_Approval{
 
 	/**
 	 * 红冲／红冲并复制
-	 * @throws RemoteException 
+	 * @throws RemoteException
 	 */
 	public SalesVO addRed(SalesVO vo, boolean isCopy) throws RemoteException {
 		SalesVO redVO = vo;
 		// 取负
 		ArrayList<CommodityItemVO> commodities = redVO.commodities;
-		for (int i = 0; i < commodities.size(); i++) {
+		for(int i = 0; i < commodities.size(); i++) {
 			int number = -commodities.get(i).number;
 			commodities.get(i).number = number;
 		}
-		
+
 		redVO.commodities = commodities;
 		redVO.allowance = (-redVO.allowance);
 		redVO.voucher = (-redVO.voucher);
 		// 先建立对应的PO
-		SaleTrans transPOVO = new SaleTrans();
-		SalesPO redPO = new SalesPO(redVO.ID, redVO.clientID, redVO.client, redVO.salesman, redVO.user, redVO.storage, 
-				transPOVO.changeItems.itemsVOtoPO(redVO.commodities), redVO.beforePrice, redVO.allowance, redVO.voucher, redVO.remark, redVO.afterPrice, redVO.type);
+		SalesPO redPO = new SalesPO(redVO.ID, redVO.clientID, redVO.client, redVO.salesman, redVO.user, redVO.storage, ChangeCommodityItems.itemsVOtoPO(redVO.commodities), redVO.beforePrice, redVO.allowance, redVO.voucher, redVO.remark, redVO.afterPrice, redVO.type);
 		if (!isCopy) {
 			// 入账，更改相应数据
 			saleData.insert(redPO);
-			pass(redVO);		
-		}
-		else {
+			pass(redVO);
+		} else {
 			// TODO 保存为草稿状态
 		}
 		return redVO;
 	}
-	
+
 }
