@@ -5,18 +5,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import java.io.File;
-
 import java.io.FileOutputStream;
-
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -56,7 +52,7 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 	static WarningIndex panel_alarm;
 	static GiftFinish panel_giftFinish;
 	static WarningFinish panel_warningFinish;
-	
+
 	static JLabel in_back;
 	
 	static JTable outputTable;

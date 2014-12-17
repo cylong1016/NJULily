@@ -19,7 +19,10 @@ import ui.differui.finace.business_condition.BusinessConditionUI;
 import ui.differui.finace.business_process.BusinessProcessUI;
 import ui.differui.finace.index.FinaceIndex;
 import ui.differui.finace.sale_detail.SaleDetailUI;
-import ui.differui.finace.trade.TradeManagementUI;
+import ui.differui.finace.trade.TradeBill;
+import ui.differui.finace.trade.TradeCash;
+import ui.differui.finace.trade.TradeChooseUI;
+import ui.differui.finace.trade.TradeFinish;
 
 public class Frame_Finace extends MyFrame implements ActionListener{
 
@@ -34,10 +37,14 @@ public class Frame_Finace extends MyFrame implements ActionListener{
 	
 	static FinaceIndex panel_index;
 	static AccountManagementUI panel_account;
-	static TradeManagementUI panel_trade;
+	static TradeBill panel_trade;
+	static TradeCash panel_cash;
+	static TradeFinish panel_finish;
 	static SaleDetailUI panel_saleDetail;
 	static BusinessProcessUI panel_businessProcess;
 	static BusinessConditionUI panel_businessCondition;
+	
+	static JLabel trade_back;
 	
 	public Frame_Finace(){
 		
@@ -55,9 +62,17 @@ public class Frame_Finace extends MyFrame implements ActionListener{
 		panel_account.setVisible(false);
 		this.add(panel_account);
 		
-		panel_trade = new TradeManagementUI();
+		panel_trade = new TradeBill();
 		panel_trade.setVisible(false);
 		this.add(panel_trade);
+		
+		panel_cash = new TradeCash();
+		panel_cash.setVisible(false);
+		this.add(panel_cash);
+		
+		panel_finish = new TradeFinish();
+		panel_finish.setVisible(false);
+		this.add(panel_finish);
 		
 		panel_saleDetail = new SaleDetailUI();
 		panel_saleDetail.setVisible(false);
@@ -70,6 +85,11 @@ public class Frame_Finace extends MyFrame implements ActionListener{
 		panel_businessCondition = new BusinessConditionUI();
 		panel_businessCondition.setVisible(false);
 		this.add(panel_businessCondition);
+		
+		trade_back = new JLabel(new ImageIcon("ui/image/finace/tradeBack.png"));
+		trade_back.setBounds(0, 0, 1280, 630);
+		trade_back.setVisible(false);
+		this.add(trade_back);
 		
 		/////////////////////////////index///////////////////////////////
 		
@@ -199,16 +219,43 @@ public class Frame_Finace extends MyFrame implements ActionListener{
 	}
 	
 	public static void visibleTrue(int i){
-		
+	
 		flag = i;
 		
 		switch(i){
 			case 0: panel_index.setVisible(true);break;
 			case 1: panel_account.setVisible(true);break;
-			case 2: panel_trade.setVisible(true);break;
+			case 2: TradeChooseUI choose = new TradeChooseUI();
+					choose.setVisible(true);break;
 			case 3: panel_saleDetail.setVisible(true);break;
 			case 4: panel_businessProcess.setVisible(true);break;
 			case 5: panel_businessCondition.setVisible(true);break;
+			
+			case 6: panel_trade.setVisible(true);
+					panel_trade.showAllAccount();
+					panel_trade.reset();
+					trade_back.setVisible(true);
+					flag = 2;break;
+					
+			case 7: panel_cash.setVisible(true);
+					panel_cash.showAllAccount();
+					panel_cash.reset();
+					trade_back.setVisible(true);
+					flag = 2;break;
+					
+			case 8: panel_finish.setVisible(true);
+					trade_back.setVisible(false);
+					flag = 2;break;
+					
+			case 9: panel_trade.setVisible(true);
+					panel_trade.showAllAccount();
+					trade_back.setVisible(true);
+					flag = 2;break;
+			
+			case 10: panel_cash.setVisible(true);
+					 panel_cash.showAllAccount();
+					 trade_back.setVisible(true);
+					 flag = 2;break;
 		}
 	}
 	
@@ -217,7 +264,9 @@ public class Frame_Finace extends MyFrame implements ActionListener{
 		switch(i){
 			case 0: panel_index.setVisible(false);break;
 			case 1: panel_account.setVisible(false);break;
-			case 2: panel_trade.setVisible(false);break;
+			case 2: panel_trade.setVisible(false);
+					panel_cash.setVisible(false);
+					trade_back.setVisible(false);break;
 			case 3: panel_saleDetail.setVisible(false);break;
 			case 4: panel_businessProcess.setVisible(false);break;
 			case 5: panel_businessCondition.setVisible(false);break;
@@ -253,7 +302,8 @@ public class Frame_Finace extends MyFrame implements ActionListener{
 		
 		if(events.getSource() == bt_trade){
 			if(flag == 0){			
-				panel_trade.setVisible(true);
+				TradeChooseUI choose = new TradeChooseUI();
+				choose.setVisible(true);
 				panel_index.setVisible(false);
 				flag = 2;
 			}else if(flag == 2){
