@@ -51,6 +51,7 @@ public class AccountBill {
 
 	/**
 	 * 创建收款（付款）单的时候返回一个可用的单子ID
+	 * @deprecated 分解成连个方法了，不用判断单据类型
 	 * @param type 创建单子的类型
 	 * @return 新的ID
 	 * @author cylong
@@ -61,6 +62,26 @@ public class AccountBill {
 		this.type = type;
 		this.ID = accountBillData.getID(type);
 		return ID;
+	}
+
+	/**
+	 * @return 新建收款单时候，返回一个可用的收款单ID
+	 * @author cylong
+	 * @version 2014年12月17日 下午11:43:40
+	 * @throws RemoteException
+	 */
+	public String getExpenseID() throws RemoteException {
+		return accountBillData.getExpenseID();
+	}
+
+	/**
+	 * @return 新建付款单的时候，返回以恶搞可用的付款单ID
+	 * @throws RemoteException
+	 * @author cylong
+	 * @version 2014年12月17日 下午11:48:09
+	 */
+	public String getPayID() throws RemoteException {
+		return accountBillData.getPayID();
 	}
 
 	/**

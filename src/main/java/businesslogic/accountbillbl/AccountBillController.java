@@ -20,17 +20,30 @@ public class AccountBillController implements AccountBillBLService {
 		accountBill = new AccountBill();
 	}
 
+	/**
+	 * @see blservice.accountbillblservice.AccountBillBLService#getPayID()
+	 */
 	@Override
 	public String getPayID() {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			return accountBill.getPayID();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
-
+	/**
+	 * @see blservice.accountbillblservice.AccountBillBLService#getExpenseID()
+	 */
 	@Override
 	public String getExpenseID() {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			return accountBill.getExpenseID();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	/**
