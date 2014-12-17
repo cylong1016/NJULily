@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import ui.commonui.myui.MyWindow;
-import ui.differui.finace.frame.Frame_Finace;
 
 public class TradeChooseUI extends MyWindow implements ActionListener{
 	

@@ -24,8 +24,6 @@ import blservice.cashbillblservice.CashBillBLService;
 import businesslogic.accountbillbl.AccountBillController;
 import businesslogic.cashbillbl.CashBillController;
 
-
-
 public class TradeFinish extends JLabel implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
@@ -127,7 +125,7 @@ public class TradeFinish extends JLabel implements ActionListener{
 		
 		if(events.getSource() == button_back){
 			this.setVisible(false);
-			Frame_Finace.visibleTrue(9);
+			Frame_Finace.visibleTrue(10);
 		}
 		
 		if(events.getSource() == button_output){
