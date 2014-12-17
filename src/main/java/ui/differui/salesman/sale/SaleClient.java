@@ -1,4 +1,4 @@
-package ui.differui.salesman.client;
+package ui.differui.salesman.sale;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -10,22 +10,22 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-import message.ResultMessage;
-import dataenum.FindTypeClient;
-import blservice.clientblservice.ClientBLService;
-import businesslogic.clientbl.ClientController;
-import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.myui.MyComboBox;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyTable;
 import ui.commonui.myui.MyTextField;
 import ui.commonui.warning.WarningFrame;
+import ui.differui.salesman.frame.Frame_Salesman;
 import vo.client.ClientVO;
+import blservice.clientblservice.ClientBLService;
+import businesslogic.clientbl.ClientController;
+import dataenum.FindTypeClient;
 
-public class ClientManagementUI extends JLabel implements ActionListener{
+public class SaleClient extends JLabel implements ActionListener{
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -34,13 +34,15 @@ public class ClientManagementUI extends JLabel implements ActionListener{
 	public static MyJButton button_showAll;
 	public static JButton button_delete;
 	MyComboBox comboBox;
-	MyTextField textField;
+	MyTextField textField, tf_client, tf_inven , ta, tf_ticket;
 	
 	String deleteID = "";
-		
+	public static String ClientName, ClientID, note;
+	static double  allowance, voucher;
+	
 	ClientBLService controller;
 	
-	public ClientManagementUI(){
+	public SaleClient(){
 		this.setLayout(null);
 		this.setBounds(0, 0, 1280, 720);
 		
@@ -49,7 +51,7 @@ public class ClientManagementUI extends JLabel implements ActionListener{
 		Color foreColor = new Color(158, 213, 220);
 		Color backColor = new Color(46, 52, 101);
 		
-		JLabel infoBar = new JLabel("客户管理");
+		JLabel infoBar = new JLabel("制定销售单 - 完善信息");
 		infoBar.setFont(new Font("华文细黑", Font.BOLD, 18));
 		infoBar.setBounds(80, 14, 1100, 20);
 		infoBar.setForeground(Color.GRAY);
@@ -100,7 +102,7 @@ public class ClientManagementUI extends JLabel implements ActionListener{
 		JTableHeader head = table.getTableHeader();
 		head.setBackground(backColor);
 		head.setForeground(foreColor);
-		jsp.setBounds(75, 120 - 10, 1125, 450);
+		jsp.setBounds(75, 120 - 10, 1125, 450 - 235 + 180);
 		jsp.getViewport().setBackground(new Color(0,0,0,0.3f));
 		jsp.setOpaque(false);
 		jsp.setBorder(BorderFactory.createEmptyBorder());
@@ -108,29 +110,101 @@ public class ClientManagementUI extends JLabel implements ActionListener{
 		this.add(jsp);
 		
 		//add a button for adding a new client
-		button_add = new MyJButton("新增一名客户");
-		button_add.setBounds(25 + 420 + 125 + 140, 610 - 26 - 10, 130, 25);
+		button_add = new MyJButton("上一步");
+		button_add.setBounds(75, 610 - 26 - 10, 130, 25);
 		button_add.setBackground(backColor);
 		button_add.setForeground(foreColor);
 		button_add.addActionListener(this);
 		this.add(button_add);	
 		
-		//add a button for deleting a selected client
-		button_del = new MyJButton("删除所选客户");
-		button_del.setBounds(165 + 420 + 125 + 140, 610 - 26 - 10, 130, 25);
-		button_del.addActionListener(this);
-		button_del.setBackground(backColor);
-		button_del.setForeground(foreColor);
-		this.add(button_del);	
+		JLabel word = new JLabel("本货单的客户为：");
+		word.setBounds(230 + 360, 600 - 26 - 235 + 180, 120, 25);
+		word.setBackground(null);
+		word.setForeground(Color.WHITE);
+		word.setVisible(true);
+		this.add(word);
 		
+		tf_client = new MyTextField(360 + 360, 600 - 26 - 235 + 180, 140 + 90, 25);
+		tf_client.setText("无");
+		tf_client.setEditable(false);
+		tf_client.setVisible(true);
+		tf_client.setForeground(foreColor);
+		tf_client.setBackground(backColor);
+		tf_client.setHorizontalAlignment(JTextField.CENTER);
+		this.add(tf_client);
+		
+		JLabel word2 = new JLabel("折让数额：");
+		word2.setBounds(75, 600 - 26 - 235 + 180, 120, 25);
+		word2.setBackground(null);
+		word2.setForeground(Color.WHITE);
+		word2.setVisible(true);
+		this.add(word2);
+		
+		tf_inven = new MyTextField(155, 600 - 26 - 235 + 180, 120, 25);
+		tf_inven.setVisible(true);
+		tf_inven.setForeground(foreColor);
+		tf_inven.setBackground(backColor);
+		tf_inven.setHorizontalAlignment(JTextField.CENTER);
+		this.add(tf_inven);
+		
+		JLabel word4 = new JLabel("元");
+		word4.setBounds(285, 600 - 26 - 235 + 180, 40, 25);
+		word4.setBackground(null);
+		word4.setForeground(Color.WHITE);
+		word4.setVisible(true);
+		this.add(word4);
+		
+		JLabel word5 = new JLabel("代金券数额：");
+		word5.setBounds(75 + 260, 600 - 26 - 235 + 180, 120, 25);
+		word5.setBackground(null);
+		word5.setForeground(Color.WHITE);
+		word5.setVisible(true);
+		this.add(word5);
+		
+		tf_ticket = new MyTextField(150 + 260, 600 - 26 - 235 + 180, 120, 25);
+		tf_ticket.setVisible(true);
+		tf_ticket.setForeground(foreColor);
+		tf_ticket.setBackground(backColor);
+		tf_ticket.setHorizontalAlignment(JTextField.CENTER);
+		this.add(tf_ticket);
+		
+		JLabel word6 = new JLabel("元");
+		word6.setBounds(285 + 260, 600 - 26 - 235 + 180, 40, 25);
+		word6.setBackground(null);
+		word6.setForeground(Color.WHITE);
+		word6.setVisible(true);
+		this.add(word6);
+		
+		JLabel word3 = new JLabel("货单备注：");
+		word3.setBounds(230, 610 - 26 - 10, 120, 25);
+		word3.setBackground(null);
+		word3.setForeground(Color.WHITE);
+		word3.setVisible(true);
+		this.add(word3);
+		
+		ta = new MyTextField(330, 610 - 26 - 10, 620, 25);
+		ta.setVisible(true);
+		ta.setForeground(foreColor);
+		ta.setBackground(backColor);
+		ta.setHorizontalAlignment(JTextField.CENTER);
+		this.add(ta);
+			
 		//add a button for checking and modifying the information of a selected client
-		button_cam = new MyJButton("修改或查看所选客户详细信息");
-		button_cam.setBounds(305 + 420 + 125 + 140, 610 - 26 - 10, 210, 25);
+		button_cam = new MyJButton("选择选中客户");
+		button_cam.setBounds(525 + 450 + 15, 610 - 26 - 10 - 235 + 180, 210, 25);
 		button_cam.addActionListener(this);
 		button_cam.setBackground(backColor);
 		button_cam.setForeground(foreColor);
 		this.add(button_cam);	
-				
+		
+		//add a button for returning to the last UI
+		button_return = new MyJButton("生成进货单");
+		button_return.setBounds(525 + 450 + 125 - 110, 610 - 26 - 10, 210, 25);
+		button_return.addActionListener(this);
+		button_return.setBackground(backColor);
+		button_return.setForeground(foreColor);
+		this.add(button_return);	
+			
 		// the background
 		this.setBackground(null);
 		
@@ -139,8 +213,8 @@ public class ClientManagementUI extends JLabel implements ActionListener{
 	public void actionPerformed(ActionEvent events) {
 			
 		if(events.getSource() == button_add){
-			ClientAddingUI window_add = new ClientAddingUI();
-			window_add.setVisible(true);
+			this.setVisible(false);
+			Frame_Salesman.visibleTrue(2);
 		}
 		
 		/////////////////////////////FUNCTION SHOWALL////////////////////////////
@@ -153,67 +227,60 @@ public class ClientManagementUI extends JLabel implements ActionListener{
 			
 			for(int i = 0; i < rowCount; i++)
 				tableModel.removeRow(0);
-			
+		
 			controller = new ClientController();
-			
-			rowCount = controller.show().size();
 			
 			for(int i = 0; i < controller.show().size(); i++){
 				ClientVO cvo = controller.show().get(i);
 				
-				String[] str = {cvo.ID, getCategory(cvo.category.toString()), getLevel(cvo.level.toString())
-						, cvo.name,cvo.salesman,String.valueOf(cvo.receivable - cvo.payable)
-						,String.valueOf(cvo.receivable), String.valueOf(cvo.payable),String.valueOf(cvo.receivableLimit)};
-				tableModel.addRow(str);
+				if(!cvo.category.toString().equals("PURCHASE_PERSON")){
+					String[] str = {cvo.ID, getCategory(cvo.category.toString()), getLevel(cvo.level.toString())
+							, cvo.name,cvo.salesman,String.valueOf(cvo.receivable - cvo.payable)
+							,String.valueOf(cvo.receivable), String.valueOf(cvo.payable),String.valueOf(cvo.receivableLimit)};
+					tableModel.addRow(str);
+				}
 			}		
 		}
 		
-		/////////////////////////////FUNCTION DEL////////////////////////////
-		
-		if(events.getSource() == button_del){
-				
-			if(table.getSelectedRow() < 0){
-				WarningFrame wf = new WarningFrame("请选择要进行删除的客户！");
-				wf.setVisible(true);
-			}else{
-				deleteID = (String) table.getValueAt(table.getSelectedRow(), 0);
-				ExitFinishFrame ef = new ExitFinishFrame("Delete a Client");
-				ef.setVisible(true);
-			}
-		}
-		
-		if(events.getSource() == button_delete){
-			
-			controller = new ClientController();
-			
-			ResultMessage rm = controller.deletClient(deleteID);
-			
-			if(rm.equals(ResultMessage.SUCCESS)){
-				WarningFrame wp = new WarningFrame("已成功删除该客户！");
-				wp.setVisible(true);
-				ClientManagementUI.button_showAll.doClick();
-			}else{
-				WarningFrame wp = new WarningFrame("无法删除该客户！");
-				wp.setVisible(true);
-			}
-		}
 		
 		/////////////////////////////FUNCTION CAM////////////////////////////
 
 		if(events.getSource() == button_cam){
-			
-			controller = new ClientController();
-			
 			if(table.getSelectedRow() < 0){
-				WarningFrame wf = new WarningFrame("请选择要进行查看或修改的客户！");
+				WarningFrame wf = new WarningFrame("请选择一个客户！");
+				wf.setVisible(true);
+			}else{
+				tf_client.setText((String)table.getValueAt(table.getSelectedRow(), 3));
+				ClientName = (String)table.getValueAt(table.getSelectedRow(), 3);
+				ClientID = (String)table.getValueAt(table.getSelectedRow(), 0);
+			}
+		}
+		
+		if(events.getSource() == button_return){
+			if(tf_client.getText().equals("无")){
+				WarningFrame wf = new WarningFrame("请选择一个客户！");
 				wf.setVisible(true);
 			}else{
 				
-				ClientVO cvo = controller.findClient((String) table.getValueAt(table.getSelectedRow(), 0), FindTypeClient.ID).get(0);
+				Frame_Salesman.visibleTrue(10);
+				this.setVisible(false);
+				note = ta.getText();
 				
-				ClientDetailUI window_cam = new ClientDetailUI(cvo);
-				window_cam.setVisible(true);
-			}			
+				if(tf_inven.getText().isEmpty()){
+					allowance = 0;
+				}else{
+					allowance = Double.parseDouble(tf_inven.getText());
+				}
+
+				if(tf_ticket.getText().isEmpty()){
+					voucher = 0;
+				}else{
+					voucher = Double.parseDouble(tf_ticket.getText());
+				}
+				
+				SaleFinal.showText.doClick();
+				
+			}
 		}
 		
 		/////////////////////////////SEARCH////////////////////////////
@@ -236,22 +303,23 @@ public class ClientManagementUI extends JLabel implements ActionListener{
 					DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 					
 					int rowCount = table.getRowCount();
-					
 					for(int k = 0; k < rowCount; k++)
 						tableModel.removeRow(0);
-														
+													
 					for(int i = 0; i < list.size(); i++){
 										
 						ClientVO cvo = list.get(i);
 						
-						String[] str = {cvo.ID, getCategory(cvo.category.toString()), getLevel(cvo.level.toString())
-								, cvo.name,cvo.salesman,String.valueOf(cvo.receivable - cvo.payable)
-								,String.valueOf(cvo.receivable), String.valueOf(cvo.payable),String.valueOf(cvo.receivableLimit)};
-						tableModel.addRow(str);
+						if(!cvo.category.toString().equals("PURCHASE_PERSON")){
+							String[] str = {cvo.ID, getCategory(cvo.category.toString()), getLevel(cvo.level.toString())
+									, cvo.name,cvo.salesman,String.valueOf(cvo.receivable - cvo.payable)
+									,String.valueOf(cvo.receivable), String.valueOf(cvo.payable),String.valueOf(cvo.receivableLimit)};
+							tableModel.addRow(str);
+						}
 						
 					}	
 								
-					WarningFrame wf = new WarningFrame("共有  " + list.size() + "  名客户符合条件！");
+					WarningFrame wf = new WarningFrame("共有  " + table.getRowCount() + "  名客户符合条件！");
 					wf.setVisible(true);
 				}
 				

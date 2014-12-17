@@ -45,7 +45,7 @@ public class InventoryReviewUI extends MyPanel implements ActionListener{
 		this.add(infoBar);
 		
 		//adding the table 
-		String[] headers = {"出库数量","入库数量","出库金额","入库金额","出库总额","入库总额"};
+		String[] headers = {"出库数量","入库数量","出库金额","入库金额","出入数量合计","出入金额核算"};
 		table = new MyTable(headers);
 		
 		JScrollPane jsp = new JScrollPane(table);
@@ -55,7 +55,7 @@ public class InventoryReviewUI extends MyPanel implements ActionListener{
 		jsp.setVisible(true);
 		this.add(jsp);
 		
-		String[] headers2 = {"销售数量","进货数量","销售金额","进货金额","销售总额","进货总额"};
+		String[] headers2 = {"销售数量","进货数量","销售金额","进货金额","进销数量合计","进销金额核算"};
 		table2 = new MyTable(headers2);
 		
 		JScrollPane jsp2=new JScrollPane(table2);
@@ -202,10 +202,10 @@ public void actionPerformed(ActionEvent events) {
 				String endDate = yearAddZero(tf_year2.getText()) + addZero(tf_month2.getText()) + addZero(tf_day2.getText());
 				InventoryViewVO ivvo = controller.viewInventory(beginDate, endDate);
 				
-				String[] str = {String.valueOf(ivvo.saleNumber) + "元", String.valueOf(ivvo.purNumber) + "元"
-						, String.valueOf(ivvo.saleMoney) + "元", String.valueOf(ivvo.purMoney) + "元"
-						, String.valueOf(ivvo.saleNumber * ivvo.saleMoney) + "元"
-						, String.valueOf(ivvo.purNumber * ivvo.purMoney) + "元"};
+				String[] str = {String.valueOf(ivvo.saleNumber) + "元", String.valueOf(ivvo.purNumber) + "件"
+						, String.valueOf(ivvo.saleMoney) + "元", String.valueOf(ivvo.purMoney) + "件"
+						, String.valueOf(ivvo.saleNumber + ivvo.purNumber) + "元"
+						, String.valueOf(ivvo.saleMoney - ivvo.purMoney) + "元"};
 			//	String[] str2 = {"100", "200", "100","100", "0", "100"};
 				
 				tableModel.addRow(str);

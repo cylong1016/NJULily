@@ -22,7 +22,9 @@ import ui.differui.salesman.in.InGood;
 import ui.differui.salesman.inback.InBackFinal;
 import ui.differui.salesman.inback.InBackFirst;
 import ui.differui.salesman.index.SaleIndex;
-import ui.differui.salesman.sale.SaleUI;
+import ui.differui.salesman.sale.SaleClient;
+import ui.differui.salesman.sale.SaleFinal;
+import ui.differui.salesman.sale.SaleGood;
 import ui.differui.salesman.saleback.SaleBackUI;
 
 
@@ -43,7 +45,9 @@ public class Frame_Salesman extends MyFrame implements ActionListener{
 	static InGood panel_iu;
 	static InBackFirst panel_ibu;
 	static InBackFinal panel_inBackFinal;
-	static SaleUI panel_su;
+	static SaleGood panel_su;
+	static SaleClient panel_saleClient;
+	static SaleFinal panel_saleFinal;
 	static SaleBackUI panel_sbu;
 	static InFinal panel_inFinal;
 	
@@ -86,7 +90,15 @@ public class Frame_Salesman extends MyFrame implements ActionListener{
 		panel_inBackFinal.setVisible(false);
 		this.add(panel_inBackFinal);
 		
-		panel_su = new SaleUI();
+		panel_saleClient = new SaleClient();
+		panel_saleClient.setVisible(false);
+		this.add(panel_saleClient);
+		
+		panel_saleFinal = new SaleFinal();
+		panel_saleFinal.setVisible(false);
+		this.add(panel_saleFinal);
+		
+		panel_su = new SaleGood();
 		panel_su.setVisible(false);
 		this.add(panel_su);
 		
@@ -237,8 +249,10 @@ public class Frame_Salesman extends MyFrame implements ActionListener{
 					in_back.setVisible(true);break;
 			case 3: panel_ibu.setVisible(true);
 					in_back.setVisible(true);break;
-			case 4: panel_su.setVisible(true);break;
-			case 5: panel_sbu.setVisible(true);break;
+			case 4: panel_su.setVisible(true);
+					in_back.setVisible(true);break;
+			case 5: panel_sbu.setVisible(true);
+					in_back.setVisible(true);break;
 			
 			//进货时的第二步 -添加客户
 			case 6: panel_inClient.setVisible(true);
@@ -249,6 +263,12 @@ public class Frame_Salesman extends MyFrame implements ActionListener{
 					
 			case 8: panel_inBackFinal.setVisible(true);
 					flag = 3;break;
+					
+			case 9: panel_saleClient.setVisible(true);
+					flag = 4;break;
+					
+			case 10: panel_saleFinal.setVisible(true);
+					flag = 4;break;
 		}
 	}
 	
@@ -264,8 +284,12 @@ public class Frame_Salesman extends MyFrame implements ActionListener{
 			case 3: panel_ibu.setVisible(false);
 					panel_inBackFinal.setVisible(false);
 					in_back.setVisible(false);break;
-			case 4: panel_su.setVisible(false);break;
-			case 5: panel_sbu.setVisible(false);break;
+			case 4: panel_su.setVisible(false);
+					panel_saleClient.setVisible(false);
+					panel_saleFinal.setVisible(false);
+					in_back.setVisible(false);break;
+			case 5: panel_sbu.setVisible(false);
+					in_back.setVisible(false);break;
 			
 			//进货时的第二步 -添加客户
 			case 6: in_back.setVisible(false);
@@ -273,6 +297,9 @@ public class Frame_Salesman extends MyFrame implements ActionListener{
 			//进货退货第二步 -添加客户
 			case 8: in_back.setVisible(false);
 					flag = 3;break;
+			
+			case 9: in_back.setVisible(false);
+					 flag = 4;break;
 		}
 	}
 	
@@ -339,6 +366,8 @@ public class Frame_Salesman extends MyFrame implements ActionListener{
 			if(flag == 0){			
 				panel_su.setVisible(true);
 				panel_si.setVisible(false);
+				in_back.setVisible(true);
+				SaleGood.ClearAll();
 				flag = 4;
 			}else if(flag == 4){
 				
@@ -353,6 +382,7 @@ public class Frame_Salesman extends MyFrame implements ActionListener{
 			if(flag == 0){			
 				panel_sbu.setVisible(true);
 				panel_si.setVisible(false);
+				in_back.setVisible(true);
 				flag = 5;
 			}else if(flag == 5){
 				

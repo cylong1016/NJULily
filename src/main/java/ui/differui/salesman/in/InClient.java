@@ -10,7 +10,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -35,8 +34,7 @@ public class InClient extends JLabel implements ActionListener{
 	public static MyJButton button_showAll;
 	public static JButton button_delete;
 	MyComboBox comboBox;
-	MyTextField textField, tf_client, tf_inven;
-	JTextArea ta;
+	MyTextField textField, tf_client, tf_inven , ta;
 	
 	String deleteID = "";
 	public static String ClientName, ClientID, storeName ,note;
@@ -103,7 +101,7 @@ public class InClient extends JLabel implements ActionListener{
 		JTableHeader head = table.getTableHeader();
 		head.setBackground(backColor);
 		head.setForeground(foreColor);
-		jsp.setBounds(75, 120 - 10, 1125, 450 - 235);
+		jsp.setBounds(75, 120 - 10, 1125, 450 - 235 + 180);
 		jsp.getViewport().setBackground(new Color(0,0,0,0.3f));
 		jsp.setOpaque(false);
 		jsp.setBorder(BorderFactory.createEmptyBorder());
@@ -119,48 +117,52 @@ public class InClient extends JLabel implements ActionListener{
 		this.add(button_add);	
 		
 		JLabel word = new JLabel("本货单的客户为：");
-		word.setBounds(230 + 360, 600 - 26 - 235, 120, 25);
+		word.setBounds(230 + 360, 600 - 26 - 235 + 180, 120, 25);
 		word.setBackground(null);
 		word.setForeground(Color.WHITE);
 		word.setVisible(true);
 		this.add(word);
 		
-		tf_client = new MyTextField(360 + 360, 600 - 26 - 235, 140, 25);
+		tf_client = new MyTextField(360 + 360, 600 - 26 - 235 + 180, 140, 25);
 		tf_client.setText("无");
 		tf_client.setEditable(false);
 		tf_client.setVisible(true);
+		tf_client.setForeground(foreColor);
+		tf_client.setBackground(backColor);
 		tf_client.setHorizontalAlignment(JTextField.CENTER);
 		this.add(tf_client);
 		
 		JLabel word2 = new JLabel("仓库名称：");
-		word2.setBounds(230, 600 - 26 - 235, 120, 25);
+		word2.setBounds(230, 600 - 26 - 235 + 180, 120, 25);
 		word2.setBackground(null);
 		word2.setForeground(Color.WHITE);
 		word2.setVisible(true);
 		this.add(word2);
 		
-		tf_inven = new MyTextField(360, 600 - 26 - 235, 140, 25);
+		tf_inven = new MyTextField(360, 600 - 26 - 235 + 180, 140, 25);
 		tf_inven.setVisible(true);
-		tf_inven.setForeground(backColor);
+		tf_inven.setForeground(foreColor);
+		tf_inven.setBackground(backColor);
 		tf_inven.setHorizontalAlignment(JTextField.CENTER);
 		this.add(tf_inven);
 		
 		JLabel word3 = new JLabel("货单备注：");
-		word3.setBounds(230, 600 - 26 - 235 + 50, 120, 25);
+		word3.setBounds(230, 600 - 26 - 235 + 50 + 180, 120, 25);
 		word3.setBackground(null);
 		word3.setForeground(Color.WHITE);
 		word3.setVisible(true);
 		this.add(word3);
 		
-		ta = new JTextArea();
-			
-		JScrollPane jsp2 = new JScrollPane(ta);
-		jsp2.setBounds(360, 600 - 26 - 235 + 50, 500, 160);
-		this.add(jsp2);
+		ta = new MyTextField(360, 600 - 26 - 235 + 50 + 180, 500, 25);
+		ta.setVisible(true);
+		ta.setForeground(foreColor);
+		ta.setBackground(backColor);
+		ta.setHorizontalAlignment(JTextField.CENTER);
+		this.add(ta);
 			
 		//add a button for checking and modifying the information of a selected client
 		button_cam = new MyJButton("选择选中客户");
-		button_cam.setBounds(525 + 450 + 15, 610 - 26 - 10 - 235, 210, 25);
+		button_cam.setBounds(525 + 450 + 15, 610 - 26 - 10 - 235 + 180, 210, 25);
 		button_cam.addActionListener(this);
 		button_cam.setBackground(backColor);
 		button_cam.setForeground(foreColor);
@@ -168,7 +170,7 @@ public class InClient extends JLabel implements ActionListener{
 		
 		//add a button for returning to the last UI
 		button_return = new MyJButton("生成进货单");
-		button_return.setBounds(525 + 450 + 125, 610 - 26 - 10, 100, 25);
+		button_return.setBounds(525 + 450 + 125 - 110, 610 - 26 - 10, 210, 25);
 		button_return.addActionListener(this);
 		button_return.setBackground(backColor);
 		button_return.setForeground(foreColor);
@@ -272,14 +274,16 @@ public class InClient extends JLabel implements ActionListener{
 										
 						ClientVO cvo = list.get(i);
 						
-						String[] str = {cvo.ID, getCategory(cvo.category.toString()), getLevel(cvo.level.toString())
-								, cvo.name,cvo.salesman,String.valueOf(cvo.receivable - cvo.payable)
-								,String.valueOf(cvo.receivable), String.valueOf(cvo.payable),String.valueOf(cvo.receivableLimit)};
-						tableModel.addRow(str);
+						if(!cvo.category.toString().equals("SALES_PERSON")){
+							String[] str = {cvo.ID, getCategory(cvo.category.toString()), getLevel(cvo.level.toString())
+									, cvo.name,cvo.salesman,String.valueOf(cvo.receivable - cvo.payable)
+									,String.valueOf(cvo.receivable), String.valueOf(cvo.payable),String.valueOf(cvo.receivableLimit)};
+							tableModel.addRow(str);
+						}
 						
 					}	
 								
-					WarningFrame wf = new WarningFrame("共有  " + list.size() + "  名客户符合条件！");
+					WarningFrame wf = new WarningFrame("共有  " + table.getRowCount() + "  名客户符合条件！");
 					wf.setVisible(true);
 				}
 				
