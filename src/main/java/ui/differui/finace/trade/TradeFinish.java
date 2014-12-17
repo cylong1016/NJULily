@@ -20,7 +20,9 @@ import ui.commonui.warning.WarningFrame;
 import ui.differui.finace.frame.Frame_Finace;
 import vo.AccountBillItemVO;
 import blservice.accountbillblservice.AccountBillBLService;
+import blservice.cashbillblservice.CashBillBLService;
 import businesslogic.accountbillbl.AccountBillController;
+import businesslogic.cashbillbl.CashBillController;
 
 
 
@@ -105,7 +107,16 @@ public class TradeFinish extends JLabel implements ActionListener{
 				controller.addBillItem(new AccountBillItemVO(TradeBill.accountName, TradeBill.money, TradeBill.note));
 				controller.submit();
 			}else{
+				CashBillBLService controller = new CashBillController();
+				controller.getID();
+				String[] str = TradeCash.billItem.split(";");
 				
+				for(int i = 0; i < str.length; i++ ){
+					String[] str2 = str[i].split(":");
+					controller.addBillItem(str2[0], Double.parseDouble(str2[1]), str2[2]);
+				}
+				
+				controller.submit(TradeBill.accountName);
 			}
 			
 			WarningFrame wf = new WarningFrame("添加成功！");
@@ -253,6 +264,13 @@ public class TradeFinish extends JLabel implements ActionListener{
 			for(int i = 0; i < 9; i++)
 				text = text + blank4;
 			text = text + "转账金额：" + TradeBill.money + "元\n";
+			
+			for(int i = 0; i < 5; i++)
+				text = text + blank4;
+			
+			for(int i = 0; i < 32; i++)
+				text = text + line;
+			text = text + "\n";
 				
 			for(int i = 0; i < 7; i++)
 				text = text + blank4;
@@ -264,7 +282,105 @@ public class TradeFinish extends JLabel implements ActionListener{
 			
 			return text;
 		}else{
-			return null;
+			AccountBillBLService controller = new AccountBillController();
+			ID = controller.getPayID();
+			
+			double total = 0;
+			
+			String text = "";
+			String blank4 = "    ";
+			String blank = "";
+			String line = "----";
+			for(int i = 0; i < 25; i++)
+				blank = blank + blank4;
+			text = text + blank + "现金费用单" + "\n";
+			
+			for(int i = 0; i < 5; i++)
+				text = text + blank4;
+			
+			for(int i = 0; i < 32; i++)
+				text = text + line;
+			text = text + "\n";
+			
+			for(int i = 0; i < 35; i++)
+				text = text + blank4;
+			text = text + "单据编号：" + ID + "\n";
+			
+			for(int i = 0; i < 35; i++)
+				text = text + blank4;
+			text = text + "账户名称：" + TradeCash.accountName + "\n";
+			
+			for(int i = 0; i < 35; i++)
+				text = text + blank4;
+			text = text + "操作人员：" + Frame_Login.userName + "\n";
+			
+			for(int i = 0; i < 5; i++)
+				text = text + blank4;
+			
+			for(int i = 0; i < 32; i++)
+				text = text + line;
+			text = text + "\n";
+			
+			for(int i = 0; i < 7; i++)
+				text = text + blank4;
+			text = text + "账目信息：" + "\n";
+			
+			
+			String[] str = TradeCash.billItem.split(";");
+			
+			for(int i = 0; i < str.length; i++ ){
+				
+				String[] str2 = str[i].split(":");
+				
+				for(int j = 0; j < 9; j++)
+					text = text + blank4;
+				text = text + "条目序号：" + (i + 1) + "\n";
+				
+				for(int j = 0; j < 9; j++)
+					text = text + blank4;
+				text = text + "条目名称：" + str2[0] + "\n";
+					
+				for(int j = 0; j < 9; j++)
+					text = text + blank4;
+				text = text + "条目数额：" + str2[1] + "元\n";
+				
+				total = total + Double.parseDouble(str2[1]);
+				
+				for(int j = 0; j < 9; j++)
+					text = text + blank4;
+				if(str2[2].equals("null"))
+					str2[2] = "无";
+				text = text + "条目备注：" + str2[2] + "\n\n";
+				
+			}
+		
+			for(int i = 0; i < 5; i++)
+				text = text + blank4;
+			
+			for(int i = 0; i < 32; i++)
+				text = text + line;
+			text = text + "\n";
+			
+			for(int i = 0; i < 35; i++)
+				text = text + blank4;
+			text = text + "条目总价：" + String.format("%.2f",total) + "\n" + "\n" + "\n";
+			
+			for(int i = 0; i < 5; i++)
+				text = text + blank4;
+			
+			for(int i = 0; i < 32; i++)
+				text = text + line;
+			text = text + "\n";
+					
+			for(int i = 0; i < 7; i++)
+				text = text + blank4;
+			text = text + "货单备注:" + "\n";
+			
+			for(int i = 0; i < 9; i++)
+				text = text + blank4;
+			text = text + TradeCash.note + "\n" + "\n";
+			
+			return text;
 		}	
 	}
 	public static void writeto(String a,String file){
