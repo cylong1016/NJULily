@@ -9,6 +9,9 @@ import java.awt.event.ActionListener;
 
 
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -17,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.filechooser.FileSystemView;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -63,7 +67,7 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 	
 	JLabel word;
 	
-	static int index;
+	static int index = -1;
 	
 	public ApproveManagementUI(){
 		
@@ -173,9 +177,57 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 		bt_del.setVisible(true);
 		this.add(bt_del);
 		
+		index = -1;
 	}
 	
 	public void actionPerformed(ActionEvent events) {
+		
+		if(events.getSource() == bt_approval){
+			if(index >= 0){
+				if(!table.getValueAt(index, 3).equals("未审批")){
+					WarningFrame wf = new WarningFrame("状态为未审批的单据才能进行审批工作！");
+					wf.setVisible(true);
+				}else{
+					ApprovalBLService controller = new ApprovalController();
+					
+					passList.clear();
+					passType.clear();
+					
+					passList.add(listPool.get(index));
+					passType.add(typePool.get(index));
+					
+					ResultMessage rm = controller.passBill(passList, passType);
+					
+					if(rm.equals(ResultMessage.FAILURE)){
+						WarningFrame wf = new WarningFrame("审批失败！");
+						wf.setVisible(true);
+					}else{
+						
+						bt_search.doClick();
+						
+						index = -1;
+						ta.setText("");
+						word.setText("单据状态:    ");
+						
+						WarningFrame wf = new WarningFrame("审批成功！");
+						wf.setVisible(true);
+							
+					}
+				}
+			}
+		}
+		
+		if(events.getSource() == bt_out){
+			if(index >= 0){
+				FileSystemView fsv = FileSystemView.getFileSystemView();
+				String file = String.valueOf(fsv.getHomeDirectory()) + "/" + table.getValueAt(index, 2) + ".txt";		
+				System.out.print(file);
+				writeto(ta.getText().replaceAll("\n", "\r\n"),file);
+				
+				WarningFrame wf = new WarningFrame("已成功导出至桌面！ ");
+				wf.setVisible(true);
+			}
+		}
 		
 		if(events.getSource() == bt_check){
 			
@@ -241,6 +293,9 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 			ApprovalBLService controller = new ApprovalController();
 			
 			int rowCount = table.getRowCount();
+			
+			passList.clear();
+			passType.clear();
 			
 			for(int i = 0; i < rowCount; i++){
 				if(table.getValueAt(i, 0).equals(Boolean.TRUE)){
@@ -533,6 +588,22 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 		case "未通过" : word.setText("单据状态:    " + "未通过");break;
 		case "已通过": word.setText("单据状态:    " + "已通过");break;
 		case "未审批" : word.setText("单据状态:    " + "未审批");break;
+		}
+	}
+	
+	private void writeto(String a,String file){
+		
+		try {
+			File filename=new File(file);
+			
+			if (!filename.exists()) { 
+				filename.createNewFile();}
+			
+			FileWriter fw=new FileWriter(filename);
+			fw.write(a);
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 

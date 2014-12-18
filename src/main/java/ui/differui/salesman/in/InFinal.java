@@ -119,7 +119,7 @@ public class InFinal extends JLabel implements ActionListener{
 		
 		if(events.getSource() == button_output){
 			FileSystemView fsv = FileSystemView.getFileSystemView();
-			String file=String.valueOf(fsv.getHomeDirectory())+"/进货单"+ID+".txt";		
+			String file=String.valueOf(fsv.getHomeDirectory())+ "/进货单" +ID+".txt";		
 			writeto(ta.getText().replaceAll("\n", "\r\n"),file);
 			
 			WarningFrame wf = new WarningFrame("已成功导出至桌面！ ");
