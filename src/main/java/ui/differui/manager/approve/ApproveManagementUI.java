@@ -336,40 +336,34 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 				try {
 					getApprovalData(cbb_sort.getSelectedIndex());
 				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}else if(cbb_isApproval.getSelectedIndex() == 2){
 				try {
 					getPassData(cbb_sort.getSelectedIndex());
 				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}else if(cbb_isApproval.getSelectedIndex() == 3){
 				try {
 					getFailureData(cbb_sort.getSelectedIndex());
 				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}else{
 				try {
 					getApprovalData(cbb_sort.getSelectedIndex());
 				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				try {
 					getPassData(cbb_sort.getSelectedIndex());
 				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				try {
 					getFailureData(cbb_sort.getSelectedIndex());
 				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

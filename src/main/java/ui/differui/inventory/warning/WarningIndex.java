@@ -362,7 +362,6 @@ public class WarningIndex extends MyPanel implements ActionListener{
 								commoList.add(new BillListItem((String)table2.getValueAt(j, 0)
 										,Integer.parseInt((String) table2.getValueAt(j, 3))));
 							} catch (NumberFormatException | RemoteException e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
 						}
