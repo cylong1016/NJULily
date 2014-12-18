@@ -19,11 +19,12 @@ public class CashBillShow {
 	}
 
 	public ArrayList<CashBillVO> show() throws RemoteException {
-		ArrayList<CashBillVO> VOs = new ArrayList<CashBillVO>();
-		for(CashBillPO po : cashBillData.show()) {
-			CashBillVO vo = cashBill.POToVO(po);
-			VOs.add(vo);
-		}
+		ArrayList<CashBillPO> POs = cashBillData.show();
+		ArrayList<CashBillVO> VOs = cashBill.billsPOToBillsVO(POs);
+//		for(CashBillPO po : POs) {
+//			CashBillVO vo = cashBill.POToVO(po);
+//			VOs.add(vo);
+//		}
 		return VOs;
 	}
 
@@ -46,7 +47,8 @@ public class CashBillShow {
 
 	private ArrayList<CashBillVO> showChoose(BillState state) throws RemoteException {
 		ArrayList<CashBillVO> VOs = new ArrayList<CashBillVO>();
-		for(CashBillVO vo : show()) {
+		ArrayList<CashBillVO> show = show();
+		for(CashBillVO vo : show) {
 			if (vo.state == state) {
 				VOs.add(vo);
 			}

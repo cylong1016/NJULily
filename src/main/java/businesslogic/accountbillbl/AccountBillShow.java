@@ -73,7 +73,8 @@ public class AccountBillShow {
 	 */
 	private ArrayList<AccountBillVO> showChoose(BillType type) throws RemoteException {
 		ArrayList<AccountBillVO> choose = new ArrayList<AccountBillVO>();
-		for(AccountBillVO vo : show()) {
+		ArrayList<AccountBillVO> show = show();
+		for(AccountBillVO vo : show) {
 			if (vo.type == type) {
 				choose.add(vo);
 			}
@@ -92,7 +93,8 @@ public class AccountBillShow {
 	 */
 	private ArrayList<AccountBillVO> showChoose(BillType type, BillState state) throws RemoteException {
 		ArrayList<AccountBillVO> choose = new ArrayList<AccountBillVO>();
-		for(AccountBillVO vo : show()) {
+		ArrayList<AccountBillVO> show = show();
+		for(AccountBillVO vo : show) {
 			if (vo.type == type && vo.state == state) {
 				choose.add(vo);
 			}

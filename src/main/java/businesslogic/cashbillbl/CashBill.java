@@ -93,6 +93,15 @@ public class CashBill {
 		// TODO 存在本地
 		return POToVO(po);
 	}
+	
+	public ArrayList<CashBillVO> billsPOToBillsVO(ArrayList<CashBillPO> billsPO) {
+		ArrayList<CashBillVO> billsVO = new ArrayList<CashBillVO>();
+		for(CashBillPO po : billsPO) {
+			CashBillVO vo = POToVO(po);
+			billsVO.add(vo);
+		}
+		return billsVO;
+	}
 
 	public CashBillVO POToVO(CashBillPO po) {
 		String ID = po.getID();
