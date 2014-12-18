@@ -73,7 +73,7 @@ public class Inventory {
 		InventoryDataService inventoryData = getInventoryData();
 		// 得到批号
 		CheckList checkList = new CheckList(inventoryData.returnLotNumber());
-		InventoryCheckVO vo = new InventoryCheckVO(checkList.getItemsVO(), checkList.getAvePrice(), checkList.getToday(), checkList.getLot());
+		InventoryCheckVO vo = new InventoryCheckVO(checkList.getItemsVO(), checkList.getToday(), checkList.getLot());
 		return vo;
 	}
 

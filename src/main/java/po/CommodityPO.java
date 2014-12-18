@@ -34,8 +34,9 @@ public class CommodityPO extends PersistentObject {
 	private double avePur;
 	
 	private int saleNumber;
-	
 	private int purNumber;
+	/** 退货数量 */
+	private int saleBackNumber;
 	/** 能否被删除*/
 	private boolean canDelete;
 
@@ -202,6 +203,14 @@ public class CommodityPO extends PersistentObject {
 
 	public void setCanDelete(boolean canDelete) {
 		this.canDelete = canDelete;
+	}
+
+	public int getSaleBackNumber() {
+		return saleBackNumber;
+	}
+
+	public void setSaleBackNumber(int saleBackNumber) {
+		this.saleBackNumber = saleBackNumber;
 	}
 	
 	

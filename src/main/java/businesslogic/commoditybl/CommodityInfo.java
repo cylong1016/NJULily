@@ -67,7 +67,9 @@ public class CommodityInfo implements CommodityInfo_Sale, CommodityInfo_Purchase
 	 */
 	public double getAvePrice(String ID) throws RemoteException {
 		po = commodityData.find(ID);
-		return po.getPurPrice();
+		int totalNumber = po.getSaleNumber() + po.getPurNumber();
+		double totalPrice = po.getSalePrice() * po.getSaleNumber() + po.getPurNumber() * po.getAvePur();
+		return totalPrice/totalNumber;
 	}
 
 	/*
@@ -137,6 +139,8 @@ public class CommodityInfo implements CommodityInfo_Sale, CommodityInfo_Purchase
 			po.setInventoryNum(po.getInventoryNum() + number);
 			po.setAveSale((po.getAveSale() * po.getSaleNumber() - number * price) / nowSaleNumber);
 			po.setSaleNumber(nowSaleNumber);
+			// 增加退货商品的数量
+			po.setSaleBackNumber(po.getSaleBackNumber() + number);
 			break;
 		case PURCHASE: // 如果是销售退款单，需要增加库存数量，更改平均售价，减少销售数量
 			nowPurNumber = po.getPurNumber() + number;

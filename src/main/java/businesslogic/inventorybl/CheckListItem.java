@@ -21,6 +21,8 @@ public class CheckListItem {
 	private int number;
 	/** 商品价格 */
 	private double price;
+	/** 库存均价 */
+	private double avePrice;
 
 	private String commodityID;
 
@@ -53,4 +55,7 @@ public class CheckListItem {
 		return commodityID;
 	}
 
+	public double getAvePrice() {
+		return avePrice;
+	}
 }

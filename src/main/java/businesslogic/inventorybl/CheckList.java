@@ -18,9 +18,6 @@ import businesslogic.inventorybl.info.CommodityInfo_Inventory;
  * @version Nov 28, 201410:51:02 AM
  */
 public class CheckList {
-
-	/** 库存均价 */
-	private double avePrice;
 	/** 批号 */
 	private String today;
 	/** 批次 */
@@ -73,11 +70,6 @@ public class CheckList {
 			vos.add(vo);
 		}
 		return vos;
-	}
-
-	public double getAvePrice() {
-		avePrice = totalPrice / totalNumber;
-		return avePrice;
 	}
 
 }
