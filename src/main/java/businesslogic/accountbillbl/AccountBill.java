@@ -70,7 +70,8 @@ public class AccountBill {
 	 * @throws RemoteException
 	 */
 	public String getExpenseID() throws RemoteException {
-		return accountBillData.getExpenseID();
+		this.type = BillType.EXPENSE;
+		return ID = accountBillData.getExpenseID();
 	}
 
 	/**
@@ -80,7 +81,8 @@ public class AccountBill {
 	 * @version 2014年12月17日 下午11:48:09
 	 */
 	public String getPayID() throws RemoteException {
-		return accountBillData.getPayID();
+		this.type = BillType.PAY;
+		return ID = accountBillData.getPayID();
 	}
 
 	/**
