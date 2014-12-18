@@ -144,7 +144,6 @@ public class SaleDetailUI extends JLabel implements ActionListener{
 	public void actionPerformed(ActionEvent events) {
 		if(events.getSource() == button_check){
 			
-			
 			RecordBLService controller = new RecordController();
 			
 			//String beginDate, String endDate, String commodityName, String clientName, String salesman, Storage storage

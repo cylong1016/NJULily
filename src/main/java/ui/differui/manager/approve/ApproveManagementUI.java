@@ -29,6 +29,7 @@ import businesslogic.approvalbl.ApprovalController;
 import businesslogic.approvalbl.ApprovalShow;
 import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.myui.MyComboBox;
+import ui.commonui.text_conductor.TextConductor;
 import ui.commonui.warning.WarningFrame;
 import vo.AccountBillVO;
 import vo.CashBillVO;
@@ -48,7 +49,7 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 	Color foreColor = new Color(158, 213, 220);
 	Color backColor = new Color(46, 52, 101);
 	
-	JButton bt_approval, bt_approvalAll, bt_search, bt_modify, bt_check, bt_out;
+	JButton bt_approval, bt_approvalAll, bt_search, bt_modify, bt_check, bt_out, bt_del;
 	public static JButton passBill;
 	
 	MyComboBox cbb_isApproval, cbb_sort;
@@ -59,6 +60,10 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 
 	ArrayList<ValueObject> passList;
 	ArrayList<BillType> passType;
+	
+	JLabel word;
+	
+	static int index;
 	
 	public ApproveManagementUI(){
 		
@@ -99,6 +104,12 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 		JScrollPane jsp2 = new JScrollPane(ta);
 		jsp2.setBounds(520, 95, 650, 465);
 		this.add(jsp2);
+		
+		word = new JLabel("单据状态:    ");
+		word.setForeground(Color.WHITE);
+		word.setBackground(new Color(0, 0, 0, 0));
+		word.setBounds(520, 56, 200, 25);
+		this.add(word);
 		
 		passBill = new JButton();
 		passBill.addActionListener(this);
@@ -147,15 +158,50 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 		this.add(bt_modify);
 		
 		bt_out = new JButton("导出单据至桌面");
-		bt_out.setBounds(755, 572, 180, 25);
+		bt_out.setBounds(1170 - 180, 56, 180, 25);
 		bt_out.addActionListener(this);
 		bt_out.setBackground(Color.WHITE);
 		bt_out.setForeground(backColor);
 		bt_out.setVisible(true);
 		this.add(bt_out);
+		
+		bt_del = new JButton("单据审批不通过");
+		bt_del.setBounds(755, 572, 180, 25);
+		bt_del.addActionListener(this);
+		bt_del.setBackground(Color.WHITE);
+		bt_del.setForeground(backColor);
+		bt_del.setVisible(true);
+		this.add(bt_del);
+		
 	}
 	
 	public void actionPerformed(ActionEvent events) {
+		
+		if(events.getSource() == bt_check){
+			
+			int count = 0;
+			
+			for(int i = 0; i < table.getRowCount(); i++){
+				if(table.getValueAt(i, 0) != null)
+					if(table.getValueAt(i, 0).equals(Boolean.TRUE)){
+						count++;
+						index = i;
+					}
+			}
+			
+			if(count == 0){
+				WarningFrame wf = new WarningFrame("请选择一条要查看的单据！");
+				wf.setVisible(true);
+			}else if(count > 1){
+				WarningFrame wf = new WarningFrame("请只选择一条要查看的单据！");
+				wf.setVisible(true);
+			}else{
+				setCondition((String)table.getValueAt(index, 3));
+				TextConductor writer = new TextConductor();
+				ta.setText(writer.writeBill(typePool.get(index), listPool.get(index)));
+			}
+			
+		}
 		
 		if(events.getSource() == bt_approvalAll){
 						
@@ -165,13 +211,16 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 			int rowCount = table.getRowCount();
 			
 			for(int i = 0; i < rowCount; i++){
-				if(table.getValueAt(i, 0).equals(Boolean.TRUE)){
-					count++;
-				}
-				if(table.getValueAt(i, 0).equals(Boolean.TRUE) && 
-						!table.getValueAt(i, 3).equals("未审批")){
-					flag = false;
-				}
+				if(table.getValueAt(i, 0) != null)
+					if(table.getValueAt(i, 0).equals(Boolean.TRUE)){
+						count++;
+					}
+				
+				if(table.getValueAt(i, 0) != null)
+					if(table.getValueAt(i, 0).equals(Boolean.TRUE) && 
+							!table.getValueAt(i, 3).equals("未审批")){
+						flag = false;
+					}
 			}
 			
 			if(flag == true){
@@ -355,30 +404,40 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 			for(int i = 0; i < approval_pur.size(); i++){
 				Object[] rowData = {new Boolean(false), "进货类单据", approval_pur.get(i).ID, "已通过"};
 				model.addRow(rowData);
+				listPool.add(approval_pur.get(i));
+				typePool.add(approval_pur.get(i).type);
 			}
 		
 		if(index == 2)
 			for(int i = 0; i < approval_sale.size(); i++){
 				Object[] rowData = {new Boolean(false), "销售类单据", approval_sale.get(i).ID, "已通过"};
 				model.addRow(rowData);
+				listPool.add(approval_sale.get(i));
+				typePool.add(approval_sale.get(i).type);
 			}
 		
 		if(index == 3)
 			for(int i = 0; i < approval_account.size(); i++){
 				Object[] rowData = {new Boolean(false), "财务类单据", approval_account.get(i).ID, "已通过"};
 				model.addRow(rowData);
+				listPool.add(approval_account.get(i));
+				typePool.add(approval_account.get(i).type);
 			}
 		
 		if(index == 4)
 			for(int i = 0; i < approval_inventory.size(); i++){
 				Object[] rowData = {new Boolean(false), "库存类单据", approval_inventory.get(i).ID, "已通过"};
 				model.addRow(rowData);
+				listPool.add(approval_inventory.get(i));
+				typePool.add(approval_inventory.get(i).billType);
 			}
 		
 		if(index == 5)
 			for(int i = 0; i < approval_cashBill.size(); i++){
 				Object[] rowData = {new Boolean(false), "现金类单据", approval_cashBill.get(i).ID, "已通过"};
 				model.addRow(rowData);
+				listPool.add(approval_cashBill.get(i));
+				typePool.add(BillType.CASH);
 			}
 	}
 	
@@ -401,6 +460,7 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 				Object[] rowData = {new Boolean(false), "进货类单据", approval_pur.get(i).ID, "未通过"};
 				model.addRow(rowData);
 				listPool.add(approval_pur.get(i));
+				typePool.add(approval_pur.get(i).type);
 			}
 		
 		if(index == 2)
@@ -408,6 +468,7 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 				Object[] rowData = {new Boolean(false), "销售类单据", approval_sale.get(i).ID, "未通过"};
 				model.addRow(rowData);
 				listPool.add(approval_sale.get(i));
+				typePool.add(approval_sale.get(i).type);
 			}
 		
 		if(index == 3)
@@ -415,6 +476,7 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 				Object[] rowData = {new Boolean(false), "财务类单据", approval_account.get(i).ID, "未通过"};
 				model.addRow(rowData);
 				listPool.add(approval_account.get(i));
+				typePool.add(approval_account.get(i).type);
 			}
 		
 		if(index == 4)
@@ -422,6 +484,7 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 				Object[] rowData = {new Boolean(false), "库存类单据", approval_inventory.get(i).ID, "未通过"};
 				model.addRow(rowData);
 				listPool.add(approval_inventory.get(i));
+				typePool.add(approval_inventory.get(i).billType);
 			}
 		
 		if(index == 5)
@@ -429,6 +492,7 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 				Object[] rowData = {new Boolean(false), "现金类单据", approval_cashBill.get(i).ID, "未通过"};
 				model.addRow(rowData);
 				listPool.add(approval_cashBill.get(i));
+				typePool.add(BillType.CASH);
 			}
 	}
 	
@@ -465,6 +529,14 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 		jsp.setOpaque(false);
 		jsp.setVisible(true);
 		this.add(jsp);	
+	}
+	
+	private void setCondition(String str){
+		switch(str){
+		case "未通过" : word.setText("单据状态:    " + "未通过");break;
+		case "已通过": word.setText("单据状态:    " + "已通过");break;
+		case "未审批" : word.setText("单据状态:    " + "未审批");break;
+		}
 	}
 
 }
