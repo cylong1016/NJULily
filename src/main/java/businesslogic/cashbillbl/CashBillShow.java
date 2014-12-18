@@ -21,10 +21,6 @@ public class CashBillShow {
 	public ArrayList<CashBillVO> show() throws RemoteException {
 		ArrayList<CashBillPO> POs = cashBillData.show();
 		ArrayList<CashBillVO> VOs = cashBill.billsPOToBillsVO(POs);
-//		for(CashBillPO po : POs) {
-//			CashBillVO vo = cashBill.POToVO(po);
-//			VOs.add(vo);
-//		}
 		return VOs;
 	}
 

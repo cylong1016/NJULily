@@ -1,4 +1,4 @@
-package cash;
+package cashbill;
 
 import java.rmi.RemoteException;
 

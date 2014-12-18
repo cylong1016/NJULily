@@ -22,8 +22,7 @@ public class PromotionCommodity extends Promotion {
 	}
 	
 	public ArrayList<PromotionCommodityVO> show() throws RemoteException {
-		PromotionTrans transPOVO = new PromotionTrans();
-		return transPOVO.commodityPOtoVO(promotionData.show(PromotionType.COMMODITY));
+		return PromotionTrans.commodityPOtoVO(promotionData.show(PromotionType.COMMODITY));
 	}
 
 	public void addCommodity(String ID, int number) throws RemoteException {

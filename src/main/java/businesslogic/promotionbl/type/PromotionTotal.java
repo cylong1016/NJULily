@@ -25,10 +25,11 @@ public class PromotionTotal extends Promotion {
 	public PromotionTotal() {
 		super();
 	}
+
 	public ArrayList<PromotionTotalVO> show() throws RemoteException {
-		PromotionTrans transPOVO = new PromotionTrans();
-		return transPOVO.totalPOtoVO(promotionData.show(PromotionType.TOTAL));
+		return PromotionTrans.totalPOtoVO(promotionData.show(PromotionType.TOTAL));
 	}
+
 	/**
 	 * 设置可以进行促销的总价
 	 * @param total
@@ -43,20 +44,20 @@ public class PromotionTotal extends Promotion {
 		PromotionListItem item = new PromotionListItem(vo.ID, vo.number);
 		list.addGift(item);
 	}
-	
+
 	public void addGiftBill(InventoryBillVO giftBill) throws RemoteException {
 		ArrayList<CommodityItemVO> commodityItems = giftBill.commodities;
-		for (CommodityItemVO vo : commodityItems) {
+		for(CommodityItemVO vo : commodityItems) {
 			addGifts(vo);
-		}		
+		}
 	}
 
 	public ResultMessage submit(PromoInputInfo info) throws RemoteException {
 		setInputInfo(info);
 		PromotionPO po = buildPromotion();
- 		return promotionData.insert(po);
+		return promotionData.insert(po);
 	}
-	
+
 	private PromotionPO buildPromotion() {
 		double total = list.getTotal();
 		ArrayList<CommodityItemPO> gifts = list.getGifts();

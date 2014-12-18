@@ -1,4 +1,4 @@
-package cash;
+package cashbill;
 
 import org.junit.After;
 import org.junit.Before;
