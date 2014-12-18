@@ -10,7 +10,7 @@ import ui.commonui.login.Frame_Login;
  * @author 陈云龙
  * @version Oct 26, 2014 9:04:33 PM
  */
-public class Main {
+public class NJULilyMain {
 
 	public static void main(String[] args) {
 

@@ -157,7 +157,6 @@ public class AccountBill {
 	 * @throws RemoteException
 	 */
 	public AccountBillVO submit() throws RemoteException {
-		System.out.println("aaa");
 		accountBillData.insert(po);
 		return AccountBillTrans.poToVO(po);
 	}
