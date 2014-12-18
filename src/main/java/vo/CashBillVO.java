@@ -3,6 +3,7 @@ package vo;
 import java.util.ArrayList;
 
 import dataenum.BillState;
+
 /**
  * 现金费用单
  * 管理报销等现金操作，单据中包含：单据编号（XJFYD-yyyyMMdd-xxxxx）,
@@ -11,19 +12,19 @@ import dataenum.BillState;
  * @author Zing
  * @version 2014年10月31日下午5:56:51
  */
-public class CashBillVO extends ValueObject{
-	
+public class CashBillVO extends ValueObject {
+
 	/** 操作员 */
 	public String user;
 	/** 银行账户 */
 	public String account;
-	/**  条目清单*/
+	/** 条目清单 */
 	public ArrayList<CashItemVO> bills;
 	/** 汇款总额 */
 	public double total;
 	/** 单据状态 */
 	public BillState state;
-	
+
 	public CashBillVO(String ID, String user, String account, ArrayList<CashItemVO> bills, double total, BillState state) {
 		this.ID = ID;
 		this.user = user;

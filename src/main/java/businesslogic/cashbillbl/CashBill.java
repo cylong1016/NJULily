@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import po.CashBillPO;
 import po.CashItemPO;
 import vo.CashBillVO;
+
+import businesslogic.cashbillbl.info.UserInfo_CashBill;
+import businesslogic.userbl.UserInfo;
 import config.RMIConfig;
 import dataservice.cashbilldataservice.CashBillDataService;
 
@@ -76,7 +79,9 @@ public class CashBill {
 	}
 
 	public CashBillPO addCashBill(String account) {
-		po = new CashBillPO(ID, "user", account, getCashItemPO(), getSumMoney());
+		UserInfo_CashBill userInfo = new UserInfo();
+		String username = userInfo.getUsername();
+		po = new CashBillPO(ID, username, account, getCashItemPO(), getSumMoney());
 		return po;
 	}
 
@@ -90,6 +95,8 @@ public class CashBill {
 		addCashBill(account);
 		// TODO 存在本地
 		return CashBillTrans.POToVO(po);
+
 	}
+
 
 }

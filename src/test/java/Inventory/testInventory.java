@@ -30,7 +30,6 @@ public class testInventory {
 		try {
 			mcl = new MockCheckList("0123");
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

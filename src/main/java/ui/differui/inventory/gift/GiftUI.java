@@ -361,7 +361,6 @@ public class GiftUI extends MyPanel implements ActionListener{
 											,Integer.parseInt((String) table2.getValueAt(j, 3))));
 								} catch (NumberFormatException
 										| RemoteException e) {
-									// TODO Auto-generated catch block
 									e.printStackTrace();
 								}
 							}

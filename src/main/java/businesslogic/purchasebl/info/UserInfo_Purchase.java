@@ -1,6 +1,6 @@
-package businesslogic.salebl.info;
+package businesslogic.purchasebl.info;
 
-public interface UserInfo_Sale {
+public interface UserInfo_Purchase {
 
 	/**
 	 * @return 当前登录用户的username
