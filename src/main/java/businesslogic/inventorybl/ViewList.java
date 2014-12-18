@@ -44,30 +44,34 @@ public class ViewList {
 		setDate();
 	}
 
-	private void setDate() {	
+	private void setDate() throws RemoteException {	
 		Date begin = DateOperate.changeBeginDate(beginDate);
 		Date end = DateOperate.changeEndDate(endDate);
 		this.saleInfo = new SaleInfo(begin, end);
 		this.purchaseInfo = new PurchaseInfo(begin, end);
+		setAllData();
+	}
+	
+	private void setAllData() throws RemoteException {
+		saleNumber = saleInfo.getNumber();
+		purNumber = purchaseInfo.getNumber();
+		saleMoney = saleInfo.getMoney();
+		purMoney = purchaseInfo.getMoney();
 	}
 
 	public int getSaleNumber() throws RemoteException {
-		saleNumber = saleInfo.getNumber();
 		return saleNumber;
 	}
 
 	public int getPurNumber() throws RemoteException {
-		purNumber = purchaseInfo.getNumber();
 		return purNumber;
 	}
 
 	public double getSaleMoney() throws RemoteException {
-		saleMoney = saleInfo.getMoney();
 		return saleMoney;
 	}
 
 	public double getPurMoney() throws RemoteException {
-		purMoney = purchaseInfo.getMoney();
 		return purMoney;
 	}
 }
