@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -17,7 +16,6 @@ import ui.commonui.myui.MyTable;
 import ui.commonui.myui.MyTextField;
 import ui.commonui.warning.WarningFrame;
 import vo.BusinessStateVO;
-import vo.SaleDetailVO;
 
 public class BusinessConditionUI extends JLabel implements ActionListener{
 	
