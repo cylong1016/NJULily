@@ -46,6 +46,9 @@ public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInf
 	public InventoryInfo(Date begin, Date end) {
 		inventory = new Inventory();
 		inventoryData = inventory.getInventoryData();
+		giftIDs = new ArrayList<String>();
+		overIDs = new ArrayList<String>();
+		lossIDs = new ArrayList<String>();
 		setIDsByDate(begin, end);
 	}
 	

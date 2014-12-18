@@ -26,7 +26,7 @@ public abstract class Info<PO extends PersistentObject> {
 	 */
 	protected ArrayList<String> getID(ArrayList<String> IDs, String clientName, String salesman, Storage storage) throws RemoteException {
 		TableInfoService<PO> data = getData();
-		if (IDs.isEmpty()) {
+		if (IDs.isEmpty() || IDs == null) {
 			return new ArrayList<String>();
 		}
 		for (String id : IDs) {

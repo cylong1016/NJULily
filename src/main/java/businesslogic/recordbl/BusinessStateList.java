@@ -103,8 +103,11 @@ public class BusinessStateList {
 		ArrayList<String> purchaseID = purchaseInfo.getID(null, null, null);
 		purIDs.addAll(purchaseID);
 		ArrayList<String> inventoryID = inventoryInfo.getID(null, null, null);
-		inventoryIDs.addAll(inventoryID);
-	}
+		if(inventoryID != null) {
+			inventoryIDs.addAll(inventoryID);
+			}
+		}
+		
 
 	private void accountSale(String ID) throws RemoteException {
 		allowance += saleInfo.getAllowance(ID);

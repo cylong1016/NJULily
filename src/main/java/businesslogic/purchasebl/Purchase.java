@@ -84,6 +84,7 @@ public class Purchase {
 		ClientInfo_Purchase info = new ClientInfo();
 		String clientName = info.getName(list.getClientID());
 		Storage storage = list.getStorage();
+		// TODO
 		po = new PurchasePO(ID, list.getClientID(), clientName, "user", storage, list.getCommodities(), sumPrice, list.getRemark(), type);
 		return po;
 	}

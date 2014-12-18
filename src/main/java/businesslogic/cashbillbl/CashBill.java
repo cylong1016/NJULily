@@ -97,6 +97,7 @@ public class CashBill {
 	public ArrayList<CashBillVO> billsPOToBillsVO(ArrayList<CashBillPO> billsPO) {
 		ArrayList<CashBillVO> billsVO = new ArrayList<CashBillVO>();
 		for(CashBillPO po : billsPO) {
+			System.out.println(po.getID());
 			CashBillVO vo = POToVO(po);
 			billsVO.add(vo);
 		}

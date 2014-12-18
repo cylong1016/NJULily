@@ -13,8 +13,6 @@ import dataenum.BillState;
  */
 public class CashBillVO extends ValueObject{
 	
-	/** 编号 */
-	public String ID;
 	/** 操作员 */
 	public String user;
 	/** 银行账户 */

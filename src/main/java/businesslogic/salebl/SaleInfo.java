@@ -36,6 +36,7 @@ public class SaleInfo extends Info<SalesPO> implements SaleInfo_Inventory, SaleI
 
 	public SaleInfo(Date beginDate, Date endDate) {
 		sale = new Sale();
+		this.saleData = sale.getSaleData();
 		saleIDs = new ArrayList<String>();
 		backIDs = new ArrayList<String>();
 		setIDsByDate(beginDate, endDate);
