@@ -24,19 +24,23 @@ public class PromotionTrans {
 	 * @version Dec 9, 2014 4:43:31 PM
 	 * @throws RemoteException
 	 */
-	public ArrayList<PromotionBargainVO> bargainsPOtoVO(ArrayList<PromotionPO> POs) throws RemoteException {
+	static public ArrayList<PromotionBargainVO> bargainsPOtoVO(ArrayList<PromotionPO> POs) throws RemoteException {
 		ArrayList<PromotionBargainVO> VOs = new ArrayList<PromotionBargainVO>();
 		for(PromotionPO po : POs) {
-			String ID = po.getID();
-			String beginDate = po.getBeginDate();
-			String endDate = po.getEndDate();
-			ArrayList<CommodityItemVO> bargains = ChangeCommodityItems.itemPOToVO(po.getBargains());
-			double beforeTotal = po.getBeforeTotal();
-			double bargainTotal = po.getBargainTotal();
-			PromotionBargainVO vo = new PromotionBargainVO(ID, beginDate, endDate, bargains, beforeTotal, bargainTotal);
-			VOs.add(vo);
+			VOs.add(bargainPOvoVO(po));
 		}
 		return VOs;
+	}
+	
+	static public PromotionBargainVO bargainPOvoVO(PromotionPO po) throws RemoteException {
+		String ID = po.getID();
+		String beginDate = po.getBeginDate();
+		String endDate = po.getEndDate();
+		ArrayList<CommodityItemVO> bargains = ChangeCommodityItems.itemPOToVO(po.getBargains());
+		double beforeTotal = po.getBeforeTotal();
+		double bargainTotal = po.getBargainTotal();
+		PromotionBargainVO vo = new PromotionBargainVO(ID, beginDate, endDate, bargains, beforeTotal, bargainTotal);
+		return vo;
 	}
 
 	/**
@@ -47,7 +51,7 @@ public class PromotionTrans {
 	 * @version Dec 9, 2014 4:58:14 PM
 	 * @throws RemoteException
 	 */
-	public ArrayList<PromotionClientVO> clientPOtoVO(ArrayList<PromotionPO> POs) throws RemoteException {
+	static public ArrayList<PromotionClientVO> clientPOtoVO(ArrayList<PromotionPO> POs) throws RemoteException {
 		ArrayList<PromotionClientVO> VOs = new ArrayList<PromotionClientVO>();
 		for(PromotionPO po : POs) {
 			String ID = po.getID();
@@ -71,7 +75,7 @@ public class PromotionTrans {
 	 * @version Dec 9, 2014 5:20:57 PM
 	 * @throws RemoteException
 	 */
-	public ArrayList<PromotionCommodityVO> commodityPOtoVO(ArrayList<PromotionPO> POs) throws RemoteException {
+	static public ArrayList<PromotionCommodityVO> commodityPOtoVO(ArrayList<PromotionPO> POs) throws RemoteException {
 		ArrayList<PromotionCommodityVO> VOs = new ArrayList<PromotionCommodityVO>();
 		for(PromotionPO po : POs) {
 			String ID = po.getID();
@@ -95,7 +99,7 @@ public class PromotionTrans {
 	 * @version Dec 9, 2014 5:23:46 PM
 	 * @throws RemoteException
 	 */
-	public ArrayList<PromotionTotalVO> totalPOtoVO(ArrayList<PromotionPO> POs) throws RemoteException {
+	static public ArrayList<PromotionTotalVO> totalPOtoVO(ArrayList<PromotionPO> POs) throws RemoteException {
 		ArrayList<PromotionTotalVO> VOs = new ArrayList<PromotionTotalVO>();
 		for(PromotionPO po : POs) {
 			String ID = po.getID();
@@ -111,7 +115,7 @@ public class PromotionTrans {
 		return VOs;
 	}
 	
-	private ArrayList<PromotionGoodsVO> getGoods(ArrayList<CommodityItemPO> commodityItems) {
+	static private ArrayList<PromotionGoodsVO> getGoods(ArrayList<CommodityItemPO> commodityItems) {
 		ArrayList<PromotionGoodsVO> VOs = new ArrayList<PromotionGoodsVO>();
 		for (CommodityItemPO item : commodityItems) {
 			PromotionGoodsVO vo = new PromotionGoodsVO(item.getID(), item.getName(), item.getNumber());

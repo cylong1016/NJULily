@@ -5,7 +5,9 @@ import java.util.ArrayList;
 
 import po.CommodityPO;
 import vo.commodity.CommodityVO;
+import blservice.inventoryblservice.InventoryBLService;
 import businesslogic.accountinitbl.info.CommodityInfo_Init;
+import businesslogic.inventorybl.InventoryController;
 import businesslogic.inventorybl.info.CommodityInfo_Inventory;
 import businesslogic.promotionbl.info.CommodityInfo_Promotion;
 import businesslogic.purchasebl.info.CommodityInfo_Purchase;
@@ -130,6 +132,8 @@ public class CommodityInfo implements CommodityInfo_Sale, CommodityInfo_Purchase
 			int nowCommodityNumber = po.getInventoryNum() - number;
 			nowSaleNumber = po.getSaleNumber() + number;
 			po.setInventoryNum(nowCommodityNumber);
+			// 判断数量是否需要建立报警单
+			isAlarm(po, nowCommodityNumber, po.getAlarmNumber());
 			po.setRecentSalePrice(price);
 			po.setAveSale((po.getAveSale() * po.getSaleNumber() + number * price) / nowSaleNumber);
 			po.setSaleNumber(nowSaleNumber);
@@ -159,6 +163,17 @@ public class CommodityInfo implements CommodityInfo_Sale, CommodityInfo_Purchase
 			break;
 		}
 		commodityData.update(po);
+	}
+	
+	/** 判断是否数量少于警戒数量 */
+	private void isAlarm(CommodityPO po, int now, int alarm) {
+		if (now > alarm) {
+			return;
+		}
+		InventoryBLService alarmBill = new InventoryController();
+		alarmBill.getAlarmID();
+		alarmBill.addCommodity(po.getID(), alarm - now);
+		alarmBill.submit(po.getName() + "在销售完毕后库存数量低于警戒数量，需要补充");
 	}
 
 	/**

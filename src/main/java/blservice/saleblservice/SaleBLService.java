@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import vo.commodity.CommodityItemVO;
 import vo.promotion.PromotionBargainVO;
 import vo.promotion.PromotionClientVO;
-import vo.promotion.PromotionCommodityVO;
 import vo.promotion.PromotionTotalVO;
 import vo.sale.SalesVO;
 import vo.sale.saleAddVO;
@@ -65,8 +64,8 @@ public interface SaleBLService {
 	 * @return
 	 * @author Zing
 	 * @version Dec 9, 2014 5:41:34 PM
-	 */
-	public ArrayList<PromotionCommodityVO> findFitPromotionCommodity();
+	 */	
+//	public ArrayList<PromotionCommodityVO> findFitPromotionCommodity();
 
 	public ArrayList<PromotionClientVO> findFitPromotionClient();
 	

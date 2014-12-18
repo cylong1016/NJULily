@@ -75,5 +75,30 @@ public class DateOperate {
 		}
 		return resultIDs;
 	}
+	
+	/**
+	 * 判断该ID是否在指定日期内
+	 * @param ID
+	 * @param begin
+	 * @param end
+	 * @return
+	 * @author Zing
+	 * @version Dec 18, 2014 7:29:28 PM
+	 */
+	static public boolean isIncluded(String ID, String begin, String end) {
+		String dateID = ID.split("-")[1];
+		Date beginDate = changeBeginDate(begin);
+		Date endDate = changeEndDate(end);
+		Date date = null;
+		try {
+			date = new SimpleDateFormat("yyyyMMdd").parse(dateID);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		if (date.getTime() >= beginDate.getTime() && date.getTime() <= endDate.getTime()) {
+			return true;
+		}
+		return false;
+	}
 
 }

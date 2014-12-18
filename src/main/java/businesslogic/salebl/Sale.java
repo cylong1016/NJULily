@@ -1,8 +1,6 @@
 package businesslogic.salebl;
 
-import java.net.MalformedURLException;
 import java.rmi.Naming;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -31,6 +29,8 @@ public class Sale {
 
 	/** 销售单 */
 	private SaleList list;
+	/** 销售单数据 */
+	private SaleDataService saleData;
 	/** 销售单持久化对象 */
 	private SalesPO po;
 	/** 单据类型 */
@@ -49,18 +49,15 @@ public class Sale {
 		promotionInfo = new PromotionInfo();
 		commodityIDs = new ArrayList<String>();
 		commodityNumber = new ArrayList<Integer>();
+		saleData = getSaleData();
 	}
 
 	public SaleDataService getSaleData() {
 		try {
 			return (SaleDataService)Naming.lookup(RMIConfig.PREFIX + SaleDataService.NAME);
-		} catch (MalformedURLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		} catch (NotBoundException e) {
-			e.printStackTrace();
-		}
+		} 
 		return null;
 	}
 
@@ -74,20 +71,27 @@ public class Sale {
 	 */
 	public String getSaleID() throws RemoteException {
 		this.type = BillType.SALE;
-		SaleDataService saleData = getSaleData();
 		this.ID = saleData.getSaleID();
 		return ID;
 	}
 
 	public String getSaleBackID() throws RemoteException {
 		this.type = BillType.SALEBACK;
-		SaleDataService saleData = getSaleData();
 		this.ID = saleData.getSaleBackID();
 		return ID;
 	}
 
 	public ArrayList<PromotionBargainVO> showBargains() throws RemoteException {
 		return promotionInfo.showBargains();
+	}
+	
+	public void addBargains(String ID) throws RemoteException {
+		PromotionBargainVO bargain = promotionInfo.findBargains(ID);
+		ArrayList<CommodityItemVO> commodityVOs = bargain.bargains;
+		for (CommodityItemVO vo : commodityVOs) {
+			addCommodities(vo);
+		}
+		list.setVoucher(bargain.beforeTotal - bargain.bargainTotal);
 	}
 
 	/**
@@ -131,7 +135,7 @@ public class Sale {
 	public SalesVO submit(saleAddVO inputInfo) throws RemoteException {
 		setInputInfo(inputInfo);
 		SalesPO po = buildSales();
-		getSaleData().insert(po);
+		saleData.insert(po);
 		return SaleTrans.poToVo(po);
 	}
 

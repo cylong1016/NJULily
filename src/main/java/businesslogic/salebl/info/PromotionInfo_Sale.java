@@ -43,4 +43,6 @@ public interface PromotionInfo_Sale {
 
 	public ArrayList<PromotionBargainVO> showBargains() throws RemoteException;
 	
+	public PromotionBargainVO findBargains(String iD) throws RemoteException;
+	
 }

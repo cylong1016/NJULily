@@ -24,8 +24,7 @@ public class PromotionBargin extends Promotion {
 	 * @throws RemoteException 
 	 */
 	public ArrayList<PromotionBargainVO> show() throws RemoteException {
-		PromotionTrans transPOVO = new PromotionTrans();
-		return  transPOVO.bargainsPOtoVO(promotionData.show(PromotionType.BARGAINS));
+		return  PromotionTrans.bargainsPOtoVO(promotionData.show(PromotionType.BARGAINS));
 	}
 
 	/**

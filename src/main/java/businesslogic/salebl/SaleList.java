@@ -114,7 +114,7 @@ public class SaleList {
 	}
 
 	public void setVoucher(double voucher) {
-		this.voucher = voucher;
+		this.voucher += voucher;
 	}
 
 }

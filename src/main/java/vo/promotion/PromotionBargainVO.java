@@ -17,7 +17,7 @@ public class PromotionBargainVO extends PromotionVO{
 	public ArrayList<CommodityItemVO> bargains;
 	/** 特价包的总价 */
 	public double beforeTotal;
-	/** 特价包的总价 */
+	/** 特价包的优惠总价 */
 	public double bargainTotal;
 	/** 促销策略类型 */
 	public PromotionType type;

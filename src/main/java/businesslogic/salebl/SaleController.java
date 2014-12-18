@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import vo.commodity.CommodityItemVO;
 import vo.promotion.PromotionBargainVO;
 import vo.promotion.PromotionClientVO;
-import vo.promotion.PromotionCommodityVO;
 import vo.promotion.PromotionTotalVO;
 import vo.sale.SalesVO;
 import vo.sale.saleAddVO;
@@ -64,6 +63,14 @@ public class SaleController implements SaleBLService {
 		}
 		return null;
 	}
+	
+	public void ddBargains(String ID) {
+		try {
+			sale.addBargains(ID);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * @see blservice.saleblservice.SaleBLService#addCommodities(vo.commodity.CommodityItemVO)
@@ -88,15 +95,14 @@ public class SaleController implements SaleBLService {
 	/**
 	 * @see blservice.saleblservice.SaleBLService#findFitPromotionCommodity()
 	 */
-	@Override
-	public ArrayList<PromotionCommodityVO> findFitPromotionCommodity() {
-		try {
-			return sale.findFitPromotionCommodity();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
+//	public ArrayList<PromotionCommodityVO> findFitPromotionCommodity() {
+//		try {
+//			return sale.findFitPromotionCommodity();
+//		} catch (RemoteException e) {
+//			e.printStackTrace();
+//			return null;
+//		}
+//	}
 
 	/**
 	 * @see blservice.saleblservice.SaleBLService#findFitPromotionClient()
