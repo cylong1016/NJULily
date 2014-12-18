@@ -7,9 +7,9 @@ package businesslogic.accountbillbl.info;
 public interface UserInfo_AccountBill {
 
 	/**
-	 * @return 当前登录的用户name
+	 * @return 当前登录的用户username
 	 * @author cylong
 	 * @version 2014年12月1日 上午1:43:15
 	 */
-	public String getUserName();
+	public String getUsername();
 }

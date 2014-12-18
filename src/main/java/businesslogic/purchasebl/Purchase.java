@@ -13,6 +13,8 @@ import blservice.purchaseblservice.PurInputInfo;
 import businesslogic.clientbl.ClientInfo;
 import businesslogic.common.ChangeCommodityItems;
 import businesslogic.purchasebl.info.ClientInfo_Purchase;
+import businesslogic.purchasebl.info.UserInfo_Purchase;
+import businesslogic.userbl.UserInfo;
 import config.RMIConfig;
 import dataenum.BillState;
 import dataenum.BillType;
@@ -81,11 +83,12 @@ public class Purchase {
 
 	private PurchasePO buildPur() throws RemoteException {
 		double sumPrice = list.getBeforePrice();
-		ClientInfo_Purchase info = new ClientInfo();
-		String clientName = info.getName(list.getClientID());
+		ClientInfo_Purchase clientInfo = new ClientInfo();
+		String clientName = clientInfo.getName(list.getClientID());
 		Storage storage = list.getStorage();
-		// TODO
-		po = new PurchasePO(ID, list.getClientID(), clientName, "user", storage, list.getCommodities(), sumPrice, list.getRemark(), type);
+		UserInfo_Purchase userInfo = new UserInfo();
+		String username = userInfo.getUsername();
+		po = new PurchasePO(ID, list.getClientID(), clientName, username, storage, list.getCommodities(), sumPrice, list.getRemark(), type);
 		return po;
 	}
 

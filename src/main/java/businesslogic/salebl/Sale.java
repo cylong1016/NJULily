@@ -14,8 +14,10 @@ import vo.sale.SalesVO;
 import vo.sale.saleAddVO;
 import businesslogic.clientbl.ClientInfo;
 import businesslogic.promotionbl.PromotionInfo;
+import businesslogic.purchasebl.info.UserInfo_Purchase;
 import businesslogic.salebl.info.ClientInfo_Sale;
 import businesslogic.salebl.info.PromotionInfo_Sale;
+import businesslogic.userbl.UserInfo;
 import config.RMIConfig;
 import dataenum.BillType;
 import dataservice.saledataservice.SaleDataService;
@@ -57,7 +59,7 @@ public class Sale {
 			return (SaleDataService)Naming.lookup(RMIConfig.PREFIX + SaleDataService.NAME);
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		return null;
 	}
 
@@ -84,11 +86,11 @@ public class Sale {
 	public ArrayList<PromotionBargainVO> showBargains() throws RemoteException {
 		return promotionInfo.showBargains();
 	}
-	
+
 	public void addBargains(String ID) throws RemoteException {
 		PromotionBargainVO bargain = promotionInfo.findBargains(ID);
 		ArrayList<CommodityItemVO> commodityVOs = bargain.bargains;
-		for (CommodityItemVO vo : commodityVOs) {
+		for(CommodityItemVO vo : commodityVOs) {
 			addCommodities(vo);
 		}
 		list.setVoucher(bargain.beforeTotal - bargain.bargainTotal);
@@ -161,12 +163,14 @@ public class Sale {
 	private SalesPO buildSales() throws RemoteException {
 		double beforePrice = list.getBeforePrice();
 		double afterPrice = list.getAfterPrice();
-		ClientInfo_Sale info = new ClientInfo();
-		String clientName = info.getName(list.getClientID());
+		ClientInfo_Sale clientInfo = new ClientInfo();
+		String clientName = clientInfo.getName(list.getClientID());
 		String clientID = list.getClientID();
-		String salesman = info.getSalesman(list.getClientID());
+		String salesman = clientInfo.getSalesman(list.getClientID());
 		// TODO user从文件中读取当前登陆的用户
-		po = new SalesPO(ID, clientID, clientName, salesman, "user", list.getStorage(), list.getCommodities(), beforePrice, list.getAllowance(), list.getVoucher(), list.getRemark(), afterPrice, type);
+		UserInfo_Purchase userInfo = new UserInfo();
+		String username = userInfo.getUsername();
+		po = new SalesPO(ID, clientID, clientName, salesman, username, list.getStorage(), list.getCommodities(), beforePrice, list.getAllowance(), list.getVoucher(), list.getRemark(), afterPrice, type);
 		return po;
 	}
 

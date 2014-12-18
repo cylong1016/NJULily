@@ -3,7 +3,10 @@ package businesslogic.userbl;
 import io.DefineList;
 import po.UserPO;
 import businesslogic.accountbillbl.info.UserInfo_AccountBill;
+import businesslogic.cashbillbl.info.UserInfo_CashBill;
 import businesslogic.clientbl.UserInfo_Client;
+import businesslogic.purchasebl.info.UserInfo_Purchase;
+import businesslogic.salebl.info.UserInfo_Sale;
 import dataenum.UserIdentity;
 
 /**
@@ -11,7 +14,7 @@ import dataenum.UserIdentity;
  * @author cylong
  * @version 2014年12月1日 下午2:39:13
  */
-public class UserInfo implements UserInfo_Client, UserInfo_AccountBill {
+public class UserInfo implements UserInfo_Client, UserInfo_AccountBill, UserInfo_Purchase, UserInfo_Sale, UserInfo_CashBill {
 
 	private UserPO current;	// 当前登录的用户
 
@@ -22,10 +25,13 @@ public class UserInfo implements UserInfo_Client, UserInfo_AccountBill {
 	}
 
 	/**
-	 * @see businesslogic.accountbillbl.info.UserInfo_AccountBill#getUserName()
+	 * @see businesslogic.accountbillbl.info.UserInfo_AccountBill#getUsername()
+	 * @see businesslogic.purchasebl.info.UserInfo_Purchase#getUsername()
+	 * @see businesslogic.salebl.info.UserInfo_Sale#getUsername()
+	 * @see businesslogic.cashbillbl.info.UserInfo_CashBill#getUsername()
 	 */
 	@Override
-	public String getUserName() {
+	public String getUsername() {
 		return current.getUsername();
 	}
 
@@ -36,4 +42,5 @@ public class UserInfo implements UserInfo_Client, UserInfo_AccountBill {
 	public UserIdentity getUserIden() {
 		return current.getIden();
 	}
+
 }

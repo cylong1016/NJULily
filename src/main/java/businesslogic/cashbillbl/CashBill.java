@@ -10,6 +10,8 @@ import po.CashBillPO;
 import po.CashItemPO;
 import vo.CashBillVO;
 import vo.CashItemVO;
+import businesslogic.cashbillbl.info.UserInfo_CashBill;
+import businesslogic.userbl.UserInfo;
 import config.RMIConfig;
 import dataenum.BillState;
 import dataservice.cashbilldataservice.CashBillDataService;
@@ -78,7 +80,9 @@ public class CashBill {
 	}
 
 	public CashBillPO addCashBill(String account) {
-		po = new CashBillPO(ID, "user", account, getCashItemPO(), getSumMoney());
+		UserInfo_CashBill userInfo = new UserInfo();
+		String username = userInfo.getUsername();
+		po = new CashBillPO(ID, username, account, getCashItemPO(), getSumMoney());
 		return po;
 	}
 
@@ -93,7 +97,7 @@ public class CashBill {
 		// TODO 存在本地
 		return POToVO(po);
 	}
-	
+
 	public ArrayList<CashBillVO> billsPOToBillsVO(ArrayList<CashBillPO> billsPO) {
 		ArrayList<CashBillVO> billsVO = new ArrayList<CashBillVO>();
 		for(CashBillPO po : billsPO) {

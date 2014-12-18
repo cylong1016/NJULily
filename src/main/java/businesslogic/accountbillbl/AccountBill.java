@@ -142,7 +142,7 @@ public class AccountBill {
 	 */
 	public void addAccountBill(String clientID, String clientName) {
 		UserInfo_AccountBill userInfo = new UserInfo();
-		String username = userInfo.getUserName();
+		String username = userInfo.getUsername();
 		ArrayList<AccountBillItemPO> billsPO = bills.toPOList();
 		po = new AccountBillPO(ID, clientID, clientName, username, billsPO, type);
 	}
