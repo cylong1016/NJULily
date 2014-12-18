@@ -24,9 +24,6 @@ public class User {
 	private UserPO current;	// 当前登录的用户
 
 	/**
-	 * @throws MalformedURLException
-	 * @throws RemoteException
-	 * @throws NotBoundException
 	 * @author cylong
 	 * @version 2014年12月14日 上午5:18:22
 	 */
@@ -65,6 +62,10 @@ public class User {
 	 */
 	public UserIdentity login(LoginInfo loginInfo) throws RemoteException {
 
+		if (userData.login(loginInfo) == null) {
+			return null;
+		}
+
 		ArrayList<UserPO> pos = userData.show();
 		for(UserPO po : pos) {
 			if (po.getUsername().equals(loginInfo.username)) {
@@ -75,12 +76,12 @@ public class User {
 		if (loginInfo.isRemembered) {
 			currentUser.clear();
 			currentUser.add(current);	// 保存当前登录的用户的帐户名
-			currentUserTemp.clear();
-			currentUserTemp.add(current);	// 记录当前登录的用户的信息
 		} else {	// 删除记住的账号
 			currentUser.clear();
 		}
 
+		currentUserTemp.clear();
+		currentUserTemp.add(current);	// 记录当前登录的用户的信息
 		return userData.login(loginInfo);
 	}
 
