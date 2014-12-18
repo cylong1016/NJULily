@@ -75,7 +75,7 @@ public class AccountBill {
 	}
 
 	/**
-	 * @return 新建付款单的时候，返回以恶搞可用的付款单ID
+	 * @return 新建付款单的时候，返回一个可用的付款单ID
 	 * @throws RemoteException
 	 * @author cylong
 	 * @version 2014年12月17日 下午11:48:09
