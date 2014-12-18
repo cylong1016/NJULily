@@ -109,6 +109,7 @@ public class GiftFinish extends JLabel implements ActionListener{
 					
 			WarningFrame wf = new WarningFrame("赠送单添加成功！");
 			wf.setVisible(true);
+			Frame_Inventory.visibleFalse(6);
 			Frame_Inventory.visibleTrue(0);
 			this.setVisible(false);
 		

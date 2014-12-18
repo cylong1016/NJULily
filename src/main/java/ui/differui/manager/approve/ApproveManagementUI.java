@@ -376,9 +376,6 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 		
 		if(index == 5)
 			for(int i = 0; i < approval_cashBill.size(); i++){
-				
-				System.out.println(approval_cashBill.get(i).ID);
-				
 				Object[] rowData = {new Boolean(false), "现金类单据", approval_cashBill.get(i).ID, "未审批"};
 				model.addRow(rowData);
 				listPool.add(approval_cashBill.get(i));

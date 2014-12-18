@@ -149,8 +149,7 @@ public class TradeFinish extends JLabel implements ActionListener{
 			
 			AccountBillBLService controller = new AccountBillController();
 			ID = controller.getExpenseID();
-			System.out.println(controller.getExpenseID());
-			
+		
 			String text = "";
 			String blank4 = "    ";
 			String blank = "";

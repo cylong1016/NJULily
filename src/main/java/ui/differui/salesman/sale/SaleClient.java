@@ -214,7 +214,7 @@ public class SaleClient extends JLabel implements ActionListener{
 			
 		if(events.getSource() == button_add){
 			this.setVisible(false);
-			Frame_Salesman.visibleTrue(2);
+			Frame_Salesman.visibleTrue(4);
 		}
 		
 		/////////////////////////////FUNCTION SHOWALL////////////////////////////
