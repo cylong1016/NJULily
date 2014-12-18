@@ -202,9 +202,9 @@ public void actionPerformed(ActionEvent events) {
 				String endDate = yearAddZero(tf_year2.getText()) + addZero(tf_month2.getText()) + addZero(tf_day2.getText());
 				InventoryViewVO ivvo = controller.viewInventory(beginDate, endDate);
 				
-				String[] str = {String.valueOf(ivvo.saleNumber) + "元", String.valueOf(ivvo.purNumber) + "件"
-						, String.valueOf(ivvo.saleMoney) + "元", String.valueOf(ivvo.purMoney) + "件"
-						, String.valueOf(ivvo.saleNumber + ivvo.purNumber) + "元"
+				String[] str = {String.valueOf(ivvo.saleNumber) + "件", String.valueOf(ivvo.purNumber) + "件"
+						, String.valueOf(ivvo.saleMoney) + "元", String.valueOf(ivvo.purMoney) + "元"
+						, String.valueOf(ivvo.saleNumber + ivvo.purNumber) + "件"
 						, String.valueOf(ivvo.saleMoney - ivvo.purMoney) + "元"};
 			//	String[] str2 = {"100", "200", "100","100", "0", "100"};
 				

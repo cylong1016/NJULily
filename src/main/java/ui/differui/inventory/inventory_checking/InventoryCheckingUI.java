@@ -4,15 +4,14 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
-
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+
 
 
 import blservice.commodityblservice.CommodityBLService;
@@ -41,6 +40,12 @@ public class InventoryCheckingUI extends MyPanel implements ActionListener{
 	
 	MyTable table;
 	ArrayList<CommodityVO> list;
+	
+	String today, lot;
+	
+	InventoryBLService controller;
+	
+	JLabel word_4;
 
 	public InventoryCheckingUI(){
 		
@@ -49,10 +54,10 @@ public class InventoryCheckingUI extends MyPanel implements ActionListener{
 //		Color foreColor = new Color(158, 213, 220);
 //		Color backColor = new Color(46, 52, 101);
 				
-		JLabel word_4 = new JLabel("*表格中商品批号、批次、出厂日期以及实际数量请在导出后根据盘点实际情况进行填写！");
-		word_4.setForeground(Color.RED);
+		word_4 = new JLabel("批号: " + today + "     批次: " + lot);
+		word_4.setForeground(Color.WHITE);
 		word_4.setBackground(new Color(0, 0, 0, 0));
-		word_4.setBounds(76, 50, 600, 25);
+		word_4.setBounds(80, 50, 600, 25);
 		this.add(word_4);
 			
 		this.setLayout(null);
@@ -68,7 +73,7 @@ public class InventoryCheckingUI extends MyPanel implements ActionListener{
 		
 		//adding the table 
 		String[] headers = {"行号","商品编号","商品名称"
-				,"商品型号","库存均价","批号","批次","出厂日期","库存数量","实际数量"};
+				,"商品型号","库存均价","库存数量","实际数量"};
 		table = new MyTable(headers);
 		
 		DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();// 设置table内容居中
@@ -150,12 +155,16 @@ public class InventoryCheckingUI extends MyPanel implements ActionListener{
 			
 		list.clear();
 		
-		InventoryBLService controller = new InventoryController();
+		controller = new InventoryController();
 		InventoryCheckVO vo = controller.checkRecord();
 		CommodityBLService commoController = new CommodityController();
 		ArrayList<CommodityVO> commoVO = commoController.show();
 		ArrayList<CheckCommodityItemVO> checkVO = vo.commodities;
-	
+		
+		lot = vo.lot;
+		today = vo.today;
+		
+		word_4.setText("批号: " + today + "     批次: " + lot);
 		
 		for(int i = 0; i < checkVO.size(); i++){
 			for(int j = 0; j < commoVO.size(); j++){
@@ -166,7 +175,7 @@ public class InventoryCheckingUI extends MyPanel implements ActionListener{
 					list.add(commoVO.get(j));
 					
 					String[] str = {String.valueOf(i + 1), good.ID, good.name,
-							 good.type, String.valueOf(good.avePur), "", "", "", String.valueOf(good.inventoryNum),""}; 
+							 good.type, String.format("%.2f",checkVO.get(i).avePrice) + "元", String.valueOf(good.inventoryNum),""}; 
 					
 					tableModel.addRow(str);
 					

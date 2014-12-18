@@ -107,6 +107,7 @@ public class TradeFinish extends JLabel implements ActionListener{
 			}else{
 				CashBillBLService controller = new CashBillController();
 				controller.getID();
+				
 				String[] str = TradeCash.billItem.split(";");
 				
 				for(int i = 0; i < str.length; i++ ){
@@ -205,7 +206,7 @@ public class TradeFinish extends JLabel implements ActionListener{
 				
 			for(int i = 0; i < 7; i++)
 				text = text + blank4;
-			text = text + "货单备注:" + "\n";
+			text = text + "单据备注:" + "\n";
 			
 			for(int i = 0; i < 9; i++)
 				text = text + blank4;
@@ -272,7 +273,7 @@ public class TradeFinish extends JLabel implements ActionListener{
 				
 			for(int i = 0; i < 7; i++)
 				text = text + blank4;
-			text = text + "货单备注:" + "\n";
+			text = text + "单据备注:" + "\n";
 			
 			for(int i = 0; i < 9; i++)
 				text = text + blank4;
@@ -280,8 +281,8 @@ public class TradeFinish extends JLabel implements ActionListener{
 			
 			return text;
 		}else{
-			AccountBillBLService controller = new AccountBillController();
-			ID = controller.getPayID();
+			CashBillBLService controller = new CashBillController();
+			ID = controller.getID();
 			
 			double total = 0;
 			
@@ -372,7 +373,7 @@ public class TradeFinish extends JLabel implements ActionListener{
 					
 			for(int i = 0; i < 7; i++)
 				text = text + blank4;
-			text = text + "货单备注:" + "\n";
+			text = text + "单据备注:" + "\n";
 			
 			for(int i = 0; i < 9; i++)
 				text = text + blank4;

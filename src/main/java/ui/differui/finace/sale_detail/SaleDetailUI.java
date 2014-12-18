@@ -8,6 +8,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 
+import blservice.recordblservice.RecordBLService;
+import blservice.recordblservice.SaleDetailInputInfo;
+import businesslogic.recordbl.RecordController;
 import ui.commonui.myui.MyComboBox;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyTable;
@@ -139,6 +142,13 @@ public class SaleDetailUI extends JLabel implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent events) {
-		
+		if(events.getSource() == button_check){
+			
+			
+			RecordBLService controller = new RecordController();
+			
+			//String beginDate, String endDate, String commodityName, String clientName, String salesman, Storage storage
+			System.out.println(controller.saleDetail(new SaleDetailInputInfo("20141201","20141220",null,null,null,null)));
+		}
 	}
 }
