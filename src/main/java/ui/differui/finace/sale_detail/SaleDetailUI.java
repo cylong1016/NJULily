@@ -4,9 +4,12 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
 
 import blservice.recordblservice.RecordBLService;
 import blservice.recordblservice.SaleDetailInputInfo;
@@ -15,6 +18,8 @@ import ui.commonui.myui.MyComboBox;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyTable;
 import ui.commonui.myui.MyTextField;
+import ui.commonui.warning.WarningFrame;
+import vo.SaleDetailVO;
 
 public class SaleDetailUI extends JLabel implements ActionListener{
 	
@@ -23,12 +28,17 @@ public class SaleDetailUI extends JLabel implements ActionListener{
 	MyComboBox comboBox;
 	MyTextField textField;
 	MyTable table;
+	JCheckBox checkbox;
+	
+	static ArrayList<SaleDetailVO> saleList;
 	
 	private static final long serialVersionUID = 1L;
 	
 	public SaleDetailUI(){
 		
-		int y = 65 + 200 + 150;
+		saleList = new ArrayList<SaleDetailVO>();
+		
+		int y = 65 + 200 + 150 + 10;
 		
 		Color foreColor = new Color(158, 213, 220);
 		Color backColor = new Color(46, 52, 101);
@@ -44,7 +54,7 @@ public class SaleDetailUI extends JLabel implements ActionListener{
 		infoBar.setOpaque(false);
 		this.add(infoBar);
 		
-		String[] headers = {"操作时间", "商品编号", "商品名称", "商品型号", "商品数量", "商品单价", "商品总额"};
+		String[] headers = {"操作时间", "商品名称", "商品型号", "商品数量", "商品单价", "商品总额"};
 		table = new MyTable(headers);
 		
 		JScrollPane jsp = new JScrollPane(table);
@@ -54,7 +64,7 @@ public class SaleDetailUI extends JLabel implements ActionListener{
 		jsp.setVisible(true);
 		this.add(jsp);
 		
-		String[] comboBoxStr2 = {"请选择查看方式", "商品名称", "客户名称", "业务员名称", "仓库名称"};
+		String[] comboBoxStr2 = {"请选择查看方式", "商品名称", "客户名称", "业务员名称"};
 		comboBox = new MyComboBox(83, 50, 180, 25,comboBoxStr2);
 		comboBox.setForeground(foreColor);
 		comboBox.setBackground(backColor);
@@ -65,6 +75,12 @@ public class SaleDetailUI extends JLabel implements ActionListener{
 		textField.setBackground(backColor);
 		textField.setForeground(foreColor);
 		this.add(textField);
+		
+		checkbox = new JCheckBox();
+		checkbox.setVisible(true);
+		checkbox.setBounds(60 + y, 50, 25, 25);
+		checkbox.setOpaque(false);
+		this.add(checkbox);
 		
 		JLabel word_4 = new JLabel("选择查看时间段:    ");
 		word_4.setForeground(Color.WHITE);
@@ -130,7 +146,7 @@ public class SaleDetailUI extends JLabel implements ActionListener{
 		this.add(word_day2);
 		
 		button_check = new MyJButton("查看");
-		button_check.setBounds(250 + x, 50, 90, 25);
+		button_check.setBounds(250 + x - 10, 50, 90, 25);
 		button_check.addActionListener(this);
 		this.add(button_check);
 		
@@ -144,10 +160,77 @@ public class SaleDetailUI extends JLabel implements ActionListener{
 	public void actionPerformed(ActionEvent events) {
 		if(events.getSource() == button_check){
 			
+			saleList.clear();
+			
 			RecordBLService controller = new RecordController();
 			
-			//String beginDate, String endDate, String commodityName, String clientName, String salesman, Storage storage
-			System.out.println(controller.saleDetail(new SaleDetailInputInfo("20141201","20141220",null,null,null,null)));
+			String beginDate = null, endDate = null;
+			String commodityName = null, clientName = null, salesman = null;
+			
+			boolean flag = true;
+			
+			if(checkbox.isSelected()){
+				if(tf_year1.getText().isEmpty() || tf_year2.getText().isEmpty() 
+						|| tf_month1.getText().isEmpty() || tf_month2.getText().isEmpty()
+						 || tf_day1.getText().isEmpty() || tf_day2.getText().isEmpty()){
+					
+					WarningFrame wf = new WarningFrame("请检查时间段填写是否正确！");
+					wf.setVisible(true);
+					flag = false;
+				}else{
+					beginDate = yearAddZero(tf_year1.getText()) + addZero(tf_month1.getText()) + addZero(tf_day1.getText());
+					endDate = yearAddZero(tf_year2.getText()) + addZero(tf_month2.getText()) + addZero(tf_day2.getText());
+				}
+			}
+			
+			if(flag == true){
+				if(comboBox.getSelectedIndex() == 1){
+					commodityName = textField.getText();
+				}else if(comboBox.getSelectedIndex() == 2){
+					clientName = textField.getText();
+				}else if(comboBox.getSelectedIndex() == 3){
+					salesman = textField.getText();
+				}
+				
+				saleList = controller.saleDetail(new SaleDetailInputInfo(beginDate, endDate, commodityName, clientName, salesman, null));
+				
+				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+				int rowCount = table.getRowCount();
+				for(int i = 0; i < rowCount; i++){
+					tableModel.removeRow(0);
+				}
+				
+				for(int i = 0; i < saleList.size(); i++){
+					//"操作时间", "商品名称", "商品型号", "商品数量", "商品单价", "商品总额"
+					String[] rowData = {saleList.get(i).date, saleList.get(i).name, saleList.get(i).type
+							, String.valueOf(saleList.get(i).number), String.format("%.2f", saleList.get(i).price) + "元"
+							, String.format("%.2f", saleList.get(i).total) + "元"};
+					tableModel.addRow(rowData);
+				}		
+			}			
+		}
+	}
+	
+	private String addZero(String str){
+		if(Integer.parseInt(str) < 10){
+			return "0" + str;
+		}else{
+			return str;
+		}
+	}
+	private String yearAddZero(String str){
+		if(Integer.parseInt(str) < 10){
+			return "000" + str;
+		}else{
+			if(Integer.parseInt(str) < 100){
+				return "00" + str;
+			}else{
+				if(Integer.parseInt(str) < 1000){
+					return "0" + str;
+				}else{
+					return str;
+				}
+			}
 		}
 	}
 }
