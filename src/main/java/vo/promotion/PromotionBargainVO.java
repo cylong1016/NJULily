@@ -5,10 +5,8 @@ import java.util.ArrayList;
 import vo.commodity.CommodityItemVO;
 import dataenum.PromotionType;
 
-public class PromotionBargainVO extends PromotionVO{
+public class PromotionBargainVO extends PromotionVO {
 	
-	/** 促销策略编号*/
-	public String ID;
 	/** 促销起始时间*/
 	public String beginDate;
 	/** 促销结束时间*/

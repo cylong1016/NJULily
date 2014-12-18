@@ -17,10 +17,8 @@ import dataenum.Storage;
  * @author Zing
  * @version 2014年10月29日上午9:03:59
  */
-public class SalesVO extends ValueObject{
+public class SalesVO extends ValueObject {
 
-	/** 单据编号 */
-	public String ID;
 	/** 客户ID */
 	public String clientID;
 	/** 客户 */

@@ -8,8 +8,6 @@ import dataenum.PromotionType;
 public class PromotionPO extends PersistentObject {
 
 	private static final long serialVersionUID = 1L;
-	/** 促销策略编号 */
-	private String ID;
 	/** 促销起始时间 */
 	private String beginDate;
 	/** 促销结束时间 */
@@ -48,10 +46,6 @@ public class PromotionPO extends PersistentObject {
 		this.gifts = gifts;
 		this.allowance = allowance;
 		this.voucher = voucher;
-	}
-
-	public String getID() {
-		return ID;
 	}
 
 	public ArrayList<CommodityItemPO> getBargains() {

@@ -14,21 +14,18 @@ import vo.commodity.CheckCommodityItemVO;
  * @version 2014年11月8日下午6:15:31
  */
 public class InventoryCheckVO {
+
 	/** 商品列表 */
 	public ArrayList<CheckCommodityItemVO> commodities;
 	/** 批号 */
 	public String today;
 	/** 批次 */
 	public String lot;
-	
+
 	public InventoryCheckVO(ArrayList<CheckCommodityItemVO> commodities, String today, String lot) {
 		this.commodities = commodities;
 		this.today = today;
 		this.lot = lot;
 	}
-	
-	
-	
-	
 
 }

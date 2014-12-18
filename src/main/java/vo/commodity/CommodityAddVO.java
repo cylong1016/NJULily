@@ -7,8 +7,6 @@ import vo.ValueObject;
  * @version Dec 7, 2014 7:58:41 PM
  */
 public class CommodityAddVO extends ValueObject{
-	/** 商品ID */
-	public String ID;
 	/** 商品名称 */
 	public String name;
 	/** 商品型号 */

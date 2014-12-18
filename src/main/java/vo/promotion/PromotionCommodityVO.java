@@ -4,13 +4,11 @@ import java.util.ArrayList;
 
 import vo.commodity.CommodityItemVO;
 
-public class PromotionCommodityVO extends PromotionVO{
-	
-	/** 促销策略编号*/
-	public String ID;
-	/** 促销起始时间*/
+public class PromotionCommodityVO extends PromotionVO {
+
+	/** 促销起始时间 */
 	public String beginDate;
-	/** 促销结束时间*/
+	/** 促销结束时间 */
 	public String endDate;
 	/** 购买的商品 */
 	public ArrayList<PromotionGoodsVO> goods;
@@ -32,7 +30,7 @@ public class PromotionCommodityVO extends PromotionVO{
 	 * @param allowance
 	 * @param voucher
 	 */
-	public PromotionCommodityVO(String ID, String beginDate, String endDate, ArrayList<PromotionGoodsVO> goods, ArrayList<CommodityItemVO> gifts, double allowance, int voucher){
+	public PromotionCommodityVO(String ID, String beginDate, String endDate, ArrayList<PromotionGoodsVO> goods, ArrayList<CommodityItemVO> gifts, double allowance, int voucher) {
 		this.ID = ID;
 		this.beginDate = beginDate;
 		this.endDate = endDate;

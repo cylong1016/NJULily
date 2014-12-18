@@ -5,12 +5,11 @@ import java.util.ArrayList;
 import vo.commodity.CommodityItemVO;
 import dataenum.ClientLevel;
 
-public class PromotionClientVO extends PromotionVO{
-	/** 促销策略编号*/
-	public String ID;
-	/** 促销起始时间*/
+public class PromotionClientVO extends PromotionVO {
+
+	/** 促销起始时间 */
 	public String beginDate;
-	/** 促销结束时间*/
+	/** 促销结束时间 */
 	public String endDate;
 	/** 客户等级 */
 	public ClientLevel level;
@@ -20,7 +19,7 @@ public class PromotionClientVO extends PromotionVO{
 	public double allowance;
 	/** 代金券 */
 	public int voucher;
-	
+
 	/**
 	 * 策略2:根据客户等级，制定赠送包/折扣/代金券
 	 * @param ID

@@ -42,7 +42,6 @@ public class AccountBillPO extends PersistentObject {
 
 	public AccountBillPO(String ID, String clientID, String clientName, String username, ArrayList<AccountBillItemPO> bills, BillType type) {
 		super(ID);
-		this.ID = ID;
 		this.clientID = clientID;
 		this.clientName = clientName;
 		this.username = username;

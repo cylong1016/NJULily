@@ -71,7 +71,6 @@ public class CommodityPO extends PersistentObject {
 	 */
 	public CommodityPO(String ID, String name, String type, String sortID, double aveSale, double avePur) {
 		super(ID);
-		this.ID = ID;
 		this.name = name;
 		this.type = type;
 		this.sortID = sortID;
@@ -213,7 +212,4 @@ public class CommodityPO extends PersistentObject {
 		this.saleBackNumber = saleBackNumber;
 	}
 	
-	
-	
-
 }

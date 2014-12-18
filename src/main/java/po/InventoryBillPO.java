@@ -13,8 +13,6 @@ import dataenum.BillType;
 public class InventoryBillPO extends PersistentObject {
 
 	private static final long serialVersionUID = 1L;
-	/** 单据ID */
-	private String ID;
 	/** 商品集合（赠送单） */
 	private ArrayList<CommodityItemPO> commodities;
 	/** 备注 */
@@ -26,7 +24,6 @@ public class InventoryBillPO extends PersistentObject {
 
 	public InventoryBillPO(String ID, BillType billType, ArrayList<CommodityItemPO> commodities, String remark) {
 		super(ID);
-		this.ID = ID;
 		this.billType = billType;
 		this.commodities = commodities;
 		this.remark = remark;
@@ -41,9 +38,6 @@ public class InventoryBillPO extends PersistentObject {
 		this.state = state;
 	}
 
-	public String getID() {
-		return ID;
-	}
 	public BillType getBillType() {
 		return billType;
 	}

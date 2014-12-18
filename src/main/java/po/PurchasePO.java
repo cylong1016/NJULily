@@ -18,8 +18,6 @@ import dataenum.Storage;
 public class PurchasePO extends PersistentObject {
 
 	private static final long serialVersionUID = 1L;
-	/** 单据编号 */
-	private String ID;
 	/** 客户ID */
 	private String clientID;
 	/** 客户 */
@@ -41,7 +39,6 @@ public class PurchasePO extends PersistentObject {
 
 	public PurchasePO(String ID, String clientID, String client, String user, Storage storage, ArrayList<CommodityItemPO> commodities, double beforePrice, String remark, BillType type) {
 		super(ID);
-		this.ID = ID;
 		this.clientID = clientID;
 		this.client = client;
 		this.user = user;
@@ -63,10 +60,6 @@ public class PurchasePO extends PersistentObject {
 
 	public void setState(BillState state) {
 		this.state = state;
-	}
-
-	public String getID() {
-		return ID;
 	}
 
 	public String getClient() {

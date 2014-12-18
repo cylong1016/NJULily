@@ -21,15 +21,10 @@ public class CommoditySortPO extends PersistentObject {
 
 	public CommoditySortPO(String ID, String name, String fatherID, ArrayList<String> childrenID, ArrayList<String> commoditiesID) {
 		super(ID);
-		this.ID = ID;
 		this.name = name;
 		this.fatherID = fatherID;
 		this.childrenID = childrenID;
 		this.commoditiesID = commoditiesID;
-	}
-
-	public String getID() {
-		return this.ID;
 	}
 
 	public String getName() {

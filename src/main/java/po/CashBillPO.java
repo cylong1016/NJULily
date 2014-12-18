@@ -15,8 +15,6 @@ import dataenum.BillState;
 public class CashBillPO extends PersistentObject {
 
 	private static final long serialVersionUID = 1L;
-	/** 编号 */
-	private String ID;
 	/** 操作员 */
 	private String user;
 	/** 银行账户 */
@@ -43,10 +41,6 @@ public class CashBillPO extends PersistentObject {
 
 	public void setState(BillState state) {
 		this.state = state;
-	}
-
-	public String getID() {
-		return ID;
 	}
 
 	public String getUser() {

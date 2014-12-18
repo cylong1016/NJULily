@@ -9,7 +9,7 @@ import vo.commodity.CommodityVO;
 /**
  * 期初建账值对象
  * @author cylong
- * @version Oct 26, 2014  2:23:18 PM
+ * @version Oct 26, 2014 2:23:18 PM
  */
 /**
  * 这个系统是可以支持建多套账的，每套帐在新建的时候都要经过期初建账这一环节，可以理解为一套帐的初始化操作。
@@ -22,21 +22,19 @@ import vo.commodity.CommodityVO;
  * @author Zing
  * @version 2014年11月2日下午3:54:10
  */
-public class AccountaInitVO {
-	
-	public String ID;
-	
+public class AccountaInitVO extends ValueObject {
+
 	public String date;
-	
+
 	public ArrayList<CommoditySortVO> commoditySorts;
-	
+
 	public ArrayList<CommodityVO> commodities;
-	
+
 	public ArrayList<ClientVO> clients;
-	
+
 	public ArrayList<AccountVO> accounts;
-	
-	public AccountaInitVO(String ID, String date, ArrayList<CommoditySortVO> commoditySorts, ArrayList<CommodityVO> commodities, ArrayList<ClientVO> clients, ArrayList<AccountVO> accounts){
+
+	public AccountaInitVO(String ID, String date, ArrayList<CommoditySortVO> commoditySorts, ArrayList<CommodityVO> commodities, ArrayList<ClientVO> clients, ArrayList<AccountVO> accounts) {
 		this.ID = ID;
 		this.date = date;
 		this.commoditySorts = commoditySorts;
