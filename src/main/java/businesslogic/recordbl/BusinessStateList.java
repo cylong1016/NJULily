@@ -99,9 +99,17 @@ public class BusinessStateList {
 	/* 是为了获得所有存在的销售单、销售退货单、进货单、进货退货单、赠送单、报损单、报溢单、报警单的ID */
 	private void getAllDateIDs() throws RemoteException {
 		ArrayList<String> saleID = saleInfo.getID(null, null, null);
-		saleIDs.addAll(saleID);
+		if (saleID != null) {
+			saleIDs.addAll(saleID);
+		}
 		ArrayList<String> purchaseID = purchaseInfo.getID(null, null, null);
-		purIDs.addAll(purchaseID);
+		if (purchaseID != null) {
+			purIDs.addAll(purchaseID);
+			if (purchaseID.isEmpty()) {
+				System.out.println("这是空哒");
+			}
+			System.out.println("加入数据");
+		}
 		ArrayList<String> inventoryID = inventoryInfo.getID(null, null, null);
 		if(inventoryID != null) {
 			inventoryIDs.addAll(inventoryID);

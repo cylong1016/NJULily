@@ -183,7 +183,14 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 	public ArrayList<AccountBillVO> findApproval() throws RemoteException {
 		AccountBillShow show = new AccountBillShow();
 		ArrayList<AccountBillVO> VOs = show.showPayApproving();
+		if (VOs.isEmpty()) {
+			System.out.println("啊呀是空的");
+		}
+		System.out.println("查看付款单");
 		VOs.addAll(show.showExpenseApproving());
+		if (show.showExpenseApproving().isEmpty()) {
+			System.out.println("收款单是空的！");
+		}
 		return VOs;
 	}
 

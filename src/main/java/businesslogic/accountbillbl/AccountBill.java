@@ -18,7 +18,6 @@ import businesslogic.accountbl.AccountInfo;
 import businesslogic.clientbl.ClientInfo;
 import businesslogic.userbl.UserInfo;
 import config.RMIConfig;
-import dataenum.BillState;
 import dataenum.BillType;
 import dataservice.accountbilldataservice.AccountBillDataService;
 
@@ -147,58 +146,6 @@ public class AccountBill {
 		po = new AccountBillPO(ID, clientID, clientName, username, billsPO, type);
 	}
 
-	/**
-	 * 将收款单（付款单）的PO集合转化成VO集合
-	 * @param billsPO
-	 * @return ArrayList<AccountBillVO>
-	 * @author cylong
-	 * @version 2014年12月1日 下午3:45:32
-	 */
-	public ArrayList<AccountBillVO> billsPOToBillsVO(ArrayList<AccountBillPO> billsPO) {
-		ArrayList<AccountBillVO> billsVO = new ArrayList<AccountBillVO>();
-		for(AccountBillPO po : billsPO) {
-			AccountBillVO vo = poToVO(po);
-			billsVO.add(vo);
-		}
-		return billsVO;
-	}
-
-	/**
-	 * 将AccountBillPO转化成AccountBillVO
-	 * @param po AccountBillPO
-	 * @return AccountBillVO
-	 * @author cylong
-	 * @version 2014年12月1日 下午3:40:52
-	 */
-	public AccountBillVO poToVO(AccountBillPO po) {
-		String ID = po.getID();
-		String clientID = po.getClientID();
-		String clientName = po.getClientName();
-		String username = po.getUsername();
-		ArrayList<AccountBillItemVO> bills = toItemVOList(po.getBills());
-		BillState state = po.getState();
-		BillType type = po.getType();
-		AccountBillVO vo = new AccountBillVO(ID, clientID, clientName, username, bills, state, type);
-		return vo;
-	}
-
-	/**
-	 * itemPOList转化成itemVOList
-	 * @return itemVOList
-	 * @author cylong
-	 * @version 2014年12月1日 上午1:13:19
-	 */
-	public ArrayList<AccountBillItemVO> toItemVOList(ArrayList<AccountBillItemPO> itemPOList) {
-		ArrayList<AccountBillItemVO> itemVOList = new ArrayList<AccountBillItemVO>();
-		for(AccountBillItemPO po : itemPOList) {
-			String accountName = po.getAccountName();
-			double money = po.getMoney();
-			String remark = po.getRemark();
-			AccountBillItemVO vo = new AccountBillItemVO(accountName, money, remark);
-			itemVOList.add(vo);
-		}
-		return itemVOList;
-	}
 
 	/**
 	 * 提交成正在审批状态
@@ -209,7 +156,7 @@ public class AccountBill {
 	 */
 	public AccountBillVO submit() throws RemoteException {
 		accountBillData.insert(po);
-		return poToVO(po);
+		return AccountBillTrans.poToVO(po);
 	}
 
 	/**
@@ -233,7 +180,7 @@ public class AccountBill {
 	 */
 	public AccountBillVO find(String ID) throws RemoteException {
 		AccountBillPO po = accountBillData.find(ID);
-		return poToVO(po);
+		return AccountBillTrans.poToVO(po);
 	}
 
 	public AccountBillDataService getAccountBillData() {

@@ -12,10 +12,9 @@ import dataservice.accountbilldataservice.AccountBillDataService;
 public class AccountBillShow {
 
 	private AccountBillDataService accountBillData;
-	private AccountBill accountBill;
 
 	public AccountBillShow() {
-		accountBill = new AccountBill();
+		AccountBill accountBill = new AccountBill();
 		accountBillData = accountBill.getAccountBillData();
 	}
 
@@ -59,7 +58,7 @@ public class AccountBillShow {
 	 */
 	private ArrayList<AccountBillVO> show() throws RemoteException {
 		ArrayList<AccountBillPO> billsPO = accountBillData.show();
-		ArrayList<AccountBillVO> billsVO = accountBill.billsPOToBillsVO(billsPO);
+		ArrayList<AccountBillVO> billsVO = AccountBillTrans.billsPOToBillsVO(billsPO);
 		return billsVO;
 	}
 

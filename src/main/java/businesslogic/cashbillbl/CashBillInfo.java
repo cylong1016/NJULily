@@ -70,7 +70,7 @@ public class CashBillInfo extends Info<CashBillPO> implements ValueObjectInfo_Re
 	}
 
 	public CashBillVO find(String ID) throws RemoteException {
-		return cashBill.POToVO(cashBillData.find(ID));
+		return CashBillTrans.POToVO(cashBillData.find(ID));
 	}
 
 	public ResultMessage update(CashBillVO vo) throws RemoteException {

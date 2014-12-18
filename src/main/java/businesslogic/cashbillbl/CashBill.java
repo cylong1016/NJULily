@@ -9,9 +9,7 @@ import java.util.ArrayList;
 import po.CashBillPO;
 import po.CashItemPO;
 import vo.CashBillVO;
-import vo.CashItemVO;
 import config.RMIConfig;
-import dataenum.BillState;
 import dataservice.cashbilldataservice.CashBillDataService;
 
 /**
@@ -85,44 +83,13 @@ public class CashBill {
 	public CashBillVO submit(String account) throws RemoteException {
 		addCashBill(account);
 		getCashBillData().insert(po);
-		return POToVO(po);
+		return CashBillTrans.POToVO(po);
 	}
 
 	public CashBillVO save(String account) {
 		addCashBill(account);
 		// TODO 存在本地
-		return POToVO(po);
-	}
-	
-	public ArrayList<CashBillVO> billsPOToBillsVO(ArrayList<CashBillPO> billsPO) {
-		ArrayList<CashBillVO> billsVO = new ArrayList<CashBillVO>();
-		for(CashBillPO po : billsPO) {
-			System.out.println(po.getID());
-			CashBillVO vo = POToVO(po);
-			billsVO.add(vo);
-		}
-		return billsVO;
-	}
-
-	public CashBillVO POToVO(CashBillPO po) {
-		String ID = po.getID();
-		String user = po.getUser();
-		String account = po.getAccount();
-		ArrayList<CashItemVO> bills = itemsPOToVO(po.getBills());
-		double total = po.getTotal();
-		BillState state = po.getState();
-		CashBillVO vo = new CashBillVO(ID, user, account, bills, total, state);
-		return vo;
-	}
-
-	private ArrayList<CashItemVO> itemsPOToVO(ArrayList<CashItemPO> bills) {
-		ArrayList<CashItemVO> VOs = new ArrayList<CashItemVO>();
-		for(int i = 0; i < bills.size(); i++) {
-			CashItemPO po = bills.get(i);
-			CashItemVO vo = new CashItemVO(po.getName(), po.getMoney(), po.getRemark());
-			VOs.add(vo);
-		}
-		return VOs;
+		return CashBillTrans.POToVO(po);
 	}
 
 }

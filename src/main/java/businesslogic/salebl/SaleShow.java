@@ -77,7 +77,8 @@ public class SaleShow {
 	 */
 	private ArrayList<SalesVO> showChoose(BillType type) throws RemoteException {
 		ArrayList<SalesVO> choose = new ArrayList<SalesVO>();
-		for(SalesVO vo : show()) {
+		ArrayList<SalesVO> show = show();
+		for(SalesVO vo : show) {
 			if (vo.type == type) {
 				choose.add(vo);
 			}
@@ -96,7 +97,8 @@ public class SaleShow {
 	 */
 	private ArrayList<SalesVO> showChoose(BillType type, BillState state) throws RemoteException {
 		ArrayList<SalesVO> choose = new ArrayList<SalesVO>();
-		for(SalesVO vo : show()) {
+		ArrayList<SalesVO> show = show();
+		for(SalesVO vo : show) {
 			if (vo.type == type && vo.state == state) {
 				choose.add(vo);
 			}

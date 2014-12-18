@@ -10,17 +10,20 @@ import dataservice.cashbilldataservice.CashBillDataService;
 
 public class CashBillShow {
 
-	private CashBill cashBill;
 	private CashBillDataService cashBillData;
 
 	public CashBillShow() {
-		cashBill = new CashBill();
+		CashBill cashBill = new CashBill();
 		cashBillData = cashBill.getCashBillData();
 	}
 
 	public ArrayList<CashBillVO> show() throws RemoteException {
 		ArrayList<CashBillPO> POs = cashBillData.show();
-		ArrayList<CashBillVO> VOs = cashBill.billsPOToBillsVO(POs);
+		ArrayList<CashBillVO> VOs = new ArrayList<CashBillVO>();
+		for (CashBillPO po : POs) {
+			CashBillVO vo = CashBillTrans.POToVO(po);
+			VOs.add(vo);
+		}
 		return VOs;
 	}
 
