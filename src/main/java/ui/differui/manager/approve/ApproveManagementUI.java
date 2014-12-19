@@ -183,6 +183,18 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 	
 	public void actionPerformed(ActionEvent events) {
 		
+		if(events.getSource() == bt_modify){
+			if(index >= 0){
+				if(!table.getValueAt(index, 3).equals("未审批")){
+					WarningFrame wf = new WarningFrame("状态为未审批的单据才能进行修改工作！");
+					wf.setVisible(true);
+				}else{
+					ApprovalModifyUI modifyUI = new ApprovalModifyUI(typePool.get(index), listPool.get(index));
+					modifyUI.setVisible(true);
+				}
+			}
+		}
+		
 		if(events.getSource() == bt_approval){
 			if(index >= 0){
 				if(!table.getValueAt(index, 3).equals("未审批")){
@@ -299,10 +311,11 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 			passType.clear();
 			
 			for(int i = 0; i < rowCount; i++){
-				if(table.getValueAt(i, 0).equals(Boolean.TRUE)){
-					passList.add(listPool.get(i));
-					passType.add(typePool.get(i));
-				}
+				if(table.getValueAt(i, 0) != null)
+					if(table.getValueAt(i, 0).equals(Boolean.TRUE)){
+						passList.add(listPool.get(i));
+						passType.add(typePool.get(i));
+					}
 			}
 			
 			ResultMessage rm = controller.passBill(passList, passType);

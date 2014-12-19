@@ -19,6 +19,7 @@ import ui.differui.inventory.commodity_management.detailgood.CommodityDetailPane
 import ui.differui.inventory.commodity_management.detailsort.SortDetailPanel;
 import ui.differui.inventory.commodity_management.detailsort.SortDetailUI;
 import ui.differui.inventory.commodity_management.index.CommodityManagementUI;
+import ui.differui.manager.approve.ApprovalModifyPanel;
 import ui.differui.manager.approve.ApproveManagementUI;
 import ui.differui.salesman.client.ClientAddingPanel;
 import ui.differui.salesman.client.ClientDetailPanel;
@@ -105,6 +106,8 @@ public class ExitFinishPanel extends MyPanel implements ActionListener{
 				case "delete a account" : AccountManagementUI.deleteAccount.doClick();break;
 				
 				case "modify a account" : AccountManagementUI.modifyAccount.doClick();break;
+				
+				case "ApprovalModify" : ApprovalModifyPanel.modify.doClick();break;
 
 			}
 			ExitFinishFrame.button_close.doClick();

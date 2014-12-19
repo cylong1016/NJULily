@@ -906,7 +906,9 @@ public class TextConductor {
 		for(int i = 0; i < 7; i++)
 			text = text + blank4;
 		text = text + "账目信息：" + "\n";
-			
+	
+		System.out.println(bill.bills.size());
+		
 		for(int i = 0; i < 9; i++)
 			text = text + blank4;
 		text = text + "转账账户：" + bill.bills.get(0).accountName + "\n";
@@ -974,7 +976,7 @@ public class TextConductor {
 		for(int i = 0; i < 7; i++)
 			text = text + blank4;
 		text = text + "账目信息：" + "\n";
-			
+		
 		for(int i = 0; i < 9; i++)
 			text = text + blank4;
 		text = text + "转账账户：" + bill.bills.get(0).accountName + "\n";
