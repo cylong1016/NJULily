@@ -20,10 +20,8 @@ public class AccountBillTrans {
 	 */
 	static public ArrayList<AccountBillVO> billsPOToBillsVO(ArrayList<AccountBillPO> billsPO) {
 		ArrayList<AccountBillVO> billsVO = new ArrayList<AccountBillVO>();
-		System.out.println("进入了方法");
 		for(AccountBillPO po : billsPO) {
 			AccountBillVO vo = poToVO(po);
-			System.out.println(po.getID());
 			billsVO.add(vo);
 		}
 		return billsVO;
