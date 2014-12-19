@@ -148,7 +148,34 @@ public class ApprovalModifyPanel extends MyPanel implements ActionListener{
 			//BillType type, String ID, String clientID, String client,
 			//String user, Storage storage, ArrayList<CommodityItemVO> commodities, double beforePrice, BillState state
 			rm = controller.updateBill(new PurchaseVO(billType, vo.ID, vo.clientID,
-					vo.client, vo.user, vo.storage,commodities,sum,vo.state), billType);	
+					vo.client, vo.user, vo.storage,commodities,sum,vo.state), billType);
+			
+		}else if(billType.equals( BillType.SALE )|| billType.equals(BillType.SALEBACK)){
+			SalesVO vo = (SalesVO)currentBill;
+			ArrayList<CommodityItemVO> commodities = new ArrayList<CommodityItemVO>();
+			
+			double sum = 0;
+			double price = 0;
+			int num = 0;
+			
+			for(int i = 0; i < table.getRowCount(); i++){
+				num = Integer.parseInt((String)table.getValueAt(i, 3).toString());
+				
+				price = Double.parseDouble((String)table.getValueAt(i, 4).toString());
+				
+				sum = sum + num * price;
+				
+				//String ID, int number, double price, String remark, String name, String type
+				commodities.add(new CommodityItemVO((String)table.getValueAt(i, 0), num, price, (String)table.getValueAt(i, 5)
+						, (String)table.getValueAt(i, 1), (String)table.getValueAt(i, 2)));
+			}
+			//String ID, String clientID, String client, Storage storage, String user,
+			//String salesman, ArrayList<CommodityItemVO> commodities, String remark, 
+			//double beforePrice, double allowance, double voucher, double afterPrice, BillType type, BillState state
+			double afterSum = sum - vo.afterPrice - vo.voucher;
+			rm = controller.updateBill(new SalesVO(vo.ID, vo.clientID, vo.client, vo.storage
+					, vo.user, vo.salesman, commodities, textField.getText()
+					, sum, vo.allowance, vo.voucher, afterSum, vo.type, vo.state ), billType);
 		}		
 		
 		bt_return.doClick();
@@ -168,8 +195,8 @@ public class ApprovalModifyPanel extends MyPanel implements ActionListener{
 		
 		if(billType.equals(BillType.PURCHASE) || billType.equals(BillType.PURCHASEBACK)){
 			purchaseTable((PurchaseVO)bill);	
-			}else if(billType.equals( BillType.SALE )|| billType.equals(BillType.SALEBACK)){
-					
+		}else if(billType.equals( BillType.SALE )|| billType.equals(BillType.SALEBACK)){
+			saleTable((SalesVO)bill);
 		}
 		initJsp();
 	}
@@ -195,8 +222,19 @@ public class ApprovalModifyPanel extends MyPanel implements ActionListener{
 			Object[] rowData = {cvo.ID, cvo.name, cvo.type, cvo.number, cvo.price, cvo.remark};
 			tableModel.addRow(rowData);
 		}
+	}
+	
+	private void saleTable(SalesVO bill){
+		String[] headers = {"商品编号","商品名称","商品型号","商品数量","商品价格","商品备注"};
+		table = new MyTable(headers, true);
+		ArrayList<CommodityItemVO> list = bill.commodities;
 		
-		if(bill.remark != null)
-			textField.setText(bill.remark);
+		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+		
+		for(int i = 0; i < list.size(); i++ ){
+			CommodityItemVO cvo = list.get(i);
+			Object[] rowData = {cvo.ID, cvo.name, cvo.type, cvo.number, cvo.price, cvo.remark};
+			tableModel.addRow(rowData);
+		}
 	}
 }
