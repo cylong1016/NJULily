@@ -105,10 +105,6 @@ public class BusinessStateList {
 		ArrayList<String> purchaseID = purchaseInfo.getID(null, null, null);
 		if (purchaseID != null) {
 			purIDs.addAll(purchaseID);
-			if (purchaseID.isEmpty()) {
-				System.out.println("这是空哒");
-			}
-			System.out.println("加入数据");
 		}
 		ArrayList<String> inventoryID = inventoryInfo.getID(null, null, null);
 		if(inventoryID != null) {

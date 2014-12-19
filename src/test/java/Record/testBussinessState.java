@@ -1,22 +1,21 @@
 package Record;
 
-import static org.junit.Assert.*;
+
+import java.rmi.RemoteException;
 
 import org.junit.Test;
+
+import blservice.recordblservice.RecordBLService;
+import businesslogic.recordbl.BusinessStateList;
+import businesslogic.recordbl.RecordController;
 
 public class testBussinessState {
 
 	@Test
-	public void test() {
-		MockSale sale1 = new MockSale(100);
-		MockSale sale2 = new MockSale(200);
-		
-		
-		MockBusinessState businessState = new MockBusinessState(null, null);
-		businessState.add(sale1);
-		businessState.add(sale2);
-		
-		assertEquals(300, businessState.getTotal(), 0.01);
+	public void test() throws RemoteException {
+		BusinessStateList businessStateList = new BusinessStateList("20141211", "20141220");
+		System.out.println(businessStateList.getBusinessState().saleIncome);
+		System.out.println(businessStateList.getBusinessState().saleCost);
 	}
 
 }
