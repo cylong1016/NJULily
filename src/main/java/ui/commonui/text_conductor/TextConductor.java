@@ -42,6 +42,7 @@ public class TextConductor {
 			return writePay((AccountBillVO)bill);
 		}else if(billType.equals(BillType.CASH)){
 			return writeCash((CashBillVO)bill);
+			
 		}
 		return null;
 	}
