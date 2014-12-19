@@ -36,6 +36,7 @@ import ui.commonui.myui.MyComboBox;
 import ui.commonui.text_conductor.TextConductor;
 import ui.commonui.warning.WarningFrame;
 import vo.AccountBillVO;
+import vo.ApprovalVO;
 import vo.CashBillVO;
 import vo.InventoryBillVO;
 import vo.PurchaseVO;
@@ -379,11 +380,12 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 	private void getApprovalData(int index) throws RemoteException{
 		
 		ApprovalShow controller = new ApprovalShow();
-		ArrayList<PurchaseVO> approval_pur = controller.ShowApproving().purchaseVOs;
-		ArrayList<SalesVO> approval_sale = controller.ShowApproving().salesVOs;
-		ArrayList<AccountBillVO> approval_account = controller.ShowApproving().accountBillVOs;
-		ArrayList<InventoryBillVO> approval_inventory = controller.ShowApproving().inventoryBillVOs;
-		ArrayList<CashBillVO> approval_cashBill = controller.ShowApproving().cashBillVOs;
+		ApprovalVO vo = controller.ShowApproving();
+		ArrayList<PurchaseVO> approval_pur = vo.purchaseVOs;
+		ArrayList<SalesVO> approval_sale = vo.salesVOs;
+		ArrayList<AccountBillVO> approval_account = vo.accountBillVOs;
+		ArrayList<InventoryBillVO> approval_inventory = vo.inventoryBillVOs;
+		ArrayList<CashBillVO> approval_cashBill = vo.cashBillVOs;
 		
 		model = (DefaultTableModel) table.getModel();
 		
@@ -434,11 +436,12 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 	
 	private void getPassData(int index) throws RemoteException{
 		ApprovalShow controller = new ApprovalShow();
-		ArrayList<PurchaseVO> approval_pur = controller.showPass().purchaseVOs;
-		ArrayList<SalesVO> approval_sale = controller.showPass().salesVOs;
-		ArrayList<AccountBillVO> approval_account = controller.showPass().accountBillVOs;
-		ArrayList<InventoryBillVO> approval_inventory = controller.showPass().inventoryBillVOs;
-		ArrayList<CashBillVO> approval_cashBill = controller.showPass().cashBillVOs;
+		ApprovalVO vo = controller.showPass();
+		ArrayList<PurchaseVO> approval_pur = vo.purchaseVOs;
+		ArrayList<SalesVO> approval_sale = vo.salesVOs;
+		ArrayList<AccountBillVO> approval_account = vo.accountBillVOs;
+		ArrayList<InventoryBillVO> approval_inventory = vo.inventoryBillVOs;
+		ArrayList<CashBillVO> approval_cashBill = vo.cashBillVOs;
 		
 		model = (DefaultTableModel) table.getModel();
 		
@@ -489,11 +492,12 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 	
 	private void getFailureData(int index) throws RemoteException{
 		ApprovalShow controller = new ApprovalShow();
-		ArrayList<PurchaseVO> approval_pur = controller.showFailure().purchaseVOs;
-		ArrayList<SalesVO> approval_sale = controller.showFailure().salesVOs;
-		ArrayList<AccountBillVO> approval_account = controller.showFailure().accountBillVOs;
-		ArrayList<InventoryBillVO> approval_inventory = controller.showFailure().inventoryBillVOs;
-		ArrayList<CashBillVO> approval_cashBill = controller.showFailure().cashBillVOs;
+		ApprovalVO vo = controller.showFailure();
+		ArrayList<PurchaseVO> approval_pur = vo.purchaseVOs;
+		ArrayList<SalesVO> approval_sale = vo.salesVOs;
+		ArrayList<AccountBillVO> approval_account = vo.accountBillVOs;
+		ArrayList<InventoryBillVO> approval_inventory = vo.inventoryBillVOs;
+		ArrayList<CashBillVO> approval_cashBill = vo.cashBillVOs;
 		
 		model = (DefaultTableModel) table.getModel();
 		
