@@ -2,7 +2,6 @@ package blservice.promotionblservice;
 
 import java.util.ArrayList;
 
-import message.ResultMessage;
 import vo.InventoryBillVO;
 import vo.commodity.CommodityItemVO;
 import vo.promotion.PromotionBargainVO;
@@ -71,6 +70,6 @@ public interface PromotionBargainBLService {
 	 * @author Zing
 	 * @version Nov 29, 2014 7:00:42 PM
 	 */
-	public ResultMessage submit(String beginDate, String endDate);
+	public PromotionBargainVO submit(String beginDate, String endDate);
 	
 }

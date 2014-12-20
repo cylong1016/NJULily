@@ -3,7 +3,6 @@ package blservice.promotionblservice;
 import java.util.ArrayList;
 
 import dataenum.ClientLevel;
-import message.ResultMessage;
 import vo.InventoryBillVO;
 import vo.commodity.CommodityItemVO;
 import vo.promotion.PromotionClientVO;
@@ -65,5 +64,5 @@ public interface PromotionClientBLService {
 	 * @author Zing
 	 * @version Nov 29, 2014 7:00:42 PM
 	 */
-	public ResultMessage submit(PromoInputInfo info);
+	public PromotionClientVO submit(PromoInputInfo info);
 }

@@ -3,7 +3,6 @@ package businesslogic.promotionbl.type;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import message.ResultMessage;
 import vo.InventoryBillVO;
 import vo.commodity.CommodityItemVO;
 import vo.promotion.PromotionTotalVO;
@@ -102,12 +101,12 @@ public class PromotionTotalController implements PromotionTotalBLService {
 	 * @see blservice.promotionblservice.PromotionTotalBLService#submit(blservice.promotionblservice.PromoInputInfo)
 	 */
 	@Override
-	public ResultMessage submit(PromoInputInfo info) {
+	public PromotionTotalVO submit(PromoInputInfo info) {
 		try {
 			return promotionTotal.submit(info);
 		} catch (RemoteException e) {
 			e.printStackTrace();
-			return ResultMessage.REMOTE_EXCEPTION;
+			return null;
 		}
 	}
 }

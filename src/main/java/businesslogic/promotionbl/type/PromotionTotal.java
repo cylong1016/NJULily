@@ -3,7 +3,6 @@ package businesslogic.promotionbl.type;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import message.ResultMessage;
 import po.CommodityItemPO;
 import po.PromotionPO;
 import vo.InventoryBillVO;
@@ -52,10 +51,11 @@ public class PromotionTotal extends Promotion {
 		}
 	}
 
-	public ResultMessage submit(PromoInputInfo info) throws RemoteException {
+	public PromotionTotalVO submit(PromoInputInfo info) throws RemoteException {
 		setInputInfo(info);
 		PromotionPO po = buildPromotion();
-		return promotionData.insert(po);
+		promotionData.insert(po);
+		return PromotionTrans.totalPOtoVO(po);
 	}
 
 	private PromotionPO buildPromotion() {

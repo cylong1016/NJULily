@@ -22,6 +22,8 @@ import dataservice.promotiondataservice.PromotionDataService;
  * @version Nov 30, 2014 12:53:47 AM
  */
 public class Promotion {
+	
+	// TODO 删除促销策略的方法
 
 	/** 策略编号 */
 	protected String ID;

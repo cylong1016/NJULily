@@ -85,11 +85,8 @@ public class CommoditySort {
 	 * @throws RemoteException
 	 */
 	public ResultMessage addCommoSort(String sortName, String fatherID) throws RemoteException {
-
-		//这里加一行就万事大吉了
-		//不对啊，是你那边要获得好吗！是你直接调用好吗！
-		//不对啊！写到一起肯定好！呗呗儿的好儿
-
+		
+		// TODO 请jsw自己更改一下，从界面直接调用这个方法
 		getID(fatherID);
 
 		if (fatherID == null) {

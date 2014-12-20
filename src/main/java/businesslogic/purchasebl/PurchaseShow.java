@@ -12,10 +12,10 @@ import dataservice.purchasedataservice.PurchaseDataService;
 public class PurchaseShow {
 	
 	private PurchaseDataService purchaseData;
-	private Purchase purchase;
+	
 	public PurchaseShow() {
-		this.purchase = new Purchase();
-		purchaseData = purchase.getPurData();
+		Purchase purchase = new Purchase();
+		this.purchaseData = purchase.getPurData();
 	}
 
 	public ArrayList<PurchaseVO> showPurchase() throws RemoteException {
@@ -62,7 +62,7 @@ public class PurchaseShow {
 		ArrayList<PurchaseVO> VOs = new ArrayList<PurchaseVO>();
 		ArrayList<PurchasePO> POs = purchaseData.show();
 		for(PurchasePO po : POs) {
-			PurchaseVO vo = purchase.poToVO(po);
+			PurchaseVO vo = PurchaseTrans.poToVO(po);
 			VOs.add(vo);
 		}
 		return VOs;

@@ -49,21 +49,6 @@ public class AccountBill {
 	}
 
 	/**
-	 * 创建收款（付款）单的时候返回一个可用的单子ID
-	 * @deprecated 分解成连个方法了，不用判断单据类型
-	 * @param type 创建单子的类型
-	 * @return 新的ID
-	 * @author cylong
-	 * @version 2014年12月1日 上午1:32:18
-	 * @throws RemoteException
-	 */
-	public String getID(BillType type) throws RemoteException {
-		this.type = type;
-		this.ID = accountBillData.getID(type);
-		return ID;
-	}
-
-	/**
 	 * @return 新建收款单时候，返回一个可用的收款单ID
 	 * @author cylong
 	 * @version 2014年12月17日 下午11:43:40

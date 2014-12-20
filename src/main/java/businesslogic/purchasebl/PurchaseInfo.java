@@ -72,7 +72,7 @@ public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Re
 	}
 
 	public PurchaseVO find(String ID) throws RemoteException {
-		return purchase.poToVO(purchaseData.find(ID));
+		return PurchaseTrans.poToVO(purchaseData.find(ID));
 	}
 	
 	public double getMoney() throws RemoteException {

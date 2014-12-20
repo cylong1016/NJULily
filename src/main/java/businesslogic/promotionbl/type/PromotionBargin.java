@@ -3,7 +3,6 @@ package businesslogic.promotionbl.type;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import message.ResultMessage;
 import po.CommodityItemPO;
 import po.PromotionPO;
 import vo.commodity.CommodityItemVO;
@@ -51,11 +50,12 @@ public class PromotionBargin extends Promotion {
 	 * 开始时间、结束时间、总价
 	 * @throws RemoteException 
 	 */
-	public ResultMessage submit(String beginDate, String endDate) throws RemoteException {
+	public PromotionBargainVO submit(String beginDate, String endDate) throws RemoteException {
 		this.beginDate = beginDate;
 		this.endDate = endDate;
 		PromotionPO po = buildPromotion();
-		return promotionData.insert(po);
+		promotionData.insert(po);
+		return PromotionTrans.bargainPOvoVO(po);
 	}
 	
 	/**

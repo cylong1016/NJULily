@@ -54,17 +54,21 @@ public class PromotionTrans {
 	static public ArrayList<PromotionClientVO> clientPOtoVO(ArrayList<PromotionPO> POs) throws RemoteException {
 		ArrayList<PromotionClientVO> VOs = new ArrayList<PromotionClientVO>();
 		for(PromotionPO po : POs) {
-			String ID = po.getID();
-			String beginDate = po.getBeginDate();
-			String endDate = po.getEndDate();
-			ClientLevel level = po.getLevel();
-			ArrayList<CommodityItemVO> gifts = ChangeCommodityItems.itemPOToVO(po.getGifts());
-			double allowance = po.getAllowance();
-			int voucher = po.getVoucher();
-			PromotionClientVO vo = new PromotionClientVO(ID, beginDate, endDate, level, gifts, allowance, voucher);
-			VOs.add(vo);
+			VOs.add(clientPOtoVO(po));
 		}
 		return VOs;
+	}
+	
+	static public PromotionClientVO clientPOtoVO(PromotionPO po) throws RemoteException {
+		String ID = po.getID();
+		String beginDate = po.getBeginDate();
+		String endDate = po.getEndDate();
+		ClientLevel level = po.getLevel();
+		ArrayList<CommodityItemVO> gifts = ChangeCommodityItems.itemPOToVO(po.getGifts());
+		double allowance = po.getAllowance();
+		int voucher = po.getVoucher();
+		PromotionClientVO vo = new PromotionClientVO(ID, beginDate, endDate, level, gifts, allowance, voucher);
+		return vo;
 	}
 
 	/**
@@ -102,17 +106,21 @@ public class PromotionTrans {
 	static public ArrayList<PromotionTotalVO> totalPOtoVO(ArrayList<PromotionPO> POs) throws RemoteException {
 		ArrayList<PromotionTotalVO> VOs = new ArrayList<PromotionTotalVO>();
 		for(PromotionPO po : POs) {
-			String ID = po.getID();
-			String beginDate = po.getBeginDate();
-			String endDate = po.getEndDate();
-			double total = po.getTotal();
-			ArrayList<CommodityItemVO> gifts = ChangeCommodityItems.itemPOToVO(po.getGifts());
-			double allowance = po.getAllowance();
-			int voucher = po.getVoucher();
-			PromotionTotalVO vo = new PromotionTotalVO(ID, beginDate, endDate, total, gifts, allowance, voucher);
-			VOs.add(vo);
+			VOs.add(totalPOtoVO(po));
 		}
 		return VOs;
+	}
+	
+	static public PromotionTotalVO totalPOtoVO(PromotionPO po) throws RemoteException {
+		String ID = po.getID();
+		String beginDate = po.getBeginDate();
+		String endDate = po.getEndDate();
+		double total = po.getTotal();
+		ArrayList<CommodityItemVO> gifts = ChangeCommodityItems.itemPOToVO(po.getGifts());
+		double allowance = po.getAllowance();
+		int voucher = po.getVoucher();
+		PromotionTotalVO vo = new PromotionTotalVO(ID, beginDate, endDate, total, gifts, allowance, voucher);
+		return vo;
 	}
 	
 	static private ArrayList<PromotionGoodsVO> getGoods(ArrayList<CommodityItemPO> commodityItems) {

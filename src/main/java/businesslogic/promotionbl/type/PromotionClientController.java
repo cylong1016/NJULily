@@ -3,7 +3,6 @@ package businesslogic.promotionbl.type;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import message.ResultMessage;
 import vo.InventoryBillVO;
 import vo.commodity.CommodityItemVO;
 import vo.promotion.PromotionClientVO;
@@ -78,6 +77,7 @@ public class PromotionClientController implements PromotionClientBLService {
 	/**
 	 * @see blservice.promotionblservice.PromotionClientBLService#addGiftBill(vo.InventoryBillVO)
 	 */
+	// TODO 这个方法可以删掉好了……
 	@Override
 	public void addGiftBill(InventoryBillVO giftBill) {
 		try {
@@ -99,12 +99,12 @@ public class PromotionClientController implements PromotionClientBLService {
 	 * @see blservice.promotionblservice.PromotionClientBLService#submit(blservice.promotionblservice.PromoInputInfo)
 	 */
 	@Override
-	public ResultMessage submit(PromoInputInfo info) {
+	public PromotionClientVO submit(PromoInputInfo info) {
 		try {
 			return promotionClient.submit(info);
 		} catch (RemoteException e) {
 			e.printStackTrace();
-			return ResultMessage.REMOTE_EXCEPTION;
+			return null;
 		}
 	}
 }
