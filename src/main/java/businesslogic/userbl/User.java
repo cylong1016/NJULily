@@ -62,7 +62,8 @@ public class User {
 	 */
 	public UserIdentity login(LoginInfo loginInfo) throws RemoteException {
 
-		if (userData.login(loginInfo) == null) {
+		UserIdentity iden = userData.login(loginInfo);
+		if (iden == null) {
 			return null;
 		}
 
@@ -82,7 +83,7 @@ public class User {
 
 		currentUserTemp.clear();
 		currentUserTemp.add(current);	// 记录当前登录的用户的信息
-		return userData.login(loginInfo);
+		return iden;
 	}
 
 	/**

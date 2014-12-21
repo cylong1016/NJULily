@@ -5,9 +5,7 @@ import java.rmi.RemoteException;
 
 import org.junit.Test;
 
-import blservice.recordblservice.RecordBLService;
 import businesslogic.recordbl.BusinessStateList;
-import businesslogic.recordbl.RecordController;
 
 public class testBussinessState {
 
