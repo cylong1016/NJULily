@@ -26,4 +26,6 @@ public interface InventoryInfo_Approval {
 	public void pass(InventoryBillVO vo) throws RemoteException;
 
 	public InventoryBillVO addRed(InventoryBillVO vo, boolean isCopy) throws RemoteException;
+
+	public void noPass(InventoryBillVO vo) throws RemoteException;
 }

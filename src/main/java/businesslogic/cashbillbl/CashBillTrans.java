@@ -40,4 +40,26 @@ public class CashBillTrans {
 		}
 		return VOs;
 	}
+	
+	static public CashBillPO VOtoPO(CashBillVO vo) {
+		String ID = vo.ID;
+		String user = vo.user;
+		String account = vo.account;
+		double total = vo.total;
+		ArrayList<CashItemPO> bills = itemsVOtoPO(vo.bills);
+		CashBillPO po = new CashBillPO(ID, user, account, bills, total);
+		return po;
+	}
+
+	private static ArrayList<CashItemPO> itemsVOtoPO(ArrayList<CashItemVO> VOs) {
+		ArrayList<CashItemPO> POs = new ArrayList<CashItemPO>();
+		for(CashItemVO vo : VOs) {
+			String name = vo.name;
+			double money = vo.money;
+			String remark = vo.remark;
+			CashItemPO po = new CashItemPO(name, money, remark);
+			POs.add(po);
+		}
+		return POs;
+	}
 }

@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import po.CashBillPO;
 import po.CashItemPO;
 import vo.CashBillVO;
-
 import businesslogic.cashbillbl.info.UserInfo_CashBill;
 import businesslogic.userbl.UserInfo;
 import config.RMIConfig;
+import dataenum.BillState;
 import dataservice.cashbilldataservice.CashBillDataService;
 
 /**
@@ -91,9 +91,10 @@ public class CashBill {
 		return CashBillTrans.POToVO(po);
 	}
 
-	public CashBillVO save(String account) {
+	public CashBillVO save(String account) throws RemoteException {
 		addCashBill(account);
-		// TODO 存在本地
+		po.setState(BillState.DRAFT);
+		getCashBillData().insert(po);
 		return CashBillTrans.POToVO(po);
 
 	}

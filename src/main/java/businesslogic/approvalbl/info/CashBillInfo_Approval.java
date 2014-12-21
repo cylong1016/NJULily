@@ -26,4 +26,6 @@ public interface CashBillInfo_Approval {
 	public void pass(CashBillVO vo) throws RemoteException;
 
 	public CashBillVO addRed(CashBillVO vo, boolean isCopy) throws RemoteException;
+
+	public void noPass(CashBillVO vo) throws RemoteException;
 }

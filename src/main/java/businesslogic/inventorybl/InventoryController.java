@@ -132,7 +132,12 @@ public class InventoryController implements InventoryBLService {
 	 */
 	@Override
 	public InventoryBillVO save(String remark) {
-		return inventory.save(remark);
+		try {
+			return inventory.save(remark);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }

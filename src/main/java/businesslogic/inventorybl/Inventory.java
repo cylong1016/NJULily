@@ -137,7 +137,7 @@ public class Inventory {
 	public InventoryBillVO submit(String remark) throws RemoteException {
 		list.setRemark(remark);
 		InventoryBillPO po = getInventoryBill();
-		getInventoryData().insert(po);
+		inventoryData.insert(po);
 		return poToVo(po);
 	}
 
@@ -147,11 +147,14 @@ public class Inventory {
 	 * @return
 	 * @author Zing
 	 * @version Dec 2, 2014 6:12:02 PM
+	 * @throws RemoteException 
 	 */
-	public InventoryBillVO save(String remark) {
+	public InventoryBillVO save(String remark) throws RemoteException {
 		list.setRemark(remark);
-		// 保存为草稿
-		return null;
+		InventoryBillPO po = getInventoryBill();
+		po.setState(BillState.DRAFT);
+		inventoryData.insert(po);
+		return poToVo(po);
 	}
 
 	/**

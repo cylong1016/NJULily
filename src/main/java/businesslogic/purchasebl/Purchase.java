@@ -14,22 +14,21 @@ import businesslogic.purchasebl.info.ClientInfo_Purchase;
 import businesslogic.purchasebl.info.UserInfo_Purchase;
 import businesslogic.userbl.UserInfo;
 import config.RMIConfig;
+import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Storage;
 import dataservice.purchasedataservice.PurchaseDataService;
 
 public class Purchase {
-
+	private  PurchaseDataService purchaseData;
 	private PurchaseList list;
-
 	private PurchasePO po;
-
 	private String ID;
-
 	private BillType type;
-
+	
 	public Purchase() {
 		this.list = new PurchaseList();
+		purchaseData = getPurData();
 	}
 
 	public PurchaseDataService getPurData() {
@@ -47,15 +46,13 @@ public class Purchase {
 
 	public String getPurchaseID() throws RemoteException {
 		this.type = BillType.PURCHASE;
-		PurchaseDataService purData = getPurData();
-		this.ID = purData.getPurchaseID();
+		this.ID = purchaseData.getPurchaseID();
 		return ID;
 	}
 
 	public String getPurBackID() throws RemoteException {
 		this.type = BillType.PURCHASEBACK;
-		PurchaseDataService purData = getPurData();
-		this.ID = purData.getPurchaseBackID();
+		this.ID = purchaseData.getPurchaseBackID();
 		return ID;
 	}
 
@@ -67,14 +64,15 @@ public class Purchase {
 	public PurchaseVO submit(PurInputInfo info) throws RemoteException {
 		setInputInfo(info);
 		po = buildPur();
-		getPurData().insert(po);
+		purchaseData.insert(po);
 		return PurchaseTrans.poToVO(po);
 	}
 
 	public PurchaseVO save(PurInputInfo info) throws RemoteException {
 		setInputInfo(info);
 		po = buildPur();
-		// TODO 保存为草稿
+		po.setState(BillState.DRAFT);
+		purchaseData.insert(po);
 		return PurchaseTrans.poToVO(po);
 	}
 

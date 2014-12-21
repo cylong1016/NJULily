@@ -27,4 +27,6 @@ public interface AccountBill_Approval {
 	public void pass(AccountBillVO vo) throws RemoteException;
 
 	public AccountBillVO addRed(AccountBillVO vo, boolean isCopy) throws RemoteException;
+
+	public void noPass(AccountBillVO vo) throws RemoteException;
 }

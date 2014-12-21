@@ -19,6 +19,7 @@ import businesslogic.salebl.info.ClientInfo_Sale;
 import businesslogic.salebl.info.PromotionInfo_Sale;
 import businesslogic.userbl.UserInfo;
 import config.RMIConfig;
+import dataenum.BillState;
 import dataenum.BillType;
 import dataservice.saledataservice.SaleDataService;
 
@@ -151,7 +152,8 @@ public class Sale {
 	public SalesVO save(saleAddVO inputInfo) throws RemoteException {
 		setInputInfo(inputInfo);
 		SalesPO po = buildSales();
-		// TODO 保存在本地
+		po.setState(BillState.FAILURE);
+		saleData.insert(po);
 		return SaleTrans.poToVo(po);
 	}
 

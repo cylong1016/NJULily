@@ -74,25 +74,8 @@ public class CashBillInfo extends Info<CashBillPO> implements ValueObjectInfo_Re
 	}
 
 	public ResultMessage update(CashBillVO vo) throws RemoteException {
-		String ID = vo.ID;
-		String user = vo.user;
-		String account = vo.account;
-		double total = vo.total;
-		ArrayList<CashItemPO> bills = itemsVOtoPO(vo.bills);
-		CashBillPO po = new CashBillPO(ID, user, account, bills, total);
+		CashBillPO po = CashBillTrans.VOtoPO(vo);
 		return cashBillData.update(po);
-	}
-
-	private ArrayList<CashItemPO> itemsVOtoPO(ArrayList<CashItemVO> VOs) {
-		ArrayList<CashItemPO> POs = new ArrayList<CashItemPO>();
-		for(CashItemVO vo : VOs) {
-			String name = vo.name;
-			double money = vo.money;
-			String remark = vo.remark;
-			CashItemPO po = new CashItemPO(name, money, remark);
-			POs.add(po);
-		}
-		return POs;
 	}
 
 	public void pass(CashBillVO vo) throws RemoteException {
@@ -118,7 +101,7 @@ public class CashBillInfo extends Info<CashBillPO> implements ValueObjectInfo_Re
 			bills.get(i).money = money;
 		}
 		redVO.bills = bills;
-		CashBillPO redPO = new CashBillPO(redVO.ID, redVO.user, redVO.account, itemsVOtoPO(redVO.bills), redVO.total);
+		CashBillPO redPO = CashBillTrans.VOtoPO(redVO);
 		if (!isCopy) {
 			cashBillData.insert(redPO);
 			pass(redVO);
@@ -147,5 +130,13 @@ public class CashBillInfo extends Info<CashBillPO> implements ValueObjectInfo_Re
 	public ArrayList<CashBillVO> showFailure() throws RemoteException {
 		CashBillShow show = new CashBillShow();
 		return show.showFailure();
+	}
+
+	@Override
+	public void noPass(CashBillVO vo) throws RemoteException {
+		CashBillPO po = CashBillTrans.VOtoPO(vo);
+		po.setState(BillState.FAILURE);
+		cashBillData.insert(po);
+		
 	}
 }

@@ -18,6 +18,7 @@ import businesslogic.accountbl.AccountInfo;
 import businesslogic.clientbl.ClientInfo;
 import businesslogic.userbl.UserInfo;
 import config.RMIConfig;
+import dataenum.BillState;
 import dataenum.BillType;
 import dataservice.accountbilldataservice.AccountBillDataService;
 
@@ -151,10 +152,12 @@ public class AccountBill {
 	 * @return 处理结果
 	 * @author cylong
 	 * @version 2014年11月30日 下午10:43:20
+	 * @throws RemoteException 
 	 */
-	public AccountBillVO save() {
-		// TODO AccountBill保存成草稿状态
-		return null;
+	public AccountBillVO save() throws RemoteException {
+		po.setState(BillState.DRAFT);
+		accountBillData.insert(po);
+		return AccountBillTrans.poToVO(po);
 	}
 
 	/**

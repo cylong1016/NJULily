@@ -98,26 +98,8 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 	}
 
 	public ResultMessage update(AccountBillVO vo) throws RemoteException {
-		String ID = vo.ID;
-		String clientID = vo.clientID;
-		String clientName = vo.clientName;
-		String username = vo.username;
-		BillType type = vo.type;
-		ArrayList<AccountBillItemPO> bills = itemsVOtoPO(vo.bills);
-		AccountBillPO po = new AccountBillPO(ID, clientID, clientName, username, bills, type);
+		AccountBillPO po = AccountBillTrans.VOtoPO(vo);
 		return accountBillData.update(po);
-	}
-
-	private ArrayList<AccountBillItemPO> itemsVOtoPO(ArrayList<AccountBillItemVO> VOs) {
-		ArrayList<AccountBillItemPO> POs = new ArrayList<AccountBillItemPO>();
-		for(AccountBillItemVO vo : VOs) {
-			String accountName = vo.accountName;
-			double money = vo.money;
-			String remark = vo.remark;
-			AccountBillItemPO po = new AccountBillItemPO(accountName, money, remark);
-			POs.add(po);
-		}
-		return POs;
 	}
 
 	/**
@@ -165,8 +147,7 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 			bills.get(i).money = money;
 		}
 		redVO.bills = bills;
-		AccountBillPO redPO =
-								new AccountBillPO(redVO.ID, redVO.clientID, redVO.clientName, redVO.username, itemsVOtoPO(redVO.bills), redVO.type);
+		AccountBillPO redPO = AccountBillTrans.VOtoPO(redVO);
 		if (!isCopy) {
 			accountBillData.insert(redPO);
 			pass(redVO);
@@ -201,6 +182,13 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 		ArrayList<AccountBillVO> VOs = show.showPayFailure();
 		VOs.addAll(show.showExpenseFailure());
 		return VOs;
+	}
+
+	@Override
+	public void noPass(AccountBillVO vo) throws RemoteException {
+		AccountBillPO po = AccountBillTrans.VOtoPO(vo);
+		po.setState(BillState.FAILURE);
+		accountBillData.update(po);
 	}
 
 }

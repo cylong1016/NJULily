@@ -8,7 +8,8 @@ package dataenum;
 public enum BillState {
 	APPROVALING("正在审批"),
 	SUCCESS("审批成功"),
-	FAILURE("审批失败");
+	FAILURE("审批失败"),
+	DRAFT("存为草稿");
 
 	public final String value;
 

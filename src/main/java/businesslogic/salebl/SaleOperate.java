@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import businesslogic.approvalbl.info.SaleInfo_Approval;
 import businesslogic.clientbl.ClientInfo;
 import businesslogic.commoditybl.CommodityInfo;
-import businesslogic.common.ChangeCommodityItems;
 import businesslogic.salebl.info.ClientInfo_Sale;
 import businesslogic.salebl.info.CommodityInfo_Sale;
 import message.ResultMessage;
@@ -16,7 +15,6 @@ import vo.commodity.CommodityItemVO;
 import vo.sale.SalesVO;
 import dataenum.BillState;
 import dataenum.BillType;
-import dataenum.Storage;
 import dataservice.saledataservice.SaleDataService;
 
 /**
@@ -39,20 +37,7 @@ public class SaleOperate implements SaleInfo_Approval {
 	 * @throws RemoteException
 	 */
 	public ResultMessage update(SalesVO vo) throws RemoteException {
-		String ID = vo.ID;
-		String clientID = vo.clientID;
-		String client = vo.client;
-		String salesman = vo.salesman;
-		String user = vo.user;
-		Storage storage = vo.storage;
-		double beforePrice = vo.beforePrice;
-		double allowance = vo.allowance;
-		double voucher = vo.voucher;
-		String remark = vo.remark;
-		double afterPrice = vo.afterPrice;
-		BillType type = vo.type;
-		ArrayList<CommodityItemPO> commodities = ChangeCommodityItems.itemsVOtoPO(vo.commodities);
-		SalesPO po = new SalesPO(ID, clientID, client, salesman, user, storage, commodities, beforePrice, allowance, voucher, remark, afterPrice, type);
+		SalesPO po = SaleTrans.VOtoPO(vo);
 		return saleData.update(po);
 	}
 
@@ -106,12 +91,11 @@ public class SaleOperate implements SaleInfo_Approval {
 			int number = -commodities.get(i).number;
 			commodities.get(i).number = number;
 		}
-
 		redVO.commodities = commodities;
 		redVO.allowance = (-redVO.allowance);
 		redVO.voucher = (-redVO.voucher);
 		// 先建立对应的PO
-		SalesPO redPO = new SalesPO(redVO.ID, redVO.clientID, redVO.client, redVO.salesman, redVO.user, redVO.storage, ChangeCommodityItems.itemsVOtoPO(redVO.commodities), redVO.beforePrice, redVO.allowance, redVO.voucher, redVO.remark, redVO.afterPrice, redVO.type);
+		SalesPO redPO = SaleTrans.VOtoPO(redVO);
 		if (!isCopy) {
 			// 入账，更改相应数据
 			saleData.insert(redPO);
@@ -120,6 +104,13 @@ public class SaleOperate implements SaleInfo_Approval {
 			// TODO 保存为草稿状态
 		}
 		return redVO;
+	}
+
+	@Override
+	public void noPass(SalesVO vo) throws RemoteException {
+		SalesPO po = SaleTrans.VOtoPO(vo);
+		po.setState(BillState.FAILURE);
+		saleData.update(po);
 	}
 
 }

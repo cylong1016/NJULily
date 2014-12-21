@@ -3,6 +3,7 @@ package businesslogic.approvalbl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import businesslogic.approvalbl.info.NoPassApproval;
 import message.ResultMessage;
 import vo.AccountBillVO;
 import vo.CashBillVO;
@@ -96,9 +97,37 @@ public class Approval {
 	}
 
 	public ResultMessage noPassBill(ArrayList<ValueObject> VOs,
-			ArrayList<BillType> billTypes) {
-		// TODO Auto-generated method stub
-		return null;
+			ArrayList<BillType> billTypes) throws RemoteException {
+		NoPassApproval noPass = new NoPassApproval();
+		for (int i=0; i < VOs.size(); i++) {
+			BillType billType = billTypes.get(i);
+			ValueObject vo = VOs.get(i);
+			switch (billType) {
+			case SALE:
+			case SALEBACK:
+				noPass.noPassBill((SalesVO)vo);
+				 break;
+			case PURCHASE:
+			case PURCHASEBACK:
+				noPass.noPassBill((PurchaseVO)vo);
+				 break;
+			case GIFT:
+			case OVERFLOW:
+			case LOSS:
+				noPass.noPassBill((InventoryBillVO)vo);
+				 break;
+			case PAY:
+			case EXPENSE:
+				noPass.noPassBill((AccountBillVO)vo);
+				 break;
+			case CASH:
+				noPass.noPassBill((CashBillVO)vo);
+				 break;
+			default:
+				break;
+			}
+		}
+		return ResultMessage.SUCCESS;
 	}
 	
 }

@@ -6,12 +6,10 @@ import java.util.ArrayList;
 import message.ResultMessage;
 import dataenum.BillState;
 import dataenum.BillType;
-import dataenum.Storage;
 import dataservice.purchasedataservice.PurchaseDataService;
 import businesslogic.approvalbl.info.PurchaseInfo_Approval;
 import businesslogic.clientbl.ClientInfo;
 import businesslogic.commoditybl.CommodityInfo;
-import businesslogic.common.ChangeCommodityItems;
 import businesslogic.purchasebl.info.ClientInfo_Purchase;
 import businesslogic.purchasebl.info.CommodityInfo_Purchase;
 import po.CommodityItemPO;
@@ -30,19 +28,9 @@ public class PurchaseOperate implements PurchaseInfo_Approval{
 	}
 	
 	public ResultMessage update(PurchaseVO vo) throws RemoteException {
-		String ID = vo.ID;
-		String clientID = vo.clientID;
-		String client = vo.client;
-		String user = vo.user;
-		Storage storage = vo.storage;
-		String remark = vo.remark;
-		double beforePrice = vo.beforePrice;
-		BillType type = vo.type;
-		ArrayList<CommodityItemPO> commodities = ChangeCommodityItems.itemsVOtoPO(vo.commodities);
-		PurchasePO po = new PurchasePO(ID, clientID, client, user, storage, commodities, beforePrice, remark, type);
+		PurchasePO po = PurchaseTrans.VOtoPO(vo);
 		return purchaseData.update(po);
 	}
-
 	
 	public ResultMessage pass(PurchaseVO vo) throws RemoteException {
 		PurchasePO po = purchaseData.find(vo.ID);
@@ -86,8 +74,7 @@ public class PurchaseOperate implements PurchaseInfo_Approval{
 		}
 		redVO.commodities = commodities;
 		// 先建立对应的PO
-		PurchasePO redPO = new PurchasePO(redVO.ID, redVO.clientID, redVO.client, redVO.user, 
-				redVO.storage, ChangeCommodityItems.itemsVOtoPO(redVO.commodities), redVO.beforePrice, redVO.remark, redVO.type);
+		PurchasePO redPO = PurchaseTrans.VOtoPO(redVO);
 		if (!isCopy) {
 			purchaseData.insert(redPO);
 			pass(redVO);
@@ -96,6 +83,13 @@ public class PurchaseOperate implements PurchaseInfo_Approval{
 			// TODO 保存为草稿 
 		}
 		return null;
+	}
+
+	@Override
+	public void noPass(PurchaseVO vo) throws RemoteException {
+		PurchasePO po = PurchaseTrans.VOtoPO(vo);
+		po.setState(BillState.FAILURE);
+		purchaseData.insert(po);
 	}
 
 }

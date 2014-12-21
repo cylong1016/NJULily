@@ -33,4 +33,6 @@ public interface SaleInfo_Approval {
 	 * @throws RemoteException 
 	 */
 	public SalesVO addRed(SalesVO vo, boolean isCopy) throws RemoteException;
+
+	public void noPass(SalesVO vo) throws RemoteException;
 }

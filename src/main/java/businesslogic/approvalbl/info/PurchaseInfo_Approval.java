@@ -26,4 +26,6 @@ public interface PurchaseInfo_Approval {
 	public ResultMessage pass(PurchaseVO vo) throws RemoteException;
 
 	public PurchaseVO addRed(PurchaseVO vo, boolean isCopy) throws RemoteException;
+
+	public void noPass(PurchaseVO vo) throws RemoteException;
 }

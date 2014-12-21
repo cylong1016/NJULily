@@ -56,7 +56,12 @@ public class ApprovalController implements ApprovalBLService {
 	 */
 	@Override
 	public ResultMessage noPassBill(ArrayList<ValueObject> VOs, ArrayList<BillType> billTypes) {
-		return approval.noPassBill(VOs, billTypes);
+		try {
+			return approval.noPassBill(VOs, billTypes);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return ResultMessage.REMOTE_EXCEPTION;
+		}
 	}
 
 }

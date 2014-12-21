@@ -62,7 +62,12 @@ public class CashBillController implements CashBillBLService {
 	 */
 	@Override
 	public CashBillVO save(String account) {
-		return cashBill.save(account);
+		try {
+			return cashBill.save(account);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }

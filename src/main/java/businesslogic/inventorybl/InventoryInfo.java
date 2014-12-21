@@ -88,7 +88,7 @@ public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInf
 	 * @throws MalformedURLException 
 	 * @throws RemoteException 
 	 */
-	public ArrayList<String> getID(String ID, String clientName, String salesman, Storage storage) throws RemoteException {
+	public ArrayList<String> getID(String clientName, String salesman, Storage storage) throws RemoteException {
 		ArrayList<String> IDs = new ArrayList<String>();
 		IDs = getID(giftIDs, clientName, salesman, storage);
 		IDs.addAll(getID(overIDs, clientName, salesman, storage));
@@ -106,12 +106,17 @@ public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInf
 	}
 
 	public ResultMessage update(InventoryBillVO vo) throws RemoteException {
+		InventoryBillPO po = VOtoPO(vo);
+		return inventoryData.update(po);
+	}
+	
+	private InventoryBillPO VOtoPO(InventoryBillVO vo) {
 		String ID = vo.ID;
 		BillType billType = vo.billType;
 		String remark = vo.remark;
 		ArrayList<CommodityItemPO> commodities = ChangeCommodityItems.itemsVOtoPO(vo.commodities);
 		InventoryBillPO po = new InventoryBillPO(ID, billType, commodities, remark);
-		return inventoryData.update(po);
+		return po;
 	}
 
 	/**
@@ -162,7 +167,7 @@ public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInf
 		}
 		redVO.commodities = commodities;
 		// 先建立对应的PO
-		InventoryBillPO redPO = new InventoryBillPO(redVO.ID, redVO.billType, ChangeCommodityItems.itemsVOtoPO(redVO.commodities), redVO.remark);
+		InventoryBillPO redPO = VOtoPO(redVO);
 		if (!isCopy) {
 			inventoryData.insert(redPO);
 			pass(redVO);
@@ -207,9 +212,9 @@ public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInf
 	}
 
 	@Override
-	public ArrayList<String> getID(String clientName, String salesman,
-			Storage storage) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+	public void noPass(InventoryBillVO vo) throws RemoteException {
+		InventoryBillPO po = VOtoPO(vo);
+		po.setState(BillState.FAILURE);
+		inventoryData.insert(po);
 	}
 }

@@ -63,4 +63,28 @@ public class AccountBillTrans {
 		}
 		return itemVOList;
 	}
+	
+	static AccountBillPO VOtoPO(AccountBillVO vo) {
+		String ID = vo.ID;
+		String clientID = vo.clientID;
+		String clientName = vo.clientName;
+		String username = vo.username;
+		BillType type = vo.type;
+		ArrayList<AccountBillItemPO> bills = itemsVOtoPO(vo.bills);
+		AccountBillPO po = new AccountBillPO(ID, clientID, clientName, username, bills, type);
+		return po;
+	}
+
+	private static ArrayList<AccountBillItemPO> itemsVOtoPO(ArrayList<AccountBillItemVO> VOs) {
+		ArrayList<AccountBillItemPO> POs = new ArrayList<AccountBillItemPO>();
+		for(AccountBillItemVO vo : VOs) {
+			String accountName = vo.accountName;
+			double money = vo.money;
+			String remark = vo.remark;
+			AccountBillItemPO po = new AccountBillItemPO(accountName, money, remark);
+			POs.add(po);
+		}
+		return POs;
+	}
+
 }

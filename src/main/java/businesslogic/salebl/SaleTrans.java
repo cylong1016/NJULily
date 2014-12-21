@@ -3,6 +3,7 @@ package businesslogic.salebl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import po.CommodityItemPO;
 import po.SalesPO;
 import vo.commodity.CommodityItemVO;
 import vo.sale.SalesVO;
@@ -38,5 +39,23 @@ public class SaleTrans {
 		ArrayList<CommodityItemVO> commodities = ChangeCommodityItems.itemPOToVO(po.getCommodities());
 		SalesVO vo = new SalesVO(ID, clientID, client, storage, user, salesman, commodities, remark, beforePrice, allowance, voucher, afterPrice, type, state);
 		return vo;
+	}
+	
+public static SalesPO VOtoPO(SalesVO vo) {
+	String ID = vo.ID;
+	String clientID = vo.clientID;
+	String client = vo.client;
+	String salesman = vo.salesman;
+	String user = vo.user;
+	Storage storage = vo.storage;
+	double beforePrice = vo.beforePrice;
+	double allowance = vo.allowance;
+	double voucher = vo.voucher;
+	String remark = vo.remark;
+	double afterPrice = vo.afterPrice;
+	BillType type = vo.type;
+	ArrayList<CommodityItemPO> commodities = ChangeCommodityItems.itemsVOtoPO(vo.commodities);
+	SalesPO po = new SalesPO(ID, clientID, client, salesman, user, storage, commodities, beforePrice, allowance, voucher, remark, afterPrice, type);
+	return po;
 	}
 }

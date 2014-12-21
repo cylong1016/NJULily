@@ -129,7 +129,12 @@ public class AccountBillController implements AccountBillBLService {
 	 */
 	@Override
 	public AccountBillVO save() {
-		return accountBill.save();
+		try {
+			return accountBill.save();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }
