@@ -37,9 +37,9 @@ public class Frame_Login extends MyFrame implements ActionListener{
 	
 	MyTextField userNameField;
 	MyPasswordField passwordField;
-	MyLabel label_field1, label_field2, label_checkbox;
-	MyButton button_Enter, button_checkbox;
-	MyBackground loginBackground2;
+	MyLabel label_field1, label_field2;
+	MyButton button_Enter;
+	MyBackground loginBackground2, loginBackground;
 	
 	public static String userName;
 	public static UserIdentity userIden;
@@ -49,7 +49,7 @@ public class Frame_Login extends MyFrame implements ActionListener{
 		MyFrame.button_back.setVisible(false);
 		
 		//a text field for user name input 
-		userNameField = new MyTextField(850, 200, 240, 48);
+		userNameField = new MyTextField(575, 480, 200, 40);
 		userNameField.setFont(new Font("Arail",Font.BOLD,20));
 		userNameField.setForeground(Color.WHITE);
 		userNameField.setOpaque(false);
@@ -65,7 +65,7 @@ public class Frame_Login extends MyFrame implements ActionListener{
 		this.add(userNameField);
 		
 		//a password field for password input
-		passwordField = new MyPasswordField(850, 305, 240, 48);
+		passwordField = new MyPasswordField(575, 560, 200, 40);
 		passwordField.setFont(new Font("Arail",Font.PLAIN,20));
 		passwordField.setForeground(Color.WHITE);
 		passwordField.addMouseListener(new MouseAdapter(){
@@ -79,59 +79,40 @@ public class Frame_Login extends MyFrame implements ActionListener{
 		this.add(passwordField);
 		
 		//the button for action login
-		button_Enter = new MyButton(782,450,320,60);
+		button_Enter = new MyButton(530, 630, 250, 40);
 		button_Enter.addMouseListener(new MouseAdapter(){
-			public void mouseEntered(MouseEvent arg0) {
+			public void mouseEntered(MouseEvent arg0) {			
+				loginBackground.setVisible(false);
 				loginBackground2.setVisible(true);
 			}
 			public void mouseExited(MouseEvent arg0) {
+				loginBackground.setVisible(true);
 				loginBackground2.setVisible(false);
 			}
 			}); 
 		button_Enter.addActionListener(this);
 		this.add(button_Enter);
 		
-		//a button act as a checkbox
-		MyButton button_checkbox = new MyButton(800,390,25,25);
-		button_checkbox.addMouseListener(new MouseAdapter(){
-			public void mouseClicked(MouseEvent arg0){
-					if(flag == false){
-						label_checkbox.setVisible(true);
-						flag = true;
-					}else{
-						label_checkbox.setVisible(false);
-						flag = false;
-					}
-					
-				}
-			});
-		this.add(button_checkbox);
 		
 		//these are the effect for better UI
-		label_field1 = new MyLabel(289, -135, 1280, 700);
-		label_field1.setIcon(new ImageIcon("ui/image/login/field.png"));
+		label_field1 = new MyLabel(0, 0, 1280, 720);
+		label_field1.setIcon(new ImageIcon("ui/image/login/back3.png"));
 		label_field1.setVisible(false);
 		label_field1.setOpaque(false);
 		this.add(label_field1);
 		
-		label_field2 = new MyLabel(289, -32, 1280, 700);
-		label_field2.setIcon(new ImageIcon("ui/image/login/field.png"));
+		label_field2 = new MyLabel(0, 0, 1280, 720);
+		label_field2.setIcon(new ImageIcon("ui/image/login/back4.png"));
 		label_field2.setVisible(false);
 		label_field2.setOpaque(false);
 		this.add(label_field2);
-		
-		label_checkbox = new MyLabel(160, 53, 1280, 700);
-		label_checkbox.setIcon(new ImageIcon("ui/image/login/checkbox.png"));
-		label_checkbox.setVisible(false);
-		label_checkbox.setOpaque(false);
-		this.add(label_checkbox);
 			
 		//initialize the background for this frame
-		loginBackground2 = new MyBackground("ui/image/login/loginBackground2.png");
+		loginBackground2 = new MyBackground("ui/image/login/backg2.png");
 		loginBackground2.setVisible(false);
 		this.add(loginBackground2);
 		
-		MyBackground loginBackground = new MyBackground("ui/image/login/loginBackground.png");
+		loginBackground = new MyBackground("ui/image/login/backg.png");
 		this.add(loginBackground);
 			
 	}
