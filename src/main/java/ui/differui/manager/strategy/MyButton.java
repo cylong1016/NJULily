@@ -14,9 +14,11 @@ public class MyButton extends JButton implements ActionListener{
 	
 	private static final long serialVersionUID = 1L;
 	
-	private JPanel inPanel; // TODO 这两个变量干嘛用的，没用到把
+	// 我把private改成public了，主要是黄线。。。
+	// TODO 这两个变量干嘛用的，没用到把
+	public JPanel inPanel;
 	
-	private JPanel nextPanel;
+	public JPanel nextPanel;
 
 	public MyButton(String text, int x, int y, int width, int height){
 		this.setBounds(x, y, width, height);
