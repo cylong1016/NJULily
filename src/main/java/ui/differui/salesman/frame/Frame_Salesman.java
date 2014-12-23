@@ -33,7 +33,7 @@ public class Frame_Salesman extends MyFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	
-	MyButton bt_index, bt_in, bt_client, bt_inBack, bt_sale, bt_saleBack;
+	static MyButton bt_index, bt_in, bt_client, bt_inBack, bt_sale, bt_saleBack;
 	JLabel lb_index, lb_in, lb_client, lb_inBack, lb_sale, lb_saleBack;
 	
 	public static JButton bt_vanish;
@@ -54,7 +54,7 @@ public class Frame_Salesman extends MyFrame implements ActionListener{
 	static SaleBackFinal panel_saleBack;
 	
 	
-	static JLabel in_back;
+	static JLabel in_back, lb_super;
 	
 	public Frame_Salesman(){
 		
@@ -113,8 +113,13 @@ public class Frame_Salesman extends MyFrame implements ActionListener{
 		panel_saleBack.setVisible(false);
 		this.add(panel_saleBack);
 		
-		in_back = new JLabel(new ImageIcon("ui/image/salesman/in.png"));
-		in_back.setBounds(0, 0, 1280, 630);
+		lb_super = new JLabel(new ImageIcon("ui/image/inventory/super.png"));
+		lb_super.setBounds(0, 0, 1280, 720);
+		lb_super.setVisible(false);
+		this.add(lb_super);
+		
+		in_back = new JLabel(new ImageIcon("ui/image/inventory/arrow.png"));
+		in_back.setBounds(0, 0, 1280, 720);
 		in_back.setVisible(false);
 		this.add(in_back);
 			
@@ -245,9 +250,38 @@ public class Frame_Salesman extends MyFrame implements ActionListener{
 		
 	}
 	
+	private static void buttonVanish(){
+	
+		bt_index.setVisible(false);
+		bt_in.setVisible(false);
+		bt_client.setVisible(false);
+		bt_inBack.setVisible(false);
+		bt_sale.setVisible(false);
+		bt_saleBack.setVisible(false);
+		lb_super.setVisible(false);
+	}
+	
+	private static void buttonTurnedUp(){
+		
+		bt_index.setVisible(true);
+		bt_in.setVisible(true);
+		bt_client.setVisible(true);
+		bt_inBack.setVisible(true);
+		bt_sale.setVisible(true);
+		bt_saleBack.setVisible(true);
+		lb_super.setVisible(true);
+		
+	}
+	
 	public static void visibleTrue(int i){
 		
 		flag = i;
+		
+		if(i == 0){
+			buttonVanish();
+		}else{
+			buttonTurnedUp();
+		}
 		
 		switch(i){
 			case 0: panel_si.setVisible(true);break;

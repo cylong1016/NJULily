@@ -44,7 +44,7 @@ public class InBackFinal extends JLabel implements ActionListener{
 		JLabel infoBar = new JLabel("制定进货退货单 - 确认生成");
 		infoBar.setFont(new Font("华文细黑", Font.BOLD, 18));
 		infoBar.setBounds(80, 14, 1100, 20);
-		infoBar.setForeground(Color.GRAY);
+		infoBar.setForeground(Color.WHITE);
 		infoBar.setOpaque(false);
 		this.add(infoBar);
 		

@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import ui.commonui.myui.MyBackground;
 import ui.commonui.myui.MyButton;
 import ui.differui.inventory.frame.Frame_Inventory;
+import ui.differui.salesman.frame.Frame_Salesman;
 
 public class InventoryIndex extends JLabel implements ActionListener{
 	
@@ -31,27 +32,27 @@ public class InventoryIndex extends JLabel implements ActionListener{
 	public void actionPerformed(ActionEvent events) {
 		
 		if(events.getSource() == bt1){
-			Frame_Inventory.visibleTrue(1);
+			Frame_Salesman.visibleTrue(1);
 			this.setVisible(false);
 		}
 		
 		if(events.getSource() == bt2){
-			Frame_Inventory.visibleTrue(2);
+			Frame_Salesman.visibleTrue(2);
 			this.setVisible(false);
 		}
 		
 		if(events.getSource() == bt3){
-			Frame_Inventory.visibleTrue(3);
+			Frame_Salesman.visibleTrue(3);
 			this.setVisible(false);
 		}
 		
 		if(events.getSource() == bt4){
-			Frame_Inventory.visibleTrue(4);
+			Frame_Salesman.visibleTrue(4);
 			this.setVisible(false);
 		}
 		
 		if(events.getSource() == bt5){
-			Frame_Inventory.visibleTrue(5);
+			Frame_Salesman.visibleTrue(5);
 			this.setVisible(false);
 		}
 		

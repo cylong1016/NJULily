@@ -50,7 +50,7 @@ public class SaleInfo extends Info<SalesPO> implements SaleInfo_Inventory, SaleI
 			SaleInfoService saleInfo = (SaleInfoService)getData();
 			ArrayList<String> IDs = saleInfo.getAllID(BillType.SALE);
 			for (String id : IDs) {
-				System.out.println(id);
+				System.out.println(id); // TODO
 			}
 			saleIDs = DateOperate.findFitDate(IDs, beginDate, endDate);
 			ArrayList<String> bIDs = saleInfo.getAllID(BillType.SALEBACK);

@@ -14,7 +14,7 @@ public class MyButton extends JButton implements ActionListener{
 	
 	private static final long serialVersionUID = 1L;
 	
-	private JPanel inPanel;
+	private JPanel inPanel; // TODO 这两个变量干嘛用的，没用到把
 	
 	private JPanel nextPanel;
 
