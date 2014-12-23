@@ -38,11 +38,11 @@ public class CommodityDetailPanel2 extends MyPanel implements ActionListener{
 		
 		CommodityBLService controller = new CommodityController();
 		CommodityVO cvo = controller.show(ID);
-		
-			
+
+
 		Color foreColor = new Color(158, 213, 220);
 		Color backColor = new Color(46, 52, 101);
-		
+
 		int x1 = 80, y1 = 55, x2 = 390, y2 = -66;
 		
 		//information bar
