@@ -28,8 +28,12 @@ public class Frame_Finace extends MyFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	
-	MyButton bt_index, bt_account, bt_trade, bt_saleDetail, bt_businessProcess, bt_businessCondition;
+	static MyButton bt_index, bt_account, bt_trade, bt_saleDetail, bt_businessProcess, bt_businessCondition;
 	JLabel lb_index, lb_account, lb_trade, lb_saleDetail, lb_businessProcess, lb_businessCondition;
+	
+	static JLabel lb_super;
+	
+	static MyBackground background;
 	
 	public static JButton bt_vanish;
 	
@@ -53,6 +57,11 @@ public class Frame_Finace extends MyFrame implements ActionListener{
 		this.add(bt_vanish);
 		
 		Frame_Login.myNameis = "Frame_Finace";
+		
+		lb_super = new JLabel(new ImageIcon("ui/image/inventory/super.png"));
+		lb_super.setBounds(0, 0, 1280, 720);
+		lb_super.setVisible(false);
+		this.add(lb_super);
 		
 		panel_index = new FinaceIndex();
 		panel_index.setVisible(true);
@@ -86,7 +95,7 @@ public class Frame_Finace extends MyFrame implements ActionListener{
 		panel_businessCondition.setVisible(false);
 		this.add(panel_businessCondition);
 		
-		trade_back = new JLabel(new ImageIcon("ui/image/finace/tradeBack.png"));
+		trade_back = new JLabel(new ImageIcon("ui/image/finace/tradeBack2.png"));
 		trade_back.setBounds(0, 0, 1280, 630);
 		trade_back.setVisible(false);
 		this.add(trade_back);
@@ -213,14 +222,45 @@ public class Frame_Finace extends MyFrame implements ActionListener{
 		
 		/////////////////////////////back///////////////////////////////
 		
-		MyBackground background = new MyBackground("ui/image/finace/background.jpg");
+		background = new MyBackground("ui/image/finace/background.jpg");
 		this.add(background);
+		
+	}
+	
+	private static void buttonVanish(){
+		
+		bt_index.setVisible(false);
+		bt_account.setVisible(false);
+		bt_trade.setVisible(false);
+		bt_saleDetail.setVisible(false);
+		bt_businessProcess.setVisible(false);
+		bt_businessCondition.setVisible(false);
+		background.setVisible(false);
+		lb_super.setVisible(false);
+	}
+	
+	private static void buttonTurnedUp(){
+		
+		bt_index.setVisible(true);
+		bt_account.setVisible(true);
+		bt_trade.setVisible(true);
+		bt_saleDetail.setVisible(true);
+		bt_businessProcess.setVisible(true);
+		bt_businessCondition.setVisible(true);
+		background.setVisible(true);
+		lb_super.setVisible(true);
 		
 	}
 	
 	public static void visibleTrue(int i){
 	
 		flag = i;
+		
+		if(i == 0){
+			buttonVanish();
+		}else{
+			buttonTurnedUp();
+		}
 		
 		switch(i){
 			case 0: panel_index.setVisible(true);break;

@@ -9,7 +9,6 @@ import javax.swing.JLabel;
 
 import ui.commonui.myui.MyBackground;
 import ui.commonui.myui.MyButton;
-import ui.differui.inventory.frame.Frame_Inventory;
 import ui.differui.salesman.frame.Frame_Salesman;
 
 public class InventoryIndex extends JLabel implements ActionListener{
