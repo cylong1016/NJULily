@@ -35,7 +35,7 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	
-	MyButton bt_index, bt_good, bt_show, bt_gift, bt_checking, bt_alarm;
+	static MyButton bt_index, bt_good, bt_show, bt_gift, bt_checking, bt_alarm;
 	JLabel lb_index, lb_good, lb_show, lb_gift, lb_checking, lb_alarm;
 
 	static JLabel lb_good2;
@@ -52,7 +52,7 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 	static WarningIndex panel_alarm;
 	static GiftFinish panel_giftFinish;
 	static WarningFinish panel_warningFinish;
-
+	static MyBackground background;
 	static JLabel in_back;
 	
 	static JTable outputTable;
@@ -95,12 +95,12 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 		panel_alarm.setVisible(false);
 		this.add(panel_alarm);
 		
-		in_back = new JLabel(new ImageIcon("ui/image/salesman/in.png"));
+		in_back = new JLabel(new ImageIcon("ui/image/salesman/in2.png"));
 		in_back.setBounds(0, 0, 1280, 630);
 		in_back.setVisible(false);
 		this.add(in_back);
 		
-		lb_good2 = new JLabel(new ImageIcon("ui/image/inventory/good.png"));
+		lb_good2 = new JLabel(new ImageIcon("ui/image/inventory/good2.png"));
 		lb_good2.setBounds(0, 0, 1280, 630);
 		lb_good2.setVisible(false);
 		this.add(lb_good2);
@@ -207,7 +207,7 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 			}); 
 		this.add(bt_alarm);
 		
-		MyBackground background = new MyBackground("ui/image/inventory/back.jpg");
+		background = new MyBackground("ui/image/inventory/back.jpg");
 		this.add(background);
 		
 		bt_vanish = new JButton();
@@ -221,14 +221,44 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 		output = new JButton();
 		output.addActionListener(this);
 		this.add(output);
+		
+		buttonVanish();
+	}
+	
+	private static void buttonVanish(){
+		bt_index.setVisible(false);
+		bt_good.setVisible(false);
+		bt_show.setVisible(false);
+		bt_gift.setVisible(false);
+		bt_checking.setVisible(false);
+		bt_alarm.setVisible(false);
+		background.setVisible(false);
+	}
+	
+	private static void buttonTurnedUp(){
+		bt_index.setVisible(true);
+		bt_good.setVisible(true);
+		bt_show.setVisible(true);
+		bt_gift.setVisible(true);
+		bt_checking.setVisible(true);
+		bt_alarm.setVisible(true);
+		background.setVisible(true);
 	}
 	
 	public static void visibleTrue(int i){
 		
 		flag = i;
 		
+		
+		if(i == 0){
+			buttonVanish();
+		}else{
+			buttonTurnedUp();
+		}
+		
 		switch(i){
-			case 0: panel_index.setVisible(true);break;
+			case 0: panel_index.setVisible(true);
+					break;
 			
 			case 1: panel_good.setVisible(true);
 					lb_good2.setVisible(true);break;
