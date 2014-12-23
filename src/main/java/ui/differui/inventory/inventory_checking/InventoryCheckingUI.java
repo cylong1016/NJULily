@@ -64,10 +64,10 @@ public class InventoryCheckingUI extends MyPanel implements ActionListener{
 		this.setBounds(0, 0, 1280, 720);
 		this.setOpaque(false);
 
-		JLabel infoBar = new JLabel("制定赠送单 - 选择商品");
+		JLabel infoBar = new JLabel("库存盘点");
 		infoBar.setFont(new Font("华文细黑", Font.BOLD, 18));
 		infoBar.setBounds(80, 14, 1100, 20);
-		infoBar.setForeground(Color.GRAY);
+		infoBar.setForeground(Color.WHITE);
 		infoBar.setOpaque(false);
 		this.add(infoBar);
 		

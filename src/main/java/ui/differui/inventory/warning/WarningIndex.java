@@ -82,7 +82,7 @@ public class WarningIndex extends MyPanel implements ActionListener{
 		JLabel infoBar = new JLabel("创建警报类单据 - 选择商品");
 		infoBar.setFont(new Font("华文细黑", Font.BOLD, 18));
 		infoBar.setBounds(80, 14, 1100, 20);
-		infoBar.setForeground(Color.GRAY);
+		infoBar.setForeground(Color.WHITE);
 		infoBar.setOpaque(false);
 		this.add(infoBar);
 		

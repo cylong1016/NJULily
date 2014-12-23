@@ -12,22 +12,17 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import message.ResultMessage;
-import blservice.approvalblservice.ApprovalBLService;
-import businesslogic.approvalbl.ApprovalController;
-import dataenum.BillState;
-import dataenum.BillType;
-import dataenum.Storage;
 import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.myui.MyPanel;
 import ui.commonui.myui.MyTable;
 import ui.commonui.warning.WarningFrame;
-import vo.AccountBillVO;
-import vo.CashBillVO;
-import vo.InventoryBillVO;
 import vo.PurchaseVO;
 import vo.ValueObject;
 import vo.commodity.CommodityItemVO;
 import vo.sale.SalesVO;
+import blservice.approvalblservice.ApprovalBLService;
+import businesslogic.approvalbl.ApprovalController;
+import dataenum.BillType;
 
 public class ApprovalModifyPanel extends MyPanel implements ActionListener{
 

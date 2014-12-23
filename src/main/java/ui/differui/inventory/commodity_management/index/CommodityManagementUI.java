@@ -1,11 +1,13 @@
 package ui.differui.inventory.commodity_management.index;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -67,6 +69,13 @@ public class CommodityManagementUI extends MyPanel implements ActionListener{
 		this.setBackground(null);
 		this.setOpaque(false);
 		this.setBounds(0, 0, 1280, 720);
+		
+		JLabel infoBar = new JLabel("商品与商品分类管理");
+		infoBar.setFont(new Font("华文细黑", Font.BOLD, 18));
+		infoBar.setBounds(80, 14, 1100, 20);
+		infoBar.setForeground(Color.WHITE);
+		infoBar.setOpaque(false);
+		this.add(infoBar);
 				
 		DefaultMutableTreeNode root = new DefaultMutableTreeNode("所有商品分类"); 
 		tree = new MyTree(root); 
