@@ -117,7 +117,7 @@ public class GiftFinish extends JLabel implements ActionListener{
 		
 		if(events.getSource() == button_back){
 			this.setVisible(false);
-			Frame_Inventory.visibleTrue(6);
+			Frame_Inventory.visibleTrue(4);
 		}
 		
 		if(events.getSource() == button_output){

@@ -38,7 +38,7 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 	static MyButton bt_index, bt_good, bt_show, bt_gift, bt_checking, bt_alarm;
 	JLabel lb_index, lb_good, lb_show, lb_gift, lb_checking, lb_alarm;
 
-	static JLabel lb_good2;
+	static JLabel lb_super;
 	
 	public static int flag = 0, destination = 0;
 	
@@ -95,15 +95,15 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 		panel_alarm.setVisible(false);
 		this.add(panel_alarm);
 		
-		in_back = new JLabel(new ImageIcon("ui/image/salesman/in2.png"));
-		in_back.setBounds(0, 0, 1280, 630);
+		in_back = new JLabel(new ImageIcon("ui/image/inventory/arrow.png"));
+		in_back.setBounds(0, 0, 1280, 720);
 		in_back.setVisible(false);
 		this.add(in_back);
 		
-		lb_good2 = new JLabel(new ImageIcon("ui/image/inventory/good2.png"));
-		lb_good2.setBounds(0, 0, 1280, 630);
-		lb_good2.setVisible(false);
-		this.add(lb_good2);
+		lb_super = new JLabel(new ImageIcon("ui/image/inventory/super.png"));
+		lb_super.setBounds(0, 0, 1280, 720);
+		lb_super.setVisible(false);
+		this.add(lb_super);
 		
 		lb_index = new JLabel(new ImageIcon("ui/image/inventory/index.jpg"));
 		lb_index.setBounds(0, 0, 1280, 720);
@@ -233,6 +233,7 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 		bt_checking.setVisible(false);
 		bt_alarm.setVisible(false);
 		background.setVisible(false);
+		lb_super.setVisible(false);
 	}
 	
 	private static void buttonTurnedUp(){
@@ -243,6 +244,7 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 		bt_checking.setVisible(true);
 		bt_alarm.setVisible(true);
 		background.setVisible(true);
+		lb_super.setVisible(true);
 	}
 	
 	public static void visibleTrue(int i){
@@ -260,8 +262,7 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 			case 0: panel_index.setVisible(true);
 					break;
 			
-			case 1: panel_good.setVisible(true);
-					lb_good2.setVisible(true);break;
+			case 1: panel_good.setVisible(true);break;
 					
 			case 2: panel_review.setVisible(true);break;
 			
@@ -270,7 +271,8 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 			case 4: panel_gift.setVisible(true);
 					in_back.setVisible(true);break;
 					
-			case 5: panel_alarm.setVisible(true);break;
+			case 5: panel_alarm.setVisible(true);
+					in_back.setVisible(true);break;
 			
 			case 6: panel_giftFinish.setVisible(true);
 					in_back.setVisible(true);
@@ -285,8 +287,7 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 		switch(i){
 			case 0: panel_index.setVisible(false);break;
 			
-			case 1: panel_good.setVisible(false);
-					lb_good2.setVisible(false);break;
+			case 1: panel_good.setVisible(false);break;
 					
 			case 2: panel_review.setVisible(false);break;
 			
@@ -296,7 +297,8 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 					panel_giftFinish.setVisible(false);
 					in_back.setVisible(false);break;
 					
-			case 5: panel_alarm.setVisible(false);break;
+			case 5: panel_alarm.setVisible(false);
+					in_back.setVisible(false);break;
 			
 			case 6: in_back.setVisible(false);
 					flag = 4;break;
@@ -325,7 +327,6 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 			if(flag == 0){			
 				panel_good.setVisible(true);
 				panel_index.setVisible(false);
-				lb_good2.setVisible(true);
 				flag = 1;
 			}else if(flag == 1){
 				
