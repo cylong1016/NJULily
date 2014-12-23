@@ -9,8 +9,8 @@ public interface PurchaseShowBLService {
 	
 	
 	/**
-	 * 返回给界面层显示全部的销售（销售退货）单
-	 * @return 全部的销售（销售退货）单的ArrayList
+	 * 返回给界面层显示全部的进货（销进货退货）单
+	 * @return 全部的进货（进货退货）单的ArrayList
 	 * @author cylong
 	 * @version 2014年11月28日 下午4:14:35
 	 */
@@ -18,7 +18,7 @@ public interface PurchaseShowBLService {
 	public ArrayList<PurchaseVO> showPurchaseBack();
 
 	/**
-	 * 返回给界面层显示全部在审核的销售（销售退货）单
+	 * 返回给界面层显示全部在审核的进货（进货退货）单
 	 * @return
 	 * @author Zing
 	 * @version Dec 12, 2014 1:58:50 AM
@@ -27,7 +27,7 @@ public interface PurchaseShowBLService {
 	public ArrayList<PurchaseVO> showPurchaseBackApproving();
 	
 	/**
-	 * 返回给界面层显示全部通过审核的销售（销售退货）单
+	 * 返回给界面层显示全部通过审核的进货（进货退货）单
 	 * @return
 	 * @author Zing
 	 * @version Dec 12, 2014 1:59:15 AM
@@ -36,7 +36,7 @@ public interface PurchaseShowBLService {
 	public ArrayList<PurchaseVO> showPurchaseBackPass();
 	
 	/**
-	 * 返回给界面层显示全部没有通过审批的销售（销售退货）单
+	 * 返回给界面层显示全部没有通过审批的进货（进货退货）单
 	 * @return
 	 * @author Zing
 	 * @version Dec 12, 2014 2:01:47 AM
