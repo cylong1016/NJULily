@@ -26,10 +26,12 @@ public class Frame_Manager extends MyFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	
-	MyButton bt_index, bt_approve, bt_strategy, bt_saleDetail, bt_businessProcess, bt_businessCondition;
+	static MyButton bt_index, bt_approve, bt_strategy, bt_saleDetail, bt_businessProcess, bt_businessCondition;
 	JLabel lb_index, lb_approve, lb_strategy, lb_saleDetail, lb_businessProcess, lb_businessCondition;
 	
 	public static JButton bt_vanish;
+	
+	static JLabel lb_super;
 	
 	public static int flag = 0, destination = 0;
 	
@@ -47,6 +49,11 @@ public class Frame_Manager extends MyFrame implements ActionListener{
 		this.add(bt_vanish);
 		
 		Frame_Login.myNameis = "Frame_Manager";
+		
+		lb_super = new JLabel(new ImageIcon("ui/image/inventory/super.png"));
+		lb_super.setBounds(0, 0, 1280, 720);
+		lb_super.setVisible(false);
+		this.add(lb_super);
 		
 		panel_index = new ManagerIndex();
 		panel_index.setVisible(true);
@@ -199,9 +206,36 @@ public class Frame_Manager extends MyFrame implements ActionListener{
 		
 	}
 	
+	private static void buttonVanish(){	
+		bt_index.setVisible(false);
+		bt_approve.setVisible(false);
+		bt_strategy.setVisible(false);
+		bt_saleDetail.setVisible(false);
+		bt_businessProcess.setVisible(false);
+		bt_businessCondition.setVisible(false);
+		lb_super.setVisible(false);
+	}
+	
+	private static void buttonTurnedUp(){
+		bt_index.setVisible(true);
+		bt_approve.setVisible(true);
+		bt_strategy.setVisible(true);
+		bt_saleDetail.setVisible(true);
+		bt_businessProcess.setVisible(true);
+		bt_businessCondition.setVisible(true);
+		lb_super.setVisible(true);
+	}
+	
+	
 	public static void visibleTrue(int i){
 		
 		flag = i;
+		
+		if(i == 0){
+			buttonVanish();
+		}else{
+			buttonTurnedUp();
+		}
 		
 		switch(i){
 			case 0: panel_index.setVisible(true);break;

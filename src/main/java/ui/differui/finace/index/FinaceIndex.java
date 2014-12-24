@@ -10,7 +10,6 @@ import javax.swing.JLabel;
 import ui.commonui.myui.MyBackground;
 import ui.commonui.myui.MyButton;
 import ui.differui.finace.frame.Frame_Finace;
-import ui.differui.salesman.frame.Frame_Salesman;
 
 public class FinaceIndex extends JLabel implements ActionListener{
 	
