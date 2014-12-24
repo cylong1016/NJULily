@@ -9,7 +9,6 @@ import javax.swing.JLabel;
 
 import ui.commonui.myui.MyBackground;
 import ui.commonui.myui.MyButton;
-import ui.differui.finace.frame.Frame_Finace;
 import ui.differui.manager.frame.Frame_Manager;
 
 public class ManagerIndex extends JLabel implements ActionListener{
