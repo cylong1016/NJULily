@@ -14,7 +14,6 @@ import vo.sale.SalesVO;
 import vo.sale.saleAddVO;
 import businesslogic.clientbl.ClientInfo;
 import businesslogic.promotionbl.PromotionInfo;
-import businesslogic.purchasebl.info.UserInfo_Purchase;
 import businesslogic.salebl.info.ClientInfo_Sale;
 import businesslogic.salebl.info.PromotionInfo_Sale;
 import businesslogic.userbl.UserInfo;
@@ -169,9 +168,7 @@ public class Sale {
 		String clientName = clientInfo.getName(list.getClientID());
 		String clientID = list.getClientID();
 		String salesman = clientInfo.getSalesman(list.getClientID());
-		// TODO user从文件中读取当前登陆的用户
-		UserInfo_Purchase userInfo = new UserInfo();
-		String username = userInfo.getUsername();
+		String username = UserInfo.getUsername();
 		po = new SalesPO(ID, clientID, clientName, salesman, username, list.getStorage(), list.getCommodities(), beforePrice, list.getAllowance(), list.getVoucher(), list.getRemark(), afterPrice, type);
 		return po;
 	}

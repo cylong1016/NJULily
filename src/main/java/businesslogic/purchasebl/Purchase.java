@@ -11,7 +11,6 @@ import vo.commodity.CommodityItemVO;
 import blservice.purchaseblservice.PurInputInfo;
 import businesslogic.clientbl.ClientInfo;
 import businesslogic.purchasebl.info.ClientInfo_Purchase;
-import businesslogic.purchasebl.info.UserInfo_Purchase;
 import businesslogic.userbl.UserInfo;
 import config.RMIConfig;
 import dataenum.BillState;
@@ -81,8 +80,7 @@ public class Purchase {
 		ClientInfo_Purchase clientInfo = new ClientInfo();
 		String clientName = clientInfo.getName(list.getClientID());
 		Storage storage = list.getStorage();
-		UserInfo_Purchase userInfo = new UserInfo();
-		String username = userInfo.getUsername();
+		String username = UserInfo.getUsername();
 		po = new PurchasePO(ID, list.getClientID(), clientName, username, storage, list.getCommodities(), sumPrice, list.getRemark(), type);
 		return po;
 	}

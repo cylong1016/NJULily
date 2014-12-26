@@ -3,6 +3,7 @@ package businesslogic.userbl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import log.LogController;
 import message.ResultMessage;
 import vo.UserVO;
 import blservice.userblservice.UserBLService;
@@ -54,7 +55,10 @@ public class UserController implements UserBLService {
 	@Override
 	public UserIdentity login(LoginInfo loginInfo) {
 		try {
-			return user.login(loginInfo);
+			UserIdentity iden = user.login(loginInfo);
+			String message = "登录成功！";
+			LogController.addLog(message);
+			return iden;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;
@@ -75,7 +79,12 @@ public class UserController implements UserBLService {
 	@Override
 	public ResultMessage add(UserVO vo) {
 		try {
-			return user.add(vo);
+			ResultMessage res = user.add(vo);
+			if (res.equals(ResultMessage.SUCCESS)) {
+				String message = "添加一位客户 " + vo.toString();
+				LogController.addLog(message);
+			}
+			return res;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return ResultMessage.REMOTE_EXCEPTION;
@@ -88,7 +97,12 @@ public class UserController implements UserBLService {
 	@Override
 	public ResultMessage delete(String ID) {
 		try {
-			return user.delete(ID);
+			ResultMessage res = user.delete(ID);
+			if(res.equals(ResultMessage.SUCCESS)) {
+				String message = "删除一位客户 [客户ID=" + ID + "]";
+				LogController.addLog(message);
+			}
+			return res;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return ResultMessage.REMOTE_EXCEPTION;
@@ -101,7 +115,10 @@ public class UserController implements UserBLService {
 	@Override
 	public ResultMessage update(UserVO vo) {
 		try {
-			return user.update(vo);
+			ResultMessage res = user.update(vo);
+			String message = "更新一位客户 " + vo.toString();
+			LogController.addLog(message);
+			return res;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return ResultMessage.REMOTE_EXCEPTION;

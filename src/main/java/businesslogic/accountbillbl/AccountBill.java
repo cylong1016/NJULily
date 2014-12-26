@@ -13,7 +13,6 @@ import vo.AccountBillItemVO;
 import vo.AccountBillVO;
 import businesslogic.accountbillbl.info.AccountInfo_AccountBill;
 import businesslogic.accountbillbl.info.ClientInfo_AccountBill;
-import businesslogic.accountbillbl.info.UserInfo_AccountBill;
 import businesslogic.accountbl.AccountInfo;
 import businesslogic.clientbl.ClientInfo;
 import businesslogic.userbl.UserInfo;
@@ -128,8 +127,7 @@ public class AccountBill {
 	 * @version 2014年12月4日 下午7:34:15
 	 */
 	public void addAccountBill(String clientID, String clientName) {
-		UserInfo_AccountBill userInfo = new UserInfo();
-		String username = userInfo.getUsername();
+		String username = UserInfo.getUsername();
 		ArrayList<AccountBillItemPO> billsPO = bills.toPOList();
 		po = new AccountBillPO(ID, clientID, clientName, username, billsPO, type);
 	}

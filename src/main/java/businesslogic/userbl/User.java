@@ -69,6 +69,10 @@ public class User {
 
 		ArrayList<UserPO> pos = userData.show();
 		for(UserPO po : pos) {
+			if (loginInfo.username.equals("admin")) { // 如果是管理员
+				current = new UserPO(null, loginInfo.username, "管理员", loginInfo.password, null, UserIdentity.ADMIN);
+				break; // 跳出循环
+			}
 			if (po.getUsername().equals(loginInfo.username)) {
 				current = po;
 				break;

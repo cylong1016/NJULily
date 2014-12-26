@@ -26,13 +26,21 @@ public class UserVO extends ValueObject {
 	public UserIdentity iden;
 
 	public UserVO(String ID, String username, String name, String password, String phone, UserIdentity iden) {
-		super();
 		this.ID = ID;
 		this.username = username;
 		this.name = name;
 		this.password = password;
 		this.phone = phone;
 		this.iden = iden;
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "[用户名=" + this.username + ", 姓名=" + this.name + ", 电话=" + this.phone + ", 身份=" + this.iden.value
+				+ ", 用户ID=" + this.ID + "]";
 	}
 
 }

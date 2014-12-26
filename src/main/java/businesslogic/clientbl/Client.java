@@ -128,7 +128,6 @@ public class Client {
 	 * @throws RemoteException
 	 */
 	public ResultMessage updClient(ClientAddVO vo) throws RemoteException {
-		UserInfo_Client userInfo = new UserInfo();
 		ClientPO po = clientData.find(vo.ID);	// 从数据层获得相应的client
 		po.setCategory(vo.category);
 		po.setLevel(vo.level);
@@ -138,7 +137,7 @@ public class Client {
 		po.setPost(vo.post);
 		po.setEmail(vo.email);
 		if (vo.receivableLimit != po.getReceivableLimit()) {	// 仅最高权限可以修改
-			boolean b = po.setReceivableLimit(vo.receivableLimit, userInfo.getUserIden());
+			boolean b = po.setReceivableLimit(vo.receivableLimit, UserInfo.getUserIden());
 			if (!b) {
 				return ResultMessage.FAILURE;	// 权限不够，更新失败
 			}
