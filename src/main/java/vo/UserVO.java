@@ -39,8 +39,7 @@ public class UserVO extends ValueObject {
 	 */
 	@Override
 	public String toString() {
-		return "[用户名=" + this.username + ", 姓名=" + this.name + ", 电话=" + this.phone + ", 身份=" + this.iden.value
-				+ ", 用户ID=" + this.ID + "]";
+		return "[用户ID=" + this.ID + ", " + "用户名=" + this.username + ", 姓名=" + this.name + ", 电话=" + this.phone
+				+ ", 身份=" + this.iden.value + "]";
 	}
-
 }

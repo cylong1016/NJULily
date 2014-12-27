@@ -24,4 +24,13 @@ public class AccountBillItemVO {
 		this.money = money;
 		this.remark = remark;
 	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "[账户名=" + this.accountName + ", 金额=" + this.money + ", 备注=" + this.remark + "]";
+	}
+
 }

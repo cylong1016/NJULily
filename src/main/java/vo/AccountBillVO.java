@@ -63,4 +63,14 @@ public class AccountBillVO extends ValueObject {
 		return sum;
 	}
 
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "[单据ID=" + this.ID + ", " + "客户ID=" + this.clientID + ", 客户姓名=" + this.clientName + ", 操作员="
+				+ this.username + ", bills=" + this.bills.toString() + ", 总价=" + this.sumMoney + ", 单据状态="
+				+ this.state.value + ", 单据类型=" + this.type.value + "]";
+	}
+
 }

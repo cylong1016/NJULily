@@ -21,4 +21,12 @@ public class AccountVO extends ValueObject {
 		this.name = name;
 		this.money = money;
 	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "[账户ID=" + this.ID + ", " + "帐户名=" + this.name + ", 账户余额=" + this.money + "]";
+	}
 }
