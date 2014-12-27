@@ -3,7 +3,6 @@ package blservice.accountinitblservice;
 import java.util.ArrayList;
 
 import vo.AccountaInitVO;
-import message.ResultMessage;
 
 /**
  * 负责实现建账界面所需要的服务
@@ -29,7 +28,7 @@ public interface AccountInitBLService {
 	 * @author Zing
 	 * @version Dec 2, 2014 7:00:20 PM
 	 */
-	public ResultMessage buildAccount();
+	public AccountaInitVO buildAccount();
 
 	/**
 	 * 查看以往的期初建账信息

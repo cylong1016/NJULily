@@ -2,6 +2,7 @@ package businesslogic.cashbillbl;
 
 import java.rmi.RemoteException;
 
+import log.LogController;
 import vo.CashBillVO;
 import blservice.cashbillblservice.CashBillBLService;
 
@@ -50,7 +51,12 @@ public class CashBillController implements CashBillBLService {
 	@Override
 	public CashBillVO submit(String account) {
 		try {
-			return cashBill.submit(account);
+			CashBillVO vo = cashBill.submit(account);
+			if (vo == null) {
+				return null;
+			}
+			LogController.addLog("提交现金费用单");
+			return vo;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;
@@ -63,7 +69,12 @@ public class CashBillController implements CashBillBLService {
 	@Override
 	public CashBillVO save(String account) {
 		try {
-			return cashBill.save(account);
+			CashBillVO vo = cashBill.submit(account);
+			if (vo == null) {
+				return null;
+			}
+			LogController.addLog("保存收款单为草稿单");
+			return vo;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;

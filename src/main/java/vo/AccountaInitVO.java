@@ -42,4 +42,11 @@ public class AccountaInitVO extends ValueObject {
 		this.clients = clients;
 		this.accounts = accounts;
 	}
+
+	@Override
+	public String toString() {
+		return "期初建账 [ID=" + ID + "]";
+	}
+	
+	
 }

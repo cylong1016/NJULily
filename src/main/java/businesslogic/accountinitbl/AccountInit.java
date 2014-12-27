@@ -6,7 +6,6 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import message.ResultMessage;
 import po.AccountPO;
 import po.AccountaInitPO;
 import po.ClientPO;
@@ -54,21 +53,26 @@ public class AccountInit {
 	 * @version Dec 2, 2014 8:15:55 PM
 	 * @throws RemoteException 
 	 */
-	public ResultMessage buildAccount() throws RemoteException {
+	public AccountaInitVO buildAccount() throws RemoteException {
 		BuildInit buildInit = new BuildInit(getID());
 		AccountaInitPO po = new AccountaInitPO(buildInit.getID(), buildInit.getDate(), buildInit.getCommoditySorts(), buildInit.getCommodities(), buildInit.getClients(), buildInit.getAccounts());
-		return accountInitData.insert(po);
+		accountInitData.insert(po);
+		return POtoVO(po);
 	}
 
 	public ArrayList<AccountaInitVO> show() throws RemoteException {
 		ArrayList<AccountaInitPO> POs = accountInitData.show();
 		ArrayList<AccountaInitVO> VOs = new ArrayList<AccountaInitVO>();
 		for(AccountaInitPO po : POs) {
-			AccountaInitVO vo =
-								new AccountaInitVO(po.getID(), po.getDate(), getSortVOs(po.getCommoditySorts()), getCommodityVOs(po.getCommodities()), getClientVOs(po.getClients()), getAccountVOs(po.getAccounts()));
+			AccountaInitVO vo = POtoVO(po);
 			VOs.add(vo);
 		}
 		return VOs;
+	}
+	
+	private AccountaInitVO POtoVO(AccountaInitPO po) throws RemoteException {
+		AccountaInitVO vo = new AccountaInitVO(po.getID(), po.getDate(), getSortVOs(po.getCommoditySorts()), getCommodityVOs(po.getCommodities()), getClientVOs(po.getClients()), getAccountVOs(po.getAccounts()));
+		return vo;
 	}
 
 	/** 以下的方法是为了转换每一个PO，变成VO展示 */

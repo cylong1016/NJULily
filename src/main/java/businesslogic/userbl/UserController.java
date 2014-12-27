@@ -116,8 +116,10 @@ public class UserController implements UserBLService {
 	public ResultMessage update(UserVO vo) {
 		try {
 			ResultMessage res = user.update(vo);
+			if(res.equals(ResultMessage.SUCCESS)) {
 			String message = "更新一位客户 " + vo.toString();
 			LogController.addLog(message);
+			}
 			return res;
 		} catch (RemoteException e) {
 			e.printStackTrace();

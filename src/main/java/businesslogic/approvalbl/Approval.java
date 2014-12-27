@@ -65,35 +65,36 @@ public class Approval {
 	 */
 	public ResultMessage passBill(ArrayList<ValueObject> VOs, ArrayList<BillType> billTypes) throws RemoteException {
 		PassApproval pass = new PassApproval();
+		ResultMessage res = null;
 		for (int i=0; i < VOs.size(); i++) {
 			BillType billType = billTypes.get(i);
 			ValueObject vo = VOs.get(i);
 			switch (billType) {
 			case SALE:
 			case SALEBACK:
-				pass.passBill((SalesVO)vo);
+				res = pass.passBill((SalesVO)vo);
 				 break;
 			case PURCHASE:
 			case PURCHASEBACK:
-				pass.passBill((PurchaseVO)vo);
+				res = pass.passBill((PurchaseVO)vo);
 				 break;
 			case GIFT:
 			case OVERFLOW:
 			case LOSS:
-				pass.passBill((InventoryBillVO)vo);
+				res = pass.passBill((InventoryBillVO)vo);
 				 break;
 			case PAY:
 			case EXPENSE:
-				pass.passBill((AccountBillVO)vo);
+				res = pass.passBill((AccountBillVO)vo);
 				 break;
 			case CASH:
-				pass.passBill((CashBillVO)vo);
+				res = pass.passBill((CashBillVO)vo);
 				 break;
 			default:
 				break;
 			}
 		}
-		return ResultMessage.SUCCESS;
+		return res;
 	}
 
 	public ResultMessage noPassBill(ArrayList<ValueObject> VOs,
