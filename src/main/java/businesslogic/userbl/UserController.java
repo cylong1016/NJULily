@@ -56,8 +56,7 @@ public class UserController implements UserBLService {
 	public UserIdentity login(LoginInfo loginInfo) {
 		try {
 			UserIdentity iden = user.login(loginInfo);
-			String message = "登录成功！";
-			LogController.addLog(message);
+			LogController.addLog("登录成功");
 			return iden;
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -81,8 +80,7 @@ public class UserController implements UserBLService {
 		try {
 			ResultMessage res = user.add(vo);
 			if (res.equals(ResultMessage.SUCCESS)) {
-				String message = "添加一位客户 " + vo.toString();
-				LogController.addLog(message);
+				LogController.addLog("添加客户 " + vo.toString());
 			}
 			return res;
 		} catch (RemoteException e) {
@@ -99,8 +97,7 @@ public class UserController implements UserBLService {
 		try {
 			ResultMessage res = user.delete(ID);
 			if(res.equals(ResultMessage.SUCCESS)) {
-				String message = "删除一位客户 [客户ID=" + ID + "]";
-				LogController.addLog(message);
+				LogController.addLog("删除客户 [客户ID=" + ID + "]");
 			}
 			return res;
 		} catch (RemoteException e) {
@@ -117,8 +114,7 @@ public class UserController implements UserBLService {
 		try {
 			ResultMessage res = user.update(vo);
 			if(res.equals(ResultMessage.SUCCESS)) {
-				String message = "更新一位客户 " + vo.toString();
-				LogController.addLog(message);
+				LogController.addLog("更新客户 " + vo.toString());
 			}
 			return res;
 		} catch (RemoteException e) {

@@ -40,7 +40,7 @@ public class CashBillShow {
 	}
 
 	public ArrayList<CashBillVO> showDraft() throws RemoteException {
-		return showChoose(BillState.APPROVALING);
+		return showChoose(BillState.DRAFT);
 	}
 
 	private ArrayList<CashBillVO> showChoose(BillState state) throws RemoteException {

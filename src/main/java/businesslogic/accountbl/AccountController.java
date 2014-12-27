@@ -3,6 +3,7 @@ package businesslogic.accountbl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import log.LogController;
 import message.ResultMessage;
 import vo.AccountVO;
 import dataenum.FindTypeAccount;
@@ -57,6 +58,7 @@ public class AccountController implements AccountBLService {
 	@Override
 	public ArrayList<AccountVO> find(String keywords, FindTypeAccount type) {
 		try {
+			LogController.addLog("模糊查找账户 [关键字=" + keywords + "]");
 			return account.find(keywords, type);
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -70,6 +72,7 @@ public class AccountController implements AccountBLService {
 	@Override
 	public AccountVO find(String ID) {
 		try {
+			LogController.addLog("精确查找账户 [账户ID=" + ID + "]");
 			return account.find(ID);
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -83,7 +86,11 @@ public class AccountController implements AccountBLService {
 	@Override
 	public ResultMessage add(AccountVO vo) {
 		try {
-			return account.add(vo);
+			ResultMessage res = account.add(vo);
+			if (res.equals(ResultMessage.SUCCESS)) {
+				LogController.addLog("添加账户 " + vo.toString());
+			}
+			return res;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return ResultMessage.REMOTE_EXCEPTION;
@@ -96,7 +103,11 @@ public class AccountController implements AccountBLService {
 	@Override
 	public ResultMessage delete(String ID) {
 		try {
-			return account.delete(ID);
+			ResultMessage res = account.delete(ID);
+			if (res.equals(ResultMessage.SUCCESS)) {
+				LogController.addLog("删除账户 [账户ID=" + ID + "]");
+			}
+			return res;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return ResultMessage.REMOTE_EXCEPTION;
@@ -109,7 +120,11 @@ public class AccountController implements AccountBLService {
 	@Override
 	public ResultMessage update(AccountVO vo) {
 		try {
-			return account.update(vo);
+			ResultMessage res = account.update(vo);
+			if (res.equals(ResultMessage.SUCCESS)) {
+				LogController.addLog("更新账户 " + vo.toString());
+			}
+			return res;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return ResultMessage.REMOTE_EXCEPTION;
