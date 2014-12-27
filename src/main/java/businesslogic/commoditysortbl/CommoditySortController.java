@@ -44,7 +44,7 @@ public class CommoditySortController implements CommoditySortBLService {
 	@Override
 	public CommoditySortVO show(String ID) {
 		try {
-			LogController.addLog("根据商品分类ID查看分类，ID＝" + ID);
+			LogController.addLog("查看商品分类 [分类ID＝" + ID + "]");
 			return commoditySort.show(ID);
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -73,10 +73,9 @@ public class CommoditySortController implements CommoditySortBLService {
 	public ResultMessage addCommoSort(String sortName, String fatherID) {
 		try {
 			ResultMessage res = commoditySort.addCommoSort(sortName, fatherID);
-			if (!res.equals(ResultMessage.SUCCESS)) {
-				return res;
+			if (res.equals(ResultMessage.SUCCESS)) {
+				LogController.addLog("添加商品分类 [分类名称=" + sortName + ", 父类ID=" + fatherID + "]");
 			}
-			LogController.addLog("添加商品分类：商品分类" + sortName);
 			return res;
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -91,10 +90,9 @@ public class CommoditySortController implements CommoditySortBLService {
 	public ResultMessage deleteCommoSort(String ID) {
 		try {
 			ResultMessage res = commoditySort.deleteCommoSort(ID);
-			if (!res.equals(ResultMessage.SUCCESS)) {
-				return res;
+			if (res.equals(ResultMessage.SUCCESS)) {
+				LogController.addLog("删除商品分类 [分类ID＝" + ID + "]");
 			}
-			LogController.addLog("删除商品分类，分类ID＝" + ID);
 			return res;
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -110,10 +108,9 @@ public class CommoditySortController implements CommoditySortBLService {
 	public ResultMessage updCommoSort(String ID, String name) {
 		try {
 			ResultMessage res = commoditySort.updCommoSort(ID, name);
-			if (!res.equals(ResultMessage.SUCCESS)) {
-				return res;
+			if (res.equals(ResultMessage.SUCCESS)) {
+				LogController.addLog("更新商品分类 [分类ID＝" + ID + ", 分类名称=" + name + "]");
 			}
-			LogController.addLog("更新商品分类，分类ID＝" + ID);
 			return res;
 		} catch (RemoteException e) {
 			e.printStackTrace();

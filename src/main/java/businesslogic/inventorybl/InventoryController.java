@@ -31,7 +31,7 @@ public class InventoryController implements InventoryBLService {
 	@Override
 	public InventoryViewVO viewInventory(String beginDate, String endDate) {
 		try {
-			LogController.addLog("进行库存查看");
+			LogController.addLog("进行库存查看 [开始时间=" + beginDate + ", 结束时间=" + endDate + "]");
 			return inventory.viewInventory(beginDate, endDate);
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -124,10 +124,9 @@ public class InventoryController implements InventoryBLService {
 	public InventoryBillVO submit(String remark) {
 		try {
 			InventoryBillVO vo = inventory.submit(remark);
-			if (vo == null) {
-				return null;
+			if (vo != null) {
+				LogController.addLog("提交库存单据 " + vo.toString());
 			}
-			LogController.addLog("提交库存单据：" + vo.toString());
 			return vo;
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -142,10 +141,9 @@ public class InventoryController implements InventoryBLService {
 	public InventoryBillVO save(String remark) {
 		try {
 			InventoryBillVO vo = inventory.submit(remark);
-			if (vo == null) {
-				return null;
+			if (vo != null) {
+				LogController.addLog("保存库存单据为草稿状态 " + vo.toString());
 			}
-			LogController.addLog("保存库存单据为草稿状态：" + vo.toString());
 			return inventory.save(remark);
 		} catch (RemoteException e) {
 			e.printStackTrace();

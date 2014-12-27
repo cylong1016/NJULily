@@ -48,7 +48,7 @@ public class CommodityController implements CommodityBLService {
 	public CommodityVO show(String ID) {
 		try {
 			CommodityVO vo = commodity.show(ID);
-			LogController.addLog("查看商品信息 [商品ID=" + vo.ID+"]");
+			LogController.addLog("查看商品信息 [商品ID=" + ID + "]");
 			return vo;
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -76,10 +76,9 @@ public class CommodityController implements CommodityBLService {
 	public ResultMessage addCommo(CommodityAddVO addVO) {
 		try {
 			ResultMessage res = commodity.addCommo(addVO);
-			if (!res.equals(ResultMessage.SUCCESS)) {
-				return res;
+			if (res.equals(ResultMessage.SUCCESS)) {
+				LogController.addLog("添加商品 " + addVO.toString());
 			}
-			LogController.addLog("添加商品 [商品ID=" + addVO.ID +"]");
 			return res;
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -94,10 +93,9 @@ public class CommodityController implements CommodityBLService {
 	public ResultMessage deletCommo(String ID) {
 		try {
 			ResultMessage res = commodity.deletCommo(ID);
-			if (!res.equals(ResultMessage.SUCCESS)) {
-				return res;
+			if (res.equals(ResultMessage.SUCCESS)) {
+				LogController.addLog("删除商品 [商品ID=" + ID + "]");
 			}
-			LogController.addLog("删除商品 [商品ID=" + ID + "]");
 			return res;
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -113,10 +111,9 @@ public class CommodityController implements CommodityBLService {
 	public ResultMessage updCommo(String ID, CommodityUpdateVO updateVO) {
 		try {
 			ResultMessage res = commodity.updCommo(ID, updateVO);
-			if (!res.equals(ResultMessage.SUCCESS)) {
-				return res;
+			if (res.equals(ResultMessage.SUCCESS)) {
+				LogController.addLog("更改商品 [商品ID＝" + ID + "]" + updateVO.toString());
 			}
-			LogController.addLog("更改商品：商品ID＝" + ID);
 			return res;
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -131,7 +128,7 @@ public class CommodityController implements CommodityBLService {
 	@Override
 	public ArrayList<CommodityVO> findCommo(String info, FindTypeCommo type) {
 		try {
-			LogController.addLog("查找商品，关键字＝" + info);
+			LogController.addLog("模糊查找商品 [关键字＝" + info + "]");
 			return commodity.findCommo(info, type);
 		} catch (RemoteException e) {
 			e.printStackTrace();

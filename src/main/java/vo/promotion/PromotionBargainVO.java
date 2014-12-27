@@ -6,10 +6,10 @@ import vo.commodity.CommodityItemVO;
 import dataenum.PromotionType;
 
 public class PromotionBargainVO extends PromotionVO {
-	
-	/** 促销起始时间*/
+
+	/** 促销起始时间 */
 	public String beginDate;
-	/** 促销结束时间*/
+	/** 促销结束时间 */
 	public String endDate;
 	/** 特价包 */
 	public ArrayList<CommodityItemVO> bargains;
@@ -19,7 +19,7 @@ public class PromotionBargainVO extends PromotionVO {
 	public double bargainTotal;
 	/** 促销策略类型 */
 	public PromotionType type;
-		
+
 	/**
 	 * 销售策略1:制定一个特价包
 	 * @param ID
@@ -35,7 +35,7 @@ public class PromotionBargainVO extends PromotionVO {
 		this.bargainTotal = bargainTotal;
 		this.type = PromotionType.BARGAINS;
 	}
-	
+
 	/**
 	 * 传入的数据
 	 * @param beginDate
@@ -50,9 +50,8 @@ public class PromotionBargainVO extends PromotionVO {
 
 	@Override
 	public String toString() {
-		return  "[促销策略ID=" + ID +  ", 开始日日期" + beginDate + ", 结束日期=" + endDate + ", 特价商品=" + bargains.toString()
-				+ ", 特价包总价=" + bargainTotal + "]";
+		return "[促销策略ID=" + ID + ", 开始日期" + beginDate + ", 结束日期=" + endDate + ", 特价商品=" + bargains
+				+ ",\r\n特价包总价=" + bargainTotal + "]";
 	}
-	
-	
+
 }

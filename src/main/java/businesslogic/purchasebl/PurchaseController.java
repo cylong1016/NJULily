@@ -70,10 +70,9 @@ public class PurchaseController implements PurchaseBLService {
 	public PurchaseVO submit(PurInputInfo info) {
 		try {
 			PurchaseVO vo = purchase.submit(info);
-			if (vo == null) {
-				return null;
+			if (vo != null) {
+				LogController.addLog("提交进货（进货退货）单 " + vo.toString());
 			}
-			LogController.addLog("提交进货单／进货退货单：" + vo.toString());
 			return vo;
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -88,10 +87,9 @@ public class PurchaseController implements PurchaseBLService {
 	public PurchaseVO save(PurInputInfo info) {
 		try {
 			PurchaseVO vo = purchase.save(info);
-			if (vo == null) {
-				return null;
+			if (vo != null) {
+				LogController.addLog("保存进货（进货退货）单为草稿状态 " + vo.toString());
 			}
-			LogController.addLog("保存进货单／进货退货单为草稿：" + vo.toString());
 			return vo;
 		} catch (RemoteException e) {
 			e.printStackTrace();

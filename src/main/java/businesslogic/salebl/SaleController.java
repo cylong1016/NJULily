@@ -3,6 +3,7 @@ package businesslogic.salebl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import log.LogController;
 import vo.commodity.CommodityItemVO;
 import vo.promotion.PromotionBargainVO;
 import vo.promotion.PromotionClientVO;
@@ -63,7 +64,7 @@ public class SaleController implements SaleBLService {
 		}
 		return null;
 	}
-	
+
 	public void ddBargains(String ID) {
 		try {
 			sale.addBargains(ID);
@@ -95,14 +96,14 @@ public class SaleController implements SaleBLService {
 	/**
 	 * @see blservice.saleblservice.SaleBLService#findFitPromotionCommodity()
 	 */
-//	public ArrayList<PromotionCommodityVO> findFitPromotionCommodity() {
-//		try {
-//			return sale.findFitPromotionCommodity();
-//		} catch (RemoteException e) {
-//			e.printStackTrace();
-//			return null;
-//		}
-//	}
+	//	public ArrayList<PromotionCommodityVO> findFitPromotionCommodity() {
+	//		try {
+	//			return sale.findFitPromotionCommodity();
+	//		} catch (RemoteException e) {
+	//			e.printStackTrace();
+	//			return null;
+	//		}
+	//	}
 
 	/**
 	 * @see blservice.saleblservice.SaleBLService#findFitPromotionClient()
@@ -136,7 +137,11 @@ public class SaleController implements SaleBLService {
 	@Override
 	public SalesVO submit(saleAddVO inputInfo) {
 		try {
-			return sale.submit(inputInfo);
+			SalesVO vo = sale.submit(inputInfo);
+			if (vo != null) {
+				LogController.addLog("提交销售（销售退货）单 " + vo.toString());
+			}
+			return vo;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;
@@ -149,7 +154,11 @@ public class SaleController implements SaleBLService {
 	@Override
 	public SalesVO save(saleAddVO inputInfo) {
 		try {
-			return sale.save(inputInfo);
+			SalesVO vo = sale.save(inputInfo);
+			if (vo != null) {
+				LogController.addLog("保存销售（销售退货）单为草稿状态 " + vo.toString());
+			}
+			return vo;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;

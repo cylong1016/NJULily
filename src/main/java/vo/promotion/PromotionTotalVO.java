@@ -38,9 +38,9 @@ public class PromotionTotalVO extends PromotionVO {
 
 	@Override
 	public String toString() {
-		return "[ID="+ ID +  ", 起始日期=" + beginDate + ", 结束日期="
-				+ endDate + ", 可促销总价=" + total + ", 赠品=" + gifts.toString()
-				+ ", 折让=" + allowance + ", 代金券=" + voucher + "]";
+		return "[促销策略ID="+ ID +  ", 起始日期=" + beginDate + ", 结束日期="
+				+ endDate + ", 可促销总价=" + total + ", 赠品=" + gifts
+				+ ",\r\n折让=" + allowance + ", 代金券=" + voucher + "]";
 	}
 	
 	

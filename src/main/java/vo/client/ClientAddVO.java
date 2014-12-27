@@ -47,7 +47,7 @@ public class ClientAddVO extends ValueObject {
 	@Override
 	public String toString() {
 		return "[客户ID=" + this.ID + ", " + "姓名=" + this.name + ", 联系电话=" + this.phone + ", 地址=" + this.address
-				+ ", 邮编=" + this.post + ", 电子邮件=" + this.email + ", 类别=" + this.category.value + ", 等级=" + this.level
+				+ ", 邮编=" + this.post + ", 电子邮件=" + this.email + ", 类别=" + this.category.value + ", 等级=" + this.level.value
 				+ ", 应收额度=" + this.receivableLimit + ", 默认业务员=" + this.salesman + "]";
 	}
 }

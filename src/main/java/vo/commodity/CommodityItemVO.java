@@ -23,7 +23,6 @@ public class CommodityItemVO extends ValueObject {
 	public String remark;
 
 	public CommodityItemVO(String ID, int number, double price, String remark, String name, String type) {
-		super();
 		this.ID = ID;
 		this.name = name;
 		this.type = type;
@@ -34,11 +33,8 @@ public class CommodityItemVO extends ValueObject {
 
 	@Override
 	public String toString() {
-		return " [商品名称=" + name + ", 商品类型=" + type + ", 商品数量="
-				+ number + ", 商品单价=" + price + ", 商品总价=" + total
-				+ ", 备注=" + remark + ", 商品ID=" + ID + "]";
+		return "\r\n\t[商品ID=" + ID + ", 商品名称=" + name + ", 商品类型=" + type + ", 商品数量=" + number + ", 商品单价=" + price
+				+ ", 商品总价=" + total + ", 备注=" + remark + "]";
 	}
-	
-	
-	
+
 }

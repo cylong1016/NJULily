@@ -73,4 +73,15 @@ public class SalesVO extends ValueObject {
 		this.type = type;
 		this.state = state;
 	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "[单据ID=" + ID + "单据类型=" + type.value + ", 客户ID=" + clientID + ", 客户姓名=" + client + ", 仓库="
+				+ storage.value + ", 业务员=" + salesman + ", 操作员=" + user + ", 商品列表=" + commodities + ",\r\n折让前总额 ="
+				+ beforePrice + ", 折让金额=" + allowance + ", 代金券总额=" + voucher + ", 折让后总额=" + afterPrice + ", 备注="
+				+ remark + ", 单据状态=" + state.value + "]";
+	}
 }

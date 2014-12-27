@@ -39,8 +39,8 @@ public class PromotionClientVO extends PromotionVO {
 	@Override
 	public String toString() {
 		return "[促销策略ID="+ ID + ", 开始日期=" + beginDate + ", 结束日期="
-				+ endDate + ", 客户等级=" + level.value + ", 赠品=" + gifts.toString()
-				+ ", 折让=" + allowance + ", 代金券=" + voucher + "]";
+				+ endDate + ", 客户等级=" + level.value + ", 赠品=" + gifts
+				+ ",\r\n折让=" + allowance + ", 代金券=" + voucher + "]";
 	}
 	
 	

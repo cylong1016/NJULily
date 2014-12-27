@@ -30,7 +30,7 @@ public class AccountBillItemVO {
 	 */
 	@Override
 	public String toString() {
-		return "[账户名=" + this.accountName + ", 金额=" + this.money + ", 备注=" + this.remark + "]";
+		return "\r\n\t[账户名=" + this.accountName + ", 金额=" + this.money + ", 备注=" + this.remark + "]";
 	}
 
 }

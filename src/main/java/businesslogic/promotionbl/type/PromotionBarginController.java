@@ -91,7 +91,7 @@ public class PromotionBarginController implements PromotionBargainBLService {
 			PromotionBargainVO vo = promotionBargin.submit(beginDate, endDate);
 			if(vo == null)
 				return null;
-			LogController.addLog("添加特价包促销策略："  + vo.toString());
+			LogController.addLog("添加特价包促销策略 "  + vo.toString());
 			return promotionBargin.submit(beginDate, endDate);
 		} catch (RemoteException e) {
 			e.printStackTrace();

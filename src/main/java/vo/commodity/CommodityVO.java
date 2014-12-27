@@ -34,7 +34,6 @@ public class CommodityVO extends ValueObject {
 	public double avePur;
 
 	public CommodityVO(String ID, String name, String type, String sortID, int inventoryNum, double purPrice, double salePrice, double recentPurpPrice, double recentSalePrice, int alarmNumber) {
-		super();
 		this.ID = ID;
 		this.name = name;
 		this.type = type;

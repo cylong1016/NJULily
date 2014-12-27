@@ -107,7 +107,7 @@ public class PromotionClientController implements PromotionClientBLService {
 			if (vo == null) {
 				return null;
 			}
-			LogController.addLog("添加客户促销策略：" + vo.toString());
+			LogController.addLog("添加客户促销策略 " + vo.toString());
 			return promotionClient.submit(info);
 		} catch (RemoteException e) {
 			e.printStackTrace();

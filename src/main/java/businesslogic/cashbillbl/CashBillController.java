@@ -55,7 +55,7 @@ public class CashBillController implements CashBillBLService {
 			if (vo == null) {
 				return null;
 			}
-			LogController.addLog("提交现金费用单：" + vo.toString());
+			LogController.addLog("提交现金费用单 " + vo.toString());
 			return vo;
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -73,7 +73,7 @@ public class CashBillController implements CashBillBLService {
 			if (vo == null) {
 				return null;
 			}
-			LogController.addLog("保存现金费用单为草稿状态：" + vo.toString());
+			LogController.addLog("保存现金费用单为草稿状态 " + vo.toString());
 			return vo;
 		} catch (RemoteException e) {
 			e.printStackTrace();

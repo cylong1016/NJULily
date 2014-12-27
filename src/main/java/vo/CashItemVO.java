@@ -22,7 +22,7 @@ public class CashItemVO {
 
 	@Override
 	public String toString() {
-		return "条目清单列表 [条目名=" + name + ", 金额=" + money + ", 备注="
+		return "\r\n\t[条目名=" + name + ", 金额=" + money + ", 备注="
 				+ remark + "]";
 	}
 	

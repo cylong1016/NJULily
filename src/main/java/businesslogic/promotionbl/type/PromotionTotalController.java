@@ -109,7 +109,7 @@ public class PromotionTotalController implements PromotionTotalBLService {
 			if (vo == null) {
 				return null;
 			}
-			LogController.addLog("添加总价的促销策略：" + vo.toString());
+			LogController.addLog("添加总价的促销策略 " + vo.toString());
 			return vo;
 		} catch (RemoteException e) {
 			e.printStackTrace();

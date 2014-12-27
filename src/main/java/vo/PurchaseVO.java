@@ -50,12 +50,11 @@ public class PurchaseVO extends ValueObject {
 
 	@Override
 	public String toString() {
-		return 	"[单据ID=" + ID + ", 客户=" + clientID + ", client=" + client
+		return 	"[单据ID=" + ID + ", 客户ID=" + clientID + ", 客户姓名=" + client
 				+ ", 仓库=" + storage.value + ", 操作员=" + user + ", 商品列表="
-				+ commodities.toString() + ", 商品总价=" + beforePrice + ", 备注="
+				+ commodities + ",\r\n商品总价=" + beforePrice + ", 备注="
 				+ remark + ", 单据类型=" + type.value + ", 单据状态=" + state.value
 				+ "]";
 	}
-	
 	
 }

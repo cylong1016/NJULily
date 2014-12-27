@@ -34,12 +34,13 @@ public class CashBillVO extends ValueObject {
 		this.state = state;
 	}
 
+	/**
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		return "现金费用单 [操作员=" + user + ", 账户=" + account + ", 条目清单="
-				+ bills.toString() + ", 总价=" + total + ", 状态=" + state.value + "]";
+		return "[单据ID=" + this.ID + ", " + "操作员=" + this.user + ", 账户=" + this.account + ", 条目清单="
+				+ this.bills + ",\r\n总价=" + this.total + ", 状态=" + this.state.value + "]";
 	}
-	
-	
 
 }

@@ -8,11 +8,10 @@ public class ValueObject {
 
 	public String ID;
 	public String date;
+
 	@Override
 	public String toString() {
-		return "单据 [ID=" + ID + "]";
+		return "[ID=" + ID + "]";
 	}
-	
-	
-	
+
 }

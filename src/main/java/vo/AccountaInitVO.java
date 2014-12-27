@@ -47,6 +47,5 @@ public class AccountaInitVO extends ValueObject {
 	public String toString() {
 		return "期初建账 [ID=" + ID + "]";
 	}
-	
-	
+
 }

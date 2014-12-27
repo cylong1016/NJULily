@@ -32,7 +32,7 @@ public class CommodityAddVO extends ValueObject{
 
 	@Override
 	public String toString() {
-		return " [" + "商品ID=" + ID + ", 商品名称=" + name + ", 商品类型=" + type + ", 商品分类ID="
+		return " [商品ID=" + ID + ", 商品名称=" + name + ", 商品类型=" + type + ", 商品分类ID="
 				+ sortID + ", 库存数量=" + inventoryNum + ", 商品进价="
 				+ purPrice + ", 商品售价=" + salePrice + "]";
 	}
