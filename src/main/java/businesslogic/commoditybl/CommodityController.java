@@ -3,7 +3,7 @@ package businesslogic.commoditybl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import log.LogController;
+import log.LogMsgController;
 import message.ResultMessage;
 import vo.commodity.CommodityAddVO;
 import vo.commodity.CommodityUpdateVO;
@@ -48,7 +48,7 @@ public class CommodityController implements CommodityBLService {
 	public CommodityVO show(String ID) {
 		try {
 			CommodityVO vo = commodity.show(ID);
-			LogController.addLog("查看商品信息 [商品ID=" + ID + "]");
+			LogMsgController.addLog("查看商品信息 [商品ID=" + ID + "]");
 			return vo;
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -77,7 +77,7 @@ public class CommodityController implements CommodityBLService {
 		try {
 			ResultMessage res = commodity.addCommo(addVO);
 			if (res.equals(ResultMessage.SUCCESS)) {
-				LogController.addLog("添加商品 " + addVO.toString());
+				LogMsgController.addLog("添加商品 " + addVO.toString());
 			}
 			return res;
 		} catch (RemoteException e) {
@@ -94,7 +94,7 @@ public class CommodityController implements CommodityBLService {
 		try {
 			ResultMessage res = commodity.deletCommo(ID);
 			if (res.equals(ResultMessage.SUCCESS)) {
-				LogController.addLog("删除商品 [商品ID=" + ID + "]");
+				LogMsgController.addLog("删除商品 [商品ID=" + ID + "]");
 			}
 			return res;
 		} catch (RemoteException e) {
@@ -112,7 +112,7 @@ public class CommodityController implements CommodityBLService {
 		try {
 			ResultMessage res = commodity.updCommo(ID, updateVO);
 			if (res.equals(ResultMessage.SUCCESS)) {
-				LogController.addLog("更改商品 [商品ID＝" + ID + "]" + updateVO.toString());
+				LogMsgController.addLog("更改商品 [商品ID＝" + ID + "]" + updateVO.toString());
 			}
 			return res;
 		} catch (RemoteException e) {
@@ -128,7 +128,7 @@ public class CommodityController implements CommodityBLService {
 	@Override
 	public ArrayList<CommodityVO> findCommo(String info, FindTypeCommo type) {
 		try {
-			LogController.addLog("模糊查找商品 [关键字＝" + info + "]");
+			LogMsgController.addLog("模糊查找商品 [关键字＝" + info + "]");
 			return commodity.findCommo(info, type);
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -142,7 +142,7 @@ public class CommodityController implements CommodityBLService {
 	@Override
 	public ResultMessage setAlarm(ArrayList<String> IDs, int alarmNumber) {
 		try {
-			LogController.addLog("设置商品的警戒数量");
+			LogMsgController.addLog("设置商品的警戒数量");
 			return commodity.setAlarm(IDs, alarmNumber);
 		} catch (RemoteException e) {
 			e.printStackTrace();

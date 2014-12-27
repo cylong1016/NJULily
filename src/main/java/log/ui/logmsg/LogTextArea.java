@@ -1,7 +1,6 @@
 package log.ui.logmsg;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,11 +11,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.plaf.metal.MetalScrollButton;
 
-import log.LogController;
 import log.LogMessage;
-import config.LogUIConfig;
+import log.LogMsgController;
+import log.config.LogUIConfig;
 
 /**
  * 把日志信息放到TextArea中
@@ -47,18 +45,11 @@ public class LogTextArea extends JScrollPane {
 		bar.setBackground(Color.LIGHT_GRAY);
 		bar.setOpaque(false);
 		bar.setBorder(new EmptyBorder(0, 0, 0, 0));
-		Component[] barComs = bar.getComponents();
-		for(int i = 0; i < barComs.length; i++) {
-			MetalScrollButton msb = (MetalScrollButton)barComs[i];
-			msb.setOpaque(false);
-			msb.setBorder(new EmptyBorder(0, 0, 0, 0));
-			msb.setBackground(Color.LIGHT_GRAY);
-		}
 	}
 
 	private void addTextArea() {
 		textArea = new JTextArea();
-		for(LogMessage log : LogController.logs.getInList()) {
+		for(LogMessage log : LogMsgController.logs.getInList()) {
 			textArea.append(log.toString() + "\r\n");
 		}
 		textArea.setLineWrap(true);

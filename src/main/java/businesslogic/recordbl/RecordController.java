@@ -3,7 +3,7 @@ package businesslogic.recordbl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import log.LogController;
+import log.LogMsgController;
 import vo.BusinessStateVO;
 import vo.SaleDetailVO;
 import vo.ValueObject;
@@ -35,7 +35,7 @@ public class RecordController implements RecordBLService {
 	@Override
 	public ArrayList<SaleDetailVO> saleDetail(SaleDetailInputInfo info) {
 		try {
-			LogController.addLog("查看销售明细表");
+			LogMsgController.addLog("查看销售明细表");
 			return record.saleDetail(info);
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -49,7 +49,7 @@ public class RecordController implements RecordBLService {
 	@Override
 	public ArrayList<ValueObject> bussinessPro(BusinessStateInputInfo info) {
 		try {
-			LogController.addLog("查看经营历程表");
+			LogMsgController.addLog("查看经营历程表");
 			return record.bussinessPro(info);
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -63,7 +63,7 @@ public class RecordController implements RecordBLService {
 	@Override
 	public ValueObject red(ValueObject valueRecord, BillType type) {
 		try {
-			LogController.addLog("进行红冲");
+			LogMsgController.addLog("进行红冲");
 			return record.red(valueRecord, type);
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -77,7 +77,7 @@ public class RecordController implements RecordBLService {
 	@Override
 	public ValueObject copyRed(ValueObject valueRecord, BillType type) {
 		try {
-			LogController.addLog("进行红冲并复制");
+			LogMsgController.addLog("进行红冲并复制");
 			return record.copyRed(valueRecord, type);
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -91,7 +91,7 @@ public class RecordController implements RecordBLService {
 	@Override
 	public BusinessStateVO businessState(String beginDate, String endDate) {
 		try {
-			LogController.addLog("查看经营情况表");
+			LogMsgController.addLog("查看经营情况表");
 			return record.businessState(beginDate, endDate);
 		} catch (RemoteException e) {
 			e.printStackTrace();

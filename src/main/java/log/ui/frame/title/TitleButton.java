@@ -1,4 +1,4 @@
-package log.ui.logframe.title;
+package log.ui.frame.title;
 
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
@@ -6,7 +6,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JLabel;
 
-import config.LogUIConfig;
+import log.config.LogUIConfig;
 
 /**
  * 最小化按钮；关闭按钮

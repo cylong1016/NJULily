@@ -5,7 +5,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JLabel;
 
-import config.LogUIConfig;
+import log.config.LogUIConfig;
 
 /**
  * 所有button的父类

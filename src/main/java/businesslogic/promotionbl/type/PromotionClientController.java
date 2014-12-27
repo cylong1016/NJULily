@@ -3,7 +3,7 @@ package businesslogic.promotionbl.type;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import log.LogController;
+import log.LogMsgController;
 import vo.InventoryBillVO;
 import vo.commodity.CommodityItemVO;
 import vo.promotion.PromotionClientVO;
@@ -30,7 +30,7 @@ public class PromotionClientController implements PromotionClientBLService {
 	@Override
 	public ArrayList<PromotionClientVO> show() {
 		try {
-			LogController.addLog("查看所有的客户促销策略");
+			LogMsgController.addLog("查看所有的客户促销策略");
 			return promotionClient.show();
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -107,7 +107,7 @@ public class PromotionClientController implements PromotionClientBLService {
 			if (vo == null) {
 				return null;
 			}
-			LogController.addLog("添加客户促销策略 " + vo.toString());
+			LogMsgController.addLog("添加客户促销策略 " + vo.toString());
 			return promotionClient.submit(info);
 		} catch (RemoteException e) {
 			e.printStackTrace();

@@ -1,4 +1,4 @@
-package log.ui.logframe.title;
+package log.ui.frame.title;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -9,8 +9,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import log.ui.logframe.LogFrame;
-import config.LogUIConfig;
+import log.config.LogUIConfig;
+import log.ui.frame.Frame;
 
 /**
  * frame上的标题栏
@@ -33,9 +33,9 @@ public class TitlePanel extends JPanel {
 	/** 最小化按钮 */
 	private TitleButton min;
 	/** 主frame，主要为了最小化使用其对象 */
-	private LogFrame frame;
+	private Frame frame;
 
-	public TitlePanel(LogFrame frame) {
+	public TitlePanel(Frame frame) {
 		this.frame = frame;
 		this.setLayout(null);
 		this.setOpaque(true);

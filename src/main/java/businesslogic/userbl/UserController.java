@@ -3,7 +3,7 @@ package businesslogic.userbl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import log.LogController;
+import log.LogMsgController;
 import message.ResultMessage;
 import vo.UserVO;
 import blservice.userblservice.UserBLService;
@@ -56,7 +56,7 @@ public class UserController implements UserBLService {
 	public UserIdentity login(LoginInfo loginInfo) {
 		try {
 			UserIdentity iden = user.login(loginInfo);
-			LogController.addLog("登录成功");
+			LogMsgController.addLog("登录成功");
 			return iden;
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -80,7 +80,7 @@ public class UserController implements UserBLService {
 		try {
 			ResultMessage res = user.add(vo);
 			if (res.equals(ResultMessage.SUCCESS)) {
-				LogController.addLog("添加客户 " + vo.toString());
+				LogMsgController.addLog("添加客户 " + vo.toString());
 			}
 			return res;
 		} catch (RemoteException e) {
@@ -97,7 +97,7 @@ public class UserController implements UserBLService {
 		try {
 			ResultMessage res = user.delete(ID);
 			if(res.equals(ResultMessage.SUCCESS)) {
-				LogController.addLog("删除客户 [客户ID=" + ID + "]");
+				LogMsgController.addLog("删除客户 [客户ID=" + ID + "]");
 			}
 			return res;
 		} catch (RemoteException e) {
@@ -114,7 +114,7 @@ public class UserController implements UserBLService {
 		try {
 			ResultMessage res = user.update(vo);
 			if(res.equals(ResultMessage.SUCCESS)) {
-				LogController.addLog("更新客户 " + vo.toString());
+				LogMsgController.addLog("更新客户 " + vo.toString());
 			}
 			return res;
 		} catch (RemoteException e) {

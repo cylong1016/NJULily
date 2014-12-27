@@ -3,7 +3,7 @@ package businesslogic.cashbillbl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import log.LogController;
+import log.LogMsgController;
 import vo.CashBillVO;
 import blservice.cashbillblservice.CashBillShowBLService;
 
@@ -39,7 +39,7 @@ public class CashBillShowController implements CashBillShowBLService {
 	@Override
 	public ArrayList<CashBillVO> showApproving() {
 		try {
-			LogController.addLog("查看所有等待审批的现金费用单");
+			LogMsgController.addLog("查看所有等待审批的现金费用单");
 			return cashBillShow.showApproving();
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -53,7 +53,7 @@ public class CashBillShowController implements CashBillShowBLService {
 	@Override
 	public ArrayList<CashBillVO> showPass() {
 		try {
-			LogController.addLog("查看所有通过审批的现金费用单");
+			LogMsgController.addLog("查看所有通过审批的现金费用单");
 			return cashBillShow.showPass();
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -67,7 +67,7 @@ public class CashBillShowController implements CashBillShowBLService {
 	@Override
 	public ArrayList<CashBillVO> showFailure() {
 		try {
-			LogController.addLog("查看所有审批失败的现金费用单");
+			LogMsgController.addLog("查看所有审批失败的现金费用单");
 			return cashBillShow.showFailure();
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -81,7 +81,7 @@ public class CashBillShowController implements CashBillShowBLService {
 	@Override
 	public ArrayList<CashBillVO> showDraft() {
 		try {
-			LogController.addLog("查看所有草稿状态的现金费用单");
+			LogMsgController.addLog("查看所有草稿状态的现金费用单");
 			return cashBillShow.showDraft();
 		} catch (RemoteException e) {
 			e.printStackTrace();

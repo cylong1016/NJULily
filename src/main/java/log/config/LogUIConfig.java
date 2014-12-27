@@ -1,7 +1,9 @@
-package config;
+package log.config;
 
 import java.awt.Color;
 import java.awt.Font;
+
+import config.ParseXML;
 
 /**
  * LogUI的配置

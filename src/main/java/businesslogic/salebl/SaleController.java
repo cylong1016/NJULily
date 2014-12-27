@@ -3,7 +3,7 @@ package businesslogic.salebl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import log.LogController;
+import log.LogMsgController;
 import vo.commodity.CommodityItemVO;
 import vo.promotion.PromotionBargainVO;
 import vo.promotion.PromotionClientVO;
@@ -139,7 +139,7 @@ public class SaleController implements SaleBLService {
 		try {
 			SalesVO vo = sale.submit(inputInfo);
 			if (vo != null) {
-				LogController.addLog("提交销售（销售退货）单 " + vo.toString());
+				LogMsgController.addLog("提交销售（销售退货）单 " + vo.toString());
 			}
 			return vo;
 		} catch (RemoteException e) {
@@ -156,7 +156,7 @@ public class SaleController implements SaleBLService {
 		try {
 			SalesVO vo = sale.save(inputInfo);
 			if (vo != null) {
-				LogController.addLog("保存销售（销售退货）单为草稿状态 " + vo.toString());
+				LogMsgController.addLog("保存销售（销售退货）单为草稿状态 " + vo.toString());
 			}
 			return vo;
 		} catch (RemoteException e) {

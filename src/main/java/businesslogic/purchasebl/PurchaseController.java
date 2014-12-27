@@ -2,7 +2,7 @@ package businesslogic.purchasebl;
 
 import java.rmi.RemoteException;
 
-import log.LogController;
+import log.LogMsgController;
 import vo.PurchaseVO;
 import vo.commodity.CommodityItemVO;
 import blservice.purchaseblservice.PurInputInfo;
@@ -71,7 +71,7 @@ public class PurchaseController implements PurchaseBLService {
 		try {
 			PurchaseVO vo = purchase.submit(info);
 			if (vo != null) {
-				LogController.addLog("提交进货（进货退货）单 " + vo.toString());
+				LogMsgController.addLog("提交进货（进货退货）单 " + vo.toString());
 			}
 			return vo;
 		} catch (RemoteException e) {
@@ -88,7 +88,7 @@ public class PurchaseController implements PurchaseBLService {
 		try {
 			PurchaseVO vo = purchase.save(info);
 			if (vo != null) {
-				LogController.addLog("保存进货（进货退货）单为草稿状态 " + vo.toString());
+				LogMsgController.addLog("保存进货（进货退货）单为草稿状态 " + vo.toString());
 			}
 			return vo;
 		} catch (RemoteException e) {

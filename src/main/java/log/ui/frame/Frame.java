@@ -1,4 +1,4 @@
-package log.ui.logframe;
+package log.ui.frame;
 
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
@@ -9,43 +9,38 @@ import java.util.Properties;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
-import log.ui.logframe.title.TitlePanel;
-import log.ui.logmsg.LogPanel;
-import config.LogUIConfig;
+import log.ui.frame.title.TitlePanel;
 
 /**
  * log主JFrame
  * @author cylong
  * @version 2014年12月10日 上午9:32:04
  */
-public class LogFrame extends JFrame {
+public class Frame extends JFrame {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = 5359481363535358093L;
 
 	/** 标题栏 */
-	private TitlePanel title;
-	/** Frame透明度 */
-	private float hyalineValue = 0f;
+	protected TitlePanel title;
 
-	public LogFrame() {
-		// 显示日志信息的panel
-		LogPanel panel = new LogPanel();
-		this.add(panel);
+	/** Frame透明度 */
+	protected float hyalineValue = 0f;
+	/** 线程内部类，透明渐变显示Frame */
+	protected HyalineValue hy;
+
+	public Frame() {
+		hy = new HyalineValue();
 		// 标题栏
 		title = new TitlePanel(this);
 		this.add(title);
-		this.setTitle("操作日志");
-		this.setSize(LogUIConfig.WIDTH, LogUIConfig.HEIGHT);
 		this.setLayout(null);
-		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setUndecorated(true);
 		this.setOpacity(hyalineValue); // 设置透明
 		this.setVisible(true);
 		this.setDragable(); // 设置可以拖动
 		this.setOSStyle(); // 设置为当前系统风格
-		new HyalineValue().start(); // 透明度渐变启动界面
 	}
 
 	/**
@@ -53,7 +48,7 @@ public class LogFrame extends JFrame {
 	 * @author cylong
 	 * @version 2014年12月12日 上午3:25:27
 	 */
-	private class HyalineValue extends Thread {
+	protected class HyalineValue extends Thread {
 
 		public void run() {
 			while(true) {

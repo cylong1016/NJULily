@@ -1,6 +1,6 @@
 package main;
 
-import log.ui.logframe.LogFrame;
+import log.ui.login.LoginFrame;
 
 /**
  * 查看日志界面
@@ -12,6 +12,6 @@ public class LogMain {
 	public static void main(String[] args) {
 		System.setProperty("awt.useSystemAAFontSettings", "on");
 		System.setProperty("swing.aatext", "true");
-		new LogFrame();
+		new LoginFrame();
 	}
 }

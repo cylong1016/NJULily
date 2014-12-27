@@ -3,7 +3,7 @@ package businesslogic.accountbillbl;
 import java.rmi.RemoteException;
 import java.util.HashMap;
 
-import log.LogController;
+import log.LogMsgController;
 import vo.AccountBillItemVO;
 import vo.AccountBillVO;
 import blservice.accountbillblservice.AccountBillBLService;
@@ -53,7 +53,7 @@ public class AccountBillController implements AccountBillBLService {
 	@Override
 	public AccountBillVO find(String ID) {
 		try {
-			LogController.addLog("查看收款（付款）单 [单据ID=" + ID + "]");
+			LogMsgController.addLog("查看收款（付款）单 [单据ID=" + ID + "]");
 			return accountBill.find(ID);
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -121,7 +121,7 @@ public class AccountBillController implements AccountBillBLService {
 		try {
 			AccountBillVO bill = accountBill.submit();
 			if(bill != null) {
-				LogController.addLog("提交收款（付款）单 " + bill.toString());
+				LogMsgController.addLog("提交收款（付款）单 " + bill.toString());
 			}
 			return bill;
 		} catch (RemoteException e) {
@@ -138,7 +138,7 @@ public class AccountBillController implements AccountBillBLService {
 		try {
 			AccountBillVO bill = accountBill.save();
 			if(bill != null) {
-				LogController.addLog("保存收款（付款）单为草稿状态 " + bill.toString());
+				LogMsgController.addLog("保存收款（付款）单为草稿状态 " + bill.toString());
 			}
 			return bill;
 		} catch (RemoteException e) {

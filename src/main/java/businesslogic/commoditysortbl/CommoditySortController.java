@@ -3,7 +3,7 @@ package businesslogic.commoditysortbl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import log.LogController;
+import log.LogMsgController;
 import message.ResultMessage;
 import vo.commodity.CommoditySortVO;
 import blservice.commoditysortblservice.CommoditySortBLService;
@@ -44,7 +44,7 @@ public class CommoditySortController implements CommoditySortBLService {
 	@Override
 	public CommoditySortVO show(String ID) {
 		try {
-			LogController.addLog("查看商品分类 [分类ID＝" + ID + "]");
+			LogMsgController.addLog("查看商品分类 [分类ID＝" + ID + "]");
 			return commoditySort.show(ID);
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -74,7 +74,7 @@ public class CommoditySortController implements CommoditySortBLService {
 		try {
 			ResultMessage res = commoditySort.addCommoSort(sortName, fatherID);
 			if (res.equals(ResultMessage.SUCCESS)) {
-				LogController.addLog("添加商品分类 [分类名称=" + sortName + ", 父类ID=" + fatherID + "]");
+				LogMsgController.addLog("添加商品分类 [分类名称=" + sortName + ", 父类ID=" + fatherID + "]");
 			}
 			return res;
 		} catch (RemoteException e) {
@@ -91,7 +91,7 @@ public class CommoditySortController implements CommoditySortBLService {
 		try {
 			ResultMessage res = commoditySort.deleteCommoSort(ID);
 			if (res.equals(ResultMessage.SUCCESS)) {
-				LogController.addLog("删除商品分类 [分类ID＝" + ID + "]");
+				LogMsgController.addLog("删除商品分类 [分类ID＝" + ID + "]");
 			}
 			return res;
 		} catch (RemoteException e) {
@@ -109,7 +109,7 @@ public class CommoditySortController implements CommoditySortBLService {
 		try {
 			ResultMessage res = commoditySort.updCommoSort(ID, name);
 			if (res.equals(ResultMessage.SUCCESS)) {
-				LogController.addLog("更新商品分类 [分类ID＝" + ID + ", 分类名称=" + name + "]");
+				LogMsgController.addLog("更新商品分类 [分类ID＝" + ID + ", 分类名称=" + name + "]");
 			}
 			return res;
 		} catch (RemoteException e) {

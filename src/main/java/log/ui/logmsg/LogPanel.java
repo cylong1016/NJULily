@@ -13,10 +13,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import log.LogController;
+import log.LogMsgController;
 import log.LogMessage;
+import log.config.LogUIConfig;
 import log.ui.Button;
-import config.LogUIConfig;
 
 /**
  * 显示日志信息
@@ -131,7 +131,7 @@ public class LogPanel extends JPanel {
 				String day = LogPanel.this.input[2].getText();
 				day = (isDigit(day) && month.length() != 0) ? ("-" + day) : "";
 				String date = year + month + day;
-				ArrayList<LogMessage> logs = LogController.getLogs(date);
+				ArrayList<LogMessage> logs = LogMsgController.getLogs(date);
 				logText.setText("");
 				logText.append(logs);
 				logText.setTitle(date);
@@ -139,8 +139,8 @@ public class LogPanel extends JPanel {
 				String title = "全部日志";
 				logText.setTitle(title);
 				logText.setText("");
-				for(int i = LogController.logFilesName.length - 1; i >= 0; i--) {
-					ArrayList<LogMessage> logs = LogController.getLogs(LogController.logFilesName[i]);
+				for(int i = LogMsgController.logFilesName.length - 1; i >= 0; i--) {
+					ArrayList<LogMessage> logs = LogMsgController.getLogs(LogMsgController.logFilesName[i]);
 					logText.append(logs);
 				}
 			}

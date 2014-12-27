@@ -12,7 +12,7 @@ import java.util.Date;
  * @author cylong
  * @version 2014年12月27日 上午5:00:20
  */
-public class LogController {
+public class LogMsgController {
 
 	/** 所有日志文件名 */
 	public static String[] logFilesName;
