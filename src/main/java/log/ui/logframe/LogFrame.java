@@ -1,4 +1,4 @@
-package log.ui.frame;
+package log.ui.logframe;
 
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
@@ -9,7 +9,7 @@ import java.util.Properties;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
-import log.ui.frame.title.TitlePanel;
+import log.ui.logframe.title.TitlePanel;
 import log.ui.logmsg.LogPanel;
 import config.LogUIConfig;
 

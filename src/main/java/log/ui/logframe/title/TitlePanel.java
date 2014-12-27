@@ -1,4 +1,4 @@
-package log.ui.frame.title;
+package log.ui.logframe.title;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -9,7 +9,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import log.ui.frame.LogFrame;
+import log.ui.logframe.LogFrame;
 import config.LogUIConfig;
 
 /**

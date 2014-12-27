@@ -1,6 +1,6 @@
 package main;
 
-import log.ui.frame.LogFrame;
+import log.ui.logframe.LogFrame;
 
 /**
  * 查看日志界面

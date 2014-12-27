@@ -1,4 +1,4 @@
-package log.ui.frame.title;
+package log.ui.logframe.title;
 
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
