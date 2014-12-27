@@ -10,16 +10,17 @@ import java.awt.event.ActionListener;
 
 
 
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-import message.ResultMessage;
 import dataenum.ClientCategory;
 import dataenum.ClientLevel;
 import dataenum.FindTypeClient;
+import dataenum.ResultMessage;
 import blservice.clientblservice.ClientBLService;
 import businesslogic.clientbl.ClientController;
 import ui.commonui.exitfinish.ExitFinishFrame;

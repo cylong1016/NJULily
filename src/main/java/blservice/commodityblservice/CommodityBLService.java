@@ -3,10 +3,10 @@ package blservice.commodityblservice;
 import java.util.ArrayList;
 
 import dataenum.FindTypeCommo;
+import dataenum.ResultMessage;
 import vo.commodity.CommodityAddVO;
 import vo.commodity.CommodityUpdateVO;
 import vo.commodity.CommodityVO;
-import message.ResultMessage;
 
 /**
  * 负责实现商品与商品管理界面所需要的服务

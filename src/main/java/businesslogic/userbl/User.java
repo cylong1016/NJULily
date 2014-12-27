@@ -8,10 +8,10 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import message.ResultMessage;
 import po.UserPO;
 import vo.UserVO;
 import config.RMIConfig;
+import dataenum.ResultMessage;
 import dataenum.UserIdentity;
 import dataservice.userdataservice.LoginInfo;
 import dataservice.userdataservice.UserDataService;

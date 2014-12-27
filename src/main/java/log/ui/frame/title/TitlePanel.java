@@ -1,5 +1,6 @@
 package log.ui.frame.title;
 
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -22,24 +23,19 @@ public class TitlePanel extends JPanel {
 	/** serialVersionUID */
 	private static final long serialVersionUID = -5595756092214353675L;
 
-	/** 按钮之间还有和边框的间隙 */
-	private int interval = (LogUIConfig.TITLE_HEIGHT - LogUIConfig.TITLE_BTN_H) / 2;
-	/** 关闭按钮x坐标 */
-	private int exitX = LogUIConfig.WIDTH - LogUIConfig.TITLE_BTN_W - interval;
-	/** 最小化按钮x坐标 */
-	private int minX = exitX - interval - LogUIConfig.TITLE_BTN_W;
 	/** 关闭按钮 */
 	private TitleButton exit;
 	/** 最小化按钮 */
 	private TitleButton min;
+	/** 按钮与按钮之间、按钮与边框的间距 */
+	private int interval = 8;
 	/** 主frame，主要为了最小化使用其对象 */
 	private Frame frame;
 
 	public TitlePanel(Frame frame) {
 		this.frame = frame;
-		this.setLayout(null);
+		this.setLayout(new FlowLayout(FlowLayout.RIGHT, interval, interval));
 		this.setOpaque(true);
-		this.setSize(LogUIConfig.WIDTH, LogUIConfig.TITLE_HEIGHT);
 		this.setBackground(LogUIConfig.TITLE_BACK_COLOR);
 		addTitleButton(); // 添加最大化最小化按钮
 	}
@@ -56,16 +52,14 @@ public class TitlePanel extends JPanel {
 	private void addTitleButton() {
 		// 按钮监听
 		TitleButtonListener listener = new TitleButtonListener();
-		// 关闭按钮
-		exit = new TitleButton();
-		exit.setLocation(exitX, interval);
-		exit.addMouseListener(listener);
-		this.add(exit);
 		// 最小化按钮
 		min = new TitleButton();
-		min.setLocation(minX, interval);
 		min.addMouseListener(listener);
 		this.add(min);
+		// 关闭按钮
+		exit = new TitleButton();
+		exit.addMouseListener(listener);
+		this.add(exit);
 	}
 
 	private class TitleButtonListener extends MouseAdapter {

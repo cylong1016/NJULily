@@ -3,8 +3,8 @@ package dataservice.accountinitdataservice;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import message.ResultMessage;
 import po.AccountaInitPO;
+import dataenum.ResultMessage;
 import dataservice.DataService;
 
 /**

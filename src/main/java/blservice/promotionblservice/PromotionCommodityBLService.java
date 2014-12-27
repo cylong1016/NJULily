@@ -2,7 +2,7 @@ package blservice.promotionblservice;
 
 import java.util.ArrayList;
 
-import message.ResultMessage;
+import dataenum.ResultMessage;
 import vo.InventoryBillVO;
 import vo.commodity.CommodityItemVO;
 import vo.promotion.PromotionCommodityVO;

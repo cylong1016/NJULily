@@ -2,8 +2,8 @@ package businesslogic.approvalbl.info;
 
 import java.rmi.RemoteException;
 
+import dataenum.ResultMessage;
 import vo.PurchaseVO;
-import message.ResultMessage;
 
 public interface PurchaseInfo_Approval {
 	/**

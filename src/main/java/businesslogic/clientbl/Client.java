@@ -6,7 +6,6 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import message.ResultMessage;
 import po.ClientPO;
 import vo.client.ClientAddVO;
 import vo.client.ClientPartInfoVO;
@@ -14,6 +13,7 @@ import vo.client.ClientVO;
 import businesslogic.userbl.UserInfo;
 import config.RMIConfig;
 import dataenum.FindTypeClient;
+import dataenum.ResultMessage;
 import dataservice.clientdataservice.ClientDataService;
 
 public class Client {

@@ -3,7 +3,6 @@ package businesslogic.promotionbl.type;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import message.ResultMessage;
 import po.CommodityItemPO;
 import po.PromotionPO;
 import vo.InventoryBillVO;
@@ -14,6 +13,7 @@ import businesslogic.promotionbl.Promotion;
 import businesslogic.promotionbl.PromotionListItem;
 import businesslogic.promotionbl.PromotionTrans;
 import dataenum.PromotionType;
+import dataenum.ResultMessage;
 
 public class PromotionCommodity extends Promotion {
 

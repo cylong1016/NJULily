@@ -13,8 +13,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-import message.ResultMessage;
 import dataenum.FindTypeCommo;
+import dataenum.ResultMessage;
 import blservice.commodityblservice.CommodityBLService;
 import blservice.commoditysortblservice.CommoditySortBLService;
 import businesslogic.commoditybl.CommodityController;

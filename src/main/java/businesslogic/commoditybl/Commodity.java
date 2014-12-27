@@ -6,7 +6,6 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import message.ResultMessage;
 import po.CommodityPO;
 import vo.commodity.CommodityAddVO;
 import vo.commodity.CommodityUpdateVO;
@@ -14,6 +13,7 @@ import vo.commodity.CommodityVO;
 import businesslogic.commoditysortbl.CommoditySortInfo;
 import config.RMIConfig;
 import dataenum.FindTypeCommo;
+import dataenum.ResultMessage;
 import dataservice.commoditydataservice.CommodityDataService;
 
 /**

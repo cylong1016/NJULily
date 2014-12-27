@@ -62,7 +62,7 @@ public class LogTextArea extends JScrollPane {
 	private void setBorder() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		title = sdf.format(new Date()); // 初始化标题为当前日期
-		this.setBorder(BorderFactory.createTitledBorder(getBorder(), title, TitledBorder.CENTER, TitledBorder.TOP, LogUIConfig.TEXT_FONT));
+		this.setBorder(BorderFactory.createTitledBorder(null, title, TitledBorder.CENTER, TitledBorder.TOP, LogUIConfig.TEXT_FONT));
 	}
 
 	public void setTitle(String title) {

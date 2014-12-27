@@ -1,5 +1,7 @@
 package log.ui.login;
 
+import java.awt.BorderLayout;
+
 import log.config.LogUIConfig;
 import log.ui.frame.Frame;
 
@@ -13,8 +15,10 @@ public class LoginFrame extends Frame {
 	private static final long serialVersionUID = -4910301259193694804L;
 
 	public LoginFrame() {
-		this.setTitle("登录");
-		this.setSize(LogUIConfig.WIDTH, LogUIConfig.HEIGHT);
+		LoginPanel panel = new LoginPanel();
+		this.add(panel, BorderLayout.CENTER);
+		this.setTitle("用户登录");
+		this.setSize(LogUIConfig.WIDTH / 2, LogUIConfig.HEIGHT / 2);
 		this.setLocationRelativeTo(null); // 居中
 		hy.start(); // 透明度渐变启动界面
 	}

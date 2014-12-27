@@ -4,9 +4,9 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import log.LogMsgController;
-import message.ResultMessage;
 import vo.AccountVO;
 import dataenum.FindTypeAccount;
+import dataenum.ResultMessage;
 import blservice.accountblservice.AccountBLService;
 
 /**

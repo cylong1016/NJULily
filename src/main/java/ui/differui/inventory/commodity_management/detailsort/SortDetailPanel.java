@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-import message.ResultMessage;
+import dataenum.ResultMessage;
 import blservice.commoditysortblservice.CommoditySortBLService;
 import businesslogic.commoditysortbl.CommoditySortController;
 import ui.commonui.exitfinish.ExitFinishFrame;

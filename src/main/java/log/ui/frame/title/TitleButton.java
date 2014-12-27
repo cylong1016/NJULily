@@ -17,14 +17,21 @@ public class TitleButton extends JLabel {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = 7046202963400208918L;
+
 	/** 按钮大小 */
-	private Dimension size = new Dimension(LogUIConfig.TITLE_BTN_W, LogUIConfig.TITLE_BTN_H);
+	private Dimension size = new Dimension(32, 16);
 
 	public TitleButton() {
-		this.setSize(size);
+		this.setPreferredSize(size);
 		this.setOpaque(true); // 不透明
 		this.addMouseListener(new ButtonListener());
 		this.setBackground(LogUIConfig.TITLE_BUTTON_BACK_COLOR);
+	}
+
+	public TitleButton(String text) {
+		this();
+		this.setText(text);
+		this.setHorizontalAlignment(JLabel.CENTER);
 	}
 
 	private class ButtonListener extends MouseAdapter {

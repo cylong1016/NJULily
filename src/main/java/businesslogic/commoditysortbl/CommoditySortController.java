@@ -3,8 +3,8 @@ package businesslogic.commoditysortbl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import dataenum.ResultMessage;
 import log.LogMsgController;
-import message.ResultMessage;
 import vo.commodity.CommoditySortVO;
 import blservice.commoditysortblservice.CommoditySortBLService;
 

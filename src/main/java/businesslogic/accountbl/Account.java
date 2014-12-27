@@ -6,11 +6,11 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import message.ResultMessage;
 import po.AccountPO;
 import vo.AccountVO;
 import config.RMIConfig;
 import dataenum.FindTypeAccount;
+import dataenum.ResultMessage;
 import dataservice.accountdataservice.AccountDataService;
 
 public class Account {

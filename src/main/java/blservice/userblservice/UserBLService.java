@@ -2,9 +2,9 @@ package blservice.userblservice;
 
 import java.util.ArrayList;
 
+import dataenum.ResultMessage;
 import dataenum.UserIdentity;
 import dataservice.userdataservice.LoginInfo;
-import message.ResultMessage;
 import vo.UserVO;
 
 /**

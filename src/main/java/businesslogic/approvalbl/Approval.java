@@ -4,7 +4,6 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import businesslogic.approvalbl.info.NoPassApproval;
-import message.ResultMessage;
 import vo.AccountBillVO;
 import vo.CashBillVO;
 import vo.InventoryBillVO;
@@ -12,6 +11,7 @@ import vo.PurchaseVO;
 import vo.ValueObject;
 import vo.sale.SalesVO;
 import dataenum.BillType;
+import dataenum.ResultMessage;
 
 /**
  * 审批

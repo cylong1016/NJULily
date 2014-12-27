@@ -6,10 +6,10 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import message.ResultMessage;
 import po.CommoditySortPO;
 import vo.commodity.CommoditySortVO;
 import config.RMIConfig;
+import dataenum.ResultMessage;
 import dataservice.commoditysortdataservice.CommoditySortDataService;
 
 public class CommoditySort {

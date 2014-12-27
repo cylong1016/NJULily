@@ -2,11 +2,11 @@ package blservice.clientblservice;
 
 import java.util.ArrayList;
 
-import message.ResultMessage;
 import vo.client.ClientAddVO;
 import vo.client.ClientPartInfoVO;
 import vo.client.ClientVO;
 import dataenum.FindTypeClient;
+import dataenum.ResultMessage;
 
 /**
  * 负责实现客户管理界面所需要的服务

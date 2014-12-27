@@ -11,7 +11,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import message.ResultMessage;
 import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.myui.MyPanel;
 import ui.commonui.myui.MyTable;
@@ -23,6 +22,7 @@ import vo.sale.SalesVO;
 import blservice.approvalblservice.ApprovalBLService;
 import businesslogic.approvalbl.ApprovalController;
 import dataenum.BillType;
+import dataenum.ResultMessage;
 
 public class ApprovalModifyPanel extends MyPanel implements ActionListener{
 

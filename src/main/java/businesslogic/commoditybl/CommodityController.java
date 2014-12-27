@@ -4,12 +4,12 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import log.LogMsgController;
-import message.ResultMessage;
 import vo.commodity.CommodityAddVO;
 import vo.commodity.CommodityUpdateVO;
 import vo.commodity.CommodityVO;
 import blservice.commodityblservice.CommodityBLService;
 import dataenum.FindTypeCommo;
+import dataenum.ResultMessage;
 
 /**
  * @see blservice.commodityblservice.CommodityBLService

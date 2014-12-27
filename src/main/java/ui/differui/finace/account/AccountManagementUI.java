@@ -16,7 +16,7 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
 import dataenum.FindTypeAccount;
-import message.ResultMessage;
+import dataenum.ResultMessage;
 import blservice.accountblservice.AccountBLService;
 import businesslogic.accountbl.AccountController;
 import ui.commonui.exitfinish.ExitFinishFrame;

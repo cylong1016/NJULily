@@ -26,8 +26,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
-import message.ResultMessage;
 import dataenum.BillType;
+import dataenum.ResultMessage;
 import blservice.approvalblservice.ApprovalBLService;
 import businesslogic.approvalbl.ApprovalController;
 import businesslogic.approvalbl.ApprovalShow;

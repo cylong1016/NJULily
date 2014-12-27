@@ -3,8 +3,6 @@ package log.config;
 import java.awt.Color;
 import java.awt.Font;
 
-import config.ParseXML;
-
 /**
  * LogUI的配置
  * @author cylong
@@ -13,21 +11,13 @@ import config.ParseXML;
 public class LogUIConfig {
 
 	/** 界面的宽 */
-	public static int WIDTH;
+	public static int WIDTH = 900;
 	/** 界面的高 */
-	public static int HEIGHT;
+	public static int HEIGHT = 600;
 	/** 主界面的背景色 */
 	public static Color MAIN_COLOR = Color.WHITE;
-
-	static {
-		ParseXML parse = new ParseXML("config/LogUI.xml", "UISize");
-		WIDTH = Integer.parseInt(parse.getValue("width"));
-		HEIGHT = Integer.parseInt(parse.getValue("height"));
-	}
-
+	
 	/*----------------------------标题配置--------------------------------*/
-	/** 标题栏高 */
-	public static int TITLE_HEIGHT;
 	/** 标题字体 */
 	public static Font TITLE_FONT = new Font("黑体", Font.PLAIN, 25);
 	/** 标题字体颜色 */
@@ -36,18 +26,13 @@ public class LogUIConfig {
 	public static Color TITLE_BACK_COLOR = new Color(0x2D2D30);
 	/** 标题按钮背景颜色 */
 	public static Color TITLE_BUTTON_BACK_COLOR = Color.LIGHT_GRAY;
-	/** 标题栏按钮的宽【最小化，关闭按钮】 */
-	public static int TITLE_BTN_W;
-	/** 标题栏按钮的高【最小化，关闭按钮】 */
-	public static int TITLE_BTN_H;
-
-	static {
-		ParseXML parse = new ParseXML("config/LogUI.xml", "Title");
-		TITLE_HEIGHT = Integer.parseInt(parse.getValue("height"));
-		TITLE_BTN_W = Integer.parseInt(parse.getValue("title_btn_width"));
-		TITLE_BTN_H = Integer.parseInt(parse.getValue("title_btn_height"));
-	}
 	/*----------------------------标题配置--------------------------------*/
+	
+	/*----------------------------登录界面配置--------------------------------*/
+	/** 字体 */
+	public static Font LOGIN_FONT = new Font("黑体", Font.PLAIN, 25);
+	public static int COLUMNS = 13;
+	/*----------------------------登录界面配置--------------------------------*/
 
 	/*----------------------------通用按钮配置--------------------------------*/
 	/** button字体 */

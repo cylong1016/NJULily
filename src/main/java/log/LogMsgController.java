@@ -19,6 +19,7 @@ public class LogMsgController {
 
 	static {
 		new Thread() {
+
 			@Override
 			public void run() {
 				File dir = new File("data/log");
@@ -47,12 +48,13 @@ public class LogMsgController {
 	}
 
 	public static ArrayList<LogMessage> getLogs(String date) {
-		for(int i = 0; i < logFilesName.length; i++) {
-			if(logFilesName[i].contains(date)) {
-				return new DefineList<LogMessage>("data/log/" + logFilesName[i]).getInList();
+		ArrayList<LogMessage> logs = new ArrayList<LogMessage>();
+		for(int i = logFilesName.length - 1; i >= 0; i--) {
+			if (logFilesName[i].contains(date)) {
+				logs.addAll(new DefineList<LogMessage>("data/log/" + logFilesName[i]).getInList());
 			}
 		}
-		return null;
+		return logs;
 	}
 
 }

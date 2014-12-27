@@ -2,8 +2,8 @@ package businesslogic.approvalbl.info;
 
 import java.rmi.RemoteException;
 
+import dataenum.ResultMessage;
 import vo.CashBillVO;
-import message.ResultMessage;
 
 public interface CashBillInfo_Approval {
 	/**

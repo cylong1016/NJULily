@@ -3,8 +3,8 @@ package blservice.approvalblservice;
 import java.util.ArrayList;
 
 import dataenum.BillType;
+import dataenum.ResultMessage;
 import vo.ValueObject;
-import message.ResultMessage;
 
 
 /**

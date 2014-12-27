@@ -4,10 +4,10 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import log.LogMsgController;
-import message.ResultMessage;
 import vo.ValueObject;
 import blservice.approvalblservice.ApprovalBLService;
 import dataenum.BillType;
+import dataenum.ResultMessage;
 
 /**
  * @see blservice.approvalblservice.ApprovalBLService

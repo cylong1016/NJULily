@@ -3,7 +3,7 @@ package dataservice;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import message.ResultMessage;
+import dataenum.ResultMessage;
 import po.PersistentObject;
 
 /**

@@ -13,8 +13,8 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-import message.ResultMessage;
 import dataenum.FindTypeClient;
+import dataenum.ResultMessage;
 import blservice.clientblservice.ClientBLService;
 import businesslogic.clientbl.ClientController;
 import ui.commonui.exitfinish.ExitFinishFrame;

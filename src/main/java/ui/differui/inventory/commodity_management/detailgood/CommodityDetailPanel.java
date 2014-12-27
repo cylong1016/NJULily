@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
-import message.ResultMessage;
+import dataenum.ResultMessage;
 import blservice.commodityblservice.CommodityBLService;
 import blservice.commoditysortblservice.CommoditySortBLService;
 import businesslogic.commoditybl.CommodityController;

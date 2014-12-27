@@ -3,9 +3,9 @@ package businesslogic.purchasebl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import message.ResultMessage;
 import dataenum.BillState;
 import dataenum.BillType;
+import dataenum.ResultMessage;
 import dataservice.purchasedataservice.PurchaseDataService;
 import businesslogic.approvalbl.info.PurchaseInfo_Approval;
 import businesslogic.clientbl.ClientInfo;

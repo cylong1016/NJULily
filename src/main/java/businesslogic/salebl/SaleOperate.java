@@ -8,13 +8,13 @@ import businesslogic.clientbl.ClientInfo;
 import businesslogic.commoditybl.CommodityInfo;
 import businesslogic.salebl.info.ClientInfo_Sale;
 import businesslogic.salebl.info.CommodityInfo_Sale;
-import message.ResultMessage;
 import po.CommodityItemPO;
 import po.SalesPO;
 import vo.commodity.CommodityItemVO;
 import vo.sale.SalesVO;
 import dataenum.BillState;
 import dataenum.BillType;
+import dataenum.ResultMessage;
 import dataservice.saledataservice.SaleDataService;
 
 /**

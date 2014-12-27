@@ -2,7 +2,7 @@
 
 import java.rmi.RemoteException;
 
-import message.ResultMessage;
+import dataenum.ResultMessage;
 import vo.AccountBillVO;
 import vo.CashBillVO;
 import vo.InventoryBillVO;

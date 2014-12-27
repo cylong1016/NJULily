@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-import message.ResultMessage;
 import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.exitfunction.ExitFunctionFrame;
 import ui.commonui.myui.MyComboBox;
@@ -17,6 +16,7 @@ import ui.commonui.warning.WarningFrame;
 import vo.UserVO;
 import blservice.userblservice.UserBLService;
 import businesslogic.userbl.UserController;
+import dataenum.ResultMessage;
 import dataenum.UserIdentity;
 
 public class AdminAddingPanel extends MyPanel implements ActionListener{

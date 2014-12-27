@@ -2,9 +2,9 @@ package blservice.accountblservice;
 
 import java.util.ArrayList;
 
-import message.ResultMessage;
 import vo.AccountVO;
 import dataenum.FindTypeAccount;
+import dataenum.ResultMessage;
 
 /**
  * 负责实现公司账户界面所需要的服务

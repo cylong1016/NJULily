@@ -5,7 +5,6 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import message.ResultMessage;
 import po.AccountBillItemPO;
 import po.AccountBillPO;
 import vo.AccountBillItemVO;
@@ -22,6 +21,7 @@ import businesslogic.recordbl.info.ValueObjectInfo_Record;
 import config.RMIConfig;
 import dataenum.BillState;
 import dataenum.BillType;
+import dataenum.ResultMessage;
 import dataenum.Storage;
 import dataservice.TableInfoService;
 import dataservice.accountbilldataservice.AccountBillDataService;

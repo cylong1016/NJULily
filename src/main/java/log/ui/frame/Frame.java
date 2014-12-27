@@ -1,5 +1,6 @@
 package log.ui.frame;
 
+import java.awt.BorderLayout;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -33,8 +34,7 @@ public class Frame extends JFrame {
 		hy = new HyalineValue();
 		// 标题栏
 		title = new TitlePanel(this);
-		this.add(title);
-		this.setLayout(null);
+		this.add(title, BorderLayout.NORTH);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setUndecorated(true);
 		this.setOpacity(hyalineValue); // 设置透明

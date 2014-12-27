@@ -4,12 +4,12 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import log.LogMsgController;
-import message.ResultMessage;
 import vo.client.ClientAddVO;
 import vo.client.ClientPartInfoVO;
 import vo.client.ClientVO;
 import blservice.clientblservice.ClientBLService;
 import dataenum.FindTypeClient;
+import dataenum.ResultMessage;
 
 /**
  * @see blservice.clientblservice.ClientBLService

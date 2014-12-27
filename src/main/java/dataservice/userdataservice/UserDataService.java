@@ -2,8 +2,8 @@ package dataservice.userdataservice;
 
 import java.rmi.RemoteException;
 
-import message.ResultMessage;
 import po.UserPO;
+import dataenum.ResultMessage;
 import dataenum.UserIdentity;
 import dataservice.CommonDataService;
 
