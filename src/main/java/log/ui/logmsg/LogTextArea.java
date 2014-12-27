@@ -37,7 +37,6 @@ public class LogTextArea extends JScrollPane {
 	public LogTextArea() {
 		this.setOpaque(false);	// 将JScrollPane设置为透明
 		this.getViewport().setOpaque(false);	// 将中间的viewport设置为透明
-		this.getViewport().setBorder(null);
 		this.addTextArea();	// 添加文本域
 		this.setBorder();	// 设置边框
 		this.modifyScrollBar();	// 修改滚动条样式
@@ -70,7 +69,7 @@ public class LogTextArea extends JScrollPane {
 	}
 
 	private void setBorder() {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年 MM月 dd日");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		title = sdf.format(new Date()); // 初始化标题为当前日期
 		this.setBorder(BorderFactory.createTitledBorder(getBorder(), title, TitledBorder.CENTER, TitledBorder.TOP, LogUIConfig.TEXT_FONT));
 	}

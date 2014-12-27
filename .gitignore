@@ -27,4 +27,5 @@ pom.xml.next
 release.properties
 /bin
 jre
-run.bat
+NJULily_run.bat
+Log_run.bat

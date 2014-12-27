@@ -4,7 +4,9 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -120,25 +122,47 @@ public class LogPanel extends JPanel {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			if (e.getSource() == search) {
-				String date =
-								LogPanel.this.input[0].getText() + "-" + LogPanel.this.input[1].getText() + "-"
-										+ LogPanel.this.input[2].getText();
+				Date current = new Date();
+				String year = LogPanel.this.input[0].getText();
+				SimpleDateFormat sdfYear = new SimpleDateFormat("yyyy");
+				year = (isDigit(year)) ? year : sdfYear.format(current);	// 默认为当年
+				String month = LogPanel.this.input[1].getText();
+				month = (isDigit(month)) ? ("-" + month) : "";
+				String day = LogPanel.this.input[2].getText();
+				day = (isDigit(day) && month.length() != 0) ? ("-" + day) : "";
+				String date = year + month + day;
 				ArrayList<LogMessage> logs = LogController.getLogs(date);
 				logText.setText("");
 				logText.append(logs);
-				String title =
-								LogPanel.this.input[0].getText() + "年" + LogPanel.this.input[1].getText() + "月"
-										+ LogPanel.this.input[2].getText() + "日";
-				logText.setTitle(title);
+				logText.setTitle(date);
 			} else if (e.getSource() == showAll) {
 				String title = "全部日志";
 				logText.setTitle(title);
 				logText.setText("");
-				for(String fileName : LogController.logFilesName) {
-					ArrayList<LogMessage> logs = LogController.getLogs(fileName);
+				for(int i = LogController.logFilesName.length - 1; i >= 0; i--) {
+					ArrayList<LogMessage> logs = LogController.getLogs(LogController.logFilesName[i]);
 					logText.append(logs);
 				}
 			}
+		}
+		
+		/**
+		 * 判断一个字符串是否为数字
+		 * @param num
+		 * @return
+		 * @author cylong
+		 * @version 2014年12月27日  下午3:18:35
+		 */
+		private boolean isDigit(String num) {
+			if(num.length() == 0) {
+				return false;
+			}
+			for(int i = 0; i < num.length(); i++) {
+				if(!Character.isDigit(num.charAt(i))) {
+					return false;
+				}
+			}
+			return true;
 		}
 	}
 
