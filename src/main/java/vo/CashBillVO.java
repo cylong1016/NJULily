@@ -36,8 +36,8 @@ public class CashBillVO extends ValueObject {
 
 	@Override
 	public String toString() {
-		return "CashBillVO [user=" + user + ", account=" + account + ", bills="
-				+ bills.toString() + ", total=" + total + ", state=" + state + "]";
+		return "现金费用单 [操作员=" + user + ", 账户=" + account + ", 条目清单="
+				+ bills.toString() + ", 总价=" + total + ", 状态=" + state.value + "]";
 	}
 	
 	

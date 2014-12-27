@@ -127,4 +127,24 @@ public class AccountBillShowController implements AccountBillShowBLService {
 		}
 	}
 
+	@Override
+	public ArrayList<AccountBillVO> showPayDraft() {
+		try {
+			return accountBillShow.showPayDraft();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public ArrayList<AccountBillVO> showExpenseDraft() {
+		try {
+			return accountBillShow.showExpenseDraft();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }

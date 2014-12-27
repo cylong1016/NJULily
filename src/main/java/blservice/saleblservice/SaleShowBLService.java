@@ -42,4 +42,7 @@ public interface SaleShowBLService {
 	 */
 	public ArrayList<SalesVO> showSaleFailure();
 	public ArrayList<SalesVO> showSaleBackFailure();
+	
+	public ArrayList<SalesVO> showSaleDraft();
+	public ArrayList<SalesVO> showSaleBackDraft();
 }

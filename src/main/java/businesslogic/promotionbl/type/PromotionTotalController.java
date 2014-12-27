@@ -3,6 +3,7 @@ package businesslogic.promotionbl.type;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import log.LogController;
 import vo.InventoryBillVO;
 import vo.commodity.CommodityItemVO;
 import vo.promotion.PromotionTotalVO;
@@ -32,6 +33,7 @@ public class PromotionTotalController implements PromotionTotalBLService {
 	@Override
 	public ArrayList<PromotionTotalVO> show() {
 		try {
+			LogController.addLog("查看所有总价促销策略");
 			return promotionTotal.show();
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -103,7 +105,12 @@ public class PromotionTotalController implements PromotionTotalBLService {
 	@Override
 	public PromotionTotalVO submit(PromoInputInfo info) {
 		try {
-			return promotionTotal.submit(info);
+			PromotionTotalVO vo = promotionTotal.submit(info);
+			if (vo == null) {
+				return null;
+			}
+			LogController.addLog("添加总价的促销策略：" + vo.toString());
+			return vo;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;

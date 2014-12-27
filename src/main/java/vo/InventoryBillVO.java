@@ -34,4 +34,13 @@ public class InventoryBillVO extends ValueObject {
 		this.state = state;
 	}
 
+	@Override
+	public String toString() {
+		return " [商品集合=" + commodities.toString() + ", 备注="
+				+ remark + ", 单据类型=" + billType + ", 单据状态=" + state
+				+ ", 单据ID=" + ID + "]";
+	}
+	
+	
+
 }

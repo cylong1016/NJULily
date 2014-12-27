@@ -101,4 +101,12 @@ public class AccountBillShow {
 		return choose;
 	}
 
+	public ArrayList<AccountBillVO> showPayDraft() throws RemoteException {
+		return showChoose(BillType.PAY, BillState.DRAFT);
+	}
+
+	public ArrayList<AccountBillVO> showExpenseDraft() throws RemoteException {
+		return showChoose(BillType.EXPENSE, BillState.DRAFT);
+	}
+
 }

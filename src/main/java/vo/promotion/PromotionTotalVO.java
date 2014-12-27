@@ -35,4 +35,13 @@ public class PromotionTotalVO extends PromotionVO {
 		this.allowance = allowance;
 		this.voucher = voucher;
 	}
+
+	@Override
+	public String toString() {
+		return "[ID="+ ID +  ", 起始日期=" + beginDate + ", 结束日期="
+				+ endDate + ", 可促销总价=" + total + ", 赠品=" + gifts.toString()
+				+ ", 折让=" + allowance + ", 代金券=" + voucher + "]";
+	}
+	
+	
 }

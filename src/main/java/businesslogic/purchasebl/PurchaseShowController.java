@@ -3,6 +3,7 @@ package businesslogic.purchasebl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import log.LogController;
 import vo.PurchaseVO;
 import blservice.purchaseblservice.PurchaseShowBLService;
 
@@ -55,6 +56,7 @@ public class PurchaseShowController implements PurchaseShowBLService {
 	@Override
 	public ArrayList<PurchaseVO> showPurchaseApproving() {
 		try {
+			LogController.addLog("查看所有等待审批的进货单");
 			return purchaseShow.showPurchaseBackFailure();
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -68,6 +70,7 @@ public class PurchaseShowController implements PurchaseShowBLService {
 	@Override
 	public ArrayList<PurchaseVO> showPurchaseBackApproving() {
 		try {
+			LogController.addLog("查看所有等待审批的进货退货单");
 			return purchaseShow.showPurchaseBackFailure();
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -81,6 +84,7 @@ public class PurchaseShowController implements PurchaseShowBLService {
 	@Override
 	public ArrayList<PurchaseVO> showPurchasePass() {
 		try {
+			LogController.addLog("查看所有通过审批的进货单");
 			return purchaseShow.showPurchaseBackFailure();
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -94,6 +98,7 @@ public class PurchaseShowController implements PurchaseShowBLService {
 	@Override
 	public ArrayList<PurchaseVO> showPurchaseBackPass() {
 		try {
+			LogController.addLog("查看所有通过审批的进货退货单");
 			return purchaseShow.showPurchaseBackFailure();
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -107,6 +112,7 @@ public class PurchaseShowController implements PurchaseShowBLService {
 	@Override
 	public ArrayList<PurchaseVO> showPurchaseFailure() {
 		try {
+			LogController.addLog("查看所有审批失败的进货单");
 			return purchaseShow.showPurchaseBackFailure();
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -120,7 +126,28 @@ public class PurchaseShowController implements PurchaseShowBLService {
 	@Override
 	public ArrayList<PurchaseVO> showPurchaseBackFailure() {
 		try {
+			LogController.addLog("查看所有审批失败的进货退货单");
 			return purchaseShow.showPurchaseBackFailure();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public ArrayList<PurchaseVO> showPurchaseDraft() {
+		try {
+			return purchaseShow.showPurchaseDraft();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public ArrayList<PurchaseVO> showPurchaseBackDraft() {
+		try {
+			return purchaseShow.showPurchaseBackDraft();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;

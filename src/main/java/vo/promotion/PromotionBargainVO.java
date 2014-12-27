@@ -47,4 +47,12 @@ public class PromotionBargainVO extends PromotionVO {
 		this.endDate = endDate;
 		this.bargainTotal = bargainTotal;
 	}
+
+	@Override
+	public String toString() {
+		return  "[促销策略ID=" + ID +  ", 开始日日期" + beginDate + ", 结束日期=" + endDate + ", 特价商品=" + bargains.toString()
+				+ ", 特价包总价=" + bargainTotal + "]";
+	}
+	
+	
 }

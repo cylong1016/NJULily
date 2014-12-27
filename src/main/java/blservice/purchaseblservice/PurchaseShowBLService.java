@@ -43,4 +43,7 @@ public interface PurchaseShowBLService {
 	 */
 	public ArrayList<PurchaseVO> showPurchaseFailure();
 	public ArrayList<PurchaseVO> showPurchaseBackFailure();
+	
+	public ArrayList<PurchaseVO> showPurchaseDraft();
+	public ArrayList<PurchaseVO> showPurchaseBackDraft();
 }

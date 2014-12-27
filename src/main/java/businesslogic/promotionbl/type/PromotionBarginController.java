@@ -3,6 +3,7 @@ package businesslogic.promotionbl.type;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import log.LogController;
 import vo.InventoryBillVO;
 import vo.commodity.CommodityItemVO;
 import vo.promotion.PromotionBargainVO;
@@ -27,6 +28,7 @@ public class PromotionBarginController implements PromotionBargainBLService {
 	@Override
 	public ArrayList<PromotionBargainVO> show() {
 		try {
+			LogController.addLog("查看所有特价包");
 			return promotionBargin.show();
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -86,6 +88,10 @@ public class PromotionBarginController implements PromotionBargainBLService {
 	@Override
 	public PromotionBargainVO submit(String beginDate, String endDate) {
 		try {
+			PromotionBargainVO vo = promotionBargin.submit(beginDate, endDate);
+			if(vo == null)
+				return null;
+			LogController.addLog("添加特价包促销策略："  + vo.toString());
 			return promotionBargin.submit(beginDate, endDate);
 		} catch (RemoteException e) {
 			e.printStackTrace();

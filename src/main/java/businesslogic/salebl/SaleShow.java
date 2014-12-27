@@ -105,4 +105,12 @@ public class SaleShow {
 		}
 		return choose;
 	}
+
+	public ArrayList<SalesVO> showSaleDraft() throws RemoteException {
+		return showChoose(BillType.SALE, BillState.DRAFT);
+	}
+
+	public ArrayList<SalesVO> showSaleBackDraft() throws RemoteException {
+		return showChoose(BillType.SALEBACK, BillState.DRAFT);
+	}
 }

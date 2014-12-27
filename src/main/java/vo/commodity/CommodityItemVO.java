@@ -31,5 +31,14 @@ public class CommodityItemVO extends ValueObject {
 		this.price = price;
 		this.remark = remark;
 	}
+
+	@Override
+	public String toString() {
+		return " [商品名称=" + name + ", 商品类型=" + type + ", 商品数量="
+				+ number + ", 商品单价=" + price + ", 商品总价=" + total
+				+ ", 备注=" + remark + ", 商品ID=" + ID + "]";
+	}
+	
+	
 	
 }

@@ -2,6 +2,7 @@ package businesslogic.inventorybl;
 
 import java.rmi.RemoteException;
 
+import log.LogController;
 import vo.InventoryBillVO;
 import vo.InventoryCheckVO;
 import vo.InventoryViewVO;
@@ -30,6 +31,7 @@ public class InventoryController implements InventoryBLService {
 	@Override
 	public InventoryViewVO viewInventory(String beginDate, String endDate) {
 		try {
+			LogController.addLog("进行库存查看");
 			return inventory.viewInventory(beginDate, endDate);
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -43,6 +45,7 @@ public class InventoryController implements InventoryBLService {
 	@Override
 	public InventoryCheckVO checkRecord() {
 		try {
+			LogController.addLog("进行库存盘点");
 			return inventory.checkRecord();
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -120,7 +123,12 @@ public class InventoryController implements InventoryBLService {
 	@Override
 	public InventoryBillVO submit(String remark) {
 		try {
-			return inventory.submit(remark);
+			InventoryBillVO vo = inventory.submit(remark);
+			if (vo == null) {
+				return null;
+			}
+			LogController.addLog("提交库存单据：" + vo.toString());
+			return vo;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;
@@ -133,6 +141,11 @@ public class InventoryController implements InventoryBLService {
 	@Override
 	public InventoryBillVO save(String remark) {
 		try {
+			InventoryBillVO vo = inventory.submit(remark);
+			if (vo == null) {
+				return null;
+			}
+			LogController.addLog("保存库存单据为草稿状态：" + vo.toString());
 			return inventory.save(remark);
 		} catch (RemoteException e) {
 			e.printStackTrace();

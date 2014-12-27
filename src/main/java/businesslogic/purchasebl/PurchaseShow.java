@@ -104,4 +104,12 @@ public class PurchaseShow {
 		}
 		return choose;
 	}
+
+	public ArrayList<PurchaseVO> showPurchaseBackDraft() throws RemoteException {
+		return showChoose(BillType.PURCHASEBACK, BillState.DRAFT);
+	}
+
+	public ArrayList<PurchaseVO> showPurchaseDraft() throws RemoteException {
+		return showChoose(BillType.PURCHASE, BillState.DRAFT);
+	}
 }
