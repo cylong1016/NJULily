@@ -2,6 +2,7 @@ package businesslogic.approvalbl;
 
 import java.rmi.RemoteException;
 
+import log.LogController;
 import vo.ApprovalVO;
 import blservice.approvalblservice.ApprovalShowBLService;
 
@@ -28,6 +29,7 @@ public class ApprovalShowController implements ApprovalShowBLService {
 	@Override
 	public ApprovalVO ShowApproving() {
 		try {
+			LogController.addLog("查看所有待审批的单据");
 			return approvalShow.ShowApproving();
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -41,6 +43,7 @@ public class ApprovalShowController implements ApprovalShowBLService {
 	@Override
 	public ApprovalVO showPass() {
 		try {
+			LogController.addLog("查看所有通过审批的单据");
 			return approvalShow.showPass();
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -54,6 +57,7 @@ public class ApprovalShowController implements ApprovalShowBLService {
 	@Override
 	public ApprovalVO showFailure() {
 		try {
+			LogController.addLog("查看所有待审批失败的单据");
 			return approvalShow.showFailure();
 		} catch (RemoteException e) {
 			e.printStackTrace();

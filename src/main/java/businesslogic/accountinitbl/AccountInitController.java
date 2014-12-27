@@ -3,7 +3,7 @@ package businesslogic.accountinitbl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import message.ResultMessage;
+import log.LogController;
 import vo.AccountaInitVO;
 import blservice.accountinitblservice.AccountInitBLService;
 
@@ -28,12 +28,17 @@ public class AccountInitController implements AccountInitBLService {
 	 * @see blservice.accountinitblservice.AccountInitBLService#buildAccount()
 	 */
 	@Override
-	public ResultMessage buildAccount() {
+	public AccountaInitVO buildAccount() {
 		try {
-			return accountInit.buildAccount();
+			AccountaInitVO vo = accountInit.buildAccount();
+			if (vo == null) {
+				return null;
+			}
+			LogController.addLog(vo.toString());
+			return vo;
 		} catch (RemoteException e) {
 			e.printStackTrace();
-			return ResultMessage.REMOTE_EXCEPTION;
+			return null;
 		}
 	}
 
@@ -43,7 +48,9 @@ public class AccountInitController implements AccountInitBLService {
 	@Override
 	public ArrayList<AccountaInitVO> show() {
 		try {
-			return accountInit.show();
+			ArrayList<AccountaInitVO> vos = accountInit.show();
+			LogController.addLog("查看所有的以往的期初建账");
+			return vos;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;

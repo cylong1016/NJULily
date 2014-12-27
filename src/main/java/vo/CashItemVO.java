@@ -18,6 +18,13 @@ public class CashItemVO {
 		this.name = name;
 		this.money = money;
 		this.remark = remark;
-		
 	}
+
+	@Override
+	public String toString() {
+		return "条目清单 [name=" + name + ", money=" + money + ", remark="
+				+ remark + "]";
+	}
+	
+	
 }

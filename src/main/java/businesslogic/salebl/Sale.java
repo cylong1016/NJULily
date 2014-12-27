@@ -151,7 +151,7 @@ public class Sale {
 	public SalesVO save(saleAddVO inputInfo) throws RemoteException {
 		setInputInfo(inputInfo);
 		SalesPO po = buildSales();
-		po.setState(BillState.FAILURE);
+		po.setState(BillState.DRAFT);
 		saleData.insert(po);
 		return SaleTrans.poToVo(po);
 	}

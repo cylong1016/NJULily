@@ -34,4 +34,12 @@ public class CashBillVO extends ValueObject {
 		this.state = state;
 	}
 
+	@Override
+	public String toString() {
+		return "CashBillVO [user=" + user + ", account=" + account + ", bills="
+				+ bills.toString() + ", total=" + total + ", state=" + state + "]";
+	}
+	
+	
+
 }

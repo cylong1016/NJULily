@@ -3,10 +3,11 @@ package businesslogic.approvalbl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import log.LogController;
 import message.ResultMessage;
 import vo.ValueObject;
-import dataenum.BillType;
 import blservice.approvalblservice.ApprovalBLService;
+import dataenum.BillType;
 
 /**
  * @see blservice.approvalblservice.ApprovalBLService
@@ -31,6 +32,7 @@ public class ApprovalController implements ApprovalBLService {
 	@Override
 	public ResultMessage updateBill(ValueObject vo, BillType billType) {
 		try {
+			LogController.addLog("更改了" + vo.toString());
 			return approval.updateBill(vo, billType);
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -44,7 +46,12 @@ public class ApprovalController implements ApprovalBLService {
 	@Override
 	public ResultMessage passBill(ArrayList<ValueObject> VOs, ArrayList<BillType> billTypes) {
 		try {
-			return approval.passBill(VOs, billTypes);
+			ResultMessage res = approval.passBill(VOs, billTypes);
+			if (res != ResultMessage.SUCCESS) {
+				return ResultMessage.FAILURE;
+			}
+			LogController.addLog("通过了" + VOs.toString());
+			return res;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return ResultMessage.REMOTE_EXCEPTION;
@@ -57,6 +64,7 @@ public class ApprovalController implements ApprovalBLService {
 	@Override
 	public ResultMessage noPassBill(ArrayList<ValueObject> VOs, ArrayList<BillType> billTypes) {
 		try {
+			LogController.addLog("审批未通过" + VOs.toString());
 			return approval.noPassBill(VOs, billTypes);
 		} catch (RemoteException e) {
 			e.printStackTrace();
