@@ -248,6 +248,8 @@ public class Frame_Salesman extends MyFrame implements ActionListener{
 		MyBackground background = new MyBackground("ui/image/salesman/background.jpg");
 		this.add(background);
 		
+		buttonVanish();
+		
 	}
 	
 	private static void buttonVanish(){

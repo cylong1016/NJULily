@@ -225,6 +225,8 @@ public class Frame_Finace extends MyFrame implements ActionListener{
 		background = new MyBackground("ui/image/finace/background.jpg");
 		this.add(background);
 		
+		buttonVanish();
+		
 	}
 	
 	private static void buttonVanish(){

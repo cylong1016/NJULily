@@ -204,6 +204,8 @@ public class Frame_Manager extends MyFrame implements ActionListener{
 		MyBackground background = new MyBackground("ui/image/manager/background.jpg");
 		this.add(background);
 		
+		buttonVanish();
+		
 	}
 	
 	private static void buttonVanish(){	
