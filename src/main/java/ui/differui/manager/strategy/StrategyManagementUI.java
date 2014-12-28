@@ -44,18 +44,11 @@ public class StrategyManagementUI extends JPanel implements ActionListener{
 		MyTable clientTable = new MyTable(headersClient, data.getClientPromotion());
 		MyJScrollPane clientScrollPane = new MyJScrollPane(clientTable, 80, 50, 500, 150);
 
-//		String[] headersCommo = {"编号","起始时间","结束时间","购买商品","应送赠品","折扣","代金券"};
-//		// TODO 这个促销策略不做了
-//		@SuppressWarnings("deprecation")
-//		MyTable commodityTable = new MyTable(headersCommo, data.getCommodityPromotion());
-//		MyJScrollPane commodityScrollPane = new MyJScrollPane(commodityTable, 80, 200, 500, 150);
-
 		String[] headersTotal = {"编号","起始时间","结束时间","购买总价","应送赠品","折扣","代金券"};
 		MyTable totalTable = new MyTable(headersTotal, data.getTotalPromotion());
 		MyJScrollPane totalScrollPane = new MyJScrollPane(totalTable, 80, 350, 500, 150);
 		
 		this.add(clientScrollPane);
-//		this.add(commodityScrollPane);
 		this.add(totalScrollPane);	
 		
 	}
@@ -69,8 +62,6 @@ public class StrategyManagementUI extends JPanel implements ActionListener{
 		add(addBargainButton);
 		MyButton addClientButton = new MyButton("制定客户促销", 630+gap, y, buttonW, buttonH);
 		add(addClientButton);
-//		MyButton addCommoButton = new MyButton("制定商品促销", 630+2*gap, y, buttonW, buttonH);
-//		add(addCommoButton);
 		MyButton addTotalButton = new MyButton("制定总价促销", 630+2*gap, y, buttonW, buttonH);
 		add(addTotalButton);
 		
