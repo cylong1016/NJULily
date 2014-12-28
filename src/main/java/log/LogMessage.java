@@ -29,8 +29,12 @@ public class LogMessage implements Serializable {
 	 * @version 2014年12月26日 下午7:15:05
 	 */
 	public LogMessage(String message) {
+		this(UserInfo.getUsername(), message);
+	}
+
+	public LogMessage(String username, String message) {
+		this.username = username;
 		this.message = message;
-		this.username = UserInfo.getUsername();
 		/* 自动生成时间 */
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		this.time = sdf.format(new Date());

@@ -12,6 +12,7 @@ import java.util.Date;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import log.LogMessage;
 import log.LogMsgController;
@@ -30,7 +31,7 @@ public class LogPanel extends JPanel {
 	private static final long serialVersionUID = 8770200041944584165L;
 
 	/** 年月日标签 */
-	private DateLabel[] date;
+	private DateLabel[] dateLabel;
 	/** 三个输入框 */
 	private TextField[] input;
 	/** 查询和显示全部日志按钮 */
@@ -85,18 +86,23 @@ public class LogPanel extends JPanel {
 		 * @version 2014年12月27日 上午4:22:13
 		 */
 		private void addInput() {
-			date = new DateLabel[3];
+			dateLabel = new DateLabel[3];
 			input = new TextField[3];
-			date[0] = new DateLabel("年");
-			date[1] = new DateLabel("月");
-			date[2] = new DateLabel("日");
+			SimpleDateFormat[] sdf = new SimpleDateFormat[3];
+			String[] date_s = {"年", "月", "日"};
+			String[] dateFormat = {"yyyy", "MM", "dd"};
+			Date curDate = new Date();
 			// 初始化输入框，设置标签和输入框的位置，并且添加标签和输入框
-			for(int i = 0; i < date.length; i++) {
+			for(int i = 0; i < dateLabel.length; i++) {
+				dateLabel[i] = new DateLabel(date_s[i]);
+				sdf[i] = new SimpleDateFormat(dateFormat[i]);
 				input[i] = new TextField();
+				input[i].setText(sdf[i].format(curDate));
 				input[i].setFont(LogUIConfig.INPUT_FONT);
+				input[i].setHorizontalAlignment(JTextField.CENTER);
 				input[i].setPreferredSize(textFieldDimen);
 				this.add(input[i]);
-				this.add(date[i]);
+				this.add(dateLabel[i]);
 			}
 		}
 

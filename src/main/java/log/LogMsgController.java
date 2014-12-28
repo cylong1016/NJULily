@@ -40,11 +40,23 @@ public class LogMsgController {
 
 	/**
 	 * 添加一条日志记录
+	 * @param message 操作信息
 	 * @author cylong
 	 * @version 2014年12月26日 下午7:35:23
 	 */
 	public static void addLog(String message) {
 		logs.add(new LogMessage(message));
+	}
+	
+	/**
+	 * 添加一条日志记录
+	 * @param username 操作员
+	 * @param message 操作信息
+	 * @author cylong
+	 * @version 2014年12月29日  上午2:45:34
+	 */
+	public static void addLog(String username, String message) {
+		logs.add(new LogMessage(username, message));
 	}
 
 	public static ArrayList<LogMessage> getLogs(String date) {

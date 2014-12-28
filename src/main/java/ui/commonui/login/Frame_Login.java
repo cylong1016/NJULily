@@ -121,6 +121,8 @@ public class Frame_Login extends MyFrame implements ActionListener{
 		if(events.getSource() == button_Enter){
 			UserBLService controller = new UserController();
 			
+			UserIdentity ui = controller.login(new LoginInfo(userNameField.getText()
+					, new String(passwordField.getPassword()),flag));
 			userName = userNameField.getText();
 			for(int i = 0; i < controller.show().size(); i++){
 				if(controller.show().get(i).username.equals(userName)){
@@ -129,8 +131,6 @@ public class Frame_Login extends MyFrame implements ActionListener{
 				}
 			}
 			
-			UserIdentity ui = controller.login(new LoginInfo(userNameField.getText()
-					, new String(passwordField.getPassword()),flag));
 			
 			if(ui == null){
 				WarningFrame wf = new WarningFrame("用户名或密码填写错误！");

@@ -56,7 +56,7 @@ public class UserController implements UserBLService {
 	public UserIdentity login(LoginInfo loginInfo) {
 		try {
 			UserIdentity iden = user.login(loginInfo);
-			LogMsgController.addLog("登录成功");
+			LogMsgController.addLog(loginInfo.username, "登录成功");
 			return iden;
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -96,7 +96,7 @@ public class UserController implements UserBLService {
 	public ResultMessage delete(String ID) {
 		try {
 			ResultMessage res = user.delete(ID);
-			if(res.equals(ResultMessage.SUCCESS)) {
+			if (res.equals(ResultMessage.SUCCESS)) {
 				LogMsgController.addLog("删除客户 [客户ID=" + ID + "]");
 			}
 			return res;
@@ -113,7 +113,7 @@ public class UserController implements UserBLService {
 	public ResultMessage update(UserVO vo) {
 		try {
 			ResultMessage res = user.update(vo);
-			if(res.equals(ResultMessage.SUCCESS)) {
+			if (res.equals(ResultMessage.SUCCESS)) {
 				LogMsgController.addLog("更新客户 " + vo.toString());
 			}
 			return res;

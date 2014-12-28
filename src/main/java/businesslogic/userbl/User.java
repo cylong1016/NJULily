@@ -69,7 +69,7 @@ public class User {
 
 		ArrayList<UserPO> pos = userData.show();
 		for(UserPO po : pos) {
-			if (loginInfo.username.equals("admin")) { // 如果是管理员
+			if(iden.equals(UserIdentity.ADMIN)) {
 				current = new UserPO(null, loginInfo.username, "管理员", loginInfo.password, null, UserIdentity.ADMIN);
 				break; // 跳出循环
 			}
