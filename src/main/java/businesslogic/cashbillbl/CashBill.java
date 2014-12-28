@@ -12,6 +12,7 @@ import vo.CashBillVO;
 import businesslogic.userbl.UserInfo;
 import config.RMIConfig;
 import dataenum.BillState;
+import dataenum.ResultMessage;
 import dataservice.cashbilldataservice.CashBillDataService;
 
 /**
@@ -26,13 +27,14 @@ import dataservice.cashbilldataservice.CashBillDataService;
 public class CashBill {
 
 	private String ID;
-
+	private CashBillDataService cashBillData;
 	private ArrayList<CashBillItem> items;
 
 	private CashBillPO po;
 
 	public CashBill() {
 		items = new ArrayList<CashBillItem>();
+		cashBillData = getCashBillData();
 	}
 
 	public CashBillDataService getCashBillData() {
@@ -49,7 +51,6 @@ public class CashBill {
 	}
 
 	public String getID() throws RemoteException {
-		CashBillDataService cashBillData = getCashBillData();
 		this.ID = cashBillData.getID();
 		return ID;
 	}
@@ -85,16 +86,27 @@ public class CashBill {
 
 	public CashBillVO submit(String account) throws RemoteException {
 		addCashBill(account);
-		getCashBillData().insert(po);
+		cashBillData.insert(po);
 		return CashBillTrans.POToVO(po);
 	}
 
 	public CashBillVO save(String account) throws RemoteException {
 		addCashBill(account);
 		po.setState(BillState.DRAFT);
-		getCashBillData().insert(po);
+		cashBillData.insert(po);
 		return CashBillTrans.POToVO(po);
 
+	}
+	
+	public ResultMessage updateDraft(CashBillVO vo) throws RemoteException {
+		CashBillPO po = CashBillTrans.VOtoPO(vo);
+		return cashBillData.update(po);
+	}
+
+	public ResultMessage submitDraft(String ID) throws RemoteException {
+		CashBillPO po = cashBillData.find(ID);
+		po.setState(BillState.APPROVALING);
+		return cashBillData.update(po);
 	}
 
 

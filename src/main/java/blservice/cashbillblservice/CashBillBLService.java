@@ -1,6 +1,7 @@
 package blservice.cashbillblservice;
 
 import vo.CashBillVO;
+import dataenum.ResultMessage;
 
 /**
  * 建立现金费用单
@@ -40,4 +41,22 @@ public interface CashBillBLService {
 	 * @return
 	 */
 	public CashBillVO save(String account);
+	
+	/**
+	 * 修改草稿状态
+	 * @param vo
+	 * @return
+	 * @author Zing
+	 * @version Dec 29, 2014 12:45:22 AM
+	 */
+	public ResultMessage updateDraft(CashBillVO vo);
+	
+	/**
+	 * 提交草稿状态的单据
+	 * @param ID
+	 * @return
+	 * @author Zing
+	 * @version Dec 29, 2014 12:45:30 AM
+	 */
+	public ResultMessage submitDraft(String ID);
 }

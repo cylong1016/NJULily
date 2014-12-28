@@ -19,6 +19,7 @@ import businesslogic.userbl.UserInfo;
 import config.RMIConfig;
 import dataenum.BillState;
 import dataenum.BillType;
+import dataenum.ResultMessage;
 import dataservice.accountbilldataservice.AccountBillDataService;
 
 public class AccountBill {
@@ -156,6 +157,17 @@ public class AccountBill {
 		po.setState(BillState.DRAFT);
 		accountBillData.insert(po);
 		return AccountBillTrans.poToVO(po);
+	}
+	
+	public ResultMessage updateDraft(AccountBillVO vo) throws RemoteException {
+		AccountBillPO po = AccountBillTrans.VOtoPO(vo);
+		return accountBillData.update(po);
+	}
+	
+	public ResultMessage submitDraft(String ID) throws RemoteException {
+		AccountBillPO po = accountBillData.find(ID);
+		po.setState(BillState.APPROVALING);
+		return accountBillData.update(po);
 	}
 
 	/**
