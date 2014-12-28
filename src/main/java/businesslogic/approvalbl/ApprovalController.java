@@ -50,10 +50,9 @@ public class ApprovalController implements ApprovalBLService {
 	public ResultMessage passBill(ArrayList<ValueObject> VOs, ArrayList<BillType> billTypes) {
 		try {
 			ResultMessage res = approval.passBill(VOs, billTypes);
-			if (res != ResultMessage.SUCCESS) {
-				return ResultMessage.FAILURE;
+			if (res.equals(ResultMessage.SUCCESS)) {
+				LogMsgController.addLog("通过了单据 " + VOs.toString());
 			}
-			LogMsgController.addLog("通过了单据 " + VOs.toString());
 			return res;
 		} catch (RemoteException e) {
 			e.printStackTrace();

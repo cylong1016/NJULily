@@ -33,7 +33,6 @@ public class PromotionTotalController implements PromotionTotalBLService {
 	@Override
 	public ArrayList<PromotionTotalVO> show() {
 		try {
-			LogMsgController.addLog("查看所有总价促销策略");
 			return promotionTotal.show();
 		} catch (RemoteException e) {
 			e.printStackTrace();

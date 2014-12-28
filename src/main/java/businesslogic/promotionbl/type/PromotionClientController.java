@@ -30,7 +30,6 @@ public class PromotionClientController implements PromotionClientBLService {
 	@Override
 	public ArrayList<PromotionClientVO> show() {
 		try {
-			LogMsgController.addLog("查看所有的客户促销策略");
 			return promotionClient.show();
 		} catch (RemoteException e) {
 			e.printStackTrace();

@@ -28,7 +28,6 @@ public class PromotionBarginController implements PromotionBargainBLService {
 	@Override
 	public ArrayList<PromotionBargainVO> show() {
 		try {
-			LogMsgController.addLog("查看所有特价包");
 			return promotionBargin.show();
 		} catch (RemoteException e) {
 			e.printStackTrace();
