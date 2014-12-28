@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import vo.AccountBillItemVO;
 import vo.AccountBillVO;
+import dataenum.ResultMessage;
 
 /**
  * 负责实现资金管理界面所需要的服务
@@ -100,4 +101,22 @@ public interface AccountBillBLService {
 	 * @version 2014年11月30日 下午10:36:23
 	 */
 	public AccountBillVO save();
+	
+	/**
+	 * 修改草稿状态
+	 * @param vo
+	 * @return
+	 * @author Zing
+	 * @version Dec 29, 2014 12:45:22 AM
+	 */
+	public ResultMessage updateDraft(AccountBillVO vo);
+	
+	/**
+	 * 提交草稿状态的单据
+	 * @param ID
+	 * @return
+	 * @author Zing
+	 * @version Dec 29, 2014 12:45:30 AM
+	 */
+	public ResultMessage submitDraft(String ID);
 }

@@ -7,6 +7,7 @@ import log.LogMsgController;
 import vo.AccountBillItemVO;
 import vo.AccountBillVO;
 import blservice.accountbillblservice.AccountBillBLService;
+import dataenum.ResultMessage;
 
 /**
  * @see blservice.accountbillblservice.AccountBillBLService
@@ -141,6 +142,32 @@ public class AccountBillController implements AccountBillBLService {
 				LogMsgController.addLog("保存收款（付款）单为草稿状态 " + bill.toString());
 			}
 			return bill;
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public ResultMessage updateDraft(AccountBillVO vo) {
+		try {
+			ResultMessage res = accountBill.updateDraft(vo);
+			if (res == ResultMessage.SUCCESS) {
+				LogMsgController.addLog("更新草稿状态的收款单／付款单 " + vo.toString());
+			}
+			return res;
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public ResultMessage submitDraft(String ID) {
+		try {
+			ResultMessage res = accountBill.submitDraft(ID);
+			if (res == ResultMessage.SUCCESS) {
+				LogMsgController.addLog("提交草稿状态的收款单／付款单: " + ID);
+			}
+			return res;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;

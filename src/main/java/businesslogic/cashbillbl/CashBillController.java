@@ -2,6 +2,7 @@ package businesslogic.cashbillbl;
 
 import java.rmi.RemoteException;
 
+import dataenum.ResultMessage;
 import log.LogMsgController;
 import vo.CashBillVO;
 import blservice.cashbillblservice.CashBillBLService;
@@ -79,6 +80,35 @@ public class CashBillController implements CashBillBLService {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	@Override
+	public ResultMessage updateDraft(CashBillVO vo) {
+		try {
+			ResultMessage res = cashBill.updateDraft(vo);
+			if (res == ResultMessage.SUCCESS) {
+				LogMsgController.addLog("修改现金费用单的草稿状态 " + vo.toString());
+			}
+			return res;
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	@Override
+	public ResultMessage submitDraft(String ID) {
+		try {
+			ResultMessage res = cashBill.submitDraft(ID);
+			if (res == ResultMessage.SUCCESS) {
+				LogMsgController.addLog("提交草稿状态的现金费用单： " + ID);
+			}
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 
 }
