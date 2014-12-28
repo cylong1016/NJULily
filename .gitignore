@@ -28,4 +28,8 @@ release.properties
 /bin
 jre
 NJULily_run.bat
+NJULily.jar
 NJULilyLog_run.bat
+NJULilyLog.jar
+data/loginInfo.ser
+data/loginInfoTemp.ser

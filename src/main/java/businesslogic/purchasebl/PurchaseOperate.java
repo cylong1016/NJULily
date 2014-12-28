@@ -59,8 +59,7 @@ public class PurchaseOperate implements PurchaseInfo_Approval{
 		}
 		// 更新该进货／进货退货单状态
 		po.setState(BillState.SUCCESS);
-		purchaseData.update(po);
-		return ResultMessage.SUCCESS;
+		return purchaseData.update(po);
 	}
 
 

@@ -17,6 +17,7 @@ import log.config.LogUIConfig;
 import log.ui.Button;
 import log.ui.TextField;
 import log.ui.logmsg.LogFrame;
+import log.ui.warning.PromptDialog;
 import dataservice.userdataservice.LoginInfo;
 
 /**
@@ -99,30 +100,37 @@ public class LoginPanel extends JPanel {
 					// 解决卡顿
 					public void run() {
 						LoginInfo info = new LoginInfo(userText.getText(), new String(passText.getPassword()), false);
-						LoginCheck check = new LoginCheck();
-						if (check.login(info)) {
-							Component frame = LoginPanel.this.getParent();
-							while(!(frame instanceof LoginFrame)) {
-								frame = frame.getParent();
+						try {
+							LoginCheck check = new LoginCheck();
+							if (check.login(info)) {
+								Component frame = LoginPanel.this.getParent();
+								while(!(frame instanceof LoginFrame)) {
+									frame = frame.getParent();
+								}
+								((LoginFrame)frame).dispose();
+								new LogFrame();
+							} else {
+								PromptDialog.show("登录失败", "用户名或者密码错误");
 							}
-							((LoginFrame)frame).dispose();
-							new LogFrame();
+						} catch (Exception e) {
+							e.printStackTrace();
+							PromptDialog.show("错误", "连接服务器失败");
 						}
 					}
 				}.start();
 			}
 		}
-		
+
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			if(e.getSource() == passText) {
+			if (e.getSource() == passText) {
 				passText.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 			}
 		}
-		
+
 		@Override
 		public void mouseExited(MouseEvent e) {
-			if(e.getSource() == passText) {
+			if (e.getSource() == passText) {
 				passText.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
 			}
 		}

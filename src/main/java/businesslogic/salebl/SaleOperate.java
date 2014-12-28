@@ -75,8 +75,7 @@ public class SaleOperate implements SaleInfo_Approval {
 		}
 		// 更新该单子的状态
 		po.setState(BillState.SUCCESS);
-		saleData.update(po);
-		return ResultMessage.SUCCESS;
+		return saleData.update(po);
 	}
 
 	/**

@@ -39,7 +39,7 @@ public class LogTextArea extends JScrollPane {
 		this.setBorder();	// 设置边框
 		this.modifyScrollBar();	// 修改滚动条样式
 	}
-	
+
 	private void modifyScrollBar() {
 		JScrollBar bar = this.getVerticalScrollBar();
 		bar.setBackground(Color.LIGHT_GRAY);
@@ -49,7 +49,9 @@ public class LogTextArea extends JScrollPane {
 
 	private void addTextArea() {
 		textArea = new JTextArea();
-		for(LogMessage log : LogMsgController.logs.getInList()) {
+		// 最新的在前面显示
+		for(int i = LogMsgController.logs.size(); i >= 0; i--) {
+			LogMessage log = LogMsgController.logs.get(i);
 			textArea.append(log.toString() + "\r\n");
 		}
 		textArea.setLineWrap(true);
