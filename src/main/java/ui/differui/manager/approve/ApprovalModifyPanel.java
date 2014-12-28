@@ -15,6 +15,10 @@ import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.myui.MyPanel;
 import ui.commonui.myui.MyTable;
 import ui.commonui.warning.WarningFrame;
+import vo.AccountBillVO;
+import vo.CashBillVO;
+import vo.CashItemVO;
+import vo.InventoryBillVO;
 import vo.PurchaseVO;
 import vo.ValueObject;
 import vo.commodity.CommodityItemVO;
@@ -171,7 +175,47 @@ public class ApprovalModifyPanel extends MyPanel implements ActionListener{
 			rm = controller.updateBill(new SalesVO(vo.ID, vo.clientID, vo.client, vo.storage
 					, vo.user, vo.salesman, commodities, textField.getText()
 					, sum, vo.allowance, vo.voucher, afterSum, vo.type, vo.state ), billType);
-		}		
+		}else if(billType.equals(BillType.GIFT) || billType.equals(BillType.LOSS) || 
+				billType.equals(BillType.OVERFLOW) || billType.equals(BillType.ALARM)){
+			
+			InventoryBillVO vo = (InventoryBillVO)currentBill;
+			
+			ArrayList<CommodityItemVO> commodities = new ArrayList<CommodityItemVO>();
+			
+			double price = 0;
+			int num = 0;
+			
+			for(int i = 0; i < table.getRowCount(); i++){
+				num = Integer.parseInt((String)table.getValueAt(i, 3).toString());
+				
+				price = 0;
+				
+				//String ID, int number, double price, String remark, String name, String type
+				commodities.add(new CommodityItemVO((String)table.getValueAt(i, 0), num, price, null
+						, (String)table.getValueAt(i, 1), (String)table.getValueAt(i, 2)));
+			}
+			
+			//String ID, BillType billType, ArrayList<CommodityItemVO> commodities, String remark, BillState state
+			rm = controller.updateBill(new InventoryBillVO(vo.ID, billType, commodities,vo.remark, vo.state), billType);
+		}else if(billType.equals(BillType.CASH)){
+			
+			CashBillVO vo = (CashBillVO)currentBill;
+			
+			ArrayList<CashItemVO> bills = new ArrayList<CashItemVO>();
+			
+			double sum = 0;
+			
+			for(int i = 0; i < table.getRowCount(); i++){
+				//String name, double money, String remark
+				
+				double price = Double.parseDouble((String)table.getValueAt(i, 3));
+				sum = sum + price;
+				bills.add(new CashItemVO((String)table.getValueAt(i, 1), price, (String)table.getValueAt(i, 2)));
+			}
+			
+			//String ID, String user, String account, ArrayList<CashItemVO> bills, double total, BillState state
+			rm = controller.updateBill(new CashBillVO(vo.ID, vo.user, vo.account, bills, sum, vo.state), billType);
+		}
 		
 		bt_return.doClick();
 		
@@ -190,8 +234,15 @@ public class ApprovalModifyPanel extends MyPanel implements ActionListener{
 		
 		if(billType.equals(BillType.PURCHASE) || billType.equals(BillType.PURCHASEBACK)){
 			purchaseTable((PurchaseVO)bill);	
-		}else if(billType.equals( BillType.SALE )|| billType.equals(BillType.SALEBACK)){
+		}else if(billType.equals(BillType.SALE )|| billType.equals(BillType.SALEBACK)){
 			saleTable((SalesVO)bill);
+		}else if(billType.equals(BillType.GIFT) || billType.equals(BillType.LOSS) || 
+				billType.equals(BillType.OVERFLOW) || billType.equals(BillType.ALARM)){
+			inventoryTable((InventoryBillVO)bill);
+		}else if(billType.equals(BillType.PAY)||billType.equals(BillType.EXPENSE)){
+			accountTable((AccountBillVO)bill);
+		}else if(billType.equals(BillType.CASH)){
+			cashTable((CashBillVO)bill);
 		}
 		initJsp();
 	}
@@ -231,5 +282,52 @@ public class ApprovalModifyPanel extends MyPanel implements ActionListener{
 			Object[] rowData = {cvo.ID, cvo.name, cvo.type, cvo.number, cvo.price, cvo.remark};
 			tableModel.addRow(rowData);
 		}
+	}
+	
+	private void inventoryTable(InventoryBillVO bill){
+		String[] headers = {"商品编号","商品名称","商品型号","商品数量"};
+		table = new MyTable(headers, true);
+
+		ArrayList<CommodityItemVO> list = bill.commodities;
+		
+		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+		
+		for(int i = 0; i < list.size(); i++ ){
+			CommodityItemVO cvo = list.get(i);
+			Object[] rowData = {cvo.ID, cvo.name, cvo.type, cvo.number};
+			tableModel.addRow(rowData);
+		}
+	}
+	
+	private void accountTable(AccountBillVO bill){
+		String[] headers = {"转账编号","客户名称","账户名称","转账金额"};
+		table = new MyTable(headers, true);
+		
+		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+			
+		Object[] rowData = {bill.ID, bill.clientName, bill.bills.get(0).accountName, bill.sumMoney};
+		tableModel.addRow(rowData);
+		
+	}
+	
+	private void cashTable(CashBillVO bill){
+		String[] headers = {"条目序号","条目名称","备注","条目金额"};
+		
+		table = new MyTable(headers, true);
+		
+		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+		
+		for(int i = 0; i < bill.bills.size(); i++){
+			
+			if(bill.bills.get(i).remark.equals(null)){
+				Object[] rowData = {i + 1, bill.bills.get(i).name, "无", bill.bills.get(i).money};
+				tableModel.addRow(rowData);
+			}else{
+				Object[] rowData = {i + 1, bill.bills.get(i).name, bill.bills.get(i).remark, bill.bills.get(i).money};
+				tableModel.addRow(rowData);
+			}
+						
+		}
+	
 	}
 }

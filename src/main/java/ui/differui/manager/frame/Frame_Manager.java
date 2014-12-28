@@ -50,10 +50,6 @@ public class Frame_Manager extends MyFrame implements ActionListener{
 		
 		Frame_Login.myNameis = "Frame_Manager";
 		
-		lb_super = new JLabel(new ImageIcon("ui/image/inventory/super.png"));
-		lb_super.setBounds(0, 0, 1280, 720);
-		lb_super.setVisible(false);
-		this.add(lb_super);
 		
 		panel_index = new ManagerIndex();
 		panel_index.setVisible(true);
@@ -78,6 +74,11 @@ public class Frame_Manager extends MyFrame implements ActionListener{
 		panel_businessCondition = new BusinessConditionUI();
 		panel_businessCondition.setVisible(false);
 		this.add(panel_businessCondition);
+		
+		lb_super = new JLabel(new ImageIcon("ui/image/inventory/super.png"));
+		lb_super.setBounds(0, 0, 1280, 720);
+		lb_super.setVisible(false);
+		this.add(lb_super);
 		
 		/////////////////////////////index///////////////////////////////
 		

@@ -113,15 +113,15 @@ public class Frame_Salesman extends MyFrame implements ActionListener{
 		panel_saleBack.setVisible(false);
 		this.add(panel_saleBack);
 		
-		lb_super = new JLabel(new ImageIcon("ui/image/inventory/super.png"));
-		lb_super.setBounds(0, 0, 1280, 720);
-		lb_super.setVisible(false);
-		this.add(lb_super);
-		
 		in_back = new JLabel(new ImageIcon("ui/image/inventory/arrow.png"));
 		in_back.setBounds(0, 0, 1280, 720);
 		in_back.setVisible(false);
 		this.add(in_back);
+		
+		lb_super = new JLabel(new ImageIcon("ui/image/inventory/super.png"));
+		lb_super.setBounds(0, 0, 1280, 720);
+		lb_super.setVisible(false);
+		this.add(lb_super);
 			
 		/////////////////////////////index///////////////////////////////
 		

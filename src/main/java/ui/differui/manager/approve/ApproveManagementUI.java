@@ -55,7 +55,7 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 	Color backColor = new Color(46, 52, 101);
 	
 	JButton bt_approval, bt_approvalAll, bt_search, bt_modify, bt_check, bt_out, bt_del;
-	public static JButton passBill;
+	public static JButton passBill, refuseBill;
 	
 	MyComboBox cbb_isApproval, cbb_sort;
 	JTextArea ta;
@@ -119,6 +119,10 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 		passBill = new JButton();
 		passBill.addActionListener(this);
 		this.add(passBill);
+		
+		refuseBill = new JButton();
+		refuseBill.addActionListener(this);
+		this.add(refuseBill);
 	}
 	
 	private void initButtons(){
@@ -182,6 +186,39 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent events) {
+		
+		if(events.getSource() == refuseBill){
+			ApprovalBLService controller = new ApprovalController();
+			ArrayList<ValueObject> noPassList =  new ArrayList<ValueObject>();
+			ArrayList<BillType> noPassType =  new ArrayList<BillType>();
+			noPassList.add(listPool.get(index));
+			noPassType.add(typePool.get(index));
+			ResultMessage rm = controller.noPassBill(noPassList, noPassType);
+			
+			if(rm.equals(ResultMessage.FAILURE)){
+				WarningFrame wf = new WarningFrame("不通过单据失败！");
+				wf.setVisible(true);
+			}else{
+				
+				bt_search.doClick();
+					
+				WarningFrame wf = new WarningFrame("已不通过此单据！");
+				wf.setVisible(true);
+				
+			}
+		}
+		
+		if(events.getSource() == bt_del){
+			if(index >= 0){
+				if(!table.getValueAt(index, 3).equals("未审批")){
+					WarningFrame wf = new WarningFrame("状态为未审批的单据才能进行审批不通过操作！");
+					wf.setVisible(true);
+				}else{
+					ExitFinishFrame eff = new ExitFinishFrame("refuse a bill");
+					eff.setVisible(true);
+				}
+			}
+		}
 		
 		if(events.getSource() == bt_modify){
 			if(index >= 0){

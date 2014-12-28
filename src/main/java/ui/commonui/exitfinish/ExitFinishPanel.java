@@ -108,6 +108,8 @@ public class ExitFinishPanel extends MyPanel implements ActionListener{
 				case "modify a account" : AccountManagementUI.modifyAccount.doClick();break;
 				
 				case "ApprovalModify" : ApprovalModifyPanel.modify.doClick();break;
+				
+				case "refuse a bill" : ApproveManagementUI.refuseBill.doClick();break;
 
 			}
 			ExitFinishFrame.button_close.doClick();

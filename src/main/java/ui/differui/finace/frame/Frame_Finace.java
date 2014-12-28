@@ -58,11 +58,6 @@ public class Frame_Finace extends MyFrame implements ActionListener{
 		
 		Frame_Login.myNameis = "Frame_Finace";
 		
-		lb_super = new JLabel(new ImageIcon("ui/image/inventory/super.png"));
-		lb_super.setBounds(0, 0, 1280, 720);
-		lb_super.setVisible(false);
-		this.add(lb_super);
-		
 		panel_index = new FinaceIndex();
 		panel_index.setVisible(true);
 		this.add(panel_index);
@@ -99,6 +94,11 @@ public class Frame_Finace extends MyFrame implements ActionListener{
 		trade_back.setBounds(0, 0, 1280, 630);
 		trade_back.setVisible(false);
 		this.add(trade_back);
+		
+		lb_super = new JLabel(new ImageIcon("ui/image/inventory/super.png"));
+		lb_super.setBounds(0, 0, 1280, 720);
+		lb_super.setVisible(false);
+		this.add(lb_super);
 		
 		/////////////////////////////index///////////////////////////////
 		

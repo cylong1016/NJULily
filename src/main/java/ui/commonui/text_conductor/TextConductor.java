@@ -912,7 +912,8 @@ public class TextConductor {
 		
 		for(int i = 0; i < 9; i++)
 			text = text + blank4;
-		text = text + "转账账户：" + bill.bills.get(0).accountName + "\n";
+		if(bill.bills.size() > 0)
+			text = text + "转账账户：" + bill.bills.get(0).accountName + "\n";
 			
 		for(int i = 0; i < 9; i++)
 			text = text + blank4;
@@ -931,7 +932,8 @@ public class TextConductor {
 		
 		for(int i = 0; i < 9; i++)
 			text = text + blank4;
-		text = text + bill.bills.get(0).remark + "\n" + "\n";
+		if(bill.bills.size() > 0)
+			text = text + bill.bills.get(0).remark + "\n" + "\n";
 		
 		return text;
 	}
