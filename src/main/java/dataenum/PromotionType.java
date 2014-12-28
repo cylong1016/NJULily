@@ -1,12 +1,10 @@
 package dataenum;
 
-// TODO　@Zing
-// 不会写这个。。
 public enum PromotionType {
-	BARGAINS(""),
-	CLIENT(""),
+	BARGAINS("特价包"),
+	CLIENT("客户等级促销"),
 	COMMODITY(""),
-	TOTAL("");
+	TOTAL("购买总额促销");
 	
 	public final String value;
 

@@ -12,6 +12,7 @@ public interface PromotionInfo_Sale {
 
 	/**
 	 * 查看是否有合适的商品的促销
+	 * @deprecated 这个促销策略已经被我们狠心遗弃
 	 * @param iD
 	 * @param commodityIDs
 	 * @author Zing

@@ -34,12 +34,12 @@ public class PromotionData {
 	
 	/**
 	 * 将商品的促销单放进表格中
+	 * @deprecated 这个不做了~
 	 * @return
 	 * @author Zing
 	 * @version Dec 11, 2014 1:30:11 AM
 	 */
 	public Object[][] getCommodityPromotion() {
-		// TODO Zing说这个不做了
 //		PromotionCommodityBLService promotionBL = new PromotionCommodityController();
 //		ArrayList<PromotionCommodityVO> commodityVOs = promotionBL.show();
 //		Object[][] cellData = new Object[commodityVOs.size()][CELL];

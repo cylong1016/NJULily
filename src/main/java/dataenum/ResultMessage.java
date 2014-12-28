@@ -10,7 +10,7 @@ public enum ResultMessage {
 	SUCCESS("成功"),
 	FAILURE("失败"),
 	REMOTE_EXCEPTION("远程调用异常"),
-	COMMODITY_LACK(""); // TODO
+	COMMODITY_LACK("商品不足");
 	
 	public final String value;
 

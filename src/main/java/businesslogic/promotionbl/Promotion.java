@@ -23,8 +23,6 @@ import dataservice.promotiondataservice.PromotionDataService;
  */
 public class Promotion {
 	
-	// TODO 删除促销策略的方法
-
 	/** 策略编号 */
 	protected String ID;
 	/** 促销起始时间 */

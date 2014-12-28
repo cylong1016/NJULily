@@ -26,7 +26,6 @@ public class CommodityItemPO implements Serializable {
 	/** 商品备注 */
 	private String remark;
 
-	// TODO 需要有商品的名字
 	public CommodityItemPO(String ID, String name, int number, double price, String remark) {
 		this.ID = ID;
 		this.name = name;

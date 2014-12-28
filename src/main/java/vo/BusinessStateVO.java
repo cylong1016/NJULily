@@ -11,7 +11,6 @@ package vo;
  * 3. 利润：折让后总收入-总支出。
  * @author Zing
  * @version 2014年11月2日下午3:50:31
- * TODO 这个要怎么弄……
  */
 public class BusinessStateVO {
 	/** 起始时间 */
