@@ -114,8 +114,11 @@ public class Sale {
 		list.setClientID(clientID);
 	}
 
+	/**
+	 * @deprecated 没你什么事了~
+	 */
 	public ArrayList<PromotionCommodityVO> findFitPromotionCommodity() throws RemoteException {
-		promotionInfo.findFitPromotionCommodity(ID, commodityIDs, commodityNumber);
+		// promotionInfo.findFitPromotionCommodity(ID, commodityIDs, commodityNumber);
 		return null;
 	}
 

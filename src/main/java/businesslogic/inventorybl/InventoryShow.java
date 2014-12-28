@@ -84,23 +84,19 @@ public class InventoryShow {
 	}
 
 	public ArrayList<InventoryBillVO> showGiftsDraft() throws RemoteException {
-		// TODO 
-		return showChoose(BillType.GIFT);
+		return showChoose(BillType.GIFT, BillState.DRAFT);
 	}
 
 	public ArrayList<InventoryBillVO> showOverFlowDraft() throws RemoteException {
-		// TODO 
-		return showChoose(BillType.OVERFLOW);
+		return showChoose(BillType.OVERFLOW, BillState.DRAFT);
 	}
 
 	public ArrayList<InventoryBillVO> showLossDraft() throws RemoteException {
-		// TODO
-		return showChoose(BillType.LOSS);
+		return showChoose(BillType.LOSS, BillState.DRAFT);
 	}
 
 	public ArrayList<InventoryBillVO> showAlarmDraft() throws RemoteException {
-		// TODO
-		return showChoose(BillType.ALARM);
+		return showChoose(BillType.ALARM, BillState.DRAFT);
 	}
 
 	/**

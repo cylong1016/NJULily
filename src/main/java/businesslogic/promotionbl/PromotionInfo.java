@@ -140,7 +140,6 @@ public class PromotionInfo implements PromotionInfo_Sale{
 	public ArrayList<PromotionCommodityVO> findFitPromotionCommodity(String iD,
 			ArrayList<String> commodityIDs, ArrayList<Integer> commodityNumber)
 			throws RemoteException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

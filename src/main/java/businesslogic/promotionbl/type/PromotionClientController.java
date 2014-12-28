@@ -79,7 +79,6 @@ public class PromotionClientController implements PromotionClientBLService {
 	/**
 	 * @see blservice.promotionblservice.PromotionClientBLService#addGiftBill(vo.InventoryBillVO)
 	 */
-	// TODO 这个方法可以删掉好了……
 	@Override
 	public void addGiftBill(InventoryBillVO giftBill) {
 		try {

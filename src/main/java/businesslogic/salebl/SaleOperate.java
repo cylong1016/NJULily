@@ -101,7 +101,7 @@ public class SaleOperate implements SaleInfo_Approval {
 			saleData.insert(redPO);
 			pass(redVO);
 		} else {
-			// TODO 保存为草稿状态
+			// TODO 保存为草稿
 		}
 		return redVO;
 	}
