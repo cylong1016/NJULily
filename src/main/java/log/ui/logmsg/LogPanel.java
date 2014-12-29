@@ -3,6 +3,8 @@ package log.ui.logmsg;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -10,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -30,31 +33,51 @@ public class LogPanel extends JPanel {
 	/** serialVersionUID */
 	private static final long serialVersionUID = 8770200041944584165L;
 
+	/** 背景图片 */
+	private static final Image IMG_BACK = new ImageIcon("ui/image/log/logmain/back.png").getImage();
+
 	/** 年月日标签 */
 	private DateLabel[] dateLabel;
 	/** 三个输入框 */
-	private TextField[] input;
+	private InputField[] input;
 	/** 查询和显示全部日志按钮 */
-	public Button search, showAll;
+	private Button search, showAll;
+	/** 输入panel的位置 */
+	private Point inPanelPoint = new Point(0, 25);
+	/** 输入panel的大小 */
+	private Dimension inPanelDimen = new Dimension(IMG_BACK.getWidth(null), 82);
 
 	/** 按钮大小 */
 	private Dimension btnDim = new Dimension(80, 23);
 	/** 标签、输入框、按钮之间的间隙 */
 	private int interval = 20;
-	private Dimension textFieldDimen = new Dimension(80, 24);
 
 	/** 显示日志 */
 	private LogTextArea logText;
-	private Point logTextPoint = new Point(0, 60);
-	private Dimension logTextSize = new Dimension(LogUIConfig.WIDTH, 450);
+	/** 显示日志的TextArea与界面的内边距 */
+	private int padding = 72;
+	private Point logTextPoint = new Point(padding, inPanelPoint.y + inPanelDimen.height);
+	private Dimension logTextSize = new Dimension(LogUIConfig.WIDTH - padding * 2, 480);
 
 	public LogPanel() {
 		this.setOpaque(false);
-		this.setLayout(new BorderLayout());
+		this.setLayout(null);
 		this.setBackground(LogUIConfig.MAIN_COLOR);
-		inputPanel inPanel = new inputPanel();
-		this.add(inPanel, BorderLayout.NORTH);
+		this.addInputPanel();
 		this.addLogText();
+	}
+
+	@Override
+	protected void paintComponent(Graphics g) {
+		g.drawImage(IMG_BACK, 0, 0, this);
+		super.paintComponent(g);
+	}
+
+	private void addInputPanel() {
+		InputPanel inPanel = new InputPanel();
+		inPanel.setLocation(inPanelPoint);
+		inPanel.setSize(inPanelDimen);
+		this.add(inPanel, BorderLayout.NORTH);
 	}
 
 	/**
@@ -69,12 +92,13 @@ public class LogPanel extends JPanel {
 		this.add(logText, BorderLayout.CENTER);
 	}
 
-	private class inputPanel extends JPanel {
+	private class InputPanel extends JPanel {
 
 		/** serialVersionUID */
 		private static final long serialVersionUID = -1836768806430466838L;
 
-		public inputPanel() {
+		public InputPanel() {
+			this.setOpaque(false);
 			this.setLayout(new FlowLayout(FlowLayout.CENTER, interval, interval));
 			this.addInput();
 			this.addButton();
@@ -87,7 +111,7 @@ public class LogPanel extends JPanel {
 		 */
 		private void addInput() {
 			dateLabel = new DateLabel[3];
-			input = new TextField[3];
+			input = new InputField[3];
 			SimpleDateFormat[] sdf = new SimpleDateFormat[3];
 			String[] date_s = {"年", "月", "日"};
 			String[] dateFormat = {"yyyy", "MM", "dd"};
@@ -96,11 +120,10 @@ public class LogPanel extends JPanel {
 			for(int i = 0; i < dateLabel.length; i++) {
 				dateLabel[i] = new DateLabel(date_s[i]);
 				sdf[i] = new SimpleDateFormat(dateFormat[i]);
-				input[i] = new TextField();
+				input[i] = new InputField();
 				input[i].setText(sdf[i].format(curDate));
 				input[i].setFont(LogUIConfig.INPUT_FONT);
 				input[i].setHorizontalAlignment(JTextField.CENTER);
-				input[i].setPreferredSize(textFieldDimen);
 				this.add(input[i]);
 				this.add(dateLabel[i]);
 			}
@@ -184,4 +207,26 @@ class DateLabel extends JLabel {
 		super(Text, JLabel.LEFT);
 		this.setFont(LogUIConfig.INPUT_FONT);
 	}
+}
+
+class InputField extends TextField {
+
+	/** serialVersionUID */
+	private static final long serialVersionUID = -7461764475544506463L;
+
+	/** 输入框背景图片 */
+	private static final Image IMG_TEXT_BOX = new ImageIcon("ui/image/log/text_box.png").getImage();
+
+	public InputField() {
+		this.removeMouseListener(listener);
+		// 和背景一样大
+		this.setPreferredSize(new Dimension(IMG_TEXT_BOX.getWidth(null), IMG_TEXT_BOX.getHeight(null)));
+	}
+
+	@Override
+	protected void paintComponent(Graphics g) {
+		g.drawImage(IMG_TEXT_BOX, 0, 0, this);
+		super.paintComponent(g);
+	}
+
 }

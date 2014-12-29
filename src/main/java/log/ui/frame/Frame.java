@@ -13,7 +13,7 @@ import javax.swing.UIManager;
 import log.ui.frame.title.TitlePanel;
 
 /**
- * log主JFrame
+ * 主JFrame
  * @author cylong
  * @version 2014年12月10日 上午9:32:04
  */

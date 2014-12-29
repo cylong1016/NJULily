@@ -3,11 +3,14 @@ package log.ui.login;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -28,72 +31,81 @@ public class LoginPanel extends JPanel {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = -6549493833516155941L;
+	
+	/** 背景图片 */
+	private static final Image IMG_BACK = new ImageIcon("ui/image/log/login/back.jpg").getImage();
+	/** 用户名图片 */
+	private static final Image IMG_USERNAME = new ImageIcon("ui/image/log/login/username.png").getImage();
+	/** 密码图片 */
+	private static final Image IMG_PASS = new ImageIcon("ui/image/log/login/password.png").getImage();
+	/** 登录按钮图片 */
+	private static final Image IMG_GO_1 = new ImageIcon("ui/image/log/login/go_button_1.png").getImage();
+	/** 移动到登录按钮上的图片 */
+	private static final Image IMG_GO_2 = new ImageIcon("ui/image/log/login/go_button_2.png").getImage();
 
-	/** 用户名和密码标签 */
-	private Label username, password;
 	/** 用户名输入框 */
 	private TextField userText;
+	/** 用户名输入框的位置 */
+	private Point userFieldPoint = new Point(460, 415);
 	/** 密码输入框 */
 	private JPasswordField passText;
 	/** 输入框的大小 */
-	private Dimension fieldDimen = new Dimension(150, 30);
-
+	private Dimension fieldDimen = new Dimension(172, 38);
+	/** 是否点击输入框 */
+	private boolean isClicked = false;
 	/** 登录按钮 */
 	private Button loginBtn;
-	/** 登录按钮大小 */
-	private Dimension btnDimen = new Dimension(200, 40);
-
-	/** 上面那些组件的容器 */
-	private JPanel[] container;
 
 	/** 鼠标监听 */
 	private Listener listener;
 
 	public LoginPanel() {
-		this.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 40));
+		this.setLayout(null);
+		this.setOpaque(false);
 		listener = new Listener();
-		initPanel();
 		addInputField();
 		addLoginBtn();
 	}
 
-	private void initPanel() {
-		container = new JPanel[3];
-		for(int i = 0; i < container.length; i++) {
-			container[i] = new JPanel();
-			container[i].setLayout(new FlowLayout(FlowLayout.CENTER, 20, 0));
-			this.add(container[i]);
-		}
-	}
-
 	private void addInputField() {
-		username = new Label("用户名");
 		userText = new TextField();
-		userText.setPreferredSize(fieldDimen);
+		userText.setSize(fieldDimen);
+		userText.setLocation(userFieldPoint.x + 4, userFieldPoint.y + 2);
 		userText.setFont(LogUIConfig.LOGIN_FONT);
-		container[0].add(username);
-		container[0].add(userText);
-		password = new Label("密　码");
+		userText.addMouseListener(listener);
+		this.add(userText);
 		passText = new JPasswordField();
-		passText.setPreferredSize(fieldDimen);
-		passText.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+		passText.setSize(fieldDimen);
+		passText.setLocation(userFieldPoint.x + 187, userFieldPoint.y + 2);
+		passText.setBorder(BorderFactory.createEmptyBorder());
+		passText.setForeground(LogUIConfig.INPUT_FONT_COLOR);
+		passText.setOpaque(false);
 		passText.addMouseListener(listener);
-		container[1].add(password);
-		container[1].add(passText);
+		this.add(passText);
 	}
 
 	private void addLoginBtn() {
-		loginBtn = new Button("登录");
-		loginBtn.setFont(LogUIConfig.LOGIN_FONT);
-		loginBtn.setPreferredSize(btnDimen);
+		loginBtn = new Button(IMG_GO_1, IMG_GO_2);
+		loginBtn.setLocation(userFieldPoint.x + 364, userFieldPoint.y);
 		loginBtn.addMouseListener(listener);
-		container[2].add(loginBtn);
+		this.add(loginBtn);
 	}
+	
+	@Override
+	protected void paintComponent(Graphics g) {
+		g.drawImage(IMG_BACK, 0, 0, this);
+		if(!isClicked) {
+			g.drawImage(IMG_USERNAME, userFieldPoint.x, userFieldPoint.y, this);
+			g.drawImage(IMG_PASS, userFieldPoint.x + 182, userFieldPoint.y, this);
+		}
+		super.paintComponent(g);
+	}
+	
 
 	private class Listener extends MouseAdapter {
 
 		@Override
-		public void mouseClicked(MouseEvent e) {
+		public void mousePressed(MouseEvent e) {
 			if (e.getSource() == loginBtn) {
 				new Thread() {
 
@@ -119,19 +131,30 @@ public class LoginPanel extends JPanel {
 					}
 				}.start();
 			}
+			
 		}
+		
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			if(e.getSource() == passText | e.getSource() == userText) {
+				isClicked = true;
+				repaint();
+			}
+			
+		}
+		
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			if (e.getSource() == passText) {
-				passText.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+				passText.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
 			}
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
 			if (e.getSource() == passText) {
-				passText.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+				passText.setBorder(BorderFactory.createEmptyBorder());
 			}
 		}
 	}

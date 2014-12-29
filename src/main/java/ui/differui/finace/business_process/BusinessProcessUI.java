@@ -16,15 +16,6 @@ import javax.swing.JTextArea;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.table.DefaultTableModel;
 
-import dataenum.BillType;
-import dataenum.ResultMessage;
-import blservice.clientblservice.ClientBLService;
-import blservice.recordblservice.BusinessStateInputInfo;
-import blservice.recordblservice.RecordBLService;
-import blservice.userblservice.UserBLService;
-import businesslogic.clientbl.ClientController;
-import businesslogic.recordbl.RecordController;
-import businesslogic.userbl.UserController;
 import ui.commonui.myui.MyComboBox;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyTable;
@@ -32,6 +23,14 @@ import ui.commonui.myui.MyTextField;
 import ui.commonui.text_conductor.TextConductor;
 import ui.commonui.warning.WarningFrame;
 import vo.ValueObject;
+import blservice.clientblservice.ClientBLService;
+import blservice.recordblservice.BusinessStateInputInfo;
+import blservice.recordblservice.RecordBLService;
+import blservice.userblservice.UserBLService;
+import businesslogic.clientbl.ClientController;
+import businesslogic.recordbl.RecordController;
+import businesslogic.userbl.UserController;
+import dataenum.BillType;
 
 public class BusinessProcessUI extends JLabel implements ActionListener{
 	

@@ -113,8 +113,8 @@ public class Frame_Login extends MyFrame implements ActionListener{
 		this.add(loginBackground2);
 		
 		loginBackground = new MyBackground("ui/image/login/backg.png");
-		this.add(loginBackground); 
-			
+		this.add(loginBackground);
+		
 	}
 	
 	public void actionPerformed(ActionEvent events) {

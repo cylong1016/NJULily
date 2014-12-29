@@ -1,7 +1,5 @@
 package log.ui.logmsg;
 
-import java.awt.BorderLayout;
-
 import log.config.LogUIConfig;
 import log.ui.frame.Frame;
 
@@ -17,7 +15,7 @@ public class LogFrame extends Frame {
 	public LogFrame() {
 		// 显示日志信息的panel
 		LogPanel panel = new LogPanel();
-		this.add(panel, BorderLayout.CENTER);
+		this.add(panel);
 		this.setTitle("操作日志");
 		this.setSize(LogUIConfig.WIDTH, LogUIConfig.HEIGHT);
 		this.setLocationRelativeTo(null); // 居中

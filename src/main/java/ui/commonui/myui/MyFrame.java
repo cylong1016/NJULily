@@ -9,9 +9,6 @@ import java.awt.event.MouseMotionAdapter;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
-
-
-
 import ui.commonui.exitback.ExitBackFrame;
 import ui.commonui.exitprogram.ExitProgramFrame;
 import ui.commonui.info.Info;
@@ -119,7 +116,38 @@ public class MyFrame extends JFrame {
                     io.setY(Y);
                 }
             }
-        }); 
+        });
+        
+        new HyalineValue().start(); // 透明渐变启动界面
+	}
+	
+	/**
+	 * 透明度渐变启动界面
+	 * @author cylong
+	 * @version 2014年12月12日 上午3:25:27
+	 */
+	protected class HyalineValue extends Thread {
+		
+		float hyalineValue = 0f;
+
+		public void run() {
+			while(true) {
+				try {
+					Thread.sleep(30);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				hyalineValue += 0.05f;
+				if (hyalineValue > 1) {
+					hyalineValue = 1;
+				}
+				setOpacity(hyalineValue);
+				if (hyalineValue == 1) {
+					break;
+				}
+
+			}
+		}
 	}
 	
 	//return a location to make sure the frame initialize in the middle of users computer

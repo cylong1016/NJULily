@@ -11,9 +11,9 @@ import java.awt.Font;
 public class LogUIConfig {
 
 	/** 界面的宽 */
-	public static int WIDTH = 900;
+	public static int WIDTH = 1280;
 	/** 界面的高 */
-	public static int HEIGHT = 600;
+	public static int HEIGHT = 720;
 	/** 主界面的背景色 */
 	public static Color MAIN_COLOR = Color.WHITE;
 	
@@ -30,8 +30,7 @@ public class LogUIConfig {
 	
 	/*----------------------------登录界面配置--------------------------------*/
 	/** 字体 */
-	public static Font LOGIN_FONT = new Font("黑体", Font.PLAIN, 25);
-	public static int COLUMNS = 13;
+	public static Font LOGIN_FONT = new Font("黑体", Font.PLAIN, 23);
 	/*----------------------------登录界面配置--------------------------------*/
 
 	/*----------------------------通用按钮配置--------------------------------*/
@@ -48,6 +47,8 @@ public class LogUIConfig {
 	/*----------------------------输入日期Panel配置--------------------------------*/
 	/** 标签和输入框字体 */
 	public static Font INPUT_FONT = new Font("黑体", Font.PLAIN, 16);
+	/** 字体颜色 */
+	public static Color INPUT_FONT_COLOR = Color.GRAY;
 	/*----------------------------输入日期Panel配置--------------------------------*/
 
 	/*----------------------------文本配置--------------------------------*/

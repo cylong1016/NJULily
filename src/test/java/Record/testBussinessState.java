@@ -1,6 +1,5 @@
 package Record;
 
-
 import java.rmi.RemoteException;
 
 import org.junit.Test;
@@ -11,7 +10,7 @@ public class testBussinessState {
 
 	@Test
 	public void test() throws RemoteException {
-		BusinessStateList bs = new BusinessStateList("20141211", "20141220");
+		new BusinessStateList("20141211", "20141220");
 	}
 
 }

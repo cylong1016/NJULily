@@ -18,7 +18,7 @@ public class LoginFrame extends Frame {
 		LoginPanel panel = new LoginPanel();
 		this.add(panel, BorderLayout.CENTER);
 		this.setTitle("用户登录");
-		this.setSize(LogUIConfig.WIDTH / 2, LogUIConfig.HEIGHT / 2);
+		this.setSize(LogUIConfig.WIDTH, LogUIConfig.HEIGHT);
 		this.setLocationRelativeTo(null); // 居中
 		hy.start(); // 透明度渐变启动界面
 	}
