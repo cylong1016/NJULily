@@ -22,17 +22,16 @@ public class Approval {
 
 	/**
 	 * 更新特定单据的数据 直接传递一个数据vo过来，还要有数据的类型
-	 * 
 	 * @param VOs
 	 * @return
 	 * @author Zing
 	 * @version Dec 2, 2014 2:11:54 PM
-	 * @throws RemoteException 
+	 * @throws RemoteException
 	 */
-	
+
 	public ResultMessage updateBill(ValueObject vo, BillType billType) throws RemoteException {
 		UpdateApproval update = new UpdateApproval();
-		switch (billType) {
+		switch(billType) {
 		case SALE:
 		case SALEBACK:
 			return update.updateBill((SalesVO)vo);
@@ -53,7 +52,6 @@ public class Approval {
 		}
 		return ResultMessage.FAILURE;
 	}
-	
 
 	/**
 	 * 单子通过审核（可以批量）
@@ -61,35 +59,35 @@ public class Approval {
 	 * @return
 	 * @author Zing
 	 * @version Dec 2, 2014 9:22:47 PM
-	 * @throws RemoteException 
+	 * @throws RemoteException
 	 */
 	public ResultMessage passBill(ArrayList<ValueObject> VOs, ArrayList<BillType> billTypes) throws RemoteException {
 		PassApproval pass = new PassApproval();
 		ResultMessage res = null;
-		for (int i=0; i < VOs.size(); i++) {
+		for(int i = 0; i < VOs.size(); i++) {
 			BillType billType = billTypes.get(i);
 			ValueObject vo = VOs.get(i);
-			switch (billType) {
+			switch(billType) {
 			case SALE:
 			case SALEBACK:
 				res = pass.passBill((SalesVO)vo);
-				 break;
+				break;
 			case PURCHASE:
 			case PURCHASEBACK:
 				res = pass.passBill((PurchaseVO)vo);
-				 break;
+				break;
 			case GIFT:
 			case OVERFLOW:
 			case LOSS:
 				res = pass.passBill((InventoryBillVO)vo);
-				 break;
+				break;
 			case PAY:
 			case EXPENSE:
 				res = pass.passBill((AccountBillVO)vo);
-				 break;
+				break;
 			case CASH:
 				res = pass.passBill((CashBillVO)vo);
-				 break;
+				break;
 			default:
 				break;
 			}
@@ -97,38 +95,37 @@ public class Approval {
 		return res;
 	}
 
-	public ResultMessage noPassBill(ArrayList<ValueObject> VOs,
-			ArrayList<BillType> billTypes) throws RemoteException {
+	public ResultMessage noPassBill(ArrayList<ValueObject> VOs, ArrayList<BillType> billTypes) throws RemoteException {
 		NoPassApproval noPass = new NoPassApproval();
-		for (int i=0; i < VOs.size(); i++) {
+		for(int i = 0; i < VOs.size(); i++) {
 			BillType billType = billTypes.get(i);
 			ValueObject vo = VOs.get(i);
-			switch (billType) {
+			switch(billType) {
 			case SALE:
 			case SALEBACK:
 				noPass.noPassBill((SalesVO)vo);
-				 break;
+				break;
 			case PURCHASE:
 			case PURCHASEBACK:
 				noPass.noPassBill((PurchaseVO)vo);
-				 break;
+				break;
 			case GIFT:
 			case OVERFLOW:
 			case LOSS:
 				noPass.noPassBill((InventoryBillVO)vo);
-				 break;
+				break;
 			case PAY:
 			case EXPENSE:
 				noPass.noPassBill((AccountBillVO)vo);
-				 break;
+				break;
 			case CASH:
 				noPass.noPassBill((CashBillVO)vo);
-				 break;
+				break;
 			default:
 				break;
 			}
 		}
 		return ResultMessage.SUCCESS;
 	}
-	
+
 }

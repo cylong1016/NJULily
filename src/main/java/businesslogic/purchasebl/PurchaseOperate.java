@@ -90,7 +90,7 @@ public class PurchaseOperate implements PurchaseInfo_Approval{
 	public void noPass(PurchaseVO vo) throws RemoteException {
 		PurchasePO po = PurchaseTrans.VOtoPO(vo);
 		po.setState(BillState.FAILURE);
-		purchaseData.insert(po);
+		purchaseData.update(po);
 	}
 
 }
