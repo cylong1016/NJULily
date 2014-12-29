@@ -41,7 +41,7 @@ public class Frame_Login extends MyFrame implements ActionListener{
 	MyButton button_Enter;
 	MyBackground loginBackground2, loginBackground;
 	
-	public static String userName;
+	public static String userName, userID;
 	public static UserIdentity userIden;
 	
 	public Frame_Login(){
@@ -123,9 +123,9 @@ public class Frame_Login extends MyFrame implements ActionListener{
 			
 			UserIdentity ui = controller.login(new LoginInfo(userNameField.getText()
 					, new String(passwordField.getPassword()),flag));
-			userName = userNameField.getText();
+			userID = userNameField.getText();
 			for(int i = 0; i < controller.show().size(); i++){
-				if(controller.show().get(i).username.equals(userName)){
+				if(controller.show().get(i).username.equals(userID)){
 					userName = controller.show().get(i).name;
 					userIden = controller.show().get(i).iden;
 				}

@@ -285,7 +285,8 @@ public class Frame_Finace extends MyFrame implements ActionListener{
 		}
 		
 		switch(i){
-			case 0: panel_index.setVisible(true);break;
+			case 0: panel_index.setVisible(true);
+					FinaceIndex.showAll.doClick();break;
 			case 1: panel_account.setVisible(true);break;
 			case 2: TradeChooseUI choose = new TradeChooseUI();
 					choose.setVisible(true);break;

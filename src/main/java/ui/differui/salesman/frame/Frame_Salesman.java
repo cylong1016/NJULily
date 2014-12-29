@@ -286,7 +286,8 @@ public class Frame_Salesman extends MyFrame implements ActionListener{
 		}
 		
 		switch(i){
-			case 0: panel_si.setVisible(true);break;
+			case 0: panel_si.setVisible(true);
+					SaleIndex.showAll.doClick();break;
 			case 1: panel_cm.setVisible(true);break;
 			case 2: panel_iu.setVisible(true);
 					in_back.setVisible(true);break;
