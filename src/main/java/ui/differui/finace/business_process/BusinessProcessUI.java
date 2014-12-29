@@ -17,6 +17,7 @@ import javax.swing.filechooser.FileSystemView;
 import javax.swing.table.DefaultTableModel;
 
 import dataenum.BillType;
+import dataenum.ResultMessage;
 import blservice.clientblservice.ClientBLService;
 import blservice.recordblservice.BusinessStateInputInfo;
 import blservice.recordblservice.RecordBLService;
@@ -171,29 +172,7 @@ public class BusinessProcessUI extends JLabel implements ActionListener{
 				wf.setVisible(true);
 			}else{
 				TextConductor writer = new TextConductor();
-				
-				
-				
-				String name = table.getValueAt(table.getSelectedRow(), 1).toString();
-				theName = name;
-				
-				String[] type = name.split("-");
-				BillType billtype = null;
-				System.out.print(type[0]);
-				switch(type[0]){
-					case "JHD" : billtype = BillType.PURCHASE;break;
-					case "JHTHD" : billtype = BillType.PURCHASEBACK;break;
-					case "XSD" : billtype = BillType.SALE;break;
-					case "XSTHD" : billtype = BillType.SALEBACK;break;
-					case "ZSD" : billtype = BillType.GIFT;break;
-					case "BYD" : billtype = BillType.OVERFLOW;break;
-					case "BSD" : billtype = BillType.LOSS;break;
-					//case "BZD" : billtype = BillType.ALARM;break;
-					case "SKD" : billtype = BillType.EXPENSE;break;
-					case "FKD" : billtype = BillType.PAY;break;
-					case "XJFYD" : billtype = BillType.CASH;break;
-				}
-				ta.setText(writer.writeBill(billtype, listPool.get(table.getSelectedRow())));
+				ta.setText(writer.writeBill(getType(), listPool.get(table.getSelectedRow())));
 			}
 		}
 		
@@ -287,6 +266,26 @@ public class BusinessProcessUI extends JLabel implements ActionListener{
 				writeto(ta.getText().replaceAll("\n", "\r\n"),file);
 				
 				WarningFrame wf = new WarningFrame("已成功导出至桌面！ ");
+				wf.setVisible(true);
+			}
+		}
+		
+		if(events.getSource() == bt_modify){
+			if(theName != null){
+				RecordBLService controller = new RecordController();
+				controller.red(listPool.get(table.getSelectedRow()), getType());
+				
+				WarningFrame wf = new WarningFrame("已红冲！ ");
+				wf.setVisible(true);
+			}
+		}
+		
+		if(events.getSource() == bt_del){
+			if(theName != null){
+				RecordBLService controller = new RecordController();
+				controller.copyRed(listPool.get(table.getSelectedRow()), getType());
+				
+				WarningFrame wf = new WarningFrame("已红冲并复制！ ");
 				wf.setVisible(true);
 			}
 		}
@@ -400,5 +399,29 @@ public class BusinessProcessUI extends JLabel implements ActionListener{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private BillType getType(){
+		String name = table.getValueAt(table.getSelectedRow(), 1).toString();
+		theName = name;
+		
+		String[] type = name.split("-");
+		BillType billtype = null;
+	
+		switch(type[0]){
+			case "JHD" : billtype = BillType.PURCHASE;break;
+			case "JHTHD" : billtype = BillType.PURCHASEBACK;break;
+			case "XSD" : billtype = BillType.SALE;break;
+			case "XSTHD" : billtype = BillType.SALEBACK;break;
+			case "ZSD" : billtype = BillType.GIFT;break;
+			case "BYD" : billtype = BillType.OVERFLOW;break;
+			case "BSD" : billtype = BillType.LOSS;break;
+			//case "BZD" : billtype = BillType.ALARM;break;
+			case "SKD" : billtype = BillType.EXPENSE;break;
+			case "FKD" : billtype = BillType.PAY;break;
+			case "XJFYD" : billtype = BillType.CASH;break;
+		}
+		
+		return billtype;
 	}
 }

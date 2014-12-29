@@ -36,8 +36,8 @@ public class FinaceIndex extends JLabel implements ActionListener{
 		}
 		
 		if(events.getSource() == bt2){
-			//Frame_Salesman.visibleTrue(2);
-			//this.setVisible(false);
+			Frame_Finace.visibleTrue(11);
+			this.setVisible(false);
 		}
 		
 		if(events.getSource() == bt3){

@@ -26,6 +26,7 @@ import ui.differui.finace.account.AccountManagementUI;
 import ui.differui.finace.business_condition.BusinessConditionUI;
 import ui.differui.finace.business_process.BusinessProcessUI;
 import ui.differui.finace.index.FinaceIndex;
+import ui.differui.finace.init_account.InitAccount;
 import ui.differui.finace.sale_detail.SaleDetailUI;
 import ui.differui.finace.trade.TradeBill;
 import ui.differui.finace.trade.TradeCash;
@@ -55,6 +56,7 @@ public class Frame_Finace extends MyFrame implements ActionListener{
 	static SaleDetailUI panel_saleDetail;
 	static BusinessProcessUI panel_businessProcess;
 	static BusinessConditionUI panel_businessCondition;
+	static InitAccount panel_init;
 	
 	static JLabel trade_back;
 	
@@ -99,6 +101,10 @@ public class Frame_Finace extends MyFrame implements ActionListener{
 		panel_businessCondition = new BusinessConditionUI();
 		panel_businessCondition.setVisible(false);
 		this.add(panel_businessCondition);
+		
+		panel_init = new InitAccount();
+		panel_init.setVisible(false);
+		this.add(panel_init);
 		
 		trade_back = new JLabel(new ImageIcon("ui/image/finace/tradeBack2.png"));
 		trade_back.setBounds(0, 0, 1280, 630);
@@ -312,6 +318,8 @@ public class Frame_Finace extends MyFrame implements ActionListener{
 					 panel_cash.showAllAccount();
 					 trade_back.setVisible(true);
 					 flag = 2;break;
+					 
+			case 11: panel_init.setVisible(true);break;
 		}
 	}
 	
