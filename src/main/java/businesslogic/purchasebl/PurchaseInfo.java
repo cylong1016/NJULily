@@ -45,27 +45,11 @@ public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Re
 		try {
 			PurchaseInfoService purInfo = (PurchaseInfoService)Naming.lookup(RMIConfig.PREFIX+PurchaseInfoService.NAME);
 			ArrayList<String> IDs = purInfo.getAllID(BillType.PURCHASE);
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-			purIDs.addAll(DateOperate.findFitDate(IDs, beginDate, endDate));
-			ArrayList<String> bIDs = purInfo.getAllID(BillType.PURCHASEBACK);
-			backIDs.addAll(DateOperate.findFitDate(bIDs, beginDate, endDate));
-=======
+
 			purIDs = DateOperate.findFitDate(IDs, beginDate, endDate);
 			ArrayList<String> bIDs = purInfo.getAllID(BillType.PURCHASEBACK);
 			backIDs = DateOperate.findFitDate(bIDs, beginDate, endDate);
->>>>>>> origin/master
-=======
-			purIDs = DateOperate.findFitDate(IDs, beginDate, endDate);
-			ArrayList<String> bIDs = purInfo.getAllID(BillType.PURCHASEBACK);
-			backIDs = DateOperate.findFitDate(bIDs, beginDate, endDate);
->>>>>>> origin/master
-=======
-			purIDs = DateOperate.findFitDate(IDs, beginDate, endDate);
-			ArrayList<String> bIDs = purInfo.getAllID(BillType.PURCHASEBACK);
-			backIDs = DateOperate.findFitDate(bIDs, beginDate, endDate);
->>>>>>> origin/master
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
