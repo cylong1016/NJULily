@@ -22,7 +22,6 @@ import ui.commonui.myui.MyBackground;
 import ui.commonui.myui.MyButton;
 import ui.commonui.myui.MyFrame;
 import ui.commonui.warning.WarningFrame;
-import ui.differui.inventory.index.InventoryIndex;
 import ui.differui.manager.approve.ApproveManagementUI;
 import ui.differui.manager.business_condition.BusinessConditionUI;
 import ui.differui.manager.business_process.BusinessProcessUI;

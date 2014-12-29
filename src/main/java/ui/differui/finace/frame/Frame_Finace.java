@@ -32,7 +32,6 @@ import ui.differui.finace.trade.TradeBill;
 import ui.differui.finace.trade.TradeCash;
 import ui.differui.finace.trade.TradeChooseUI;
 import ui.differui.finace.trade.TradeFinish;
-import ui.differui.inventory.index.InventoryIndex;
 
 public class Frame_Finace extends MyFrame implements ActionListener{
 
