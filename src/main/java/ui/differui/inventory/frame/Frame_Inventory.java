@@ -260,6 +260,7 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 		
 		switch(i){
 			case 0: panel_index.setVisible(true);
+					InventoryIndex.showAll.doClick();
 					break;
 			
 			case 1: panel_good.setVisible(true);break;

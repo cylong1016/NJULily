@@ -22,6 +22,7 @@ import ui.commonui.myui.MyBackground;
 import ui.commonui.myui.MyButton;
 import ui.commonui.myui.MyFrame;
 import ui.commonui.warning.WarningFrame;
+import ui.differui.inventory.index.InventoryIndex;
 import ui.differui.manager.approve.ApproveManagementUI;
 import ui.differui.manager.business_condition.BusinessConditionUI;
 import ui.differui.manager.business_process.BusinessProcessUI;
@@ -255,7 +256,8 @@ public class Frame_Manager extends MyFrame implements ActionListener{
 		}
 		
 		switch(i){
-			case 0: panel_index.setVisible(true);break;
+			case 0: panel_index.setVisible(true);
+					ManagerIndex.showAll.doClick();break;
 			case 1: panel_approve.setVisible(true);break;
 			case 5: panel_strategy.setVisible(true);break;
 			case 2: panel_saleDetail.setVisible(true);break;

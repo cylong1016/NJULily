@@ -17,7 +17,6 @@ import javax.swing.filechooser.FileSystemView;
 import javax.swing.table.DefaultTableModel;
 
 import dataenum.BillType;
-import dataenum.ResultMessage;
 import blservice.clientblservice.ClientBLService;
 import blservice.recordblservice.BusinessStateInputInfo;
 import blservice.recordblservice.RecordBLService;
