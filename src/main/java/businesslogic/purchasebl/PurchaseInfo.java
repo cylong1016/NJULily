@@ -20,14 +20,13 @@ import dataenum.Storage;
 import dataservice.TableInfoService;
 import dataservice.purchasedataservice.PurchaseDataService;
 import dataservice.purchasedataservice.PurchaseInfoService;
-import dataservice.saledataservice.SaleInfoService;
 
 public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Record<PurchaseVO>, PurchaseInfo_Record, ValueObject_Approval<PurchaseVO>, PurchaseInfo_Inventory{
 	
 	private Purchase purchase;
 	private PurchaseDataService purchaseData;
-	ArrayList<String> purIDs;
-	ArrayList<String> backIDs;
+	public ArrayList<String> purIDs;
+	public ArrayList<String> backIDs;
 	
 	public PurchaseInfo() {
 		purchase = new Purchase();
@@ -44,11 +43,11 @@ public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Re
 	
 	private void setIDsByDate(Date beginDate, Date endDate){
 		try {
-			SaleInfoService saleInfo = (SaleInfoService)Naming.lookup(RMIConfig.PREFIX+SaleInfoService.NAME);
-			ArrayList<String> IDs = saleInfo.getAllID(BillType.PURCHASE);
-			purIDs.addAll(DateOperate.findFitDate(IDs, beginDate, endDate));
-			ArrayList<String> bIDs = saleInfo.getAllID(BillType.PURCHASEBACK);
-			backIDs.addAll(DateOperate.findFitDate(bIDs, beginDate, endDate));
+			PurchaseInfoService purInfo = (PurchaseInfoService)Naming.lookup(RMIConfig.PREFIX+PurchaseInfoService.NAME);
+			ArrayList<String> IDs = purInfo.getAllID(BillType.PURCHASE);
+			purIDs = DateOperate.findFitDate(IDs, beginDate, endDate);
+			ArrayList<String> bIDs = purInfo.getAllID(BillType.PURCHASEBACK);
+			backIDs = DateOperate.findFitDate(bIDs, beginDate, endDate);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

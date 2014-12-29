@@ -12,7 +12,7 @@ public class TestViewInventory {
 	@Test
 	public void test() {
 		InventoryBLService inventory = new InventoryController();
-		inventory.viewInventory("20141211", "20141220");
+		inventory.viewInventory("20141211", "20141229");
 	}
 
 }
