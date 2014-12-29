@@ -8,15 +8,22 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
-
 import javax.swing.JTextArea;
-
 import javax.swing.table.DefaultTableModel;
 
 
+
+
+
+
+
+import dataenum.BillType;
+import dataenum.Storage;
 import blservice.clientblservice.ClientBLService;
+import blservice.recordblservice.RecordBLService;
 import blservice.userblservice.UserBLService;
 import businesslogic.clientbl.ClientController;
+import businesslogic.recordbl.RecordController;
 import businesslogic.userbl.UserController;
 import ui.commonui.myui.MyComboBox;
 import ui.commonui.myui.MyJButton;
@@ -151,6 +158,26 @@ public class BusinessProcessUI extends JLabel implements ActionListener{
 	
 	public void actionPerformed(ActionEvent events) {
 		
+		if(events.getSource() == button_check){
+			RecordBLService controller = new RecordController();
+			
+			
+			String beginDate, endDate;
+			
+			if(tf_year1.getText().isEmpty() || tf_year2.getText().isEmpty() 
+					|| tf_month1.getText().isEmpty() || tf_month2.getText().isEmpty()
+					 || tf_day1.getText().isEmpty() || tf_day2.getText().isEmpty()){
+				beginDate = null;
+				endDate = null;
+			}else{
+				beginDate = yearAddZero(tf_year1.getText()) + addZero(tf_month1.getText()) + addZero(tf_day1.getText());
+				endDate = yearAddZero(tf_year2.getText()) + addZero(tf_month2.getText()) + addZero(tf_day2.getText());
+			}
+			
+			//String beginDate, String endDate, BillType billType, String clientName, String salesman, Storage storage
+			//controller.bussinessPro(new BusinessStateInputInfo(beginDate, endDate, ));
+		}
+		
 	}
 	
 	private String[] getAllClient(){
@@ -221,5 +248,28 @@ public class BusinessProcessUI extends JLabel implements ActionListener{
 		bt_out.setForeground(backColor);
 		bt_out.setVisible(true);
 		this.add(bt_out);
+	}
+	
+	private String addZero(String str){
+		if(Integer.parseInt(str) < 10){
+			return "0" + str;
+		}else{
+			return str;
+		}
+	}
+	private String yearAddZero(String str){
+		if(Integer.parseInt(str) < 10){
+			return "000" + str;
+		}else{
+			if(Integer.parseInt(str) < 100){
+				return "00" + str;
+			}else{
+				if(Integer.parseInt(str) < 1000){
+					return "0" + str;
+				}else{
+					return str;
+				}
+			}
+		}
 	}
 }

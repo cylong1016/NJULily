@@ -400,7 +400,8 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 			flag = 0;
 			Frame_Inventory fi = new Frame_Inventory();
 			fi.setVisible(true);
-			bt_good.doClick();
+			visibleFalse(0);
+			visibleTrue(1);
 			
 			WarningFrame wf = new WarningFrame("商品分类已经更改！");
 			wf.setVisible(true);
