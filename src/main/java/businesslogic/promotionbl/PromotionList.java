@@ -35,11 +35,21 @@ public class PromotionList {
 	}
 	
 	public ArrayList<CommodityItemPO> getBargains(){
-		return null;
+		ArrayList<CommodityItemPO> bargains = new ArrayList<>();
+		for (PromotionListItem item : commodities) {
+			CommodityItemPO bargain = new CommodityItemPO(item.getID(), item.getNumber(), item.getPrice());
+			bargains.add(bargain);
+		}
+		return bargains;
 	}
 	
 	public ArrayList<CommodityItemPO> getGifts(){
-		return null;
+		ArrayList<CommodityItemPO> giftsRe = new ArrayList<>();
+		for (PromotionListItem item : gifts) {
+			CommodityItemPO gift = new CommodityItemPO(item.getID(), item.getNumber(), item.getPrice());
+			giftsRe.add(gift);
+		}
+		return giftsRe;
 	}
 	
 	public double getBeforeTotal() {
