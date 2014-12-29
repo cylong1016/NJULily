@@ -8,6 +8,7 @@ import vo.promotion.PromotionClientVO;
 import vo.promotion.PromotionTotalVO;
 import vo.sale.SalesVO;
 import vo.sale.saleAddVO;
+import dataenum.ResultMessage;
 
 /**
  * 负责实现销售界面所需要的服务
@@ -91,4 +92,21 @@ public interface SaleBLService {
 	 */
 	public SalesVO save(saleAddVO inputInfo);
 
+	/**
+	 * 修改草稿状态
+	 * @param vo
+	 * @return
+	 * @author Zing
+	 * @version Dec 29, 2014 12:45:22 AM
+	 */
+	public ResultMessage updateDraft(SalesVO vo);
+	
+	/**
+	 * 提交草稿状态的单据
+	 * @param ID
+	 * @return
+	 * @author Zing
+	 * @version Dec 29, 2014 12:45:30 AM
+	 */
+	public ResultMessage submitDraft(String ID);
 }

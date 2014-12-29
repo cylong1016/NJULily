@@ -3,6 +3,7 @@ package businesslogic.salebl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import dataenum.ResultMessage;
 import log.LogMsgController;
 import vo.commodity.CommodityItemVO;
 import vo.promotion.PromotionBargainVO;
@@ -163,5 +164,33 @@ public class SaleController implements SaleBLService {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	@Override
+	public ResultMessage updateDraft(SalesVO vo) {
+		try {
+			ResultMessage res = sale.updateDraft(vo);
+			if (res == ResultMessage.SUCCESS) {
+				LogMsgController.addLog("更改草稿状态的销售（销售退货）单 " + vo.toString());
+			}
+			return res;
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public ResultMessage submitDraft(String ID) {
+		try {
+			ResultMessage res = sale.submitDraft(ID);
+			if (res == ResultMessage.SUCCESS) {
+				LogMsgController.addLog("提交草稿状态的销售（销售退货）单 " +ID);
+			}
+			return res;
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

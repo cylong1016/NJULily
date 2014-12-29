@@ -11,11 +11,10 @@ import dataservice.inventorydataservice.InventoryDataService;
 
 public class InventoryShow {
 
-	private Inventory inventory;
 	private InventoryDataService inventoryData;
 
 	public InventoryShow() {
-		this.inventory = new Inventory();
+		Inventory inventory = new Inventory();
 		this.inventoryData = inventory.getInventoryData();
 	}
 
@@ -112,7 +111,7 @@ public class InventoryShow {
 		ArrayList<InventoryBillPO> POs = inventoryData.show();
 		for(int i = 0; i < POs.size(); i++) {
 			InventoryBillPO po = POs.get(i);
-			InventoryBillVO vo = inventory.poToVo(po);
+			InventoryBillVO vo = InventoryTrans.poToVo(po);
 			VOs.add(vo);
 		}
 		return VOs;

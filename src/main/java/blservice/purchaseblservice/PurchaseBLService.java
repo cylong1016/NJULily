@@ -2,6 +2,7 @@ package blservice.purchaseblservice;
 
 import vo.PurchaseVO;
 import vo.commodity.CommodityItemVO;
+import dataenum.ResultMessage;
 
 /**
  * 负责实现进货界面所需要的服务
@@ -50,5 +51,23 @@ public interface PurchaseBLService {
 	 * @version Nov 29, 2014 3:09:52 PM
 	 */
 	public PurchaseVO save(PurInputInfo info);
+	
+	/**
+	 * 修改草稿状态
+	 * @param vo
+	 * @return
+	 * @author Zing
+	 * @version Dec 29, 2014 12:45:22 AM
+	 */
+	public ResultMessage updateDraft(PurchaseVO vo);
+	
+	/**
+	 * 提交草稿状态的单据
+	 * @param ID
+	 * @return
+	 * @author Zing
+	 * @version Dec 29, 2014 12:45:30 AM
+	 */
+	public ResultMessage submitDraft(String ID);
 
 }

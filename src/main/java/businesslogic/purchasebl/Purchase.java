@@ -15,6 +15,7 @@ import businesslogic.userbl.UserInfo;
 import config.RMIConfig;
 import dataenum.BillState;
 import dataenum.BillType;
+import dataenum.ResultMessage;
 import dataenum.Storage;
 import dataservice.purchasedataservice.PurchaseDataService;
 
@@ -73,6 +74,17 @@ public class Purchase {
 		po.setState(BillState.DRAFT);
 		purchaseData.insert(po);
 		return PurchaseTrans.poToVO(po);
+	}
+	
+	public ResultMessage updateDraft(PurchaseVO vo) throws RemoteException {
+		PurchasePO po = PurchaseTrans.VOtoPO(vo);
+		return purchaseData.update(po);
+	}
+
+	public ResultMessage submitDraft(String ID) throws RemoteException {
+		PurchasePO po = purchaseData.find(ID);
+		po.setState(BillState.APPROVALING);
+		return purchaseData.update(po);
 	}
 
 	private PurchasePO buildPur() throws RemoteException {

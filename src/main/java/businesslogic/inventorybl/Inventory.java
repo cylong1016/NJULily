@@ -4,17 +4,15 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 
 import po.InventoryBillPO;
 import vo.InventoryBillVO;
 import vo.InventoryCheckVO;
 import vo.InventoryViewVO;
-import vo.commodity.CommodityItemVO;
-import businesslogic.common.ChangeCommodityItems;
 import config.RMIConfig;
 import dataenum.BillState;
 import dataenum.BillType;
+import dataenum.ResultMessage;
 import dataservice.inventorydataservice.InventoryDataService;
 
 public class Inventory {
@@ -138,7 +136,7 @@ public class Inventory {
 		list.setRemark(remark);
 		InventoryBillPO po = getInventoryBill();
 		inventoryData.insert(po);
-		return poToVo(po);
+		return InventoryTrans.poToVo(po);
 	}
 
 	/**
@@ -154,7 +152,18 @@ public class Inventory {
 		InventoryBillPO po = getInventoryBill();
 		po.setState(BillState.DRAFT);
 		inventoryData.insert(po);
-		return poToVo(po);
+		return InventoryTrans.poToVo(po);
+	}
+	
+	public ResultMessage updateDraft(InventoryBillVO vo) throws RemoteException {
+		InventoryBillPO po = InventoryTrans.VOtoPO(vo);
+		return inventoryData.update(po);
+	}
+
+	public ResultMessage submitDraft(String ID) throws RemoteException {
+		InventoryBillPO po = inventoryData.find(ID);
+		po.setState(BillState.APPROVALING);
+		return inventoryData.update(po);
 	}
 
 	/**
@@ -168,22 +177,5 @@ public class Inventory {
 		return po;
 	}
 
-	/**
-	 * 单子的po到vo的转换
-	 * @param po
-	 * @return
-	 * @author Zing
-	 * @version Dec 2, 2014 6:11:52 PM
-	 * @throws RemoteException 
-	 */
-	public InventoryBillVO poToVo(InventoryBillPO po) throws RemoteException {
-		String ID = po.getID();
-		BillType billType = po.getBillType();
-		ArrayList<CommodityItemVO> commodities = ChangeCommodityItems.itemPOToVO(po.getCommodities());
-		String remark = po.getRemark();
-		BillState state = po.getState();
-		InventoryBillVO vo = new InventoryBillVO(ID, billType, commodities, remark, state);
-		return vo;
-	}
 
 }

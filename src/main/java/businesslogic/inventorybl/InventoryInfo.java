@@ -14,7 +14,6 @@ import vo.commodity.CommodityItemVO;
 import businesslogic.approvalbl.info.InventoryInfo_Approval;
 import businesslogic.approvalbl.info.ValueObject_Approval;
 import businesslogic.commoditybl.CommodityInfo;
-import businesslogic.common.ChangeCommodityItems;
 import businesslogic.common.DateOperate;
 import businesslogic.common.Info;
 import businesslogic.inventorybl.info.CommodityInfo_Inventory;
@@ -101,22 +100,13 @@ public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInf
 	 * @throws RemoteException 
 	 */
 	public InventoryBillVO find(String ID) throws RemoteException {
-		InventoryBillVO vo = inventory.poToVo(inventoryData.find(ID));
+		InventoryBillVO vo = InventoryTrans.poToVo(inventoryData.find(ID));
 		return vo;
 	}
 
 	public ResultMessage update(InventoryBillVO vo) throws RemoteException {
-		InventoryBillPO po = VOtoPO(vo);
+		InventoryBillPO po = InventoryTrans.VOtoPO(vo);
 		return inventoryData.update(po);
-	}
-	
-	private InventoryBillPO VOtoPO(InventoryBillVO vo) {
-		String ID = vo.ID;
-		BillType billType = vo.billType;
-		String remark = vo.remark;
-		ArrayList<CommodityItemPO> commodities = ChangeCommodityItems.itemsVOtoPO(vo.commodities);
-		InventoryBillPO po = new InventoryBillPO(ID, billType, commodities, remark);
-		return po;
 	}
 
 	/**
@@ -167,7 +157,7 @@ public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInf
 		}
 		redVO.commodities = commodities;
 		// 先建立对应的PO
-		InventoryBillPO redPO = VOtoPO(redVO);
+		InventoryBillPO redPO = InventoryTrans.VOtoPO(redVO);
 		if (!isCopy) {
 			inventoryData.insert(redPO);
 			pass(redVO);
@@ -213,7 +203,7 @@ public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInf
 
 	@Override
 	public void noPass(InventoryBillVO vo) throws RemoteException {
-		InventoryBillPO po = VOtoPO(vo);
+		InventoryBillPO po = InventoryTrans.VOtoPO(vo);
 		po.setState(BillState.FAILURE);
 		inventoryData.insert(po);
 	}

@@ -2,6 +2,7 @@ package businesslogic.inventorybl;
 
 import java.rmi.RemoteException;
 
+import dataenum.ResultMessage;
 import log.LogMsgController;
 import vo.InventoryBillVO;
 import vo.InventoryCheckVO;
@@ -149,6 +150,37 @@ public class InventoryController implements InventoryBLService {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	@Override
+	public ResultMessage updateDraft(InventoryBillVO vo) {
+		try {
+			ResultMessage res = inventory.updateDraft(vo);
+			if (res == ResultMessage.SUCCESS) {
+				LogMsgController.addLog("更改草稿状态的库存单据 " + vo.toString());
+			}
+			return res;
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	@Override
+	public ResultMessage submitDraft(String ID) {
+		try {
+			ResultMessage res = inventory.submitDraft(ID);
+			if (res == ResultMessage.SUCCESS) {
+				LogMsgController.addLog("提交草稿状态的库存单据 单据ID: " + ID);
+			}
+			return res;
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 
 }

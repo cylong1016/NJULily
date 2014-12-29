@@ -20,6 +20,7 @@ import businesslogic.userbl.UserInfo;
 import config.RMIConfig;
 import dataenum.BillState;
 import dataenum.BillType;
+import dataenum.ResultMessage;
 import dataservice.saledataservice.SaleDataService;
 
 /**
@@ -157,6 +158,17 @@ public class Sale {
 		po.setState(BillState.DRAFT);
 		saleData.insert(po);
 		return SaleTrans.poToVo(po);
+	}
+	
+	public ResultMessage updateDraft(SalesVO vo) throws RemoteException {
+		SalesPO po = SaleTrans.VOtoPO(vo);
+		return saleData.update(po);
+	}
+
+	public ResultMessage submitDraft(String ID) throws RemoteException {
+		SalesPO po = saleData.find(ID);
+		po.setState(BillState.APPROVALING);
+		return saleData.update(po);
 	}
 
 	/**

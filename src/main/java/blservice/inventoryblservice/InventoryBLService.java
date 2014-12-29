@@ -4,6 +4,7 @@ package blservice.inventoryblservice;
 import vo.InventoryBillVO;
 import vo.InventoryCheckVO;
 import vo.InventoryViewVO;
+import dataenum.ResultMessage;
 /**
  * 负责实现仓库管理界面所需要的服务
  * @author cylong
@@ -67,5 +68,23 @@ public interface InventoryBLService {
 	 * @version Nov 30, 2014 4:03:51 PM
 	 */
 	public InventoryBillVO save(String remark);
+	
+	/**
+	 * 修改草稿状态
+	 * @param vo
+	 * @return
+	 * @author Zing
+	 * @version Dec 29, 2014 12:45:22 AM
+	 */
+	public ResultMessage updateDraft(InventoryBillVO vo);
+	
+	/**
+	 * 提交草稿状态的单据
+	 * @param ID
+	 * @return
+	 * @author Zing
+	 * @version Dec 29, 2014 12:45:30 AM
+	 */
+	public ResultMessage submitDraft(String ID);
 
 }
