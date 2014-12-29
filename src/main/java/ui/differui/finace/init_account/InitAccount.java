@@ -17,11 +17,7 @@ import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyTable;
 import ui.commonui.warning.WarningFrame;
-import vo.AccountVO;
 import vo.AccountaInitVO;
-import vo.client.ClientVO;
-import vo.commodity.CommoditySortVO;
-import vo.commodity.CommodityVO;
 
 public class InitAccount extends JLabel implements ActionListener{
 	
@@ -33,17 +29,15 @@ public class InitAccount extends JLabel implements ActionListener{
 	public static JButton init;
 
 	public InitAccount(){
-		Color foreColor = new Color(158, 213, 220);
-		Color backColor = new Color(46, 52, 101);
 		
 		this.setLayout(null);
 		this.setBounds(0, 0, 1280, 720);
 		this.setOpaque(false);
 		
-		JLabel infoBar = new JLabel("销售明细表");
+		JLabel infoBar = new JLabel("期初建账");
 		infoBar.setFont(new Font("华文细黑", Font.BOLD, 18));
 		infoBar.setBounds(80, 14, 1100, 20);
-		infoBar.setForeground(Color.GRAY);
+		infoBar.setForeground(Color.WHITE);
 		infoBar.setOpaque(false);
 		this.add(infoBar);
 		
@@ -70,7 +64,7 @@ public class InitAccount extends JLabel implements ActionListener{
 		this.add(jsp);
 		
 		JScrollPane jsp2 = new JScrollPane(table2);
-		jsp2.setBounds(80, 90 + (475/4)*1 + 10, 1085, 475/4 - 10);
+		jsp2.setBounds(80, 90 + (475/4)*1 + 15, 1085, 475/4 - 10);
 		jsp2.getViewport().setBackground(new Color(0,0,0,0.3f));
 		jsp2.setOpaque(false);
 		jsp2.setVisible(true);
@@ -84,7 +78,7 @@ public class InitAccount extends JLabel implements ActionListener{
 		this.add(jsp4);
 		
 		JScrollPane jsp3 = new JScrollPane(table3);
-		jsp3.setBounds(80, 90 + (475/4)*2 + 10 + 15, 1085, 475/4 - 10);
+		jsp3.setBounds(80, 90 + (475/4)*2 + 10 + 11, 1085, 475/4 - 10);
 		jsp3.getViewport().setBackground(new Color(0,0,0,0.3f));
 		jsp3.setOpaque(false);
 		jsp3.setVisible(true);
@@ -100,7 +94,7 @@ public class InitAccount extends JLabel implements ActionListener{
 		this.add(button_check);
 		
 		button_out = new MyJButton("期初建账");
-		button_out.setBounds(210 + x, 575, 120, 25);
+		button_out.setBounds(210 + x, 575 + 15, 120, 25);
 		button_out.addActionListener(this);
 		this.add(button_out);
 		
