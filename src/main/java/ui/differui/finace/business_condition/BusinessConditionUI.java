@@ -15,6 +15,7 @@ import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyTable;
 import ui.commonui.myui.MyTextField;
 import ui.commonui.warning.WarningFrame;
+import ui.differui.finace.frame.Frame_Finace;
 import vo.BusinessStateVO;
 
 public class BusinessConditionUI extends JLabel implements ActionListener{
@@ -146,6 +147,16 @@ public class BusinessConditionUI extends JLabel implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent events) {
+		
+		if(events.getSource() == button_list){
+			if(table.getRowCount() > 0){
+				Frame_Finace.setTable(table);
+			}else{
+				WarningFrame wf = new WarningFrame("目前无需导出!");
+				wf.setVisible(true);
+			}
+		}
+		
 		if(events.getSource() == button_check){
 			if(tf_year1.getText().isEmpty() || tf_year2.getText().isEmpty() 
 					|| tf_month1.getText().isEmpty() || tf_month2.getText().isEmpty()
@@ -161,6 +172,9 @@ public class BusinessConditionUI extends JLabel implements ActionListener{
 				BusinessStateVO vo = controller.businessState(beginDate, endDate);
 				
 				DefaultTableModel tableModel = (DefaultTableModel)table.getModel();
+				int rowCount = table.getRowCount();
+				for(int i = 0; i < rowCount; i++)
+					tableModel.removeRow(0);
 				
 				String[] rowData = {String.valueOf(table.getRowCount() + 1), "收入类",
 						"销售收入", String.format("%.2f", vo.saleIncome) + "元"};

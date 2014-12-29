@@ -4,25 +4,19 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.filechooser.FileSystemView;
 import javax.swing.table.DefaultTableModel;
 
-
-
-
-
-
-
-
-
-
 import dataenum.BillType;
-import dataenum.Storage;
 import blservice.clientblservice.ClientBLService;
 import blservice.recordblservice.BusinessStateInputInfo;
 import blservice.recordblservice.RecordBLService;
@@ -34,16 +28,19 @@ import ui.commonui.myui.MyComboBox;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyTable;
 import ui.commonui.myui.MyTextField;
+import ui.commonui.text_conductor.TextConductor;
+import ui.commonui.warning.WarningFrame;
 import vo.ValueObject;
 
 public class BusinessProcessUI extends JLabel implements ActionListener{
 	
 	private static final long serialVersionUID = 1L;
+	private static String theName = null;
 	
 	MyComboBox cbb_sort, cbb_client, cbb_user;
 	MyJButton button_check;
 	
-	JButton bt_modify, bt_check, bt_out, bt_del;
+	JButton bt_modify, bt_check, bt_out, bt_del, bt_see;
 	JTextArea ta;
 	
 	MyTextField tf_year1, tf_month1, tf_day1, tf_year2, tf_month2, tf_day2;
@@ -54,7 +51,11 @@ public class BusinessProcessUI extends JLabel implements ActionListener{
 	Color foreColor = new Color(158, 213, 220);
 	Color backColor = new Color(46, 52, 101);
 	
+	static ArrayList<ValueObject> listPool;
+	
 	public BusinessProcessUI(){
+		
+		listPool = new ArrayList<ValueObject>();
 		
 		int y = 420;
 		
@@ -164,9 +165,49 @@ public class BusinessProcessUI extends JLabel implements ActionListener{
 	
 	public void actionPerformed(ActionEvent events) {
 		
+		if(events.getSource() == bt_see){
+			if(table.getSelectedRowCount() == 0){
+				WarningFrame wf = new WarningFrame("请先选择需要查看的单据！");
+				wf.setVisible(true);
+			}else{
+				TextConductor writer = new TextConductor();
+				
+				
+				
+				String name = table.getValueAt(table.getSelectedRow(), 1).toString();
+				theName = name;
+				
+				String[] type = name.split("-");
+				BillType billtype = null;
+				System.out.print(type[0]);
+				switch(type[0]){
+					case "JHD" : billtype = BillType.PURCHASE;break;
+					case "JHTHD" : billtype = BillType.PURCHASEBACK;break;
+					case "XSD" : billtype = BillType.SALE;break;
+					case "XSTHD" : billtype = BillType.SALEBACK;break;
+					case "ZSD" : billtype = BillType.GIFT;break;
+					case "BYD" : billtype = BillType.OVERFLOW;break;
+					case "BSD" : billtype = BillType.LOSS;break;
+					//case "BZD" : billtype = BillType.ALARM;break;
+					case "SKD" : billtype = BillType.EXPENSE;break;
+					case "FKD" : billtype = BillType.PAY;break;
+					case "XJFYD" : billtype = BillType.CASH;break;
+				}
+				ta.setText(writer.writeBill(billtype, listPool.get(table.getSelectedRow())));
+			}
+		}
+		
 		if(events.getSource() == button_check){
-			RecordBLService controller = new RecordController();
 			
+			listPool.clear();
+			
+			DefaultTableModel tableModel = (DefaultTableModel)table.getModel();
+			int rowCount = table.getRowCount();
+			for(int i = 0; i < rowCount; i++){
+				tableModel.removeRow(0);
+			}
+		
+			RecordBLService controller = new RecordController();
 			
 			String beginDate, endDate;
 			
@@ -222,16 +263,32 @@ public class BusinessProcessUI extends JLabel implements ActionListener{
 					if(currentList != null)
 						for(int k = 0; k < currentList.size(); k++){
 							list.add(currentList.get(k));
+							listPool.add(currentList.get(k));
 						}
 			}
 			
-			DefaultTableModel tableModel = (DefaultTableModel)table.getModel();
-			
 			if(list != null)
 				for(int i = 0; i < list.size(); i++){
-					Object[] rowData = {list.get(i).date, list.get(i).ID}; 
+					Object[] rowData = {i + 1, list.get(i).ID}; 
 					tableModel.addRow(rowData);
 				}
+			
+			if(table.getRowCount() == 0){
+				WarningFrame wf = new WarningFrame("目前没有符合条件的单据！");
+				wf.setVisible(true);
+			}
+		}
+		
+		if(events.getSource() == bt_out){
+			if(theName != null){
+				FileSystemView fsv = FileSystemView.getFileSystemView();
+				String file = String.valueOf(fsv.getHomeDirectory()) + "/" + theName + ".txt";		
+				System.out.print(file);
+				writeto(ta.getText().replaceAll("\n", "\r\n"),file);
+				
+				WarningFrame wf = new WarningFrame("已成功导出至桌面！ ");
+				wf.setVisible(true);
+			}
 		}
 		
 	}
@@ -256,7 +313,7 @@ public class BusinessProcessUI extends JLabel implements ActionListener{
 	
 	private void initTable(){
 		
-		String[] headers = {"单据时间", "单据编号"};
+		String[] headers = {"序号", "单据编号"};
 		table = new MyTable(headers);
 		
 		table.getColumnModel().getColumn(0).setPreferredWidth(110);
@@ -273,13 +330,13 @@ public class BusinessProcessUI extends JLabel implements ActionListener{
 	
 	private void initButtons(){
 		
-		bt_check = new JButton("查看所选单据内容");
-		bt_check.setBounds(305, 572, 180, 25);
-		bt_check.addActionListener(this);
-		bt_check.setBackground(Color.WHITE);
-		bt_check.setForeground(backColor);
-		bt_check.setVisible(true);
-		this.add(bt_check);
+		bt_see = new JButton("查看所选单据内容");
+		bt_see.setBounds(305, 572, 180, 25);
+		bt_see.addActionListener(this);
+		bt_see.setBackground(Color.WHITE);
+		bt_see.setForeground(backColor);
+		bt_see.setVisible(true);
+		this.add(bt_see);
 		
 		bt_modify = new JButton("红冲操作");
 		bt_modify.setBounds(520, 572, 180, 25);
@@ -326,6 +383,22 @@ public class BusinessProcessUI extends JLabel implements ActionListener{
 					return str;
 				}
 			}
+		}
+	}
+	
+	private void writeto(String a,String file){
+		
+		try {
+			File filename=new File(file);
+			
+			if (!filename.exists()) { 
+				filename.createNewFile();}
+			
+			FileWriter fw=new FileWriter(filename);
+			fw.write(a);
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }

@@ -19,6 +19,7 @@ import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyTable;
 import ui.commonui.myui.MyTextField;
 import ui.commonui.warning.WarningFrame;
+import ui.differui.finace.frame.Frame_Finace;
 import vo.SaleDetailVO;
 
 public class SaleDetailUI extends JLabel implements ActionListener{
@@ -158,6 +159,15 @@ public class SaleDetailUI extends JLabel implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent events) {
+		if(events.getSource() == button_out){
+			if(table.getRowCount() > 0){
+				Frame_Finace.setTable(table);
+			}else{
+				WarningFrame wf = new WarningFrame("目前无需导出!");
+				wf.setVisible(true);
+			}
+		}
+		
 		if(events.getSource() == button_check){
 			
 			saleList.clear();

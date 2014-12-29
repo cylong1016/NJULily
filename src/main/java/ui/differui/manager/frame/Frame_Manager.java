@@ -1,19 +1,27 @@
 package ui.differui.manager.frame;
 
+import java.awt.FileDialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import ui.commonui.exitfunction.ExitFunctionFrame;
 import ui.commonui.login.Frame_Login;
 import ui.commonui.myui.MyBackground;
 import ui.commonui.myui.MyButton;
 import ui.commonui.myui.MyFrame;
+import ui.commonui.warning.WarningFrame;
 import ui.differui.manager.approve.ApproveManagementUI;
 import ui.differui.manager.business_condition.BusinessConditionUI;
 import ui.differui.manager.business_process.BusinessProcessUI;
@@ -29,7 +37,7 @@ public class Frame_Manager extends MyFrame implements ActionListener{
 	static MyButton bt_index, bt_approve, bt_strategy, bt_saleDetail, bt_businessProcess, bt_businessCondition;
 	JLabel lb_index, lb_approve, lb_strategy, lb_saleDetail, lb_businessProcess, lb_businessCondition;
 	
-	public static JButton bt_vanish;
+	public static JButton bt_vanish, output;
 	
 	static JLabel lb_super;
 	
@@ -41,6 +49,8 @@ public class Frame_Manager extends MyFrame implements ActionListener{
 	static SaleDetailUI panel_saleDetail;
 	static BusinessProcessUI panel_businessProcess;
 	static BusinessConditionUI panel_businessCondition;
+	
+	static JTable outputTable;
 	
 	public Frame_Manager(){
 
@@ -205,6 +215,10 @@ public class Frame_Manager extends MyFrame implements ActionListener{
 		MyBackground background = new MyBackground("ui/image/manager/background.jpg");
 		this.add(background);
 		
+		output = new JButton();
+		output.addActionListener(this);
+		this.add(output);
+		
 		buttonVanish();
 		
 	}
@@ -344,5 +358,64 @@ public class Frame_Manager extends MyFrame implements ActionListener{
 				ef.setVisible(true);
 			}
 		}
+		
+		if(events.getSource() == output){
+			outputExcel();
+		}
+	}
+	
+	//////////////////////EXCEL//////////////////////
+	
+	public void exportTable(JTable table, File file) throws IOException {
+	       DefaultTableModel model = (DefaultTableModel) table.getModel();
+	       
+	       //"ANSI");
+	       OutputStreamWriter bWriter=new OutputStreamWriter((new FileOutputStream(file)),"GB2312");
+	       //BufferedWriter bWriter = new BufferedWriter(new FileWriter(file));  
+	       for(int i=0; i < model.getColumnCount(); i++) {
+	           bWriter.write(model.getColumnName(i));
+	           bWriter.write("\t");
+	       	}
+	       	bWriter.write("\n");
+	       	for(int i = 0; i< model.getRowCount(); i++) {
+	    	   	for(int j = 0; j < model.getColumnCount(); j++) {
+	    	   		
+	    	   		String str;
+	    	   		
+	    	   		if(table.getValueAt(i, j) == null){
+	    	   			str = " ";
+	    	   		}else{
+	    	   			str = table.getValueAt(i, j).toString();
+	    	   		}
+	    	   		
+	        	   	bWriter.write(str);
+	        	   	
+	               	bWriter.write("\t");
+	           	}
+	    		bWriter.write("\n");
+	       	}
+	       	bWriter.close();
+	       	
+	       	WarningFrame wf = new WarningFrame("已成功导出！");
+	       	wf.setVisible(true);
+	   }
+	   
+	public void outputExcel(){
+	    	
+		FileDialog fd = new FileDialog(this, "导出至Excel", FileDialog.SAVE);
+	    fd.setLocation(this.getX(), this.getY());
+	    fd.setVisible(true);  
+	    String stringfile = fd.getDirectory()+fd.getFile()+".xls";  
+	    try {   	
+	    	exportTable(outputTable, new File(stringfile));
+	    } catch (IOException ex) {
+	    	System.out.println(ex.getMessage());
+	    	ex.printStackTrace();
+	    }
+	}
+	
+	public static void setTable(JTable _table){
+		outputTable = _table;
+		output.doClick();
 	}
 }
