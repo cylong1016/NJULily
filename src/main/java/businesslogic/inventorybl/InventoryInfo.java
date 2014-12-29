@@ -207,6 +207,6 @@ public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInf
 	public void noPass(InventoryBillVO vo) throws RemoteException {
 		InventoryBillPO po = InventoryTrans.VOtoPO(vo);
 		po.setState(BillState.FAILURE);
-		inventoryData.insert(po);
+		inventoryData.update(po);
 	}
 }

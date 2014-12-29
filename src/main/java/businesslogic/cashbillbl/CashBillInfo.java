@@ -138,7 +138,7 @@ public class CashBillInfo extends Info<CashBillPO> implements ValueObjectInfo_Re
 	public void noPass(CashBillVO vo) throws RemoteException {
 		CashBillPO po = CashBillTrans.VOtoPO(vo);
 		po.setState(BillState.FAILURE);
-		cashBillData.insert(po);
+		cashBillData.update(po);
 		
 	}
 }

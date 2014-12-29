@@ -14,9 +14,6 @@ import businesslogic.purchasebl.PurchaseOperate;
 import businesslogic.salebl.SaleOperate;
 
 public class NoPassApproval {
-	
-	public NoPassApproval() {
-	}
 
 	public void noPassBill(PurchaseVO vo) throws RemoteException {
 		PurchaseInfo_Approval info = new PurchaseOperate();
@@ -24,8 +21,8 @@ public class NoPassApproval {
 	}
 
 	public void noPassBill(SalesVO vo) throws RemoteException {
-		 SaleInfo_Approval info = new SaleOperate();
-		 info.noPass(vo);
+		SaleInfo_Approval info = new SaleOperate();
+		info.noPass(vo);
 	}
 
 	public void noPassBill(AccountBillVO vo) throws RemoteException {
@@ -42,5 +39,5 @@ public class NoPassApproval {
 		CashBillInfo_Approval info = new CashBillInfo();
 		info.noPass(vo);
 	}
-	
+
 }
