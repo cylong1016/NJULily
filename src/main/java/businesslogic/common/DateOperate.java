@@ -62,7 +62,6 @@ public class DateOperate {
 	static public ArrayList<String> findFitDate(ArrayList<String> IDs, Date beginDate, Date endDate) {
 		ArrayList<String> resultIDs = new ArrayList<String>();
 		for (String id : IDs) {
-			System.out.println(id);
 			String dateID = id.split("-")[1];
 			Date date = null;
 			try {

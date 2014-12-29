@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -17,9 +18,13 @@ import javax.swing.table.DefaultTableModel;
 
 
 
+
+
+
 import dataenum.BillType;
 import dataenum.Storage;
 import blservice.clientblservice.ClientBLService;
+import blservice.recordblservice.BusinessStateInputInfo;
 import blservice.recordblservice.RecordBLService;
 import blservice.userblservice.UserBLService;
 import businesslogic.clientbl.ClientController;
@@ -29,6 +34,7 @@ import ui.commonui.myui.MyComboBox;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyTable;
 import ui.commonui.myui.MyTextField;
+import vo.ValueObject;
 
 public class BusinessProcessUI extends JLabel implements ActionListener{
 	
@@ -174,8 +180,58 @@ public class BusinessProcessUI extends JLabel implements ActionListener{
 				endDate = yearAddZero(tf_year2.getText()) + addZero(tf_month2.getText()) + addZero(tf_day2.getText());
 			}
 			
+			ArrayList<BillType> billTypes = new ArrayList<BillType>();;
+			
+			switch(cbb_sort.getSelectedIndex()){
+			case 0: billTypes.add(BillType.PURCHASE);
+					billTypes.add(BillType.PURCHASEBACK);
+					billTypes.add(BillType.SALE);
+					billTypes.add(BillType.SALEBACK);
+					billTypes.add(BillType.EXPENSE);
+					billTypes.add(BillType.PAY);
+					billTypes.add(BillType.OVERFLOW);
+					billTypes.add(BillType.LOSS);
+					billTypes.add(BillType.GIFT);
+					billTypes.add(BillType.CASH);break;
+			case 1: billTypes.add(BillType.PURCHASE);
+					billTypes.add(BillType.PURCHASEBACK);break;
+			case 2: billTypes.add(BillType.SALE);
+					billTypes.add(BillType.SALEBACK);break;
+			case 3: billTypes.add(BillType.EXPENSE);
+					billTypes.add(BillType.PAY);break;
+			case 4: billTypes.add(BillType.OVERFLOW);
+					billTypes.add(BillType.LOSS);
+					billTypes.add(BillType.GIFT);break;
+			case 5: billTypes.add(BillType.CASH);break;
+			}
+			
+			String clientName = null;
+			if(cbb_client.getSelectedIndex() != 0)
+				clientName = cbb_client.getSelectedItem().toString();
+			
+			String salesman = null;
+			if(cbb_user.getSelectedIndex() != 0)
+				clientName = cbb_client.getSelectedItem().toString();
+					
+			ArrayList<ValueObject> list = new ArrayList<ValueObject>();
+			
 			//String beginDate, String endDate, BillType billType, String clientName, String salesman, Storage storage
-			//controller.bussinessPro(new BusinessStateInputInfo(beginDate, endDate, ));
+			for(int i = 0; i < billTypes.size() ; i++){
+				ArrayList<ValueObject> currentList = controller.bussinessPro(new BusinessStateInputInfo(beginDate, endDate, 
+						billTypes.get(i), clientName, salesman, null));
+					if(currentList != null)
+						for(int k = 0; k < currentList.size(); k++){
+							list.add(currentList.get(k));
+						}
+			}
+			
+			DefaultTableModel tableModel = (DefaultTableModel)table.getModel();
+			
+			if(list != null)
+				for(int i = 0; i < list.size(); i++){
+					Object[] rowData = {list.get(i).date, list.get(i).ID}; 
+					tableModel.addRow(rowData);
+				}
 		}
 		
 	}
@@ -200,7 +256,7 @@ public class BusinessProcessUI extends JLabel implements ActionListener{
 	
 	private void initTable(){
 		
-		String[] headers = {"单据种类", "单据编号"};
+		String[] headers = {"单据时间", "单据编号"};
 		table = new MyTable(headers);
 		
 		table.getColumnModel().getColumn(0).setPreferredWidth(110);
