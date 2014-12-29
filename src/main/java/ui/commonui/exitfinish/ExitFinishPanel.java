@@ -12,6 +12,7 @@ import ui.differui.admin.AdminAddingPanel;
 import ui.differui.admin.AdminModifyPanel;
 import ui.differui.admin.AdminUI;
 import ui.differui.finace.account.AccountManagementUI;
+import ui.differui.finace.init_account.InitAccount;
 import ui.differui.inventory.commodity_management.addgood.CommodityAddingPanel;
 import ui.differui.inventory.commodity_management.addsort.SortAddingPanel;
 import ui.differui.inventory.commodity_management.addsort.SortAddingUI;
@@ -110,6 +111,8 @@ public class ExitFinishPanel extends MyPanel implements ActionListener{
 				case "ApprovalModify" : ApprovalModifyPanel.modify.doClick();break;
 				
 				case "refuse a bill" : ApproveManagementUI.refuseBill.doClick();break;
+				
+				case "init account" : InitAccount.init.doClick();break;
 
 			}
 			ExitFinishFrame.button_close.doClick();
