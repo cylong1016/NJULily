@@ -151,7 +151,7 @@ public class SaleDetailUI extends JLabel implements ActionListener{
 		this.add(button_check);
 		
 		button_out = new MyJButton("导出至EXCEL");
-		button_out.setBounds(220 + x, 575, 120, 25);
+		button_out.setBounds(210 + x, 575, 120, 25);
 		button_out.addActionListener(this);
 		this.add(button_out);
 			
@@ -200,13 +200,18 @@ public class SaleDetailUI extends JLabel implements ActionListener{
 					tableModel.removeRow(0);
 				}
 				
-				for(int i = 0; i < saleList.size(); i++){
-					//"操作时间", "商品名称", "商品型号", "商品数量", "商品单价", "商品总额"
-					String[] rowData = {saleList.get(i).date, saleList.get(i).name, saleList.get(i).type
-							, String.valueOf(saleList.get(i).number), String.format("%.2f", saleList.get(i).price) + "元"
-							, String.format("%.2f", saleList.get(i).total) + "元"};
-					tableModel.addRow(rowData);
-				}		
+				if(saleList != null){
+					for(int i = 0; i < saleList.size(); i++){
+						//"操作时间", "商品名称", "商品型号", "商品数量", "商品单价", "商品总额"
+						String[] rowData = {saleList.get(i).date, saleList.get(i).name, saleList.get(i).type
+								, String.valueOf(saleList.get(i).number), String.format("%.2f", saleList.get(i).price) + "元"
+								, String.format("%.2f", saleList.get(i).total) + "元"};
+						tableModel.addRow(rowData);
+					}		
+				}else{
+					WarningFrame wf = new WarningFrame("目前暂时没有符合条件的记录");
+					wf.setVisible(true);
+				}
 			}			
 		}
 	}
