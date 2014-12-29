@@ -102,11 +102,13 @@ public class CashBillInfo extends Info<CashBillPO> implements ValueObjectInfo_Re
 		}
 		redVO.bills = bills;
 		CashBillPO redPO = CashBillTrans.VOtoPO(redVO);
+		redPO.setID(cashBillData.getID());
 		if (!isCopy) {
 			cashBillData.insert(redPO);
 			pass(redVO);
 		} else {
-			// TODO 保存为草稿
+			redPO.setState(BillState.DRAFT);
+			cashBillData.insert(redPO);
 		}
 		return redVO;
 	}

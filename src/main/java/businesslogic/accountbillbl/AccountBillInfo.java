@@ -148,11 +148,13 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 		}
 		redVO.bills = bills;
 		AccountBillPO redPO = AccountBillTrans.VOtoPO(redVO);
+		redPO.setID(accountBillData.getID());
 		if (!isCopy) {
 			accountBillData.insert(redPO);
 			pass(redVO);
 		} else {
-			// TODO 保存为草稿
+			redPO.setState(BillState.DRAFT);
+			accountBillData.insert(redPO);
 		}
 		return redVO;
 	}

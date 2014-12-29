@@ -74,14 +74,16 @@ public class PurchaseOperate implements PurchaseInfo_Approval{
 		redVO.commodities = commodities;
 		// 先建立对应的PO
 		PurchasePO redPO = PurchaseTrans.VOtoPO(redVO);
+		redPO.setID(purchaseData.getID());
 		if (!isCopy) {
 			purchaseData.insert(redPO);
 			pass(redVO);
 		}
 		else {
-			// TODO 保存为草稿 
+			redPO.setState(BillState.DRAFT);
+			purchaseData.insert(redPO);
 		}
-		return null;
+		return redVO;
 	}
 
 	@Override

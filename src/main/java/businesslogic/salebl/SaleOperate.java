@@ -95,12 +95,14 @@ public class SaleOperate implements SaleInfo_Approval {
 		redVO.voucher = (-redVO.voucher);
 		// 先建立对应的PO
 		SalesPO redPO = SaleTrans.VOtoPO(redVO);
+		redPO.setID(saleData.getID());
 		if (!isCopy) {
 			// 入账，更改相应数据
 			saleData.insert(redPO);
 			pass(redVO);
 		} else {
-			// TODO 保存为草稿
+			redPO.setState(BillState.DRAFT);
+			saleData.insert(redPO);
 		}
 		return redVO;
 	}
