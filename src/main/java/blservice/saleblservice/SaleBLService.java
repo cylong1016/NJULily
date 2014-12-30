@@ -73,6 +73,15 @@ public interface SaleBLService {
 	public ArrayList<PromotionTotalVO> findFitPromotionTotal();
 	
 	/**
+	 * 确定一个折让单据
+	 * @param PromotionID
+	 * @return
+	 * @author Zing
+	 * @version Dec 30, 2014 7:38:26 PM
+	 */
+	public double setPromotion(String PromotionID);
+	
+	/**
 	 * 创建销售（销售退货）单时需要的除商品以外的数据（变成审批状态）
 	 * @param inputInfo
 	 * @see blservice.saleblservice.SaleInputInfo

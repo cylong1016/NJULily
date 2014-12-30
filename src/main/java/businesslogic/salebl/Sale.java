@@ -130,6 +130,14 @@ public class Sale {
 	public ArrayList<PromotionTotalVO> findFitPromotionTotal() throws RemoteException {
 		return promotionInfo.findFitPromotionTotal(ID, list.getBeforePrice());
 	}
+	
+	public double setPromotion(String PromotionID) throws RemoteException {
+		double zherang = promotionInfo.getAllowance(PromotionID);
+//		ArrayList<CommodityItemPO> gifts = promotionInfo.getGifts(PromotionID);
+		double all = zherang * list.getBeforePrice();
+		list.setAllowance(all);
+		return all;
+	}
 
 	/**
 	 * 提交销售（销售退货）单，等待审批

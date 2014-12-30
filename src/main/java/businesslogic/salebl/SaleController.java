@@ -193,4 +193,14 @@ public class SaleController implements SaleBLService {
 		}
 		return null;
 	}
+
+	@Override
+	public double setPromotion(String PromotionID) {
+		try {
+			return sale.setPromotion(PromotionID);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 }

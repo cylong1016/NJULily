@@ -3,8 +3,8 @@ package businesslogic.promotionbl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import po.CommodityItemPO;
 import po.PromotionPO;
-import dataenum.ClientLevel;
 import vo.promotion.PromotionBargainVO;
 import vo.promotion.PromotionClientVO;
 import vo.promotion.PromotionCommodityVO;
@@ -16,10 +16,12 @@ import businesslogic.promotionbl.type.PromotionBargin;
 import businesslogic.promotionbl.type.PromotionClient;
 import businesslogic.promotionbl.type.PromotionTotal;
 import businesslogic.salebl.info.PromotionInfo_Sale;
+import dataenum.ClientLevel;
 
 public class PromotionInfo implements PromotionInfo_Sale{
 	
 	Promotion promotion;
+	PromotionPO po;
 	
 	public PromotionInfo() {
 		promotion = new Promotion();
@@ -30,56 +32,6 @@ public class PromotionInfo implements PromotionInfo_Sale{
 		PromotionBargin bargains = new PromotionBargin();
 		return bargains.show();
 	}
-	
-//	public ArrayList<PromotionCommodityVO> findFitPromotionCommodity(String ID,ArrayList<String> commodityIDs, ArrayList<Integer> numbers) throws RemoteException {
-//		PromotionCommodity commodityPromotion = new PromotionCommodity();
-//		ArrayList<PromotionCommodityVO> tempVOs = new ArrayList<PromotionCommodityVO>();
-//		// 得到符合时间的促销策略
-//		for (PromotionCommodityVO vo : commodityPromotion.show()) {
-//			if (hasPromotion(ID, getID(vo.beginDate, vo.endDate))) {
-//				tempVOs.add(vo);
-//			}
-//		}
-//		// 如果没有符合的时间段的，直接返回
-//		if ((tempVOs!= null && tempVOs.isEmpty()) || tempVOs == null) {
-//			return null;
-//		}
-//		// 封装对应的数据
-//		ArrayList<PromotionGoodsVO> goods = new ArrayList<PromotionGoodsVO>();
-//		for (int i = 0; i < commodityIDs.size(); i++) {
-//			PromotionGoodsVO good = new PromotionGoodsVO(commodityIDs.get(i), null, numbers.get(i));
-//			goods.add(good);
-//		}
-//		// 查看是否有符合促销策略的商品
-//			boolean hasPromotion = false;
-//			boolean hasGood = false;
-//			// 对每个存在的策略进行循环
-//			for (int j = 0; j < tempVOs.size(); j++) {
-//				// 每个策略里面的商品进行循环
-//				int sizeInPromotion = tempVOs.get(j).goods.size();
-//				int i = 0;
-//				for (int k = 0; i < sizeInPromotion;) {
-//					if (goods.get(k).ID.equals(tempVOs.get(j).goods.get(i).ID)) {
-//						k++; i++;
-//					}
-//					else {
-//						k++;
-//					}
-//				}
-//			}
-//			for (int j = 0; j < tempVOs.size(); j++) {
-//				for (int i = 0; i < goods.size(); i++) {
-//					for (PromotionGoodsVO promotionGood : tempVOs.get(j).goods) {
-//						if (promotionGood.ID.equals(goods.get(i).ID)) {
-//							continue;
-//						}
-//						
-//					}
-//				}
-//			}
-//
-//		return null;
-//	}
 
 	/**
 	 * 返回合适等级的促销策略
@@ -141,6 +93,20 @@ public class PromotionInfo implements PromotionInfo_Sale{
 			ArrayList<String> commodityIDs, ArrayList<Integer> commodityNumber)
 			throws RemoteException {
 		return null;
+	}
+	
+	public double getAllowance(String ID) throws RemoteException {
+		this.po = promotion.getPromotionData().find(ID);
+		return po.getAllowance();
+	}
+
+	@Override
+	public double getVoucher(String ID) {
+		return po.getVoucher();
+	}
+	
+	public ArrayList<CommodityItemPO> getGifts(String ID) throws RemoteException {
+		return po.getGifts();
 	}
 
 }

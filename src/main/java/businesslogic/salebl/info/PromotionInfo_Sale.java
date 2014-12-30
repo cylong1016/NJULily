@@ -3,6 +3,7 @@ package businesslogic.salebl.info;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import po.CommodityItemPO;
 import vo.promotion.PromotionBargainVO;
 import vo.promotion.PromotionClientVO;
 import vo.promotion.PromotionCommodityVO;
@@ -45,5 +46,16 @@ public interface PromotionInfo_Sale {
 	public ArrayList<PromotionBargainVO> showBargains() throws RemoteException;
 	
 	public PromotionBargainVO findBargains(String iD) throws RemoteException;
+	
+	/**
+	 * 
+	 * @param ID
+	 * @return
+	 * @author Zing
+	 * @version Dec 30, 2014 7:22:39 PM
+	 */
+	public double getAllowance(String ID) throws RemoteException;
+	public double getVoucher(String ID) throws RemoteException;
+	public ArrayList<CommodityItemPO> getGifts(String ID) throws RemoteException;
 	
 }
