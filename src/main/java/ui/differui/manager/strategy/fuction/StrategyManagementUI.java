@@ -19,7 +19,6 @@ import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 import ui.commonui.warning.WarningFrame;
-import ui.differui.manager.strategy.myui.AddBargainPane;
 import ui.differui.manager.strategy.myui.MyButton;
 import ui.differui.manager.strategy.myui.MyJScrollPane;
 import ui.differui.manager.strategy.myui.MyTable;
@@ -30,8 +29,6 @@ import ui.differui.manager.strategy.myui.PromotionData;
 public class StrategyManagementUI extends JPanel implements ActionListener{
 	
 	private static final long serialVersionUID = 1L;
-	
-	private AddBargainPane addBargainPane;
 	
 	private MyButton addBargainButton, addClientButton, addTotalButton;
 	
@@ -79,9 +76,7 @@ public class StrategyManagementUI extends JPanel implements ActionListener{
 	private void addButtons() {
 		int gap = 150;
 		int y = 570, buttonH = 20, buttonW = 120;
-		
-		addBargainPane = new AddBargainPane();
-		
+				
 		addBargainButton = new MyButton("制定特价包", 775, y, buttonW, buttonH);
 		addBargainButton.addActionListener(this);
 		add(addBargainButton);

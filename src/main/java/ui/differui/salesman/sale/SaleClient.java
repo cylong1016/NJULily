@@ -29,12 +29,12 @@ public class SaleClient extends JLabel implements ActionListener{
 	
 	private static final long serialVersionUID = 1L;
 	
-	MyJButton button_return, button_add, button_cam, button_del, button_search;
-	MyTable table;
+	MyJButton button_return, button_add, button_cam, button_del, button_search, button_choose;
+	MyTable table, table2;
 	public static MyJButton button_showAll;
 	public static JButton button_delete;
 	MyComboBox comboBox;
-	MyTextField textField, tf_client, tf_inven , ta, tf_ticket;
+	MyTextField textField, tf_client, tf_inven, ta, tf_ticket;
 	
 	String deleteID = "";
 	public static String ClientName, ClientID, note;
@@ -98,16 +98,36 @@ public class SaleClient extends JLabel implements ActionListener{
 				,"客户名称","默认业务员","应收付差额","应收","应付","应付额度"};
 		table = new MyTable(headers);
 		
-		JScrollPane jsp=new JScrollPane(table);
+		JScrollPane jsp = new JScrollPane(table);
 		JTableHeader head = table.getTableHeader();
 		head.setBackground(backColor);
 		head.setForeground(foreColor);
-		jsp.setBounds(75, 120 - 10, 1125, 450 - 235 + 180);
+		jsp.setBounds(75, 120 - 10, 1125, 450 - 235 + 180 - 230);
 		jsp.getViewport().setBackground(new Color(0,0,0,0.3f));
 		jsp.setOpaque(false);
 		jsp.setBorder(BorderFactory.createEmptyBorder());
 		jsp.setVisible(true);
 		this.add(jsp);
+		
+		JLabel wordx = new JLabel("可供选择的促销有：");
+		wordx.setBounds(75, 120 - 10 + 230 - 52, 120, 25);
+		wordx.setBackground(null);
+		wordx.setForeground(Color.WHITE);
+		wordx.setVisible(true);
+		this.add(wordx);
+		
+		String[] headersClient = {"编号","起始时间","结束时间","选择条件","应送赠品","折扣","代金券"};
+		table2 = new MyTable(headersClient);
+		JScrollPane jsp2 = new JScrollPane(table2);
+		JTableHeader head2 = table2.getTableHeader();
+		head2.setBackground(backColor);
+		head2.setForeground(foreColor);
+		jsp2.setBounds(75, 120 - 10 + 230 - 10, 1125, 450 - 235 + 180 - 220);
+		jsp2.getViewport().setBackground(new Color(0,0,0,0.3f));
+		jsp2.setOpaque(false);
+		jsp2.setBorder(BorderFactory.createEmptyBorder());
+		jsp2.setVisible(true);
+		this.add(jsp2);
 		
 		//add a button for adding a new client
 		button_add = new MyJButton("上一步");
@@ -118,13 +138,13 @@ public class SaleClient extends JLabel implements ActionListener{
 		this.add(button_add);	
 		
 		JLabel word = new JLabel("本货单的客户为：");
-		word.setBounds(230 + 360, 600 - 26 - 235 + 180, 120, 25);
+		word.setBounds(230 + 360, 600 - 26 - 235 + 180 - 230, 120, 25);
 		word.setBackground(null);
 		word.setForeground(Color.WHITE);
 		word.setVisible(true);
 		this.add(word);
 		
-		tf_client = new MyTextField(360 + 360, 600 - 26 - 235 + 180, 140 + 90, 25);
+		tf_client = new MyTextField(360 + 360, 600 - 26 - 235 + 180 - 230, 140 + 90, 25);
 		tf_client.setText("无");
 		tf_client.setEditable(false);
 		tf_client.setVisible(true);
@@ -191,11 +211,18 @@ public class SaleClient extends JLabel implements ActionListener{
 			
 		//add a button for checking and modifying the information of a selected client
 		button_cam = new MyJButton("选择选中客户");
-		button_cam.setBounds(525 + 450 + 15, 610 - 26 - 10 - 235 + 180, 210, 25);
+		button_cam.setBounds(525 + 450 + 15, 610 - 26 - 10 - 235 + 180 - 230, 210, 25);
 		button_cam.addActionListener(this);
 		button_cam.setBackground(backColor);
 		button_cam.setForeground(foreColor);
 		this.add(button_cam);	
+		
+		button_choose = new MyJButton("选择所选促销");
+		button_choose.setBounds(525 + 450 + 15, 610 - 26 - 10 - 235 + 180, 210, 25);
+		button_choose.addActionListener(this);
+		button_choose.setBackground(backColor);
+		button_choose.setForeground(foreColor);
+		this.add(button_choose);
 		
 		//add a button for returning to the last UI
 		button_return = new MyJButton("生成进货单");

@@ -72,7 +72,6 @@ public class TotalPanel extends MyPanel implements ActionListener{
 		label.setBounds(25, 45, 72, 18);
 		add(label);
 		
-		
 		tf = new JTextField();
 		tf.setBounds(120, 42, 170, 24);
 		tf.setBackground(backColor);
