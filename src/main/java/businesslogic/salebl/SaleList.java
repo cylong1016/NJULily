@@ -48,6 +48,9 @@ public class SaleList {
 	 * 计算折让前价格
 	 */
 	public double getBeforePrice() {
+		if (beforePrice > 0) {
+			return beforePrice;
+		}
 		for(int i = 0; i < commodities.size(); i++) {
 			beforePrice += commodities.get(i).getTotal();
 		}

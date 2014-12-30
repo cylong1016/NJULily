@@ -2,6 +2,7 @@ package businesslogic.salebl;
 
 import java.rmi.Naming;
 import java.rmi.RemoteException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import po.SalesPO;
@@ -137,9 +138,12 @@ public class Sale {
 		if (zherang == 0) {
 			zherang = 1;
 		}
+		
 		double all = (1-zherang) * list.getBeforePrice();
-		list.setAllowance(all);
-		return all;
+		DecimalFormat df = new DecimalFormat("0.0");
+		double allowance = Double.parseDouble(df.format(all));
+		list.setAllowance(allowance);
+		return allowance;
 	}
 
 	/**
@@ -207,7 +211,6 @@ public class Sale {
 	 */
 	private void setInputInfo(saleAddVO inputInfo) {
 		list.setStorage(inputInfo.storage);
-		list.setAllowance(inputInfo.allowance);
 		list.setVoucher(inputInfo.voucher);
 		list.setRemark(inputInfo.remark);
 	}
