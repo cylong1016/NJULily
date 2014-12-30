@@ -33,7 +33,7 @@ public class PromotionPO extends PersistentObject {
 	private PromotionType type;
 	
 	public PromotionPO(String ID, String beginDate, String endDate, ArrayList<CommodityItemPO> bargains, double beforeTotal, double bargainTotal,
-			ClientLevel level, ArrayList<CommodityItemPO> commodities, double total,ArrayList<CommodityItemPO> gifts, double allowance, int voucher) {
+			ClientLevel level, ArrayList<CommodityItemPO> commodities, double total,ArrayList<CommodityItemPO> gifts, double allowance, int voucher, PromotionType type) {
 		super(ID);
 		this.beginDate = beginDate;
 		this.endDate = endDate;
@@ -46,6 +46,7 @@ public class PromotionPO extends PersistentObject {
 		this.gifts = gifts;
 		this.allowance = allowance;
 		this.voucher = voucher;
+		this.type = type;
 	}
 
 	public ArrayList<CommodityItemPO> getBargains() {

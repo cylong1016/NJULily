@@ -53,7 +53,7 @@ public class PromotionCommodity extends Promotion {
 		ArrayList<CommodityItemPO> gifts = list.getGifts();
 		double allowance = list.getAllowance();
 		int voucher = list.getVoucher();
-		PromotionPO po = new PromotionPO(ID, beginDate, endDate, null, 0, 0, null, commodities, 0, gifts, allowance, voucher);
+		PromotionPO po = new PromotionPO(ID, beginDate, endDate, null, 0, 0, null, commodities, 0, gifts, allowance, voucher,PromotionType.COMMODITY);
 		return po;
 	}
 

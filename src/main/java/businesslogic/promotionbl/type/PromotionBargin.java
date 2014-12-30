@@ -67,7 +67,7 @@ public class PromotionBargin extends Promotion {
 	private PromotionPO buildPromotion() {
 		ArrayList<CommodityItemPO> bargains = list.getBargains();
 		double bargainTotal = list.getTotal();
-		PromotionPO po = new PromotionPO(ID, beginDate, endDate, bargains, list.getBeforeTotal(), bargainTotal, null, null, 0, null, 0, 0);
+		PromotionPO po = new PromotionPO(ID, beginDate, endDate, bargains, list.getBeforeTotal(), bargainTotal, null, null, 0, null, 0, 0, PromotionType.BARGAINS);
 		return po;
 	}
 

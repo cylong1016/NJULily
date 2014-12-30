@@ -1,5 +1,6 @@
 package blservice.promotionblservice;
 
+
 /**
  * 促销策略的其他信息
  * @author Zing
