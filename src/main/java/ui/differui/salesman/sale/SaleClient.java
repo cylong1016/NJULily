@@ -326,7 +326,7 @@ public class SaleClient extends JLabel implements ActionListener{
 				
 				controller.addClient(ClientID);
 				
-				String proID = (String)table2.getValueAt(0, table2.getSelectedRow());
+				String proID = (String)table2.getValueAt(table2.getSelectedRow(), 0);
 				
 				tf_inven.setText(String.valueOf(controller.setPromotion(proID)));
 				

@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 
 import ui.commonui.myui.MyBackground;
 import ui.commonui.myui.MyButton;
+import ui.commonui.myui.MyColor;
 import ui.commonui.myui.MyFrame;
 import ui.commonui.myui.MyLabel;
 import ui.commonui.myui.MyPasswordField;
@@ -42,6 +43,8 @@ public class Frame_Login extends MyFrame implements ActionListener {
 	public static UserIdentity userIden;
 
 	public Frame_Login() {
+		
+		MyColor color = new MyColor();
 
 		MyFrame.button_back.setVisible(false);
 
