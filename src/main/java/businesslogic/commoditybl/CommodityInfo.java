@@ -71,7 +71,7 @@ public class CommodityInfo implements CommodityInfo_Sale, CommodityInfo_Purchase
 		po = commodityData.find(ID);
 		int totalNumber = po.getSaleNumber() + po.getPurNumber();
 		double totalPrice = po.getSalePrice() * po.getSaleNumber() + po.getPurNumber() * po.getAvePur();
-		return totalPrice/totalNumber;
+		return totalPrice / (totalNumber == 0 ? 1 : totalNumber); // 防止除数为0
 	}
 
 	/*

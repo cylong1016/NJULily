@@ -36,9 +36,12 @@ public class SaleDetailUI extends JLabel implements ActionListener{
 	
 	private static final long serialVersionUID = 1L;
 	
+	static {
+		saleList = new ArrayList<SaleDetailVO>();
+	}
+	
 	public SaleDetailUI(){
 		
-		saleList = new ArrayList<SaleDetailVO>();
 		
 		int y = 65 + 200 + 150 + 10;
 		

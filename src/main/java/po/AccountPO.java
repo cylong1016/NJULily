@@ -47,7 +47,7 @@ public class AccountPO extends PersistentObject {
 	 */
 	@Override
 	public String toString() {
-		return this.ID + this.name + this.money;
+		return this.ID + "|" + this.name + "|" + this.money;
 	}
 
 	/**

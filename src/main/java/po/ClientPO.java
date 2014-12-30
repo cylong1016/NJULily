@@ -90,8 +90,8 @@ public class ClientPO extends PersistentObject {
 	 */
 	@Override
 	public String toString() {
-		return ID + category + level + name + phone + address + post + email + receivable + payable + receivableLimit
-				+ salesman;
+		return ID + "|" + category.value + "|" + level.value + "|" + name + "|" + phone + "|" + address + "|" + post + "|" + email
+				+ "|" + receivable + "|" + payable + "|" + receivableLimit + "|" + salesman;
 	}
 
 	public ClientCategory getCategory() {
@@ -174,7 +174,7 @@ public class ClientPO extends PersistentObject {
 	public double getReceivable() {
 		return this.receivable;
 	}
-	
+
 	public void setReceivable(double receivable) {
 		this.receivable = receivable;
 	}

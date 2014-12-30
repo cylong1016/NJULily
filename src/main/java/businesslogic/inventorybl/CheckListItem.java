@@ -32,7 +32,7 @@ public class CheckListItem {
 		this.name = info.getName(ID);
 		this.type = info.getType(ID);
 		this.number = info.getNumber(ID);
-		this.price = info.getAvePrice(ID);
+		this.price = info.getAvePrice(ID); // TODO 这个是均价还是单价？
 	}
 
 	public String getName() {

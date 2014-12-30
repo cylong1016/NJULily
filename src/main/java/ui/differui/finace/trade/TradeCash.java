@@ -149,7 +149,7 @@ public class TradeCash extends JLabel implements ActionListener{
 		button_del.setForeground(foreColor);
 		this.add(button_del);
 		
-		button_finish = new MyJButton("完成交易单创建");
+		button_finish = new MyJButton("完成现金费用单创建");
 		button_finish.setBounds(940, 570, 260, 25);
 		button_finish.addActionListener(this);
 		button_finish.setBackground(backColor);

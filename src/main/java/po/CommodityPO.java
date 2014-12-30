@@ -27,17 +27,17 @@ public class CommodityPO extends PersistentObject {
 	private double recentSalePrice;
 	/** 商品警戒数量 */
 	private int alarmNumber;
-	
+
 	/** 每次销售后计算平均售价 */
 	private double aveSale;
 	/** 每次进货后计算平均进价 */
 	private double avePur;
-	
+
 	private int saleNumber;
 	private int purNumber;
 	/** 退货数量 */
 	private int saleBackNumber;
-	/** 能否被删除*/
+	/** 能否被删除 */
 	private boolean canDelete;
 
 	/**
@@ -59,7 +59,7 @@ public class CommodityPO extends PersistentObject {
 		this.alarmNumber = alarmNumber;
 		this.canDelete = true;
 	}
-	
+
 	/**
 	 * 期初建账的商品信息
 	 * @param ID
@@ -84,7 +84,8 @@ public class CommodityPO extends PersistentObject {
 	 */
 	@Override
 	public String toString() {
-		return name + type + inventoryNum + purPrice + salePrice + recentPurPrice + recentSalePrice + alarmNumber + ID;
+		return name + "|" + type + "|" + inventoryNum + "|" + purPrice + "|" + salePrice + "|" + recentPurPrice + "|"
+				+ recentSalePrice + "|" + alarmNumber + "|" + ID;
 	}
 
 	/**
@@ -211,5 +212,5 @@ public class CommodityPO extends PersistentObject {
 	public void setSaleBackNumber(int saleBackNumber) {
 		this.saleBackNumber = saleBackNumber;
 	}
-	
+
 }
