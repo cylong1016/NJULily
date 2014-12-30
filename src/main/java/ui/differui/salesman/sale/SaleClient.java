@@ -21,8 +21,14 @@ import ui.commonui.myui.MyTextField;
 import ui.commonui.warning.WarningFrame;
 import ui.differui.salesman.frame.Frame_Salesman;
 import vo.client.ClientVO;
+import vo.commodity.CommodityItemVO;
+import vo.promotion.PromotionClientVO;
+import vo.promotion.PromotionTotalVO;
 import blservice.clientblservice.ClientBLService;
+import blservice.saleblservice.SaleBLService;
 import businesslogic.clientbl.ClientController;
+import businesslogic.salebl.SaleController;
+import dataenum.ClientLevel;
 import dataenum.FindTypeClient;
 
 public class SaleClient extends JLabel implements ActionListener{
@@ -116,7 +122,7 @@ public class SaleClient extends JLabel implements ActionListener{
 		wordx.setVisible(true);
 		this.add(wordx);
 		
-		String[] headersClient = {"编号","起始时间","结束时间","选择条件","应送赠品","折扣","代金券"};
+		String[] headersClient = {"编号","起始时间","结束时间","条件","应送赠品","折扣","代金券"};
 		table2 = new MyTable(headersClient);
 		JScrollPane jsp2 = new JScrollPane(table2);
 		JTableHeader head2 = table2.getTableHeader();
@@ -237,6 +243,39 @@ public class SaleClient extends JLabel implements ActionListener{
 		
 	}
 	
+	private String getLevel(ClientLevel level){
+		if(level.equals(ClientLevel.LEVEL_1)){
+			return "一星级";
+		}else if(level.equals(ClientLevel.LEVEL_2)){
+			return "二星级";
+		}else if(level.equals(ClientLevel.LEVEL_3)){
+			return "三星级";
+		}else if(level.equals(ClientLevel.LEVEL_4)){
+			return "四星级";
+		}else{
+			return "五星级(VIP)";
+		}
+	}
+	
+	private String getAllowance(double d){
+		switch(String.valueOf(d)){ 
+		case "0.5" : return "5折";
+		case "0.98" : return "98折";
+		case "0.95": return "95折";
+		case "0.9" : return "9折";
+		case "0.88" : return "88折";
+		case "0.85" : return "85折";
+		case "0.8" : return "8折";
+		case "0.79" : return "79折";
+		case "0.75" : return "75折";
+		case "0.7" : return "7折";
+		case "0.65" : return "65折";
+		case "0.6" : return "6折";
+		case "0.58" : return "58折";
+		default:return "无折扣";
+		}
+	}
+	
 	public void actionPerformed(ActionEvent events) {
 			
 		if(events.getSource() == button_add){
@@ -280,6 +319,58 @@ public class SaleClient extends JLabel implements ActionListener{
 				tf_client.setText((String)table.getValueAt(table.getSelectedRow(), 3));
 				ClientName = (String)table.getValueAt(table.getSelectedRow(), 3);
 				ClientID = (String)table.getValueAt(table.getSelectedRow(), 0);
+				
+				ArrayList<CommodityItemVO> list = SaleGood.commoList;
+				
+				SaleBLService controller = new SaleController();
+				controller.getSaleID();
+				
+				for(int i = 0; i < list.size(); i++)
+					controller.addCommodities(list.get(i));
+				
+				controller.addClient(ClientID);
+				
+				ArrayList<PromotionClientVO> clientList = controller.findFitPromotionClient();
+				ArrayList<PromotionTotalVO> totalList = controller.findFitPromotionTotal();
+				
+				DefaultTableModel tableModel = (DefaultTableModel) table2.getModel();
+				int rowCount = tableModel.getRowCount();
+				for(int i = 0; i < rowCount; i++){
+					tableModel.removeRow(0);
+				}
+				
+				if(clientList != null){
+					for(int i = 0; i < clientList.size(); i++){
+						PromotionClientVO vo = clientList.get(i);
+						if(vo.gifts.size() > 0){
+							Object[] rowData = {vo.ID, vo.beginDate, vo.endDate, getLevel(vo.level)
+									, vo.gifts.get(0).name + "(" + vo.gifts.get(0).number + "件)"
+									, getAllowance(vo.allowance), vo.voucher + "元"};
+							tableModel.addRow(rowData);
+						}else{
+							Object[] rowData = {vo.ID, vo.beginDate, vo.endDate, getLevel(vo.level)
+									, "无", getAllowance(vo.allowance), vo.voucher + "元" };
+							tableModel.addRow(rowData);
+						}
+					}
+				}
+				
+				if(totalList != null){
+					for(int i = 0; i < totalList.size(); i++){
+						PromotionTotalVO vo = totalList.get(i);
+						if(vo.gifts.size() > 0){
+							Object[] rowData = {vo.ID, vo.beginDate, vo.endDate, vo.total + "元"
+									, vo.gifts.get(0).name + "(" + vo.gifts.get(0).number + "件)"
+									, getAllowance(vo.allowance), vo.voucher + "元"};
+							tableModel.addRow(rowData);
+						}else{
+							Object[] rowData = {vo.ID, vo.beginDate, vo.endDate, vo.total + "元"
+									, "无", getAllowance(vo.allowance), vo.voucher + "元" };
+							tableModel.addRow(rowData);
+						}
+					}
+				}
+				
 			}
 		}
 		
