@@ -310,6 +310,29 @@ public class SaleClient extends JLabel implements ActionListener{
 		
 		
 		/////////////////////////////FUNCTION CAM////////////////////////////
+		
+		if(events.getSource() == button_choose){
+			if(table2.getSelectedRowCount() == 0){
+				WarningFrame wf = new WarningFrame("请选择需要添加的促销策略！");
+				wf.setVisible(true);
+			}else{
+				SaleBLService controller = new SaleController();
+				controller.getSaleID();
+				
+				ArrayList<CommodityItemVO> list = SaleGood.commoList;
+				
+				for(int i = 0; i < list.size(); i++)
+					controller.addCommodities(list.get(i));
+				
+				controller.addClient(ClientID);
+				
+				String proID = (String)table2.getValueAt(0, table2.getSelectedRow());
+				
+				tf_inven.setText(String.valueOf(controller.setPromotion(proID)));
+				
+				ta.setText("使用了促销" + proID);
+			}
+		}
 
 		if(events.getSource() == button_cam){
 			if(table.getSelectedRow() < 0){
