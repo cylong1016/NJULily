@@ -15,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
+import ui.commonui.myui.MyColor;
 import ui.commonui.myui.MyComboBox;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyTable;
@@ -59,8 +60,8 @@ public class TradeCash extends JLabel implements ActionListener{
 		infoBar.setOpaque(false);
 		this.add(infoBar);
 		
-		Color foreColor = new Color(158, 213, 220);
-		Color backColor = new Color(46, 52, 101);
+		Color foreColor = Color.WHITE;
+		Color backColor = MyColor.getColor();
 		
 		////////////////////ACCOUNT////////////////////
 			

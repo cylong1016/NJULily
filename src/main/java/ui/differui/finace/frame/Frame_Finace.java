@@ -331,6 +331,7 @@ public class Frame_Finace extends MyFrame implements ActionListener{
 			case 1: panel_account.setVisible(false);break;
 			case 2: panel_trade.setVisible(false);
 					panel_cash.setVisible(false);
+					panel_finish.setVisible(false);
 					trade_back.setVisible(false);break;
 			case 3: panel_saleDetail.setVisible(false);break;
 			case 4: panel_businessProcess.setVisible(false);break;

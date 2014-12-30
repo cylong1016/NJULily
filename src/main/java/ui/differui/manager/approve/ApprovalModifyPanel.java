@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import ui.commonui.exitfinish.ExitFinishFrame;
+import ui.commonui.myui.MyColor;
 import ui.commonui.myui.MyPanel;
 import ui.commonui.myui.MyTable;
 import ui.commonui.warning.WarningFrame;
@@ -49,8 +50,8 @@ public class ApprovalModifyPanel extends MyPanel implements ActionListener{
 		int width = 800;
 		int height = 400;
 		
-		Color foreColor = new Color(158, 213, 220);
-		Color backColor = new Color(46, 52, 101);
+		Color foreColor = Color.WHITE;
+		Color backColor = MyColor.getColor();
 		
 		this.setBounds((1280 - width) / 2, (720 - height) / 2, width, height);
 		
@@ -259,6 +260,8 @@ public class ApprovalModifyPanel extends MyPanel implements ActionListener{
 	private void purchaseTable(PurchaseVO bill){
 		String[] headers = {"商品编号","商品名称","商品型号","商品数量","商品价格","商品备注"};
 		table = new MyTable(headers, true);
+		
+		
 		ArrayList<CommodityItemVO> list = bill.commodities;
 		
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();

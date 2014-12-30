@@ -10,6 +10,7 @@ import javax.swing.JTextArea;
 
 import dataenum.BillType;
 import ui.commonui.exitfunction.ExitFunctionFrame;
+import ui.commonui.myui.MyColor;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyPanel;
 import vo.ValueObject;
@@ -28,8 +29,8 @@ public class BillPanel extends MyPanel implements ActionListener{
 		
 		this.setBounds((1280 - width) / 2, (720 - height) / 2, width, height);
 		
-		Color foreColor = new Color(158, 213, 220);
-		Color backColor = new Color(46, 52, 101);
+		Color foreColor = Color.WHITE;
+		Color backColor = MyColor.getColor();
 		
 		//information bar
 		JLabel infoBar = new JLabel("单据查看",JLabel.CENTER);
@@ -41,8 +42,8 @@ public class BillPanel extends MyPanel implements ActionListener{
 		
 		ta = new JTextArea();
 		ta.setEditable(false);
-		ta.setBackground(backColor);
-		ta.setForeground(foreColor);
+		ta.setBackground(Color.WHITE);
+		ta.setForeground(Color.BLACK);
 		TextConductor tc = new TextConductor();
 		ta.setText(tc.writeBill(billType, bill));
 		

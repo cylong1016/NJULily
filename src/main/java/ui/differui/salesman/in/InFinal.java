@@ -20,6 +20,7 @@ import blservice.purchaseblservice.PurInputInfo;
 import blservice.purchaseblservice.PurchaseBLService;
 import businesslogic.purchasebl.PurchaseController;
 import ui.commonui.login.Frame_Login;
+import ui.commonui.myui.MyColor;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.warning.WarningFrame;
 import ui.differui.salesman.frame.Frame_Salesman;
@@ -39,8 +40,8 @@ public class InFinal extends JLabel implements ActionListener{
 		this.setLayout(null);
 		this.setBounds(0, 0, 1280, 720);
 		
-		Color foreColor = new Color(158, 213, 220);
-		Color backColor = new Color(46, 52, 101);
+		Color foreColor = Color.WHITE;
+		Color backColor = MyColor.getColor();
 		
 		JLabel infoBar = new JLabel("制定进货单 - 确认生成");
 		infoBar.setFont(new Font("华文细黑", Font.BOLD, 18));

@@ -10,8 +10,8 @@ public class MyJButton extends JButton {
 	
 	public MyJButton(String str){
 		
-		Color foreColor = new Color(158, 213, 220);
-		Color backColor = new Color(46, 52, 101);
+		Color foreColor = Color.WHITE;
+		Color backColor = MyColor.getColor();
 		this.setText(str);
 		this.setVisible(true);
 		this.setBackground(backColor);

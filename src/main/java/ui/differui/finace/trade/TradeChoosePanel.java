@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 
+import ui.commonui.myui.MyColor;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyPanel;
 import ui.differui.finace.frame.Frame_Finace;
@@ -21,8 +22,8 @@ public class TradeChoosePanel extends MyPanel implements ActionListener{
 		int width = 400;
 		int height = 130;
 		
-		Color foreColor = new Color(158, 213, 220);
-		Color backColor = new Color(46, 52, 101);
+		Color foreColor = Color.WHITE;
+		Color backColor = MyColor.getColor();
 		
 		this.setBounds((1280 - width) / 2, (720 - height) / 2, width, height);
 		

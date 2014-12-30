@@ -13,6 +13,7 @@ import blservice.commoditysortblservice.CommoditySortBLService;
 import businesslogic.commoditysortbl.CommoditySortController;
 import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.exitfunction.ExitFunctionFrame;
+import ui.commonui.myui.MyColor;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyPanel;
 import ui.commonui.myui.MyTextField;
@@ -32,12 +33,15 @@ public class SortDetailPanel extends MyPanel implements ActionListener{
 		
 		str = note.toString();
 		
+		Color foreColor = Color.WHITE;
+		Color backColor = MyColor.getColor();
+		
 		//information bar
 		JLabel infoBar = new JLabel("修改或查看所选商品分类",JLabel.CENTER);
 		infoBar.setBounds(0, 0 , 600, 20);
 		infoBar.setOpaque(true);
-		infoBar.setForeground(new Color(158, 213, 220));
-		infoBar.setBackground(new Color(46, 52, 101));
+		infoBar.setForeground(foreColor);
+		infoBar.setBackground(backColor);
 		this.add(infoBar);
 		
 		//texts

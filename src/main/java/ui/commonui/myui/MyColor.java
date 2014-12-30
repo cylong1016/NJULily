@@ -12,11 +12,14 @@ public class MyColor {
 	
 	public static void setColor(int i){
 		switch(i){
-		case 1 : color = new Color(47, 76, 130);
-		case 2 : color = new Color(113, 55, 73);
-		case 3 : color = new Color(29, 72, 33);
-		case 4 : color = new Color(26, 119, 119);
-		}
-		
+		case 1 : color = new Color(47, 76, 130);break;
+		case 2 : color = new Color(113, 55, 73);break;
+		case 3 : color = new Color(29, 72, 33);break;
+		case 4 : color = new Color(26, 119, 119);break;
+		}	
+	}
+	
+	public static Color getColor(){
+		return color;
 	}
 }

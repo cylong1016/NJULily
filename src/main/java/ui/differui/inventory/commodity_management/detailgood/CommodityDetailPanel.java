@@ -17,6 +17,7 @@ import businesslogic.commoditybl.CommodityController;
 import businesslogic.commoditysortbl.CommoditySortController;
 import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.exitfunction.ExitFunctionFrame;
+import ui.commonui.myui.MyColor;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyPanel;
 import ui.commonui.myui.MyTable;
@@ -41,9 +42,8 @@ public class CommodityDetailPanel extends MyPanel implements ActionListener{
 		CommodityBLService controller = new CommodityController();
 		CommodityVO cvo = controller.show(ID);
 		
-			
-		Color foreColor = new Color(158, 213, 220);
-		Color backColor = new Color(46, 52, 101);
+		Color foreColor = Color.WHITE;
+		Color backColor = MyColor.getColor();
 		
 		int x1 = 80, y1 = 55, x2 = 390, y2 = -66;
 		

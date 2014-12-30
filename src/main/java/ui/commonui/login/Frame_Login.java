@@ -45,6 +45,7 @@ public class Frame_Login extends MyFrame implements ActionListener {
 	public Frame_Login() {
 		
 		MyColor color = new MyColor();
+		color.toString();
 
 		MyFrame.button_back.setVisible(false);
 
@@ -151,37 +152,48 @@ public class Frame_Login extends MyFrame implements ActionListener {
 
 			} else if (ui.equals(UserIdentity.PUR_SALE_MANAGER) || ui.equals(UserIdentity.SALE_MANAGER)) {
 
+				MyColor.setColor(2);
+
 				Frame_Salesman fs = new Frame_Salesman();
 				fs.setVisible(true);
 
 				this.setVisible(false);
+				
 
 				WarningFrame wf = new WarningFrame("欢迎使用本系统！");
 				wf.setVisible(true);
 			} else if (ui.equals(UserIdentity.INVENTORY_MANAGER)) {
 
+				MyColor.setColor(1);
+
 				Frame_Inventory fi = new Frame_Inventory();
 				fi.setVisible(true);
 
 				this.setVisible(false);
+				
 
 				WarningFrame wf = new WarningFrame("欢迎使用本系统！");
 				wf.setVisible(true);
 
 			} else if (ui.equals(UserIdentity.FINANCE_MANAGER)) {
+
+				MyColor.setColor(3);
+
 				Frame_Finace ff = new Frame_Finace();
 				ff.setVisible(true);
 
 				this.setVisible(false);
-
+				
 				WarningFrame wf = new WarningFrame("欢迎使用本系统！");
 				wf.setVisible(true);
 			} else if (ui.equals(UserIdentity.GENERAL_MANAGER)) {
+				MyColor.setColor(4);
+				
 				Frame_Manager fm = new Frame_Manager();
 				fm.setVisible(true);
 
 				this.setVisible(false);
-
+				
 				WarningFrame wf = new WarningFrame("欢迎使用本系统！");
 				wf.setVisible(true);
 			}

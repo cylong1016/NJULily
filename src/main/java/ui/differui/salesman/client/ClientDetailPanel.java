@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 
 
 
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -25,6 +26,7 @@ import blservice.clientblservice.ClientBLService;
 import businesslogic.clientbl.ClientController;
 import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.myui.MyButton;
+import ui.commonui.myui.MyColor;
 import ui.commonui.myui.MyComboBox;
 import ui.commonui.myui.MyLabel;
 import ui.commonui.myui.MyPanel;
@@ -50,8 +52,8 @@ public class ClientDetailPanel extends MyPanel implements ActionListener{
 			
 		int x1 = 80, y1 = 55, x2 = 390, y2 = -66;
 		
-		Color foreColor = new Color(158, 213, 220);
-		Color backColor = new Color(53, 84, 94);
+		Color foreColor = Color.WHITE;
+		Color backColor = MyColor.getColor();
 		
 		//information bar
 		JLabel infoBar = new JLabel("修改或查看所选客户详细信息",JLabel.CENTER);
@@ -331,7 +333,8 @@ public class ClientDetailPanel extends MyPanel implements ActionListener{
 		}
 		
 		if(events.getSource() == button_check){
-			System.out.println("now checking ...");
+			WarningFrame wf = new WarningFrame("暂时不支持此功能！");
+			wf.setVisible(true);
 		}
 	}
 	

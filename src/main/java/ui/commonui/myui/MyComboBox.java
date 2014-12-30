@@ -13,7 +13,12 @@ public class MyComboBox extends JComboBox<String>{
 		this.setBounds(x, y, width, height);
 		for(int i = 0; i < str.length; i++)
 			this.addItem(str[i]);
-		this.setBackground(Color.white);
+		
+		Color foreColor = Color.WHITE;
+		Color backColor = MyColor.getColor();
+		
+		this.setBackground(backColor);
+		this.setForeground(foreColor);
 		this.setVisible(true);
 		
 	}

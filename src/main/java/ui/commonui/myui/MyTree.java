@@ -29,8 +29,8 @@ public class MyTree extends JTree{
 		
 		root = _root;
 		
-		Color foreColor = new Color(158, 213, 220);
-		Color backColor = new Color(46, 52, 101);
+		Color foreColor = Color.WHITE;
+		Color backColor = MyColor.getColor();
 		
 		toggleClickCount = 2;     
         setLayout(null);

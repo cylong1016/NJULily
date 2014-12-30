@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
+import ui.commonui.myui.MyColor;
 import ui.commonui.myui.MyComboBox;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyPanel;
@@ -82,9 +83,8 @@ public class InBackFirst extends MyPanel implements ActionListener{
 		clientCommoList = new ArrayList<CommodityItemVO>();
 		clientCommoList.clear();
 		
-		
-		Color foreColor = new Color(158, 213, 220);
-		Color backColor = new Color(46, 52, 101);
+		Color foreColor = Color.WHITE;
+		Color backColor = MyColor.getColor();
 		
 		this.setLayout(null);
 		this.setBounds(0, 0, 1280, 720);
@@ -144,7 +144,7 @@ public class InBackFirst extends MyPanel implements ActionListener{
 		String[] headers2 = {"商品编号","商品名称","商品型号","商品数量","商品价格","商品备注"};
 		table2 = new MyTable(headers2, true);
 		
-		JTableHeader head2 = table.getTableHeader();
+		JTableHeader head2 = table2.getTableHeader();
 		head2.setForeground(foreColor);
 		head2.setBackground(backColor);
 		

@@ -299,6 +299,7 @@ public class Frame_Inventory extends MyFrame implements ActionListener{
 					in_back.setVisible(false);break;
 					
 			case 5: panel_alarm.setVisible(false);
+					panel_warningFinish.setVisible(false);
 					in_back.setVisible(false);break;
 			
 			case 6: in_back.setVisible(false);

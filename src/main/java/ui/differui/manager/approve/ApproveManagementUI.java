@@ -32,6 +32,7 @@ import blservice.approvalblservice.ApprovalBLService;
 import businesslogic.approvalbl.ApprovalController;
 import businesslogic.approvalbl.ApprovalShow;
 import ui.commonui.exitfinish.ExitFinishFrame;
+import ui.commonui.myui.MyColor;
 import ui.commonui.myui.MyComboBox;
 import ui.commonui.text_conductor.TextConductor;
 import ui.commonui.warning.WarningFrame;
@@ -51,8 +52,8 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 	JTable table;
 	DefaultTableModel model;
 	
-	Color foreColor = new Color(158, 213, 220);
-	Color backColor = new Color(46, 52, 101);
+	Color foreColor = Color.WHITE;
+	Color backColor = MyColor.getColor();
 	
 	JButton bt_approval, bt_approvalAll, bt_search, bt_modify, bt_check, bt_out, bt_del;
 	public static JButton passBill, refuseBill;
@@ -92,10 +93,14 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 		
 		String[] comboBoxStr = {"全部种类", "进货类单据", "销售类单据", "财务类单据", "库存类单据", "现金类单据"};
 		cbb_sort = new MyComboBox(85 + 135, 56, 130, 25, comboBoxStr);
+		cbb_sort.setBackground(backColor);
+		cbb_sort.setForeground(foreColor);
 		this.add(cbb_sort);
 		
 		String[] comboBoxStr2 = {"全部状态", "待审批", "通过审批", "未通过审批"};
 		cbb_isApproval = new MyComboBox(85, 56, 130, 25, comboBoxStr2);
+		cbb_isApproval.setBackground(backColor);
+		cbb_isApproval.setForeground(foreColor);
 		this.add(cbb_isApproval);
 		
 		initTable();
@@ -103,8 +108,8 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 		
 		ta = new JTextArea();
 		ta.setEditable(false);
-		ta.setBackground(backColor);
-		ta.setForeground(foreColor);
+		ta.setBackground(Color.WHITE);
+		ta.setForeground(Color.BLACK);
 		
 		JScrollPane jsp2 = new JScrollPane(ta);
 		jsp2.setBounds(520, 95, 650, 465);
@@ -129,56 +134,56 @@ public class ApproveManagementUI extends JLabel implements ActionListener{
 		bt_search = new JButton("搜索");
 		bt_search.setBounds(355, 56, 107, 25);
 		bt_search.addActionListener(this);
-		bt_search.setBackground(Color.WHITE);
-		bt_search.setForeground(backColor);
+		bt_search.setBackground(backColor);
+		bt_search.setForeground(foreColor);
 		bt_search.setVisible(true);
 		this.add(bt_search);
 		
 		bt_check = new JButton("查看所选单据内容");
 		bt_check.setBounds(285, 572, 180, 25);
 		bt_check.addActionListener(this);
-		bt_check.setBackground(Color.WHITE);
-		bt_check.setForeground(backColor);
+		bt_check.setBackground(backColor);
+		bt_check.setForeground(foreColor);
 		bt_check.setVisible(true);
 		this.add(bt_check);
 		
 		bt_approvalAll = new JButton("通过所有所选单据");
 		bt_approvalAll.setBounds(85, 572, 180, 25);
 		bt_approvalAll.addActionListener(this);
-		bt_approvalAll.setBackground(Color.WHITE);
-		bt_approvalAll.setForeground(backColor);
+		bt_approvalAll.setBackground(backColor);
+		bt_approvalAll.setForeground(foreColor);
 		bt_approvalAll.setVisible(true);
 		this.add(bt_approvalAll);
 		
 		bt_approval = new JButton("通过此单据");
 		bt_approval.setBounds(1170 - 180, 572, 180, 25);
 		bt_approval.addActionListener(this);
-		bt_approval.setBackground(Color.WHITE);
-		bt_approval.setForeground(backColor);
+		bt_approval.setBackground(backColor);
+		bt_approval.setForeground(foreColor);
 		bt_approval.setVisible(true);
 		this.add(bt_approval);
 		
 		bt_modify = new JButton("修改单据内容");
 		bt_modify.setBounds(520, 572, 180, 25);
 		bt_modify.addActionListener(this);
-		bt_modify.setBackground(Color.WHITE);
-		bt_modify.setForeground(backColor);
+		bt_modify.setBackground(backColor);
+		bt_modify.setForeground(foreColor);
 		bt_modify.setVisible(true);
 		this.add(bt_modify);
 		
 		bt_out = new JButton("导出单据至桌面");
 		bt_out.setBounds(1170 - 180, 56, 180, 25);
 		bt_out.addActionListener(this);
-		bt_out.setBackground(Color.WHITE);
-		bt_out.setForeground(backColor);
+		bt_out.setBackground(backColor);
+		bt_out.setForeground(foreColor);
 		bt_out.setVisible(true);
 		this.add(bt_out);
 		
 		bt_del = new JButton("单据审批不通过");
 		bt_del.setBounds(755, 572, 180, 25);
 		bt_del.addActionListener(this);
-		bt_del.setBackground(Color.WHITE);
-		bt_del.setForeground(backColor);
+		bt_del.setBackground(backColor);
+		bt_del.setForeground(foreColor);
 		bt_del.setVisible(true);
 		this.add(bt_del);
 		

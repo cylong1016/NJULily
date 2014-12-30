@@ -15,6 +15,7 @@ import businesslogic.clientbl.ClientController;
 import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.exitfunction.ExitFunctionFrame;
 import ui.commonui.login.Frame_Login;
+import ui.commonui.myui.MyColor;
 import ui.commonui.myui.MyComboBox;
 import ui.commonui.myui.MyPanel;
 import ui.commonui.myui.MyTextField;
@@ -36,8 +37,8 @@ public class ClientAddingPanel extends MyPanel implements ActionListener{
 			
 		int x1 = 120, y1 = 10, x2 = 120, y2 = 75;
 		
-		Color foreColor = new Color(158, 213, 220);
-		Color backColor = new Color(46, 52, 101);
+		Color foreColor = Color.WHITE;
+		Color backColor = MyColor.getColor();
 		
 		//information bar
 		JLabel infoBar = new JLabel("新增一位用户",JLabel.CENTER);

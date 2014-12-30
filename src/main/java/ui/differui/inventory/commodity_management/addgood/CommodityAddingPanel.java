@@ -18,6 +18,7 @@ import businesslogic.commoditybl.CommodityController;
 import businesslogic.commoditysortbl.CommoditySortController;
 import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.exitfunction.ExitFunctionFrame;
+import ui.commonui.myui.MyColor;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyPanel;
 import ui.commonui.myui.MyTextField;
@@ -42,8 +43,8 @@ public class CommodityAddingPanel extends MyPanel implements ActionListener{
 	
 	public CommodityAddingPanel(){
 		
-		Color foreColor = new Color(158, 213, 220);
-		Color backColor = new Color(46, 52, 101);
+		Color foreColor = Color.WHITE;
+		Color backColor = MyColor.getColor();
 			
 		int y = 10;
 		sortName = "无";

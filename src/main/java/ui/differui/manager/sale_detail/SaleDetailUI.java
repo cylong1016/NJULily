@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import blservice.recordblservice.RecordBLService;
 import blservice.recordblservice.SaleDetailInputInfo;
 import businesslogic.recordbl.RecordController;
+import ui.commonui.myui.MyColor;
 import ui.commonui.myui.MyComboBox;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyTable;
@@ -41,8 +42,8 @@ public class SaleDetailUI extends JLabel implements ActionListener{
 		
 		int y = 65 + 200 + 150 + 10;
 		
-		Color foreColor = new Color(158, 213, 220);
-		Color backColor = new Color(46, 52, 101);
+		Color foreColor = Color.WHITE;
+		Color backColor = MyColor.getColor();
 		
 		this.setLayout(null);
 		this.setBounds(0, 0, 1280, 720);

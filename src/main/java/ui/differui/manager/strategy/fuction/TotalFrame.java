@@ -20,7 +20,7 @@ public class TotalFrame extends MyWindow implements ActionListener{
 		
 		epp = new TotalPanel();
 		epp.setOpaque(true);
-		epp.setBackground(new Color(0, 0, 0, 0.3f));
+		epp.setBackground(new Color(0, 0, 0, 0.9f));
 		this.add(epp);
 		
 		button_close = new JButton();

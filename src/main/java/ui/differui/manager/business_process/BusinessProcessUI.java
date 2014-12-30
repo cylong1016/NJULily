@@ -24,6 +24,7 @@ import blservice.userblservice.UserBLService;
 import businesslogic.clientbl.ClientController;
 import businesslogic.recordbl.RecordController;
 import businesslogic.userbl.UserController;
+import ui.commonui.myui.MyColor;
 import ui.commonui.myui.MyComboBox;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyTable;
@@ -48,8 +49,8 @@ public class BusinessProcessUI extends JLabel implements ActionListener{
 	MyTable table;
 	DefaultTableModel model;
 	
-	Color foreColor = new Color(158, 213, 220);
-	Color backColor = new Color(46, 52, 101);
+	Color foreColor = Color.WHITE;
+	Color backColor = MyColor.getColor();
 	
 	static ArrayList<ValueObject> listPool;
 	
@@ -155,8 +156,8 @@ public class BusinessProcessUI extends JLabel implements ActionListener{
 		
 		ta = new JTextArea();
 		ta.setEditable(false);
-		ta.setBackground(backColor);
-		ta.setForeground(foreColor);
+		ta.setBackground(Color.WHITE);
+		ta.setForeground(Color.BLACK);
 		
 		JScrollPane jsp2 = new JScrollPane(ta);
 		jsp2.setBounds(520, 95, 650, 465);
@@ -171,9 +172,7 @@ public class BusinessProcessUI extends JLabel implements ActionListener{
 				wf.setVisible(true);
 			}else{
 				TextConductor writer = new TextConductor();
-				
-				
-				
+	
 				String name = table.getValueAt(table.getSelectedRow(), 1).toString();
 				theName = name;
 				
@@ -333,16 +332,16 @@ public class BusinessProcessUI extends JLabel implements ActionListener{
 		bt_see = new JButton("查看所选单据内容");
 		bt_see.setBounds(305, 572, 180, 25);
 		bt_see.addActionListener(this);
-		bt_see.setBackground(Color.WHITE);
-		bt_see.setForeground(backColor);
+		bt_see.setBackground(backColor);
+		bt_see.setForeground(foreColor);
 		bt_see.setVisible(true);
 		this.add(bt_see);
 			
 		bt_out = new JButton("导出单据至桌面");
 		bt_out.setBounds(755 + 235, 572, 180, 25);
 		bt_out.addActionListener(this);
-		bt_out.setBackground(Color.WHITE);
-		bt_out.setForeground(backColor);
+		bt_out.setBackground(backColor);
+		bt_out.setForeground(foreColor);
 		bt_out.setVisible(true);
 		this.add(bt_out);
 	}

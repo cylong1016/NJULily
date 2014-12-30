@@ -13,6 +13,7 @@ import blservice.commoditysortblservice.CommoditySortBLService;
 import businesslogic.commoditysortbl.CommoditySortController;
 import ui.commonui.exitfinish.ExitFinishFrame;
 import ui.commonui.exitfunction.ExitFunctionFrame;
+import ui.commonui.myui.MyColor;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyPanel;
 import ui.commonui.myui.MyTextField;
@@ -33,8 +34,8 @@ public class SortAddingPanel extends MyPanel implements ActionListener{
 		String str = note.toString();
 		father = note;
 		
-		Color foreColor = new Color(158, 213, 220);
-		Color backColor = new Color(46, 52, 101);
+		Color foreColor = Color.WHITE;
+		Color backColor = MyColor.getColor();
 		
 		//information bar
 		JLabel infoBar = new JLabel("新增商品分类",JLabel.CENTER);

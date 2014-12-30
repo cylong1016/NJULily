@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 
 import ui.commonui.login.Frame_Login;
+import ui.commonui.myui.MyColor;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyPanel;
 import ui.differui.admin.AdminUI;
@@ -32,8 +33,8 @@ public class ExitBackPanel extends MyPanel implements ActionListener{
 		
 		this.setBounds((1280 - width) / 2, (720 - height) / 2, width, height);
 		
-		Color foreColor = new Color(158, 213, 220);
-		Color backColor = new Color(46, 52, 101);
+		Color foreColor = Color.WHITE;
+		Color backColor = MyColor.getColor();
 		
 		//information bar
 		JLabel infoBar = new JLabel("确认是否注销账号",JLabel.CENTER);

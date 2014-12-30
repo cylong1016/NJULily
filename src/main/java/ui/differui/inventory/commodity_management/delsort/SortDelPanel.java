@@ -10,6 +10,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 import dataenum.ResultMessage;
 import ui.commonui.exitfunction.ExitFunctionFrame;
+import ui.commonui.myui.MyColor;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyPanel;
 import ui.commonui.warning.WarningFrame;
@@ -31,8 +32,8 @@ public class SortDelPanel extends MyPanel implements ActionListener{
 		str = note.toString();
 		delNode = note;
 		
-		Color foreColor = new Color(158, 213, 220);
-		Color backColor = new Color(46, 52, 101);
+		Color foreColor = Color.WHITE;
+		Color backColor = MyColor.getColor();
 		
 		//information bar
 		JLabel infoBar = new JLabel("删除商品分类",JLabel.CENTER);

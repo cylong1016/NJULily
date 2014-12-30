@@ -8,6 +8,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import ui.commonui.myui.MyColor;
+
 public class MyTable extends JTable{
 
 	private static final long serialVersionUID = 1L;
@@ -35,8 +37,8 @@ public class MyTable extends JTable{
 	}
 	
 	public JTableHeader getJTableHeader() {
-		Color foreColor = new Color(158, 213, 220);
-		Color backColor = new Color(46, 52, 101);
+		Color foreColor = Color.WHITE;
+		Color backColor = MyColor.getColor();
 		JTableHeader tableH = this.getTableHeader();	 
 	    tableH.setBackground(backColor);  
 	    tableH.setForeground(foreColor);

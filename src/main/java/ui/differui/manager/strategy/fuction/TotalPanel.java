@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 
 import ui.commonui.exitfunction.ExitFunctionFrame;
+import ui.commonui.myui.MyColor;
 import ui.commonui.myui.MyPanel;
 import ui.commonui.warning.WarningFrame;
 import vo.InventoryBillVO;
@@ -42,8 +43,8 @@ public class TotalPanel extends MyPanel implements ActionListener{
 		
 		this.setBounds((1280 - width) / 2, (720 - height) / 2, width, height);
 		
-		Color foreColor = new Color(158, 213, 220);
-		Color backColor = new Color(46, 52, 101);
+		Color foreColor = Color.WHITE;
+		Color backColor = MyColor.getColor();
 		
 		//information bar
 		JLabel infoBar = new JLabel("按总价添加促销策略",JLabel.CENTER);

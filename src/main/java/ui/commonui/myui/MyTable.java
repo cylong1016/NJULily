@@ -18,9 +18,8 @@ public class MyTable extends JTable{
 			
 		Object[][] cellData = null;
 		
-		Color foreColor = new Color(158, 213, 220);
-		Color backColor = new Color(46, 52, 101);
-		
+		Color foreColor = Color.WHITE;
+		Color backColor = MyColor.getColor();
 		
 		DefaultTableModel model = new DefaultTableModel(cellData, headers) {
 			private static final long serialVersionUID = 1L;
@@ -49,9 +48,8 @@ public class MyTable extends JTable{
 	
 	flag = _flag;
 	
-	Color foreColor = new Color(158, 213, 220);
-	Color backColor = new Color(46, 52, 101);
-	
+	Color foreColor = Color.WHITE;
+	Color backColor = MyColor.getColor();
 	
 	DefaultTableModel model = new DefaultTableModel(cellData, headers) {
 		private static final long serialVersionUID = 1L;
@@ -78,11 +76,8 @@ public class MyTable extends JTable{
 		
 		Object[][] cellData = null;
 		
-		Color foreColor = new Color(158, 213, 220);
-		Color backColor = new Color(46, 52, 101);
-		
-		
-		
+		Color foreColor = Color.WHITE;
+		Color backColor = MyColor.getColor();
 		
 		DefaultTableModel model = new DefaultTableModel(cellData, headers) {
 			private static final long serialVersionUID = 1L;

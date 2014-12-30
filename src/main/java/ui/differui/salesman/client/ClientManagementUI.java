@@ -18,6 +18,7 @@ import dataenum.ResultMessage;
 import blservice.clientblservice.ClientBLService;
 import businesslogic.clientbl.ClientController;
 import ui.commonui.exitfinish.ExitFinishFrame;
+import ui.commonui.myui.MyColor;
 import ui.commonui.myui.MyComboBox;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyTable;
@@ -46,8 +47,8 @@ public class ClientManagementUI extends JLabel implements ActionListener{
 		
 		controller = new ClientController();
 		
-		Color foreColor = new Color(158, 213, 220);
-		Color backColor = new Color(46, 52, 101);
+		Color foreColor = Color.WHITE;
+		Color backColor = MyColor.getColor();
 		
 		JLabel infoBar = new JLabel("客户管理");
 		infoBar.setFont(new Font("华文细黑", Font.BOLD, 18));

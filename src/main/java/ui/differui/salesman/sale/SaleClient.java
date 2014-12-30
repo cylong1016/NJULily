@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import ui.commonui.myui.MyColor;
 import ui.commonui.myui.MyComboBox;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyTable;
@@ -54,8 +55,8 @@ public class SaleClient extends JLabel implements ActionListener{
 		
 		controller = new ClientController();
 		
-		Color foreColor = new Color(158, 213, 220);
-		Color backColor = new Color(46, 52, 101);
+		Color foreColor = Color.WHITE;
+		Color backColor = MyColor.getColor();
 		
 		JLabel infoBar = new JLabel("制定销售单 - 完善信息");
 		infoBar.setFont(new Font("华文细黑", Font.BOLD, 18));
