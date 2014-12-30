@@ -134,7 +134,10 @@ public class Sale {
 	public double setPromotion(String PromotionID) throws RemoteException {
 		double zherang = promotionInfo.getAllowance(PromotionID);
 //		ArrayList<CommodityItemPO> gifts = promotionInfo.getGifts(PromotionID);
-		double all = zherang * list.getBeforePrice();
+		if (zherang == 0) {
+			zherang = 1;
+		}
+		double all = (1-zherang) * list.getBeforePrice();
 		list.setAllowance(all);
 		return all;
 	}
