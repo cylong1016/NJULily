@@ -141,11 +141,11 @@ public class InventoryController implements InventoryBLService {
 	@Override
 	public InventoryBillVO save(String remark) {
 		try {
-			InventoryBillVO vo = inventory.submit(remark);
+			InventoryBillVO vo = inventory.save(remark);
 			if (vo != null) {
 				LogMsgController.addLog("保存库存单据为草稿状态 " + vo.toString());
 			}
-			return inventory.save(remark);
+			return vo;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;
