@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AWTTestScript>
+  <component class="ui.differui.admin.AdminAddingPanel" id="AdminAddingPanel Instance" index="1" parent="JPanel Instance 4" window="AdminAddingUI Instance" />
+  <component class="ui.differui.admin.AdminAddingUI" id="AdminAddingUI Instance" parent="shared frame" title="" />
+  <component class="ui.differui.admin.AdminModifyPanel" id="AdminModifyPanel Instance" index="1" parent="JPanel Instance 6" window="AdminModifyUI Instance" />
+  <component class="ui.differui.admin.AdminModifyUI" id="AdminModifyUI Instance" parent="shared frame" title="" />
+  <component class="ui.differui.admin.AdminUI" id="AdminUI Instance" root="true" title="" />
+  <component class="ui.commonui.exitfinish.ExitFinishFrame" id="ExitFinishFrame Instance" parent="shared frame" title="" />
+  <component class="ui.commonui.exitfinish.ExitFinishPanel" id="ExitFinishPanel Instance" index="0" parent="JPanel Instance 5" window="ExitFinishFrame Instance" />
+  <component class="ui.commonui.exitfunction.ExitFunctionFrame" id="ExitFunctionFrame Instance" parent="shared frame" title="" />
+  <component class="ui.commonui.exitfunction.ExitFunctionPanel" id="ExitFunctionPanel Instance" index="0" parent="JPanel Instance 7" window="ExitFunctionFrame Instance" />
+  <component class="ui.commonui.login.Frame_Login" id="Frame_Login Instance" root="true" title="" />
+  <component class="javax.swing.JLayeredPane" id="JLayeredPane Instance" index="1" parent="JRootPane Instance" window="Frame_Login Instance" />
+  <component class="javax.swing.JLayeredPane" id="JLayeredPane Instance 2" index="1" parent="JRootPane Instance 2" window="WarningFrame Instance" />
+  <component class="javax.swing.JLayeredPane" id="JLayeredPane Instance 3" index="1" parent="JRootPane Instance 3" window="AdminUI Instance" />
+  <component class="javax.swing.JLayeredPane" id="JLayeredPane Instance 4" index="1" parent="JRootPane Instance 4" window="AdminAddingUI Instance" />
+  <component class="javax.swing.JLayeredPane" id="JLayeredPane Instance 5" index="1" parent="JRootPane Instance 5" window="ExitFinishFrame Instance" />
+  <component class="javax.swing.JLayeredPane" id="JLayeredPane Instance 6" index="1" parent="JRootPane Instance 6" window="AdminModifyUI Instance" />
+  <component class="javax.swing.JLayeredPane" id="JLayeredPane Instance 7" index="1" parent="JRootPane Instance 7" window="ExitFunctionFrame Instance" />
+  <component class="javax.swing.JPanel" id="JPanel Instance" index="0" parent="JLayeredPane Instance" window="Frame_Login Instance" />
+  <component class="javax.swing.JPanel" id="JPanel Instance 2" index="0" parent="JLayeredPane Instance 2" window="WarningFrame Instance" />
+  <component class="javax.swing.JPanel" id="JPanel Instance 3" index="0" parent="JLayeredPane Instance 3" window="AdminUI Instance" />
+  <component class="javax.swing.JPanel" id="JPanel Instance 4" index="0" parent="JLayeredPane Instance 4" window="AdminAddingUI Instance" />
+  <component class="javax.swing.JPanel" id="JPanel Instance 5" index="0" parent="JLayeredPane Instance 5" window="ExitFinishFrame Instance" />
+  <component class="javax.swing.JPanel" id="JPanel Instance 6" index="0" parent="JLayeredPane Instance 6" window="AdminModifyUI Instance" />
+  <component class="javax.swing.JPanel" id="JPanel Instance 7" index="0" parent="JLayeredPane Instance 7" window="ExitFunctionFrame Instance" />
+  <component class="javax.swing.JRootPane" id="JRootPane Instance" index="0" parent="Frame_Login Instance" />
+  <component class="javax.swing.JRootPane" id="JRootPane Instance 2" index="0" parent="WarningFrame Instance" />
+  <component class="javax.swing.JRootPane" id="JRootPane Instance 3" index="0" parent="AdminUI Instance" />
+  <component class="javax.swing.JRootPane" id="JRootPane Instance 4" index="0" parent="AdminAddingUI Instance" />
+  <component class="javax.swing.JRootPane" id="JRootPane Instance 5" index="0" parent="ExitFinishFrame Instance" />
+  <component class="javax.swing.JRootPane" id="JRootPane Instance 6" index="0" parent="AdminModifyUI Instance" />
+  <component class="javax.swing.JRootPane" id="JRootPane Instance 7" index="0" parent="ExitFunctionFrame Instance" />
+  <component class="javax.swing.JScrollPane" id="JScrollPane Instance" index="11" parent="JPanel Instance 3" window="AdminUI Instance" />
+  <component class="javax.swing.JViewport" id="JViewport Instance" index="0" parent="JScrollPane Instance" window="AdminUI Instance" />
+  <component class="ui.commonui.myui.MyButton" id="MyButton Instance" index="4" parent="JPanel Instance" text="" window="Frame_Login Instance" />
+  <component class="ui.commonui.myui.MyButton" id="MyButton Instance 2" index="8" parent="JPanel Instance 3" text="" window="AdminUI Instance" />
+  <component class="ui.commonui.myui.MyButton" id="MyButton Instance 3" index="10" parent="JPanel Instance 3" text="" window="AdminUI Instance" />
+  <component class="ui.commonui.myui.MyButton" id="MyButton Instance 4" index="9" parent="JPanel Instance 3" text="" window="AdminUI Instance" />
+  <component class="ui.commonui.myui.MyComboBox" id="MyComboBox Instance" index="6" parent="AdminAddingPanel Instance" window="AdminAddingUI Instance" />
+  <component class="ui.commonui.myui.MyPasswordField" id="MyPasswordField Instance" index="3" parent="JPanel Instance" window="Frame_Login Instance" />
+  <component class="ui.commonui.myui.MyTable" id="MyTable Instance" index="0" parent="JViewport Instance" window="AdminUI Instance" />
+  <component class="ui.commonui.myui.MyTextField" id="MyTextField Instance" index="2" parent="JPanel Instance" window="Frame_Login Instance" />
+  <component class="ui.commonui.myui.MyTextField" id="MyTextField Instance 2" index="4" parent="AdminAddingPanel Instance" window="AdminAddingUI Instance" />
+  <component class="ui.commonui.myui.MyTextField" id="MyTextField Instance 3" index="8" parent="AdminAddingPanel Instance" window="AdminAddingUI Instance" />
+  <component class="ui.commonui.myui.MyTextField" id="MyTextField Instance 4" index="10" parent="AdminAddingPanel Instance" window="AdminAddingUI Instance" />
+  <component class="ui.commonui.myui.MyTextField" id="MyTextField Instance 5" index="12" parent="AdminAddingPanel Instance" window="AdminAddingUI Instance" />
+  <component class="ui.commonui.myui.MyTextField" id="MyTextField Instance 6" index="4" parent="AdminModifyPanel Instance" window="AdminModifyUI Instance" />
+  <component class="ui.commonui.warning.WarningFrame" id="WarningFrame Instance" parent="shared frame" title="" />
+  <component class="ui.commonui.warning.WarningPanel" id="WarningPanel Instance" index="0" parent="JPanel Instance 2" window="WarningFrame Instance" />
+  <component class="javax.swing.SwingUtilities$SharedOwnerFrame" id="shared frame" root="true" title="" />
+  <component class="ui.commonui.myui.MyJButton" id="是" index="1" parent="ExitFinishPanel Instance" text="是" window="ExitFinishFrame Instance" />
+  <component class="ui.commonui.myui.MyJButton" id="是 2" index="1" parent="ExitFunctionPanel Instance" text="是" window="ExitFunctionFrame Instance" />
+  <component class="javax.swing.JButton" id="确认修改" index="14" parent="AdminModifyPanel Instance" text="确认修改" window="AdminModifyUI Instance" />
+  <component class="javax.swing.JButton" id="确认添加" index="14" parent="AdminAddingPanel Instance" text="确认添加" window="AdminAddingUI Instance" />
+  <component class="ui.commonui.myui.MyJButton" id="返回" index="2" parent="WarningPanel Instance" text="返回" window="WarningFrame Instance" />
+  <component class="javax.swing.JButton" id="返回 2" index="13" parent="AdminAddingPanel Instance" text="返回" window="AdminAddingUI Instance" />
+  <launch args="[]" class="main.NJULilyMain" classpath="target/NJULily-0.9.0-jar-with-dependencies.jar" desc="launch main.NJULilyMain.main([])" method="main" />
+  <sequence>
+    <action args="MyTextField Instance,0" class="javax.swing.text.JTextComponent" method="actionClick" />
+    <event component="MyTextField Instance" keyCode="VK_SHIFT" kind="KEY_PRESSED" modifiers="SHIFT_MASK" type="KeyEvent" />
+    <event component="MyTextField Instance" keyCode="VK_SHIFT" kind="KEY_RELEASED" type="KeyEvent" />
+    <action args="MyTextField Instance,admin" method="actionKeyString" />
+    <event component="MyTextField Instance" keyCode="VK_SHIFT" kind="KEY_PRESSED" modifiers="SHIFT_MASK" type="KeyEvent" />
+    <event component="MyTextField Instance" keyCode="VK_SHIFT" kind="KEY_RELEASED" type="KeyEvent" />
+    <action args="MyTextField Instance,VK_TAB" method="actionKeyStroke" />
+    <action args="MyPasswordField Instance,admin" method="actionKeyString" />
+    <action args="MyButton Instance" class="javax.swing.AbstractButton" method="actionClick" />
+    <wait args="AdminUI Instance" class="abbot.tester.ComponentTester" method="assertComponentShowing" />
+    <wait args="Frame_Login Instance" class="abbot.tester.ComponentTester" invert="true" method="assertComponentShowing" />
+    <wait args="WarningFrame Instance" class="abbot.tester.ComponentTester" method="assertComponentShowing" />
+    <action args="返回" class="javax.swing.AbstractButton" method="actionClick" />
+    <wait args="WarningFrame Instance" class="abbot.tester.ComponentTester" invert="true" method="assertComponentShowing" />
+    <action args="MyButton Instance 2" class="javax.swing.AbstractButton" method="actionClick" />
+    <wait args="AdminAddingUI Instance" class="abbot.tester.ComponentTester" method="assertComponentShowing" />
+    <action args="MyTextField Instance 2,0" class="javax.swing.text.JTextComponent" method="actionClick" />
+    <action args="MyTextField Instance 2,1234" method="actionKeyString" />
+    <action args="MyComboBox Instance,总经理" class="javax.swing.JComboBox" method="actionSelectItem" />
+    <action args="MyTextField Instance 3,0" class="javax.swing.text.JTextComponent" method="actionClick" />
+    <action args="MyTextField Instance 3,1234" method="actionKeyString" />
+    <action args="MyTextField Instance 4,0" class="javax.swing.text.JTextComponent" method="actionClick" />
+    <action args="MyTextField Instance 4,1234" method="actionKeyString" />
+    <action args="MyTextField Instance 5,0" class="javax.swing.text.JTextComponent" method="actionClick" />
+    <action args="MyTextField Instance 5,1234" method="actionKeyString" />
+    <action args="确认添加" class="javax.swing.AbstractButton" method="actionClick" />
+    <wait args="ExitFinishFrame Instance" class="abbot.tester.ComponentTester" method="assertComponentShowing" />
+    <action args="是" class="javax.swing.AbstractButton" method="actionClick" />
+    <wait args="WarningFrame Instance" class="abbot.tester.ComponentTester" method="assertComponentShowing" />
+    <wait args="AdminAddingUI Instance" class="abbot.tester.ComponentTester" invert="true" method="assertComponentShowing" />
+    <wait args="ExitFinishFrame Instance" class="abbot.tester.ComponentTester" invert="true" method="assertComponentShowing" />
+    <action args="返回" class="javax.swing.AbstractButton" method="actionClick" />
+    <wait args="WarningFrame Instance" class="abbot.tester.ComponentTester" invert="true" method="assertComponentShowing" />
+    <action args="MyTable Instance,&quot;1234&quot;" class="javax.swing.JTable" method="actionSelectCell" />
+    <action args="MyButton Instance 3" class="javax.swing.AbstractButton" method="actionClick" />
+    <wait args="AdminModifyUI Instance" class="abbot.tester.ComponentTester" method="assertComponentShowing" />
+    <action args="MyTextField Instance 6,4,0" class="javax.swing.text.JTextComponent" method="actionSelectText" />
+    <action args="MyTextField Instance 6,copy-to-clipboard" class="javax.swing.JComponent" method="actionActionMap" />
+    <action args="MyTextField Instance 6,4321" method="actionKeyString" />
+    <action args="确认修改" class="javax.swing.AbstractButton" method="actionClick" />
+    <wait args="ExitFinishFrame Instance" class="abbot.tester.ComponentTester" method="assertComponentShowing" />
+    <action args="是" class="javax.swing.AbstractButton" method="actionClick" />
+    <wait args="WarningFrame Instance" class="abbot.tester.ComponentTester" method="assertComponentShowing" />
+    <wait args="AdminModifyUI Instance" class="abbot.tester.ComponentTester" invert="true" method="assertComponentShowing" />
+    <wait args="ExitFinishFrame Instance" class="abbot.tester.ComponentTester" invert="true" method="assertComponentShowing" />
+    <action args="返回" class="javax.swing.AbstractButton" method="actionClick" />
+    <wait args="WarningFrame Instance" class="abbot.tester.ComponentTester" invert="true" method="assertComponentShowing" />
+    <action args="MyTable Instance,&quot;4321&quot;" class="javax.swing.JTable" method="actionSelectCell" />
+    <action args="MyButton Instance 4" class="javax.swing.AbstractButton" method="actionClick" />
+    <wait args="ExitFinishFrame Instance" class="abbot.tester.ComponentTester" method="assertComponentShowing" />
+    <action args="是" class="javax.swing.AbstractButton" method="actionClick" />
+    <wait args="WarningFrame Instance" class="abbot.tester.ComponentTester" method="assertComponentShowing" />
+    <wait args="ExitFinishFrame Instance" class="abbot.tester.ComponentTester" invert="true" method="assertComponentShowing" />
+    <action args="返回" class="javax.swing.AbstractButton" method="actionClick" />
+    <wait args="WarningFrame Instance" class="abbot.tester.ComponentTester" invert="true" method="assertComponentShowing" />
+    <action args="MyTable Instance,&quot;cylong&quot;" class="javax.swing.JTable" method="actionSelectCell" />
+    <action args="AdminUI Instance,(941%2c585)" class="ui.differui.admin.AdminUI" method="actionClick" />
+    <action args="MyButton Instance 2" class="javax.swing.AbstractButton" method="actionClick" />
+    <wait args="AdminAddingUI Instance" class="abbot.tester.ComponentTester" method="assertComponentShowing" />
+    <action args="返回 2" class="javax.swing.AbstractButton" method="actionClick" />
+    <wait args="ExitFunctionFrame Instance" class="abbot.tester.ComponentTester" method="assertComponentShowing" />
+    <action args="是 2" class="javax.swing.AbstractButton" method="actionClick" />
+    <wait args="AdminAddingUI Instance" class="abbot.tester.ComponentTester" invert="true" method="assertComponentShowing" />
+    <wait args="ExitFunctionFrame Instance" class="abbot.tester.ComponentTester" invert="true" method="assertComponentShowing" />
+  </sequence>
+  <terminate />
+</AWTTestScript>
+

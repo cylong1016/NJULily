@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- JNLP File for launching Costello with WebStart -->
+<jnlp spec="0.2 1.0"
+  codebase="http://abbot.sourceforge.net/lib"
+  href="http://abbot.sourceforge.net/abbot.jnlp">
+  <information>
+    <title>Costello</title>
+    <vendor>Abbot Framework</vendor>
+    <homepage href="http://abbot.sourceforge.net/"/>
+    <description>Script Editor for the Abbot Java GUI Test Framework</description>
+    <description kind="short">Costello Script Editor</description>
+    <icon href="http://abbot.sourceforge.net/logo32.gif" width="32" height="32"/>
+    <icon href="http://sourceforge.net/sflogo.php?group_id=&amp;type=1" width="64" height="64"/>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <property name="sun.swing.enableImprovedDragGesture" value="true"/>
+    <property name="apple.laf.useScreenMenuBar" value="true"/>
+    <property name="com.apple.macos.useScreenMenuBar" value="true"/>
+
+    <j2se version="1.3+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="costello.jar" main="true" download="eager"/>
+    <jar href="abbot.jar" main="false" download="eager"/>
+    <jar href="example.jar" main="false" download="eager"/>
+    <jar href="gnu-regexp-1.1.0.jar" main="false" download="eager"/>
+    <jar href="junit-3.8.1.jar" main="false" download="eager"/>
+    <jar href="jdom-1.0.jar" main="false" download="eager"/>
+    <jar href="bsh-2.0b4.jar" main="false" download="eager"/>
+    <jar href="xercesImpl-2.8.1.jar" main="false" download="eager"/>
+    <jar href="xml-apis.jar" main="false" download="eager"/>
+  </resources>
+  <application-desc main-class="abbot.editor.Costello"/>
+  <security>
+    <all-permissions/>
+  </security>
+</jnlp>
