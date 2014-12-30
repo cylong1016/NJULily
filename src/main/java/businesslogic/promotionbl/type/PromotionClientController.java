@@ -106,7 +106,7 @@ public class PromotionClientController implements PromotionClientBLService {
 				return null;
 			}
 			LogMsgController.addLog("添加客户促销策略 " + vo.toString());
-			return promotionClient.submit(info);
+			return vo;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;

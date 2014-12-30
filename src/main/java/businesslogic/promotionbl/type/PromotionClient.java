@@ -20,6 +20,7 @@ public class PromotionClient extends Promotion {
 	public PromotionClient() {
 		super();
 	}
+	
 	public ArrayList<PromotionClientVO> show() throws RemoteException {
 		return PromotionTrans.clientPOtoVO(promotionData.show(PromotionType.CLIENT));
 	}
