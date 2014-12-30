@@ -5,14 +5,11 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import vo.commodity.CommodityItemVO;
-import vo.promotion.PromotionClientVO;
-import vo.sale.SalesVO;
-import vo.sale.saleAddVO;
+import vo.promotion.PromotionTotalVO;
 import blservice.saleblservice.SaleBLService;
 import businesslogic.salebl.SaleController;
-import dataenum.Storage;
 
-public class TestPromotion {
+public class TestClientPro {
 
 	@Test
 	public void test() {
@@ -21,21 +18,17 @@ public class TestPromotion {
 		CommodityItemVO item = new CommodityItemVO("SP-101-102-00001", 2, 100, null, "一个灯", "Saaa");
 		bl.addCommodities(item);
 		bl.addClient("KH00001");
-		ArrayList<PromotionClientVO> pros = bl.findFitPromotionClient();
-		double all = bl.setPromotion("CXCL0009");
+		ArrayList<PromotionTotalVO> tots = bl.findFitPromotionTotal();
+		double all = bl.setPromotion("CXCL00010");
 		System.out.println(all);
-		if (pros == null) {
+		if (tots == null) {
 			System.out.println("null");
 		}
 		else {
-			for (PromotionClientVO vo : pros) {
+			for (PromotionTotalVO vo : tots) {
 				System.out.println(vo.ID);
 			}
 		}
-		saleAddVO addVO = new saleAddVO(Storage.STORAGE_ONE, 0, 0, null);
-		SalesVO finalVO = bl.submit(addVO);
-		System.out.println(finalVO.afterPrice);
-		
 	}
 
 }
