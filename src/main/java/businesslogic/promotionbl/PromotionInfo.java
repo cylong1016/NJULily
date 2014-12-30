@@ -12,7 +12,7 @@ import vo.promotion.PromotionTotalVO;
 import businesslogic.clientbl.ClientInfo;
 import businesslogic.common.DateOperate;
 import businesslogic.promotionbl.info.ClientInfo_Promotion;
-import businesslogic.promotionbl.type.PromotionBargin;
+import businesslogic.promotionbl.type.PromotionBargain;
 import businesslogic.promotionbl.type.PromotionClient;
 import businesslogic.promotionbl.type.PromotionTotal;
 import businesslogic.salebl.info.PromotionInfo_Sale;
@@ -29,7 +29,7 @@ public class PromotionInfo implements PromotionInfo_Sale{
 	
 	@Override
 	public ArrayList<PromotionBargainVO> showBargains() throws RemoteException {
-		PromotionBargin bargains = new PromotionBargin();
+		PromotionBargain bargains = new PromotionBargain();
 		return bargains.show();
 	}
 
@@ -83,7 +83,7 @@ public class PromotionInfo implements PromotionInfo_Sale{
 
 	@Override
 	public PromotionBargainVO findBargains(String ID) throws RemoteException {
-		PromotionBargin promotionBargin = new PromotionBargin();
+		PromotionBargain promotionBargin = new PromotionBargain();
 		PromotionPO po = promotionBargin.getPromotionData().find(ID);
 		return PromotionTrans.bargainPOvoVO(po);
 	}

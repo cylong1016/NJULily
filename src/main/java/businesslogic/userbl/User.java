@@ -2,11 +2,14 @@ package businesslogic.userbl;
 
 import io.DefineList;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import po.UserPO;
 import vo.UserVO;
@@ -20,16 +23,27 @@ public class User {
 
 	private UserDataService userData;
 	private DefineList<UserPO> currentUser;	// 保存用户名
-	private DefineList<UserPO> currentUserTemp;	// 用户的登录信息
+	private DefineList<UserPO> curUserTemp;	// 用户的登录信息
 	private UserPO current;	// 当前登录的用户
+	public static String tempFileName;
+
+	static {
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		// 以当前时间为文件名
+		String curTime = sdf.format(new Date());
+		tempFileName = "data/temp" + curTime + ".ser";
+	}
 
 	/**
 	 * @author cylong
 	 * @version 2014年12月14日 上午5:18:22
 	 */
 	public User() {
-		currentUser = new DefineList<UserPO>("data/loginInfo.ser");
-		currentUserTemp = new DefineList<UserPO>("data/loginInfoTemp.ser");
+		currentUser = new DefineList<UserPO>("data/rememberlogin.ser");
+		curUserTemp = new DefineList<UserPO>(tempFileName);
+		File tempFile = new File(tempFileName);
+		tempFile.deleteOnExit(); // 关闭虚拟机的时候删除文件
 		try {
 			userData = (UserDataService)Naming.lookup(RMIConfig.PREFIX + UserDataService.NAME);
 		} catch (MalformedURLException e) {
@@ -69,7 +83,7 @@ public class User {
 
 		ArrayList<UserPO> pos = userData.show();
 		for(UserPO po : pos) {
-			if(iden.equals(UserIdentity.ADMIN)) {
+			if (iden.equals(UserIdentity.ADMIN)) {
 				current = new UserPO(null, loginInfo.username, "管理员", loginInfo.password, null, UserIdentity.ADMIN);
 				break; // 跳出循环
 			}
@@ -85,8 +99,8 @@ public class User {
 			currentUser.clear();
 		}
 
-		currentUserTemp.clear();
-		currentUserTemp.add(current);	// 记录当前登录的用户的信息
+		curUserTemp.clear();
+		curUserTemp.add(current);	// 记录当前登录的用户的信息
 		return iden;
 	}
 

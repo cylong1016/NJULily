@@ -162,7 +162,7 @@ public class LogPanel extends JPanel {
 				String day = LogPanel.this.input[2].getText();
 				day = (isDigit(day) && month.length() != 0) ? ("-" + day) : "";
 				String date = year + month + day;
-				ArrayList<LogMessage> logs = LogMsgController.getLogs(date);
+				ArrayList<LogMessage> logs = LogMsgController.getLogsByDate(date);
 				logText.setText("");
 				logText.append(logs);
 				logText.setTitle(date);
@@ -170,7 +170,7 @@ public class LogPanel extends JPanel {
 				logText.setTitle("全部日志");
 				logText.setText("");
 				for(int i = LogMsgController.logFilesName.length - 1; i >= 0; i--) {
-					ArrayList<LogMessage> logs = LogMsgController.getLogs(LogMsgController.logFilesName[i]);
+					ArrayList<LogMessage> logs = LogMsgController.getLogsByDate(LogMsgController.logFilesName[i]);
 					logText.append(logs);
 				}
 			}

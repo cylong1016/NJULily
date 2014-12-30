@@ -50,8 +50,8 @@ public class LogTextArea extends JScrollPane {
 		textArea = new JTextArea();
 		textArea.setForeground(Color.WHITE);
 		// 最新的在前面显示
-		for(int i = LogMsgController.logs.size() - 1; i >= 0; i--) {
-			LogMessage log = LogMsgController.logs.get(i);
+		for(int i = 0; i < LogMsgController.getCurLogs().size(); i++) {
+			LogMessage log = LogMsgController.getCurLogs().get(i);
 			textArea.append(log.toString() + "\r\n");
 		}
 		textArea.setLineWrap(true);
@@ -85,8 +85,7 @@ public class LogTextArea extends JScrollPane {
 		if (logs == null) {
 			return;
 		}
-		for(int i = logs.size() - 1; i >= 0; i--) {
-			LogMessage log = logs.get(i);
+		for(LogMessage log : logs) {
 			textArea.append(log.toString() + "\r\n");
 		}
 	}

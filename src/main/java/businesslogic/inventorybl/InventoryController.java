@@ -176,7 +176,6 @@ public class InventoryController implements InventoryBLService {
 			}
 			return res;
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

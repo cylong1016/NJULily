@@ -17,7 +17,11 @@ public class LogMsgController {
 	/** 所有日志文件名 */
 	public static String[] logFilesName;
 
+	/** 当天日志 */
+	private static DefineList<LogMessage> curLogs;
+
 	static {
+		// 加载全部日志文件名和
 		new Thread() {
 
 			@Override
@@ -26,16 +30,25 @@ public class LogMsgController {
 				logFilesName = dir.list();
 			}
 		}.start();
+		// 加载当前日志文件
+		refreshCurLogs();
 	}
 
-	public static DefineList<LogMessage> logs;
+	public static DefineList<LogMessage> getCurLogs() {
+		return curLogs;
+	}
 
-	static {
+	/**
+	 * 刷新当前日志，防止多客户端之间日志的覆盖
+	 * @author cylong
+	 * @version 2014年12月31日 上午4:08:12
+	 */
+	private static void refreshCurLogs() {
 		/* 自动生成日期 */
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String date = sdf.format(new Date());
 		// 每一天的日志放到同一个文件里
-		logs = new DefineList<LogMessage>("data/log/" + date + ".log");
+		curLogs = new DefineList<LogMessage>("data/log/" + date + ".log");
 	}
 
 	/**
@@ -45,21 +58,23 @@ public class LogMsgController {
 	 * @version 2014年12月26日 下午7:35:23
 	 */
 	public static void addLog(String message) {
-		logs.add(new LogMessage(message));
+		refreshCurLogs();
+		curLogs.add(new LogMessage(message));
 	}
-	
+
 	/**
 	 * 添加一条日志记录
 	 * @param username 操作员
 	 * @param message 操作信息
 	 * @author cylong
-	 * @version 2014年12月29日  上午2:45:34
+	 * @version 2014年12月29日 上午2:45:34
 	 */
 	public static void addLog(String username, String message) {
-		logs.add(new LogMessage(username, message));
+		refreshCurLogs();
+		curLogs.add(new LogMessage(username, message));
 	}
 
-	public static ArrayList<LogMessage> getLogs(String date) {
+	public static ArrayList<LogMessage> getLogsByDate(String date) {
 		ArrayList<LogMessage> logs = new ArrayList<LogMessage>();
 		for(int i = logFilesName.length - 1; i >= 0; i--) {
 			if (logFilesName[i].contains(date)) {

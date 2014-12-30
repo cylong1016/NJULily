@@ -14,12 +14,12 @@ import blservice.promotionblservice.PromotionBargainBLService;
  * @author cylong
  * @version 2014年12月14日 下午5:08:50
  */
-public class PromotionBarginController implements PromotionBargainBLService {
+public class PromotionBargainController implements PromotionBargainBLService {
 
-	private PromotionBargin promotionBargin;
+	private PromotionBargain promotionBargain;
 
-	public PromotionBarginController() {
-		promotionBargin = new PromotionBargin();
+	public PromotionBargainController() {
+		promotionBargain = new PromotionBargain();
 	}
 
 	/**
@@ -28,7 +28,7 @@ public class PromotionBarginController implements PromotionBargainBLService {
 	@Override
 	public ArrayList<PromotionBargainVO> show() {
 		try {
-			return promotionBargin.show();
+			return promotionBargain.show();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;
@@ -41,7 +41,7 @@ public class PromotionBarginController implements PromotionBargainBLService {
 	@Override
 	public ArrayList<InventoryBillVO> showGifts() {
 		try {
-			return promotionBargin.showGifts();
+			return promotionBargain.showGifts();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;
@@ -54,7 +54,7 @@ public class PromotionBarginController implements PromotionBargainBLService {
 	@Override
 	public String getID() {
 		try {
-			return promotionBargin.getID();
+			return promotionBargain.getID();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;
@@ -67,7 +67,7 @@ public class PromotionBarginController implements PromotionBargainBLService {
 	@Override
 	public void addBargain(CommodityItemVO vo) {
 		try {
-			promotionBargin.addBargain(vo);
+			promotionBargain.addBargain(vo);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -78,7 +78,7 @@ public class PromotionBarginController implements PromotionBargainBLService {
 	 */
 	@Override
 	public void setBargainTotalPrice(double price) {
-		promotionBargin.setBargainTotalPrice(price);
+		promotionBargain.setBargainTotalPrice(price);
 	}
 
 	/**
@@ -87,7 +87,7 @@ public class PromotionBarginController implements PromotionBargainBLService {
 	@Override
 	public PromotionBargainVO submit(String beginDate, String endDate) {
 		try {
-			PromotionBargainVO vo = promotionBargin.submit(beginDate, endDate);
+			PromotionBargainVO vo = promotionBargain.submit(beginDate, endDate);
 			if(vo == null)
 				return null;
 			LogMsgController.addLog("添加特价包促销策略 "  + vo.toString());

@@ -86,11 +86,10 @@ public class CommoditySort {
 	 */
 	public ResultMessage addCommoSort(String sortName, String fatherID) throws RemoteException {
 		
-		getID(fatherID);
-
 		if (fatherID == null) {
 			po = new CommoditySortPO(ID, sortName, null, null, null);
 		} else {
+			getID(fatherID);
 			CommoditySortPO father = commoditySortData.find(fatherID);
 			// 如果父类里面有了商品的话，添加失败
 			if (father.getCommoditiesID() != null) {

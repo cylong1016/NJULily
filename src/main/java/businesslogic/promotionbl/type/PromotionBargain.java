@@ -12,9 +12,9 @@ import businesslogic.promotionbl.PromotionListItem;
 import businesslogic.promotionbl.PromotionTrans;
 import dataenum.PromotionType;
 
-public class PromotionBargin extends Promotion {	
+public class PromotionBargain extends Promotion {	
 	
-	public PromotionBargin() {
+	public PromotionBargain() {
 		super();
 	}
 

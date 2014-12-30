@@ -25,7 +25,7 @@ public class UserInfo {
 	 */
 	public static String getUsername() {
 		// 读取当前登录的用户
-		DefineList<UserPO> currentUserTemp = new DefineList<UserPO>("data/loginInfoTemp.ser");
+		DefineList<UserPO> currentUserTemp = new DefineList<UserPO>(User.tempFileName);
 		current = currentUserTemp.get(0);
 		return current.getUsername();
 	}
@@ -37,7 +37,7 @@ public class UserInfo {
 	 */
 	public static UserIdentity getUserIden() {
 		// 读取当前登录的用户
-		DefineList<UserPO> currentUserTemp = new DefineList<UserPO>("data/loginInfoTemp.ser");
+		DefineList<UserPO> currentUserTemp = new DefineList<UserPO>(User.tempFileName);
 		current = currentUserTemp.get(0);
 		return current.getIden();
 	}
