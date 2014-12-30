@@ -1,4 +1,4 @@
-package ui.differui.manager.strategy;
+package ui.differui.manager.strategy.myui;
 
 import javax.swing.JPanel;
 

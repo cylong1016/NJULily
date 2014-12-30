@@ -27,7 +27,7 @@ import ui.differui.manager.business_condition.BusinessConditionUI;
 import ui.differui.manager.business_process.BusinessProcessUI;
 import ui.differui.manager.index.ManagerIndex;
 import ui.differui.manager.sale_detail.SaleDetailUI;
-import ui.differui.manager.strategy.StrategyManagementUI;
+import ui.differui.manager.strategy.fuction.StrategyManagementUI;
 
 
 public class Frame_Manager extends MyFrame implements ActionListener{
