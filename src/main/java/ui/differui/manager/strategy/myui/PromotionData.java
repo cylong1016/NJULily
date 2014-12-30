@@ -30,7 +30,7 @@ public class PromotionData {
 			
 			if(vo.gifts.size() != 0){
 				Object[] row = {vo.ID, vo.beginDate, vo.endDate, getLevel(vo.level)
-						, vo.gifts.get(0).name, getAllowance(vo.allowance), vo.voucher + "元"};
+						, vo.gifts.get(0).name +"("+vo.gifts.get(0).number + "件)", getAllowance(vo.allowance), vo.voucher + "元"};
 				cellData[i] = row;
 			}else{
 				Object[] row = {vo.ID, vo.beginDate, vo.endDate, getLevel(vo.level)
@@ -59,6 +59,7 @@ public class PromotionData {
 	
 	private String getAllowance(double d){
 		switch(String.valueOf(d)){ 
+		case "0.5" : return "5折";
 		case "0.98" : return "98折";
 		case "0.95": return "95折";
 		case "0.9" : return "9折";
@@ -71,7 +72,7 @@ public class PromotionData {
 		case "0.65" : return "65折";
 		case "0.6" : return "6折";
 		case "0.58" : return "58折";
-		default:return "5折";
+		default:return "无折扣";
 		}
 	}
 	
@@ -109,8 +110,17 @@ public class PromotionData {
 		Object[][] cellData = new Object[totalVOs.size()][CELL];
 		int i = 0;
 		for (PromotionTotalVO vo : totalVOs) {
-			Object[] row = {vo.ID, vo.beginDate, vo.endDate, vo.total, vo.gifts, vo.allowance,vo.voucher};
-			cellData[i] = row;
+			
+			if(vo.gifts.size() != 0){
+				Object[] row = {vo.ID, vo.beginDate, vo.endDate, vo.total + "元"
+						, vo.gifts.get(0).name +"("+vo.gifts.get(0).number + "件)", getAllowance(vo.allowance), vo.voucher + "元"};
+				cellData[i] = row;
+			}else{
+				Object[] row = {vo.ID, vo.beginDate, vo.endDate, vo.total + "元"
+						, "无", getAllowance(vo.allowance), vo.voucher + "元" };
+				cellData[i] = row;
+			}
+			
 			i++;
 		}
 		return cellData;

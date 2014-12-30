@@ -18,21 +18,20 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 
-import dataenum.ClientLevel;
 import blservice.promotionblservice.PromoInputInfo;
-import blservice.promotionblservice.PromotionClientBLService;
-import businesslogic.promotionbl.type.PromotionClientController;
+import blservice.promotionblservice.PromotionTotalBLService;
+import businesslogic.promotionbl.type.PromotionTotalController;
 
-public class LevelPanel extends MyPanel implements ActionListener{
+public class TotalPanel extends MyPanel implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
-	private JTextField textField;
+	private JTextField textField, tf;
 	private JTextField textField_1, textField_date2, textField_date1;
 	private JButton button_return, button_finish;
 	private static ArrayList<CommodityItemVO> commoPool;
-	private JComboBox<String> comboBox, comboBox_1, comboBox_2;
+	private JComboBox<String> comboBox_1, comboBox_2;
 	private JCheckBox checkBox, checkBox_1, checkBox_2;
-	public LevelPanel(){
+	public TotalPanel(){
 		
 		commoPool = new ArrayList<CommodityItemVO>();
 		
@@ -47,7 +46,7 @@ public class LevelPanel extends MyPanel implements ActionListener{
 		Color backColor = new Color(46, 52, 101);
 		
 		//information bar
-		JLabel infoBar = new JLabel("按客户星级添加促销策略",JLabel.CENTER);
+		JLabel infoBar = new JLabel("按总价添加促销策略",JLabel.CENTER);
 		infoBar.setBounds(0, 0, width, 20);
 		infoBar.setOpaque(true);
 		infoBar.setForeground(foreColor);
@@ -68,17 +67,22 @@ public class LevelPanel extends MyPanel implements ActionListener{
 		button_finish.setForeground(foreColor);
 		add(button_finish);
 		
-		JLabel label = new JLabel("*选择星级");
+		JLabel label = new JLabel("*填写总价");
 		label.setForeground(Color.RED);
 		label.setBounds(25, 45, 72, 18);
 		add(label);
 		
-		String[] str = {"一星级", "二星级", "三星级", "四星级", "五星级"};
-		comboBox = new JComboBox<String>(str);
-		comboBox.setBounds(120, 42, 198, 24);
-		comboBox.setBackground(backColor);
-		comboBox.setForeground(foreColor);
-		add(comboBox);
+		
+		tf = new JTextField();
+		tf.setBounds(120, 42, 170, 24);
+		tf.setBackground(backColor);
+		tf.setForeground(foreColor);
+		add(tf);
+		
+		JLabel label_4x = new JLabel("元");
+		label_4x.setForeground(Color.WHITE);
+		label_4x.setBounds(298, 42, 72, 18);
+		add(label_4x);
 		
 		JLabel label_1 = new JLabel("*选择一种促销方式");
 		label_1.setForeground(Color.RED);
@@ -208,23 +212,13 @@ public class LevelPanel extends MyPanel implements ActionListener{
 		}
 	}
 	
-	private ClientLevel getLevel(){
-		switch(comboBox.getSelectedIndex()){
-			case 0:return ClientLevel.LEVEL_1;
-			case 1:return ClientLevel.LEVEL_2;
-			case 2:return ClientLevel.LEVEL_3;
-			case 3:return ClientLevel.LEVEL_4;
-			default:return ClientLevel.VIP;
-		}
-	}
-	
 	private String[] getGift(){
 		
 		commoPool.clear();
 		
 		String str = "";
 		
-		PromotionClientBLService controller = new PromotionClientController();
+		PromotionTotalBLService controller = new PromotionTotalController();
 		ArrayList<InventoryBillVO> list = controller.showGifts();
 		if(list != null)
 			for(int i =0; i < list.size(); i++){
@@ -248,7 +242,7 @@ public class LevelPanel extends MyPanel implements ActionListener{
 	
 	public void actionPerformed(ActionEvent events){
 		if(events.getSource() == button_return){
-			ExitFunctionFrame eff = new ExitFunctionFrame("LevelFrame");
+			ExitFunctionFrame eff = new ExitFunctionFrame("TotalFrame");
 			eff.setVisible(true);
 		}
 		
@@ -281,11 +275,14 @@ public class LevelPanel extends MyPanel implements ActionListener{
 				if(textField_date1.getText().isEmpty() || textField_date2.getText().isEmpty()){
 					WarningFrame wf = new WarningFrame("请检查时间填写是否完整!");
 					wf.setVisible(true);
+				}else if(!textField_date1.getText().isEmpty() && !textField_date2.getText().isEmpty() &&tf.getText().isEmpty()){
+					WarningFrame wf = new WarningFrame("请检查总价是否填写!");
+					wf.setVisible(true);
 				}else{
 					if(flag == 1){
-						PromotionClientBLService controller = new PromotionClientController();
+						PromotionTotalBLService controller = new PromotionTotalController();
 						controller.getID();
-						controller.setClient(getLevel());
+						controller.setTotal(Double.parseDouble(tf.getText()));
 						//String beginDate, String endDate, double allowance, int voucher
 						controller.submit(new PromoInputInfo(textField_date1.getText()
 								, textField_date2.getText(), getAllowance(), 0));
@@ -293,7 +290,7 @@ public class LevelPanel extends MyPanel implements ActionListener{
 						WarningFrame wf = new WarningFrame("添加成功!");
 						wf.setVisible(true);
 						
-						LevelFrame.button_close.doClick();
+						TotalFrame.button_close.doClick();
 						StrategyManagementUI.refresh.doClick();
 						
 					}else if(flag == 2){
@@ -301,9 +298,9 @@ public class LevelPanel extends MyPanel implements ActionListener{
 							WarningFrame wf = new WarningFrame("请检查信息填写是否完整!");
 							wf.setVisible(true);
 						}else{
-							PromotionClientBLService controller = new PromotionClientController();
+							PromotionTotalBLService controller = new PromotionTotalController();
 							controller.getID();
-							controller.setClient(getLevel());
+							controller.setTotal(Double.parseDouble(tf.getText()));
 							//String beginDate, String endDate, double allowance, int voucher
 							controller.submit(new PromoInputInfo(textField_date1.getText()
 									, textField_date2.getText(), 1, Integer.parseInt(textField.getText())));
@@ -311,7 +308,7 @@ public class LevelPanel extends MyPanel implements ActionListener{
 							WarningFrame wf = new WarningFrame("添加成功!");
 							wf.setVisible(true);
 							
-							LevelFrame.button_close.doClick();
+							TotalFrame.button_close.doClick();
 							StrategyManagementUI.refresh.doClick();
 						}
 					}else{
@@ -319,9 +316,9 @@ public class LevelPanel extends MyPanel implements ActionListener{
 							WarningFrame wf = new WarningFrame("请检查信息填写是否完整!");
 							wf.setVisible(true);
 						}else{
-							PromotionClientBLService controller = new PromotionClientController();
+							PromotionTotalBLService controller = new PromotionTotalController();
 							controller.getID();
-							controller.setClient(getLevel());
+							controller.setTotal(Double.parseDouble(tf.getText()));
 							int index = comboBox_2.getSelectedIndex();
 							CommodityItemVO old = commoPool.get(index);
 							//String ID, int number, double price, String remark, String name, String type
@@ -336,7 +333,7 @@ public class LevelPanel extends MyPanel implements ActionListener{
 							WarningFrame wf = new WarningFrame("添加成功!");
 							wf.setVisible(true);
 							
-							LevelFrame.button_close.doClick();
+							TotalFrame.button_close.doClick();
 							StrategyManagementUI.refresh.doClick();
 						}
 					}

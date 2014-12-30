@@ -12,11 +12,13 @@ import java.awt.event.ActionListener;
 
 
 
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
+import ui.commonui.warning.WarningFrame;
 import ui.differui.manager.strategy.myui.AddBargainPane;
 import ui.differui.manager.strategy.myui.MyButton;
 import ui.differui.manager.strategy.myui.MyJScrollPane;
@@ -81,7 +83,6 @@ public class StrategyManagementUI extends JPanel implements ActionListener{
 		addBargainPane = new AddBargainPane();
 		
 		addBargainButton = new MyButton("制定特价包", 775, y, buttonW, buttonH);
-		addBargainButton.setPanel(this, addBargainPane);
 		addBargainButton.addActionListener(this);
 		add(addBargainButton);
 		
@@ -96,9 +97,20 @@ public class StrategyManagementUI extends JPanel implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent events) {
+		
+		if(events.getSource() == addBargainButton){
+			WarningFrame wf = new WarningFrame("暂时不支持此功能！");
+			wf.setVisible(true);
+		}
+		
 		if(events.getSource() == addClientButton){
 			LevelFrame lf = new LevelFrame();
 			lf.setVisible(true);
+		}
+		
+		if(events.getSource() == addTotalButton){
+			TotalFrame tf = new TotalFrame();
+			tf.setVisible(true);
 		}
 		
 		if(events.getSource() == refresh){
@@ -119,11 +131,18 @@ public class StrategyManagementUI extends JPanel implements ActionListener{
 			tablemodel2.removeRow(0);
 		PromotionData pd = new PromotionData();
 		Object[][] rowData = pd.getClientPromotion();
+		Object[][] rowData2 = pd.getTotalPromotion();
 		
 		for(int i = 0; i < rowData.length; i++){
 			Object[] obj = {rowData[i][0], rowData[i][1], rowData[i][2], rowData[i][3]
 					, rowData[i][4], rowData[i][5], rowData[i][6]};
 				tablemodel1.addRow(obj);
+		}
+		
+		for(int i = 0; i < rowData2.length; i++){
+			Object[] obj = {rowData2[i][0], rowData2[i][1], rowData2[i][2], rowData2[i][3]
+					, rowData2[i][4], rowData2[i][5], rowData2[i][6]};
+				tablemodel2.addRow(obj);
 		}
 	}
 }
