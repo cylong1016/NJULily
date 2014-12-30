@@ -206,7 +206,7 @@ public class LevelPanel extends MyPanel implements ActionListener{
 		case 10:return 0.6;
 		case 11:return 0.58;
 		default:return 0.5;
-	}
+		}
 	}
 	
 	private ClientLevel getLevel(){

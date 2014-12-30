@@ -2,7 +2,9 @@ package ui.differui.manager.strategy.myui;
 
 import java.awt.Color;
 
+import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
@@ -22,6 +24,10 @@ public class MyTable extends JTable{
 				
 			}
 		};
+		
+		DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();// 设置table内容居中
+		tcr.setHorizontalAlignment(JLabel.CENTER);
+		this.setDefaultRenderer(Object.class, tcr);
 		
 		this.setModel(model);
 		this.setTableHeader(getJTableHeader());

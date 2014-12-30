@@ -11,9 +11,11 @@ import java.awt.event.ActionListener;
 
 
 
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 import ui.differui.manager.strategy.myui.AddBargainPane;
 import ui.differui.manager.strategy.myui.MyButton;
@@ -30,6 +32,8 @@ public class StrategyManagementUI extends JPanel implements ActionListener{
 	private AddBargainPane addBargainPane;
 	
 	private MyButton addBargainButton, addClientButton, addTotalButton;
+	
+	private MyTable clientTable, clientTable2;
 	
 	public static JButton refresh;
 	
@@ -51,6 +55,8 @@ public class StrategyManagementUI extends JPanel implements ActionListener{
 		refresh = new JButton();
 		refresh.addActionListener(this);
 		this.add(refresh);
+		
+		refresh();
 	}
 	
 	private void addPromotionTable() {
@@ -58,12 +64,12 @@ public class StrategyManagementUI extends JPanel implements ActionListener{
 		PromotionData data = new PromotionData();
 		
 		String[] headersClient = {"编号","起始时间","结束时间","客户等级","应送赠品","折扣","代金券"};
-		MyTable clientTable = new MyTable(headersClient, data.getClientPromotion());
+		clientTable = new MyTable(headersClient, data.getClientPromotion());
 		MyJScrollPane clientScrollPane = new MyJScrollPane(clientTable, 80, 70, 1111, 220);		
 		this.add(clientScrollPane);	
 		
 		String[] headersClient2 = {"编号","起始时间","结束时间","总价","应送赠品","折扣","代金券"};
-		MyTable clientTable2 = new MyTable(headersClient2, data.getClientPromotion());
+		clientTable2 = new MyTable(headersClient2, data.getTotalPromotion());
 		MyJScrollPane clientScrollPane2 = new MyJScrollPane(clientTable2, 80, 320, 1111, 220);		
 		this.add(clientScrollPane2);	
 	}
@@ -101,6 +107,23 @@ public class StrategyManagementUI extends JPanel implements ActionListener{
 	}
 	
 	private void refresh(){
+		DefaultTableModel tablemodel1 = (DefaultTableModel) clientTable.getModel();
+		DefaultTableModel tablemodel2 = (DefaultTableModel) clientTable2.getModel();
+		int rowCount = tablemodel1.getRowCount();
+		int rowCount2 = tablemodel2.getRowCount();
 		
+		for(int i = 0; i < rowCount; i++)
+			tablemodel1.removeRow(0);
+		
+		for(int i = 0; i < rowCount2; i++)
+			tablemodel2.removeRow(0);
+		PromotionData pd = new PromotionData();
+		Object[][] rowData = pd.getClientPromotion();
+		
+		for(int i = 0; i < rowData.length; i++){
+			Object[] obj = {rowData[i][0], rowData[i][1], rowData[i][2], rowData[i][3]
+					, rowData[i][4], rowData[i][5], rowData[i][6]};
+				tablemodel1.addRow(obj);
+		}
 	}
 }

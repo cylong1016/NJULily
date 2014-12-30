@@ -2,6 +2,7 @@ package ui.differui.manager.strategy.myui;
 
 import java.util.ArrayList;
 
+import dataenum.ClientLevel;
 import vo.promotion.PromotionClientVO;
 import vo.promotion.PromotionTotalVO;
 import blservice.promotionblservice.PromotionClientBLService;
@@ -25,12 +26,55 @@ public class PromotionData {
 		int i = 0;
 		Object[][] cellData = new Object[clientProVO.size()][CELL];
 		for (PromotionClientVO vo : clientProVO) {
-			Object[] row = {vo.ID, vo.beginDate, vo.endDate, vo.level, vo.gifts, vo.allowance,vo.voucher};
-			cellData[i] = row;
+			//"编号","起始时间","结束时间","客户等级","应送赠品","折扣","代金券"
+			
+			if(vo.gifts.size() != 0){
+				Object[] row = {vo.ID, vo.beginDate, vo.endDate, getLevel(vo.level)
+						, vo.gifts.get(0).name, getAllowance(vo.allowance), vo.voucher + "元"};
+				cellData[i] = row;
+			}else{
+				Object[] row = {vo.ID, vo.beginDate, vo.endDate, getLevel(vo.level)
+						, "无", getAllowance(vo.allowance), vo.voucher + "元" };
+				cellData[i] = row;
+			}
+			
 			i++;
 		}
 		return cellData;
 	}
+	
+	private String getLevel(ClientLevel level){
+		if(level.equals(ClientLevel.LEVEL_1)){
+			return "一星级";
+		}else if(level.equals(ClientLevel.LEVEL_2)){
+			return "二星级";
+		}else if(level.equals(ClientLevel.LEVEL_3)){
+			return "三星级";
+		}else if(level.equals(ClientLevel.LEVEL_4)){
+			return "四星级";
+		}else{
+			return "五星级(VIP)";
+		}
+	}
+	
+	private String getAllowance(double d){
+		switch(String.valueOf(d)){ 
+		case "0.98" : return "98折";
+		case "0.95": return "95折";
+		case "0.9" : return "9折";
+		case "0.88" : return "88折";
+		case "0.85" : return "85折";
+		case "0.8" : return "8折";
+		case "0.79" : return "79折";
+		case "0.75" : return "75折";
+		case "0.7" : return "7折";
+		case "0.65" : return "65折";
+		case "0.6" : return "6折";
+		case "0.58" : return "58折";
+		default:return "5折";
+		}
+	}
+	
 	
 	/**
 	 * 将商品的促销单放进表格中
