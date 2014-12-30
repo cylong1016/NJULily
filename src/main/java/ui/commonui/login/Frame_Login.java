@@ -1,4 +1,4 @@
-﻿package ui.commonui.login;
+package ui.commonui.login;
 
 import java.awt.Color;
 import java.awt.Font;
