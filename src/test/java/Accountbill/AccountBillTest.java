@@ -36,7 +36,7 @@ public class AccountBillTest {
 	 */
 	@Test
 	public void testGetSumMoney() {
-		assertEquals(1500.0, accountBill.getSumMoney(), 0);
+		assertEquals(0, accountBill.getSumMoney(), 0);
 	}
 
 }
