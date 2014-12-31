@@ -58,10 +58,16 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 			ArrayList<String> IDs = new ArrayList<String>();
 			ArrayList<AccountBillPO> pos = accountBillData.show();
 			for (AccountBillPO po : pos) {
+				if(po.getType() == BillType.PAY)
 				IDs.add(po.getID());
 			}
  			payIDs.addAll(DateOperate.findFitDate(IDs, beginDate, endDate));
-			ArrayList<String> bIDs = accountBill.getAllID(BillType.EXPENSE);
+//			ArrayList<String> bIDs = accountBill.getAllID(BillType.EXPENSE);
+ 			ArrayList<String> bIDs = new ArrayList<String>();
+			for (AccountBillPO po : pos) {
+				if(po.getType() == BillType.EXPENSE)
+				bIDs.add(po.getID());
+			}
 			expenIDs.addAll(DateOperate.findFitDate(bIDs, beginDate, endDate));
 		} catch (Exception e) {
 			e.printStackTrace();

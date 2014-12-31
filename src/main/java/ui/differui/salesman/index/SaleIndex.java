@@ -20,6 +20,7 @@ import businesslogic.approvalbl.ApprovalShowController;
 import ui.commonui.login.Frame_Login;
 import ui.commonui.myui.MyBackground;
 import ui.commonui.myui.MyButton;
+import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyTable;
 import ui.commonui.text_conductor.BillFrame;
 import ui.commonui.warning.WarningFrame;
@@ -34,6 +35,7 @@ public class SaleIndex extends JLabel implements ActionListener{
 	
 	MyBackground indexBack0, indexBack1, indexBack2, indexBack3, indexBack4, indexBack5;
 	MyButton bt1, bt2, bt3, bt4, bt5;
+	MyJButton button_teach, button_save;
 	JButton bt_check;
 	MyTable table;
 	
@@ -49,6 +51,16 @@ public class SaleIndex extends JLabel implements ActionListener{
 		this.setLayout(null);
 		this.setBounds(0, 0, 1280, 720);
 		this.setOpaque(false);
+		
+		button_save = new MyJButton("查看单据草稿");
+		button_save.setBounds(1060, 625, 120, 25);
+		button_save.addActionListener(this);
+		this.add(button_save);
+		
+//		button_teach = new MyJButton("使用帮助");
+//		button_teach.setBounds(1060, 625, 120, 25);
+//		button_teach.addActionListener(this);
+//		this.add(button_teach);
 		
 		initButtons();
 		initInfo();

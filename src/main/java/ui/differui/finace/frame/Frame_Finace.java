@@ -287,7 +287,8 @@ public class Frame_Finace extends MyFrame implements ActionListener{
 		switch(i){
 			case 0: panel_index.setVisible(true);
 					FinaceIndex.showAll.doClick();break;
-			case 1: panel_account.setVisible(true);break;
+			case 1: panel_account.setVisible(true);
+					panel_account.showAll();break;
 			case 2: TradeChooseUI choose = new TradeChooseUI();
 					choose.setVisible(true);break;
 			case 3: panel_saleDetail.setVisible(true);break;
@@ -320,7 +321,8 @@ public class Frame_Finace extends MyFrame implements ActionListener{
 					 trade_back.setVisible(true);
 					 flag = 2;break;
 					 
-			case 11: panel_init.setVisible(true);break;
+			case 11: panel_init.setVisible(true);
+					 flag = 6;break;
 		}
 	}
 	
@@ -336,6 +338,7 @@ public class Frame_Finace extends MyFrame implements ActionListener{
 			case 3: panel_saleDetail.setVisible(false);break;
 			case 4: panel_businessProcess.setVisible(false);break;
 			case 5: panel_businessCondition.setVisible(false);break;
+			case 6: panel_init.setVisible(false);break;
 		}
 	}
 	
