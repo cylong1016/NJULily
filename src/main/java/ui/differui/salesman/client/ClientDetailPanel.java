@@ -313,10 +313,8 @@ public class ClientDetailPanel extends MyPanel implements ActionListener{
 					, Double.valueOf(textField_limit.getText()), textField_salesman.getText()));	
 			
 			if(rm.equals(ResultMessage.SUCCESS)){
-				WarningFrame wf = new WarningFrame("客户信息修改成功！");
-				wf.setVisible(true);
-				
-				this.setVisible(false);
+						
+				ClientDetailUI.button_close.doClick();
 				
 				ClientManagementUI.button_showAll.doClick();
 				
@@ -324,6 +322,9 @@ public class ClientDetailPanel extends MyPanel implements ActionListener{
 				
 				ClientDetailUI cdf = new ClientDetailUI(cvo2);
 				cdf.setVisible(true);
+				
+				WarningFrame wf = new WarningFrame("客户信息修改成功！");
+				wf.setVisible(true);
 				
 			}else{
 				WarningFrame wf = new WarningFrame("客户信息修改失败！");

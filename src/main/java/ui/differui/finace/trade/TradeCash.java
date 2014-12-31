@@ -208,6 +208,8 @@ public class TradeCash extends JLabel implements ActionListener{
 						WarningFrame wf = new WarningFrame("请将条目信息填写完整！");
 						wf.setVisible(true);
 					}else{
+						
+						billItem = "";
 							
 						flag = true;
 							
