@@ -12,7 +12,7 @@ import dataservice.inventorydataservice.InventoryDataService;
 public class InventoryShow {
 
 	private InventoryDataService inventoryData;
-
+	private ArrayList<InventoryBillVO> VOs;
 	public InventoryShow() {
 		Inventory inventory = new Inventory();
 		this.inventoryData = inventory.getInventoryData();
@@ -107,7 +107,10 @@ public class InventoryShow {
 	 * @throws RemoteException
 	 */
 	private ArrayList<InventoryBillVO> show() throws RemoteException {
-		ArrayList<InventoryBillVO> VOs = new ArrayList<InventoryBillVO>();
+		if (VOs != null) {
+			return VOs;
+		}
+		VOs = new ArrayList<InventoryBillVO>();
 		ArrayList<InventoryBillPO> POs = inventoryData.show();
 		for(int i = 0; i < POs.size(); i++) {
 			InventoryBillPO po = POs.get(i);

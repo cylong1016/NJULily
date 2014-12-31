@@ -48,14 +48,32 @@ public class SaleInfo extends Info<SalesPO> implements SaleInfo_Inventory, SaleI
 	 */
 	private void setIDsByDate(Date beginDate, Date endDate) {
 		try {
-			SaleInfoService saleInfo = (SaleInfoService)getData();
-			ArrayList<String> IDs = saleInfo.getAllID(BillType.SALE);
+//			SaleInfoService saleInfo = (SaleInfoService)getData();
+//			ArrayList<String> IDs = saleInfo.getAllID(BillType.SALE);
+			ArrayList<String> IDs = getPassID(BillType.SALE);
 			saleIDs = DateOperate.findFitDate(IDs, beginDate, endDate);
-			ArrayList<String> bIDs = saleInfo.getAllID(BillType.SALEBACK);
+//			ArrayList<String> bIDs = saleInfo.getAllID(BillType.SALEBACK);
+			ArrayList<String> bIDs = getPassID(BillType.SALEBACK);
 			backIDs = DateOperate.findFitDate(bIDs, beginDate, endDate);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private ArrayList<String> getPassID(BillType type) throws RemoteException {
+		ArrayList<String> IDs = new ArrayList<String>();
+		SaleShow show = new SaleShow();
+		ArrayList<SalesVO> vos = new ArrayList<SalesVO>();
+		if (type == BillType.SALE) {
+			vos = show.showSalePass();
+		}
+		else {
+			vos = show.showSaleBackPass();
+		}
+		for (SalesVO vo : vos) {
+			IDs.add(vo.ID);
+		}
+		return IDs;
 	}
 
 	protected TableInfoService<SalesPO> getData() {

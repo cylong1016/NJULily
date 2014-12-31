@@ -92,6 +92,9 @@ public class CommoditySort {
 			getID(fatherID);
 			CommoditySortPO father = commoditySortData.find(fatherID);
 			// 如果父类里面有了商品的话，添加失败
+			if (father.getCommoditiesID() == null) {
+				return ResultMessage.FAILURE;
+			}
 			if (father.getCommoditiesID() != null) {
 				if (!father.getCommoditiesID().isEmpty()) {
 					return ResultMessage.FAILURE;

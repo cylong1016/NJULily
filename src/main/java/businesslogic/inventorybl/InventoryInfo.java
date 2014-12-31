@@ -56,15 +56,37 @@ public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInf
 	 */
 	private void setIDsByDate(Date beginDate, Date endDate){
 		try {
-			ArrayList<String> gIDs = getData().getAllID(BillType.GIFT);
+//			ArrayList<String> gIDs = getData().getAllID(BillType.GIFT);
+			ArrayList<String> gIDs = getPassID(BillType.GIFT);
 			giftIDs.addAll(DateOperate.findFitDate(gIDs, beginDate, endDate));
-			ArrayList<String> oIDs = getData().getAllID(BillType.OVERFLOW);
+//			ArrayList<String> oIDs = getData().getAllID(BillType.OVERFLOW);
+			ArrayList<String> oIDs = getPassID(BillType.OVERFLOW);
 			overIDs.addAll(DateOperate.findFitDate(oIDs, beginDate, endDate));
-			ArrayList<String> lIDs = getData().getAllID(BillType.LOSS);
+//			ArrayList<String> lIDs = getData().getAllID(BillType.LOSS);
+			ArrayList<String> lIDs = getPassID(BillType.LOSS);
 			lossIDs.addAll(DateOperate.findFitDate(lIDs, beginDate, endDate));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private ArrayList<String> getPassID(BillType type) throws RemoteException {
+		ArrayList<String> IDs = new ArrayList<String>();
+		InventoryShow show = new InventoryShow();
+		ArrayList<InventoryBillVO> vos = new ArrayList<InventoryBillVO>();
+		if (type == BillType.GIFT) {
+			vos = show.showGiftsPass();
+		}
+		if (type == BillType.OVERFLOW) {
+			vos = show.showOverFlowPass();
+		}
+		else {
+			vos = show.showLossPass();
+		}
+		for (InventoryBillVO vo : vos) {
+			IDs.add(vo.ID);
+		}
+		return IDs;
 	}
 
 	public TableInfoService<InventoryBillPO> getData() {
