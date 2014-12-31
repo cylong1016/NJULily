@@ -26,7 +26,7 @@ public class testProSelect {
 		
 		AccountBill sale = new AccountBill();
 		AccountBillPO po = sale.getAccountBillData().find(ID);
-//		System.out.println(po.getUsername());
+		System.out.println(po.getUsername());
 		
 		
 	}
