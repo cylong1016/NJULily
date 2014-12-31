@@ -1,0 +1,77 @@
+﻿<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>LilyStudio</groupId>
+	<artifactId>NJULilyServer</artifactId>
+	<version>1.0.0</version>
+	<packaging>jar</packaging>
+
+	<name>NJULilyServer</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.2</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>abbot</groupId>
+			<artifactId>abbot</artifactId>
+			<version>1.2.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/abbot.jar</systemPath>
+		</dependency>
+		
+		<dependency>
+			<groupId>costello</groupId>
+			<artifactId>costello</artifactId>
+			<version>1.1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/costello.jar</systemPath>
+		</dependency>
+	</dependencies>
+
+
+	<!-- 添加这一段 -->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<includes>
+						<!-- 匹配默认规则,Test结尾，test开头的方法 -->
+						<include>**/*Test.java</include>
+						<!-- 两个星号**用来匹配任意路径，一个星号*用来获取除路径风格符外的0个或多个字符 -->
+					</includes>
+					<excludes>
+						<!-- 可以去除符合要求但不想测试的类 -->
+					</excludes>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<archive>
+						<manifest>
+							<mainClass>main.NJULilyServerMain</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

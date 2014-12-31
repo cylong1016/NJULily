@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AWTTestScript>
+  <component class="ui.start.ClientInfoPanel" id="ClientInfoPanel Instance" index="3" parent="StartPanel Instance" window="NJULilyServer" />
+  <component class="javax.swing.JLayeredPane" id="JLayeredPane Instance" index="1" parent="JRootPane Instance" window="NJULilyServer" />
+  <component class="javax.swing.JPanel" id="JPanel Instance" index="0" parent="JLayeredPane Instance" window="NJULilyServer" />
+  <component class="javax.swing.JRootPane" id="JRootPane Instance" index="0" parent="NJULilyServer" />
+  <component class="ui.frame.ServerFrame" id="NJULilyServer" root="true" title="NJULilyServer" />
+  <component class="ui.ServerButton" hOrder="0" id="ServerButton Instance" index="1" parent="StartPanel Instance" text="" window="NJULilyServer" />
+  <component class="ui.ServerButton" id="ServerButton Instance 2" index="2" parent="StartPanel Instance" text="" window="NJULilyServer" />
+  <component class="ui.ServerButton" id="ServerButton Instance 3" index="1" parent="ClientInfoPanel Instance" text="" window="NJULilyServer" />
+  <component class="ui.start.StartPanel" id="StartPanel Instance" index="0" parent="JPanel Instance" window="NJULilyServer" />
+  <component class="ui.frame.title.TitleButton" id="TitleButton Instance" index="1" parent="TitlePanel Instance" text="" window="NJULilyServer" />
+  <component class="ui.frame.title.TitlePanel" id="TitlePanel Instance" index="1" parent="JPanel Instance" window="NJULilyServer" />
+  <launch args="[]" class="main.NJULilyServerMain" classpath="target/NJULilyServer-0.9.0-jar-with-dependencies.jar" desc="launch main.NJULilyServerMain.main([])" method="main" />
+  <sequence>
+    <action args="ServerButton Instance,(108%2c36)" class="ui.ServerButton" method="actionClick" />
+    <action args="ServerButton Instance 2,(109%2c37)" class="ui.ServerButton" method="actionClick" />
+    <action args="ServerButton Instance 3,(64%2c16)" class="ui.ServerButton" method="actionClick" />
+    <action args="TitleButton Instance,(16%2c13)" class="ui.frame.title.TitleButton" method="actionClick" />
+  </sequence>
+  <terminate />
+</AWTTestScript>
+
