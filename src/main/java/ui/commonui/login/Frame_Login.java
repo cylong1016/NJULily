@@ -136,9 +136,11 @@ public class Frame_Login extends MyFrame implements ActionListener {
 
 		loginBackground = new MyBackground("ui/image/login/backg.png");
 		this.add(loginBackground);
+		
+		// this.setOSStyle(); // 设置为当前系统风格
 
 	}
-
+	
 	public void actionPerformed(ActionEvent events) {
 		if (events.getSource() == button_Enter) {
 			UserBLService controller = new UserController();
