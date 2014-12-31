@@ -94,6 +94,8 @@ public class CashBill {
 		addCashBill(account);
 		po.setState(BillState.DRAFT);
 		cashBillData.insert(po);
+//		po.setState(BillState.DRAFT);
+//		cashBillData.update(po);
 		return CashBillTrans.POToVO(po);
 
 	}
