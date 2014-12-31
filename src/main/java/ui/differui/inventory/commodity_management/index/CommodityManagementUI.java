@@ -33,6 +33,7 @@ import ui.differui.inventory.commodity_management.addgood.CommodityAddingUI;
 import ui.differui.inventory.commodity_management.addsort.SortAddingUI;
 import ui.differui.inventory.commodity_management.delsort.SortDelUI;
 import ui.differui.inventory.commodity_management.detailgood.CommodityDetailUI;
+import ui.differui.inventory.commodity_management.detailsort.SortDetailPanel;
 import ui.differui.inventory.commodity_management.detailsort.SortDetailUI;
 import ui.differui.inventory.frame.Frame_Inventory;
 import vo.commodity.CommoditySortVO;
@@ -51,7 +52,7 @@ public class CommodityManagementUI extends MyPanel implements ActionListener{
 
 	MyJButton button_del;
 	
-	public static JButton button_close, button_cam, button_buildTree, delGood, showAll;
+	public static JButton button_close, button_cam, button_buildTree, delGood, showAll, search;
 	
 	JScrollPane jsp;
 	MyTree tree;
@@ -189,9 +190,46 @@ public class CommodityManagementUI extends MyPanel implements ActionListener{
 		this.add(showAll);
 		
 		showAll.doClick();
+		
+		search = new JButton();
+		search.addActionListener(this);
+		this.add(search);
 	}
 		
 	public void actionPerformed(ActionEvent events) {
+		
+		if(events.getSource() == search){
+			
+			CommodityBLService controller = new CommodityController();
+			ArrayList<CommodityVO> list = controller.findCommo(SortDetailPanel.sortName
+					, FindTypeCommo.SORT);
+			
+			if(list.size() == 0){
+				WarningFrame wf = new WarningFrame("没有符合条件的商品！");
+				wf.setVisible(true);
+			}else{
+				
+				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+				
+				int rowCount = table.getRowCount();
+				
+				for(int k = 0; k < rowCount; k++)
+					tableModel.removeRow(0);
+				
+				for(int i = 0; i < list.size(); i++){
+									
+					CommodityVO cvo = list.get(i);
+					
+					String[] str = {cvo.ID, getSortName(cvo.sortID), cvo.name
+							, cvo.type, String.valueOf(cvo.inventoryNum)};
+					tableModel.addRow(str);
+					
+				}	
+							
+				WarningFrame wf = new WarningFrame("共有  " + list.size() + "  件商品符合条件, 已经显示至表格中！");
+				wf.setVisible(true);
+			}
+		}
 	
 		if(events.getSource() == button_add){
 			CommodityAddingUI cau = new CommodityAddingUI();

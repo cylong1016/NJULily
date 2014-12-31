@@ -198,6 +198,45 @@ public class GiftUI extends MyPanel implements ActionListener{
 		
 	public void actionPerformed(ActionEvent events) {
 		
+		if(events.getSource() == button_sort){
+			
+			DefaultMutableTreeNode note = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+			
+			if(tree.getSelectionCount() != 1){
+				WarningFrame wf = new WarningFrame("请选择一个商品分类的所属类别！");
+				wf.setVisible(true);
+			}else{
+				CommodityBLService controller = new CommodityController();
+				ArrayList<CommodityVO> list = controller.findCommo(note.toString()
+						, FindTypeCommo.SORT);
+				
+				if(list.size() == 0){
+					WarningFrame wf = new WarningFrame("没有符合条件的商品！");
+					wf.setVisible(true);
+				}else{
+					
+					DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+					int rowCount = table.getRowCount();
+					
+					for(int k = 0; k < rowCount; k++)
+						tableModel.removeRow(0);
+														
+					for(int i = 0; i < list.size(); i++){
+										
+						CommodityVO cvo = list.get(i);
+				
+						String[] str = {cvo.ID, getSortName(cvo.sortID), cvo.name
+								, cvo.type, String.valueOf(cvo.inventoryNum)};
+						tableModel.addRow(str);
+						
+					}	
+								
+					WarningFrame wf = new WarningFrame("共有  " + list.size() + "  件商品符合条件！");
+					wf.setVisible(true);
+				}
+			}
+		}
+		
 		if(events.getSource() == button_close){
 			this.setVisible(false);
 		}

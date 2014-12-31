@@ -28,6 +28,7 @@ public class SortDetailPanel extends MyPanel implements ActionListener{
 	MyJButton button_return, button_confirm, button_show;
 	static MyTextField tf_name;
 	static String str = "";
+	public static String sortName;
 	
 	public SortDetailPanel(DefaultMutableTreeNode note){
 		
@@ -71,6 +72,8 @@ public class SortDetailPanel extends MyPanel implements ActionListener{
 		button_show.setBounds(165, 115, 235, 20);
 		button_show.addActionListener(this);
 		this.add(button_show);
+		
+		sortName = tf_name.getText();
 	}
 	
 	public static void changeName(){
@@ -104,6 +107,10 @@ public class SortDetailPanel extends MyPanel implements ActionListener{
 		if(events.getSource() == button_confirm){
 			ExitFinishFrame eff = new ExitFinishFrame("Change sort's name");
 			eff.setVisible(true);
+		}
+		
+		if(events.getSource() == button_show){
+			CommodityManagementUI.search.doClick();
 		}
 		
 	}	
