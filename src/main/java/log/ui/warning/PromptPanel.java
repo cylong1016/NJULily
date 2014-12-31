@@ -44,7 +44,7 @@ public class PromptPanel extends JPanel {
 		titleLabel.setPreferredSize(preDimen);
 		titleLabel.setFont(font);
 		this.add(titleLabel, BorderLayout.NORTH);
-		promptLabel = new JTextArea("\r\n");
+		promptLabel = new JTextArea("\r\n\r\n");
 		promptLabel.append(prompt);
 		promptLabel.setFont(font);
 		promptLabel.setLineWrap(true);

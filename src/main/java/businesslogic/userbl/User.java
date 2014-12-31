@@ -38,21 +38,16 @@ public class User {
 	/**
 	 * @author cylong
 	 * @version 2014年12月14日 上午5:18:22
+	 * @throws NotBoundException
+	 * @throws RemoteException
+	 * @throws MalformedURLException
 	 */
-	public User() {
+	public User() throws MalformedURLException, RemoteException, NotBoundException {
 		currentUser = new DefineList<UserPO>("data/rememberlogin.ser");
 		curUserTemp = new DefineList<UserPO>(tempFileName);
 		File tempFile = new File(tempFileName);
 		tempFile.deleteOnExit(); // 关闭虚拟机的时候删除文件
-		try {
-			userData = (UserDataService)Naming.lookup(RMIConfig.PREFIX + UserDataService.NAME);
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		} catch (NotBoundException e) {
-			e.printStackTrace();
-		}
+		userData = (UserDataService)Naming.lookup(RMIConfig.PREFIX + UserDataService.NAME);
 	}
 
 	/**

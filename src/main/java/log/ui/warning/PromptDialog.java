@@ -17,7 +17,7 @@ public class PromptDialog extends JDialog {
 	private static final long serialVersionUID = 2857496548979951207L;
 
 	/** 窗口大小 */
-	private Dimension dimen = new Dimension(250, 150);
+	private Dimension dimen = new Dimension(300, 200);
 
 	private Vanish vanish;
 
@@ -44,6 +44,10 @@ public class PromptDialog extends JDialog {
 		PromptDialog promptDialog = new PromptDialog();
 		promptDialog.setComp(new PromptPanel(title, prompt));
 		promptDialog.start(); // 固定时间关闭窗口
+	}
+	
+	public static void showConnectionError() {
+		show("网络异常", "请检查网络状况和与服务器的连接是否正常");
 	}
 
 	private class Vanish extends Thread {
