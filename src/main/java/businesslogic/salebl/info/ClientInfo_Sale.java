@@ -35,5 +35,5 @@ public interface ClientInfo_Sale {
 	 * @author Zing
 	 * @version Dec 3, 2014 2:11:32 PM
 	 */
-	public void changeReceivable(String clientID, double afterPrice) throws RemoteException;
+	public boolean changeReceivable(String clientID, double afterPrice) throws RemoteException;
 }

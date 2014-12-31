@@ -69,7 +69,9 @@ public class SaleOperate implements SaleInfo_Approval {
 		// 更改客户的应收金额
 		ClientInfo_Sale clientInfo = new ClientInfo();
 		if (po.getType() == BillType.SALE) {
-			clientInfo.changeReceivable(po.getClientID(), po.getAfterPrice());
+			if (!clientInfo.changeReceivable(po.getClientID(), po.getAfterPrice())) {
+				po.setState(BillState.FAILURE);
+			}
 		} else {
 			clientInfo.changeReceivable(po.getClientID(), -po.getAfterPrice());
 		}

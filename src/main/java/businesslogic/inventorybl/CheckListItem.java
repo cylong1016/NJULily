@@ -19,8 +19,6 @@ public class CheckListItem {
 	private String type;
 	/** 库存数量 */
 	private int number;
-	/** 商品价格 */
-	private double price;
 	/** 库存均价 */
 	private double avePrice;
 
@@ -32,7 +30,7 @@ public class CheckListItem {
 		this.name = info.getName(ID);
 		this.type = info.getType(ID);
 		this.number = info.getNumber(ID);
-		this.price = info.getAvePrice(ID); // TODO 这个是均价还是单价？
+		this.avePrice = info.getAvePrice(ID); // TODO 这个是均价还是单价？
 	}
 
 	public String getName() {
@@ -46,11 +44,7 @@ public class CheckListItem {
 	public int getNumber() {
 		return number;
 	}
-
-	public double getPrice() {
-		return price;
-	}
-
+	
 	public String getCommodityID() {
 		return commodityID;
 	}

@@ -72,10 +72,15 @@ public class ClientInfo implements ClientInfo_AccountBill, ClientInfo_Sale, Clie
 	/**
 	 * @see businesslogic.salebl.info.ClientInfo_Sale#changeReceivable(java.lang.String, double)
 	 */
-	public void changeReceivable(String clientID, double afterPrice) throws RemoteException {
+	public boolean changeReceivable(String clientID, double afterPrice) throws RemoteException {
 		ClientPO po = client.getClientData().find(clientID);
-		po.setReceivable(po.getReceivable() + afterPrice);
+		double nowReceivable = po.getReceivable() + afterPrice;
+		if (nowReceivable > po.getReceivableLimit()) {
+			return false;
+		}
+		po.setReceivable(nowReceivable);
 		client.getClientData().update(po);
+		return true;
 	}
 
 	/**

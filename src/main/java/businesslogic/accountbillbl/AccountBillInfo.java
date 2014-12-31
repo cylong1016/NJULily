@@ -108,9 +108,6 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 	 */
 	public void pass(AccountBillVO vo) throws RemoteException {
 		AccountBillPO po = accountBillData.find(vo.ID);
-		// 更改该收款单／付款单的状态
-		po.setState(BillState.SUCCESS);
-		accountBillData.update(po);
 		// 更改银行账户的数据
 		ArrayList<AccountBillItemPO> billItemPOs = po.getBills();
 		AccountInfo_AccountBill accountInfo = new AccountInfo();
@@ -129,10 +126,20 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 		ClientInfo_AccountBill clientInfo = new ClientInfo();
 		switch(vo.type) {
 		case PAY:
-			clientInfo.changeReceivable(vo.clientID, vo.sumMoney);
+			if (!clientInfo.changeReceivable(vo.clientID, vo.sumMoney)) {
+				po.setState(BillState.FAILURE);
+				accountBillData.update(po);
+			}
+			else {
+				// 更改该收款单／付款单的状态
+				po.setState(BillState.SUCCESS);
+				accountBillData.update(po);
+			}
 			break;
 		case EXPENSE:
 			clientInfo.changePayable(vo.clientID, vo.sumMoney);
+			po.setState(BillState.SUCCESS);
+			accountBillData.update(po);
 			break;
 		default:
 			break;

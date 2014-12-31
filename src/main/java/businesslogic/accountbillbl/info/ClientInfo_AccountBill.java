@@ -33,7 +33,8 @@ public interface ClientInfo_AccountBill {
 	 * @param money
 	 * @author Zing
 	 * @version Dec 4, 2014 5:31:10 PM
+	 * @return 
 	 * @throws RemoteException 
 	 */
-	public void changeReceivable(String clientID, double money) throws RemoteException;
+	public boolean changeReceivable(String clientID, double money) throws RemoteException;
 }

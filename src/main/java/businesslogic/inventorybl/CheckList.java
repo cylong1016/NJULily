@@ -25,8 +25,6 @@ public class CheckList {
 
 	private ArrayList<CheckListItem> items;
 	/** 库存总数 */
-	public int totalNumber;
-	public double totalPrice;
 
 	public CheckList(String lot) throws RemoteException {
 		this.lot = lot;
@@ -64,9 +62,7 @@ public class CheckList {
 	public ArrayList<CheckCommodityItemVO> getItemsVO() {
 		ArrayList<CheckCommodityItemVO> vos = new ArrayList<CheckCommodityItemVO>();
 		for(CheckListItem item : items) {
-			CheckCommodityItemVO vo = new CheckCommodityItemVO(item.getName(), item.getType(), item.getNumber(), item.getPrice());
-			totalNumber += item.getNumber();
-			totalPrice += item.getPrice();
+			CheckCommodityItemVO vo = new CheckCommodityItemVO(item.getName(), item.getType(), item.getNumber(), item.getAvePrice());
 			vos.add(vo);
 		}
 		return vos;
