@@ -18,7 +18,6 @@ import businesslogic.common.Info;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
 import config.RMIConfig;
 import dataenum.BillState;
-import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.Storage;
 import dataservice.TableInfoService;
@@ -48,7 +47,13 @@ public class CashBillInfo extends Info<CashBillPO> implements ValueObjectInfo_Re
 	 */
 	private void setIDsByDate(Date beginDate, Date endDate){
 		try {
-			ArrayList<String> IDs = getData().getAllID(BillType.CASH);
+//			ArrayList<String> IDs = getData().getAllID(BillType.CASH);
+			ArrayList<String> IDs = new ArrayList<String>();
+			CashBillShow show = new CashBillShow();
+			ArrayList<CashBillVO> vos = show.showPass();
+			for (CashBillVO vo : vos) {
+				IDs.add(vo.ID);
+			}
 			cashIDs = DateOperate.findFitDate(IDs, beginDate, endDate);
 		} catch (Exception e) {
 			e.printStackTrace();

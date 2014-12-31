@@ -9,11 +9,13 @@ import po.CommodityItemPO;
 import po.SalesPO;
 import vo.sale.SalesVO;
 import businesslogic.approvalbl.info.ValueObject_Approval;
+import businesslogic.commoditybl.CommodityInfo;
 import businesslogic.common.DateOperate;
 import businesslogic.common.Info;
 import businesslogic.inventorybl.info.SaleInfo_Inventory;
 import businesslogic.recordbl.info.SaleInfo_Record;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
+import businesslogic.salebl.info.CommodityInfo_Sale;
 import config.RMIConfig;
 import dataenum.BillState;
 import dataenum.BillType;
@@ -176,7 +178,8 @@ public class SaleInfo extends Info<SalesPO> implements SaleInfo_Inventory, SaleI
 	}
 
 	public String getCommodityType(String ID) throws RemoteException {
-		return findCommodityItemPO(ID).getType();
+		CommodityInfo_Sale info_Sale = new CommodityInfo();
+		return info_Sale.getType(ID);
 	}
 
 	public int getCommodityNumber(String ID) throws RemoteException {

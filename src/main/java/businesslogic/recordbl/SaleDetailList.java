@@ -73,7 +73,8 @@ public class SaleDetailList {
 		for (String ID : salesIDs) {
 			// 如果筛选条件为空，就查看这个单据所有的ID
 			if (commodityName == null) {
-				for (String commodityID : info.getAllCommodityID(ID)) {
+				ArrayList<String> allID = info.getAllCommodityID(ID);
+				for (String commodityID : allID) {
 					SaleDetailVO vo = new SaleDetailVO(ID.split("-")[1], info.getCommodityName(commodityID),
 							info.getCommodityType(commodityID), info.getCommodityNumber(commodityID), info.getCommodityPrice(commodityID));
 					VOs.add(vo);

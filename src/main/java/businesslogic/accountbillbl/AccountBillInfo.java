@@ -53,25 +53,32 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 	
 	private void setIDsByDate(Date beginDate, Date endDate){
 		try {
-			AccountBillInfoService accountBill = (AccountBillInfoService)Naming.lookup(RMIConfig.PREFIX+AccountBillInfoService.NAME);
+//			AccountBillInfoService accountBill = (AccountBillInfoService)Naming.lookup(RMIConfig.PREFIX+AccountBillInfoService.NAME);
 //			ArrayList<String> IDs = accountBill.getAllID(BillType.PAY);
-			ArrayList<String> IDs = new ArrayList<String>();
-			ArrayList<AccountBillPO> pos = accountBillData.show();
-			for (AccountBillPO po : pos) {
-				if(po.getType() == BillType.PAY)
-				IDs.add(po.getID());
-			}
+			ArrayList<String> IDs = getPassID(BillType.PAY);
  			payIDs.addAll(DateOperate.findFitDate(IDs, beginDate, endDate));
 //			ArrayList<String> bIDs = accountBill.getAllID(BillType.EXPENSE);
- 			ArrayList<String> bIDs = new ArrayList<String>();
-			for (AccountBillPO po : pos) {
-				if(po.getType() == BillType.EXPENSE)
-				bIDs.add(po.getID());
-			}
+ 			ArrayList<String> bIDs = getPassID(BillType.EXPENSE);
 			expenIDs.addAll(DateOperate.findFitDate(bIDs, beginDate, endDate));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private ArrayList<String> getPassID(BillType type) throws RemoteException {
+		ArrayList<String> IDs = new ArrayList<String>();
+		AccountBillShow show = new AccountBillShow();
+		ArrayList<AccountBillVO> vos = new ArrayList<AccountBillVO>();
+		if (type == BillType.PAY) {
+			vos = show.showPayPass();
+		}
+		else {
+			vos = show.showExpensePass();
+		}
+		for (AccountBillVO vo : vos) {
+			IDs.add(vo.ID);
+		}
+		return IDs;
 	}
 
 	/**

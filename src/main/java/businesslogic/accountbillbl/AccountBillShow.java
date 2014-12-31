@@ -12,7 +12,8 @@ import dataservice.accountbilldataservice.AccountBillDataService;
 public class AccountBillShow {
 
 	private AccountBillDataService accountBillData;
-
+	private ArrayList<AccountBillVO> billsVO;
+	
 	public AccountBillShow() {
 		AccountBill accountBill = new AccountBill();
 		accountBillData = accountBill.getAccountBillData();
@@ -50,6 +51,14 @@ public class AccountBillShow {
 		return showChoose(BillType.EXPENSE, BillState.FAILURE);
 	}
 
+	public ArrayList<AccountBillVO> showPayDraft() throws RemoteException {
+		return showChoose(BillType.PAY, BillState.DRAFT);
+	}
+
+	public ArrayList<AccountBillVO> showExpenseDraft() throws RemoteException {
+		return showChoose(BillType.EXPENSE, BillState.DRAFT);
+	}
+
 	/**
 	 * @return 全部的收款单和付款单
 	 * @author cylong
@@ -57,8 +66,11 @@ public class AccountBillShow {
 	 * @throws RemoteException
 	 */
 	private ArrayList<AccountBillVO> show() throws RemoteException {
+		if (billsVO != null) {
+			return billsVO;
+		}
 		ArrayList<AccountBillPO> billsPO = accountBillData.show();
-		ArrayList<AccountBillVO> billsVO = AccountBillTrans.billsPOToBillsVO(billsPO);
+		billsVO = AccountBillTrans.billsPOToBillsVO(billsPO);
 		return billsVO;
 	}
 
@@ -99,14 +111,6 @@ public class AccountBillShow {
 			}
 		}
 		return choose;
-	}
-
-	public ArrayList<AccountBillVO> showPayDraft() throws RemoteException {
-		return showChoose(BillType.PAY, BillState.DRAFT);
-	}
-
-	public ArrayList<AccountBillVO> showExpenseDraft() throws RemoteException {
-		return showChoose(BillType.EXPENSE, BillState.DRAFT);
 	}
 
 }
