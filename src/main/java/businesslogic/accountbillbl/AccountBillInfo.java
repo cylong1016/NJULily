@@ -106,7 +106,8 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 	 * @throws RemoteException
 	 */
 	public void pass(AccountBillVO vo) throws RemoteException {
-		AccountBillPO po = accountBillData.find(vo.ID);
+//		AccountBillPO po = accountBillData.find(vo.ID);
+		AccountBillPO po = AccountBillTrans.VOtoPO(vo);
 		// 更改银行账户的数据
 		ArrayList<AccountBillItemPO> billItemPOs = po.getBills();
 		AccountInfo_AccountBill accountInfo = new AccountInfo();

@@ -20,7 +20,7 @@ public class testPro {
 	@Test
 	public void test() throws RemoteException, MalformedURLException, NotBoundException {
 		BusinessProList pro = new BusinessProList(null, null);
-		pro.setInfo(BillType.PAY, null, null, null);
+		pro.setInfo(BillType.EXPENSE, null, null, null);
 		ArrayList<ValueObject> vos = pro.getBusinessPro();
 		for (ValueObject vo : vos) {
 			System.out.println(vo.ID);

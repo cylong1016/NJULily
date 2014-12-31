@@ -79,10 +79,8 @@ public class CashBillInfo extends Info<CashBillPO> implements ValueObjectInfo_Re
 	}
 
 	public void pass(CashBillVO vo) throws RemoteException {
-		CashBillPO po = cashBillData.find(vo.ID);
-		// 更新该现金费用单的状态
-		po.setState(BillState.SUCCESS);
-		cashBillData.update(po);
+//		CashBillPO po = cashBillData.find(vo.ID);
+		CashBillPO po = CashBillTrans.VOtoPO(vo);
 		AccountInfo_CashBill info = new AccountInfo();
 		ArrayList<CashItemPO> items = po.getBills();
 		double money = 0;
@@ -91,6 +89,9 @@ public class CashBillInfo extends Info<CashBillPO> implements ValueObjectInfo_Re
 		}
 		// 更改对应账户的余额
 		info.changeMoney(po.getAccount(), money);
+		// 更新该现金费用单的状态
+		po.setState(BillState.SUCCESS);
+		cashBillData.update(po);
 	}
 
 	public CashBillVO addRed(CashBillVO vo, boolean isCopy) throws RemoteException {
@@ -104,6 +105,7 @@ public class CashBillInfo extends Info<CashBillPO> implements ValueObjectInfo_Re
 		CashBillPO redPO = CashBillTrans.VOtoPO(redVO);
 		redPO.setID(cashBillData.getID());
 		if (!isCopy) {
+			redPO.setState(BillState.SUCCESS);
 			cashBillData.insert(redPO);
 			pass(redVO);
 		} else {
