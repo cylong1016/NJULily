@@ -219,7 +219,11 @@ public class TradeCash extends JLabel implements ActionListener{
 							}
 							billItem = billItem + (String) table3.getValueAt(i, 0) + ":";
 							billItem = billItem + (String) table3.getValueAt(i, 1) + ":";
-							billItem = billItem + (String) table3.getValueAt(i, 2) + ";";
+							if(((String)table3.getValueAt(i, 2)).equals("")){
+								billItem = billItem + "null" + ";";
+							}else{
+								billItem = billItem + (String) table3.getValueAt(i, 2) + ";";
+							}
 						}
 							
 						if(flag == false){
