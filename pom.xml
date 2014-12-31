@@ -37,30 +37,14 @@
 			<scope>system</scope>
 			<systemPath>${project.basedir}/lib/costello.jar</systemPath>
 		</dependency>
-		
+
 		<dependency>
-            <groupId>po</groupId>
-            <artifactId>po</artifactId>
-            <version>1.0.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/po.jar</systemPath>
-        </dependency>
-        
-        <dependency>
-            <groupId>dataservice</groupId>
-            <artifactId>dataservice</artifactId>
-            <version>1.0.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/dataservice.jar</systemPath>
-        </dependency>
-        
-        <dependency>
-            <groupId>dataenum</groupId>
-            <artifactId>dataenum</artifactId>
-            <version>1.0.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/dataenum.jar</systemPath>
-        </dependency>
+			<groupId>dataservice</groupId>
+			<artifactId>dataservice</artifactId>
+			<version>1.0.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/dataservice.jar</systemPath>
+		</dependency>
 	</dependencies>
 
 	<!-- 添加这一段 -->

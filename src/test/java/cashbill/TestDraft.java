@@ -1,17 +1,15 @@
 package cashbill;
 
-import static org.junit.Assert.*;
-
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import org.junit.Test;
 
-import dataenum.BillState;
 import po.CashBillPO;
 import vo.CashBillVO;
 import businesslogic.cashbillbl.CashBill;
 import businesslogic.cashbillbl.CashBillShow;
+import dataenum.BillState;
 
 public class TestDraft {
 
