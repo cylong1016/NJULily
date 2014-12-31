@@ -10,6 +10,7 @@ import ui.commonui.myui.MyColor;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyPanel;
 import ui.commonui.text_conductor.BillFrame;
+import ui.commonui.text_conductor.SaveFrame;
 import ui.differui.admin.AdminAddingUI;
 import ui.differui.admin.AdminModifyUI;
 import ui.differui.finace.frame.Frame_Finace;
@@ -118,6 +119,8 @@ public class ExitFunctionPanel extends MyPanel implements ActionListener{
 			case "LevelFrame" : LevelFrame.button_close.doClick();break;
 			
 			case "TotalFrame" : TotalFrame.button_close.doClick();break;
+			
+			case "SaveFrame" : SaveFrame.button_close.doClick();break; 
 			
 			}
 			ExitFunctionFrame.button_close.doClick();

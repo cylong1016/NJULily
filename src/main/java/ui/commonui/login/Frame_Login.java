@@ -145,8 +145,7 @@ public class Frame_Login extends MyFrame implements ActionListener {
 		if (events.getSource() == button_Enter) {
 			UserBLService controller = new UserController();
 
-			UserIdentity ui =
-								controller.login(new LoginInfo(userNameField.getText(), new String(passwordField.getPassword()), flag));
+			UserIdentity ui = controller.login(new LoginInfo(userNameField.getText(), new String(passwordField.getPassword()), flag));
 			userID = userNameField.getText();
 			for(int i = 0; i < controller.show().size(); i++) {
 				if (controller.show().get(i).username.equals(userID)) {

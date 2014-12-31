@@ -22,6 +22,7 @@ import ui.commonui.myui.MyButton;
 import ui.commonui.myui.MyJButton;
 import ui.commonui.myui.MyTable;
 import ui.commonui.text_conductor.BillFrame;
+import ui.commonui.text_conductor.SaveFrame;
 import ui.commonui.warning.WarningFrame;
 import ui.differui.inventory.frame.Frame_Inventory;
 import vo.InventoryBillVO;
@@ -73,6 +74,11 @@ public class InventoryIndex extends JLabel implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent events) {
+		
+		if(events.getSource() == button_save){
+			SaveFrame sf = new SaveFrame();
+			sf.setVisible(true);
+		}
 		
 		if(events.getSource() == bt_check){
 			if(table.getSelectedRowCount() == 0){

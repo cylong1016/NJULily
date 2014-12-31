@@ -162,7 +162,7 @@ public class ClientManagementUI extends JLabel implements ActionListener{
 			for(int i = 0; i < controller.show().size(); i++){
 				ClientVO cvo = controller.show().get(i);
 				
-				String[] str = {cvo.ID, getCategory(cvo.category.toString()), getLevel(cvo.level.toString())
+				String[] str = {cvo.ID, cvo.category.value, cvo.level.value
 						, cvo.name,cvo.salesman,String.valueOf(cvo.receivable - cvo.payable)
 						,String.valueOf(cvo.receivable), String.valueOf(cvo.payable),String.valueOf(cvo.receivableLimit)};
 				tableModel.addRow(str);
@@ -245,7 +245,7 @@ public class ClientManagementUI extends JLabel implements ActionListener{
 										
 						ClientVO cvo = list.get(i);
 						
-						String[] str = {cvo.ID, getCategory(cvo.category.toString()), getLevel(cvo.level.toString())
+						String[] str = {cvo.ID, cvo.category.value, cvo.level.value
 								, cvo.name,cvo.salesman,String.valueOf(cvo.receivable - cvo.payable)
 								,String.valueOf(cvo.receivable), String.valueOf(cvo.payable),String.valueOf(cvo.receivableLimit)};
 						tableModel.addRow(str);
@@ -275,24 +275,6 @@ public class ClientManagementUI extends JLabel implements ActionListener{
 	}
 	
 	
-	private String getCategory(String str){
-		switch(str){
-			case "PURCHASE_PERSON" : return "进货商";
-			case "SALES_PERSON" : return "销售商";
-			case "BOTH" :  return "进货商/销售商(两者都是)";
-			default : return null;
-		}
-	}
-	
-	private String getLevel(String str){
-		switch(str){
-			case "LEVEL_1" : return "一星级";
-			case "LEVEL_2" : return "二星级";
-			case "LEVEL_3" :  return "三星级";
-			case "LEVEL_4" : return "四星级";
-			case "VIP" :  return "五星级(VIP)";
-			default : return null;
-		}
-	}
+
 
 }
