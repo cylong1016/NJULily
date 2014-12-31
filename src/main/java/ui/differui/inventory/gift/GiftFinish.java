@@ -95,6 +95,23 @@ public class GiftFinish extends JLabel implements ActionListener{
 	
 	public void actionPerformed(ActionEvent events){
 		
+		if(events.getSource() == button_save){
+			InventoryBLService controller = new InventoryController();
+			ArrayList<BillListItem> list = GiftUI.commoList;
+			
+			controller.getGiftID();
+			
+			//ADD COMMODITIES
+			for(int i = 0; i < list.size(); i++)
+				controller.addCommodity(list.get(i).getID(), list.get(i).getNumber());
+			
+			//SUBMIT
+			controller.save(GiftUI.note);
+					
+			WarningFrame wf = new WarningFrame("已保存至草稿！");
+			wf.setVisible(true);
+		}
+		
 		if(events.getSource() == button_finish){
 			InventoryBLService controller = new InventoryController();
 			ArrayList<BillListItem> list = GiftUI.commoList;

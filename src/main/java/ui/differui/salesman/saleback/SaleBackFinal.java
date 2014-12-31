@@ -92,6 +92,24 @@ public class SaleBackFinal extends JLabel implements ActionListener{
 	
 	public void actionPerformed(ActionEvent events){
 		
+		if(events.getSource() == button_save){
+			SaleBLService controller = new SaleController();
+			ArrayList<CommodityItemVO> list = SaleBackFirst.commoList;
+			
+			controller.getSaleBackID();
+			
+			//ADD COMMODITIES
+			for(int i = 0; i < list.size(); i++)
+				controller.addCommodities(list.get(i));
+			
+			controller.addClient(SaleBackFirst.ClientID);
+			
+			controller.save(new saleAddVO(null, 0, 0, SaleBackFirst.note));
+					
+			WarningFrame wf = new WarningFrame("已经保存为草稿状态！");
+			wf.setVisible(true);
+		}
+		
 		if(events.getSource() == button_finish){
 			SaleBLService controller = new SaleController();
 			ArrayList<CommodityItemVO> list = SaleBackFirst.commoList;

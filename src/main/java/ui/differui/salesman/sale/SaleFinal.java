@@ -93,6 +93,26 @@ public class SaleFinal extends JLabel implements ActionListener{
 	
 	public void actionPerformed(ActionEvent events){
 		
+		if(events.getSource() == button_save){
+			SaleBLService controller = new SaleController();
+			ArrayList<CommodityItemVO> list = SaleGood.commoList;
+			
+			controller.getSaleID();
+			
+			//ADD COMMODITIES
+			for(int i = 0; i < list.size(); i++)
+				controller.addCommodities(list.get(i));
+			
+			//ADD CLIENT
+			controller.addClient(SaleClient.ClientID);
+			
+			//SAVE
+			controller.save(new saleAddVO(null,SaleClient.allowance, SaleClient.voucher, SaleClient.note));
+					
+			WarningFrame wf = new WarningFrame("已经保存为草稿状态！");
+			wf.setVisible(true);
+		}
+		
 		if(events.getSource() == button_finish){
 			SaleBLService controller = new SaleController();
 			ArrayList<CommodityItemVO> list = SaleGood.commoList;

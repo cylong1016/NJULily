@@ -96,6 +96,61 @@ public class WarningFinish extends JLabel implements ActionListener{
 	
 	public void actionPerformed(ActionEvent events){
 		
+		if(events.getSource() == button_save){
+			
+				if(alarmType == 1){
+				
+				InventoryBLService controller = new InventoryController();
+				ArrayList<BillListItem> list = WarningIndex.commoList;
+				
+				controller.getOverFlowID();
+				
+				//ADD COMMODITIES
+				for(int i = 0; i < list.size(); i++)
+					controller.addCommodity(list.get(i).getID(), list.get(i).getNumber());
+				
+				//SUBMIT
+				controller.save(WarningIndex.note);
+						
+				WarningFrame wf = new WarningFrame("草稿添加成功！");
+				wf.setVisible(true);
+				
+			}else if(alarmType == 2){
+				
+				InventoryBLService controller = new InventoryController();
+				ArrayList<BillListItem> list = WarningIndex.commoList;
+				
+				controller.getLossID();
+				
+				//ADD COMMODITIES
+				for(int i = 0; i < list.size(); i++)
+					controller.addCommodity(list.get(i).getID(), list.get(i).getNumber());
+				
+				//SUBMIT
+				controller.save(WarningIndex.note);
+						
+				WarningFrame wf = new WarningFrame("草稿添加成功！");
+				wf.setVisible(true);
+		
+			}else{
+				InventoryBLService controller = new InventoryController();
+				ArrayList<BillListItem> list = WarningIndex.commoList;
+				
+				controller.getAlarmID();
+				
+				//ADD COMMODITIES
+				for(int i = 0; i < list.size(); i++)
+					controller.addCommodity(list.get(i).getID(), list.get(i).getNumber());
+				
+				//SUBMIT
+				controller.save(WarningIndex.note);
+						
+				WarningFrame wf = new WarningFrame("草稿添加成功！");
+				wf.setVisible(true);
+				
+			}
+		}
+		
 		if(events.getSource() == button_finish){
 			if(alarmType == 1){
 				

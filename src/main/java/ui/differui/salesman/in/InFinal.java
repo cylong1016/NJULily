@@ -93,6 +93,23 @@ public class InFinal extends JLabel implements ActionListener{
 	
 	public void actionPerformed(ActionEvent events){
 		
+		if(events.getSource() == button_save){
+			PurchaseBLService purController = new PurchaseController();
+			ArrayList<CommodityItemVO> list = InGood.commoList;
+			
+			purController.getPurchaseID();
+			
+			//ADD COMMODITIES
+			for(int i = 0; i < list.size(); i++)
+				purController.addCommodities(list.get(i));
+			
+			//SAVE
+			purController.save(new PurInputInfo(InClient.ClientID, Storage.STORAGE_ONE, InClient.note));
+			
+			WarningFrame wf = new WarningFrame("已保存为草稿状态！");
+			wf.setVisible(true);
+		}
+		
 		if(events.getSource() == button_finish){
 			PurchaseBLService purController = new PurchaseController();
 			ArrayList<CommodityItemVO> list = InGood.commoList;

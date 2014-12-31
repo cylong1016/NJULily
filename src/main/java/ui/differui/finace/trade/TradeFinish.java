@@ -91,6 +91,40 @@ public class TradeFinish extends JLabel implements ActionListener{
 	
 	public void actionPerformed(ActionEvent events){
 		
+if(events.getSource() == button_finish){
+			
+			if(type == 1){
+				AccountBillBLService controller = new AccountBillController();
+				controller.getExpenseID();
+				controller.addAccountBill(TradeBill.clientID, TradeBill.clientName);
+				controller.addBillItem(new AccountBillItemVO(TradeBill.accountName, TradeBill.money, TradeBill.note));
+				controller.save();				
+			}else if(type == 2){
+				AccountBillBLService controller = new AccountBillController();
+				controller.getPayID();
+				controller.addAccountBill(TradeBill.clientID, TradeBill.clientName);
+				controller.addBillItem(new AccountBillItemVO(TradeBill.accountName, TradeBill.money, TradeBill.note));
+				controller.save();
+			}else{
+				CashBillBLService controller = new CashBillController();
+				controller.getID();
+				
+				String[] str = TradeCash.billItem.split(";");
+				
+				for(int i = 0; i < str.length; i++ ){
+					String[] str2 = str[i].split(":");
+					controller.addBillItem(str2[0], Double.parseDouble(str2[1]), str2[2]);
+				}
+				
+				controller.save(TradeBill.accountName);
+			}
+			
+			WarningFrame wf = new WarningFrame("添加草稿成功！");
+			wf.setVisible(true);
+			
+		}
+		
+		
 		if(events.getSource() == button_finish){
 			
 			if(type == 1){
