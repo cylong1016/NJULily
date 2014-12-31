@@ -26,7 +26,6 @@ import dataenum.Storage;
 import dataservice.TableInfoService;
 import dataservice.accountbilldataservice.AccountBillDataService;
 import dataservice.accountbilldataservice.AccountBillInfoService;
-import dataservice.saledataservice.SaleInfoService;
 
 /**
  * @author cylong
@@ -54,7 +53,7 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 	
 	private void setIDsByDate(Date beginDate, Date endDate){
 		try {
-			SaleInfoService saleInfo = (SaleInfoService)Naming.lookup(RMIConfig.PREFIX+SaleInfoService.NAME);
+			AccountBillInfoService saleInfo = (AccountBillInfoService)Naming.lookup(RMIConfig.PREFIX+AccountBillInfoService.NAME);
 			ArrayList<String> IDs = saleInfo.getAllID(BillType.PAY);
 			payIDs.addAll(DateOperate.findFitDate(IDs, beginDate, endDate));
 			ArrayList<String> bIDs = saleInfo.getAllID(BillType.EXPENSE);

@@ -69,17 +69,17 @@ public class SaleOperate implements SaleInfo_Approval {
 		// 更改客户的应收金额
 		ClientInfo_Sale clientInfo = new ClientInfo();
 		if (po.getType() == BillType.SALE) {
-			// 如果是销售单，增加客户的应收
+			// 如果是销售单，增加客户的应付
 			if (clientInfo.isLimit(po.getClientID(), po.getAfterPrice())) {
-				clientInfo.changeReceivable(po.getClientID(), po.getAfterPrice());
+				clientInfo.changePayable(po.getClientID(), po.getAfterPrice());
 				po.setState(BillState.SUCCESS);
 				}
 			else {
 				po.setState(BillState.FAILURE);
 			}
 		} else {
-			// 如果是销售退货单，减少客户的应收
-			clientInfo.changeReceivable(po.getClientID(), -po.getAfterPrice());
+			// 如果是销售退货单，减少客户的应付
+			clientInfo.changePayable(po.getClientID(), -po.getAfterPrice());
 			po.setState(BillState.SUCCESS);
 		}
 		// 更新该单子的状态

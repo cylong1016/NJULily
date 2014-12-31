@@ -50,12 +50,12 @@ public class PurchaseOperate implements PurchaseInfo_Approval{
 		for (CommodityItemPO commodity : commodities) {
 			commodityInfo.changeCommodityInfo(commodity.getID(), commodity.getNumber(), commodity.getPrice(), po.getType());
 		}
-		// 更改客户的应付金额
+		// 更改客户的应收金额
 		ClientInfo_Purchase clientInfo = new ClientInfo();
 		if (po.getType() == BillType.PURCHASE) {
-			clientInfo.changePayable(po.getClientID(), po.getBeforePrice());
+			clientInfo.changeReceivable(po.getClientID(), po.getBeforePrice());
 		} else {
-			clientInfo.changePayable(po.getClientID(), -po.getBeforePrice());
+			clientInfo.changeReceivable(po.getClientID(), -po.getBeforePrice());
 		}
 		// 更新该进货／进货退货单状态
 		po.setState(BillState.SUCCESS);

@@ -29,12 +29,14 @@ public interface ClientInfo_Sale {
 	public String getName(String ID) throws RemoteException;
 
 	/**
-	 * 更改客户的应收
+	 * 更改客户的应付
 	 * @param clientID
 	 * @param afterPrice
 	 * @author Zing
 	 * @version Dec 3, 2014 2:11:32 PM
 	 */
-	public void changeReceivable(String clientID, double afterPrice) throws RemoteException;
+	public void changePayable(String clientID, double afterPrice) throws RemoteException;
 	public boolean isLimit(String clientID, double money) throws RemoteException;
+
+	
 }

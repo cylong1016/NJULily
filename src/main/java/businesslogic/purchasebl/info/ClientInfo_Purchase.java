@@ -18,6 +18,6 @@ public interface ClientInfo_Purchase {
 	 * @version Dec 3, 2014 4:50:54 PM
 	 * @throws RemoteException
 	 */
-	public void changePayable(String clientID, double beforePrice) throws RemoteException;
+	public void changeReceivable(String clientID, double beforePrice) throws RemoteException;
 
 }
