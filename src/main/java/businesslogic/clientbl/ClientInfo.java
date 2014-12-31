@@ -12,6 +12,7 @@ import businesslogic.promotionbl.info.ClientInfo_Promotion;
 import businesslogic.purchasebl.info.ClientInfo_Purchase;
 import businesslogic.salebl.info.ClientInfo_Sale;
 import dataenum.ClientLevel;
+import dataservice.clientdataservice.ClientDataService;
 
 /**
  * 共外部获得Client信息
@@ -21,9 +22,11 @@ import dataenum.ClientLevel;
 public class ClientInfo implements ClientInfo_AccountBill, ClientInfo_Sale, ClientInfo_Purchase, ClientInfo_Init, ClientInfo_Promotion {
 
 	private Client client;
+	private ClientDataService clientData;
 
 	public ClientInfo() {
 		client = new Client();
+		clientData = client.getClientData();
 	}
 
 	/**
@@ -61,7 +64,7 @@ public class ClientInfo implements ClientInfo_AccountBill, ClientInfo_Sale, Clie
 	}
 
 	public ArrayList<ClientPO> getClientPOs() throws RemoteException {
-		return client.getClientData().show();
+		return clientData.show();
 	}
 
 	public ArrayList<ClientVO> getClientVOs(ArrayList<ClientPO> POs) {
@@ -69,18 +72,24 @@ public class ClientInfo implements ClientInfo_AccountBill, ClientInfo_Sale, Clie
 		return transPOVO.posToVOs(POs);
 	}
 
+	@Override
+	public boolean isLimit(String clientID, double money) throws RemoteException {
+		ClientPO po = clientData.find(clientID);
+		double nowReceivable = po.getReceivable() + money;
+		if (po.getReceivableLimit() < nowReceivable) {
+			return false;
+		}
+		return true;
+	}
+	
 	/**
 	 * @see businesslogic.salebl.info.ClientInfo_Sale#changeReceivable(java.lang.String, double)
 	 */
-	public boolean changeReceivable(String clientID, double afterPrice) throws RemoteException {
-		ClientPO po = client.getClientData().find(clientID);
+	public void changeReceivable(String clientID, double afterPrice) throws RemoteException {
+		ClientPO po = clientData.find(clientID);
 		double nowReceivable = po.getReceivable() + afterPrice;
-		if (nowReceivable > po.getReceivableLimit()) {
-			return false;
-		}
 		po.setReceivable(nowReceivable);
-		client.getClientData().update(po);
-		return true;
+		clientData.update(po);
 	}
 
 	/**
@@ -90,13 +99,13 @@ public class ClientInfo implements ClientInfo_AccountBill, ClientInfo_Sale, Clie
 	public void changePayable(String clientID, double beforePrice) throws RemoteException {
 		ClientPO po = client.getClientData().find(clientID);
 		po.setPayable(po.getPayable() + beforePrice);
-		client.getClientData().update(po);
+		clientData.update(po);
 	}
 
 	/**
 	 * @see businesslogic.promotionbl.info.ClientInfo_Promotion#getLevel(java.lang.String)
 	 */
 	public ClientLevel getLevel(String clientID) throws RemoteException {
-		return client.getClientData().find(clientID).getLevel();
+		return clientData.find(clientID).getLevel();
 	}
 }

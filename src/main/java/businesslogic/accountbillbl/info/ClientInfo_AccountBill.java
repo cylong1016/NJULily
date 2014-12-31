@@ -36,5 +36,7 @@ public interface ClientInfo_AccountBill {
 	 * @return 
 	 * @throws RemoteException 
 	 */
-	public boolean changeReceivable(String clientID, double money) throws RemoteException;
+	public void changeReceivable(String clientID, double money) throws RemoteException;
+	
+	public boolean isLimit(String clientID, double money) throws RemoteException;
 }

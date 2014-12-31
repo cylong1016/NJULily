@@ -73,8 +73,15 @@ public interface CommodityInfo_Inventory {
 	 * @param billType
 	 * @author Zing
 	 * @version Dec 3, 2014 4:58:06 PM
+	 * @return 
 	 * @throws RemoteException
 	 */
 	public void changeNumber(String id, int number, BillType billType) throws RemoteException;
+
+	/**
+	 * 判断数量是否不足
+	 * @version Dec 31, 2014 11:15:07 AM
+	 */
+	public boolean checkNumber(String id, int number, BillType billType) throws RemoteException;
 
 }

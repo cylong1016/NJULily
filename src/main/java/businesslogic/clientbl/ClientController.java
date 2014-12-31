@@ -83,7 +83,7 @@ public class ClientController implements ClientBLService {
 	@Override
 	public ClientVO findClient(String ID) {
 		try {
-			LogMsgController.addLog("精确查找客户 [客户ID=" + ID + "]");
+	//		LogMsgController.addLog("精确查找客户 [客户ID=" + ID + "]");
 			return client.findClient(ID);
 		} catch (RemoteException e) {
 			e.printStackTrace();

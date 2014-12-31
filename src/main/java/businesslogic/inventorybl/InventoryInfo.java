@@ -115,14 +115,24 @@ public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInf
 	 */
 	public void pass(InventoryBillVO vo) throws RemoteException {
 		InventoryBillPO po = inventoryData.find(vo.ID);
-		// 更新单据状态
-		po.setState(BillState.SUCCESS);
-		inventoryData.update(po);
+		boolean isPass = true;
 		// 更改商品数量
 		ArrayList<CommodityItemPO> commodities = po.getCommodities();
 		CommodityInfo_Inventory info = new CommodityInfo();
 		for(CommodityItemPO commodity : commodities) {
-			info.changeNumber(commodity.getID(), commodity.getNumber(), po.getBillType());
+			if (!info.checkNumber(commodity.getID(), commodity.getNumber(), po.getBillType())) {
+				po.setState(BillState.FAILURE);
+				inventoryData.update(po);
+				isPass = false;
+			}
+		}
+		if (isPass) {
+			for(CommodityItemPO commodity : commodities) {
+				info.changeNumber(commodity.getID(), commodity.getNumber(), po.getBillType());
+			}
+			// 更新单据状态
+			po.setState(BillState.SUCCESS);
+			inventoryData.update(po);
 		}
 	}
 

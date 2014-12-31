@@ -198,12 +198,30 @@ public class CommodityInfo implements CommodityInfo_Sale, CommodityInfo_Purchase
 			break;
 		case LOSS:
 		case GIFT:
-			po.setInventoryNum(po.getInventoryNum() - number);
+			int nowNumber = po.getInventoryNum() - number;
+			po.setInventoryNum(nowNumber);
 			break;
 		default:
 			break;
 		}
 		commodityData.update(po);
+		}
+	
+	@Override
+	public boolean checkNumber(String ID, int number, BillType billType) throws RemoteException {
+		CommodityPO po = commodityData.find(ID);
+		switch(billType) {
+		case LOSS:
+		case GIFT:
+			int nowNumber = po.getInventoryNum() - number;
+			if (nowNumber < 0) {
+				return false;
+			}
+			break;
+		default:
+			break;
+		}
+		return true;
 	}
 
 	/**

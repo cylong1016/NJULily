@@ -114,10 +114,12 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 		for(AccountBillItemPO billItem : billItemPOs) {
 			switch(vo.type) {
 			case PAY:
-				accountInfo.changeMoney(billItem.getAccountName(), billItem.getMoney());
+				// 如果是付款单，减少账户的钱
+				accountInfo.changeMoney(billItem.getAccountName(), -billItem.getMoney());
 				break;
 			case EXPENSE:
-				accountInfo.changeMoney(billItem.getAccountName(), -billItem.getMoney());
+				// 如果是收款单，增加账户的钱
+				accountInfo.changeMoney(billItem.getAccountName(), billItem.getMoney());
 				break;
 			default:
 				break;
@@ -126,24 +128,19 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 		ClientInfo_AccountBill clientInfo = new ClientInfo();
 		switch(vo.type) {
 		case PAY:
-			if (!clientInfo.changeReceivable(vo.clientID, vo.sumMoney)) {
-				po.setState(BillState.FAILURE);
-				accountBillData.update(po);
-			}
-			else {
-				// 更改该收款单／付款单的状态
-				po.setState(BillState.SUCCESS);
-				accountBillData.update(po);
-			}
+			// 如果是付款单，减少客户的应收
+			clientInfo.changeReceivable(vo.clientID, -vo.sumMoney);
 			break;
 		case EXPENSE:
-			clientInfo.changePayable(vo.clientID, vo.sumMoney);
-			po.setState(BillState.SUCCESS);
-			accountBillData.update(po);
+			// 如果是收款单，减少客户应付
+			clientInfo.changePayable(vo.clientID, -vo.sumMoney);
 			break;
 		default:
 			break;
 		}
+		// 更改该收款单／付款单的状态
+		po.setState(BillState.SUCCESS);
+		accountBillData.update(po);
 	}
 
 	public AccountBillVO addRed(AccountBillVO vo, boolean isCopy) throws RemoteException {

@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import dataservice.accountdataservice.AccountDataService;
 import po.AccountPO;
 import vo.AccountVO;
 import businesslogic.accountbillbl.info.AccountInfo_AccountBill;
@@ -18,9 +19,10 @@ import businesslogic.cashbillbl.info.AccountInfo_CashBill;
 public class AccountInfo implements AccountInfo_AccountBill, AccountInfo_Init, AccountInfo_CashBill {
 
 	private Account account;
-
+	private AccountDataService accountData;
 	public AccountInfo() {
 		account = new Account();
+		accountData = account.getAccountData();
 	}
 
 	/**
@@ -39,7 +41,7 @@ public class AccountInfo implements AccountInfo_AccountBill, AccountInfo_Init, A
 	}
 
 	public ArrayList<AccountPO> getAccountPOs() throws RemoteException {
-		return account.getAccountData().show();
+		return accountData.show();
 	}
 
 	/**
@@ -56,10 +58,11 @@ public class AccountInfo implements AccountInfo_AccountBill, AccountInfo_Init, A
 	 * @throws RemoteException
 	 */
 	public void changeMoney(String accountName, double money) throws RemoteException {
-		ArrayList<AccountPO> POs = account.getAccountData().show();
+		ArrayList<AccountPO> POs = accountData.show();
 		for(AccountPO po : POs) {
 			if (po.getName().equals(accountName)) {
-				po.setMoney(po.getMoney() - money);
+				po.setMoney(po.getMoney() + money);
+				accountData.update(po);
 				return;
 			}
 		}
