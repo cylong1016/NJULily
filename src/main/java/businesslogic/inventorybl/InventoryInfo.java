@@ -168,7 +168,17 @@ public class InventoryInfo extends Info<InventoryBillPO> implements InventoryInf
 		redVO.commodities = commodities;
 		// 先建立对应的PO
 		InventoryBillPO redPO = InventoryTrans.VOtoPO(redVO);
-		redPO.setID(inventoryData.getID());
+		switch (vo.billType) {
+		case GIFT:
+			redPO.setID(inventoryData.getGiftID());
+			break;
+		case OVERFLOW:
+			redPO.setID(inventoryData.getOverflowID());
+		case LOSS:
+			redPO.setID(inventoryData.getLossID());
+		default:
+			break;
+		}
 		if (!isCopy) {
 			inventoryData.insert(redPO);
 			pass(redVO);

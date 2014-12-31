@@ -53,10 +53,15 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 	
 	private void setIDsByDate(Date beginDate, Date endDate){
 		try {
-			AccountBillInfoService saleInfo = (AccountBillInfoService)Naming.lookup(RMIConfig.PREFIX+AccountBillInfoService.NAME);
-			ArrayList<String> IDs = saleInfo.getAllID(BillType.PAY);
-			payIDs.addAll(DateOperate.findFitDate(IDs, beginDate, endDate));
-			ArrayList<String> bIDs = saleInfo.getAllID(BillType.EXPENSE);
+			AccountBillInfoService accountBill = (AccountBillInfoService)Naming.lookup(RMIConfig.PREFIX+AccountBillInfoService.NAME);
+//			ArrayList<String> IDs = accountBill.getAllID(BillType.PAY);
+			ArrayList<String> IDs = new ArrayList<String>();
+			ArrayList<AccountBillPO> pos = accountBillData.show();
+			for (AccountBillPO po : pos) {
+				IDs.add(po.getID());
+			}
+ 			payIDs.addAll(DateOperate.findFitDate(IDs, beginDate, endDate));
+			ArrayList<String> bIDs = accountBill.getAllID(BillType.EXPENSE);
 			expenIDs.addAll(DateOperate.findFitDate(bIDs, beginDate, endDate));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -106,8 +111,8 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 	 * @throws RemoteException
 	 */
 	public void pass(AccountBillVO vo) throws RemoteException {
-//		AccountBillPO po = accountBillData.find(vo.ID);
-		AccountBillPO po = AccountBillTrans.VOtoPO(vo);
+		AccountBillPO po = accountBillData.find(vo.ID);
+//		AccountBillPO po = AccountBillTrans.VOtoPO(vo);
 		// 更改银行账户的数据
 		ArrayList<AccountBillItemPO> billItemPOs = po.getBills();
 		AccountInfo_AccountBill accountInfo = new AccountInfo();
@@ -152,8 +157,18 @@ public class AccountBillInfo extends Info<AccountBillPO> implements ValueObjectI
 		}
 		redVO.bills = bills;
 		AccountBillPO redPO = AccountBillTrans.VOtoPO(redVO);
-		redPO.setID(accountBillData.getID());
+		switch (vo.type) {
+		case PAY:
+			redPO.setID(accountBillData.getPayID());
+			break;
+		case EXPENSE:
+			redPO.setID(accountBillData.getExpenseID());
+			break;
+		default:
+			break;
+		}
 		if (!isCopy) {
+			redPO.setState(BillState.SUCCESS);
 			accountBillData.insert(redPO);
 			pass(redVO);
 		} else {

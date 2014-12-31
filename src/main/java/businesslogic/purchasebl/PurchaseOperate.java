@@ -75,6 +75,16 @@ public class PurchaseOperate implements PurchaseInfo_Approval{
 		// 先建立对应的PO
 		PurchasePO redPO = PurchaseTrans.VOtoPO(redVO);
 		redPO.setID(purchaseData.getID());
+		switch (vo.type) {
+		case PURCHASE:
+			redPO.setID(purchaseData.getPurchaseID());
+			break;
+		case PURCHASEBACK:
+			redPO.setID(purchaseData.getPurchaseBackID());
+			break;
+		default:
+			break;
+		}
 		if (!isCopy) {
 			purchaseData.insert(redPO);
 			pass(redVO);

@@ -204,24 +204,15 @@ public class BusinessProcessUI extends JLabel implements ActionListener{
 			
 			switch(cbb_sort.getSelectedIndex()){
 			case 0: billTypes.add(BillType.PURCHASE);
-					billTypes.add(BillType.PURCHASEBACK);
 					billTypes.add(BillType.SALE);
-					billTypes.add(BillType.SALEBACK);
 					billTypes.add(BillType.EXPENSE);
 					billTypes.add(BillType.PAY);
 					billTypes.add(BillType.OVERFLOW);
-					billTypes.add(BillType.LOSS);
-					billTypes.add(BillType.GIFT);
 					billTypes.add(BillType.CASH);break;
-			case 1: billTypes.add(BillType.PURCHASE);
-					billTypes.add(BillType.PURCHASEBACK);break;
-			case 2: billTypes.add(BillType.SALE);
-					billTypes.add(BillType.SALEBACK);break;
-			case 3: billTypes.add(BillType.EXPENSE);
-					billTypes.add(BillType.PAY);break;
-			case 4: billTypes.add(BillType.OVERFLOW);
-					billTypes.add(BillType.LOSS);
-					billTypes.add(BillType.GIFT);break;
+			case 1: billTypes.add(BillType.PURCHASE);break;
+			case 2: billTypes.add(BillType.SALE);break;
+			case 3: billTypes.add(BillType.EXPENSE);break;
+			case 4: billTypes.add(BillType.OVERFLOW);break;
 			case 5: billTypes.add(BillType.CASH);break;
 			}
 			
