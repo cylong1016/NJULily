@@ -15,6 +15,7 @@ import businesslogic.inventorybl.info.SaleInfo_Inventory;
 import businesslogic.recordbl.info.SaleInfo_Record;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
 import config.RMIConfig;
+import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Storage;
 import dataservice.TableInfoService;
@@ -85,13 +86,23 @@ public class SaleInfo extends Info<SalesPO> implements SaleInfo_Inventory, SaleI
 	@Override
 	public ArrayList<String> getSaleIDs(String clientName, String salesman, Storage storage) throws RemoteException {
 		ArrayList<String> IDs = new ArrayList<String>();
-		IDs = getID(saleIDs, clientName, salesman, storage);
+		IDs = checkIDs(getID(saleIDs, clientName, salesman, storage));
 		return IDs;
 	}
 
 	public ArrayList<String> getSaleBackIDs(String clientName, String salesman, Storage storage) throws RemoteException {
 		ArrayList<String> IDs = new ArrayList<String>();
-		IDs = getID(backIDs, clientName, salesman, storage);
+		IDs = checkIDs(getID(backIDs, clientName, salesman, storage));
+		return IDs;
+	}
+	
+	/** 查找通过审批的单子 */
+	private ArrayList<String> checkIDs(ArrayList<String> IDs) throws RemoteException {
+		for (int i = 0; i < IDs.size(); i++) {
+			if (saleData.find(IDs.get(i)).getState() != BillState.SUCCESS) {
+				IDs.remove(i);
+			}
+		}
 		return IDs;
 	}
 

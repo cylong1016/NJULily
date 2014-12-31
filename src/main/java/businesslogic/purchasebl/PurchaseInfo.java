@@ -15,6 +15,7 @@ import businesslogic.inventorybl.info.PurchaseInfo_Inventory;
 import businesslogic.recordbl.info.PurchaseInfo_Record;
 import businesslogic.recordbl.info.ValueObjectInfo_Record;
 import config.RMIConfig;
+import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Storage;
 import dataservice.TableInfoService;
@@ -67,9 +68,20 @@ public class PurchaseInfo extends Info<PurchasePO> implements ValueObjectInfo_Re
 		ArrayList<String> IDs = new ArrayList<String>();
 		IDs = getID(purIDs, clientName, salesman, storage);
 		IDs.addAll(getID(backIDs, clientName, salesman, storage));
+		IDs = checkIDs(IDs);
 		return IDs;
 	}
 
+	/** 查找通过审批的单子 */
+	private ArrayList<String> checkIDs(ArrayList<String> IDs) throws RemoteException {
+		for (int i = 0; i < IDs.size(); i++) {
+			if (purchaseData.find(IDs.get(i)).getState() != BillState.SUCCESS) {
+				IDs.remove(i);
+			}
+		}
+		return IDs;
+	}
+	
 	public PurchaseVO find(String ID) throws RemoteException {
 		return PurchaseTrans.poToVO(purchaseData.find(ID));
 	}

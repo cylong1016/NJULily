@@ -33,7 +33,9 @@ public class CommodityInfo implements CommodityInfo_Sale, CommodityInfo_Purchase
 	 * @see businesslogic.salebl.CommodityInfo_Sale#getType(java.lang.String)
 	 */
 	public String getType(String ID) throws RemoteException {
-		po = commodityData.find(ID);
+		if (po == null) {
+			po = commodityData.find(ID);
+		}
 		return po.getType();
 	}
 
@@ -42,7 +44,9 @@ public class CommodityInfo implements CommodityInfo_Sale, CommodityInfo_Purchase
 	 * @see businesslogic.salebl.CommodityInfo_Sale#getName(java.lang.String)
 	 */
 	public String getName(String ID) throws RemoteException {
-		po = commodityData.find(ID);
+		if (po == null) {
+			po = commodityData.find(ID);
+		}
 		return po.getName();
 	}
 
@@ -59,7 +63,9 @@ public class CommodityInfo implements CommodityInfo_Sale, CommodityInfo_Purchase
 	 * @see businesslogic.inventorybl.info.CommodityInfo_Inventory#getNumber(java.lang.String)
 	 */
 	public int getNumber(String ID) throws RemoteException {
-		po = commodityData.find(ID);
+		if (po == null) {
+			po = commodityData.find(ID);
+		}
 		return po.getInventoryNum();
 	}
 
@@ -68,7 +74,9 @@ public class CommodityInfo implements CommodityInfo_Sale, CommodityInfo_Purchase
 	 * @see businesslogic.inventorybl.info.CommodityInfo_Inventory#getAvePrice(java.lang.String)
 	 */
 	public double getAvePrice(String ID) throws RemoteException {
-		po = commodityData.find(ID);
+		if (po == null) {
+			po = commodityData.find(ID);
+		}
 		int totalNumber = po.getSaleNumber() + po.getPurNumber();
 		double totalPrice = po.getSalePrice() * po.getSaleNumber() + po.getPurNumber() * po.getAvePur();
 		return totalPrice / (totalNumber == 0 ? 1 : totalNumber); // 防止除数为0
@@ -79,7 +87,9 @@ public class CommodityInfo implements CommodityInfo_Sale, CommodityInfo_Purchase
 	 * @see businesslogic.inventorybl.info.CommodityInfo_Inventory#getPurPrice(java.lang.String)
 	 */
 	public double getPurPrice(String ID) throws RemoteException {
-		po = commodityData.find(ID);
+		if (po == null) {
+			po = commodityData.find(ID);
+		}
 		return po.getPurPrice();
 	}
 
