@@ -72,8 +72,15 @@ public class TradeFinish extends JLabel implements ActionListener{
 		button_finish.addActionListener(this);
 		this.add(button_finish);
 		
+		button_save = new MyJButton("保存至草稿状态");
+		button_save.setBounds(1090, 540, 130, 25);
+		button_save.setBackground(backColor);
+		button_save.setForeground(foreColor);
+		button_save.addActionListener(this);
+		this.add(button_save);
+		
 		button_output = new MyJButton("导出至桌面");
-		button_output.setBounds(1090, 540, 130, 25);
+		button_output.setBounds(1090, 505, 130, 25);
 		button_output.setBackground(backColor);
 		button_output.setForeground(foreColor);
 		button_output.addActionListener(this);
@@ -91,19 +98,19 @@ public class TradeFinish extends JLabel implements ActionListener{
 	
 	public void actionPerformed(ActionEvent events){
 		
-if(events.getSource() == button_finish){
+		if(events.getSource() == button_save){
 			
 			if(type == 1){
 				AccountBillBLService controller = new AccountBillController();
 				controller.getExpenseID();
-				controller.addAccountBill(TradeBill.clientID, TradeBill.clientName);
 				controller.addBillItem(new AccountBillItemVO(TradeBill.accountName, TradeBill.money, TradeBill.note));
+				controller.addAccountBill(TradeBill.clientID, TradeBill.clientName);
 				controller.save();				
 			}else if(type == 2){
 				AccountBillBLService controller = new AccountBillController();
 				controller.getPayID();
-				controller.addAccountBill(TradeBill.clientID, TradeBill.clientName);
 				controller.addBillItem(new AccountBillItemVO(TradeBill.accountName, TradeBill.money, TradeBill.note));
+				controller.addAccountBill(TradeBill.clientID, TradeBill.clientName);
 				controller.save();
 			}else{
 				CashBillBLService controller = new CashBillController();
@@ -130,14 +137,14 @@ if(events.getSource() == button_finish){
 			if(type == 1){
 				AccountBillBLService controller = new AccountBillController();
 				controller.getExpenseID();
-				controller.addAccountBill(TradeBill.clientID, TradeBill.clientName);
 				controller.addBillItem(new AccountBillItemVO(TradeBill.accountName, TradeBill.money, TradeBill.note));
+				controller.addAccountBill(TradeBill.clientID, TradeBill.clientName);
 				controller.submit();				
 			}else if(type == 2){
 				AccountBillBLService controller = new AccountBillController();
 				controller.getPayID();
-				controller.addAccountBill(TradeBill.clientID, TradeBill.clientName);
 				controller.addBillItem(new AccountBillItemVO(TradeBill.accountName, TradeBill.money, TradeBill.note));
+				controller.addAccountBill(TradeBill.clientID, TradeBill.clientName);
 				controller.submit();
 			}else{
 				CashBillBLService controller = new CashBillController();

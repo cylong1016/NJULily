@@ -51,6 +51,10 @@ public class MyTable extends JTable{
 	Color foreColor = Color.WHITE;
 	Color backColor = MyColor.getColor();
 	
+	DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();// 设置table内容居中
+	tcr.setHorizontalAlignment(JLabel.CENTER);
+	this.setDefaultRenderer(Object.class, tcr);
+	
 	DefaultTableModel model = new DefaultTableModel(cellData, headers) {
 		private static final long serialVersionUID = 1L;
 		public boolean isCellEditable(int row, int column) { //这里让表不可修改
@@ -85,6 +89,10 @@ public class MyTable extends JTable{
 				return true;
 			}
 		};
+		
+		DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();// 设置table内容居中
+		tcr.setHorizontalAlignment(JLabel.CENTER);
+		this.setDefaultRenderer(Object.class, tcr);
 		
 		this.setModel(model);
 		this.setRowSelectionAllowed(true);	
