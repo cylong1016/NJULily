@@ -221,7 +221,7 @@ public class BusinessProcessUI extends JLabel implements ActionListener{
 			
 			String salesman = null;
 			if(cbb_user.getSelectedIndex() != 0)
-				clientName = cbb_client.getSelectedItem().toString();
+				salesman = cbb_user.getSelectedItem().toString();
 					
 			ArrayList<ValueObject> list = new ArrayList<ValueObject>();
 			
@@ -241,11 +241,15 @@ public class BusinessProcessUI extends JLabel implements ActionListener{
 					Object[] rowData = {i + 1, list.get(i).ID}; 
 					tableModel.addRow(rowData);
 				}
-			
-			if(table.getRowCount() == 0){
+			if (list == null || (list != null && list.isEmpty())) {
 				WarningFrame wf = new WarningFrame("目前没有符合条件的单据！");
 				wf.setVisible(true);
 			}
+//			
+//			if(table.getRowCount() == 0){
+//				WarningFrame wf = new WarningFrame("目前没有符合条件的单据！");
+//				wf.setVisible(true);
+//			}
 		}
 		
 		if(events.getSource() == bt_out){
@@ -292,10 +296,20 @@ public class BusinessProcessUI extends JLabel implements ActionListener{
 	}
 	
 	private String[] getAllUser(){
-		UserBLService controller = new UserController();
-		String str = "全部操作员;";
+//		UserBLService controller = new UserController();
+		ClientBLService controller = new ClientController();
+		String str = "全部业务员;";
+		String beforeSalesman = null;
 		for(int i = 0; i < controller.show().size(); i++){
-			str = str + controller.show().get(i).name + ";";
+			if (i == 0 ) {
+				beforeSalesman = controller.show().get(i).salesman;
+				str = str + beforeSalesman + ";";
+			}
+			else {
+				if(beforeSalesman.equals(controller.show().get(i).salesman))
+					continue;
+				str = str + controller.show().get(i).salesman + ";";
+			}
 		}
 		return str.split(";");
 	}

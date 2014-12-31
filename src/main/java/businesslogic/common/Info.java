@@ -29,27 +29,30 @@ public abstract class Info<PO extends PersistentObject> {
 		if (IDs.isEmpty() || IDs == null) {
 			return new ArrayList<String>();
 		}
-		for (String id : IDs) {
+		for (int i=0; i< IDs.size(); ) {
 			if (clientName != null) {
-				if (!data.getClient(id).equals(clientName)) {
-					IDs.remove(id);
+				String client = data.getClient(IDs.get(i));
+				if (client == null || (!client.equals(clientName))) {
+					IDs.remove(i);
 					continue;
 				}
 			}
 			if (salesman != null) {
-				if (!data.getSalesman(id).equals(salesman)) {
-					IDs.remove(id);
+				String sale = data.getSalesman(IDs.get(i));
+				if (sale == null || (!sale.equals(salesman))) {
+					IDs.remove(i);
 					continue;
 				}
 			}
 
 			if (storage != null) {
-				if (!data.getStorage(id).equals(storage)) {
-					IDs.remove(id);
+				Storage st = data.getStorage(IDs.get(i));
+				if (st == null || (!st.equals(storage))) {
+					IDs.remove(i);
 					continue;
-					}
 				}
-
+			}
+			i++;
 		}
 		return IDs;
 	}
