@@ -80,12 +80,14 @@ public class User {
 		if (iden == null) {
 			return null;
 		}
-
+		if (iden.equals(UserIdentity.ADMIN)) {
+			// 如果是管理员就创建一个临时的UserPO
+			current = new UserPO(null, loginInfo.username, "管理员", loginInfo.password, null, UserIdentity.ADMIN);
+		}
 		ArrayList<UserPO> pos = userData.show();
 		for(UserPO po : pos) {
 			if (iden.equals(UserIdentity.ADMIN)) {
-				current = new UserPO(null, loginInfo.username, "管理员", loginInfo.password, null, UserIdentity.ADMIN);
-				break; // 跳出循环
+				break; // 如果是管理员就直接跳出查找
 			}
 			if (po.getUsername().equals(loginInfo.username)) {
 				current = po;
