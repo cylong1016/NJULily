@@ -79,16 +79,6 @@ public class CommodityPO extends PersistentObject {
 	}
 
 	/**
-	 * 模糊查询的时候使用
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return name + "|" + type + "|" + inventoryNum + "|" + purPrice + "|" + salePrice + "|" + recentPurPrice + "|"
-				+ recentSalePrice + "|" + alarmNumber + "|" + ID;
-	}
-
-	/**
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -111,6 +101,16 @@ public class CommodityPO extends PersistentObject {
 		} else if (!this.type.equals(other.type))
 			return false;
 		return true;
+	}
+
+	/**
+	 * 模糊查找的时候使用
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return name + "," + type + "," + inventoryNum + "," + purPrice + "," + salePrice + "," + recentPurPrice + ","
+				+ recentSalePrice + "," + alarmNumber + "," + ID;
 	}
 
 	public String getName() {
