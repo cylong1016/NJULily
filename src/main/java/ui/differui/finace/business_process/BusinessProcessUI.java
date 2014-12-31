@@ -200,7 +200,7 @@ public class BusinessProcessUI extends JLabel implements ActionListener{
 				endDate = yearAddZero(tf_year2.getText()) + addZero(tf_month2.getText()) + addZero(tf_day2.getText());
 			}
 			
-			ArrayList<BillType> billTypes = new ArrayList<BillType>();;
+			ArrayList<BillType> billTypes = new ArrayList<BillType>();
 			
 			switch(cbb_sort.getSelectedIndex()){
 			case 0: billTypes.add(BillType.PURCHASE);

@@ -908,8 +908,6 @@ public class TextConductor {
 			text = text + blank4;
 		text = text + "账目信息：" + "\n";
 	
-		System.out.println(bill.bills.size());
-		
 		for(int i = 0; i < 9; i++)
 			text = text + blank4;
 		if(bill.bills.size() > 0)

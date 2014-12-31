@@ -4,11 +4,15 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
 
 import ui.commonui.myui.MyBackground;
 import ui.commonui.myui.MyButton;
@@ -82,7 +86,7 @@ public class Frame_Login extends MyFrame implements ActionListener {
 			}
 		});
 		this.add(passwordField);
-
+		
 		//the button for action login
 		button_Enter = new MyButton(530, 630, 250, 40);
 		button_Enter.addMouseListener(new MouseAdapter() {
@@ -97,6 +101,18 @@ public class Frame_Login extends MyFrame implements ActionListener {
 				loginBackground2.setVisible(false);
 			}
 		});
+		button_Enter.registerKeyboardAction(this, 
+		        KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), 
+		        JComponent.WHEN_IN_FOCUSED_WINDOW); 
+		button_Enter.addKeyListener(new KeyAdapter(){ 
+			
+		    public void keyPressed(KeyEvent event){ 
+		    	
+		    	if (KeyEvent.getKeyText(event.getKeyCode()).compareToIgnoreCase("Enter") == 0){ 
+		    		button_Enter.doClick(); 
+		    	} 
+	    	} 
+		}); 
 		button_Enter.addActionListener(this);
 		this.add(button_Enter);
 
