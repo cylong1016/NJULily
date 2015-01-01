@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import dataenum.ResultMessage;
 import log.LogMsgController;
+import log.ui.warning.PromptDialog;
 import vo.commodity.CommodityItemVO;
 import vo.promotion.PromotionBargainVO;
 import vo.promotion.PromotionClientVO;
@@ -39,6 +40,7 @@ public class SaleController implements SaleBLService {
 			return sale.getSaleID();
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			PromptDialog.showConnectionError();
 			return null;
 		}
 	}
@@ -52,6 +54,7 @@ public class SaleController implements SaleBLService {
 			return sale.getSaleBackID();
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			PromptDialog.showConnectionError();
 			return null;
 		}
 	}
@@ -62,6 +65,7 @@ public class SaleController implements SaleBLService {
 			return sale.showBargains();
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			PromptDialog.showConnectionError();
 		}
 		return null;
 	}
@@ -71,6 +75,7 @@ public class SaleController implements SaleBLService {
 			sale.addBargains(ID);
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			PromptDialog.showConnectionError();
 		}
 	}
 
@@ -83,6 +88,7 @@ public class SaleController implements SaleBLService {
 			sale.addCommodities(item);
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			PromptDialog.showConnectionError();
 		}
 	}
 
@@ -115,6 +121,7 @@ public class SaleController implements SaleBLService {
 			return sale.findFitPromotionClient();
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			PromptDialog.showConnectionError();
 			return null;
 		}
 	}
@@ -128,6 +135,7 @@ public class SaleController implements SaleBLService {
 			return sale.findFitPromotionTotal();
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			PromptDialog.showConnectionError();
 			return null;
 		}
 	}
@@ -145,6 +153,7 @@ public class SaleController implements SaleBLService {
 			return vo;
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			PromptDialog.showConnectionError();
 			return null;
 		}
 	}
@@ -162,6 +171,7 @@ public class SaleController implements SaleBLService {
 			return vo;
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			PromptDialog.showConnectionError();
 			return null;
 		}
 	}
@@ -176,6 +186,7 @@ public class SaleController implements SaleBLService {
 			return res;
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			PromptDialog.showConnectionError();
 		}
 		return null;
 	}
@@ -185,11 +196,12 @@ public class SaleController implements SaleBLService {
 		try {
 			ResultMessage res = sale.submitDraft(ID);
 			if (res == ResultMessage.SUCCESS) {
-				LogMsgController.addLog("提交草稿状态的销售（销售退货）单 " +ID);
+				LogMsgController.addLog("提交草稿状态的销售（销售退货）单 " + ID);
 			}
 			return res;
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			PromptDialog.showConnectionError();
 		}
 		return null;
 	}
@@ -200,6 +212,7 @@ public class SaleController implements SaleBLService {
 			return sale.setPromotion(PromotionID);
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			PromptDialog.showConnectionError();
 		}
 		return 0;
 	}

@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+import log.ui.warning.PromptDialog;
 import po.SalesPO;
 import vo.commodity.CommodityItemVO;
 import vo.promotion.PromotionBargainVO;
@@ -60,6 +61,7 @@ public class Sale {
 		try {
 			return (SaleDataService)Naming.lookup(RMIConfig.PREFIX + SaleDataService.NAME);
 		} catch (Exception e) {
+			PromptDialog.showConnectionError();
 			e.printStackTrace();
 		}
 		return null;

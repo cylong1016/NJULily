@@ -38,6 +38,7 @@ public class UserController implements UserBLService {
 			return user.show();
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			PromptDialog.showConnectionError();
 			return null;
 		}
 	}
@@ -51,6 +52,7 @@ public class UserController implements UserBLService {
 			return user.getID();
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			PromptDialog.showConnectionError();
 			return null;
 		}
 	}
@@ -66,6 +68,7 @@ public class UserController implements UserBLService {
 			return iden;
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			PromptDialog.showConnectionError();
 			return null;
 		}
 	}
@@ -91,6 +94,7 @@ public class UserController implements UserBLService {
 			return res;
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			PromptDialog.showConnectionError();
 			return ResultMessage.REMOTE_EXCEPTION;
 		}
 	}
@@ -108,6 +112,7 @@ public class UserController implements UserBLService {
 			return res;
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			PromptDialog.showConnectionError();
 			return ResultMessage.REMOTE_EXCEPTION;
 		}
 	}
@@ -125,6 +130,7 @@ public class UserController implements UserBLService {
 			return res;
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			PromptDialog.showConnectionError();
 			return ResultMessage.REMOTE_EXCEPTION;
 		}
 	}
@@ -138,6 +144,7 @@ public class UserController implements UserBLService {
 			return user.updateAdmin(oldPass, newPass);
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			PromptDialog.showConnectionError();
 			return ResultMessage.REMOTE_EXCEPTION;
 		}
 	}

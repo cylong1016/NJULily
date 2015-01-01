@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import log.LogMsgController;
+import log.ui.warning.PromptDialog;
 import vo.sale.SalesVO;
 import blservice.saleblservice.SaleShowBLService;
 
@@ -33,6 +34,7 @@ public class SaleShowController implements SaleShowBLService {
 			return saleShow.showSale();
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			PromptDialog.showConnectionError();
 			return null;
 		}
 	}
@@ -46,6 +48,7 @@ public class SaleShowController implements SaleShowBLService {
 			return saleShow.showSaleBack();
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			PromptDialog.showConnectionError();
 			return null;
 		}
 	}
@@ -60,6 +63,7 @@ public class SaleShowController implements SaleShowBLService {
 			return saleShow.showSaleApproving();
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			PromptDialog.showConnectionError();
 			return null;
 		}
 	}
@@ -74,6 +78,7 @@ public class SaleShowController implements SaleShowBLService {
 			return saleShow.showSaleBackApproving();
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			PromptDialog.showConnectionError();
 			return null;
 		}
 	}
@@ -88,6 +93,7 @@ public class SaleShowController implements SaleShowBLService {
 			return saleShow.showSalePass();
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			PromptDialog.showConnectionError();
 			return null;
 		}
 	}
@@ -102,6 +108,7 @@ public class SaleShowController implements SaleShowBLService {
 			return saleShow.showSaleBackPass();
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			PromptDialog.showConnectionError();
 			return null;
 		}
 	}
@@ -116,6 +123,7 @@ public class SaleShowController implements SaleShowBLService {
 			return saleShow.showSaleFailure();
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			PromptDialog.showConnectionError();
 			return null;
 		}
 	}
@@ -130,6 +138,7 @@ public class SaleShowController implements SaleShowBLService {
 			return saleShow.showSaleBackFailure();
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			PromptDialog.showConnectionError();
 			return null;
 		}
 	}
@@ -140,6 +149,7 @@ public class SaleShowController implements SaleShowBLService {
 			return saleShow.showSaleDraft();
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			PromptDialog.showConnectionError();
 			return null;
 		}
 	}
@@ -150,6 +160,7 @@ public class SaleShowController implements SaleShowBLService {
 			return saleShow.showSaleBackDraft();
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			PromptDialog.showConnectionError();
 			return null;
 		}
 	}
