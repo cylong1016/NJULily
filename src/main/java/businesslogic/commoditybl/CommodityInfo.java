@@ -101,8 +101,7 @@ public class CommodityInfo implements CommodityInfo_Sale, CommodityInfo_Purchase
 		ArrayList<CommodityPO> POs = commodityData.show();
 		ArrayList<CommodityPO> returnPOs = new ArrayList<CommodityPO>();
 		for(CommodityPO po : POs) {
-			CommodityPO returnPO =
-									new CommodityPO(po.getID(), po.getName(), po.getType(), po.getSortID(), po.getAveSale(), po.getAvePur());
+			CommodityPO returnPO = new CommodityPO(po.getID(), po.getName(), po.getType(), po.getSortID(), po.getAveSale(), po.getAvePur());
 			returnPOs.add(returnPO);
 		}
 		return returnPOs;
