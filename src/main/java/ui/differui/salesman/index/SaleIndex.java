@@ -126,6 +126,8 @@ public class SaleIndex extends JLabel implements ActionListener{
 	}
 	
 	private void showAll(){
+		listPool.clear();
+		typePool.clear();
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		int rowCount = table.getRowCount();
 		for(int k = 0; k < rowCount; k++)
