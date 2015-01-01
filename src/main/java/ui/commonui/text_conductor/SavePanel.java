@@ -182,14 +182,6 @@ public class SavePanel extends MyPanel implements ActionListener{
 			
 			ArrayList<SalesVO> list4 = controller2.showSaleBackDraft();
 			if(list4 != null)
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-				// TODO
->>>>>>> origin/master
-=======
-				// TODO
->>>>>>> origin/master
 				for(int i = 0; i < list4.size(); i++){
 					str = str + list4.get(i).ID + ";";
 					typePool.add(list4.get(i).type);
