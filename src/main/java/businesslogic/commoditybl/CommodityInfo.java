@@ -194,9 +194,9 @@ public class CommodityInfo implements CommodityInfo_Sale, CommodityInfo_Purchase
 		CommodityPO po = commodityData.find(ID);
 		switch(billType) {
 		case OVERFLOW:
-			po.setInventoryNum(po.getInventoryNum() + number);
-			break;
 		case LOSS:
+			po.setInventoryNum(number);
+			break;
 		case GIFT:
 			int nowNumber = po.getInventoryNum() - number;
 			po.setInventoryNum(nowNumber);
@@ -211,7 +211,6 @@ public class CommodityInfo implements CommodityInfo_Sale, CommodityInfo_Purchase
 	public boolean checkNumber(String ID, int number, BillType billType) throws RemoteException {
 		CommodityPO po = commodityData.find(ID);
 		switch(billType) {
-		case LOSS:
 		case GIFT:
 			int nowNumber = po.getInventoryNum() - number;
 			if (nowNumber < 0) {

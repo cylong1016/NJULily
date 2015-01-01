@@ -759,11 +759,11 @@ public class TextConductor {
 				
 			for(int i = 0; i < 9; i++)
 				text = text + blank4;
-			text = text + "商品库存个数：" + list.get(k).number +  "件" +"\n";
+			text = text + "警报个数：" + list.get(k).number +  "件" +"\n";
 			
 			for(int i = 0; i < 9; i++)
 				text = text + blank4;
-			text = text + "警报个数：" + (cvo.alarmNumber - list.get(k).number) + "件" +"\n"+"\n";				
+			text = text + "商品库存个数：" + (cvo.alarmNumber - list.get(k).number) + "件" +"\n"+"\n";				
 		}
 		
 		for(int i = 0; i < 5; i++)
