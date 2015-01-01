@@ -142,6 +142,7 @@ public class Commodity {
 	public ResultMessage updCommo(String ID, CommodityUpdateVO info) throws RemoteException {
 		CommodityPO oldPO = commodityData.find(ID);
 		po = new CommodityPO(ID, info.name, oldPO.getSortID(), info.type, info.purPrice, info.salePrice, oldPO.getAlarmNumber());
+		po.setInventoryNum(oldPO.getInventoryNum());
 		return commodityData.update(po);
 	}
 
