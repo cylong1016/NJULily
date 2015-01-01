@@ -214,6 +214,7 @@ public class Sale {
 	 */
 	private void setInputInfo(saleAddVO inputInfo) {
 		list.setStorage(inputInfo.storage);
+		list.setAllowance(inputInfo.allowance);
 		list.setVoucher(inputInfo.voucher);
 		list.setRemark(inputInfo.remark);
 	}
