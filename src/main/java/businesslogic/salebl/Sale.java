@@ -200,7 +200,8 @@ public class Sale {
 		String clientName = clientInfo.getName(list.getClientID());
 		String clientID = list.getClientID();
 		String salesman = clientInfo.getSalesman(list.getClientID());
-		String username = UserInfo.getUsername();
+		UserInfo userInfo = UserInfo.getInstance();
+		String username = userInfo.getUsername();
 		po = new SalesPO(ID, clientID, clientName, salesman, username, list.getStorage(), list.getCommodities(), beforePrice, list.getAllowance(), list.getVoucher(), list.getRemark(), afterPrice, type);
 		return po;
 	}

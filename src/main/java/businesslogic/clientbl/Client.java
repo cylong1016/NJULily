@@ -136,8 +136,9 @@ public class Client {
 		po.setAddress(vo.address);
 		po.setPost(vo.post);
 		po.setEmail(vo.email);
+		UserInfo userInfo = UserInfo.getInstance();
 		if (vo.receivableLimit != po.getReceivableLimit()) {	// 仅最高权限可以修改
-			boolean b = po.setReceivableLimit(vo.receivableLimit, UserInfo.getUserIden());
+			boolean b = po.setReceivableLimit(vo.receivableLimit, userInfo.getUserIden());
 			if (!b) {
 				return ResultMessage.FAILURE;	// 权限不够，更新失败
 			}

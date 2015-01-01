@@ -29,7 +29,7 @@ public class LogMessage implements Serializable {
 	 * @version 2014年12月26日 下午7:15:05
 	 */
 	public LogMessage(String message) {
-		this(UserInfo.getUsername(), message);
+		this(UserInfo.getInstance().getUsername(), message);
 	}
 
 	public LogMessage(String username, String message) {

@@ -79,7 +79,8 @@ public class CashBill {
 	}
 
 	public CashBillPO addCashBill(String account) {
-		String username = UserInfo.getUsername();
+		UserInfo userInfo = UserInfo.getInstance();
+		String username = userInfo.getUsername();
 		po = new CashBillPO(ID, username, account, getCashItemPO(), getSumMoney());
 		return po;
 	}

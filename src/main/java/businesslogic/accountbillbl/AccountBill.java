@@ -128,7 +128,8 @@ public class AccountBill {
 	 * @version 2014年12月4日 下午7:34:15
 	 */
 	public void addAccountBill(String clientID, String clientName) {
-		String username = UserInfo.getUsername();
+		UserInfo userInfo = UserInfo.getInstance();
+		String username = userInfo.getUsername();
 		ArrayList<AccountBillItemPO> billsPO = bills.toPOList();
 		po = new AccountBillPO(ID, clientID, clientName, username, billsPO, type);
 	}

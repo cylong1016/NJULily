@@ -16,17 +16,29 @@ import dataenum.UserIdentity;
  */
 public class UserInfo {
 
-	private static UserPO current;	// 当前登录的用户
+	private UserPO current;	// 当前登录的用户
+
+	private static UserInfo userInfo;
+
+	private UserInfo() {
+		// 读取当前登录的用户
+		DefineList<UserPO> currentUserTemp = new DefineList<UserPO>(User.tempFileName);
+		current = currentUserTemp.get(0);
+	}
+
+	public static UserInfo getInstance() {
+		if (userInfo == null) {
+			userInfo = new UserInfo();
+		}
+		return userInfo;
+	}
 
 	/**
 	 * @return 当前登录的用户名
 	 * @author cylong
 	 * @version 2014年12月26日 下午8:03:10
 	 */
-	public static String getUsername() {
-		// 读取当前登录的用户
-		DefineList<UserPO> currentUserTemp = new DefineList<UserPO>(User.tempFileName);
-		current = currentUserTemp.get(0);
+	public String getUsername() {
 		return current.getUsername();
 	}
 
@@ -35,10 +47,7 @@ public class UserInfo {
 	 * @author cylong
 	 * @version 2014年12月26日 下午8:03:19
 	 */
-	public static UserIdentity getUserIden() {
-		// 读取当前登录的用户
-		DefineList<UserPO> currentUserTemp = new DefineList<UserPO>(User.tempFileName);
-		current = currentUserTemp.get(0);
+	public UserIdentity getUserIden() {
 		return current.getIden();
 	}
 
