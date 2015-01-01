@@ -16,14 +16,6 @@ import javax.swing.JTextArea;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.table.DefaultTableModel;
 
-import dataenum.BillType;
-import blservice.clientblservice.ClientBLService;
-import blservice.recordblservice.BusinessStateInputInfo;
-import blservice.recordblservice.RecordBLService;
-import blservice.userblservice.UserBLService;
-import businesslogic.clientbl.ClientController;
-import businesslogic.recordbl.RecordController;
-import businesslogic.userbl.UserController;
 import ui.commonui.myui.MyColor;
 import ui.commonui.myui.MyComboBox;
 import ui.commonui.myui.MyJButton;
@@ -32,6 +24,12 @@ import ui.commonui.myui.MyTextField;
 import ui.commonui.text_conductor.TextConductor;
 import ui.commonui.warning.WarningFrame;
 import vo.ValueObject;
+import blservice.clientblservice.ClientBLService;
+import blservice.recordblservice.BusinessStateInputInfo;
+import blservice.recordblservice.RecordBLService;
+import businesslogic.clientbl.ClientController;
+import businesslogic.recordbl.RecordController;
+import dataenum.BillType;
 
 public class BusinessProcessUI extends JLabel implements ActionListener{
 	
@@ -224,24 +222,14 @@ public class BusinessProcessUI extends JLabel implements ActionListener{
 			
 			switch(cbb_sort.getSelectedIndex()){
 			case 0: billTypes.add(BillType.PURCHASE);
-					billTypes.add(BillType.PURCHASEBACK);
 					billTypes.add(BillType.SALE);
-					billTypes.add(BillType.SALEBACK);
-					billTypes.add(BillType.EXPENSE);
 					billTypes.add(BillType.PAY);
-					billTypes.add(BillType.OVERFLOW);
-					billTypes.add(BillType.LOSS);
 					billTypes.add(BillType.GIFT);
 					billTypes.add(BillType.CASH);break;
-			case 1: billTypes.add(BillType.PURCHASE);
-					billTypes.add(BillType.PURCHASEBACK);break;
-			case 2: billTypes.add(BillType.SALE);
-					billTypes.add(BillType.SALEBACK);break;
-			case 3: billTypes.add(BillType.EXPENSE);
-					billTypes.add(BillType.PAY);break;
-			case 4: billTypes.add(BillType.OVERFLOW);
-					billTypes.add(BillType.LOSS);
-					billTypes.add(BillType.GIFT);break;
+			case 1: billTypes.add(BillType.PURCHASE);;break;
+			case 2: billTypes.add(BillType.SALE);;break;
+			case 3: billTypes.add(BillType.EXPENSE);;break;
+			case 4: billTypes.add(BillType.OVERFLOW);break;
 			case 5: billTypes.add(BillType.CASH);break;
 			}
 			
@@ -251,7 +239,7 @@ public class BusinessProcessUI extends JLabel implements ActionListener{
 			
 			String salesman = null;
 			if(cbb_user.getSelectedIndex() != 0)
-				clientName = cbb_client.getSelectedItem().toString();
+				salesman = cbb_user.getSelectedItem().toString();
 					
 			ArrayList<ValueObject> list = new ArrayList<ValueObject>();
 			
@@ -302,10 +290,19 @@ public class BusinessProcessUI extends JLabel implements ActionListener{
 	}
 	
 	private String[] getAllUser(){
-		UserBLService controller = new UserController();
-		String str = "全部操作员;";
+		ClientBLService controller = new ClientController();
+		String str = "全部业务员;";
+		String beforeSalesman = null;
 		for(int i = 0; i < controller.show().size(); i++){
-			str = str + controller.show().get(i).name + ";";
+			if (i == 0 ) {
+				beforeSalesman = controller.show().get(i).salesman;
+				str = str + beforeSalesman + ";";
+			}
+			else {
+				if(beforeSalesman.equals(controller.show().get(i).salesman))
+					continue;
+				str = str + controller.show().get(i).salesman + ";";
+			}
 		}
 		return str.split(";");
 	}

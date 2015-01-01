@@ -51,11 +51,12 @@ public class SaleOperate implements SaleInfo_Approval {
 		SalesPO po = saleData.find(vo.ID);
 		// 更改商品库存数量、最近售价
 		CommodityInfo_Sale commodityInfo = new CommodityInfo();
+		ClientInfo_Sale clientInfo = new ClientInfo();
 		ArrayList<CommodityItemPO> commodities = po.getCommodities();
 		// 检查现在的商品数量是否够，如果不够，就直接返回商品不足，并将这个单子的状态设为审批失败
 		if (vo.type == BillType.SALE) {
 			for(CommodityItemPO commodity : commodities) {
-				if (!commodityInfo.checkNumber(commodity.getID(), commodity.getNumber())) {
+				if ((!commodityInfo.checkNumber(commodity.getID(), commodity.getNumber())) || (!clientInfo.isLimit(po.getClientID(), po.getAfterPrice()))) {
 					po.setState(BillState.FAILURE);
 					saleData.update(po);
 					return ResultMessage.COMMODITY_LACK;
@@ -67,22 +68,16 @@ public class SaleOperate implements SaleInfo_Approval {
 			commodityInfo.changeCommodityInfo(commodity.getID(), commodity.getNumber(), commodity.getPrice(), po.getType());
 		}
 		// 更改客户的应收金额
-		ClientInfo_Sale clientInfo = new ClientInfo();
 		if (po.getType() == BillType.SALE) {
 			// 如果是销售单，增加客户的应付
-			if (clientInfo.isLimit(po.getClientID(), po.getAfterPrice())) {
-				clientInfo.changePayable(po.getClientID(), po.getAfterPrice());
-				po.setState(BillState.SUCCESS);
-				}
-			else {
-				po.setState(BillState.FAILURE);
-			}
+			clientInfo.changePayable(po.getClientID(), po.getAfterPrice());
+			po.setState(BillState.SUCCESS);
 		} else {
 			// 如果是销售退货单，减少客户的应付
 			clientInfo.changePayable(po.getClientID(), -po.getAfterPrice());
-			po.setState(BillState.SUCCESS);
 		}
 		// 更新该单子的状态
+		po.setState(BillState.SUCCESS);
 		return saleData.update(po);
 	}
 

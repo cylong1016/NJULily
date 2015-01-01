@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import log.LogMsgController;
+import log.ui.warning.PromptDialog;
 import vo.UserVO;
 import blservice.userblservice.UserBLService;
 import dataenum.ResultMessage;
@@ -20,7 +21,12 @@ public class UserController implements UserBLService {
 	private User user;
 
 	public UserController() {
-		user = new User();
+		try {
+			user = new User();
+		} catch (Exception e) {
+			e.printStackTrace();
+			PromptDialog.showConnectionError();
+		}
 	}
 
 	/**

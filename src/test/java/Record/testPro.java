@@ -8,15 +8,10 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import config.RMIConfig;
 import vo.AccountBillVO;
-import vo.ValueObject;
 import businesslogic.accountbillbl.AccountBillShow;
-import businesslogic.recordbl.BusinessProList;
-import dataenum.BillType;
+import config.RMIConfig;
 import dataservice.accountbilldataservice.AccountBillDataService;
-import dataservice.accountbilldataservice.AccountBillInfoService;
-import dataservice.purchasedataservice.PurchaseInfoService;
 
 public class testPro {
 

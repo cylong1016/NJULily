@@ -70,7 +70,7 @@ public class CashBillController implements CashBillBLService {
 	@Override
 	public CashBillVO save(String account) {
 		try {
-			CashBillVO vo = cashBill.submit(account);
+			CashBillVO vo = cashBill.save(account);
 			if (vo == null) {
 				return null;
 			}

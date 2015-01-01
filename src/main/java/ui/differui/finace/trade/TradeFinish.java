@@ -388,6 +388,7 @@ public class TradeFinish extends JLabel implements ActionListener{
 				
 				for(int j = 0; j < 9; j++)
 					text = text + blank4;
+				System.out.println(str2[2]);
 				if(str2[2].equals("null"))
 					str2[2] = "无";
 				text = text + "条目备注：" + str2[2] + "\n\n";

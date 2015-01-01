@@ -126,7 +126,7 @@ public class LoginPanel extends JPanel {
 							}
 						} catch (Exception e) {
 							e.printStackTrace();
-							PromptDialog.show("错误", "连接服务器失败");
+							PromptDialog.showConnectionError();
 						}
 					}
 				}.start();

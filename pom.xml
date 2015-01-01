@@ -4,7 +4,7 @@
 
 	<groupId>LilyStudio</groupId>
 	<artifactId>NJULily</artifactId>
-	<version>0.9.0</version>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
 	<name>NJULily</name>
@@ -36,6 +36,14 @@
 			<version>1.1.0</version>
 			<scope>system</scope>
 			<systemPath>${project.basedir}/lib/costello.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>dataservice</groupId>
+			<artifactId>dataservice</artifactId>
+			<version>1.0.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/dataservice.jar</systemPath>
 		</dependency>
 	</dependencies>
 

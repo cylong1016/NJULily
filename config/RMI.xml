@@ -2,7 +2,7 @@
 <Config>
 	<Data>
 		<name>RMI</name>
-		<host>192.168.132.1</host>
+		<host>127.0.0.1</host>
 		<port>1994</port>
 	</Data>
 </Config>
