@@ -118,7 +118,6 @@ public class BusinessStateList {
 		double beforePrice = saleInfo.getBeforePrice(ID);
 		saleIncome += beforePrice;
 		double voucher = saleInfo.getVoucher(ID);
-		// TODO 成本调价QvQ
 		if (beforePrice < voucher) {
 			voucherIncome += (voucher - beforePrice);
 		}

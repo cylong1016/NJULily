@@ -30,7 +30,7 @@ public class CheckListItem {
 		this.name = info.getName(ID);
 		this.type = info.getType(ID);
 		this.number = info.getNumber(ID);
-		this.avePrice = info.getAvePrice(ID); // TODO 这个是均价还是单价？
+		this.avePrice = info.getAvePrice(ID);
 	}
 
 	public String getName() {

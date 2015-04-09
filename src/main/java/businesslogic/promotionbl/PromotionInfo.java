@@ -52,7 +52,7 @@ public class PromotionInfo implements PromotionInfo_Sale{
 				clientVOs.remove(i);
 			}
 			else {
-				i++; // TODO i-- ?
+				i++;
 			}
 		}
 		return clientVOs;
@@ -75,7 +75,7 @@ public class PromotionInfo implements PromotionInfo_Sale{
 				totalVOs.remove(i);
 			}
 			else {
-				i++; // TODO i-- ?
+				i++;
 			}
 		}
 		return totalVOs;
